@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from 'react-native-paper';
 
-import * as themeActions from 'app/store/actions/themeActions';
-import { IThemeState } from 'app/models/reducers/theme';
+import * as themeActions from 'src/store/actions/themeActions';
+import { IThemeState } from 'src/models/reducers/theme';
 
 interface IState {
   themeReducer: IThemeState;

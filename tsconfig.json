@@ -38,18 +38,18 @@
     /* Module Resolution Options */
     "moduleResolution": "node",               /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
      "baseUrl": "./",
-     "typeRoots": ["node_modules/@types", "./app/**"],
+     "typeRoots": ["node_modules/@types", "./**"],
      "paths": {
-      "app/assets/*": ["./app/assets/*"],
-      "app/components/*": ["./app/components/*"],
-      "app/config/*": ["./app/config/*"],
-      "app/lib/*": ["./app/lib/*"],
-      "app/models/*": ["./app/models/*"],
-      "app/navigation/*": ["./app/navigation/*"],
-      "app/screens/*": ["./app/screens/*"],
-      "app/services/*": ["./app/services/*"],
-      "app/store/*": ["./app/store/*"],
-      "app/utils/*": ["./app/utils/*"],
+      "src/assets/*": ["./src/assets/*"],
+      "src/components/*": ["./src/components/*"],
+      "src/config/*": ["./src/config/*"],
+      "src/lib/*": ["./src/lib/*"],
+      "src/models/*": ["./src/models/*"],
+      "src/navigation/*": ["./src/navigation/*"],
+      "src/screens/*": ["./src/screens/*"],
+      "src/services/*": ["./src/services/*"],
+      "src/store/*": ["./src/store/*"],
+      "src/utils/*": ["./src/utils/*"],
     },
      /* Base directory to resolve non-absolute module names. */
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
