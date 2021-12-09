@@ -2,11 +2,11 @@
  * Loading reducer made separate for easy blacklisting
  * Avoid data persist
  */
-import createReducer from 'app/lib/createReducer';
-import * as types from 'app/store/actions/types';
+import createReducer from 'src/lib/createReducer';
+import * as types from 'src/store/actions/types';
 
-import { IThemeState } from 'app/models/reducers/theme';
-import { IThemeToggleAction } from 'app/models/actions/theme';
+import { IThemeState } from 'src/models/reducers/theme';
+import { IThemeToggleAction } from 'src/models/actions/theme';
 
 const initialState: IThemeState = {
   isDark: false,
