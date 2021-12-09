@@ -1,38 +1,36 @@
 # ThePlayersCo
 
-## Setup
+## Features
+- [Typescript](https://www.typescriptlang.org/) support.
+- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+- [React Navigation](https://reactnavigation.org/) with [Authentication flow](https://reactnavigation.org/docs/auth-flow) baked in & theming support.
+- [React Native Gesture Handler](https://github.com/kmagiera/react-native-gesture-handler)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)- with theming support 
+- [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+- [Redux](http://redux.js.org/) with [hooks](https://react-redux.js.org/api/hooks) support
+- [Redux Saga](https://redux-saga.js.org/)
+- [Redux Persist](https://github.com/rt2zz/redux-persist/)
+- [Jest](https://facebook.github.io/jest/)
+- [Eslint](http://eslint.org/) ([Airbnb config](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb))
+  
+## Prerequisites
 
-1. Follow the instructions on the "React Native CLI Quickstart" tab of
-  the [React Native setup instructions](
-  https://reactnative.dev/docs/environment-setup).  These
-  instructions fan out by host operating system (macOS, Windows,
-  Linux) and target operating system (iOS, Android).
+- [Node](https://nodejs.org) v10 (it is recommended to install it via [NVM](https://github.com/creationix/nvm))
+- [Yarn](https://yarnpkg.com/)
+- A development machine set up for React Native by following [these instructions](https://facebook.github.io/react-native/docs/getting-started.html)
 
-2. Install the Javascript dependencies
-    ```
-    yarn install
-    ```
+## Getting Started
 
-3. Install iOS dependencies (iOS only)
-    ```
-    cd ios
-    pod install
-    ```
-## Running
+1. Clone this repo
+2. Go to project's root directory
+3. Run `yarn` to install dependencies
 
-### Android (device or emulator)
+4. Start the packager with `yarn start`
+5. Connect a mobile device to your development machine
+6. Run the test application:
 
-Start an emulator or plug in your device, then:
-
-`yarn run android`
-
-If running on a device you must first:
-  1. Enable USB Debugging on the device
-  2. Run `adb reverse tcp:8081 tcp:8081` at the command line
-
-
-### iOS Simulator
-
-`yarn run ios`
-
-This will start a simulator for you.
+- On Android:
+  - Run `react-native run-android` or Use Android Studio (Recommended)
+- On iOS:
+  - Open `ios/YourReactProject.xcworkspace` in Xcode
+  - Hit `Run` after selecting the desired device
