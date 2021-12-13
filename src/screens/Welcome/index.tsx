@@ -5,9 +5,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import AppColors from 'src/config/colors';
 import Text from 'src/components/Text';
 import Button from 'src/components/Button';
+import NavigationService from 'src/navigation/NavigationService';
+
 import styles from './styles';
 
 const Welcome: React.FC = () => {
+  const onJoin = () => NavigationService.navigate('InvitationCode');
+
   return (
     <LinearGradient colors={AppColors.redLinnerGradient} style={styles.container}>
       <SafeAreaView style={styles.viewContainer}>
@@ -30,7 +34,12 @@ const Welcome: React.FC = () => {
             </View>
           </View>
           <View style={styles.actionWrapper}>
-            <Button style={styles.joinAction} uppercase={false} labelStyle={styles.joinActionlabel}>
+            <Button
+              style={styles.joinAction}
+              uppercase={false}
+              labelStyle={styles.joinActionlabel}
+              onPress={onJoin}
+            >
               Join the movement
             </Button>
           </View>

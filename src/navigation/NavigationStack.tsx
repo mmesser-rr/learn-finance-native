@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { navigationRef } from './NavigationService';
 import Welcome from '../screens/Welcome';
+import InvitationCode from '../screens/Verification/InvitationCode';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <Stack.Screen
           name="Welcome"
           component={Welcome}
+        />
+        <Stack.Screen
+          name="InvitationCode"
+          component={InvitationCode}
         />
       </Stack.Navigator>
     </NavigationContainer>

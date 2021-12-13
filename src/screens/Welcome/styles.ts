@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import AppColors from 'src/config/colors';
 import { scale } from 'src/config/dimentions';
 
-const color = AppColors.whiteTextColor;
+const color = AppColors.whiteColor;
 
 const styles = StyleSheet.create({
   container: {
