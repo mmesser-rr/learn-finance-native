@@ -6,6 +6,7 @@ interface ButtonProps {
   labelStyle: Object;
   uppercase?: Boolean;
   children: React.ReactNode;
+  onPress?: () => void
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -13,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   style,
   labelStyle: labelStyleProps,
   uppercase,
+  onPress,
 }) => {
   const labelStyle = {
     ...labelStyleProps,
@@ -20,7 +22,12 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <RNButton style={style} uppercase={!!uppercase} labelStyle={labelStyle}>{children}</RNButton>
+    <RNButton
+      style={style}
+      uppercase={!!uppercase}
+      labelStyle={labelStyle}
+      onPress={onPress}
+    >{children}</RNButton>
   );
 };
 
