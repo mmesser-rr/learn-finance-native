@@ -31,20 +31,23 @@ const styles = StyleSheet.create({
     lineHeight: scale(24),
     marginBottom: scale(32),
   },
-  noCodeAction: {
+  askAction: {
     marginTop: scale(32),
   },
-  noCodeActionLabel: {
+  askActionLabel: {
     marginTop: 0,
     marginBottom: 0,
     color: AppColors.linkColor,
     fontWeight: '500',
     fontSize: scale(16),
     letterSpacing: 0.5,
+    textAlign: 'center'
   },
   continueActionWrapper: {
-    borderRadius: 100,
-    width: '100%',
+    borderRadius: scale(100),
+    borderWidth: 1,
+    overflow: 'hidden'
+    // width: '100%',
   },
   buttonStyle: {
     paddingTop: scale(10),
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
   continueAction: {
     backgroundColor: AppColors.grayColor,
     color: AppColors.disableColor,
+    borderRadius: 100,
   },
   linearGradient: {
     borderRadius: 100,

@@ -11,8 +11,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		6172F2D35A4C3AA820D92908 /* libPods-ThePlayersCo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-ThePlayersCo.a */; };
-		7EF68E3733C33B6898317E18 /* libPods-ThePlayersCo-ThePlayersCoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-ThePlayersCo-ThePlayersCoTests.a */; };
+		492DC87533A8FD35ACDCFF79 /* libPods-ThePlayersCo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF227D37FA2C9D404160E3F1 /* libPods-ThePlayersCo.a */; };
+		8157AF6361836AE5F7C5B5C3 /* libPods-ThePlayersCo-ThePlayersCoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CE1C121CD602E7CBF497B2 /* libPods-ThePlayersCo-ThePlayersCoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		BF88A8BD2763505900CA1EB6 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF88A8B22763505900CA1EB6 /* Lato-ThinItalic.ttf */; };
 		BF88A8BE2763505900CA1EB6 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF88A8B22763505900CA1EB6 /* Lato-ThinItalic.ttf */; };
@@ -68,12 +68,11 @@
 		5318080A32F147A09B728646 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		59CAA873447043ABAD783886 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		5C117DD402BB423697DB20A7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		6423831EA8574132BED9D8CC /* libPods-ThePlayersCo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThePlayersCo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C8C13DACA834EEB8A0C660B /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-ThePlayersCo-ThePlayersCoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThePlayersCo-ThePlayersCoTests.debug.xcconfig"; path = "Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E685946500149D68DCF2AAA /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ThePlayersCo/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ABFE59519B596E51CEFDCCC0 /* libPods-ThePlayersCo-ThePlayersCoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThePlayersCo-ThePlayersCoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81CE1C121CD602E7CBF497B2 /* libPods-ThePlayersCo-ThePlayersCoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThePlayersCo-ThePlayersCoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF88A8B22763505900CA1EB6 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-ThinItalic.ttf"; path = "../android/app/src/main/assets/fonts/Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
 		BF88A8B32763505900CA1EB6 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "../android/app/src/main/assets/fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		BF88A8B42763505900CA1EB6 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "../android/app/src/main/assets/fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		BF88A8BC2763505900CA1EB6 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "../android/app/src/main/assets/fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
 		C0A881CF5CF3F2B244570E2A /* Pods-ThePlayersCo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThePlayersCo.debug.xcconfig"; path = "Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo.debug.xcconfig"; sourceTree = "<group>"; };
 		C9A99362DED2465AB5040CFF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		CF227D37FA2C9D404160E3F1 /* libPods-ThePlayersCo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ThePlayersCo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D00AAFFCFCFDA5787532823F /* Pods-ThePlayersCo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThePlayersCo.release.xcconfig"; path = "Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo.release.xcconfig"; sourceTree = "<group>"; };
 		DA3F36DC8E3B48FBBD6A8413 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		E893B0347DD64975BEE8095A /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EF68E3733C33B6898317E18 /* libPods-ThePlayersCo-ThePlayersCoTests.a in Frameworks */,
+				8157AF6361836AE5F7C5B5C3 /* libPods-ThePlayersCo-ThePlayersCoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6172F2D35A4C3AA820D92908 /* libPods-ThePlayersCo.a in Frameworks */,
+				492DC87533A8FD35ACDCFF79 /* libPods-ThePlayersCo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				6423831EA8574132BED9D8CC /* libPods-ThePlayersCo.a */,
-				ABFE59519B596E51CEFDCCC0 /* libPods-ThePlayersCo-ThePlayersCoTests.a */,
+				CF227D37FA2C9D404160E3F1 /* libPods-ThePlayersCo.a */,
+				81CE1C121CD602E7CBF497B2 /* libPods-ThePlayersCo-ThePlayersCoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,7 +244,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */,
+				DE2B67E9F3D066EC7C31C941 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -266,7 +266,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
+				5043A28CA91CC6465A103166 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -390,21 +390,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */ = {
+		5043A28CA91CC6465A103166 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A130D646172E58E1D159D8F2 /* [CP] Check Pods Manifest.lock */ = {
@@ -429,21 +429,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */ = {
+		DE2B67E9F3D066EC7C31C941 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo/Pods-ThePlayersCo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ThePlayersCo-ThePlayersCoTests/Pods-ThePlayersCo-ThePlayersCoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {

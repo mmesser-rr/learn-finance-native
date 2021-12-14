@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { TextInput as RNTextInput } from 'react-native-paper';
+import TextInputMask from 'react-native-text-input-mask';
+import { TextInput } from 'react-native-paper';
+
 import AppColors from 'src/config/colors';
 
 import styles from './styles';
 
-interface TextInputProps {
+interface PhoneInputProps {
   label: string;
   defaultValue?: string;
-  placeholder?: string;
   changeValue: (text: string) => void
 }
 
-const TextInput: React.FC<TextInputProps> = ({
+const PhoneInput: React.FC<PhoneInputProps> = ({
   label,
   defaultValue,
-  placeholder,
   changeValue,
 }) => {
-  const [text, setText] = React.useState(defaultValue || '');
-  const [focused, setFocused] = useState(false);
+  const [text, setText] = useState(defaultValue || '');
 
   const textChangeHandler = (txt: string) => {
     setText(txt);
@@ -28,9 +27,9 @@ const TextInput: React.FC<TextInputProps> = ({
 
   return (
     <View>
-      <RNTextInput
+      <TextInput
+        autoFocus={true}
         label={label}
-        placeholder={focused ? '' : placeholder}
         value={text}
         underlineColor={AppColors.whiteColor}
         activeUnderlineColor={AppColors.whiteColor}
@@ -39,15 +38,22 @@ const TextInput: React.FC<TextInputProps> = ({
           colors: {
             text: AppColors.whiteColor,
             placeholder: AppColors.placeholderColor,
-            accent: AppColors.whiteColor,
           }
         }}
-        onChangeText={text => textChangeHandler(text)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        render={props =>
+          <TextInputMask
+            value={props.value}
+            style={styles.inputMask}
+            selectionColor={AppColors.whiteColor}
+            mask="+1 [000] [000] [0000]"
+            onChangeText={(formatted, extracted) => {
+              textChangeHandler(formatted);
+            }}
+          />
+        }
       />
     </View>
   );
 };
 
-export default TextInput;
+export default PhoneInput;

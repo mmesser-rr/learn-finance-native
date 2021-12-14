@@ -2,18 +2,16 @@ import React from 'react';
 import { Text as RNText } from 'react-native-paper';
 
 interface TextProps {
-  style: Object;
+  style: Object | Object[];
   children: React.ReactNode;
 }
 
 const Text: React.FC<TextProps> = ({children, style: propsStyle}) => {
-  const textStyle = {
-    ...propsStyle,
-    fontFamily: 'Lato',
-  };
+  let styles = Array.isArray(propsStyle) ? [...propsStyle] : [propsStyle];
+  styles = [[{fontFamily: 'Lato'}], ...styles];
 
   return (
-    <RNText style={textStyle}>{children}</RNText>
+    <RNText style={styles}>{children}</RNText>
   );
 };
 
