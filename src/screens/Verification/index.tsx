@@ -5,6 +5,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import Text from 'src/components/Text';
 import TextInput from 'src/components/TextInput';
 import PhoneInput from 'src/components/PhoneInput';
+import InvitationCodeStep from './InvitationCodeStep';
+import PhoneInputStep from './PhoneInputStep';
+import PhoneCodeVerifyStep from './PhoneCodeVerifyStep';
 
 import styles from './styles';
 
@@ -13,6 +16,7 @@ const activeActionGradientColors = ['#34A9EC', '#2D95D1', '#0077CC', '#1735BC'];
 const Verification: React.FC = () => {
   const [code, setCode] = useState('');
   const [step, setStep] = useState(1);
+  const [isValid, setIsValid] = useState(false);
 
   const changeValue = (value: string) => {
     setCode(value);
@@ -21,8 +25,12 @@ const Verification: React.FC = () => {
   const onContinue = () => {
     if (step < 3) {
       setStep(step + 1);
-      setCode('');
+      setIsValid(false);
     }
+  };
+
+  const changeValidation = (status: boolean) => {
+    setIsValid(status);
   };
 
   const actionLabel = step === 3 ? 'Verify Code' : 'Continue';
@@ -30,88 +38,11 @@ const Verification: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.viewContainer}>
-        {step === 1 && (
-          <View>
-            <View>
-              <Text style={styles.head}>Welcome to Players Co.</Text>
-            </View>
-            <View>
-              <Text style={styles.description}>
-                Enter your invitation code to get started.
-              </Text>
-            </View>
-            <View>
-              <TextInput
-                label='Invite Code'
-                placeholder='Invite Code'
-                changeValue={changeValue}
-              />
-            </View>
-            <View>
-              <TouchableOpacity
-                style={styles.askAction}
-                onPress={() => {}}
-              >
-                <Text style={styles.askActionLabel}>Don't have an invite code?</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        {step === 2 && (
-          <View>
-            <View>
-              <Text style={styles.head}>To continue, verify your phone number</Text>
-            </View>
-            <View>
-              <Text style={styles.description}>
-                We'll text a verification code to this number.
-              </Text>
-            </View>
-            <View>
-              <PhoneInput
-                label='Phone Number'
-                changeValue={changeValue}
-              />
-            </View>
-            <View>
-              <TouchableOpacity
-                style={styles.askAction}
-                onPress={() => {}}
-              >
-                <Text style={styles.askActionLabel}>Resend code</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        {step === 3 && (
-          <View>
-            <View>
-              <Text style={styles.head}>Enter your verification code</Text>
-            </View>
-            <View>
-              <Text style={styles.description}>
-                We sent a verification code to (333) 666 9999
-              </Text>
-            </View>
-            <View>
-              <TextInput
-                label='Enter 6-digit Code'
-                placeholder='Enter 6-digit Codee'
-                changeValue={changeValue}
-              />
-            </View>
-            <View>
-              <TouchableOpacity
-                style={styles.askAction}
-                onPress={() => {}}
-              >
-                <Text style={styles.askActionLabel}>Resend code</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
+        {step === 1 && (<InvitationCodeStep changeValidation={changeValidation} />)}
+        {step === 2 && (<PhoneInputStep changeValidation={changeValidation} />)}
+        {step === 3 && (<PhoneCodeVerifyStep changeValidation={changeValidation} />)}
         <View>
-          {code ?
+          {isValid ?
             (
               <LinearGradient
                 style={styles.linearGradient}

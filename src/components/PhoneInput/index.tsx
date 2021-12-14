@@ -20,9 +20,9 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
 }) => {
   const [text, setText] = useState(defaultValue || '');
 
-  const textChangeHandler = (txt: string) => {
-    setText(txt);
-    changeValue(txt);
+  const textChangeHandler = (txt: string | undefined) => {
+    setText(txt || '');
+    changeValue(txt || '');
   };
 
   return (
@@ -47,7 +47,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
             selectionColor={AppColors.whiteColor}
             mask="+1 [000] [000] [0000]"
             onChangeText={(formatted, extracted) => {
-              textChangeHandler(formatted);
+              textChangeHandler(extracted);
             }}
           />
         }
