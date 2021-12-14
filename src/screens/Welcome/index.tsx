@@ -10,7 +10,7 @@ import NavigationService from 'src/navigation/NavigationService';
 import styles from './styles';
 
 const Welcome: React.FC = () => {
-  const onJoin = () => NavigationService.navigate('InvitationCode');
+  const onJoin = () => NavigationService.navigate('Verification');
 
   return (
     <LinearGradient colors={AppColors.redLinnerGradient} style={styles.container}>
