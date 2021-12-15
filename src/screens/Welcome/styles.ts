@@ -55,16 +55,16 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.blackColor,
     borderRadius: 100,
     width: '100%',
-    paddingTop: scale(10),
-    paddingBottom: scale(10),
   },
   joinActionlabel: {
-    marginTop: 0,
-    marginBottom: 0,
     color,
     fontWeight: '500',
     fontSize: scale(16),
+    lineHeight: scale(24),
     letterSpacing: 0.5,
+    paddingTop: scale(10),
+    paddingBottom: scale(10),
+    textAlign: 'center',
   },
 });
 
