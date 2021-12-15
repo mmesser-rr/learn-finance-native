@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
+import SubmitButton from 'src/components/SubmitButton';
 import Text from 'src/components/Text';
 import TextInput from 'src/components/TextInput';
-import { gradientButtonColors } from 'src/utils/constants';
 
 import styles from './styles';
 
 interface PhoneCodeVerifyProps {
   goToNextStep: () => void;
 }
-
-const actionLabel = 'Verify Code';
 
 const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   goToNextStep,
@@ -46,24 +43,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         </View>
       </View>
       <View>
-        {isValid ?
-          (
-            <LinearGradient
-              style={styles.linearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={gradientButtonColors}
-            >
-              <TouchableOpacity onPress={goToNextStep} >
-                <Text style={styles.activeContinueAction}>{actionLabel}</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) :
-          (
-            <View style={styles.continueActionWrapper}>
-              <Text style={[styles.buttonStyle, styles.continueAction]}>{actionLabel}</Text>
-            </View>
-          )}
+        <SubmitButton isValid={isValid} actionLabel='Verify Code' onSubmit={goToNextStep} />
       </View>
     </View>
   );
