@@ -4,34 +4,37 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { navigationRef } from './NavigationService';
 import Welcome from '../screens/Welcome';
-import Verification from '../screens/Verification';
-
-const Stack = createStackNavigator();
+import SignUp from '../screens/SignUp';
+import { RootStackParamList } from 'src/types/routerTypes';
+import { SignUpSteps } from 'src/utils/constants';
 
 interface IProps {
   theme: Theme;
 }
+
+const RootStack = createStackNavigator<RootStackParamList>();
 
 const App: React.FC<IProps> = (props: IProps) => {
   const { theme } = props;
 
   return (
     <NavigationContainer ref={navigationRef} theme={theme}>
-      <Stack.Navigator
+      <RootStack.Navigator
         initialRouteName="Welcome"
         screenOptions={{
           headerShown: false
         }}
       >
-        <Stack.Screen
+        <RootStack.Screen
           name="Welcome"
           component={Welcome}
         />
-        <Stack.Screen
-          name="Verification"
-          component={Verification}
+        <RootStack.Screen
+          name="SignUp"
+          component={SignUp}
+          initialParams={{ step: SignUpSteps[0] }}
         />
-      </Stack.Navigator>
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };
