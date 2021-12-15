@@ -11,8 +11,6 @@ interface NameCaptureProps {
   goToNextStep: () => void;
 }
 
-const actionLabel = 'Continue';
-
 const NameCapture: React.FC<NameCaptureProps> = ({
   goToNextStep,
 }) => {
@@ -20,18 +18,18 @@ const NameCapture: React.FC<NameCaptureProps> = ({
   const [lastName, setLastName] = useState('');
   const [isValid, setIsValid] = useState(false);
 
-  const checkValidation = () => {
-    setIsValid(!!firstName && !!lastName);
+  const checkValidation = (fName: string, lName: string) => {
+    setIsValid(!!fName && !!lName);
   };
 
   const changeFirstName = (value: string) => {
     setFirstName(value);
-    checkValidation();
+    checkValidation(value, lastName);
   };
 
   const changeLastName = (value: string) => {
     setLastName(value);
-    checkValidation();
+    checkValidation(firstName, value);
   };
 
   return (
