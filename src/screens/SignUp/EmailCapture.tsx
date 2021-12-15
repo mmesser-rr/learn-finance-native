@@ -38,11 +38,11 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
         <View style={styles.agreementWrapper}>
           <Text style={styles.agreementText}>
             By tapping 'sign up', you agree to our{' '}
-            <Text style={styles.agreementLink}>e-sign content, Mobile Deposit Agreement</Text>
+            <Text style={styles.agreementLink} onPress={() => {}}>e-sign content, Mobile Deposit Agreement</Text>
             , and{' '}
-            <Text style={styles.agreementLink}>Players Co's Terms</Text>
-            {' '}&{' '} 
-            <Text style={styles.agreementLink}>Privacy Policy</Text>
+            <Text style={styles.agreementLink} onPress={() => {}}>Players Co's Terms</Text>
+            {' '}&{' '}
+            <Text style={styles.agreementLink} onPress={() => {}}>Privacy Policy</Text>
             .
           </Text>
         </View>
