@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View } from 'react-native';
 
 import Text from 'src/components/Text';
 import PhoneInput from 'src/components/PhoneInput';
+import SubmitButton from 'src/components/SubmitButton';
 
 import styles from './styles';
-import { gradientButtonColors } from 'src/utils/constants';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
 }
-
-const actionLabel = 'Continue';
 
 const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
@@ -42,24 +39,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
         </View>
       </View>
       <View>
-        {isValid ?
-          (
-            <LinearGradient
-              style={styles.linearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={gradientButtonColors}
-            >
-              <TouchableOpacity onPress={goToNextStep} >
-                <Text style={styles.activeContinueAction}>{actionLabel}</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) :
-          (
-            <View style={styles.continueActionWrapper}>
-              <Text style={[styles.buttonStyle, styles.continueAction]}>{actionLabel}</Text>
-            </View>
-          )}
+        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
       </View>
     </View>
   );

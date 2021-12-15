@@ -4,7 +4,6 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import AppColors from 'src/config/colors';
 import Text from 'src/components/Text';
-import Button from 'src/components/Button';
 import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';

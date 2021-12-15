@@ -43,39 +43,24 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     textAlign: 'center'
   },
-  continueActionWrapper: {
-    borderRadius: scale(100),
-    borderWidth: 1,
-    overflow: 'hidden'
-    // width: '100%',
+  agreementWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: scale(16),
   },
-  buttonStyle: {
-    paddingTop: scale(10),
-    paddingBottom: scale(10),
-    fontWeight: '500',
-    fontSize: scale(16),
-    lineHeight: scale(24),
-    letterSpacing: 0.5,
-    textAlign: 'center',
-  },
-  continueAction: {
-    backgroundColor: AppColors.grayColor,
-    color: AppColors.disableColor,
-    borderRadius: 100,
-  },
-  linearGradient: {
-    borderRadius: 100,
-  },
-  activeContinueAction: {
-    width: '100%',
-    fontSize: scale(16),
-    lineHeight: scale(24),
-    fontWeight: '500',
-    paddingTop: scale(10),
-    paddingBottom: scale(10),
-    letterSpacing: 0.5,
+  agreementText: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     color,
-    textAlign: 'center',
+    fontSize: scale(16),
+    lineHeight: scale(24),
+  },
+  agreementLink: {
+    color: AppColors.linkColor,
+    fontSize: scale(16),
+    lineHeight: scale(24),
   },
 });
 

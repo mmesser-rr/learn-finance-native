@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View } from 'react-native';
 
+import SubmitButton from 'src/components/SubmitButton';
 import Text from 'src/components/Text';
 import TextInput from 'src/components/TextInput';
-import { gradientButtonColors } from 'src/utils/constants';
 
 import styles from './styles';
 
@@ -60,24 +59,7 @@ const NameCapture: React.FC<NameCaptureProps> = ({
         </View>
       </View>
       <View>
-        {isValid ?
-          (
-            <LinearGradient
-              style={styles.linearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={gradientButtonColors}
-            >
-              <TouchableOpacity onPress={goToNextStep} >
-                <Text style={styles.activeContinueAction}>{actionLabel}</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) :
-          (
-            <View style={styles.continueActionWrapper}>
-              <Text style={[styles.buttonStyle, styles.continueAction]}>{actionLabel}</Text>
-            </View>
-          )}
+        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
       </View>
     </View>
   );

@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
+import SubmitButton from 'src/components/SubmitButton';
 import Text from 'src/components/Text';
 import TextInput from 'src/components/TextInput';
-import { gradientButtonColors } from 'src/utils/constants';
 
 import styles from './styles';
 
 interface EmailCaptureProps {
   goToNextStep: () => void;
 }
-
-const actionLabel = 'Sign Up';
 
 const EmailCapture: React.FC<EmailCaptureProps> = ({
   goToNextStep,
@@ -38,24 +35,18 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
         </View>
       </View>
       <View>
-        {isValid ?
-          (
-            <LinearGradient
-              style={styles.linearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              colors={gradientButtonColors}
-            >
-              <TouchableOpacity onPress={goToNextStep} >
-                <Text style={styles.activeContinueAction}>{actionLabel}</Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          ) :
-          (
-            <View style={styles.continueActionWrapper}>
-              <Text style={[styles.buttonStyle, styles.continueAction]}>{actionLabel}</Text>
-            </View>
-          )}
+        <View style={styles.agreementWrapper}>
+          <Text style={styles.agreementText}>
+            By tapping 'sign up', you agree to our{' '}
+            <Text style={styles.agreementLink}>e-sign content, Mobile Deposit Agreement</Text>
+            , and{' '}
+            <Text style={styles.agreementLink}>Players Co's Terms</Text>
+            {' '}&{' '} 
+            <Text style={styles.agreementLink}>Privacy Policy</Text>
+            .
+          </Text>
+        </View>
+        <SubmitButton isValid={isValid} actionLabel='Sign Up' onSubmit={goToNextStep} />
       </View>
     </View>
   );
