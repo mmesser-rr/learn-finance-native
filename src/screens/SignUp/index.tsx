@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native';
 
 import { SignUpProps } from 'src/types/routerTypes';
+import { SignUpSteps } from 'src/utils/constants';
+import AppLayout from 'src/components/layout/AppLayout';
 import InvitationCode from './InvitationCode';
 import PhoneCapture from './PhoneCapture';
 import PhoneCodeVerify from './PhoneCodeVerify';
 import NameCapture from './NameCapture';
 import EmailCapture from './EmailCapture';
-import { SignUpSteps } from 'src/utils/constants';
 
 import styles from './styles';
 
@@ -21,19 +21,19 @@ const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps)
   }, [stepName]);
 
   const goToNextStep = () => {
-    if (stepCount < 5) {
+    if (stepCount < 4) {
       navigation.navigate('SignUp', { step: SignUpSteps[stepCount + 1] });
     }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       {stepCount === 0 && (<InvitationCode goToNextStep={goToNextStep} />)}
       {stepCount === 1 && (<PhoneCapture goToNextStep={goToNextStep} />)}
       {stepCount === 2 && (<PhoneCodeVerify goToNextStep={goToNextStep} />)}
       {stepCount === 3 && (<NameCapture goToNextStep={goToNextStep} />)}
       {stepCount === 4 && (<EmailCapture goToNextStep={goToNextStep} />)}
-    </SafeAreaView>
+    </AppLayout>
   );
 };
 
