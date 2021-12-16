@@ -8,18 +8,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  viewContainer: {
-    flex: 1,
-  },
   viewWrapper: {
-    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingTop: scale(43),
-    paddingLeft: scale(27),
-    paddingRight: scale(27),
-    paddingBottom: scale(50),
   },
   descriptionWrapper: {
     flex: 3,

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import Text from 'src/components/Text';
-import PhoneInput from 'src/components/PhoneInput';
-import SubmitButton from 'src/components/SubmitButton';
+import Text from 'src/components/common/Text';
+import PhoneInput from 'src/components/common/PhoneInput';
+import SubmitButton from 'src/components/common/SubmitButton';
 
 import styles from './styles';
+import { Caption, Title } from 'src/components/common/Texts';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
@@ -21,14 +22,14 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   };
 
   return (
-    <View style={styles.viewContainer}>
+    <>
       <View>
         <View>
           <View>
-            <Text style={styles.head}>To continue, verify your phone number</Text>
+            <Title style={styles.head}>To continue, verify your phone number</Title>
           </View>
           <View>
-            <Text style={styles.description}>We'll text a verification code to this number.</Text>
+            <Caption style={styles.description}>We'll text a verification code to this number.</Caption>
           </View>
           <View>
             <PhoneInput
@@ -41,7 +42,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
       <View>
         <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
       </View>
-    </View>
+    </>
   );
 };
 

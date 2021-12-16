@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { navigationRef } from './NavigationService';
 import Welcome from '../screens/Welcome';
 import SignUp from '../screens/SignUp';
+import Terms from '../screens/Terms';
 import { RootStackParamList } from 'src/types/routerTypes';
 import { SignUpSteps } from 'src/utils/constants';
 
@@ -33,6 +34,10 @@ const App: React.FC<IProps> = (props: IProps) => {
           name="SignUp"
           component={SignUp}
           initialParams={{ step: SignUpSteps[0] }}
+        />
+        <RootStack.Screen
+          name="Terms"
+          component={Terms}
         />
       </RootStack.Navigator>
     </NavigationContainer>

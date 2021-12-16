@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import SubmitButton from 'src/components/SubmitButton';
-import Text from 'src/components/Text';
-import TextInput from 'src/components/TextInput';
+import SubmitButton from 'src/components/common/SubmitButton';
+import Text from 'src/components/common/Text';
+import TextInput from 'src/components/common/TextInput';
+import { Caption, Title } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -21,13 +22,13 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
   };
 
   return (
-    <View style={styles.viewContainer}>
+    <>
       <View>
         <View>
-          <Text style={styles.head}>Welcome to Players Co.</Text>
+          <Title style={styles.head}>Welcome to Players Co.</Title>
         </View>
         <View>
-          <Text style={styles.description}>Enter your invitation code to get started.</Text>
+          <Caption style={styles.description}>Enter your invitation code to get started.</Caption>
         </View>
         <View>
           <TextInput
@@ -45,7 +46,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
       <View>
         <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
       </View>
-    </View>
+    </>
   );
 };
 
