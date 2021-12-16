@@ -9,6 +9,7 @@ interface TextInputProps {
   label: string;
   defaultValue?: string;
   placeholder?: string;
+  maxLength?: number;
   changeValue: (text: string) => void
 }
 
@@ -16,6 +17,7 @@ const TextInput: React.FC<TextInputProps> = ({
   label,
   defaultValue,
   placeholder,
+  maxLength,
   changeValue,
 }) => {
   const [text, setText] = React.useState(defaultValue || '');
@@ -42,6 +44,7 @@ const TextInput: React.FC<TextInputProps> = ({
             accent: AppColors.whiteColor,
           }
         }}
+        maxLength={maxLength}
         onChangeText={text => textChangeHandler(text)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
