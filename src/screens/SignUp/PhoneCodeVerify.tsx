@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import SubmitButton from 'src/components/SubmitButton';
-import Text from 'src/components/Text';
-import TextInput from 'src/components/TextInput';
+import SubmitButton from 'src/components/common/SubmitButton';
+import Text from 'src/components/common/Text';
+import TextInput from 'src/components/common/TextInput';
+import { Caption, Title } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -21,18 +22,19 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   };
 
   return (
-    <View style={styles.viewContainer}>
+    <>
       <View>
         <View>
-          <Text style={styles.head}>Enter your verification code</Text>
+          <Title style={styles.head}>Enter your verification code</Title>
         </View>
         <View>
-          <Text style={styles.description}>We sent a verification code to (333) 666 9999</Text>
+          <Caption style={styles.description}>We sent a verification code to (333) 666 9999</Caption>
         </View>
         <View>
           <TextInput
             label='Enter 6-digit Code'
             placeholder='Enter 6-digit Codee'
+            maxLength={6}
             changeValue={changeValue}
           />
         </View>
@@ -45,7 +47,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
       <View>
         <SubmitButton isValid={isValid} actionLabel='Verify Code' onSubmit={goToNextStep} />
       </View>
-    </View>
+    </>
   );
 };
 
