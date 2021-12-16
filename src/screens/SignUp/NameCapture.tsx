@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import SubmitButton from 'src/components/SubmitButton';
-import Text from 'src/components/Text';
-import TextInput from 'src/components/TextInput';
+import SubmitButton from 'src/components/common/SubmitButton';
+import Text from 'src/components/common/Text';
+import TextInput from 'src/components/common/TextInput';
+import { Caption, Title } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -33,13 +34,13 @@ const NameCapture: React.FC<NameCaptureProps> = ({
   };
 
   return (
-    <View style={styles.viewContainer}>
+    <>
       <View>
         <View>
-          <Text style={styles.head}>What's your name?</Text>
+          <Title style={styles.head}>What's your name?</Title>
         </View>
         <View>
-          <Text style={styles.description}>Your legal name is required</Text>
+          <Caption style={styles.description}>Your legal name is required</Caption>
         </View>
         <View>
           <TextInput
@@ -59,7 +60,7 @@ const NameCapture: React.FC<NameCaptureProps> = ({
       <View>
         <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
       </View>
-    </View>
+    </>
   );
 };
 

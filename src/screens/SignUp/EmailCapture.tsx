@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
+import { Title } from 'src/components/common/Texts';
 
-import SubmitButton from 'src/components/SubmitButton';
-import Text from 'src/components/Text';
-import TextInput from 'src/components/TextInput';
+import SubmitButton from 'src/components/common/SubmitButton';
+import Text from 'src/components/common/Text';
+import TextInput from 'src/components/common/TextInput';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
@@ -20,11 +22,15 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
     setIsValid(!!value);
   };
 
+  const onTerms = () => {
+    NavigationService.navigate('Terms');
+  };
+
   return (
-    <View style={styles.viewContainer}>
+    <>
       <View>
         <View>
-          <Text style={styles.head}>What's your email?</Text>
+          <Title style={styles.head}>What's your email?</Title>
         </View>
         <View>
           <TextInput
@@ -37,18 +43,13 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
       <View>
         <View style={styles.agreementWrapper}>
           <Text style={styles.agreementText}>
-            By tapping 'sign up', you agree to our{' '}
-            <Text style={styles.agreementLink} onPress={() => {}}>e-sign content, Mobile Deposit Agreement</Text>
-            , and{' '}
-            <Text style={styles.agreementLink} onPress={() => {}}>Players Co's Terms</Text>
-            {' '}&{' '}
-            <Text style={styles.agreementLink} onPress={() => {}}>Privacy Policy</Text>
-            .
+            By tapping 'sign up', you consent to our {' '}
+            <Text style={styles.agreementLink} onPress={onTerms}>Terms & Privacy Policy</Text>.
           </Text>
         </View>
         <SubmitButton isValid={isValid} actionLabel='Sign Up' onSubmit={goToNextStep} />
       </View>
-    </View>
+    </>
   );
 };
 

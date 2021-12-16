@@ -6,30 +6,17 @@ const color = AppColors.whiteColor;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: AppColors.blackColor,
   },
-  viewContainer: {
-    flex: 1,
+  viewWrapper: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingTop: scale(43),
-    paddingLeft: scale(27),
-    paddingRight: scale(27),
-    paddingBottom: scale(50),
   },
   head: {
-    color,
-    fontSize: scale(20),
-    lineHeight: scale(28),
     marginBottom: scale(16),
-    fontWeight: 'bold',
   },
   description: {
-    color,
-    fontSize: scale(16),
-    lineHeight: scale(24),
     marginBottom: scale(32),
   },
   askAction: {
