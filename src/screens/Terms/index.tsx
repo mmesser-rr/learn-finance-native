@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
-import Text from 'src/components/common/Text';
 import { TermsProps } from 'src/types/routerTypes';
 import CloseIcon from 'src/assets/icons/close.svg';
 import AppLayout from 'src/components/layout/AppLayout';
-import { BigTitle } from 'src/components/common/Texts';
+import { BigTitle, Text } from 'src/components/common/Texts';
 import { SignUpSteps } from 'src/utils/constants';
 
 import styles from './styles';

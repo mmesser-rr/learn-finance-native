@@ -2,8 +2,8 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import Text from 'src/components/common/Text';
 import { gradientButtonColors } from 'src/utils/constants';
+import { Text } from '../Texts';
 
 import styles from './styles';
 

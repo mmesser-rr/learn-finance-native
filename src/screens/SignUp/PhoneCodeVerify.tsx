@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
-import Text from 'src/components/common/Text';
 import TextInput from 'src/components/common/TextInput';
-import { Caption, Title } from 'src/components/common/Texts';
+import { Caption, Title, Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
