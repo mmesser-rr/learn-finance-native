@@ -3,11 +3,12 @@ import { NavigationContainer, Theme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { navigationRef } from './NavigationService';
-import Welcome from '../screens/Welcome';
-import SignUp from '../screens/SignUp';
-import Terms from '../screens/Terms';
 import { RootStackParamList } from 'src/types/routerTypes';
 import { SignUpSteps } from 'src/utils/constants';
+import Welcome from 'src/screens/Welcome';
+import SignUp from 'src/screens/SignUp';
+import Terms from 'src/screens/Terms';
+import SelectLevel from 'src/screens/SelectLevel';
 
 interface IProps {
   theme: Theme;
@@ -38,6 +39,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="Terms"
           component={Terms}
+        />
+        <RootStack.Screen
+          name="SelectLevel"
+          component={SelectLevel}
         />
       </RootStack.Navigator>
     </NavigationContainer>
