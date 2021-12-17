@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Title } from 'src/components/common/Texts';
+import { Text, Title } from 'src/components/common/Texts';
 
 import SubmitButton from 'src/components/common/SubmitButton';
-import Text from 'src/components/common/Text';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
 

@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Welcome: undefined;
   SignUp: { step: string };
   Terms: undefined;
+  SelectLevel: undefined;
 };
 
 // sign up
