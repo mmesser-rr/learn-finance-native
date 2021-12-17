@@ -9,38 +9,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   viewWrapper: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
   descriptionWrapper: {
-    flex: 3,
-    display: 'flex',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
   actionWrapper: {
     flex: 1,
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-  },
-  header: {
-    fontSize: scale(28),
-    lineHeight: scale(36),
-    fontWeight: 'bold',
-    color,
   },
   blockTitle: {
     fontSize: scale(22),
     lineHeight: scale(28),
     fontWeight: '300',
-    color,
-  },
-  blockDescription: {
-    fontSize: scale(16),
-    lineHeight: scale(24),
-    fontWeight: '500',
     color,
   },
   joinAction: {

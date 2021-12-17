@@ -23,6 +23,8 @@ const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps)
   const goToNextStep = () => {
     if (stepCount < 4) {
       navigation.navigate('SignUp', { step: SignUpSteps[stepCount + 1] });
+    } else {
+      navigation.navigate('SelectLevel');
     }
   };
 
