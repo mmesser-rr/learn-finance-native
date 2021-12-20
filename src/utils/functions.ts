@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { TextStyle } from "react-native";
 
 export const generateTextStyle = (
@@ -12,3 +13,20 @@ export const generateTextStyle = (
   
   return [ownStyle, ...style];
 };
+
+export const useDebounce = (value: string | number, delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(
+    () => {
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay]
+  );
+  return debouncedValue;
+}
