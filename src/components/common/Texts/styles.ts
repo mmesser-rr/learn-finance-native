@@ -5,6 +5,7 @@ import { scale } from 'src/config/dimentions';
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Lato',
+    color: AppColors.whiteColor,
   },
   bigTitle: {
     fontSize: scale(28),

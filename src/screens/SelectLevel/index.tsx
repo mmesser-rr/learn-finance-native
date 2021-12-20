@@ -12,7 +12,7 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 import styles from './styles';
 
 const SelectLevel: React.FC = () => {
-  const onSelectLevel = () => {};
+  const onSelectLevel = () => NavigationService.navigate('SelectSport');
 
   return (
     <LinearGradient colors={AppColors.redLinnerGradient} style={styles.container}>
