@@ -9,6 +9,7 @@ import Welcome from 'src/screens/Welcome';
 import SignUp from 'src/screens/SignUp';
 import Terms from 'src/screens/Terms';
 import SelectLevel from 'src/screens/SelectLevel';
+import SelectSport from 'src/screens/SelectSport';
 
 interface IProps {
   theme: Theme;
@@ -43,6 +44,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="SelectLevel"
           component={SelectLevel}
+        />
+        <RootStack.Screen
+          name="SelectSport"
+          component={SelectSport}
         />
       </RootStack.Navigator>
     </NavigationContainer>

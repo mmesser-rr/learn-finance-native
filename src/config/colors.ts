@@ -5,6 +5,7 @@ const AppColors = {
   blackColor: '#000',
   grayColor: '#333',
   placeholderColor: '#999',
+  searchPlaceholderColor: '#F7F7F738',
   redLinnerGradient: ['#FF5A5F', '#CA3D45', '#97283C'],
 };
 

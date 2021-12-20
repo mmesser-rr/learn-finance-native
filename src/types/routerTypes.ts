@@ -6,6 +6,7 @@ export type RootStackParamList = {
   SignUp: { step: string };
   Terms: undefined;
   SelectLevel: undefined;
+  SelectSport: undefined;
 };
 
 // sign up
