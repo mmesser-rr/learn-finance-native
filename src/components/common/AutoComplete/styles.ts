@@ -10,10 +10,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: AppColors.whiteColor,
   },
-  radioStyle: {
-    borderBottomWidth: 1,
-    borderColor: AppColors.whiteColor,
-  },
   searchStyle: {
     backgroundColor: AppColors.grayColor,
     color: AppColors.whiteColor,
@@ -24,6 +20,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Lato',
     color: AppColors.whiteColor,
     fontSize: scale(16)
+  },
+  selectWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderColor: AppColors.placeholderColor,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(16),
+  },
+  selectLabel: {
+    color: AppColors.placeholderColor,
+  },
+  active: {
+    color: AppColors.whiteColor,
+    borderColor: AppColors.whiteColor,
   },
 });
 
