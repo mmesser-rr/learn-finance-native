@@ -10,6 +10,7 @@ interface TextInputProps {
   defaultValue?: string;
   placeholder?: string;
   maxLength?: number;
+  isNumeric?: boolean;
   changeValue: (text: string) => void
 }
 
@@ -18,14 +19,16 @@ const TextInput: React.FC<TextInputProps> = ({
   defaultValue,
   placeholder,
   maxLength,
+  isNumeric,
   changeValue,
 }) => {
   const [text, setText] = React.useState(defaultValue || '');
   const [focused, setFocused] = useState(false);
 
   const textChangeHandler = (txt: string) => {
-    setText(txt);
-    changeValue(txt);
+    const updated = isNumeric ? txt.replace(/[^0-9]/g, '') : txt;
+    setText(updated);
+    changeValue(updated);
   };
 
   return (
@@ -36,6 +39,7 @@ const TextInput: React.FC<TextInputProps> = ({
         value={text}
         underlineColor={AppColors.whiteColor}
         activeUnderlineColor={AppColors.whiteColor}
+        autoCapitalize='none'
         style={styles.input}
         theme={{
           colors: {

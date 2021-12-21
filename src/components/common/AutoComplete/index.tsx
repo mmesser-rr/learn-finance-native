@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import { Searchbar, RadioButton } from 'react-native-paper';
+import { TextStyle, View } from 'react-native';
+import { Searchbar, TouchableRipple } from 'react-native-paper';
 import AppColors from 'src/config/colors';
 import SearchIcon from 'src/assets/icons/search.svg';
 import CloseIcon from 'src/assets/icons/searchbar-close.svg';
+import CheckIcon from 'src/assets/icons/autocomplete-check.svg';
+
+import { useDebounce } from 'src/utils/functions';
+import { Caption } from '../Texts';
 
 import styles from './styles';
-import { useDebounce } from 'src/utils/functions';
 
 export interface ItemInterface {
   value: string;
@@ -15,13 +18,13 @@ export interface ItemInterface {
 
 interface AutoCompleteProps {
   suggestions: ItemInterface[];
-  onPress?: () => void;
+  onChange?: (val: string) => void;
 }
 
-const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions}) => {
+const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = useState<ItemInterface[]>([]);
-  const [value, setValue] = React.useState<string>('');
+  const [selectedValue, setSelectedValue] = React.useState<string>('');
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
@@ -36,12 +39,22 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions}) => {
           )
         );
       }
+
+      setSelectedValue('');
     },
     [debouncedSearchQuery] // Only call effect if debounced search term changes
   );
 
   const onChangeSearch = (query: string) => {
     setSearchQuery(query);
+  };
+
+  const onSelect = (val: string) => {
+    setSelectedValue(val);
+
+    if (onChange) {
+      onChange(val);
+    }
   };
 
   return (
@@ -52,6 +65,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions}) => {
         value={searchQuery}
         style={styles.searchStyle}
         inputStyle={styles.searchInputStyle}
+        autoCapitalize='none'
         icon={() => <SearchIcon />}
         clearIcon={() => searchQuery? <CloseIcon />: null}
         theme={{
@@ -61,18 +75,25 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions}) => {
           }
        }}
       />
-      <RadioButton.Group onValueChange={value => setValue(value)} value={value} >
-        {filtered.map(s => (
-          <RadioButton.Item
-            key={s.value}
-            label={s.label}
-            value={s.value}
-            color={AppColors.whiteColor}
-            style={styles.radioStyle}
-            labelStyle={styles.labelStyle}
-          />
-        ))}
-      </RadioButton.Group>
+      {filtered.map(s => {
+        const isSelected = selectedValue === s.value;
+        let wrapperStyle: TextStyle[] = [styles.selectWrapper];
+        let labelStyle: TextStyle[] = [styles.selectLabel];
+
+        if (isSelected) {
+          wrapperStyle.push(styles.active);
+          labelStyle.push(styles.active);
+        }
+
+        return (
+          <TouchableRipple onPress={() => onSelect(s.value)} key={s.value}>
+            <View style={wrapperStyle}>
+              <Caption style={labelStyle}>{s.label}</Caption>
+              {isSelected && <CheckIcon />}
+            </View>
+          </TouchableRipple>
+        );
+      })}
     </View>
   );
 };

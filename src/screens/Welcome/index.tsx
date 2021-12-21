@@ -6,9 +6,9 @@ import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
 import { BigTitle, Caption, Text } from 'src/components/common/Texts';
+import Button from 'src/components/common/Button';
 
 import styles from './styles';
-import Button from 'src/components/common/Button';
 
 const Welcome: React.FC = () => {
   const onJoin = () => NavigationService.navigate('SignUp');
