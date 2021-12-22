@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import TextInputMask from 'react-native-text-input-mask';
+import RNTextInputMask from 'react-native-text-input-mask';
 import { TextInput } from 'react-native-paper';
 
 import AppColors from 'src/config/colors';
 
 import styles from './styles';
 
-interface PhoneInputProps {
+interface TextInputMaskProps {
   label: string;
+  mask: string;
   defaultValue?: string;
+  autoFocus?: boolean;
   changeValue: (text: string) => void
 }
 
-const PhoneInput: React.FC<PhoneInputProps> = ({
+const TextInputMask: React.FC<TextInputMaskProps> = ({
   label,
+  mask,
   defaultValue,
+  autoFocus,
   changeValue,
 }) => {
   const [text, setText] = useState(defaultValue || '');
@@ -28,7 +32,7 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   return (
     <View>
       <TextInput
-        autoFocus={true}
+        autoFocus={!!autoFocus}
         label={label}
         value={text}
         underlineColor={AppColors.whiteColor}
@@ -41,11 +45,11 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
           }
         }}
         render={props =>
-          <TextInputMask
+          <RNTextInputMask
             value={props.value}
             style={styles.inputMask}
             selectionColor={AppColors.whiteColor}
-            mask="+1 [000] [000] [0000]"
+            mask={mask}
             onChangeText={(formatted, extracted) => {
               textChangeHandler(extracted);
             }}
@@ -56,4 +60,4 @@ const PhoneInput: React.FC<PhoneInputProps> = ({
   );
 };
 
-export default PhoneInput;
+export default TextInputMask;

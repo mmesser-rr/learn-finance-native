@@ -11,6 +11,8 @@ import Terms from 'src/screens/Terms';
 import SelectLevel from 'src/screens/SelectLevel';
 import SelectSport from 'src/screens/SelectSport';
 import SelectTeam from 'src/screens/SelectTeam';
+import BankAccountIntro from 'src/screens/BankAccountIntro';
+import CaptureDOB from 'src/screens/CaptureDOB';
 
 interface IProps {
   theme: Theme;
@@ -53,6 +55,14 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="SelectTeam"
           component={SelectTeam}
+        />
+        <RootStack.Screen
+          name="BankAccountIntro"
+          component={BankAccountIntro}
+        />
+        <RootStack.Screen
+          name="CaptureDOB"
+          component={CaptureDOB}
         />
       </RootStack.Navigator>
     </NavigationContainer>
