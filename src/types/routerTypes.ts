@@ -7,6 +7,7 @@ export type RootStackParamList = {
   Terms: undefined;
   SelectLevel: undefined;
   SelectSport: undefined;
+  SelectTeam: undefined;
 };
 
 // sign up
@@ -30,4 +31,14 @@ type TermsScreenNavigationProp = StackNavigationProp<
 
 export type TermsProps = {
   navigation: TermsScreenNavigationProp;
+};
+
+// SelectSport
+type SelectSportScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'SelectSport'
+>;
+
+export type SelectSportProps = {
+  navigation: SelectSportScreenNavigationProp;
 };

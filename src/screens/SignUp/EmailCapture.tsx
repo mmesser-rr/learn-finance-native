@@ -18,7 +18,8 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
   const [isValid, setIsValid] = useState(false);
 
   const codeChangeHandler = (value: string) => {
-    setIsValid(!!value);
+    const reg = /\S+@\S+\.\S+/;
+    setIsValid(!!value && reg.test(value));
   };
 
   const onTerms = () => {
