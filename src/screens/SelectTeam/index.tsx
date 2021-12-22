@@ -6,6 +6,7 @@ import { Title } from 'src/components/common/Texts';
 import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete';
 
 import styles from './styles';
+import NavigationService from 'src/navigation/NavigationService';
 
 const suggestions: ItemInterface[] = [
   {
@@ -31,6 +32,8 @@ const suggestions: ItemInterface[] = [
 ];
 
 const SelectTeam: React.FC = () => {
+  const onChangeOption = () => NavigationService.navigate('BankAccountIntro');
+
   return (
     <AppLayout containerStyle={styles.container}>
       <View>
@@ -38,7 +41,7 @@ const SelectTeam: React.FC = () => {
           <Title style={styles.head}>What team do you play for?</Title>
         </View>
         <View>
-          <AutoComplete suggestions={suggestions} />
+          <AutoComplete suggestions={suggestions} onChange={onChangeOption} />
         </View>
       </View>
     </AppLayout>

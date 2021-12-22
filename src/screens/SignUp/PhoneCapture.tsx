@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import Text from 'src/components/common/Text';
-import PhoneInput from 'src/components/common/PhoneInput';
+import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
+import { Caption, Title } from 'src/components/common/Texts';
 
 import styles from './styles';
-import { Caption, Title } from 'src/components/common/Texts';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
@@ -32,8 +31,10 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
             <Caption style={styles.description}>We'll text a verification code to this number.</Caption>
           </View>
           <View>
-            <PhoneInput
+            <TextInputMask
               label='Phone Number'
+              mask='+1 [000] [000] [0000]'
+              autoFocus={true}
               changeValue={changeValue}
             />
           </View>

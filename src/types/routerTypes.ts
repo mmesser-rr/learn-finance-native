@@ -8,6 +8,8 @@ export type RootStackParamList = {
   SelectLevel: undefined;
   SelectSport: undefined;
   SelectTeam: undefined;
+  BankAccountIntro: undefined;
+  CaptureDOB: undefined;
 };
 
 // sign up

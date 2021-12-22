@@ -10,10 +10,9 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    paddingTop: scale(43),
-    paddingLeft: scale(27),
-    paddingRight: scale(27),
-    paddingBottom: scale(50),
+    marginTop: scale(43),
+    marginHorizontal: scale(27),
+    marginBottom: scale(50),
   },
 });
 
