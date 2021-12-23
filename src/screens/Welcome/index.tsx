@@ -11,7 +11,7 @@ import Button from 'src/components/common/Button';
 import styles from './styles';
 
 const Welcome: React.FC = () => {
-  const onJoin = () => NavigationService.navigate('SignUp');
+  const onJoin = () => NavigationService.navigate('BankAccountIntro');
 
   return (
     <LinearGradient colors={AppColors.redLinnerGradient} style={styles.container}>

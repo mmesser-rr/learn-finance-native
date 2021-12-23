@@ -13,6 +13,7 @@ import SelectSport from 'src/screens/SelectSport';
 import SelectTeam from 'src/screens/SelectTeam';
 import BankAccountIntro from 'src/screens/BankAccountIntro';
 import CaptureDOB from 'src/screens/CaptureDOB';
+import CaptureAddress from 'src/screens/CaptureAddress';
 
 interface IProps {
   theme: Theme;
@@ -63,6 +64,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="CaptureDOB"
           component={CaptureDOB}
+        />
+        <RootStack.Screen
+          name="CaptureAddress"
+          component={CaptureAddress}
         />
       </RootStack.Navigator>
     </NavigationContainer>
