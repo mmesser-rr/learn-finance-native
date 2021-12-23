@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextStyle, TouchableOpacity } from 'react-native';
-import { generateTextStyle } from 'src/utils/functions';
 
+import { generateTextStyle } from 'src/utils/functions';
 import { Caption } from '../Texts';
 
 import styles from './styles';
