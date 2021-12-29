@@ -16,7 +16,7 @@ const CaptureDOB: React.FC = () => {
     setIsValid(!!value);
   };
 
-  const goToNextStep = () => {};
+  const goToNextStep = () => NavigationService.navigate('CaptureAddress');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
