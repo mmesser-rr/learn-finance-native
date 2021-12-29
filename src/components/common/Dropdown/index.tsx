@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { DefaultTheme } from 'react-native-paper';
 
 import DropDown from "./library";
@@ -15,24 +15,50 @@ export interface DropDownList {
 
 interface DropdownProps {
   label?: string;
+  value?: string;
   list: DropDownList[];
+  onChange?: (value: string) => void;
+  onBlur?: () => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   label,
   list,
+  value: propsValue,
+  onChange,
+  onBlur,
 }) => {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   const [showDropDown, setShowDropDown] = useState(false);
+
+  useEffect(() => {
+    setValue(propsValue || '');
+  }, [propsValue]);
+
+  const dismissHandler = () => {
+    setShowDropDown(false);
+
+    if (onBlur) {
+      onBlur();
+    }
+  };
+
+  const changeHandler = (value: string) => {
+    setValue(value);
+
+    if (onChange) {
+      onChange(value);
+    }
+  };
 
   return (
     <DropDown
       label={label}
       visible={showDropDown}
       showDropDown={() => setShowDropDown(true)}
-      onDismiss={() => setShowDropDown(false)}
+      onDismiss={() => dismissHandler()}
       value={value}
-      setValue={setValue}
+      setValue={changeHandler}
       list={list}
       dropdownIconColor={AppColors.whiteColor}
       dropdownUpIcon={() => <ArrowDownIcon />}
