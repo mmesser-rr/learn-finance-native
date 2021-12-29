@@ -4,6 +4,8 @@ import RNTextInputMask from 'react-native-text-input-mask';
 import { TextInput } from 'react-native-paper';
 
 import AppColors from 'src/config/colors';
+import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
+import EyeIcon from 'src/assets/icons/eye.svg';
 
 import styles from './styles';
 
@@ -12,6 +14,7 @@ interface TextInputMaskProps {
   mask: string;
   defaultValue?: string;
   autoFocus?: boolean;
+  isSecure?: boolean;
   changeValue: (text: string) => void
 }
 
@@ -20,9 +23,11 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   mask,
   defaultValue,
   autoFocus,
+  isSecure,
   changeValue,
 }) => {
   const [text, setText] = useState(defaultValue || '');
+  const [securityState, setSecurityState] = useState(true);
 
   const textChangeHandler = (txt: string | undefined) => {
     setText(txt || '');
@@ -50,10 +55,22 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
             style={styles.inputMask}
             selectionColor={AppColors.whiteColor}
             mask={mask}
+            secureTextEntry={isSecure && securityState}
+            returnKeyType='next'
+            keyboardType={'numeric'}
             onChangeText={(formatted, extracted) => {
               textChangeHandler(extracted);
             }}
           />
+        }
+        right={
+          isSecure && (
+            <TextInput.Icon
+              name={() => securityState ? <EyeSlashIcon /> : <EyeIcon />}
+              color={AppColors.errorColor}
+              onPress={() => setSecurityState(!securityState)}
+            />
+          )
         }
       />
     </View>

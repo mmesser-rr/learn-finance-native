@@ -11,6 +11,8 @@ export type RootStackParamList = {
   BankAccountIntro: undefined;
   CaptureDOB: undefined;
   CaptureAddress: undefined;
+  CaptureSSN: undefined;
+  AccountCreateSuccess: undefined;
 };
 
 // sign up
