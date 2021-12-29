@@ -14,6 +14,8 @@ import SelectTeam from 'src/screens/SelectTeam';
 import BankAccountIntro from 'src/screens/BankAccountIntro';
 import CaptureDOB from 'src/screens/CaptureDOB';
 import CaptureAddress from 'src/screens/CaptureAddress';
+import CaptureSSN from 'src/screens/CaptureSSN';
+import AccountCreateSuccess from 'src/screens/AccountCreateSuccess';
 
 interface IProps {
   theme: Theme;
@@ -68,6 +70,14 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="CaptureAddress"
           component={CaptureAddress}
+        />
+        <RootStack.Screen
+          name="CaptureSSN"
+          component={CaptureSSN}
+        />
+        <RootStack.Screen
+          name="AccountCreateSuccess"
+          component={AccountCreateSuccess}
         />
       </RootStack.Navigator>
     </NavigationContainer>

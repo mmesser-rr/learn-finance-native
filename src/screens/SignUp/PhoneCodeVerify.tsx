@@ -35,7 +35,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
             placeholder='Enter 6-digit Codee'
             maxLength={6}
             isNumeric={true}
-            changeValue={changeValue}
+            onChange={changeValue}
           />
         </View>
         <View>

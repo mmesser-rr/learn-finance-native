@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
+import { useForm, Controller } from "react-hook-form";
 
 import { Title } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-
-import styles from './styles';
 import TextInput from 'src/components/common/TextInput';
 import Dropdown from 'src/components/common/Dropdown';
+
+import styles from './styles';
 
 const states = [
   {
@@ -29,14 +30,34 @@ const states = [
   },
 ];
 
+type FormData = {
+  address: string;
+  apartment_number: string;
+  city: string;
+  zipcode: string;
+  state: string;
+};
+
 const CaptureAddress: React.FC = () => {
-  const [isValid, setIsValid] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    formState: { isValid }
+  } = useForm<FormData>({
+    defaultValues: {
+      address: '',
+      apartment_number: '',
+      city: '',
+      zipcode: '',
+      state: '',
+    },
+    mode: 'onChange',
+  });
 
-  const changeFirstName = (value: string) => {
-    setIsValid(!!value);
+  const onSubmit = (data: FormData) => {
+    NavigationService.navigate('CaptureSSN');
   };
-
-  const goToNextStep = () => {};
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -45,42 +66,102 @@ const CaptureAddress: React.FC = () => {
           <Title style={styles.head}>What's your address?</Title>
         </View>
         <View style={styles.inputWrapper}>
-          <TextInput
-            label='Street Address'
-            placeholder='Street Address'
-            changeValue={changeFirstName}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Field is required' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label='Street Address'
+                placeholder='Street Address'
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+                error={errors?.address?.message}
+              />
+            )}
+            name="address"
           />
         </View>
         <View style={styles.inputWrapper}>
-          <TextInput
-            label='Apartment Number'
-            placeholder='Apartment Number'
-            changeValue={changeFirstName}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Field is required' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label='Apartment Number'
+                placeholder='Apartment Number'
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+                error={errors?.apartment_number?.message}
+              />
+            )}
+            name="apartment_number"
           />
         </View>
         <View style={styles.inputWrapper}>
-          <TextInput
-            label='City'
-            placeholder='City'
-            changeValue={changeFirstName}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Field is required' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label='City'
+                placeholder='City'
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+                error={errors?.city?.message}
+              />
+            )}
+            name="city"
           />
         </View>
         <View style={styles.inputWrapper}>
-          <Dropdown
-            label='State'
-            list={states}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Field is required' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Dropdown
+                label='State'
+                list={states}
+                value={value}
+                onBlur={onBlur}
+                onChange={onChange}
+              />
+            )}
+            name="state"
           />
         </View>
         <View style={styles.inputWrapper}>
-          <TextInput
-            label='ZIP Code'
-            placeholder='ZIP Code'
-            changeValue={changeFirstName}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Field is required' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label='ZIP Code'
+                placeholder='ZIP Code'
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value}
+                error={errors?.zipcode?.message}
+              />
+            )}
+            name="zipcode"
           />
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={handleSubmit(onSubmit)} />
       </View>
     </AppLayout>
   );
