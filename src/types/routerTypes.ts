@@ -10,6 +10,7 @@ export type RootStackParamList = {
   SelectTeam: undefined;
   BankAccountIntro: undefined;
   CaptureDOB: undefined;
+  CaptureAddress: undefined;
 };
 
 // sign up
