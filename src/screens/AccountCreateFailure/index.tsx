@@ -5,31 +5,31 @@ import { Caption, Title } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-import SuccessIcon from 'src/assets/icons/account-creation-success.svg';
+import FailureIcon from 'src/assets/icons/account-creation-failure.svg';
 
 import styles from './styles';
 
-const AccountCreateSuccess: React.FC = () => {
-  const goToNextStep = () => NavigationService.navigate('AccountCreateFailure');
+const AccountCreateFailure: React.FC = () => {
+  const goToNextStep = () => {};
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
-        <SuccessIcon />
+        <FailureIcon />
       </View>
       <View>
-        <Title style={styles.head}>Success!</Title>
+        <Title style={styles.head}>Additional Action Needed</Title>
       </View>
       <View>
         <Caption style={styles.caption}>
-          Your identity has been successfully verified. Your Players Co. bank account is now established.
+          We need more documentations to verify your identity. We will send detailed instructions to john.smith@gmail.com
         </Caption>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={true} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton isValid={true} actionLabel='OK' onSubmit={goToNextStep} />
       </View>
     </AppLayout>
   );
 };
 
-export default AccountCreateSuccess;
+export default AccountCreateFailure;
