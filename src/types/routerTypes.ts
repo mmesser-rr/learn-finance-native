@@ -13,6 +13,7 @@ export type RootStackParamList = {
   CaptureAddress: undefined;
   CaptureSSN: undefined;
   AccountCreateSuccess: undefined;
+  AccountCreateFailure: undefined;
 };
 
 // sign up
