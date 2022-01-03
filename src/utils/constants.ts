@@ -12,3 +12,5 @@ export const gradientButtonColors = [
   '#0077CC',
   '#1735BC'
 ];
+
+export const RedLinnerGradient = ['#FF5A5F', '#CA3D45', '#97283C'];
