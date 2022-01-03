@@ -14,6 +14,7 @@ export type RootStackParamList = {
   CaptureSSN: undefined;
   AccountCreateSuccess: undefined;
   AccountCreateFailure: undefined;
+  ProfileIntro: undefined;
 };
 
 // sign up
