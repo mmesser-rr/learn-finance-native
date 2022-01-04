@@ -15,6 +15,7 @@ export type RootStackParamList = {
   AccountCreateSuccess: undefined;
   AccountCreateFailure: undefined;
   ProfileIntro: undefined;
+  SelectPlayerTag: undefined;
 };
 
 // sign up

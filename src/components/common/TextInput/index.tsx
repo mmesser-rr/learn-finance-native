@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { TextInput as RNTextInput, HelperText } from 'react-native-paper';
+import { TextInputProps as RNTextInputProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
 
 import AppColors from 'src/config/colors';
 
 import styles from './styles';
 
-interface TextInputProps {
-  label: string;
-  value?: string;
-  error?: string;
-  defaultValue?: string;
-  placeholder?: string;
-  maxLength?: number;
+type TextInputProps = Omit<RNTextInputProps, 'theme'> & {
+  errorMssage?: string;
   isNumeric?: boolean;
-  onChange: (text: string) => void;
+  onChangeText: (text: string) => void;
   onBlur?: () => void;
-}
+};
 
 const TextInput: React.FC<TextInputProps> = ({
-  label,
   value,
-  error,
+  errorMssage,
   defaultValue,
   placeholder,
-  maxLength,
   isNumeric,
-  onChange,
+  onChangeText,
   onBlur,
+  ...rest
 }) => {
   const [text, setText] = React.useState(defaultValue || '');
   const [focused, setFocused] = useState(false);
@@ -39,7 +34,7 @@ const TextInput: React.FC<TextInputProps> = ({
   const textChangeHandler = (txt: string) => {
     const updated = isNumeric ? txt.replace(/[^0-9]/g, '') : txt;
     setText(updated);
-    onChange(updated);
+    onChangeText(updated);
   };
 
   const blurHandler = () => {
@@ -50,12 +45,9 @@ const TextInput: React.FC<TextInputProps> = ({
     }
   };
 
-  const isError = Boolean(error);
-
   return (
     <View>
       <RNTextInput
-        label={label}
         placeholder={focused ? '' : placeholder}
         value={text}
         underlineColor={AppColors.whiteColor}
@@ -69,14 +61,14 @@ const TextInput: React.FC<TextInputProps> = ({
             accent: AppColors.whiteColor,
           }
         }}
-        maxLength={maxLength}
         onChangeText={text => textChangeHandler(text)}
         onFocus={() => setFocused(true)}
         onBlur={() => blurHandler()}
+        {...rest}
       />
-      {isError && (
+      {!!errorMssage && (
         <HelperText type='error'>
-          {error}
+          {errorMssage}
         </HelperText>
       )}
     </View>

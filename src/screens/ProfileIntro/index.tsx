@@ -12,7 +12,7 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 import styles from './styles';
 
 const ProfileIntro: React.FC = () => {
-  const onFinish = () => {};
+  const onFinish = () => NavigationService.navigate('SelectPlayerTag');
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
