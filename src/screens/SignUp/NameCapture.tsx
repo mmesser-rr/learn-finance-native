@@ -45,14 +45,14 @@ const NameCapture: React.FC<NameCaptureProps> = ({
           <TextInput
             label='First Name'
             placeholder='First Name'
-            onChange={changeFirstName}
+            onChangeText={changeFirstName}
           />
         </View>
         <View>
           <TextInput
             label='Last Name'
             placeholder='Last Name'
-            onChange={changeLastName}
+            onChangeText={changeLastName}
           />
         </View>
       </View>
