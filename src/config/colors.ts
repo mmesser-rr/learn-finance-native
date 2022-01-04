@@ -7,7 +7,6 @@ const AppColors = {
   placeholderColor: '#999',
   searchPlaceholderColor: '#F7F7F738',
   errorColor: '#FF5A5F',
-  redLinnerGradient: ['#FF5A5F', '#CA3D45', '#97283C'],
 };
 
 export default AppColors;

@@ -10,7 +10,7 @@ import FailureIcon from 'src/assets/icons/account-creation-failure.svg';
 import styles from './styles';
 
 const AccountCreateFailure: React.FC = () => {
-  const goToNextStep = () => {};
+  const goToNextStep = () => NavigationService.navigate('ProfileIntro');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>

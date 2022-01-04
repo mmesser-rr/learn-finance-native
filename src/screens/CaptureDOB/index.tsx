@@ -6,6 +6,7 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import NavigationService from 'src/navigation/NavigationService';
+import { validateDOB } from 'src/utils/validation';
 
 import styles from './styles';
 
@@ -13,7 +14,7 @@ const CaptureDOB: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
 
   const changeValue = (value: string) => {
-    setIsValid(!!value);
+    setIsValid(validateDOB(value));
   };
 
   const goToNextStep = () => NavigationService.navigate('CaptureAddress');
