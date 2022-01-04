@@ -36,7 +36,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
           <TextInput
             label='Email Address'
             placeholder='Email Address'
-            onChange={codeChangeHandler}
+            onChangeText={codeChangeHandler}
           />
         </View>
       </View>

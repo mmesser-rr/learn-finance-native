@@ -18,6 +18,7 @@ import CaptureSSN from 'src/screens/CaptureSSN';
 import AccountCreateSuccess from 'src/screens/AccountCreateSuccess';
 import AccountCreateFailure from 'src/screens/AccountCreateFailure';
 import ProfileIntro from 'src/screens/ProfileIntro';
+import SelectPlayerTag from 'src/screens/SelectPlayerTag';
 
 interface IProps {
   theme: Theme;
@@ -88,6 +89,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="ProfileIntro"
           component={ProfileIntro}
+        />
+        <RootStack.Screen
+          name="SelectPlayerTag"
+          component={SelectPlayerTag}
         />
       </RootStack.Navigator>
     </NavigationContainer>
