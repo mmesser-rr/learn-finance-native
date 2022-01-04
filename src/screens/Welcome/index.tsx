@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import AppColors from 'src/config/colors';
+import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
 import { BigTitle, Caption, Text } from 'src/components/common/Texts';
@@ -14,7 +14,7 @@ const Welcome: React.FC = () => {
   const onJoin = () => NavigationService.navigate('SignUp');
 
   return (
-    <LinearGradient colors={AppColors.redLinnerGradient} style={styles.container}>
+    <LinearGradient colors={RedLinnerGradient} style={styles.container}>
       <AppLayout viewStyle={styles.viewWrapper}>
         <View style={styles.descriptionWrapper}>
           <View>
