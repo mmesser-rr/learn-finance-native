@@ -11,8 +11,8 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 
 import styles from './styles';
 
-const BankAccountIntro: React.FC = () => {
-  const onVerify = () => NavigationService.navigate('CaptureDOB');
+const ProfileIntro: React.FC = () => {
+  const onFinish = () => {};
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
@@ -22,27 +22,25 @@ const BankAccountIntro: React.FC = () => {
             <LogoIcon />
           </View>
           <View style={styles.block}>
-            <BigTitle>Open the Players Co. Bank Account</BigTitle>
+            <BigTitle>Last but not least</BigTitle>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Verify Identity</Title>
-            <Caption>
-              Nothing fancy, just a few things to understand your athlete experience.
-            </Caption>
+            <Title style={styles.title}>Add Players Tag</Title>
+            <Caption>Choose your username to join the community.</Caption>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Open the bank account</Title>
+            <Title style={styles.title}>Verify your email</Title>
             <Caption>
-              Once your identity is verified your Players Co. bank account will be established.
+              Confirming your email address helps protect your personal info. 
             </Caption>
           </View>
         </View>
         <View>
-          <Button onPress={onVerify}>Next: Verify identify</Button>
+          <Button onPress={onFinish}>Finish Account Setup</Button>
         </View>
       </AppLayout>
     </LinearGradient>
   );
 };
 
-export default BankAccountIntro;
+export default ProfileIntro;
