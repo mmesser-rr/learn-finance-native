@@ -33,7 +33,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
           <TextInput
             label='Invite Code'
             placeholder='Invite Code'
-            onChange={codeChangeHandler}
+            onChangeText={codeChangeHandler}
           />
         </View>
         <View>

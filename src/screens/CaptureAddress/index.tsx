@@ -76,9 +76,9 @@ const CaptureAddress: React.FC = () => {
                 label='Street Address'
                 placeholder='Street Address'
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={onChange}
                 value={value}
-                error={errors?.address?.message}
+                errorMssage={errors?.address?.message}
               />
             )}
             name="address"
@@ -95,9 +95,9 @@ const CaptureAddress: React.FC = () => {
                 label='Apartment Number'
                 placeholder='Apartment Number'
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={onChange}
                 value={value}
-                error={errors?.apartment_number?.message}
+                errorMssage={errors?.apartment_number?.message}
               />
             )}
             name="apartment_number"
@@ -114,9 +114,9 @@ const CaptureAddress: React.FC = () => {
                 label='City'
                 placeholder='City'
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={onChange}
                 value={value}
-                error={errors?.city?.message}
+                errorMssage={errors?.city?.message}
               />
             )}
             name="city"
@@ -151,9 +151,9 @@ const CaptureAddress: React.FC = () => {
                 label='ZIP Code'
                 placeholder='ZIP Code'
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={onChange}
                 value={value}
-                error={errors?.zipcode?.message}
+                errorMssage={errors?.zipcode?.message}
               />
             )}
             name="zipcode"
