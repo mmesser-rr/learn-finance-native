@@ -35,7 +35,7 @@ const SelectLevel: React.FC = () => {
             <Button onPress={onSelectLevel}>I'm a professional athlete</Button>
           </View>
           <View>
-            <Button propsActionStyle={styles.collegeAction} onPress={onSelectLevel}>I'm a college athlete</Button>
+            <Button actionStyle={styles.collegeAction} onPress={onSelectLevel}>I'm a college athlete</Button>
           </View>
         </View>
       </AppLayout>

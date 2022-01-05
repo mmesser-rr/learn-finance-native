@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
   continueAction: {
     backgroundColor: AppColors.grayColor,
     color: AppColors.disableColor,
-    borderRadius: 100,
+    borderRadius: scale(100),
   },
   linearGradient: {
-    borderRadius: 100,
+    borderRadius: scale(100),
   },
   activeContinueAction: {
     width: '100%',

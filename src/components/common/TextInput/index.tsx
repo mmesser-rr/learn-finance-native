@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { TextInput as RNTextInput, HelperText } from 'react-native-paper';
+import { TextInput as RNTextInput } from 'react-native-paper';
 import { TextInputProps as RNTextInputProps } from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
+import { Text } from '../Texts';
 
 import styles from './styles';
 
@@ -50,8 +52,8 @@ const TextInput: React.FC<TextInputProps> = ({
       <RNTextInput
         placeholder={focused ? '' : placeholder}
         value={text}
-        underlineColor={AppColors.whiteColor}
-        activeUnderlineColor={AppColors.whiteColor}
+        underlineColor={!!errorMssage ? AppColors.errorColor : AppColors.whiteColor}
+        activeUnderlineColor={!!errorMssage ? AppColors.errorColor : AppColors.whiteColor}
         autoCapitalize='none'
         style={styles.input}
         theme={{
@@ -67,9 +69,15 @@ const TextInput: React.FC<TextInputProps> = ({
         {...rest}
       />
       {!!errorMssage && (
-        <HelperText type='error'>
-          {errorMssage}
-        </HelperText>
+        <View style={styles.helperWrapper}>
+          <MaterialCommunityIcons
+            style={styles.helperIcon}
+            name="information-outline"
+            color={AppColors.errorColor}
+            size={16}
+          />
+          <Text style={styles.helperText}>{errorMssage}</Text>
+        </View>
       )}
     </View>
   );

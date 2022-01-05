@@ -17,7 +17,7 @@ const SelectPlayerTag: React.FC = () => {
     setIsValid(!!value);
   };
 
-  const goToNextStep = () => {};
+  const goToNextStep = () => NavigationService.navigate('VerifyEmailCode');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
