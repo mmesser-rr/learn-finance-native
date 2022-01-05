@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { gradientButtonColors } from 'src/utils/constants';
+import { GradientButtonColors } from 'src/utils/constants';
 import { Text } from '../Texts';
 
 import styles from './styles';
@@ -26,7 +26,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
             style={styles.linearGradient}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
-            colors={gradientButtonColors}
+            colors={GradientButtonColors}
           >
             <TouchableOpacity onPress={onSubmit} >
               <Text style={styles.activeContinueAction}>{actionLabel}</Text>
