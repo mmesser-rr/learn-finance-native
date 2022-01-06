@@ -7,28 +7,8 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
 import TextInput from 'src/components/common/TextInput';
-import Dropdown from 'src/components/common/Dropdown';
 
 import styles from './styles';
-
-const states = [
-  {
-    label: "Califonia",
-    value: "califonia",
-  },
-  {
-    label: "Texas",
-    value: "texas",
-  },
-  {
-    label: "Florida",
-    value: "florida",
-  },
-  {
-    label: "Alaska",
-    value: "alaska",
-  },
-];
 
 type FormData = {
   address: string;
@@ -69,7 +49,7 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Field is required' },
+              required: { value: true, message: 'Please fill out this field' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -87,9 +67,7 @@ const CaptureAddress: React.FC = () => {
         <View style={styles.inputWrapper}>
           <Controller
             control={control}
-            rules={{
-              required: { value: true, message: 'Field is required' },
-            }}
+            rules={{ required: false }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='Apartment Number'
@@ -107,7 +85,7 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Field is required' },
+              required: { value: true, message: 'Please fill out this field' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
@@ -126,15 +104,16 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Field is required' },
+              required: { value: true, message: 'Please fill out this field' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
-              <Dropdown
+              <TextInput
                 label='State'
-                list={states}
-                value={value}
+                placeholder='State'
                 onBlur={onBlur}
-                onChange={onChange}
+                onChangeText={onChange}
+                value={value}
+                errorMssage={errors?.state?.message}
               />
             )}
             name="state"
@@ -144,12 +123,16 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Field is required' },
+              required: { value: true, message: 'Please fill out this field' },
+              minLength: { value: 5, message: 'The length should be 5' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='ZIP Code'
                 placeholder='ZIP Code'
+                keyboardType='number-pad'
+                isNumeric
+                maxLength={5}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
