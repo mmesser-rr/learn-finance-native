@@ -34,7 +34,8 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
             label='Invite Code'
             placeholder='Invite Code'
             keyboardType='number-pad'
-            isNumeric={true}
+            isNumeric
+            autoFocus
             onChangeText={codeChangeHandler}
           />
         </View>
