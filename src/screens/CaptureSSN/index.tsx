@@ -15,7 +15,7 @@ const CaptureSSN: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
 
   const changeValue = (value: string) => {
-    setIsValid(!!value);
+    setIsValid(value.length === 9);
   };
 
   const goToNextStep = () => NavigationService.navigate('AccountCreateSuccess');

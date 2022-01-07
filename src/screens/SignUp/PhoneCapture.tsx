@@ -33,8 +33,8 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
           <View>
             <TextInputMask
               label='Phone Number'
-              mask='+1 [000] [000] [0000]'
-              autoFocus={true}
+              mask='[000] [000] [0000]'
+              autoFocus
               changeValue={changeValue}
             />
           </View>
