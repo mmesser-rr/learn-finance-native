@@ -26,6 +26,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
             style={styles.linearGradient}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
+            locations={[0, 0, 0.2388, 1]}
             colors={GradientButtonColors}
           >
             <TouchableOpacity onPress={onSubmit} >
