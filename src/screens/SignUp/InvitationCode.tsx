@@ -33,6 +33,8 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
           <TextInput
             label='Invite Code'
             placeholder='Invite Code'
+            keyboardType='number-pad'
+            isNumeric={true}
             onChangeText={codeChangeHandler}
           />
         </View>

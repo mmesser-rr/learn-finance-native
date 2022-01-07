@@ -6,7 +6,7 @@ export const SignUpSteps = [
   'email_capture',
 ];
 
-export const gradientButtonColors = [
+export const GradientButtonColors = [
   '#34A9EC',
   '#2D95D1',
   '#0077CC',
