@@ -8,15 +8,15 @@ import styles from './styles';
 
 interface ButtonProps {
   children: React.ReactNode;
-  propsActionStyle?: TextStyle | TextStyle[];
-  propsLabelStyle?: TextStyle | TextStyle[];
+  actionStyle?: TextStyle | TextStyle[];
+  labelStyle?: TextStyle | TextStyle[];
   onPress?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  propsActionStyle,
-  propsLabelStyle,
+  actionStyle: propsActionStyle,
+  labelStyle: propsLabelStyle,
   onPress,
 }) => {
   const actionStyle = generateTextStyle(styles.action, propsActionStyle);
