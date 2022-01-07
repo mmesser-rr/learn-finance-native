@@ -14,7 +14,7 @@ const AccountCreateFailure: React.FC = () => {
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View>
+      <View style={styles.iconWrapper}>
         <FailureIcon />
       </View>
       <View>

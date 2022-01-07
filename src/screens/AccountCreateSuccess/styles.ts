@@ -18,9 +18,14 @@ const styles = StyleSheet.create({
   caption: {
     marginBottom: scale(48),
     textAlign: 'center',
+    height: scale(78),
   },
   actionWrapper: {
     width: '100%',
+  },
+  iconWrapper: {
+    height: scale(62),
+    justifyContent: 'center',
   },
 });
 

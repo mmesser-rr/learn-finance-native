@@ -17,7 +17,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
   const [isValid, setIsValid] = useState(false);
 
   const codeChangeHandler = (value: string) => {
-    setIsValid(!!value);
+    setIsValid(value.length === 6);
   };
 
   return (
@@ -36,6 +36,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
             keyboardType='number-pad'
             isNumeric
             autoFocus
+            maxLength={6}
             onChangeText={codeChangeHandler}
           />
         </View>
