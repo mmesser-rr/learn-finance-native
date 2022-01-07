@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useState, createRef, useRef, useEffect } from 'react';
+import { View, TextInput as RNTextInput } from 'react-native';
 import RNTextInputMask from 'react-native-text-input-mask';
 import { TextInput } from 'react-native-paper';
 
@@ -37,10 +37,10 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   return (
     <View>
       <TextInput
-        autoFocus={!!autoFocus}
         label={label}
         value={text}
         underlineColor={AppColors.whiteColor}
+        autoFocus={true}
         activeUnderlineColor={AppColors.whiteColor}
         style={styles.input}
         theme={{
@@ -51,6 +51,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
         }}
         render={props =>
           <RNTextInputMask
+            autoFocus={!!autoFocus}
             value={props.value}
             style={styles.inputMask}
             selectionColor={AppColors.whiteColor}

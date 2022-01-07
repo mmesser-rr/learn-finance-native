@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: scale(16),
     lineHeight: scale(24),
-    fontWeight: '400',
+    fontWeight: '500',
     color: AppColors.whiteColor,
     letterSpacing: scale(0.5),
   },

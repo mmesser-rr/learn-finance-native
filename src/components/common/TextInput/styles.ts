@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   helperText: {
     fontSize: scale(14),
     lineHeight: scale(20),
-    fontWeight: '400',
+    fontWeight: '500',
     color: AppColors.errorColor,
   },
   helperIcon: {
