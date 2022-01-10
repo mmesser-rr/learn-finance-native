@@ -30,7 +30,7 @@ const CaptureSSN: React.FC = () => {
           <TextInputMask
             label={label}
             mask='[000]-[00]-[0000]'
-            autoFocus={true}
+            autoFocus
             isSecure
             changeValue={changeValue}
           />
