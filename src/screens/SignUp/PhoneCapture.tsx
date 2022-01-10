@@ -35,6 +35,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
               label='Phone Number'
               mask='[000] [000] [0000]'
               autoFocus
+              keyboardType='number-pad'
               changeValue={changeValue}
             />
           </View>

@@ -19,14 +19,13 @@ type TextInputProps = Omit<RNTextInputProps, 'theme'> & {
 const TextInput: React.FC<TextInputProps> = ({
   value,
   errorMssage,
-  defaultValue,
   placeholder,
   isNumeric,
   onChangeText,
   onBlur,
   ...rest
 }) => {
-  const [text, setText] = React.useState(defaultValue || '');
+  const [text, setText] = React.useState(value || '');
   const [focused, setFocused] = useState(false);
 
   useEffect(() => {

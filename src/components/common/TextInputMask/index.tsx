@@ -1,5 +1,5 @@
-import React, { useState, createRef, useRef, useEffect } from 'react';
-import { View, TextInput as RNTextInput } from 'react-native';
+import React, { useState } from 'react';
+import { KeyboardType, View } from 'react-native';
 import RNTextInputMask from 'react-native-text-input-mask';
 import { TextInput } from 'react-native-paper';
 
@@ -12,21 +12,23 @@ import styles from './styles';
 interface TextInputMaskProps {
   label: string;
   mask: string;
-  defaultValue?: string;
+  value?: string;
   autoFocus?: boolean;
   isSecure?: boolean;
+  keyboardType?: KeyboardType;
   changeValue: (text: string) => void
 }
 
 const TextInputMask: React.FC<TextInputMaskProps> = ({
   label,
   mask,
-  defaultValue,
+  value,
   autoFocus,
   isSecure,
+  keyboardType,
   changeValue,
 }) => {
-  const [text, setText] = useState(defaultValue || '');
+  const [text, setText] = useState(value || '');
   const [securityState, setSecurityState] = useState(true);
 
   const textChangeHandler = (txt: string | undefined) => {
@@ -40,30 +42,29 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
         label={label}
         value={text}
         underlineColor={AppColors.whiteColor}
-        autoFocus={true}
+        autoFocus={!!autoFocus}
         activeUnderlineColor={AppColors.whiteColor}
         style={styles.input}
+        keyboardType={keyboardType}
         theme={{
           colors: {
             text: AppColors.whiteColor,
             placeholder: AppColors.placeholderColor,
           }
         }}
-        render={props =>
-          <RNTextInputMask
-            autoFocus={!!autoFocus}
-            value={props.value}
+        render={props => {
+          const {ref, ...rest} = props;
+          return <RNTextInputMask
+            {...rest}
             style={styles.inputMask}
             selectionColor={AppColors.whiteColor}
             mask={mask}
             secureTextEntry={isSecure && securityState}
-            returnKeyType='next'
-            keyboardType={'numeric'}
             onChangeText={(formatted, extracted) => {
               textChangeHandler(extracted);
             }}
-          />
-        }
+          />;
+        }}
         right={
           isSecure && (
             <TextInput.Icon
