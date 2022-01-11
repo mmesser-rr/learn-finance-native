@@ -9,6 +9,7 @@ import NavigationService from 'src/navigation/NavigationService';
 import { validateDOB } from 'src/utils/validation';
 
 import styles from './styles';
+import { calculateContentHeight } from 'src/utils/functions';
 
 const CaptureDOB: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
@@ -18,10 +19,11 @@ const CaptureDOB: React.FC = () => {
   };
 
   const goToNextStep = () => NavigationService.navigate('CaptureAddress');
+  const safeviewHeight = calculateContentHeight();
 
   return (
-    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={styles.contentWrapper}>
+    <AppLayout containerStyle={styles.container}>
+      <View style={{height: safeviewHeight / 2}}>
         <View>
           <Title style={styles.head}>What's your date of birth?</Title>
         </View>
@@ -36,7 +38,12 @@ const CaptureDOB: React.FC = () => {
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel='Continue'
+          style={styles.submit}
+          onSubmit={goToNextStep}
+        />
       </View>
     </AppLayout>
   );

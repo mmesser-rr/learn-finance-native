@@ -35,7 +35,7 @@ const VerifyEmailCode: React.FC = () => {
   const safeviewHeight = calculateContentHeight();
 
   return (
-    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
+    <AppLayout containerStyle={styles.container}>
       <View style={{height: safeviewHeight / 2}}>
         <View>
           <Title style={styles.head}>Enter your verification code</Title>

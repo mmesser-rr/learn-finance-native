@@ -6,8 +6,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.blackColor,
   },
-  viewWrapper: {
-  },
   head: {
     marginBottom: scale(16),
   },
