@@ -10,6 +10,7 @@ import TextInput from 'src/components/common/TextInput';
 import Button from 'src/components/common/Button';
 import { GradientButtonColors } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
+import { calculateContentHeight } from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -31,10 +32,11 @@ const VerifyEmailCode: React.FC = () => {
   });
 
   const onSubmit = (data: FormData) => {};
+  const safeviewHeight = calculateContentHeight();
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={styles.contentWrapper}>
+      <View style={{height: safeviewHeight / 2}}>
         <View>
           <Title style={styles.head}>Enter your verification code</Title>
         </View>

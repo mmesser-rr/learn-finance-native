@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { TextStyle } from "react-native";
+import { TextStyle, Dimensions } from "react-native";
+import SafeArea from 'react-native-safe-area';
+
+import { scale } from 'src/config/dimentions';
 
 export const generateTextStyle = (
   ownStyle: TextStyle,
@@ -29,4 +32,20 @@ export const useDebounce = (value: string | number, delay: number) => {
     [value, delay]
   );
   return debouncedValue;
-}
+};
+
+let top = 0;
+let bottom = 0;
+
+SafeArea.getSafeAreaInsetsForRootView()
+  .then(({safeAreaInsets}) => {
+    if (safeAreaInsets) {
+      top = safeAreaInsets.top;
+      bottom = safeAreaInsets.bottom;
+    }
+  });
+
+export const calculateContentHeight = () => {
+  const windowHeight = Dimensions.get('window').height;
+  return windowHeight - top - bottom - scale(28) * 2;
+};
