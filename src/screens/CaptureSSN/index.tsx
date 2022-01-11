@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
 import { Title } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -13,6 +13,7 @@ const label = 'SSN (xxx-xx-xxxx)';
 
 const CaptureSSN: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
+  const windowHeight = Dimensions.get('window').height;
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 9);
@@ -32,12 +33,18 @@ const CaptureSSN: React.FC = () => {
             mask='[000]-[00]-[0000]'
             autoFocus
             isSecure
+            keyboardType='number-pad'
             changeValue={changeValue}
           />
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel='Continue'
+          style={styles.submit}
+          onSubmit={goToNextStep}
+        />
       </View>
     </AppLayout>
   );

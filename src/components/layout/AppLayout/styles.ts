@@ -5,7 +5,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollViewContainer: {
+  avoidViewContent: {
+    flex: 1,
+  },
+  avoidingViewContainer: {
+    flex: 1,
+  },
+  scrollViewContent: {
     flexGrow: 1,
   },
   view: {

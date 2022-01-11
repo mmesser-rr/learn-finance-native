@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.blackColor,
   },
   viewWrapper: {
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
