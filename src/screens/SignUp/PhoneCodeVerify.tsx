@@ -35,6 +35,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
             placeholder='Enter 6-digit Codee'
             maxLength={6}
             isNumeric
+            autoFocus
             keyboardType='number-pad'
             onChangeText={changeValue}
           />
