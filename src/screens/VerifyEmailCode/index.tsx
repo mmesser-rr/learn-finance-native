@@ -55,8 +55,9 @@ const VerifyEmailCode: React.FC = () => {
                 label='Enter 6-digit Code'
                 placeholder='Enter 6-digit Code'
                 maxLength={6}
-                autoFocus={true}
-                isNumeric={true}
+                autoFocus
+                isNumeric
+                keyboardType='number-pad'
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -73,7 +74,12 @@ const VerifyEmailCode: React.FC = () => {
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Verify code' onSubmit={handleSubmit(onSubmit)} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel='Verify code'
+          style={styles.submit}
+          onSubmit={handleSubmit(onSubmit)}
+        />
         <LinearGradient
           style={styles.laterActionGradient}
           start={{x: 0, y: 0}}

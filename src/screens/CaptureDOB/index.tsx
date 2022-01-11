@@ -30,6 +30,7 @@ const CaptureDOB: React.FC = () => {
             label='Date of Birth (mm/dd/yyyy)'
             mask='[00]/[00]/[0000]'
             autoFocus
+            keyboardType='number-pad'
             changeValue={changeValue}
           />
         </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, TextStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { GradientButtonColors } from 'src/utils/constants';
@@ -8,6 +8,7 @@ import { Text } from '../Texts';
 import styles from './styles';
 
 interface SubmitButtonProps {
+  style?: TextStyle | TextStyle[];
   actionLabel: string;
   isValid: boolean;
   onSubmit: () => void;
@@ -15,11 +16,12 @@ interface SubmitButtonProps {
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({
   actionLabel,
+  style,
   isValid,
   onSubmit,
 }) => {
   return (
-    <View>
+    <View style={style}>
       {isValid ?
         (
           <LinearGradient
