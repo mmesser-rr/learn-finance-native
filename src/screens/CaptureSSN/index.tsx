@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
 import { Title } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -14,7 +14,15 @@ const label = 'SSN (xxx-xx-xxxx)';
 
 const CaptureSSN: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
-  const safeviewHeight = calculateContentHeight();
+  const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  useEffect(() => {
+    async function getContentHeight() {
+      SetSafeviewHeight(await calculateContentHeight());
+    }
+
+    getContentHeight();
+  }, []);
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 9);
