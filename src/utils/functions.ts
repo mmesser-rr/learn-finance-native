@@ -34,18 +34,16 @@ export const useDebounce = (value: string | number, delay: number) => {
   return debouncedValue;
 };
 
-let top = 0;
-let bottom = 0;
+export const calculateContentHeight = async () => {
+  let top = 0;
+  let bottom = 0;
+  const { safeAreaInsets } = await SafeArea.getSafeAreaInsetsForRootView();
 
-SafeArea.getSafeAreaInsetsForRootView()
-  .then(({safeAreaInsets}) => {
-    if (safeAreaInsets) {
-      top = safeAreaInsets.top;
-      bottom = safeAreaInsets.bottom;
-    }
-  });
+  if (safeAreaInsets) {
+    top = safeAreaInsets.top;
+    bottom = safeAreaInsets.bottom;
+  }
 
-export const calculateContentHeight = () => {
   const windowHeight = Dimensions.get('window').height;
   return windowHeight - top - bottom - scale(28) * 2;
 };

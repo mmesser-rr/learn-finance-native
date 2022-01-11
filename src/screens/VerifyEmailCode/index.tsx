@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import LinearGradient from 'react-native-linear-gradient';
@@ -19,6 +19,16 @@ type FormData = {
 };
 
 const VerifyEmailCode: React.FC = () => {
+  const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  useEffect(() => {
+    async function getContentHeight() {
+      SetSafeviewHeight(await calculateContentHeight());
+    }
+
+    getContentHeight();
+  }, []);
+
   const {
     control,
     handleSubmit,
@@ -32,7 +42,6 @@ const VerifyEmailCode: React.FC = () => {
   });
 
   const onSubmit = (data: FormData) => {};
-  const safeviewHeight = calculateContentHeight();
 
   return (
     <AppLayout containerStyle={styles.container}>
