@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { Title } from 'src/components/common/Texts';
@@ -7,19 +7,27 @@ import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import NavigationService from 'src/navigation/NavigationService';
 import { validateDOB } from 'src/utils/validation';
+import { calculateContentHeight } from 'src/utils/functions';
 
 import styles from './styles';
-import { calculateContentHeight } from 'src/utils/functions';
 
 const CaptureDOB: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
+  const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  useEffect(() => {
+    async function getContentHeight() {
+      SetSafeviewHeight(await calculateContentHeight());
+    }
+
+    getContentHeight();
+  }, []);
 
   const changeValue = (value: string) => {
     setIsValid(validateDOB(value));
   };
 
   const goToNextStep = () => NavigationService.navigate('CaptureAddress');
-  const safeviewHeight = calculateContentHeight();
 
   return (
     <AppLayout containerStyle={styles.container}>
