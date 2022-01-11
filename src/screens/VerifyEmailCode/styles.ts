@@ -7,9 +7,6 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.blackColor,
   },
   viewWrapper: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   head: {
     marginBottom: scale(16),
@@ -18,17 +15,18 @@ const styles = StyleSheet.create({
     marginBottom: scale(32),
   },
   contentWrapper: {
-    position: 'absolute',
-    width: '100%',
-    top: 0,
-    left: 0,
+    flex: 1,
   },
   actionWrapper: {
     width: '100%',
-    marginTop: scale(64),
+    flex: 1,
+  },
+  submit: {
+    marginTop: scale(-22),
   },
   askAction: {
     marginTop: scale(32),
+    marginBottom: scale(64),
   },
   askActionLabel: {
     marginTop: 0,
