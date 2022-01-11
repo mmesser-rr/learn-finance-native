@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   submit: {
     marginTop: scale(-22),
-  }
+  },
 });
 
 export default styles;

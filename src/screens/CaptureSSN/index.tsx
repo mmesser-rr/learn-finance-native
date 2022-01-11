@@ -6,6 +6,7 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import NavigationService from 'src/navigation/NavigationService';
+import { calculateContentHeight } from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -13,7 +14,7 @@ const label = 'SSN (xxx-xx-xxxx)';
 
 const CaptureSSN: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
-  const windowHeight = Dimensions.get('window').height;
+  const safeviewHeight = calculateContentHeight();
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 9);
@@ -23,7 +24,7 @@ const CaptureSSN: React.FC = () => {
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={styles.contentWrapper}>
+      <View style={{height: safeviewHeight / 2}}>
         <View>
           <Title style={styles.head}>What's your Social Security number?</Title>
         </View>
