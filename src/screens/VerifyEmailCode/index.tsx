@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import LinearGradient from 'react-native-linear-gradient';
@@ -10,6 +10,7 @@ import TextInput from 'src/components/common/TextInput';
 import Button from 'src/components/common/Button';
 import { GradientButtonColors } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
+import { calculateContentHeight } from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -18,6 +19,16 @@ type FormData = {
 };
 
 const VerifyEmailCode: React.FC = () => {
+  const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  useEffect(() => {
+    async function getContentHeight() {
+      SetSafeviewHeight(await calculateContentHeight());
+    }
+
+    getContentHeight();
+  }, []);
+
   const {
     control,
     handleSubmit,
@@ -33,8 +44,8 @@ const VerifyEmailCode: React.FC = () => {
   const onSubmit = (data: FormData) => {};
 
   return (
-    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={styles.contentWrapper}>
+    <AppLayout containerStyle={styles.container}>
+      <View style={{height: safeviewHeight / 2}}>
         <View>
           <Title style={styles.head}>Enter your verification code</Title>
         </View>
@@ -55,8 +66,9 @@ const VerifyEmailCode: React.FC = () => {
                 label='Enter 6-digit Code'
                 placeholder='Enter 6-digit Code'
                 maxLength={6}
-                autoFocus={true}
-                isNumeric={true}
+                autoFocus
+                isNumeric
+                keyboardType='number-pad'
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -73,7 +85,12 @@ const VerifyEmailCode: React.FC = () => {
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Verify code' onSubmit={handleSubmit(onSubmit)} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel='Verify code'
+          style={styles.submit}
+          onSubmit={handleSubmit(onSubmit)}
+        />
         <LinearGradient
           style={styles.laterActionGradient}
           start={{x: 0, y: 0}}

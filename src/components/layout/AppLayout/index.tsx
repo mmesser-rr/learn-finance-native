@@ -1,5 +1,14 @@
 import React from 'react';
-import { ScrollView, View, SafeAreaView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
+
 
 import styles from './styles';
 
@@ -16,9 +25,20 @@ const AppLayout: React.FC<AppLayoutProps> = ({
 }) => {
   return (
     <SafeAreaView style={[styles.container, containerStyle]}>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <View style={[styles.view, viewStyle]}>{children}</View>
-      </ScrollView>
+      <KeyboardAvoidingView
+        style={styles.avoidingViewContainer}
+        contentContainerStyle={styles.avoidViewContent}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView
+            contentContainerStyle={styles.scrollViewContent}
+            keyboardShouldPersistTaps='handled'
+          >
+            <View style={[styles.view, viewStyle]}>{children}</View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
