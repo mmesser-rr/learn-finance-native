@@ -46,7 +46,12 @@ const SelectPlayerTag: React.FC = () => {
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel='Continue'
+          style={styles.submit}
+          onSubmit={goToNextStep}
+        />
       </View>
     </AppLayout>
   );
