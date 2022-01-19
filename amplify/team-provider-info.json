@@ -1,15 +1,48 @@
 {
+  "devken": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-theplayerscompany-devken-124949-authRole",
+      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devken-124949-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devken-124949-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-theplayerscompany-devken-124949-deployment",
+      "UnauthRoleName": "amplify-theplayerscompany-devken-124949-unauthRole",
+      "StackName": "amplify-theplayerscompany-devken-124949",
+      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-devken-124949/93bf6640-7958-11ec-abd5-0a405e8814d1",
+      "AmplifyAppId": "d3dzwrbiqysm7k"
+    },
+    "categories": {
+      "function": {
+        "InviteService": {
+          "deploymentBucketName": "amplify-theplayerscompany-devken-124949-deployment",
+          "s3Key": "amplify-builds/InviteService-6b655346547a43555967-build.zip"
+        }
+      }
+    }
+  },
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-theplayerscompany-dev-155009-authRole",
-      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-155009-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-155009-authRole",
+      "AuthRoleName": "amplify-theplayerscompany-dev-142134-authRole",
+      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-142134-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-142134-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-theplayerscompany-dev-155009-deployment",
-      "UnauthRoleName": "amplify-theplayerscompany-dev-155009-unauthRole",
-      "StackName": "amplify-theplayerscompany-dev-155009",
-      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-dev-155009/a0198a70-78a8-11ec-bb26-0ea49035b755",
+      "DeploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+      "UnauthRoleName": "amplify-theplayerscompany-dev-142134-unauthRole",
+      "StackName": "amplify-theplayerscompany-dev-142134",
+      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-dev-142134/64d23bc0-7965-11ec-b0e2-0ec1101712ad",
       "AmplifyAppId": "d3dzwrbiqysm7k"
+    },
+    "categories": {
+      "function": {
+        "InviteService": {
+          "deploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+          "s3Key": "amplify-builds/InviteService-6b655346547a43555967-build.zip"
+        },
+        "PlayerVerifyService": {
+          "deploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+          "s3Key": "amplify-builds/PlayerVerifyService-344b6a5a7347512b4667-build.zip"
+        }
+      }
     }
   }
 }
