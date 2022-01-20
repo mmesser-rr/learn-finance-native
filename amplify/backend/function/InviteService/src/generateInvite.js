@@ -54,4 +54,7 @@ const persistInvite = async (invite) => {
 
 const generateInvite = () => ({code: genCode(), status: DEFAULT_STATUS});
 
-exports.generateAndPersistInvite = async (event) => await persistInvite(generateInvite());
+module.exports = {
+  generateAndPersistInvite: async (event) => persistInvite(generateInvite()),
+  genCode: genCode
+}
