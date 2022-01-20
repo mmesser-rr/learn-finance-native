@@ -22,14 +22,14 @@ const sendSMSChallenge = (challenge) => {
 const cleanPhoneNumber = (phoneNumber) => {
   const cleanNumber = parsePhoneNumber(phoneNumber, 'US');
 
-  if (!cleanNumber.isValid()) {
-    throw new Error(errorPreamble("Phone number is not a valid US phone number."));
+  if (cleanNumber == undefined || !cleanNumber.isValid()) {
+    throw new Error(errorPreamble(phoneNumber, "Phone number is not a valid US phone number."));
   } 
 
   return cleanNumber.number;
 }
 
-module.exports = async (event) => {
+initiatePhoneChallenge = async (event) => {
   const code = genCode();
   const phoneNumber = cleanPhoneNumber(event.arguments.phoneNumber);
 
@@ -49,4 +49,9 @@ module.exports = async (event) => {
     .catch(err => {
       throw new Error(errorPreamble(phoneNumber, `Error while attempting to persist Challenge: ${err}`));
     });
+}
+
+module.exports = {
+  initiatePhoneChallenge: initiatePhoneChallenge,
+  cleanPhoneNumber: cleanPhoneNumber
 }
