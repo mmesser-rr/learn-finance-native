@@ -32,7 +32,6 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         <View>
           <TextInput
             label='Enter 6-digit Code'
-            placeholder='Enter 6-digit Codee'
             maxLength={6}
             isNumeric
             autoFocus

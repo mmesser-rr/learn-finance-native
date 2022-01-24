@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   blockTitle: {
+    fontFamily: 'Lato-Light',
     fontSize: scale(22),
     lineHeight: scale(28),
-    fontWeight: '300',
     color,
   },
   joinAction: {
@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   },
   joinActionlabel: {
     color,
-    fontWeight: '500',
     fontSize: scale(16),
     lineHeight: scale(24),
     letterSpacing: 0.5,
