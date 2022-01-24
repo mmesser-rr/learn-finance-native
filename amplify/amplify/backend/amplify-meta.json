@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-theplayerscompany-devjenna-150706-authRole",
-      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devjenna-150706-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devjenna-150706-authRole",
+      "AuthRoleName": "amplify-theplayerscompany-devjenna-150520-authRole",
+      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devjenna-150520-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devjenna-150520-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-theplayerscompany-devjenna-150706-deployment",
-      "UnauthRoleName": "amplify-theplayerscompany-devjenna-150706-unauthRole",
-      "StackName": "amplify-theplayerscompany-devjenna-150706",
-      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-devjenna-150706/c1069b60-796b-11ec-96d1-0ee49b32b1d3",
+      "DeploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+      "UnauthRoleName": "amplify-theplayerscompany-devjenna-150520-unauthRole",
+      "StackName": "amplify-theplayerscompany-devjenna-150520",
+      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-devjenna-150520/54e6b590-7d59-11ec-9ade-125bddb2acd9",
       "AmplifyAppId": "d3dzwrbiqysm7k"
     }
   },
@@ -25,7 +25,15 @@
             }
           },
           "additionalAuthenticationProviders": []
-        }
+        },
+        "GraphQLAPIIdOutput": "p7jinf4g2nfrpexym4cqh7f75y",
+        "GraphQLAPIEndpointOutput": "https://kufb6zjhubhbrp4jrhznithege.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-t6c4upwqfbetpjftz5yzrjlxbq"
+      },
+      "lastPushTimeStamp": "2022-01-24T21:47:26.792Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-devjenna-150520-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apitheplayerscompany"
       }
     }
   },
@@ -44,7 +52,22 @@
             "GraphQLAPIKeyOutput"
           ]
         }
-      ]
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:444012541784:function:InviteService-devjenna",
+        "Name": "InviteService-devjenna",
+        "LambdaExecutionRole": "theplayerscompanyLambdaRole35b861c9-devjenna"
+      },
+      "lastPushTimeStamp": "2022-01-24T21:47:26.800Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-devjenna-150520-deployment/amplify-cfn-templates/function/InviteService-cloudformation-template.json",
+        "logicalId": "functionInviteService"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+        "s3Key": "amplify-builds/InviteService-392f636c3034594c6965-build.zip"
+      }
     },
     "PlayerVerifyService": {
       "build": true,
@@ -67,7 +90,22 @@
             "Name"
           ]
         }
-      ]
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:444012541784:function:PlayerVerifyService-devjenna",
+        "Name": "PlayerVerifyService-devjenna",
+        "LambdaExecutionRole": "theplayerscompanyLambdaRole7ca81d36-devjenna"
+      },
+      "lastPushTimeStamp": "2022-01-24T21:47:26.806Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-devjenna-150520-deployment/amplify-cfn-templates/function/PlayerVerifyService-cloudformation-template.json",
+        "logicalId": "functionPlayerVerifyService"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+        "s3Key": "amplify-builds/PlayerVerifyService-53514952725144304950-build.zip"
+      }
     }
   }
 }
