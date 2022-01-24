@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     marginBottom: scale(40),
   },
   title: {
+    fontFamily: 'Lato-Light',
     fontSize: scale(22),
-    fontWeight: '300',
     marginBottom: scale(8),
   },
 });

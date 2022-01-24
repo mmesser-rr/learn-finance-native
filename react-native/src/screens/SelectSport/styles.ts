@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
   head: {
     marginBottom: scale(32),
   },
+  viewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
 });
 
 export default styles;

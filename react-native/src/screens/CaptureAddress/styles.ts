@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   viewWrapper: {
   },
   head: {
-    marginBottom: scale(16),
+    marginBottom: scale(32),
   },
   inputWrapper: {
     marginBottom: scale(16),
