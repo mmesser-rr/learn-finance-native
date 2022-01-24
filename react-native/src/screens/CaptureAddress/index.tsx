@@ -49,16 +49,16 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field' },
+              required: { value: true, message: 'Please fill out this field.' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='Street Address'
-                placeholder='Street Address'
-                onBlur={onBlur}
-                onChangeText={onChange}
+                showErrorMessage
                 value={value}
                 errorMssage={errors?.address?.message}
+                onBlur={onBlur}
+                onChangeText={onChange}
               />
             )}
             name="address"
@@ -71,11 +71,11 @@ const CaptureAddress: React.FC = () => {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='Apartment Number'
-                placeholder='Apartment Number'
-                onBlur={onBlur}
-                onChangeText={onChange}
+                showErrorMessage
                 value={value}
                 errorMssage={errors?.apartment_number?.message}
+                onBlur={onBlur}
+                onChangeText={onChange}
               />
             )}
             name="apartment_number"
@@ -85,12 +85,12 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field' },
+              required: { value: true, message: 'Please fill out this field.' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='City'
-                placeholder='City'
+                showErrorMessage
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -104,16 +104,16 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field' },
+              required: { value: true, message: 'Please fill out this field.' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='State'
-                placeholder='State'
-                onBlur={onBlur}
-                onChangeText={onChange}
+                showErrorMessage
                 value={value}
                 errorMssage={errors?.state?.message}
+                onBlur={onBlur}
+                onChangeText={onChange}
               />
             )}
             name="state"
@@ -123,20 +123,20 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field' },
-              minLength: { value: 5, message: 'The length should be 5' },
+              required: { value: true, message: 'Please fill out this field.' },
+              minLength: { value: 5, message: 'Please provide a valid Zip code.' },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='ZIP Code'
-                placeholder='ZIP Code'
+                showErrorMessage
                 keyboardType='number-pad'
                 isNumeric
+                value={value}
+                errorMssage={errors?.zipcode?.message}
                 maxLength={5}
                 onBlur={onBlur}
                 onChangeText={onChange}
-                value={value}
-                errorMssage={errors?.zipcode?.message}
               />
             )}
             name="zipcode"

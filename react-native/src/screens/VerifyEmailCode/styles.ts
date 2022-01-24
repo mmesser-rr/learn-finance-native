@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
     color: AppColors.linkColor,
-    fontWeight: '500',
     fontSize: scale(16),
     letterSpacing: 0.5,
     textAlign: 'center'

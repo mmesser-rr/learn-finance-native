@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { TextInput as RNTextInput } from 'react-native-paper';
 
-import { Caption, Title } from 'src/components/common/Texts';
+import { Caption, Text, Title } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
@@ -35,12 +34,7 @@ const SelectPlayerTag: React.FC = () => {
             label='Player Tag'
             placeholder='Player Tag'
             autoFocus={true}
-            left={(
-              <RNTextInput.Affix
-                text='@'
-                textStyle={styles.textAffixColor}
-              />
-            )}
+            left={<Text style={styles.left}>@</Text>}
             onChangeText={changeValue}
           />
         </View>

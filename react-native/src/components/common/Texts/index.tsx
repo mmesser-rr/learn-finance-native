@@ -1,6 +1,5 @@
 import React from 'react';
-import { TextStyle } from 'react-native';
-import { Text as RNText } from 'react-native-paper';
+import { TextStyle, Text as RNText } from 'react-native';
 import { generateTextStyle } from 'src/utils/functions';
 
 import styles from './styles';

@@ -4,27 +4,26 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Lato',
+    fontFamily: 'Lato Regular',
     color: AppColors.whiteColor,
   },
   bigTitle: {
+    fontFamily: 'Lato Bold',
     fontSize: scale(28),
     lineHeight: scale(36),
-    fontWeight: 'bold',
     color: AppColors.whiteColor,
   },
   title: {
+    fontFamily: 'Lato Bold',
     fontSize: scale(20),
     lineHeight: scale(28),
-    fontWeight: 'bold',
     color: AppColors.whiteColor,
   },
   caption: {
+    fontFamily: 'Lato Regular',
     fontSize: scale(16),
     lineHeight: scale(24),
-    fontWeight: '500',
     color: AppColors.whiteColor,
-    letterSpacing: scale(0.5),
   },
 });
 

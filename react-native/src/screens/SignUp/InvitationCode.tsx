@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -11,13 +12,27 @@ interface InvitationCodeProps {
   goToNextStep: () => void;
 }
 
+type FormData = {
+  code: string;
+};
+
 const InvitationCode: React.FC<InvitationCodeProps> = ({
   goToNextStep,
 }) => {
-  const [isValid, setIsValid] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    formState: { isValid }
+  } = useForm<FormData>({
+    defaultValues: {
+      code: '',
+    },
+    mode: 'onChange',
+  });
 
-  const codeChangeHandler = (value: string) => {
-    setIsValid(value.length === 6);
+  const onSubmit = (data: FormData) => {
+    goToNextStep();
   };
 
   return (
@@ -30,14 +45,24 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
           <Caption style={styles.description}>Enter your invitation code to get started.</Caption>
         </View>
         <View>
-          <TextInput
-            label='Invite Code'
-            placeholder='Invite Code'
-            keyboardType='number-pad'
-            isNumeric
-            autoFocus
-            maxLength={6}
-            onChangeText={codeChangeHandler}
+          <Controller
+            control={control}
+            rules={{
+              required: { value: true, message: 'Please fill out this field.' },
+              minLength: { value: 6, message: 'Invalid code. Please try again.' },
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                label='Invite Code'
+                showErrorMessage
+                autoFocus
+                maxLength={6}
+                errorMssage={errors?.code?.message}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
+            name="code"
           />
         </View>
         <View>
@@ -47,7 +72,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
         </View>
       </View>
       <View>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={handleSubmit(onSubmit)} />
       </View>
     </>
   );

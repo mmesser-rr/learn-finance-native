@@ -64,15 +64,15 @@ const VerifyEmailCode: React.FC = () => {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 label='Enter 6-digit Code'
-                placeholder='Enter 6-digit Code'
+                showErrorMessage
+                value={value}
+                errorMssage={errors?.code?.message}
                 maxLength={6}
                 autoFocus
                 isNumeric
                 keyboardType='number-pad'
                 onBlur={onBlur}
                 onChangeText={onChange}
-                value={value}
-                errorMssage={errors?.code?.message}
               />
             )}
             name="code"
