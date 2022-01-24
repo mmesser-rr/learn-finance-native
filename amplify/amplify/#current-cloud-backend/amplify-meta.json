@@ -1,0 +1,121 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-theplayerscompany-dev-142134-authRole",
+      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-142134-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-dev-142134-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+      "UnauthRoleName": "amplify-theplayerscompany-dev-142134-unauthRole",
+      "StackName": "amplify-theplayerscompany-dev-142134",
+      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-dev-142134/64d23bc0-7965-11ec-b0e2-0ec1101712ad",
+      "AmplifyAppId": "d3dzwrbiqysm7k"
+    }
+  },
+  "api": {
+    "theplayerscompany": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "5frq3xabxjftzauurs3jglxbzi",
+        "GraphQLAPIEndpointOutput": "https://wtbtbijug5faloeloks3s3kiaa.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-oba5wd6465eqvjwcts3p4tilgu"
+      },
+      "lastPushTimeStamp": "2022-01-19T23:55:07.905Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-dev-142134-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apitheplayerscompany"
+      }
+    }
+  },
+  "function": {
+    "InviteService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:444012541784:function:InviteService-dev",
+        "Name": "InviteService-dev",
+        "LambdaExecutionRole": "theplayerscompanyLambdaRole35b861c9-dev"
+      },
+      "lastPushTimeStamp": "2022-01-19T23:55:07.942Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-dev-142134-deployment/amplify-cfn-templates/function/InviteService-cloudformation-template.json",
+        "logicalId": "functionInviteService"
+      },
+      "lastBuildTimeStamp": "2022-01-19T23:53:13.536Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-01-19T23:53:16.269Z",
+      "distZipFilename": "InviteService-392f636c3034594c6965-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+        "s3Key": "amplify-builds/InviteService-392f636c3034594c6965-build.zip"
+      },
+      "lastPushDirHash": "zJdsF9bxpE+5cJTCDMWFR6+usKE="
+    },
+    "PlayerVerifyService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "InviteService",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ],
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:444012541784:function:PlayerVerifyService-dev",
+        "Name": "PlayerVerifyService-dev",
+        "LambdaExecutionRole": "theplayerscompanyLambdaRole7ca81d36-dev"
+      },
+      "lastPushTimeStamp": "2022-01-19T23:55:07.942Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-dev-142134-deployment/amplify-cfn-templates/function/PlayerVerifyService-cloudformation-template.json",
+        "logicalId": "functionPlayerVerifyService"
+      },
+      "lastBuildTimeStamp": "2022-01-19T23:53:13.541Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-01-19T23:53:31.099Z",
+      "distZipFilename": "PlayerVerifyService-53514952725144304950-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-theplayerscompany-dev-142134-deployment",
+        "s3Key": "amplify-builds/PlayerVerifyService-53514952725144304950-build.zip"
+      },
+      "lastPushDirHash": "FveBlHI+hPKc825YfdLgsyKLu70="
+    }
+  }
+}
