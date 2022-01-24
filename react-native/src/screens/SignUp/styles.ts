@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   head: {
-    marginBottom: scale(16),
+    marginBottom: scale(24),
   },
   description: {
     marginBottom: scale(32),
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
     color: AppColors.linkColor,
-    fontWeight: '500',
     fontSize: scale(16),
     letterSpacing: 0.5,
     textAlign: 'center'
@@ -48,6 +47,9 @@ const styles = StyleSheet.create({
     color: AppColors.linkColor,
     fontSize: scale(16),
     lineHeight: scale(24),
+  },
+  firstName: {
+    marginBottom: scale(16),
   },
 });
 

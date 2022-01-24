@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 
 import AppLayout from 'src/components/layout/AppLayout';
@@ -7,6 +7,7 @@ import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete'
 
 import styles from './styles';
 import NavigationService from 'src/navigation/NavigationService';
+import SubmitButton from 'src/components/common/SubmitButton';
 
 const suggestions: ItemInterface[] = [
   {
@@ -32,10 +33,16 @@ const suggestions: ItemInterface[] = [
 ];
 
 const SelectTeam: React.FC = () => {
-  const onChangeOption = () => NavigationService.navigate('BankAccountIntro');
+  const [value, setValue] = useState('');
+
+  const onChangeOption = (option: string) => {
+    setValue(option);
+  };
+
+  const goToNextStep = () => NavigationService.navigate('BankAccountIntro');
 
   return (
-    <AppLayout containerStyle={styles.container}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View>
           <Title style={styles.head}>What team do you play for?</Title>
@@ -43,6 +50,9 @@ const SelectTeam: React.FC = () => {
         <View>
           <AutoComplete suggestions={suggestions} onChange={onChangeOption} />
         </View>
+      </View>
+      <View>
+        <SubmitButton isValid={!!value} actionLabel='OK' onSubmit={goToNextStep} />
       </View>
     </AppLayout>
   );
