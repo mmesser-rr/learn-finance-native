@@ -41,17 +41,15 @@ const NameCapture: React.FC<NameCaptureProps> = ({
         <View>
           <Caption style={styles.description}>Your legal name is required</Caption>
         </View>
-        <View>
+        <View style={styles.firstName}>
           <TextInput
             label='First Name'
-            placeholder='First Name'
             onChangeText={changeFirstName}
           />
         </View>
         <View>
           <TextInput
             label='Last Name'
-            placeholder='Last Name'
             onChangeText={changeLastName}
           />
         </View>

@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.blackColor,
   },
+  viewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   head: {
     marginBottom: scale(32),
   },
