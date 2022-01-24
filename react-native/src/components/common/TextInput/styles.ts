@@ -3,24 +3,52 @@ import AppColors from 'src/config/colors';
 import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
-  input: {
-    backgroundColor: 'transparent',
+  helperIcon: {
+    marginLeft: scale(16),
+    marginRight: scale(8),
   },
-  helperWrapper: {
+  container: {
+    position: 'relative',
+    marginBottom: scale(24),
+  },
+  inputContainer: {
+    position: 'relative',
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: AppColors.whiteColor,
+    paddingHorizontal: scale(16),
+    paddingBottom: scale(8),
+    paddingTop: scale(24),
+    zIndex: 100,
+  },
+  input: {
+    fontFamily: 'Lato Regular',
+    color: AppColors.whiteColor,
+    fontSize: scale(16),
+    letterSpacing: 0.25,
+    flex: 1,
+  },
+  animatedStyle: {
+    position: 'absolute',
+    bottom: scale(16),
+    left: scale(16),
+    zIndex: 10,
+  },
+  helperContainer: {
+    position: 'absolute',
+    bottom: scale(-24),
+    left: 0,
     marginTop: scale(4),
     flexDirection: 'row',
     alignItems: 'center'
   },
   helperText: {
     fontSize: scale(14),
-    lineHeight: scale(20),
-    fontWeight: '500',
     color: AppColors.errorColor,
   },
-  helperIcon: {
-    marginLeft: scale(16),
-    marginRight: scale(8),
-  }
 });
 
 export default styles;

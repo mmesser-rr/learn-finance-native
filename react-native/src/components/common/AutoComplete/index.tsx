@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { TextStyle, View } from 'react-native';
-import { Searchbar, TouchableRipple } from 'react-native-paper';
+import { TextStyle, TouchableOpacity, View } from 'react-native';
+import { Searchbar } from 'react-native-paper';
 import AppColors from 'src/config/colors';
 import SearchIcon from 'src/assets/icons/search.svg';
 import CloseIcon from 'src/assets/icons/searchbar-close.svg';
@@ -25,12 +25,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = useState<ItemInterface[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>('');
+  const [showRecommendation, setShowRecommendation] = useState(true);
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   useEffect(
     () => {
-      if (!debouncedSearchQuery) {
+      if (!debouncedSearchQuery || !showRecommendation) {
         setFiltered([]);
       } else {
         setFiltered(
@@ -45,16 +46,29 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
     [debouncedSearchQuery] // Only call effect if debounced search term changes
   );
 
-  const onChangeSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
-  const onSelect = (val: string) => {
-    setSelectedValue(val);
+  const updateSelect = (value: string) => {
+    setSelectedValue(value);
 
     if (onChange) {
-      onChange(val);
+      onChange(value);
     }
+  };
+
+  const onChangeSearch = (query: string) => {
+    setSearchQuery(query);
+
+    if (!query) {
+      updateSelect('');
+      setFiltered([]);
+    }
+
+    setShowRecommendation(true);
+  };
+
+  const onSelect = (value: string, label: string) => {
+    setSearchQuery(label);
+    updateSelect(value);
+    setShowRecommendation(false);
   };
 
   return (
@@ -75,25 +89,27 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
           }
        }}
       />
-      {filtered.map(s => {
-        const isSelected = selectedValue === s.value;
-        let wrapperStyle: TextStyle[] = [styles.selectWrapper];
-        let labelStyle: TextStyle[] = [styles.selectLabel];
+      <View>
+        {filtered.map(s => {
+          const isSelected = selectedValue === s.value;
+          let wrapperStyle: TextStyle[] = [styles.selectWrapper];
+          let labelStyle: TextStyle[] = [styles.selectLabel];
 
-        if (isSelected) {
-          wrapperStyle.push(styles.active);
-          labelStyle.push(styles.active);
-        }
+          if (isSelected) {
+            wrapperStyle.push(styles.active);
+            labelStyle.push(styles.active);
+          }
 
-        return (
-          <TouchableRipple onPress={() => onSelect(s.value)} key={s.value}>
-            <View style={wrapperStyle}>
-              <Caption style={labelStyle}>{s.label}</Caption>
-              {isSelected && <CheckIcon />}
-            </View>
-          </TouchableRipple>
-        );
-      })}
+          return (
+            <TouchableOpacity onPress={() => onSelect(s.value, s.label)} key={s.value}>
+              <View style={wrapperStyle}>
+                <Caption style={labelStyle}>{s.label}</Caption>
+                {isSelected && <CheckIcon />}
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 };

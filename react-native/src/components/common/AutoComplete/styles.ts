@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
   selectWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: AppColors.placeholderColor,
     paddingHorizontal: scale(16),

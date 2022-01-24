@@ -25,7 +25,11 @@ const styles = StyleSheet.create({
   },
   textAffixColor: {
     color: AppColors.whiteColor
-  }
+  },
+  left: {
+    fontSize: scale(16),
+    color: AppColors.whiteColor,
+  },
 });
 
 export default styles;
