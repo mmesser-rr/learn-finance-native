@@ -13,7 +13,3 @@ type Invite @model {
   code: String! @primaryKey(sortKeyFields: ["status"])
   status: Status!
 }
-
-type Mutation {
-  generateInvite: Invite @function(name: "InviteService-${env}")
-}
