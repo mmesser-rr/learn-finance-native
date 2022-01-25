@@ -1,0 +1,5 @@
+type Mutation {
+  initiatePhoneChallenge(phoneNumber: String!): PhoneChallenge @function(name: "PlayerVerifyService-${env}")
+  tryPhoneChallenge(phoneNumber: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
+  generateInvite: Invite @function(name: "InviteService-${env}")
+}
