@@ -10,6 +10,7 @@
   "dependencies": {
     "aws-sdk": "^2.1054.0",
     "axios": "^0.24.0",
+    "fast-check": "^2.21.0",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6",
     "libphonenumber-js": "^1.9.44"
