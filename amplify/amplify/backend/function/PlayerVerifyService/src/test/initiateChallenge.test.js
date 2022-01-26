@@ -1,7 +1,10 @@
 const assert = require('assert');
 const fc = require('fast-check');
+const sinon = require("sinon");
+const api = require("../wrappers/graphqlWrapper.js"); 
+const sns = require("../wrappers/snsWrapper.js");
 
-const { cleanPhoneNumber } = require('../initiateChallenge.js');
+const { cleanPhoneNumber, initiatePhoneChallenge } = require('../initiateChallenge.js');
 
 describe('cleanPhoneNumber', () => {
   it('should throw when passed an obviously invalid phone number', () => assert.throws(
@@ -15,5 +18,77 @@ describe('cleanPhoneNumber', () => {
     assert(
       phoneNumbers.every(n => n === phoneNumbers[0] )
     );
+  });
+});
+
+describe('initiatePhoneChallenge', () => {
+  let numberHasChallengeStub;
+  let persistChallengeStub;
+  let sendSMSCHallengeStub;
+
+  const phoneNumber = "4165557890";
+  const event = {
+    arguments: {
+      phoneNumber: phoneNumber
+    }
+  }
+
+  beforeEach(() => {
+    numberHasChallengeStub = sinon.stub(api, "phoneNumberHasChallenge");
+    persistChallengeStub = sinon.stub(api, "persistChallenge");
+    sendSMSChallengeStub = sinon.stub(sns, "sendSMSChallenge");
+  });
+
+  afterEach(() => {
+    numberHasChallengeStub.restore();
+    persistChallengeStub.restore();
+    sendSMSChallengeStub.restore();
+  });
+
+  it("should not send an SMS if challenge already exists", async () => {
+    numberHasChallengeStub.returns(Promise.resolve(true));
+    
+    try {
+      await initiatePhoneChallenge(event);
+    } catch {} finally {
+      assert.equal(sendSMSChallengeStub.callCount, 0);
+    }
+  });
+
+  it("should not persist new challenge if challenge already exists", async () => {
+    numberHasChallengeStub.returns(Promise.resolve(true));
+    
+    try {
+      await initiatePhoneChallenge(event);
+    } catch {} finally {
+      assert.equal(persistChallengeStub.callCount, 0);
+    }
+  });
+
+  it("should send one SMS to phone if challenge does not already exist", async () => {
+    numberHasChallengeStub.returns(Promise.resolve(false));
+    sendSMSChallengeStub.returns(Promise.resolve());
+    
+    await initiatePhoneChallenge(event);
+    assert.equal(sendSMSChallengeStub.callCount, 1);
+  });
+
+  it("should not persist phoneChallenge if SMS was not successful", async () => {
+    numberHasChallengeStub.returns(Promise.resolve(false));
+    sendSMSChallengeStub.returns(Promise.reject());
+    
+    try {
+      await initiatePhoneChallenge(event);
+    } catch {} finally {
+      assert.equal(persistChallengeStub.callCount, 0);
+    }
+  });
+
+  it("should persist phoneChallenge if challenge does not already exist and SMS was successful", async () => {
+    numberHasChallengeStub.returns(Promise.resolve(false));
+    sendSMSChallengeStub.returns(Promise.resolve());
+    
+    await initiatePhoneChallenge(event);
+    assert.equal(persistChallengeStub.callCount, 1);
   });
 });

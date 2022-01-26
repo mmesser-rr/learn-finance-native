@@ -1,4 +1,4 @@
-const { getPhoneChallenge, verifyPhoneChallenge } = require("./api.js");
+const { getPhoneChallenge, verifyPhoneChallenge } = require("./wrappers/graphqlWrapper.js");
 
 const isValid = (challenge) => challenge != null && !challenge.verified;
 
