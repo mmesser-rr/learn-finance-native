@@ -94,8 +94,8 @@ const verifyPhoneChallenge = async (code, phoneNumber) => graphqlRequest({
   .then(result => result.data.data.updatePhoneChallenge);
 
 module.exports = {
-  persistChallenge: persistChallenge,
-  getPhoneChallenge: getPhoneChallenge,
-  verifyPhoneChallenge: verifyPhoneChallenge,
-  phoneNumberHasChallenge: phoneNumberHasChallenge
+  persistChallenge,
+  getPhoneChallenge,
+  verifyPhoneChallenge,
+  phoneNumberHasChallenge
 }
