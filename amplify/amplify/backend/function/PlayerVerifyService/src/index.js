@@ -21,10 +21,12 @@ Amplify Params - DO NOT EDIT */
 "use strict"
 
 const { initiatePhoneChallenge } = require("./initiateChallenge.js");
+const { initiateEmailChallenge } = require("./initiateEmailChallenge.js");
 const tryPhoneChallenge = require("./tryChallenge.js");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
+  initiateEmailChallenge: initiateEmailChallenge,
   tryPhoneChallenge: tryPhoneChallenge
 };
 
