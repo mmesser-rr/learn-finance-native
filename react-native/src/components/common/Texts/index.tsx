@@ -50,3 +50,58 @@ export const Caption: React.FC<TextProps> = ({
     <Text style={style}>{children}</Text>
   );
 };
+
+export const LargeHeadline: React.FC<TextProps> = ({
+  children,
+  style: propsStyle,
+}) => {
+  const style = generateTextStyle(styles.largeHeadline, propsStyle);
+
+  return (
+    <Text style={style}>{children}</Text>
+  );
+};
+
+export const SmallHeadline: React.FC<TextProps> = ({
+  children,
+  style: propsStyle,
+}) => {
+  const style = generateTextStyle(styles.smallHeadline, propsStyle);
+
+  return (
+    <Text style={style}>{children}</Text>
+  );
+};
+
+export const MediumTitle: React.FC<TextProps> = ({
+  children,
+  style: propsStyle,
+}) => {
+  const style = generateTextStyle(styles.mediumTitle, propsStyle);
+
+  return (
+    <Text style={style}>{children}</Text>
+  );
+};
+
+export const LargeBody: React.FC<TextProps> = ({
+  children,
+  style: propsStyle,
+}) => {
+  const style = generateTextStyle(styles.largeBody, propsStyle);
+
+  return (
+    <Text style={style}>{children}</Text>
+  );
+};
+
+export const MediumBody: React.FC<TextProps> = ({
+  children,
+  style: propsStyle,
+}) => {
+  const style = generateTextStyle(styles.mediumBody, propsStyle);
+
+  return (
+    <Text style={style}>{children}</Text>
+  );
+};

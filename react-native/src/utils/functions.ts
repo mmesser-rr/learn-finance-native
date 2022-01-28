@@ -47,3 +47,8 @@ export const calculateContentHeight = async () => {
   const windowHeight = Dimensions.get('window').height;
   return windowHeight - top - bottom - scale(28) * 2;
 };
+
+export const convertPTToPX = (value: number) => {
+  const px = value * 1.32814;
+  return Math.round(px * 100) / 100;
+};
