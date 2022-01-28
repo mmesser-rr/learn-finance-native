@@ -8,7 +8,6 @@ const genCode = require("./genCode.js");
 
 const errorPreamble = (phoneNumber, postamble) => `Cannot initiate challenge for phone number ${phoneNumber}. ${postamble}`;
 
-
 const cleanPhoneNumber = (phoneNumber) => {
   const cleanNumber = parsePhoneNumber(phoneNumber, 'US');
 
