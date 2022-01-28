@@ -53,7 +53,7 @@ const initiateEmailChallenge = async (event) => {
   const invalid = await api.emailHasChallenge(email);
 
   if (invalid) {
-    //throw new Error("Email has already been challenged");
+    throw new Error("Email has already been challenged");
   }
 
   const challenge = EmailChallenge(code, email);
