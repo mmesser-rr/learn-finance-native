@@ -4,7 +4,7 @@ const api = require("./wrappers/graphqlWrapper.js");
 const PhoneChallenge = require("./models/PhoneChallenge.js");
 const sns = require("./wrappers/snsWrapper.js");
 
-const genCode = () => Math.random().toString(36).substr(2, 6);
+const genCode = require("./genCode.js");
 
 const errorPreamble = (phoneNumber, postamble) => `Cannot initiate challenge for phone number ${phoneNumber}. ${postamble}`;
 
