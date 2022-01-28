@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     color: AppColors.whiteColor,
   },
   searchStyle: {
-    backgroundColor: AppColors.grayColor,
+    backgroundColor: AppColors.coreBlack80,
     color: AppColors.whiteColor,
     borderRadius: scale(100),
     height: scale(40)

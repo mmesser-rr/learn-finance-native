@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   continueAction: {
-    backgroundColor: AppColors.grayColor,
+    backgroundColor: AppColors.coreBlack80,
     color: AppColors.disableColor,
     borderRadius: scale(100),
   },
