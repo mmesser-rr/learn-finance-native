@@ -1,6 +1,8 @@
 const AWS = require('aws-sdk');
 const ses = new AWS.SES();
 
+const genCode = require("./genCode.js");
+
 const paramsForEmail = (email, code) => ({
   Destination: {
     ToAddresses: [
@@ -25,7 +27,7 @@ const paramsForEmail = (email, code) => ({
 const sendEmail = (params) => ses.sendEmail(params).promise();
 
 const sendEmailChallenge = (email) => {
-  const code = "HELLO";
+  const code = genCode();
   const params = paramsForEmail(email, code);
 
   return sendEmail(params);
