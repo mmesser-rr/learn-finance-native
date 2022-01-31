@@ -10,7 +10,6 @@ const getEmailChallengeStatement = gql`
   query getEmailChallenge($code: String!, $email: String!) {
     getEmailChallenge(code: $code, email: $email) {
       verified
-      phoneNumber
       code
     }
   }
