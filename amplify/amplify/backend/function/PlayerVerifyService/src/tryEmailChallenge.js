@@ -1,13 +1,13 @@
-const { getEmailChallenge, verifyEmailChallenge } = require("./wrappers/emailChallengeGraphqlWrapper.js");
+const api = require("./wrappers/emailChallengeGraphqlWrapper.js");
 
-const isValid = (challenge) => true;
+const isValid = (challenge) => !!challenge;
 
 const verifyEmailChallengeIfValid = (challenge) => {
   const valid = isValid(challenge);
   
   if (valid) {
     const {code, email} = challenge;
-    verifyEmailChallenge(code, email);
+    api.verifyEmailChallenge(code, email);
   }
 
   return valid;
@@ -15,9 +15,6 @@ const verifyEmailChallengeIfValid = (challenge) => {
 
 module.exports = async (event) => {
   const {code, email} = event.arguments;
-  return getEmailChallenge(code, email)
-  .then(challenge => {
-    if (!challenge) throw new Error(`No existing challenge with code: ${code}, email: ${email}. Challenge code is wrong (most likely) or challenge hasn't been send to this email yet.`);
-    })
+  return api.getEmailChallenge(code, email)
   .then(challenge => verifyEmailChallengeIfValid(challenge))
 }
