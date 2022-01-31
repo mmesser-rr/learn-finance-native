@@ -23,7 +23,7 @@ Amplify Params - DO NOT EDIT */
 const { initiatePhoneChallenge } = require("./initiatePhoneChallenge.js");
 const { initiateEmailChallenge } = require("./initiateEmailChallenge.js");
 const tryEmailChallenge = require("./tryEmailChallenge.js");
-const tryPhoneChallenge = require("./tryPhoneCHallenge.js");
+const tryPhoneChallenge = require("./tryPhoneChallenge.js");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
