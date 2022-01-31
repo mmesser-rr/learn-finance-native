@@ -1,6 +1,6 @@
 const parsePhoneNumber = require('libphonenumber-js');
 
-const api = require("./wrappers/graphqlWrapper.js");
+const api = require("./wrappers/phoneChallengeGraphqlWrapper.js");
 const PhoneChallenge = require("./models/PhoneChallenge.js");
 const sns = require("./wrappers/snsWrapper.js");
 

@@ -20,13 +20,15 @@ Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 Amplify Params - DO NOT EDIT */
 "use strict"
 
-const { initiatePhoneChallenge } = require("./initiateChallenge.js");
+const { initiatePhoneChallenge } = require("./initiatePhoneChallenge.js");
 const { initiateEmailChallenge } = require("./initiateEmailChallenge.js");
 const tryEmailChallenge = require("./tryEmailChallenge.js");
+const tryPhoneChallenge = require("./tryPhoneCHallenge.js");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
   initiateEmailChallenge: initiateEmailChallenge,
+  tryPhoneChallenge: tryPhoneChallenge
   tryEmailChallenge: tryEmailChallenge
 };
 
