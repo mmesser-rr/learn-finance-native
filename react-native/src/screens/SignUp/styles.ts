@@ -40,13 +40,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     color,
-    fontSize: scale(16),
-    lineHeight: scale(24),
   },
   agreementLink: {
     color: AppColors.linkColor,
-    fontSize: scale(16),
-    lineHeight: scale(24),
   },
   firstName: {
     marginBottom: scale(16),

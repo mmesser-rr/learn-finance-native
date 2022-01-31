@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 
 const Community: React.FC = () => {
   return (
-    <div>Community</div>
+    <Text>Community</Text>
   );
 };
 

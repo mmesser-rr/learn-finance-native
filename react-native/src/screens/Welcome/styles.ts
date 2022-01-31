@@ -22,25 +22,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
   },
-  blockTitle: {
-    fontFamily: 'Lato-Light',
-    fontSize: scale(22),
-    lineHeight: scale(28),
-    color,
-  },
-  joinAction: {
-    backgroundColor: AppColors.blackColor,
-    borderRadius: 100,
-    width: '100%',
-  },
-  joinActionlabel: {
-    color,
-    fontSize: scale(16),
-    lineHeight: scale(24),
-    letterSpacing: 0.5,
-    paddingTop: scale(10),
-    paddingBottom: scale(10),
-    textAlign: 'center',
+  loginAction: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: AppColors.whiteColor,
+    marginTop: scale(16),
   },
 });
 

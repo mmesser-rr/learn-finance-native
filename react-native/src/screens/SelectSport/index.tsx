@@ -3,11 +3,11 @@ import { View } from 'react-native';
 
 import { SelectSportProps } from 'src/types/routerTypes';
 import AppLayout from 'src/components/layout/AppLayout';
-import { Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete';
+import SubmitButton from 'src/components/common/SubmitButton';
 
 import styles from './styles';
-import SubmitButton from 'src/components/common/SubmitButton';
 
 const suggestions: ItemInterface[] = [
   {
@@ -37,7 +37,9 @@ const SelectSport: React.FC<SelectSportProps> = ({ navigation }: SelectSportProp
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View>
-          <Title style={styles.head}>What sports do you play?</Title>
+          <Text type='Headline/Small' style={styles.head}>
+            What sports do you play?
+          </Text>
         </View>
         <View>
           <AutoComplete suggestions={suggestions} onChange={onChangeOption} />

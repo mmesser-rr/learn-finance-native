@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 
-import { Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
@@ -43,7 +43,7 @@ const CaptureAddress: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
         <View>
-          <Title style={styles.head}>What's your address?</Title>
+          <Text type='Headline/Small' style={styles.head}>What's your address?</Text>
         </View>
         <View style={styles.inputWrapper}>
           <Controller

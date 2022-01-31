@@ -1,8 +1,7 @@
 import React from 'react';
-import { TextStyle, TouchableOpacity } from 'react-native';
+import { TextStyle, TouchableOpacity, View } from 'react-native';
 
 import { generateTextStyle } from 'src/utils/functions';
-import { Caption } from '../Texts';
 
 import styles from './styles';
 
@@ -24,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity onPress={onPress} style={actionStyle}>
-      <Caption style={labelStyle}>{children}</Caption>
+      <View style={styles.label}>{children}</View>
     </TouchableOpacity>
   );
 };

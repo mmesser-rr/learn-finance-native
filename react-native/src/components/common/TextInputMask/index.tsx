@@ -6,7 +6,7 @@ import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
 import { scale } from 'src/config/dimentions';
-import { Text } from '../Texts';
+import { TextNew as Text } from '../Texts';
 
 import styles from './styles';
 
@@ -69,7 +69,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
           styles.animatedStyle,
           transformStyle
         ]}>
-          <Text style={styles.labelStyle}>{label}</Text>
+          <Text type='Body/Medium' style={styles.labelStyle}>{label}</Text>
         </Animated.View>
         <View style={styles.inputWrapper}>
           <RNTextInputMask
