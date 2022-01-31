@@ -20,12 +20,14 @@ Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 Amplify Params - DO NOT EDIT */
 "use strict"
 
-const initiatePhoneChallenge = require("./initiateChallenge.js");
-const tryPhoneChallenge = require("./tryChallenge.js");
+const { initiatePhoneChallenge } = require("./initiateChallenge.js");
+const { initiateEmailChallenge } = require("./initiateEmailChallenge.js");
+const tryEmailChallenge = require("./tryEmailChallenge.js");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
-  tryPhoneChallenge: tryPhoneChallenge
+  initiateEmailChallenge: initiateEmailChallenge,
+  tryEmailChallenge: tryEmailChallenge
 };
 
 const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};
