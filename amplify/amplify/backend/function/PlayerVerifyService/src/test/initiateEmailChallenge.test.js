@@ -2,7 +2,7 @@ const assert = require('assert');
 const fc = require('fast-check');
 const sinon = require("sinon");
 const api = require("../wrappers/emailChallengeGraphqlWrapper.js"); 
-const sns = require("../wrappers/snsWrapper.js");
+const ses = require("../wrappers/sesWrapper.js");
 
 const { initiateEmailChallenge } = require('../initiateEmailChallenge.js');
 
@@ -21,7 +21,7 @@ describe('initiateEmailChallenge', () => {
   beforeEach(() => {
     emailHasChallengeStub = sinon.stub(api, "emailHasChallenge");
     persistChallengeStub = sinon.stub(api, "persistEmailChallenge");
-    sendEmailChallengeStub = sinon.stub(sns, "sendEmailChallenge");
+    sendEmailChallengeStub = sinon.stub(ses, "sendEmailChallenge");
   });
 
   afterEach(() => {
