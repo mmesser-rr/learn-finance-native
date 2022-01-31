@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
@@ -18,12 +18,12 @@ const AccountCreateFailure: React.FC = () => {
         <FailureIcon />
       </View>
       <View>
-        <Title style={styles.head}>Additional Action Needed</Title>
+        <Text type='Headline/Small' style={styles.head}>Additional Action Needed</Text>
       </View>
       <View>
-        <Caption style={styles.caption}>
+        <Text type='Body/Large' style={styles.caption}>
           We need more documentations to verify your identity. We will send detailed instructions to john.smith@gmail.com
-        </Caption>
+        </Text>
       </View>
       <View style={styles.actionWrapper}>
         <SubmitButton isValid={true} actionLabel='OK' onSubmit={goToNextStep} />

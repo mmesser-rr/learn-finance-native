@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Text } from 'react-native';
 
 const Profile: React.FC = () => {
   return (
-    <div>Profile</div>
+    <Text>Profile</Text>
   );
 };
 

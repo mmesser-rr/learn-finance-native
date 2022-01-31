@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.blackColor,
   },
   head: {
-    marginBottom: scale(16),
+    marginBottom: scale(32),
   },
   actionWrapper: {
     flex: 1,

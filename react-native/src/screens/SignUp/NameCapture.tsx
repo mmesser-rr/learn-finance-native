@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -36,10 +36,14 @@ const NameCapture: React.FC<NameCaptureProps> = ({
     <>
       <View>
         <View>
-          <Title style={styles.head}>What's your name?</Title>
+          <Text type='Headline/Small' style={styles.head}>
+            What's your name?
+          </Text>
         </View>
         <View>
-          <Caption style={styles.description}>Your legal name is required</Caption>
+          <Text type='Body/Large' style={styles.description}>
+            Your legal name is required
+          </Text>
         </View>
         <View style={styles.firstName}>
           <TextInput

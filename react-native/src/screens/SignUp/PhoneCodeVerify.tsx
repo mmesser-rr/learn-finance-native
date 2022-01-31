@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { Caption, Title, Text } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -24,10 +24,14 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
     <>
       <View>
         <View>
-          <Title style={styles.head}>Enter your verification code</Title>
+          <Text type='Headline/Small' style={styles.head}>
+            Enter your verification code
+          </Text>
         </View>
         <View>
-          <Caption style={styles.description}>We sent a verification code to (333) 666 9999</Caption>
+          <Text type='Body/Large' style={styles.description}>
+            We sent a verification code to (333) 666 9999
+          </Text>
         </View>
         <View>
           <TextInput
@@ -41,7 +45,9 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         </View>
         <View>
           <TouchableOpacity style={styles.askAction} onPress={() => {}}>
-            <Text style={styles.askActionLabel}>Resend code</Text>
+            <Text type='Body/Large' style={styles.askActionLabel}>
+              Resend code
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

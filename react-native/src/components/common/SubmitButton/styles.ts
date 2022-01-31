@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     paddingTop: scale(10),
     paddingBottom: scale(10),
-    fontSize: scale(16),
-    lineHeight: scale(24),
-    letterSpacing: 0.5,
     textAlign: 'center',
   },
   continueAction: {
@@ -28,11 +25,8 @@ const styles = StyleSheet.create({
   },
   activeContinueAction: {
     width: '100%',
-    fontSize: scale(16),
-    lineHeight: scale(24),
     paddingTop: scale(10),
     paddingBottom: scale(10),
-    letterSpacing: 0.5,
     color,
     textAlign: 'center',
   },

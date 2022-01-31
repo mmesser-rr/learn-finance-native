@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     color: AppColors.whiteColor,
     borderColor: AppColors.whiteColor,
   },
+  checkIcon: {
+    fontFamily: 'SF Pro Display Light',
+  }
 });
 
 export default styles;

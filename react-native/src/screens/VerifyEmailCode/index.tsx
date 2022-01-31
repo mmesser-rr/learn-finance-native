@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Caption, Text, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
@@ -47,12 +47,12 @@ const VerifyEmailCode: React.FC = () => {
     <AppLayout containerStyle={styles.container}>
       <View style={{height: safeviewHeight / 2}}>
         <View>
-          <Title style={styles.head}>Enter your verification code</Title>
+          <Text type='Headline/Small' style={styles.head}>Enter your verification code</Text>
         </View>
         <View>
-          <Caption style={styles.caption}>
+          <Text type='Body/Large' style={styles.caption}>
             Confirming your email address helps protect your personal info. We sent a verification code to john.smith@mail.com.
-          </Caption>
+          </Text>
         </View>
         <View>
           <Controller
@@ -80,7 +80,7 @@ const VerifyEmailCode: React.FC = () => {
         </View>
         <View>
           <TouchableOpacity style={styles.askAction} onPress={() => {}}>
-            <Text style={styles.askActionLabel}>Resend code</Text>
+            <Text type='Body/Large' style={styles.askActionLabel}>Resend code</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -97,7 +97,9 @@ const VerifyEmailCode: React.FC = () => {
           end={{x: 1, y: 0}}
           colors={GradientButtonColors}
         >
-          <Button>Maybe Later</Button>
+          <Button>
+            <Text type='Body/Large'>Maybe Later</Text>
+          </Button>
         </LinearGradient>
       </View>
     </AppLayout>

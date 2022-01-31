@@ -5,42 +5,53 @@ import LinearGradient from 'react-native-linear-gradient';
 import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
-import { BigTitle, Caption, Text } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 
 import styles from './styles';
 
 const Welcome: React.FC = () => {
-  const onJoin = () => NavigationService.navigate('HomeStack');
+  const onJoin = () => NavigationService.navigate('Terms');
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
       <AppLayout viewStyle={styles.viewWrapper}>
         <View style={styles.descriptionWrapper}>
           <View>
-            <BigTitle>
+            <Text type='Headline/Large'>
               A modern financial collective for athletes by athletes
-            </BigTitle>
+            </Text>
           </View>
           <View>
-            <Text style={styles.blockTitle}>POWER IN UNITY</Text>
-            <Caption>Built on the power of networks and relationships</Caption>
+            <Text type='Title/Large'>POWER IN UNITY</Text>
+            <Text type='Body/Large'>
+              Built on the power of networks and relationships
+            </Text>
           </View>
           <View>
-            <Text style={styles.blockTitle}>WEALTH OF KNOWLEDGE</Text>
-            <Caption>
+            <Text type='Title/Large'>WEALTH OF KNOWLEDGE</Text>
+            <Text type='Body/Large'>
               Programs for players to develop a foundation of financial knowledge
-            </Caption>
+            </Text>
           </View>
           <View>
-            <Text style={styles.blockTitle}>ACCESS</Text>
-            <Caption>
+            <Text type='Title/Large'>ACCESS</Text>
+            <Text type='Body/Large'>
               One-stop-shop for exclusive investment opportunities
-            </Caption>
+            </Text>
           </View>
         </View>
         <View style={styles.actionWrapper}>
-          <Button onPress={onJoin}>Join the movement</Button>
+          <Button onPress={onJoin}>
+            <Text type='Body/Large'>
+              Get started
+            </Text>
+          </Button>
+          <Button actionStyle={styles.loginAction} onPress={onJoin}>
+            <Text type='Body/Large'>
+              Login
+            </Text>
+          </Button>
         </View>
       </AppLayout>
     </LinearGradient>
