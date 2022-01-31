@@ -15,11 +15,11 @@
       "function": {
         "InviteService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/InviteService-392f636c3034594c6965-build.zip"
+          "s3Key": "amplify-builds/InviteService-35494e4b6a522b456f58-build.zip"
         },
         "PlayerVerifyService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-53514952725144304950-build.zip"
+          "s3Key": "amplify-builds/PlayerVerifyService-442f43543238624e7266-build.zip"
         }
       }
     }
