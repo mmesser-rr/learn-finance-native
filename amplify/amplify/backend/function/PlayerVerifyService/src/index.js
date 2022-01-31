@@ -22,12 +22,12 @@ Amplify Params - DO NOT EDIT */
 
 const { initiatePhoneChallenge } = require("./initiateChallenge.js");
 const { initiateEmailChallenge } = require("./initiateEmailChallenge.js");
-const tryPhoneChallenge = require("./tryChallenge.js");
+const tryEmailChallenge = require("./tryEmailChallenge.js");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
   initiateEmailChallenge: initiateEmailChallenge,
-  tryPhoneChallenge: tryPhoneChallenge
+  tryEmailChallenge: tryEmailChallenge
 };
 
 const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};
