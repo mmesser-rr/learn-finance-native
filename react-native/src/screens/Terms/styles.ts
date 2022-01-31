@@ -16,15 +16,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-  title: {
-    fontFamily: 'Lato-Light',
-    fontSize: scale(22),
-    lineHeight: scale(28),
-  },
   text: {
-    fontSize: scale(14),
-    lineHeight: scale(20),
-    letterSpacing: 0.25,
     color: AppColors.whiteColor,
     marginBottom: scale(20),
   },

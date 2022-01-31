@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
-import { BigTitle, Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 import LogoIcon from 'src/assets/icons/logo.svg';
 
@@ -22,21 +22,23 @@ const ProfileIntro: React.FC = () => {
             <LogoIcon />
           </View>
           <View style={styles.block}>
-            <BigTitle>Last but not least</BigTitle>
+            <Text type='Headline/Large'>Last but not least</Text>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Add Players Tag</Title>
-            <Caption>Choose your username to join the community.</Caption>
+            <Text type='Title/Large' style={styles.title}>Add Players Tag</Text>
+            <Text type='Body/Large'>Choose your username to join the community.</Text>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Verify your email</Title>
-            <Caption>
+            <Text type='Title/Large' style={styles.title}>Verify your email</Text>
+            <Text type='Body/Large'>
               Confirming your email address helps protect your personal info. 
-            </Caption>
+            </Text>
           </View>
         </View>
         <View>
-          <Button onPress={onFinish}>Finish Account Setup</Button>
+          <Button onPress={onFinish}>
+            <Text type='Body/Large'>Finish Account Setup</Text>
+          </Button>
         </View>
       </AppLayout>
     </LinearGradient>

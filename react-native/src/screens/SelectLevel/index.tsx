@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
-import { BigTitle, Caption } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 import LogoIcon from 'src/assets/icons/logo.svg';
 
@@ -22,20 +22,24 @@ const SelectLevel: React.FC = () => {
             <LogoIcon />
           </View>
           <View style={styles.title}>
-            <BigTitle>Just the basics</BigTitle>
+            <Text type='Headline/Large'>Just the basics</Text>
           </View>
           <View>
-            <Caption>
+            <Text type='Body/Large'>
               Nothing fancy, just a few things to understand your athlete experience.
-            </Caption>
+            </Text>
           </View>
         </View>
         <View>
           <View style={styles.proActionWrapper}>
-            <Button onPress={onSelectLevel}>I'm a professional athlete</Button>
+            <Button onPress={onSelectLevel}>
+              <Text type='Body/Large'>I'm a professional athlete</Text>
+            </Button>
           </View>
           <View>
-            <Button actionStyle={styles.collegeAction} onPress={onSelectLevel}>I'm a college athlete</Button>
+            <Button actionStyle={styles.collegeAction} onPress={onSelectLevel}>
+              <Text type='Body/Large'>I'm a college athlete</Text>
+            </Button>
           </View>
         </View>
       </AppLayout>
