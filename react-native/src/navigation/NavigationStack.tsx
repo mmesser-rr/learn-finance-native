@@ -20,6 +20,7 @@ import AccountCreateFailure from 'src/screens/AccountCreateFailure';
 import ProfileIntro from 'src/screens/ProfileIntro';
 import SelectPlayerTag from 'src/screens/SelectPlayerTag';
 import VerifyEmailCode from 'src/screens/VerifyEmailCode';
+import HomeStack from './HomeStack';
 
 interface IProps {
   theme: Theme;
@@ -98,6 +99,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="VerifyEmailCode"
           component={VerifyEmailCode}
+        />
+        <RootStack.Screen
+          name="HomeStack"
+          component={HomeStack}
         />
       </RootStack.Navigator>
     </NavigationContainer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
@@ -18,12 +18,12 @@ const AccountCreateSuccess: React.FC = () => {
         <SuccessIcon />
       </View>
       <View>
-        <Title style={styles.head}>Success!</Title>
+        <Text type='Headline/Small' style={styles.head}>Success!</Text>
       </View>
       <View>
-        <Caption style={styles.caption}>
+        <Text type='Body/Large' style={styles.caption}>
           Your identity has been successfully verified. Your Players Co. bank account is now established.
-        </Caption>
+        </Text>
       </View>
       <View style={styles.actionWrapper}>
         <SubmitButton isValid={true} actionLabel='Continue' onSubmit={goToNextStep} />

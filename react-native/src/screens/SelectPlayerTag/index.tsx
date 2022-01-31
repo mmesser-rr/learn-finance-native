@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { Caption, Text, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
@@ -22,19 +22,19 @@ const SelectPlayerTag: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
         <View>
-          <Title style={styles.head}>Pick your Player Tag</Title>
+          <Text type='Headline/Small' style={styles.head}>Pick your Player Tag</Text>
         </View>
         <View>
-          <Caption style={styles.caption}>
+          <Text type='Body/Large' style={styles.caption}>
             You Player Tag will be your public profile name in the community. You can change your Player Tag at anytime.
-          </Caption>
+          </Text>
         </View>
         <View>
           <TextInput
             label='Player Tag'
             placeholder='Player Tag'
             autoFocus={true}
-            left={<Text style={styles.left}>@</Text>}
+            left={<Text type='Body/Large' style={styles.left}>@</Text>}
             onChangeText={changeValue}
           />
         </View>

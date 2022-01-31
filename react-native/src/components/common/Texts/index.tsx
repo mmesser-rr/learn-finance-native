@@ -4,49 +4,24 @@ import { generateTextStyle } from 'src/utils/functions';
 
 import styles from './styles';
 
-interface TextProps {
+interface TextNewProps {
   style?: TextStyle | TextStyle[];
+  type: String;
   children: React.ReactNode;
   onPress?: () => void;
 }
 
-export const Text: React.FC<TextProps> = ({children, style: propsStyle, onPress}) => {
-  const style = generateTextStyle(styles.text, propsStyle);
+export const TextNew: React.FC<TextNewProps> = ({
+  children,
+  type,
+  style: propsStyle,
+  onPress,
+}) => {
+  const typeNames = type.toLowerCase().split('/');
+  const defaultStyleName = `${typeNames[1]}${typeNames[0].charAt(0).toUpperCase()}${typeNames[0].slice(1)}`;
+  const style = generateTextStyle(styles[defaultStyleName as keyof typeof styles], propsStyle);
 
   return (
     <RNText style={style} onPress={onPress}>{children}</RNText>
-  );
-};
-
-export const BigTitle: React.FC<TextProps> = ({
-  children,
-  style: propsStyle,
-}) => {
-  const style = generateTextStyle(styles.bigTitle, propsStyle);
-
-  return (
-    <Text style={style}>{children}</Text>
-  );
-};
-
-export const Title: React.FC<TextProps> = ({
-  children,
-  style: propsStyle,
-}) => {
-  const style = generateTextStyle(styles.title, propsStyle);
-
-  return (
-    <Text style={style}>{children}</Text>
-  );
-};
-
-export const Caption: React.FC<TextProps> = ({
-  children,
-  style: propsStyle,
-}) => {
-  const style = generateTextStyle(styles.caption, propsStyle);
-
-  return (
-    <Text style={style}>{children}</Text>
   );
 };

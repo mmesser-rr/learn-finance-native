@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
-import { BigTitle, Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 import LogoIcon from 'src/assets/icons/logo.svg';
 
@@ -22,23 +22,29 @@ const BankAccountIntro: React.FC = () => {
             <LogoIcon />
           </View>
           <View style={styles.block}>
-            <BigTitle>Open the Players Co. Bank Account</BigTitle>
+            <Text type='Headline/Large'>Open the Players Co. Bank Account</Text>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Verify Identity</Title>
-            <Caption>
+            <Text type='Title/Large' style={styles.title}>Verify Identity</Text>
+            <Text type='Body/Large'>
               Nothing fancy, just a few things to understand your athlete experience.
-            </Caption>
+            </Text>
           </View>
           <View style={styles.block}>
-            <Title style={styles.title}>Open the bank account</Title>
-            <Caption>
+            <Text type='Title/Large' style={styles.title}>
+              Open the bank account
+            </Text>
+            <Text type='Body/Large'>
               Once your identity is verified your Players Co. bank account will be established.
-            </Caption>
+            </Text>
           </View>
         </View>
         <View>
-          <Button onPress={onVerify}>Next: Verify identify</Button>
+          <Button onPress={onVerify}>
+            <Text type='Body/Large'>
+              Next: Verify identify
+            </Text>
+          </Button>
         </View>
       </AppLayout>
     </LinearGradient>

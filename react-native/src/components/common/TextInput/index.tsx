@@ -8,7 +8,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
-import { Text } from '../Texts';
+import { TextNew as Text } from '../Texts';
 import { scale } from 'src/config/dimentions';
 
 import styles from './styles';
@@ -106,7 +106,7 @@ const TextInput: React.FC<TextInputProps> = ({
           styles.animatedStyle,
           transformStyle
         ]}>
-          <Text style={labelStyle}>{label}</Text>
+          <Text type='Body/Medium' style={labelStyle}>{label}</Text>
         </Animated.View>
         <View
           style={[
@@ -136,7 +136,7 @@ const TextInput: React.FC<TextInputProps> = ({
             color={AppColors.errorColor}
             size={16}
           />
-          <Text style={styles.helperText}>{errorMssage}</Text>
+          <Text type='Body/Medium' style={styles.helperText}>{errorMssage}</Text>
         </View>
       )}
     </View>
