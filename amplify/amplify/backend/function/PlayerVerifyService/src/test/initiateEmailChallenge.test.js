@@ -11,10 +11,10 @@ describe('initiateEmailChallenge', () => {
   let persistChallengeStub;
   let sendEmailCHallengeStub;
 
-  const phoneNumber = "4165557890";
+  const email = "testemail@example.com";
   const event = {
     arguments: {
-      phoneNumber: phoneNumber
+      email: email
     }
   }
 
