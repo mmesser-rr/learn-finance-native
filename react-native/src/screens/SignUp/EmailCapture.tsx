@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, Title } from 'src/components/common/Texts';
 
+import { TextNew as Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
@@ -30,7 +30,9 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
     <>
       <View>
         <View>
-          <Title style={styles.head}>What's your email?</Title>
+          <Text type='Headline/Small' style={styles.head}>
+            What's your email?
+          </Text>
         </View>
         <View>
           <TextInput
@@ -42,9 +44,9 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
       </View>
       <View>
         <View style={styles.agreementWrapper}>
-          <Text style={styles.agreementText}>
+          <Text type='Body/Large' style={styles.agreementText}>
             By tapping 'sign up', you consent to our {' '}
-            <Text style={styles.agreementLink} onPress={onTerms}>Terms & Privacy Policy</Text>.
+            <Text type='Body/Large' style={styles.agreementLink} onPress={onTerms}>Terms & Privacy Policy</Text>.
           </Text>
         </View>
         <SubmitButton isValid={isValid} actionLabel='Sign Up' onSubmit={goToNextStep} />

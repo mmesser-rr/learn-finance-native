@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   label: {
-    letterSpacing: 0.5,
-    paddingTop: scale(10),
-    paddingBottom: scale(10),
+    paddingHorizontal: scale(10),
+    paddingVertical: scale(10),
     textAlign: 'center',
+    alignItems: 'center'
   },
 });
 
