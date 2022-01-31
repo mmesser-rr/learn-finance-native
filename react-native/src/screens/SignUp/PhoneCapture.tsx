@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
-import { Caption, Title } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -25,10 +25,14 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
       <View>
         <View>
           <View>
-            <Title style={styles.head}>To continue, verify your phone number</Title>
+            <Text type='Headline/Small' style={styles.head}>
+              To continue, verify your phone number
+            </Text>
           </View>
           <View>
-            <Caption style={styles.description}>We'll text a verification code to this number.</Caption>
+            <Text type='Body/Large' style={styles.description}>
+              We'll text a verification code to this number.
+            </Text>
           </View>
           <View>
             <TextInputMask

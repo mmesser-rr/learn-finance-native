@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { Caption, Title, Text } from 'src/components/common/Texts';
+import { TextNew as Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -39,10 +39,14 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
     <>
       <View>
         <View>
-          <Title style={styles.head}>Welcome to Players Co.</Title>
+          <Text type='Headline/Small' style={styles.head}>
+            Welcome to Players Co.
+          </Text>
         </View>
         <View>
-          <Caption style={styles.description}>Enter your invitation code to get started.</Caption>
+          <Text type='Body/Large' style={styles.description}>
+            Enter your invitation code to get started.
+          </Text>
         </View>
         <View>
           <Controller
@@ -67,7 +71,9 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
         </View>
         <View>
           <TouchableOpacity style={styles.askAction} onPress={() => {}}>
-            <Text style={styles.askActionLabel}>Don't have an invite code?</Text>
+            <Text type='Body/Large' style={styles.askActionLabel}>
+              Don't have an invite code?
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
