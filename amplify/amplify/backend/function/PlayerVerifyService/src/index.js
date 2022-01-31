@@ -28,7 +28,7 @@ const tryPhoneChallenge = require("./tryPhoneCHallenge.js");
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
   initiateEmailChallenge: initiateEmailChallenge,
-  tryPhoneChallenge: tryPhoneChallenge
+  tryPhoneChallenge: tryPhoneChallenge,
   tryEmailChallenge: tryEmailChallenge
 };
 
