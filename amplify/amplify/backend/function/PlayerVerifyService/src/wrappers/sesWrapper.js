@@ -1,5 +1,5 @@
 const aws = require('aws-sdk');
-const sns = new aws.SNS();
+const ses = new aws.SES();
 
 const paramsForEmail = (email, code) => ({
   Destination: {
@@ -24,7 +24,7 @@ const paramsForEmail = (email, code) => ({
 
 const sendEmailChallenge = (emailChallenge) =>  {
   const { email, code } = emailChallenge;
-  const params = params(email, code);
+  const params = paramsForEmail(email, code);
   return ses.sendEmail(params).promise();
 }
 
