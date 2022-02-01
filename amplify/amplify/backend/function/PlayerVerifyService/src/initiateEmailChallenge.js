@@ -18,7 +18,7 @@ const initiateEmailChallenge = async (event) => {
 
   const challenge = EmailChallenge(code, email);
 
-  return ses.sendEmailChallenge(email).catch(err => {
+  return ses.sendEmailChallenge(challenge).catch(err => {
     throw new Error(`Error while trying to send email challenge: ${err}`);
   })
     .then(d => api.persistEmailChallenge(challenge)).catch(err => {
