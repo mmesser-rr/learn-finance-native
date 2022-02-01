@@ -1,5 +1,5 @@
 const aws = require('aws-sdk');
-const sns = new aws.SNS();
+const ses = new aws.SES();
 
 const paramsForEmail = (email, code) => ({
   Destination: {
