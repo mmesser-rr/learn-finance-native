@@ -51,4 +51,12 @@ describe('tryPhoneChallenge', () => {
     const result = await tryPhoneChallenge(event);
     assert.equal(verifyPhoneChallengeStub.callCount, 0);
   });
+
+  it("should set challenge as verified if challenge exists for phone with correct code", async () => {
+    getPhoneChallengeStub.returns(Promise.resolve(event.arguments));
+    verifyPhoneChallengeStub.returns(Promise.resolve());
+    
+    const result = await tryPhoneChallenge(event);
+    assert.equal(verifyPhoneChallengeStub.callCount, 1);
+  });
 });

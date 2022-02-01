@@ -37,7 +37,7 @@ describe('tryEmailChallenge', () => {
     assert.equal(result, true);
   });
 
-  it("should return set challenge as verified if challenge exists for email with correct code", async () => {
+  it("should set challenge as verified if challenge exists for email with correct code", async () => {
     getEmailChallengeStub.returns(Promise.resolve(event.arguments));
     verifyEmailChallengeStub.returns(Promise.resolve());
     
