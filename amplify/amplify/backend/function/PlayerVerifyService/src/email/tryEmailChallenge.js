@@ -1,4 +1,4 @@
-const api = require("./wrappers/emailChallengeGraphqlWrapper.js");
+const api = require("../wrappers/emailChallengeGraphqlWrapper.js");
 
 const isValid = (challenge) => !!challenge && !challenge.verified;
 

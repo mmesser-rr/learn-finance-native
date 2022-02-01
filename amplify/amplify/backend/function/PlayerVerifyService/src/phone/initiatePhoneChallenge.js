@@ -1,10 +1,10 @@
 const parsePhoneNumber = require('libphonenumber-js');
 
-const api = require("./wrappers/phoneChallengeGraphqlWrapper.js");
-const PhoneChallenge = require("./models/PhoneChallenge.js");
-const sns = require("./wrappers/snsWrapper.js");
+const api = require("../wrappers/phoneChallengeGraphqlWrapper.js");
+const PhoneChallenge = require("../models/PhoneChallenge.js");
+const sns = require("../wrappers/snsWrapper.js");
 
-const genCode = require("./genCode.js");
+const genCode = require("../genCode.js");
 
 const errorPreamble = (phoneNumber, postamble) => `Cannot initiate challenge for phone number ${phoneNumber}. ${postamble}`;
 
