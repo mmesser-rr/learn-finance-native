@@ -24,7 +24,7 @@ const paramsForEmail = (email, code) => ({
 
 const sendEmailChallenge = (emailChallenge) =>  {
   const { email, code } = emailChallenge;
-  const params = params(email, code);
+  const params = paramsForEmail(email, code);
   return ses.sendEmail(params).promise();
 }
 
