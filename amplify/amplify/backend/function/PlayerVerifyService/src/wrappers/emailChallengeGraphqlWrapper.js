@@ -10,7 +10,17 @@ const getEmailChallengeStatement = gql`
   query getEmailChallenge($code: String!, $email: String!) {
     getEmailChallenge(code: $code, email: $email) {
       verified
+      email
       code
+    }
+  }
+`
+const verifyEmailChallengeStatement = gql`
+  mutation updateEmailChallenge($email: String!, $code: String!) {
+    updateEmailChallenge(input: {verified: true, email: $email, code: $code}, condition: {verified: {eq: false}}) {
+      code
+      verified
+      email
     }
   }
 `
@@ -73,14 +83,22 @@ const getEmailChallenge = async (code, email) => graphqlRequest({
   })
   .then(result => result.data.data.getEmailChallenge)
 
-const verifyEmailChallenge = async (code, email) => graphqlRequest({
+const verifyEmailChallenge = async (code, email) => {
+  console.log(code);
+  console.log(email);
+  return graphqlRequest({
     query: print(verifyEmailChallengeStatement),
     variables: {
       code: code,
       email: email
     }
   })
-  .then(result => result.data.data.updateEmailChallenge);
+  .then(result => {
+    console.log(result);
+    console.log(result.data);
+    result.data.data.updateEmailChallenge;
+  });
+}
 
 module.exports = {
   persistEmailChallenge,

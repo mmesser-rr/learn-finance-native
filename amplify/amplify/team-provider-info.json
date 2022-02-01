@@ -19,7 +19,7 @@
         },
         "PlayerVerifyService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-577838756a6134784676-build.zip"
+          "s3Key": "amplify-builds/PlayerVerifyService-3639704b543850324b35-build.zip"
         }
       }
     }

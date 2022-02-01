@@ -37,6 +37,14 @@ describe('tryEmailChallenge', () => {
     assert.equal(result, true);
   });
 
+  it("should return set challenge as verified if challenge exists for email with correct code", async () => {
+    getEmailChallengeStub.returns(Promise.resolve(event.arguments));
+    verifyEmailChallengeStub.returns(Promise.resolve());
+    
+    const result = await tryEmailChallenge(event);
+    assert.equal(verifyEmailChallengeStub.callCount, 1);
+  });
+
   it("should return false if no challenge with email & code found", async () => {
     getEmailChallengeStub.returns(Promise.resolve(undefined));
     

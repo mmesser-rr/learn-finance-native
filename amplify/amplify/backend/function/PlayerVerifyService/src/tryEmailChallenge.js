@@ -2,12 +2,12 @@ const api = require("./wrappers/emailChallengeGraphqlWrapper.js");
 
 const isValid = (challenge) => !!challenge && !challenge.verified;
 
-const verifyEmailChallengeIfValid = (challenge) => {
+const verifyEmailChallengeIfValid = async (challenge) => {
   const valid = isValid(challenge);
   
   if (valid) {
     const {code, email} = challenge;
-    api.verifyEmailChallenge(code, email);
+    await api.verifyEmailChallenge(code, email);
   }
 
   return valid;
