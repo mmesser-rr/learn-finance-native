@@ -1,10 +1,10 @@
-const ses = require("./wrappers/sesWrapper.js");
+const ses = require("../wrappers/sesWrapper.js");
 
-const api = require("./wrappers/emailChallengeGraphqlWrapper.js");
+const api = require("../wrappers/emailChallengeGraphqlWrapper.js");
 
-const genCode = require("./genCode.js");
+const genCode = require("../genCode.js");
 
-const EmailChallenge = require("./models/EmailChallenge");
+const EmailChallenge = require("../models/EmailChallenge");
 
 const initiateEmailChallenge = async (event) => {
   const code = genCode();

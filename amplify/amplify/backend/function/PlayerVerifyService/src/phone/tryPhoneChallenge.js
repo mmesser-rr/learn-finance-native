@@ -1,4 +1,4 @@
-const api = require("./wrappers/phoneChallengeGraphqlWrapper.js");
+const api = require("../wrappers/phoneChallengeGraphqlWrapper.js");
 
 const isValid = (challenge) => !!challenge && !challenge.verified;
 

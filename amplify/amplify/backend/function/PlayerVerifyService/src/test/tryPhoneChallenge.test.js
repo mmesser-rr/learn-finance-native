@@ -4,7 +4,7 @@ const sinon = require("sinon");
 
 const api = require("../wrappers/phoneChallengeGraphqlWrapper.js"); 
 
-const tryPhoneChallenge = require("../tryPhoneChallenge.js");
+const tryPhoneChallenge = require("../phone/tryPhoneChallenge.js");
 
 describe('tryPhoneChallenge', () => {
   let phoneNumberHasChallengeStub;
