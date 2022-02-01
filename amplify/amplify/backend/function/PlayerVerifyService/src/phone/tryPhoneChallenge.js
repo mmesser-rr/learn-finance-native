@@ -1,13 +1,13 @@
-const { getPhoneChallenge, verifyPhoneChallenge } = require("./wrappers/graphqlWrapper.js");
+const api = require("../wrappers/phoneChallengeGraphqlWrapper.js");
 
-const isValid = (challenge) => challenge != null && !challenge.verified;
+const isValid = (challenge) => !!challenge && !challenge.verified;
 
 const verifyPhoneChallengeIfValid = (challenge) => {
   const valid = isValid(challenge);
   
   if (valid) {
     const {code, phoneNumber} = challenge;
-    verifyPhoneChallenge(code, phoneNumber);
+    api.verifyPhoneChallenge(code, phoneNumber);
   }
 
   return valid;
@@ -15,7 +15,7 @@ const verifyPhoneChallengeIfValid = (challenge) => {
 
 module.exports = async (event) => {
   const {code, phoneNumber} = event.arguments;
-  return getPhoneChallenge(code, phoneNumber)
+  return api.getPhoneChallenge(code, phoneNumber)
   .then(challenge => verifyPhoneChallengeIfValid(challenge))
   .catch(error => {throw new Error(`Error encountered while verifying phone code: ${error}`)});
 }

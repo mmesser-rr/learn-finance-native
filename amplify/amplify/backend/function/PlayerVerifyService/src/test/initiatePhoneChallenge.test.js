@@ -1,10 +1,10 @@
 const assert = require('assert');
 const fc = require('fast-check');
 const sinon = require("sinon");
-const api = require("../wrappers/graphqlWrapper.js"); 
+const api = require("../wrappers/phoneChallengeGraphqlWrapper.js"); 
 const sns = require("../wrappers/snsWrapper.js");
 
-const { cleanPhoneNumber, initiatePhoneChallenge } = require('../initiateChallenge.js');
+const { cleanPhoneNumber, initiatePhoneChallenge } = require('../phone/initiatePhoneChallenge.js');
 
 describe('cleanPhoneNumber', () => {
   it('should throw when passed an obviously invalid phone number', () => assert.throws(

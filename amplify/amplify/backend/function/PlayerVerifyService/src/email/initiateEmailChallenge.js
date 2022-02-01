@@ -1,10 +1,10 @@
-const ses = require("./wrappers/sesWrapper.js");
+const ses = require("../wrappers/sesWrapper.js");
 
-const api = require("./wrappers/emailChallengeGraphqlWrapper.js");
+const api = require("../wrappers/emailChallengeGraphqlWrapper.js");
 
-const genCode = require("./genCode.js");
+const genCode = require("../genCode.js");
 
-const EmailChallenge = require("./models/EmailChallenge");
+const EmailChallenge = require("../models/EmailChallenge");
 
 const initiateEmailChallenge = async (event) => {
   const code = genCode();
@@ -18,12 +18,10 @@ const initiateEmailChallenge = async (event) => {
 
   const challenge = EmailChallenge(code, email);
 
-  return ses.sendEmailChallenge(email).catch(err => {
-    throw new Error("Error sending email");
-  })
+  return ses.sendEmailChallenge(challenge)
     .then(d => api.persistEmailChallenge(challenge)).catch(err => {
-    throw new Error("Error when persisting email challenge");
-  });
+    throw new Error(`Error while trying to send email challenge: ${err}`);
+  })
 };
 
 module.exports = {
