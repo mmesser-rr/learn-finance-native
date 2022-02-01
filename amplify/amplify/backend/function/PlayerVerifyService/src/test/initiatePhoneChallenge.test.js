@@ -4,7 +4,7 @@ const sinon = require("sinon");
 const api = require("../wrappers/phoneChallengeGraphqlWrapper.js"); 
 const sns = require("../wrappers/snsWrapper.js");
 
-const { cleanPhoneNumber, initiatePhoneChallenge } = require('../initiatePhoneChallenge.js');
+const { cleanPhoneNumber, initiatePhoneChallenge } = require('../phone/initiatePhoneChallenge.js');
 
 describe('cleanPhoneNumber', () => {
   it('should throw when passed an obviously invalid phone number', () => assert.throws(
