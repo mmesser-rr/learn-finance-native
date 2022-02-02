@@ -4,7 +4,7 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   viewWrapper: {
     flexDirection: 'column',

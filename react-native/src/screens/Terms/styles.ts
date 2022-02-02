@@ -4,7 +4,7 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   header: {
     justifyContent: 'center',
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     left: 0,
   },
   text: {
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
     marginBottom: scale(20),
   },
 });

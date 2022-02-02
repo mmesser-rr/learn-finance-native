@@ -8,17 +8,17 @@ const styles = StyleSheet.create({
   },
   labelStyle: {
     fontFamily: 'Lato',
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
   },
   searchStyle: {
     backgroundColor: AppColors.coreBlack80,
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
     borderRadius: scale(100),
     height: scale(40)
   },
   searchInputStyle: {
     fontFamily: 'Lato',
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
     fontSize: scale(16)
   },
   selectWrapper: {
@@ -26,16 +26,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: AppColors.placeholderColor,
+    borderColor: AppColors.coreBlack40,
     paddingHorizontal: scale(16),
     paddingVertical: scale(16),
   },
   selectLabel: {
-    color: AppColors.placeholderColor,
+    color: AppColors.coreBlack40,
   },
   active: {
-    color: AppColors.whiteColor,
-    borderColor: AppColors.whiteColor,
+    color: AppColors.gray20,
+    borderColor: AppColors.gray20,
   },
   checkIcon: {
     fontFamily: 'SF Pro Display Light',

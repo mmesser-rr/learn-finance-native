@@ -4,19 +4,19 @@ import AppColors from 'src/config/colors';
 
 const styles = StyleSheet.create({
   dropDownStyle: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   dropDownItemStyle: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   dropDownItemSelectedStyle: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   contentStyle: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   dividerStyle: {
-    backgroundColor: AppColors.whiteColor,
+    backgroundColor: AppColors.gray20,
   },
 });
 

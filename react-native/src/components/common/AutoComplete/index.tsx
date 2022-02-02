@@ -85,7 +85,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
         theme={{
           colors: {
             placeholder: AppColors.searchPlaceholderColor,
-            primary: AppColors.whiteColor,
+            primary: AppColors.gray20,
           }
        }}
       />

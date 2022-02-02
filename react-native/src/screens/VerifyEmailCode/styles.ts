@@ -4,7 +4,7 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   head: {
     marginBottom: scale(16),
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   askActionLabel: {
     marginTop: 0,
     marginBottom: 0,
-    color: AppColors.linkColor,
+    color: AppColors.interactionBlue,
     fontSize: scale(16),
     letterSpacing: 0.5,
     textAlign: 'center'
