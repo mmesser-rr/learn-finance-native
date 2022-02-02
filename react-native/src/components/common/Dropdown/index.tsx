@@ -60,7 +60,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       value={value}
       setValue={changeHandler}
       list={list}
-      dropdownIconColor={AppColors.whiteColor}
+      dropdownIconColor={AppColors.gray20}
       dropdownUpIcon={() => <ArrowDownIcon />}
       dropdownDownIcon={() => <ArrowDownIcon />}
       theme={{
@@ -68,11 +68,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         roundness: 0,
         colors: {
           ...DefaultTheme.colors,
-          primary: AppColors.whiteColor,
+          primary: AppColors.gray20,
           background: 'transparent',
-          text: AppColors.whiteColor,
-          disabled: AppColors.disableColor,
-          placeholder: AppColors.placeholderColor,
+          text: AppColors.gray20,
+          disabled: AppColors.gray120,
+          placeholder: AppColors.coreBlack40,
         }
       }}
       contentStyle={styles.contentStyle}

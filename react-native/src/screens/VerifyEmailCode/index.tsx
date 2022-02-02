@@ -41,7 +41,9 @@ const VerifyEmailCode: React.FC = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormData) => {};
+  const onSubmit = (data: FormData) => {
+    NavigationService.navigate('TransferStack')
+  };
 
   return (
     <AppLayout containerStyle={styles.container}>
