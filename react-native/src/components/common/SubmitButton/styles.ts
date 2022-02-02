@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import AppColors from 'src/config/colors';
 import { scale } from 'src/config/dimentions';
 
-const color = AppColors.whiteColor;
+const color = AppColors.gray20;
 
 const styles = StyleSheet.create({
   continueActionWrapper: {
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   continueAction: {
     backgroundColor: AppColors.coreBlack80,
-    color: AppColors.disableColor,
+    color: AppColors.gray120,
     borderRadius: scale(100),
   },
   linearGradient: {

@@ -77,7 +77,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
             autoFocus={!!autoFocus}
             style={styles.input}
             keyboardType={keyboardType}
-            selectionColor={AppColors.errorColor}
+            selectionColor={AppColors.accentRed100}
             mask={mask}
             secureTextEntry={isSecure && securityState}
             onChangeText={(formatted, extracted) => {

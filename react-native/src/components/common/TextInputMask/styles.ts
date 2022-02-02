@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: AppColors.whiteColor,
+    borderBottomColor: AppColors.gray20,
     paddingHorizontal: scale(16),
     paddingBottom: scale(8),
     paddingTop: scale(24),
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: 'Lato Regular',
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
     fontSize: scale(16),
     letterSpacing: 0.25,
     flex: 1,
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
   },
   helperText: {
     fontSize: scale(14),
-    color: AppColors.errorColor,
+    color: AppColors.accentRed100,
   },
   labelStyle: {
-    color: AppColors.placeholderColor,
+    color: AppColors.coreBlack40,
   },
 });
 

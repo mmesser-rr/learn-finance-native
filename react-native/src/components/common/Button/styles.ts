@@ -4,7 +4,7 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   action: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
     borderRadius: 100,
     width: '100%',
   },
