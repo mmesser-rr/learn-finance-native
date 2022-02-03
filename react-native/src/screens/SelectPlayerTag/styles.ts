@@ -4,7 +4,7 @@ import { scale } from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   viewWrapper: {
   },
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     marginTop: scale(-22),
   },
   textAffixColor: {
-    color: AppColors.whiteColor
+    color: AppColors.gray20
   },
   left: {
     fontSize: scale(16),
-    color: AppColors.whiteColor,
+    color: AppColors.gray20,
   },
 });
 

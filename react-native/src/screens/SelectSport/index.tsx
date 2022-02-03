@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import { SelectSportProps } from 'src/types/routerTypes';
 import AppLayout from 'src/components/layout/AppLayout';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete';
 import SubmitButton from 'src/components/common/SubmitButton';
 

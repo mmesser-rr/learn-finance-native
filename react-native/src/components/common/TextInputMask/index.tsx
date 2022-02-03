@@ -6,7 +6,7 @@ import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
 import { scale } from 'src/config/dimentions';
-import { TextNew as Text } from '../Texts';
+import { Text } from '../Texts';
 
 import styles from './styles';
 
@@ -77,7 +77,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
             autoFocus={!!autoFocus}
             style={styles.input}
             keyboardType={keyboardType}
-            selectionColor={AppColors.errorColor}
+            selectionColor={AppColors.accentRed100}
             mask={mask}
             secureTextEntry={isSecure && securityState}
             onChangeText={(formatted, extracted) => {

@@ -8,7 +8,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
-import { TextNew as Text } from '../Texts';
+import { Text } from '../Texts';
 import { scale } from 'src/config/dimentions';
 
 import styles from './styles';
@@ -91,7 +91,7 @@ const TextInput: React.FC<TextInputProps> = ({
   const isError = possibleErrorMessage && !!showErrorMessage && !!errorMssage;
 
   const labelStyle = {
-    color: isError ? AppColors.errorColor : AppColors.placeholderColor,
+    color: isError ? AppColors.accentRed100 : AppColors.coreBlack40,
     fontSize: (focused || !!text) ? scale(14) : scale(16),
   };
 
@@ -111,7 +111,7 @@ const TextInput: React.FC<TextInputProps> = ({
         <View
           style={[
             styles.inputWrapper,
-            { borderBottomColor: isError ? AppColors.errorColor : AppColors.whiteColor }
+            { borderBottomColor: isError ? AppColors.accentRed100 : AppColors.gray20 }
           ]}
         >
           {(!!text || focused) && !!left && <>{left}</>}
@@ -119,7 +119,7 @@ const TextInput: React.FC<TextInputProps> = ({
             value={text}
             autoCapitalize='none'
             style={styles.input}
-            selectionColor={AppColors.errorColor}
+            selectionColor={AppColors.accentRed100}
             onChangeText={text => textChangeHandler(text)}
             onFocus={() => focusHandler()}
             onBlur={() => blurHandler()}
@@ -133,7 +133,7 @@ const TextInput: React.FC<TextInputProps> = ({
           <MaterialCommunityIcons
             style={styles.helperIcon}
             name="information-outline"
-            color={AppColors.errorColor}
+            color={AppColors.accentRed100}
             size={16}
           />
           <Text type='Body/Medium' style={styles.helperText}>{errorMssage}</Text>

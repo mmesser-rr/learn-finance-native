@@ -21,6 +21,7 @@ import ProfileIntro from 'src/screens/ProfileIntro';
 import SelectPlayerTag from 'src/screens/SelectPlayerTag';
 import VerifyEmailCode from 'src/screens/VerifyEmailCode';
 import HomeStack from './HomeStack';
+import TransferStack from './TransferStack';
 
 interface IProps {
   theme: Theme;
@@ -103,6 +104,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="HomeStack"
           component={HomeStack}
+        />
+        <RootStack.Screen
+          name="TransferStack"
+          component={TransferStack}
         />
       </RootStack.Navigator>
     </NavigationContainer>
