@@ -4,7 +4,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { TermsProps } from 'src/types/routerTypes';
 import CloseIcon from 'src/assets/icons/close.svg';
 import AppLayout from 'src/components/layout/AppLayout';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import { SignUpSteps } from 'src/utils/constants';
 
 import styles from './styles';

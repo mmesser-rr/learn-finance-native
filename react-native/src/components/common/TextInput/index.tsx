@@ -8,7 +8,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
-import { TextNew as Text } from '../Texts';
+import { Text } from '../Texts';
 import { scale } from 'src/config/dimentions';
 
 import styles from './styles';

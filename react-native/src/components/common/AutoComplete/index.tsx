@@ -7,7 +7,7 @@ import CloseIcon from 'src/assets/icons/searchbar-close.svg';
 import CheckIcon from 'src/assets/icons/autocomplete-check.svg';
 
 import { useDebounce } from 'src/utils/functions';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 

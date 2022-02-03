@@ -6,7 +6,7 @@ import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
 import { scale } from 'src/config/dimentions';
-import { TextNew as Text } from '../Texts';
+import { Text } from '../Texts';
 
 import styles from './styles';
 
