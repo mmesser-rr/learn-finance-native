@@ -1,12 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from 'src/screens/Banking/Home';
 import Opportunities from 'src/screens/Banking/Opportunities';
 import Community from 'src/screens/Banking/Community';
 import Profile from 'src/screens/Banking/Profile';
-import { Text } from 'src/components/common/Texts';
 
 const Tab = createBottomTabNavigator();
 

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   collegeAction: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: AppColors.whiteColor
+    borderColor: AppColors.gray20
   },
 });
 

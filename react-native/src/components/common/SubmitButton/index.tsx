@@ -3,7 +3,7 @@ import { View, TouchableOpacity, TextStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { GradientButtonColors } from 'src/utils/constants';
-import { TextNew as Text } from '../Texts';
+import { Text } from '../Texts';
 
 import styles from './styles';
 
