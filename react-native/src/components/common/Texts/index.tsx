@@ -4,14 +4,14 @@ import { generateTextStyle } from 'src/utils/functions';
 
 import styles from './styles';
 
-interface TextNewProps {
+interface TextProps {
   style?: TextStyle | TextStyle[];
   type: String;
   children: React.ReactNode;
   onPress?: () => void;
 }
 
-export const TextNew: React.FC<TextNewProps> = ({
+export const Text: React.FC<TextProps> = ({
   children,
   type,
   style: propsStyle,

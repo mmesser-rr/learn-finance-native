@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import SubmitButton from 'src/components/common/SubmitButton';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import DepositNav from 'src/components/common/DepositNav';
 import EditIcon from 'src/assets/icons/edit.svg';
