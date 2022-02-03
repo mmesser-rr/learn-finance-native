@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 

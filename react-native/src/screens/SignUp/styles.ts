@@ -2,11 +2,11 @@ import { StyleSheet } from 'react-native';
 import AppColors from 'src/config/colors';
 import { scale } from 'src/config/dimentions';
 
-const color = AppColors.whiteColor;
+const color = AppColors.gray20;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.blackColor,
+    backgroundColor: AppColors.coreBlack100,
   },
   viewWrapper: {
     flexDirection: 'column',
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   askActionLabel: {
     marginTop: 0,
     marginBottom: 0,
-    color: AppColors.linkColor,
+    color: AppColors.interactionBlue,
     fontSize: scale(16),
     letterSpacing: 0.5,
     textAlign: 'center'
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     color,
   },
   agreementLink: {
-    color: AppColors.linkColor,
+    color: AppColors.interactionBlue,
   },
   firstName: {
     marginBottom: scale(16),

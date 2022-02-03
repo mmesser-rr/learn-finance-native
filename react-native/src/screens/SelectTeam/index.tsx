@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 
 import AppLayout from 'src/components/layout/AppLayout';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete';
 import NavigationService from 'src/navigation/NavigationService';
 import SubmitButton from 'src/components/common/SubmitButton';

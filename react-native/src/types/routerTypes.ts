@@ -18,6 +18,7 @@ export type RootStackParamList = {
   SelectPlayerTag: undefined;
   VerifyEmailCode: undefined;
   HomeStack: undefined;
+  TransferStack: undefined;
 };
 
 // sign up

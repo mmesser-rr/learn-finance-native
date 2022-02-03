@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 

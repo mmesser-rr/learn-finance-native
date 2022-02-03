@@ -6,13 +6,29 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
-  head: {
-    marginBottom: scale(32),
-  },
   viewWrapper: {
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  nav: {
+    marginBottom: scale(24),
+  },
+  body: {
+    marginBottom: scale(57),
+  },
+  inputContainer: {
+    alignItems: 'center'
+  },
+  inputWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  input: {
+    fontFamily: 'Lato Bold',
+    color: AppColors.gray20,
+    fontSize: scale(36),
+    lineHeight: scale(44),
+  }
 });
 
 export default styles;
