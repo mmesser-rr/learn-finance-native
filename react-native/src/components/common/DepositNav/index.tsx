@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import BackIcon from 'src/assets/icons/back.svg';
 import CloseIcon from 'src/assets/icons/close.svg';
 

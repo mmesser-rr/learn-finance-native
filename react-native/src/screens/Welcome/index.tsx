@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { RedLinnerGradient } from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 
 import styles from './styles';

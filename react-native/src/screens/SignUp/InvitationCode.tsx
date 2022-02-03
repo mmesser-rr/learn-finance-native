@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { TextNew as Text } from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 
 import styles from './styles';
 
