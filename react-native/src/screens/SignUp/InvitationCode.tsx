@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -10,7 +11,6 @@ import { getInvite } from 'src/graphql/queries';
 import { GetInviteQuery, InviteStatus } from 'src/types/graphql';
 
 import styles from './styles';
-import { GraphQLResult } from '@aws-amplify/api';
 
 interface InvitationCodeProps {
   goToNextStep: () => void;
