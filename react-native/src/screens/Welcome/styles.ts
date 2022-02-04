@@ -8,23 +8,25 @@ const styles = StyleSheet.create({
   },
   viewWrapper: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
   },
-  descriptionWrapper: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+  logo: {
+    marginBottom: scale(40),
   },
-  actionWrapper: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
+  title: {
+    marginBottom: scale(8),
+  },
+  actionLabelWrapper: {
+    marginTop: scale(72),
+    marginBottom: scale(16),
+    alignItems: 'center'
+  },
+  joinActionWrapper: {
+    marginBottom: scale(16),
   },
   loginAction: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: AppColors.gray20,
-    marginTop: scale(16),
+    borderColor: AppColors.gray20
   },
 });
 
