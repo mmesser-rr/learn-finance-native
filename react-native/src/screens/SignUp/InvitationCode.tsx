@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import { Text } from 'src/components/common/Texts';
+import { getInvite } from 'src/graphql/queries';
+import { GetInviteQuery, InviteStatus } from 'src/types/graphql';
 
 import styles from './styles';
 
@@ -16,6 +20,8 @@ type FormData = {
   code: string;
 };
 
+const invalidCodeMessage = 'Invalid code. Please try again.';
+
 const InvitationCode: React.FC<InvitationCodeProps> = ({
   goToNextStep,
 }) => {
@@ -23,7 +29,8 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
     control,
     handleSubmit,
     formState: { errors },
-    formState: { isValid }
+    formState: { isValid },
+    setError,
   } = useForm<FormData>({
     defaultValues: {
       code: '',
@@ -31,8 +38,22 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormData) => {
-    goToNextStep();
+  const onSubmit = async(formData: FormData) => {
+    const { data } = (await API.graphql(
+      graphqlOperation(getInvite, {
+        code: formData.code,
+        status: InviteStatus.AVAILABLE,
+      }),
+    )) as GraphQLResult<GetInviteQuery>;
+
+    if (data && data.getInvite) {
+      goToNextStep();
+    } else {
+      setError('code', {
+        type: 'manual',
+        message: invalidCodeMessage,
+      });
+    }
   };
 
   return (
@@ -53,7 +74,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
             control={control}
             rules={{
               required: { value: true, message: 'Please fill out this field.' },
-              minLength: { value: 6, message: 'Invalid code. Please try again.' },
+              minLength: { value: 6, message: invalidCodeMessage },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput

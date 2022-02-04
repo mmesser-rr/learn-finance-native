@@ -7,6 +7,7 @@ import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
 import { Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
+import LogoIcon from 'src/assets/icons/logo.svg';
 
 import styles from './styles';
 
@@ -16,42 +17,37 @@ const Welcome: React.FC = () => {
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
       <AppLayout viewStyle={styles.viewWrapper}>
-        <View style={styles.descriptionWrapper}>
-          <View>
+        <View>
+          <View style={styles.logo}>
+            <LogoIcon />
+          </View>
+          <View style={styles.title}>
             <Text type='Headline/Large'>
-              A modern financial collective for athletes by athletes
+              A social wealth club for the culture
             </Text>
           </View>
           <View>
-            <Text type='Title/Large'>POWER IN UNITY</Text>
-            <Text type='Body/Large'>
-              Built on the power of networks and relationships
-            </Text>
-          </View>
-          <View>
-            <Text type='Title/Large'>WEALTH OF KNOWLEDGE</Text>
-            <Text type='Body/Large'>
-              Programs for players to develop a foundation of financial knowledge
-            </Text>
-          </View>
-          <View>
-            <Text type='Title/Large'>ACCESS</Text>
-            <Text type='Body/Large'>
-              One-stop-shop for exclusive investment opportunities
+            <Text type='Title/Large'>
+              Where equal access provides equal opportunity.
             </Text>
           </View>
         </View>
-        <View style={styles.actionWrapper}>
-          <Button onPress={onJoin}>
+        <View>
+          <View style={styles.actionLabelWrapper}>
             <Text type='Body/Large'>
-              Get started
+              Let's get this money!
             </Text>
-          </Button>
-          <Button actionStyle={styles.loginAction} onPress={onJoin}>
-            <Text type='Body/Large'>
-              Login
-            </Text>
-          </Button>
+          </View>
+          <View style={styles.joinActionWrapper}>
+            <Button onPress={onJoin}>
+              <Text type='Body/Large'>Enter the club</Text>
+            </Button>
+          </View>
+          <View>
+            <Button actionStyle={styles.loginAction} onPress={() => {}}>
+              <Text type='Body/Large'>Log in</Text>
+            </Button>
+          </View>
         </View>
       </AppLayout>
     </LinearGradient>
