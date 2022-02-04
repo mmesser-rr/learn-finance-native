@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   largeTitle: {
     fontFamily: 'Lato-Light',
-    fontSize: scale(22),
+    fontSize: scale(20),
     lineHeight: scale(28),
     color: AppColors.gray20,
   },
