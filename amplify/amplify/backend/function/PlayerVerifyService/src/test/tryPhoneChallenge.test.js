@@ -11,7 +11,7 @@ describe('tryPhoneChallenge', () => {
   let persistChallengeStub;
   let sendPhoneChallengeStub;
 
-  const phoneNumber = "123-555-4456";
+  const phoneNumber = "4165557890";
   const event = {
     arguments: {
       phoneNumber: phoneNumber,
