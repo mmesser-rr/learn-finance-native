@@ -44,6 +44,13 @@ describe('tryPhoneChallenge', () => {
     assert.equal(result, false);
   });
 
+  it("should fetch challenge using cleaned version of phone number", async () => {
+    getPhoneChallengeStub.resolves(undefined)
+    
+    const result = await tryPhoneChallenge(event);
+    sinon.assert.calledWith(getPhoneChallengeStub, event.arguments.code, "+14165557890");
+  });
+
   it("should not set challenge as verified if no challenge with phone and code found", async () => {
     getPhoneChallengeStub.returns(Promise.resolve(undefined));
     verifyPhoneChallengeStub.returns(Promise.resolve());
