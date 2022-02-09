@@ -8,7 +8,11 @@ import { Provider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import SplashScreen from 'react-native-splash-screen';
-import Amplify from 'aws-amplify';
+
+//talk to amplify
+import Amplify from 'aws-amplify'
+import awsmobile from './aws-exports'
+Amplify.configure(awsmobile)
 
 import {
   PaperThemeDefault,
