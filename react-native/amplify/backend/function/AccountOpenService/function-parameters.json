@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "unitToken",
+      "environmentVariableName": "UNIT_TOKEN"
+    },
+    {
+      "cloudFormationParameterName": "unitApiUrl",
+      "environmentVariableName": "UNIT_API_URL"
+    }
+  ]
+}
