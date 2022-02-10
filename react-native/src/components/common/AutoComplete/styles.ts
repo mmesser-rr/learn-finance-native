@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   labelStyle: {
-    fontFamily: 'Lato',
+    fontFamily: 'Lato-Medium',
     color: AppColors.gray20,
   },
   searchStyle: {
@@ -17,9 +17,10 @@ const styles = StyleSheet.create({
     height: scale(40)
   },
   searchInputStyle: {
-    fontFamily: 'Lato',
+    fontFamily: 'Lato-Medium',
     color: AppColors.gray20,
-    fontSize: scale(16)
+    fontSize: scale(16),
+    alignSelf: 'center',
   },
   selectWrapper: {
     flexDirection: 'row',

@@ -22,6 +22,7 @@ import SelectPlayerTag from 'src/screens/SelectPlayerTag';
 import VerifyEmailCode from 'src/screens/VerifyEmailCode';
 import HomeStack from './HomeStack';
 import TransferStack from './TransferStack';
+import LastStepWelcome from 'src/screens/LastStepWelcome';
 
 interface IProps {
   theme: Theme;
@@ -100,6 +101,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen
           name="VerifyEmailCode"
           component={VerifyEmailCode}
+        />
+        <RootStack.Screen
+          name="LastStepWelcome"
+          component={LastStepWelcome}
         />
         <RootStack.Screen
           name="HomeStack"
