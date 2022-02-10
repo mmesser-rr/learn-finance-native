@@ -6,8 +6,8 @@ export type RootStackParamList = {
   SignUp: { step: string };
   Terms: undefined;
   SelectLevel: undefined;
-  SelectSport: undefined;
-  SelectTeam: undefined;
+  SelectSport: { type: string };
+  SelectTeam: { type: string };
   BankAccountIntro: undefined;
   CaptureDOB: undefined;
   CaptureAddress: undefined;
@@ -21,8 +21,9 @@ export type RootStackParamList = {
   TransferStack: undefined;
 };
 
-// sign up
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
+type SelectSportScreenRouteProp = RouteProp<RootStackParamList, 'SelectSport'>;
+type SelectTeamScreenRouteProp = RouteProp<RootStackParamList, 'SelectTeam'>;
 
 type SignUpScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -52,4 +53,16 @@ type SelectSportScreenNavigationProp = StackNavigationProp<
 
 export type SelectSportProps = {
   navigation: SelectSportScreenNavigationProp;
+  route: SelectSportScreenRouteProp;
+};
+
+// SelectTeam
+type SelectTeamScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'SelectTeam'
+>;
+
+export type SelectTeamProps = {
+  navigation: SelectTeamScreenNavigationProp;
+  route: SelectTeamScreenRouteProp;
 };

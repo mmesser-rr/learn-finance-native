@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: AppColors.gray20
   },
+  actionWrapper: {
+    flex: 1,
+  },
 });
 
 export default styles;

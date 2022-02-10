@@ -4,8 +4,8 @@ import { View } from 'react-native';
 import AppLayout from 'src/components/layout/AppLayout';
 import { Text } from 'src/components/common/Texts';
 import AutoComplete, { ItemInterface } from 'src/components/common/AutoComplete';
-import NavigationService from 'src/navigation/NavigationService';
 import SubmitButton from 'src/components/common/SubmitButton';
+import { SelectTeamProps } from 'src/types/routerTypes';
 
 import styles from './styles';
 
@@ -32,21 +32,25 @@ const suggestions: ItemInterface[] = [
   },
 ];
 
-const SelectTeam: React.FC = () => {
+const SelectTeam: React.FC<SelectTeamProps> = ({ navigation, route }: SelectTeamProps) => {
   const [value, setValue] = useState('');
+  const type = route.params.type;
 
   const onChangeOption = (option: string) => {
     setValue(option);
   };
 
-  const goToNextStep = () => NavigationService.navigate('BankAccountIntro');
+  const goToNextStep = () => navigation.navigate('BankAccountIntro');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View>
           <Text type='Headline/Small' style={styles.head}>
-            What team do you play for?
+            {type === 'profession' ? 
+              'What team do you play for?' :
+              'What school do you go to?'
+            }
           </Text>
         </View>
         <View>
