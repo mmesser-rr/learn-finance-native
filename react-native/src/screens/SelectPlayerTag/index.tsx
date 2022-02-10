@@ -22,11 +22,11 @@ const SelectPlayerTag: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
         <View>
-          <Text type='Headline/Small' style={styles.head}>Pick your Player Tag</Text>
+          <Text type='Headline/Small' style={styles.head}>Create your player tag</Text>
         </View>
         <View>
           <Text type='Body/Large' style={styles.caption}>
-            You Player Tag will be your public profile name in the community. You can change your Player Tag at anytime.
+            You player tag will be your public profile handle in the community. You can change your player tag at any time.
           </Text>
         </View>
         <View>
