@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { TextStyle, TouchableOpacity, View, Text as RNText } from 'react-native';
+import { TextStyle, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+
 import AppColors from 'src/config/colors';
 import SearchIcon from 'src/assets/icons/search.svg';
 import CloseIcon from 'src/assets/icons/searchbar-close.svg';
