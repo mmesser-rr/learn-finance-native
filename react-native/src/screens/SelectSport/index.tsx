@@ -24,14 +24,14 @@ const suggestions: ItemInterface[] = [
   }
 ];
 
-const SelectSport: React.FC<SelectSportProps> = ({ navigation }: SelectSportProps) => {
+const SelectSport: React.FC<SelectSportProps> = ({ navigation, route }: SelectSportProps) => {
   const [value, setValue] = useState('');
 
   const onChangeOption = (option: string) => {
     setValue(option);
   };
 
-  const goToNextStep = () => navigation.navigate('SelectTeam');
+  const goToNextStep = () => navigation.navigate('SelectTeam', { type: route.params.type });
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>

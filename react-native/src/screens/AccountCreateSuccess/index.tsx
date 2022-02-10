@@ -10,7 +10,7 @@ import SuccessIcon from 'src/assets/icons/account-creation-success.svg';
 import styles from './styles';
 
 const AccountCreateSuccess: React.FC = () => {
-  const goToNextStep = () => NavigationService.navigate('AccountCreateFailure');
+  const goToNextStep = () => NavigationService.navigate('ProfileIntro');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -18,11 +18,11 @@ const AccountCreateSuccess: React.FC = () => {
         <SuccessIcon />
       </View>
       <View>
-        <Text type='Headline/Small' style={styles.head}>Success!</Text>
+        <Text type='Headline/Small' style={styles.head}>Let's go!</Text>
       </View>
       <View>
         <Text type='Body/Large' style={styles.caption}>
-          Your identity has been successfully verified. Your Players Co. bank account is now established.
+          Your identity has been successfully verified. Your Players Company bank account is now established.
         </Text>
       </View>
       <View style={styles.actionWrapper}>
