@@ -22,12 +22,12 @@ const BankAccountIntro: React.FC = () => {
             <LogoIcon />
           </View>
           <View style={styles.block}>
-            <Text type='Headline/Large'>Open the Players Co. Bank Account</Text>
+            <Text type='Headline/Large'>Open your Players Company bank account</Text>
           </View>
           <View style={styles.block}>
             <Text type='Title/Large' style={styles.title}>Verify Identity</Text>
             <Text type='Body/Large'>
-              Nothing fancy, just a few things to understand your athlete experience.
+              You will need to enter your date of birth, address, and social security number. This has no impact on your credit nor will your social security number be stored.
             </Text>
           </View>
           <View style={styles.block}>
@@ -35,7 +35,7 @@ const BankAccountIntro: React.FC = () => {
               Open the bank account
             </Text>
             <Text type='Body/Large'>
-              Once your identity is verified your Players Co. bank account will be established.
+              Once your identity is verified, your Players Company bank account will be established.
             </Text>
           </View>
         </View>

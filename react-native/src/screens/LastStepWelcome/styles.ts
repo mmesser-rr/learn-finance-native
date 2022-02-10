@@ -7,18 +7,12 @@ const styles = StyleSheet.create({
   },
   viewWrapper: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  block: {
-    marginBottom: scale(32),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
-    marginBottom: scale(40),
-  },
-  title: {
-    fontFamily: 'Lato-Light',
-    fontSize: scale(22),
-    marginBottom: scale(8),
+    marginBottom: scale(48),
+    alignItems: 'center',
   },
 });
 
