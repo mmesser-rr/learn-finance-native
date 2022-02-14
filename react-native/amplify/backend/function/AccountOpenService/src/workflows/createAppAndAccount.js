@@ -39,7 +39,6 @@ const createAppAndAccount = (ssn, athlete) => {
   return unit.createApplication(ssn, athlete).then(res => {
     const keys = keysFromUnit(res);
     
-
     return Promise.all([
       tpc.addUnitDataToAthlete(athlete.id, keys),
       createAccountIfApproved(athlete, res, keys)
