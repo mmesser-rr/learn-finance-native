@@ -1,6 +1,3 @@
-const R = require("ramda");
-const { Reader, Either } = require("monet");
-
 const { Unit } = require("@unit-finance/unit-node-sdk");
 
 const IP = "127.0.0.1";
