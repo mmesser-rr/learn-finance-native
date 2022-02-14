@@ -25,10 +25,9 @@ const addUnitDataToAthlete = (axios) => (
     athleteId,
     unitLookup
   }
-}).then(res => {
-  console.log(res.data);
-  return res.data.data.updateAthleteUnitLookup;
-});
+}).then(resultLens);
+
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthleteUnitLookup);
 
 module.exports = {
   addUnitDataToAthlete

@@ -29,7 +29,9 @@ const persistAccount = (axios) => (
     routingCode: routingCode,
     accountNumber: accountNumber
   }
-}).then(res => res.data.data.createAthleteAccount);
+}).then(resultLens);
+
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.createAthleteAccount);
 
 module.exports = {
   persistAccount
