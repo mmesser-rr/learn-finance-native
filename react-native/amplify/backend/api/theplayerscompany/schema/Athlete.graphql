@@ -4,6 +4,7 @@
 
 type AthleteUnitLookup {
   appId: String!
+  custId: String
 }
 
 enum AthleteLevel {
