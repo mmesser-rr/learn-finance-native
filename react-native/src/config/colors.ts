@@ -3,6 +3,7 @@ const AppColors = {
   gray120: '#B7B7B7',
   interactionBlue: '#40B9FF',
   coreBlack100: '#000',
+  coreBlack90: '#1A1A1A',
   coreBlack80: '#333',
   coreBlack40: '#999',
   searchPlaceholderColor: '#F7F7F738',
