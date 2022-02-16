@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
 import { Text } from 'src/components/common/Texts';
+import { initiatePhoneChallenge } from 'src/graphql/mutations';
 
 import styles from './styles';
 
@@ -15,9 +17,24 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
 }) => {
   const [isValid, setIsValid] = useState(false);
+  const [phone, setPhone] = useState('');
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 10);
+    setPhone(value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await API.graphql(
+        graphqlOperation(initiatePhoneChallenge, {
+          phoneNumber: `1${phone}`,
+        }),
+      );
+      goToNextStep();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +63,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
         </View>
       </View>
       <View>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={handleSubmit} />
       </View>
     </>
   );
