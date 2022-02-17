@@ -27,5 +27,5 @@ const createAndPersistAccount = (athlete) => {
 }
 
 module.exports = {
-  createAndPersistAccount: createAndPersistAccount
+  createAndPersistAccount: (athleteId) => tpc.getAthlete(athleteId).then(createAndPersistAccount)
 }
