@@ -78,7 +78,7 @@
         "setupFilesAfterEnv": [],
         "testPathIgnorePatterns": [
             "/amplify/",
-            "node_modules/(?!((jest-)?react-native|react-native-elements|@react-native(-community)?)/)"
+            "/node_modules/"
         ],
         "moduleFileExtensions": [
             "ts",
