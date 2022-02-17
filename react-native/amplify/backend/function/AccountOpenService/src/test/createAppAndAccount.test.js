@@ -9,10 +9,8 @@ const unit = require("../wrappers/unit");
 describe('createAppAndAccount', () => {
   const ssn = "000000005";
 
-  const athleteId = "20025";
-
   const athlete = {
-    "id": athleteId,
+    "id": "20025",
     "firstName": "Richard",
     "lastName": "Hendricks",
     "dateOfBirth": "2001-08-10",
@@ -39,14 +37,33 @@ describe('createAppAndAccount', () => {
     appId: '2005'
   }
 
+  const unitAppId = {
+    appId: '2005'
+  }
+
   const unitApplicationApprovedResponse = {
-    appId: "2005",
-    custId: "199630"
+    data: {
+      id: "2005",
+      attributes: { 
+        status: 'Approved',
+      },
+      relationships: {
+        org: { data: { type: 'org', id: '882' } },
+        customer: { data: { type: 'individualCustomer', id: '199630' } }
+      }
+    }
   }
 
   const unitApplicationPendingResponse = {
-    appId: "882",
-    status: "Pending"
+    data: {
+      id: "2005",
+      attributes: { 
+        status: 'Pending',
+      },
+      relationships: {
+        org: { data: { type: 'org', id: '882' } }
+      }
+    }
   }
 
   const unitAccountResponse = {
@@ -83,33 +100,35 @@ describe('createAppAndAccount', () => {
       const athleteWithCustId = clone(athlete);
       athleteWithCustId.unitResponse = { custId: "5005" };
 
-      getAthleteStub.resolves(athleteWithCustId);
-
-      assert.rejects(createAppAndAccount(athleteId));
+      const createAppAndAccountWithCustId = () => createAppAndAccount(athleteWithoutCustId);
+      
+      assert.throws(createAppAndAccountWithCustId, Error, "Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
     });
   });
 
   describe("when creating an application in Unit API", async () => {
     it("should create an application in Unit API if no appId found", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
       persistAccountStub.resolves(arbitrary);
 
-      await createAppAndAccount(ssn, athleteId);
+      const athleteWithoutCustId = clone(athlete);
+      athleteWithoutCustId.unitLookup = undefined;
+
+      await createAppAndAccount(ssn, athleteWithoutCustId);
 
       sinon.assert.calledOnce(createApplicationStub);
     });
 
     it("should not create an application in Unit API if athlete already has an Unit customer affiliated with it", async () => {
-      getAthleteStub.resolves(athlete);
-
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
       persistAccountStub.resolves(arbitrary);
+
+      const athleteWithCustId = clone(athlete);
+      athleteWithCustId.unitResponse = { custId: "5005" };
 
       try {
         await createAppAndAccount(ssn, athleteWithCustId);
@@ -121,37 +140,30 @@ describe('createAppAndAccount', () => {
 
   describe("when persisting a Unit application and customer id in TPC backend", async () => {
     it("should persist application id and customer id from Unit in TPC backend when Unit application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
 
-      await createAppAndAccount(ssn, athleteId);
+      await createAppAndAccount(ssn, athleteWithoutCustId);
       
-      sinon.assert.calledWith(updateUnitDataStub, athleteId, unitCustAndAppId);
+      sinon.assert.calledWith(updateUnitDataStub, athlete.id, unitCustAndAppId);
     });
 
-    it("should persist just application id from Unit in TPC backend when the Unit application is not approved (there is no customer id to persist)", async () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
-      createApplicationStub.rejects(unitApplicationPendingResponse);
+    it("should persist just application id from Unit in TPC backend when the Unit application is not approved and there is no customer id to persist", async () => {
+      createApplicationStub.resolves(unitApplicationPendingResponse);
       updateUnitDataStub.resolves(arbitrary);
+      createAccountStub.resolves(unitAccountResponse);
 
       try {
         await createAppAndAccount(ssn, athleteWithoutCustId);
       } catch {} // Exception expected but not relevant
-      console.log(updateUnitDataStub.callCount);
       
-      sinon.assert.calledWith(updateUnitDataStub, athleteId, unitApplicationPendingResponse);
+      sinon.assert.calledWith(updateUnitDataStub, athlete.id, unitAppId);
     });
   });
 
   describe("when creating the athlete account in the Unit API", async () => {
     it("should open an account in Unit if application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
-
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -163,7 +175,6 @@ describe('createAppAndAccount', () => {
     })
 
     it("should not open an account in Unit if application is not approved", async () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationPendingResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -176,7 +187,6 @@ describe('createAppAndAccount', () => {
     })
 
     it("should reject if account not successfully created in Unit API", () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.rejects("error");
@@ -187,7 +197,6 @@ describe('createAppAndAccount', () => {
 
   describe("when persisting the athlete account in TPC", async () => {
     it("should not persist athlete account if attempt to create account in Unit fails", async () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.rejects(arbitrary);
@@ -201,9 +210,6 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist unit deposit account details in TPC", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
-
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -223,9 +229,6 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist athlete account in TPC once", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
-
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
