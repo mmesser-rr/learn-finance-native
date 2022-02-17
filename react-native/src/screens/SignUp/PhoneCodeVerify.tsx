@@ -4,6 +4,8 @@ import { View, TouchableOpacity } from 'react-native';
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import { Text } from 'src/components/common/Texts';
+import { deletePhoneChallenge, initiatePhoneChallenge, tryPhoneChallenge } from 'src/graphql/mutations';
+import { listPhoneChallenges } from 'src/graphql/queries';
 
 import styles from './styles';
 
@@ -15,9 +17,11 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   goToNextStep,
 }) => {
   const [isValid, setIsValid] = useState(false);
+  const [code, setCode] = useState('');
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 6);
+    setCode(value);
   };
 
   return (
@@ -37,9 +41,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
           <TextInput
             label='Enter 6-digit Code'
             maxLength={6}
-            isNumeric
             autoFocus
-            keyboardType='number-pad'
             onChangeText={changeValue}
           />
         </View>
