@@ -1,13 +1,9 @@
-const createApplication = require("./createApplication");
-const createAccount = require("./createAccount");
-const createCounterParty = require("./createCounterParty");
-const getApplication = require("./getApplication");
-const transfer = require("./transfer.js");
+const { createApplication } = require("./createApplication");
+const { createAccount } = require("./createAccount");
+
+const env = require("../../env.js");
 
 module.exports = {
-  ...createApplication,
-  ...createAccount,
-  ...createCounterParty,
-  ...transfer,
-  ...getApplication
+  createApplication: createApplication(env.unit),
+  createAccount: createAccount(env.unit),
 }

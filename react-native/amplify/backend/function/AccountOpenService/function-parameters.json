@@ -9,5 +9,13 @@
       "cloudFormationParameterName": "unitApiUrl",
       "environmentVariableName": "UNIT_API_URL"
     }
-  ]
+  ],
+  "permissions": {
+    "api": {
+      "theplayerscompany": [
+        "Query",
+        "Mutation"
+      ]
+    }
+  }
 }
