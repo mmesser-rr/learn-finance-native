@@ -41,11 +41,13 @@ describe('createAccount', () => {
   let persistAccountStub;
 
   beforeEach(() => {
+    getAthleteStub = sinon.stub(tpc, "getAthlete");
     persistAccountStub = sinon.stub(tpc, "persistAccount");
     createAccountStub = sinon.stub(unit, "createAccount");
   });
 
   afterEach(() => {
+    getAthleteStub.restore();
     persistAccountStub.restore();
     createAccountStub.restore();
   });
@@ -55,14 +57,15 @@ describe('createAccount', () => {
       const athleteWithoutCustId = clone(athlete);
       athleteWithoutCustId.unitLookup.custId = undefined;
 
-      const createAccountWithNoCustId = () => createAndPersistAccount(athleteWithoutCustId);
-      
-      assert.throws(createAccountWithNoCustId, Error, "Athlete does not have a unit customer id. Has their unit application been approved?");
+      getAthleteStub.resolves(athleteWithoutCustId);
+
+      assert.rejects(createAndPersistAccount(athlete.id), "Athlete does not have a unit customer id. Has their unit application been approved?");
     });
   });
 
   describe("when creating the athlete account in the Unit API", async () => {
     it("should create an account once in unit with athlete", async () => {
+      getAthleteStub.resolves(athlete);
       createAccountStub.resolves(unitResponse);
       persistAccountStub.resolves(arbitrary);
 
@@ -72,6 +75,7 @@ describe('createAccount', () => {
     });
 
     it("should reject if account not successfully created in Unit API", async () => {
+      getAthleteStub.resolves(athlete);
       createAccountStub.rejects("error");
 
       assert.rejects(createAndPersistAccount(athlete));
@@ -80,21 +84,23 @@ describe('createAccount', () => {
 
   describe("when persisting the athlete account in TPC", async () => {
     it("should not persist athlete account if Unit API fails", async () => {
+      getAthleteStub.resolves(athlete);
       createAccountStub.rejects(arbitrary);
       persistAccountStub.resolves(arbitrary);
 
       try {
-        await createAccount(athlete);
+        await createAccount(athlete.id);
       } catch {} finally {
         sinon.assert.notCalled(persistAccountStub);
       }
     });
 
     it("should persist unit deposit account details in TPC", async () => {
+      getAthleteStub.resolves(athlete);
       createAccountStub.resolves(unitResponse);
       persistAccountStub.resolves(arbitrary);
 
-      await createAndPersistAccount(athlete);
+      await createAndPersistAccount(athlete.id);
 
       const athleteId = athlete.id
 
@@ -108,10 +114,11 @@ describe('createAccount', () => {
     });
 
     it("should persist athlete account in TPC once", async () => {
+      getAthleteStub.resolves(athlete);
       createAccountStub.resolves(unitResponse);
       persistAccountStub.resolves(arbitrary);
 
-      await createAndPersistAccount(athlete);
+      await createAndPersistAccount(athlete.id);
 
       sinon.assert.calledOnce(persistAccountStub);
     });
