@@ -18,3 +18,4 @@ jobs:
           node-version: '14'
       - run: npm install -g mocha
       - run: npm install -g yarn
+      npm run-script test
