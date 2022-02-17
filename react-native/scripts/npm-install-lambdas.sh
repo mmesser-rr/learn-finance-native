@@ -12,6 +12,6 @@ for d in amplify/backend/function/* ; do
   echo ...Run tests
   npm run test
   echo =================================================================
-done
+done 
 cd $rootDir
 
