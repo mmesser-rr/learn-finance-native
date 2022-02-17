@@ -140,7 +140,6 @@ describe('createAppAndAccount', () => {
       try {
         await createAppAndAccount(ssn, athleteWithoutCustId);
       } catch {} // Exception expected but not relevant
-      console.log(updateUnitDataStub.callCount);
       
       sinon.assert.calledWith(updateUnitDataStub, athleteId, unitApplicationPendingResponse);
     });
