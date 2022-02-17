@@ -75,8 +75,7 @@
     },
     "jest": {
         "preset": "react-native",
-        "setupFilesAfterEnv": [
-        ],
+        "setupFilesAfterEnv": [],
         "testPathIgnorePatterns": [
             "/amplify/",
             "node_modules/(?!((jest-)?react-native|react-native-elements|@react-native(-community)?)/)"
