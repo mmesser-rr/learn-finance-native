@@ -1,4 +1,4 @@
-name: Backend Unit Tests
+name: UI Unit Tests
 on:
   push:
     branches: [ main ]
@@ -18,5 +18,3 @@ jobs:
           node-version: '14'
       - run: npm install -g mocha
       - run: npm install -g yarn
-      - run: scripts/npm-install-lambdas.sh
-      - run: npm test
