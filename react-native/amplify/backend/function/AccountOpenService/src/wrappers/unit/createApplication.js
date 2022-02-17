@@ -20,7 +20,7 @@ const parseApplicationParams = (unit) => (
     dateOfBirth,
     address,
     email,
-    phone
+    mobilePhone
   }
 ) => ({
   type: APPLICATION_TYPE,
@@ -30,15 +30,32 @@ const parseApplicationParams = (unit) => (
     dateOfBirth: dateOfBirth,
     address: parseAddress(unit)(address),
     email: email,
-    phone: unit.helpers.createPhone("1", phone)
+    phone: unit.helpers.createPhone("1", mobilePhone)
   }
 });
 
 const createApplication = (unit) => (ssn, athlete) => {
   const unitParams = parseApplicationParams(unit)(ssn, athlete);
-  return unit.applications.create(unitParams); 
+  return unit.applications.create(unitParams)
+    .then(rejectIfNotApproved)
+    .then(resultLens);
 }
 
+const rejectIfNotApproved = (res) => (res.data.attributes.status === "Approved") ? 
+  Promise.resolve(res.data) :
+  Promise.reject({
+    appId: res.data.id,
+    status: res.data.attributes.status,
+    message: res.data.attributes.message
+  })
+
+const resultLens = (res) => ({
+  appId: res.id,
+  custId: res.relationships.customer.data.id
+});
+
 module.exports = {
+  rejectIfNotApproved,
+  resultLens,
   createApplication
 }

@@ -1,21 +1,7 @@
 {
-  "fieldName": "createAppAndAccount",
+  "fieldName": "openAppAndAccount",
   "arguments": {
     "ssn": "000000005",
-    "athlete": {
-      "id": "4005",
-      "firstName": "Richard",
-      "lastName": "Hendricks",
-      "dateOfBirth": "2001-08-10",
-      "address": {
-        "streetAddress": "20 Ingram St.",
-        "apt": "3",
-        "city": "Forest Hills",
-        "state": "CA",
-        "zipCode": "11375"
-      },
-      "email": "april@baxter.com",
-      "phone": "2025550158"
-    }
+    "athleteId": "c97b003a-fcdd-46c7-a338-0acef4fd2de0"
   }
 }

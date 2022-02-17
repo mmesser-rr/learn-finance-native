@@ -25,9 +25,9 @@ const persistAccount = (axios) => (
 ) => axios.post("/", {
   query: print(persistAccountStatement),
   variables: {
-    athleteId: athleteId,
-    routingCode: routingCode,
-    accountNumber: accountNumber
+    athleteId,
+    routingCode,
+    accountNumber
   }
 }).then(resultLens);
 
