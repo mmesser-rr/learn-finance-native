@@ -1,5 +1,0 @@
-type EmailChallenge @model {
-  code: String! @primaryKey(sortKeyFields: ["email"])
-  email: String!
-  verified: Boolean!
-}
