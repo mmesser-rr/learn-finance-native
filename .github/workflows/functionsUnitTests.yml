@@ -1,4 +1,4 @@
-name: Backend Unit Tests
+name: Functions Unit Tests
 on:
   push:
     branches: [ main ]
