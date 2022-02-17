@@ -36,26 +36,10 @@ const parseApplicationParams = (unit) => (
 
 const createApplication = (unit) => (ssn, athlete) => {
   const unitParams = parseApplicationParams(unit)(ssn, athlete);
-  return unit.applications.create(unitParams)
-    .then(rejectIfNotApproved)
-    .then(resultLens);
+  console.log(unitParams);
+  return unit.applications.create(unitParams); 
 }
 
-const rejectIfNotApproved = (res) => (res.data.attributes.status === "Approved") ? 
-  Promise.resolve(res.data) :
-  Promise.reject({
-    appId: res.data.id,
-    status: res.data.attributes.status,
-    message: res.data.attributes.message
-  })
-
-const resultLens = (res) => ({
-  appId: res.id,
-  custId: res.relationships.customer.data.id
-});
-
 module.exports = {
-  rejectIfNotApproved,
-  resultLens,
   createApplication
 }

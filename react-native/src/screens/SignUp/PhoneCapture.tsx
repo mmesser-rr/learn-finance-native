@@ -7,6 +7,7 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import { Text } from 'src/components/common/Texts';
 
 import styles from './styles';
+import { initiatePhoneChallenge } from 'src/graphql/mutations';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
@@ -28,7 +29,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
     // try {
     //   await API.graphql(
     //     graphqlOperation(initiatePhoneChallenge, {
-    //       phoneNumber: `1${phone}`,
+    //       phoneNumber: phone,
     //     }),
     //   );
     //   goToNextStep();
