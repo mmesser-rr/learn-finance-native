@@ -16,5 +16,15 @@
     "mocha": "^9.2.0",
     "ramda": "^0.28.0",
     "sinon": "^13.0.1"
+  },
+  "jest" : {
+    "testPathIgnorePatterns" : [
+      "/node_modules",
+      "/react-natvie/src/"
+    ],
+    "transformIgnorePatterns" : [
+      "/node_modules",
+      "/react-natvie/src/"
+    ]
   }
 }
