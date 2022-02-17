@@ -10,8 +10,8 @@ const { createAccount } = require("./workflows/createAccount.js");
 const { createAppAndAccount } = require("./workflows/createAppAndAccount");
 
 const resolvers = Object.freeze({
-  createAccount: (event) => createAccount(event.arguments.athlete),
-  createAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athlete)
+  openAccount: (event) => createAccount(event.arguments.athlete),
+  openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
 });
 
 const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};

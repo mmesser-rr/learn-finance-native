@@ -33,6 +33,7 @@ type Athlete @model {
   sport: AthleteSport!
   team: AthleteTeam!
   address: Address!
+  dateOfBirth: String!
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
   isActive: Boolean!
