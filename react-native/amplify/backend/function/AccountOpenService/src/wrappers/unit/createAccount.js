@@ -1,6 +1,3 @@
-const R = require("ramda");
-const { Reader } = require("monet");
-
 const paramsFromCustId = (custId) => ({
   type: "depositAccount",
   attributes: {
@@ -19,8 +16,11 @@ const paramsFromCustId = (custId) => ({
   }
 });
 
-const createAccount = (params) => Reader(unit => unit.accounts.create(params));
+const createAccount = (unit) => (custId) => {
+  const params = paramsFromCustId(custId);
+  return unit.accounts.create(params);
+};
 
 module.exports = {
-  createAccount: R.compose(createAccount, paramsFromCustId)
+  createAccount
 }

@@ -4,4 +4,6 @@ type Mutation {
   generateInvite: Invite @function(name: "InviteService-${env}")
   initiateEmailChallenge(email: String!): EmailChallenge @function(name: "PlayerVerifyService-${env}")
   tryEmailChallenge(email: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
+  openAppAndAccount(ssn: String!, athleteId: ID!): AthleteAccount @function(name: "AccountOpenService-${env}")
+  openAccount(athleteId: ID!): AthleteAccount @function(name: "AccountOpenService-${env}")
 }
