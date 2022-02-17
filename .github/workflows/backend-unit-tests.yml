@@ -1,20 +1,15 @@
 name: Backend Unit Tests
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     defaults:
       run:
-        working-directory: ./amplify
-
+        working-directory: ./react-native/amplify
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -23,5 +18,5 @@ jobs:
           node-version: '14'
       - run: npm install -g mocha
       - run: npm ci
-      - run: ./scripts/npm-install-lambdas.sh
+      - run: ./react-native/scripts/npm-install-lambdas.sh
       - run: npm test
