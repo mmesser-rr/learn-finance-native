@@ -6,11 +6,15 @@ const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
 
   if (custId !== undefined) {
+    console.log("throwing");
     throw new Error("Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
   }
 
   return unit.createApplication(ssn, athlete)
-    .catch(err => tpc.addUnitDataToAthlete(athlete.id, err))
+    .catch(err => (err?.appId) ?
+      tpc.addUnitDataToAthlete(athlete.id, err)
+      : Promise.reject(err)
+    )
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
     .then(res => createAndPersistAccount(athlete.id));
 }

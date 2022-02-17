@@ -79,13 +79,14 @@ describe('createAppAndAccount', () => {
   });
 
   describe("before doing any work", () => {
-    it("should throw if athlete has made a unit application already", () => {
+    it("should throw if athlete has made a unit application already", async () => {
       const athleteWithCustId = clone(athlete);
       athleteWithCustId.unitResponse = { custId: "5005" };
 
       getAthleteStub.resolves(athleteWithCustId);
+      const createAppAndAccountWithCustId = () => createAppAndAccount(athleteId);
 
-      assert.rejects(createAppAndAccount(athleteId));
+      await assert.throws(createAppAndAccountWithCustId, Error, "Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
     });
   });
 
@@ -174,13 +175,13 @@ describe('createAppAndAccount', () => {
       sinon.assert.notCalled(createAccountStub);
     })
 
-    it("should reject if account not successfully created in Unit API", () => {
+    it("should reject if account not successfully created in Unit API", async () => {
       getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.rejects("error");
 
-      assert.rejects(createAppAndAccount(ssn, athleteWithoutCustId));
+      await assert.rejects(createAppAndAccount(ssn, athleteWithoutCustId));
     });
   });
 
