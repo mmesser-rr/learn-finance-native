@@ -7,10 +7,13 @@ import Button from 'src/components/common/Button';
 import { Text } from 'src/components/common/Texts';
 import { RedLinnerGradient } from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
 const Home: React.FC = () => {
+  const onSetupDirectDeposit = () => NavigationService.navigate('TransferStack', { screen: 'DirectDeposit' });
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View style={styles.dotMenu}>
@@ -40,7 +43,7 @@ const Home: React.FC = () => {
             </Button>
           </View>
           <View>
-            <Button actionStyle={styles.depositButton}>
+            <Button actionStyle={styles.depositButton} onPress={onSetupDirectDeposit}>
               <Text type='Body/Large'>Set up direct deposit</Text>
             </Button>
           </View>
