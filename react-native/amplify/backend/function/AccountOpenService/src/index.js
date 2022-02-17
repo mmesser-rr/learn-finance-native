@@ -14,6 +14,6 @@ const resolvers = Object.freeze({
   openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
 });
 
-const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};
+const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);
 
-exports.handler = async (event) => (resolvers[event.fieldName] || fallback)(event);
+exports.handler = async (event) => (resolvers[event.fieldName] || fallback)(event)

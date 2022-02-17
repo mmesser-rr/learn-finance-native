@@ -19,11 +19,11 @@
         },
         "PlayerVerifyService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-39306570636564393166-build.zip"
+          "s3Key": "amplify-builds/PlayerVerifyService-44534348336e66657362-build.zip"
         },
         "AccountOpenService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/AccountOpenService-453262545131485a7846-build.zip",
+          "s3Key": "amplify-builds/AccountOpenService-765a7075644846324452-build.zip",
           "unitToken": "",
           "unitApiUrl": ""
         }
