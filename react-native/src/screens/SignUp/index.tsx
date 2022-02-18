@@ -13,6 +13,7 @@ import styles from './styles';
 
 const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps) => {
   const [stepCount, setStepCount] = useState(-1);
+  const [phone, setPhone] = useState('');
   const stepName = route.params.step;
 
   useEffect(() => {
@@ -28,11 +29,15 @@ const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps)
     }
   };
 
+  const updatePhone = (phoneNumber: string) => {
+    setPhone(phoneNumber);
+  };
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       {stepCount === 0 && (<InvitationCode goToNextStep={goToNextStep} />)}
-      {stepCount === 1 && (<PhoneCapture goToNextStep={goToNextStep} />)}
-      {stepCount === 2 && (<PhoneCodeVerify goToNextStep={goToNextStep} />)}
+      {stepCount === 1 && (<PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />)}
+      {stepCount === 2 && (<PhoneCodeVerify phoneNumber={phone} goToNextStep={goToNextStep} />)}
       {stepCount === 3 && (<NameCapture goToNextStep={goToNextStep} />)}
       {stepCount === 4 && (<EmailCapture goToNextStep={goToNextStep} />)}
     </AppLayout>

@@ -8,8 +8,6 @@ amplify/mock-data
 amplify/backend/amplify-meta.json
 amplify/backend/.temp
 build/
-*.swp
-*.swo
 dist/
 node_modules/
 aws-exports.js

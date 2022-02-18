@@ -5,32 +5,35 @@ import { API, graphqlOperation } from 'aws-amplify';
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
 import { Text } from 'src/components/common/Texts';
-import { initiatePhoneChallenge } from 'src/graphql/mutations';
 
 import styles from './styles';
+import { initiatePhoneChallenge } from 'src/graphql/mutations';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
+  updatePhone: (phone: string) => void;
 }
 
 const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
+  updatePhone,
 }) => {
   const [isValid, setIsValid] = useState(false);
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 10);
-    setPhone(value);
+    setPhoneNumber(value);
   };
 
   const handleSubmit = async () => {
     try {
-      await API.graphql(
-        graphqlOperation(initiatePhoneChallenge, {
-          phoneNumber: `1${phone}`,
-        }),
-      );
+      // await API.graphql(
+      //   graphqlOperation(initiatePhoneChallenge, {
+      //     phoneNumber,
+      //   }),
+      // );
+      updatePhone(phoneNumber);
       goToNextStep();
     } catch (error) {
       console.log(error);

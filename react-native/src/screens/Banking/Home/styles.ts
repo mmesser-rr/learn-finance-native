@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(24),
   },
   card: {
-    paddingVertical: scale(12),
+    paddingVertical: scale(16),
     paddingHorizontal: scale(24),
     borderRadius: scale(8),
     backgroundColor: AppColors.coreBlack80,
