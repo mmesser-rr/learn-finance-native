@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
+import { API, graphqlOperation } from 'aws-amplify';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import { Text } from 'src/components/common/Texts';
-import { deletePhoneChallenge, initiatePhoneChallenge, tryPhoneChallenge } from 'src/graphql/mutations';
-import { listPhoneChallenges } from 'src/graphql/queries';
+import { tryPhoneChallenge } from 'src/graphql/mutations';
 
 import styles from './styles';
 
 interface PhoneCodeVerifyProps {
+  phoneNumber: String;
   goToNextStep: () => void;
 }
 
 const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
+  phoneNumber,
   goToNextStep,
 }) => {
   const [isValid, setIsValid] = useState(false);
@@ -22,6 +24,20 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   const changeValue = (value: string) => {
     setIsValid(value.length === 6);
     setCode(value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // await API.graphql(
+      //   graphqlOperation(tryPhoneChallenge, {
+      //     code,
+      //     phoneNumber,
+      //   }),
+      // );
+      goToNextStep();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -54,7 +70,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         </View>
       </View>
       <View>
-        <SubmitButton isValid={isValid} actionLabel='Verify Code' onSubmit={goToNextStep} />
+        <SubmitButton isValid={isValid} actionLabel='Verify Code' onSubmit={handleSubmit} />
       </View>
     </>
   );

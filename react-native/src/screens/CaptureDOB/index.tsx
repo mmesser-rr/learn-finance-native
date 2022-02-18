@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import dayjs from 'dayjs';
 
 import { Text } from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -13,6 +14,7 @@ import styles from './styles';
 
 const CaptureDOB: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
+  const [isError, setError] = useState(false);
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
 
   useEffect(() => {
@@ -24,7 +26,15 @@ const CaptureDOB: React.FC = () => {
   }, []);
 
   const changeValue = (value: string) => {
-    setIsValid(validateDOB(value));
+    let valid = validateDOB(value);
+
+    if (value.length === 8) {
+      const date = `${value.substring(0, 2)}/${value.substring(2, 4)}/${value.substring(4, 8)}`;
+      valid = dayjs(date).isBefore(dayjs().subtract(18, 'year'));
+      setError(!valid);
+    }
+
+    setIsValid(valid);
   };
 
   const goToNextStep = () => NavigationService.navigate('CaptureAddress');
@@ -43,6 +53,7 @@ const CaptureDOB: React.FC = () => {
             mask='[00]/[00]/[0000]'
             autoFocus
             keyboardType='number-pad'
+            error={isError ? 'You must be 18 years or older to open a checking account in your name only. Please come back later.' : ''}
             changeValue={changeValue}
           />
         </View>
