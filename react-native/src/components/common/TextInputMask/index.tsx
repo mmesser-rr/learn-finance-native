@@ -5,7 +5,7 @@ import RNTextInputMask from 'react-native-text-input-mask';
 import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
-import InfoIcon from 'src/assets/icons/info.svg';
+import ExclamationIcon from 'src/assets/icons/exclamation.svg';
 import { scale } from 'src/config/dimentions';
 import { Text } from '../Texts';
 
@@ -100,7 +100,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
       </View>
       {!!error && (
         <View style={styles.helperContainer}>
-          <InfoIcon style={styles.helperIcon} />
+          <ExclamationIcon style={styles.helperIcon} />
           <Text type='Body/Medium' style={styles.helperText}>{error}</Text>
         </View>
         )}
