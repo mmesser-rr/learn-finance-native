@@ -92,8 +92,8 @@ describe('createAppAndAccount', () => {
 
   describe("when creating an application in Unit API", async () => {
     it("should create an application in Unit API if no appId found", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -122,8 +122,9 @@ describe('createAppAndAccount', () => {
 
   describe("when persisting a Unit application and customer id in TPC backend", async () => {
     it("should persist application id and customer id from Unit in TPC backend when Unit application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -134,7 +135,8 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist just application id from Unit in TPC backend when the Unit application is not approved (there is no customer id to persist)", async () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.rejects(unitApplicationPendingResponse);
       updateUnitDataStub.resolves(arbitrary);
 
@@ -146,12 +148,11 @@ describe('createAppAndAccount', () => {
     });
   });
 
-  describe("when creating the athlete account in the Unit API", async () => {
-    it("should open an account in Unit if application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+  describe("when creating athlete accounts in the Unit API", async () => {
+    it("should open 3 accounts in Unit if application is approved", async () => {
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -159,7 +160,7 @@ describe('createAppAndAccount', () => {
 
       await createAppAndAccount(ssn, athleteWithoutCustId);
 
-      sinon.assert.calledOnce(createAccountStub);
+      sinon.assert.calledThrice(createAccountStub);
     })
 
     it("should not open an account in Unit if application is not approved", async () => {
@@ -201,8 +202,8 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist unit deposit account details in TPC", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
@@ -222,9 +223,9 @@ describe('createAppAndAccount', () => {
       sinon.assert.calledWith(persistAccountStub, athleteAccount);
     });
 
-    it("should persist athlete account in TPC once", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+    it("should persist all three athlete accounts in TPC", async () => {
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
@@ -235,7 +236,7 @@ describe('createAppAndAccount', () => {
 
       const athleteId = athlete.id
 
-      sinon.assert.calledOnce(persistAccountStub);
+      sinon.assert.calledThrice(persistAccountStub);
     });
   });
 });
