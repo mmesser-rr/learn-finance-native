@@ -15,4 +15,4 @@ const resolvers = Object.freeze({
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);
 
-exports.handler = async (event) => (resolvers[event.fieldName] || fallback)(event)
+exports.handler = async (event) => (resolvers[event.fieldName] || fallback)(event);

@@ -85,7 +85,7 @@ describe('createAppAndAccount', () => {
       athleteWithCustId.unitResponse = { custId: "5005" }; 
 
       getAthleteStub.resolves(athleteWithCustId);
-      const createAppAndAccountWithCustId = () => createAppAndAccount(athleteId);
+
       await assert.rejects(
         createAppAndAccount(athleteId),
         (err) => {
