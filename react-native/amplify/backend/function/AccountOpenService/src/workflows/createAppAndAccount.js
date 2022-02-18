@@ -1,6 +1,9 @@
 const { createAndPersistAccount } = require("./createAccount");
+const { repeat, map } = require("ramda");
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+
+const NO_OF_ACCOUNTS = 3;
 
 const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
@@ -10,9 +13,20 @@ const createAppAndAccount = (ssn, athlete) => {
   }
 
   return unit.createApplication(ssn, athlete)
-    .catch(err => tpc.addUnitDataToAthlete(athlete.id, err))
+    .catch(err => (err?.appId) ?
+      Promise.reject(tpc.addUnitDataToAthlete(athlete.id, err))
+      : Promise.reject(err)
+    )
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
-    .then(res => createAndPersistAccount(athlete.id));
+    .then(res => Promise.all(
+      map(
+        fn => fn(athlete.id), 
+        repeat(
+          createAndPersistAccount,
+          NO_OF_ACCOUNTS
+        )
+      )
+    ));
 }
 
 const createAppAndAccountFromId = (ssn, athleteId) => tpc.getAthlete(athleteId).then(athlete => 
