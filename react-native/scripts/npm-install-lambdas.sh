@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 rootDir=$(pwd)
 for d in amplify/backend/function/* ; do
   echo Start Testing Function $d

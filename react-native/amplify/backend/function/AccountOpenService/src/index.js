@@ -5,7 +5,6 @@
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
-
 const { createAccount } = require("./workflows/createAccount.js");
 const { createAppAndAccount } = require("./workflows/createAppAndAccount");
 
