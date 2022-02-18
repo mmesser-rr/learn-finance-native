@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   helperIcon: {
     marginLeft: scale(16),
     marginRight: scale(8),
+    marginTop: scale(4)
   },
   helperText: {
     fontSize: scale(14),
