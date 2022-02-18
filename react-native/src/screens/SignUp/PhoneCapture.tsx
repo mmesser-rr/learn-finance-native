@@ -11,31 +11,33 @@ import { initiatePhoneChallenge } from 'src/graphql/mutations';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
+  updatePhone: (phone: string) => void;
 }
 
 const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
+  updatePhone,
 }) => {
   const [isValid, setIsValid] = useState(false);
-  const [phone, setPhone] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 10);
-    setPhone(value);
+    setPhoneNumber(value);
   };
 
   const handleSubmit = async () => {
-    goToNextStep();
-    // try {
-    //   await API.graphql(
-    //     graphqlOperation(initiatePhoneChallenge, {
-    //       phoneNumber: phone,
-    //     }),
-    //   );
-    //   goToNextStep();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      // await API.graphql(
+      //   graphqlOperation(initiatePhoneChallenge, {
+      //     phoneNumber,
+      //   }),
+      // );
+      updatePhone(phoneNumber);
+      goToNextStep();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
