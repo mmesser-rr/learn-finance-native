@@ -39,7 +39,7 @@ const createApplication = (unit) => (ssn, athlete) => {
   return unit.applications.create(unitParams)
     .then(rejectIfNotApproved)
     .then(resultLens)
-    .catch(err => Promise.reject(`Failed to submit application to Unit API. Error: ${err}`));
+    .catch(err => Promise.reject(`Failed to submit application to Unit API. Error: ${err.message}`));
 }
 
 const rejectIfNotApproved = (res) => 

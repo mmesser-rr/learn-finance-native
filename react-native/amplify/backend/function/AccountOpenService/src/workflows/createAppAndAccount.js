@@ -14,7 +14,7 @@ const createAppAndAccount = (ssn, athlete) => {
 
   return unit.createApplication(ssn, athlete)
     .catch(err => (err?.appId) ?
-      tpc.addUnitDataToAthlete(athlete.id, err)
+      Promise.reject(tpc.addUnitDataToAthlete(athlete.id, err))
       : Promise.reject(err)
     )
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
