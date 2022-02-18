@@ -10,10 +10,12 @@ import { tryPhoneChallenge } from 'src/graphql/mutations';
 import styles from './styles';
 
 interface PhoneCodeVerifyProps {
+  phoneNumber: String;
   goToNextStep: () => void;
 }
 
 const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
+  phoneNumber,
   goToNextStep,
 }) => {
   const [isValid, setIsValid] = useState(false);
@@ -25,13 +27,13 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   };
 
   const handleSubmit = async () => {
-    goToNextStep();
     try {
-      await API.graphql(
-        graphqlOperation(tryPhoneChallenge, {
-          code,
-        }),
-      );
+      // await API.graphql(
+      //   graphqlOperation(tryPhoneChallenge, {
+      //     code,
+      //     phoneNumber,
+      //   }),
+      // );
       goToNextStep();
     } catch (error) {
       console.log(error);
