@@ -79,20 +79,31 @@ describe('createAppAndAccount', () => {
   });
 
   describe("before doing any work", () => {
-    it("should throw if athlete has made a unit application already", () => {
+    it("should reject if athlete has made a unit application already", async () => {
       const athleteWithCustId = clone(athlete);
-      athleteWithCustId.unitResponse = { custId: "5005" };
+      // The athlete only has a custId if a customer was created in Unit after a successful application
+      athleteWithCustId.unitResponse = { custId: "5005" }; 
 
       getAthleteStub.resolves(athleteWithCustId);
 
-      assert.rejects(createAppAndAccount(athleteId));
+      await assert.rejects(
+        createAppAndAccount(athleteId),
+        (err) => {
+          assert.strictEqual(
+            err.message, 
+            "Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing"
+          )
+
+          return true;
+        }
+      );
     });
   });
 
   describe("when creating an application in Unit API", async () => {
     it("should create an application in Unit API if no appId found", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -121,8 +132,9 @@ describe('createAppAndAccount', () => {
 
   describe("when persisting a Unit application and customer id in TPC backend", async () => {
     it("should persist application id and customer id from Unit in TPC backend when Unit application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -133,25 +145,24 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist just application id from Unit in TPC backend when the Unit application is not approved (there is no customer id to persist)", async () => {
-      getAthleteStub.resolves(athleteWithoutCustId);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
       createApplicationStub.rejects(unitApplicationPendingResponse);
       updateUnitDataStub.resolves(arbitrary);
 
       try {
         await createAppAndAccount(ssn, athleteWithoutCustId);
       } catch {} // Exception expected but not relevant
-      console.log(updateUnitDataStub.callCount);
       
       sinon.assert.calledWith(updateUnitDataStub, athleteId, unitApplicationPendingResponse);
     });
   });
 
-  describe("when creating the athlete account in the Unit API", async () => {
-    it("should open an account in Unit if application is approved", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+  describe("when creating athlete accounts in the Unit API", async () => {
+    it("should open 3 accounts in Unit if application is approved", async () => {
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
-      getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.resolves(unitAccountResponse);
@@ -159,7 +170,7 @@ describe('createAppAndAccount', () => {
 
       await createAppAndAccount(ssn, athleteWithoutCustId);
 
-      sinon.assert.calledOnce(createAccountStub);
+      sinon.assert.calledThrice(createAccountStub);
     })
 
     it("should not open an account in Unit if application is not approved", async () => {
@@ -175,13 +186,13 @@ describe('createAppAndAccount', () => {
       sinon.assert.notCalled(createAccountStub);
     })
 
-    it("should reject if account not successfully created in Unit API", () => {
+    it("should reject if account not successfully created in Unit API", async () => {
       getAthleteStub.resolves(athleteWithoutCustId);
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
       createAccountStub.rejects("error");
 
-      assert.rejects(createAppAndAccount(ssn, athleteWithoutCustId));
+      await assert.rejects(createAppAndAccount(ssn, athleteWithoutCustId));
     });
   });
 
@@ -201,8 +212,8 @@ describe('createAppAndAccount', () => {
     });
 
     it("should persist unit deposit account details in TPC", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
@@ -222,9 +233,9 @@ describe('createAppAndAccount', () => {
       sinon.assert.calledWith(persistAccountStub, athleteAccount);
     });
 
-    it("should persist athlete account in TPC once", async () => {
-      getAthleteStub.onCall(0).resolves(athleteWithoutCustId);
-      getAthleteStub.onCall(1).resolves(athlete);
+    it("should persist all three athlete accounts in TPC", async () => {
+      getAthleteStub.resolves(athlete);
+      getAthleteStub.onFirstCall().resolves(athleteWithoutCustId);
 
       createApplicationStub.resolves(unitApplicationApprovedResponse);
       updateUnitDataStub.resolves(arbitrary);
@@ -235,7 +246,7 @@ describe('createAppAndAccount', () => {
 
       const athleteId = athlete.id
 
-      sinon.assert.calledOnce(persistAccountStub);
+      sinon.assert.calledThrice(persistAccountStub);
     });
   });
 });
