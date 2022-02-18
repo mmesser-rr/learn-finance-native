@@ -5,6 +5,7 @@ import RNTextInputMask from 'react-native-text-input-mask';
 import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
+import InfoIcon from 'src/assets/icons/info.svg';
 import { scale } from 'src/config/dimentions';
 import { Text } from '../Texts';
 
@@ -14,6 +15,7 @@ interface TextInputMaskProps {
   label: string;
   mask: string;
   value?: string;
+  error?: string;
   autoFocus?: boolean;
   isSecure?: boolean;
   keyboardType?: KeyboardType;
@@ -24,6 +26,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   label,
   mask,
   value,
+  error,
   autoFocus,
   isSecure,
   keyboardType,
@@ -62,6 +65,8 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
     }],
   };
 
+  const labelStyle = !!error ? styles.errorLabel : styles.label;
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -69,7 +74,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
           styles.animatedStyle,
           transformStyle
         ]}>
-          <Text type='Body/Medium' style={styles.labelStyle}>{label}</Text>
+          <Text type='Body/Medium' style={labelStyle}>{label}</Text>
         </Animated.View>
         <View style={styles.inputWrapper}>
           <RNTextInputMask
@@ -93,6 +98,12 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
           )}
         </View>
       </View>
+      {!!error && (
+        <View style={styles.helperContainer}>
+          <InfoIcon style={styles.helperIcon} />
+          <Text type='Body/Medium' style={styles.helperText}>{error}</Text>
+        </View>
+        )}
     </View>
   );
 };
