@@ -1,9 +1,9 @@
 const { createApplication } = require("./createApplication");
 const { createAccount } = require("./createAccount");
 
-const env = require("../../env.js");
+const { unit } = require("../../env.js");
 
 module.exports = {
-  createApplication: createApplication(env.unit),
-  createAccount: createAccount(env.unit),
+  createApplication: createApplication(unit),
+  createAccount: createAccount(unit)
 }

@@ -15,48 +15,18 @@
       "function": {
         "InviteService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/InviteService-35494e4b6a522b456f58-build.zip"
+          "s3Key": "amplify-builds/InviteService-744b624a78726d514b51-build.zip"
         },
         "PlayerVerifyService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-44534348336e66657362-build.zip"
+          "s3Key": "amplify-builds/PlayerVerifyService-4b6970646f306473695a-build.zip"
         },
         "AccountOpenService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/AccountOpenService-765a7075644846324452-build.zip",
-          "unitToken": "",
-          "unitApiUrl": ""
-        }
-      }
-    }
-  },
-  "devalexma": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-theplayerscompany-devalexma-93348-authRole",
-      "UnauthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devalexma-93348-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::444012541784:role/amplify-theplayerscompany-devalexma-93348-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-theplayerscompany-devalexma-93348-deployment",
-      "UnauthRoleName": "amplify-theplayerscompany-devalexma-93348-unauthRole",
-      "StackName": "amplify-theplayerscompany-devalexma-93348",
-      "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-devalexma-93348/c6d86240-9017-11ec-bb15-0e4445f3b72f",
-      "AmplifyAppId": "d3dzwrbiqysm7k"
-    },
-    "categories": {
-      "function": {
-        "InviteService": {
-          "deploymentBucketName": "amplify-theplayerscompany-devalexma-93348-deployment",
-          "s3Key": "amplify-builds/InviteService-35494e4b6a522b456f58-build.zip"
-        },
-        "PlayerVerifyService": {
-          "deploymentBucketName": "amplify-theplayerscompany-devalexma-93348-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-51326f6932356c623747-build.zip"
-        },
-        "AccountOpenService": {
-          "deploymentBucketName": "amplify-theplayerscompany-devalexma-93348-deployment",
-          "s3Key": "amplify-builds/AccountOpenService-55696b63374331556f58-build.zip",
-          "unitToken": "",
-          "unitApiUrl": ""
+          "s3Key": "amplify-builds/AccountOpenService-4e4a6578654361763576-build.zip",
+          "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxNTI2Iiwic3ViIjoiamVubmEubXVycmVsbEBrdW5haWNvLmNvbSIsImV4cCI6IjIwMjItMTItMTVUMjE6MDQ6MjAuNTI0WiIsImp0aSI6Ijk5NzI5Iiwib3JnSWQiOiI4ODIiLCJzY29wZSI6ImFwcGxpY2F0aW9ucyBhcHBsaWNhdGlvbnMtd3JpdGUgY3VzdG9tZXJzIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtc2Vuc2l0aXZlIHRyYW5zYWN0aW9ucyBhdXRob3JpemF0aW9ucyBzdGF0ZW1lbnRzIHBheW1lbnRzIHBheW1lbnRzLXdyaXRlLWNvdW50ZXJwYXJ0eSBwYXltZW50cy13cml0ZS1hY2gtZGViaXQgY291bnRlcnBhcnRpZXMgYmF0Y2gtcmVsZWFzZXMgYmF0Y2gtcmVsZWFzZXMtd3JpdGUgd2ViaG9va3Mgd2ViaG9va3Mtd3JpdGUgZXZlbnRzIGV2ZW50cy13cml0ZSBhdXRob3JpemF0aW9uLXJlcXVlc3RzIGF1dGhvcml6YXRpb24tcmVxdWVzdHMtd3JpdGUgY2hlY2stZGVwb3NpdHMgY2hlY2stZGVwb3NpdHMtd3JpdGUiLCJvcmciOiJkdW5ubyIsInNvdXJjZUlwIjoiIiwidXNlclR5cGUiOiJvcmcifRQEwuNgZzfOtRy-BRqkSvOHncypr7Y9I_SS_5_qwRWxKuquPgZcb6_cDrV-qKwIL7uWtjTUCb45-WCk01UglA0",
+          "unitApiUrl": "https://api.s.unit.sh/",
+          "nodeEnv": "production"
         }
       }
     }
