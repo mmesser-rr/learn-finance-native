@@ -31,9 +31,9 @@ const getEnvOrJson = (varName, required = true) => getEnv(varName, false) || get
 const devEnv = () => ({
   axios: new Unit(getEnvOrJson('UNIT_TOKEN'), getEnvOrJson('UNIT_API_URL')),
   unit: axios.create({
-    baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT") || "127.0.0.1",
+    baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT") || "key"
+      'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 })
@@ -41,9 +41,9 @@ const devEnv = () => ({
 const liveEnv = () => ({
   unit: new Unit(getEnv('UNIT_TOKEN'), getEnv('UNIT_API_URL')),
   axios: axios.create({
-    baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT") || "127.0.0.1",
+    baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT") || "key"
+      'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 });
