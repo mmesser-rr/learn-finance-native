@@ -9,7 +9,6 @@ const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
 
   if (custId !== undefined) {
-    console.log("throwing");
     throw new Error("Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
   }
 
