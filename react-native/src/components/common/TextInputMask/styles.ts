@@ -34,19 +34,23 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   helperContainer: {
-    position: 'absolute',
-    bottom: scale(-24),
-    left: 0,
     marginTop: scale(4),
     flexDirection: 'row',
-    alignItems: 'center'
+  },
+  helperIcon: {
+    marginLeft: scale(16),
+    marginRight: scale(8),
   },
   helperText: {
     fontSize: scale(14),
     color: AppColors.accentRed100,
+    flex: 1,
   },
-  labelStyle: {
+  label: {
     color: AppColors.coreBlack40,
+  },
+  errorLabel: {
+    color: AppColors.accentRed100,
   },
 });
 

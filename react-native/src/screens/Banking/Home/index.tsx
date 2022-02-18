@@ -50,7 +50,7 @@ const Home: React.FC = () => {
         </View>
       </LinearGradient>
       <View style={styles.subTitle}>
-        <Text type='Title/Medium'>POD</Text>
+        <Text type='Title/Medium'>PODS</Text>
       </View>
       <View style={styles.card}>
         <View style={styles.cardHead}>
