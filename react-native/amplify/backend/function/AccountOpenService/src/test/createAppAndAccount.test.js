@@ -79,14 +79,24 @@ describe('createAppAndAccount', () => {
   });
 
   describe("before doing any work", () => {
-    it("should throw if athlete has made a unit application already", async () => {
+    it("should reject if athlete has made a unit application already", async () => {
       const athleteWithCustId = clone(athlete);
-      athleteWithCustId.unitResponse = { custId: "5005" };
+      // The athlete only has a custId if a customer was created in Unit after a successful application
+      athleteWithCustId.unitResponse = { custId: "5005" }; 
 
       getAthleteStub.resolves(athleteWithCustId);
-      const createAppAndAccountWithCustId = () => createAppAndAccount(athleteId);
 
-      await assert.throws(createAppAndAccountWithCustId, Error, "Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
+      await assert.rejects(
+        createAppAndAccount(athleteId),
+        (err) => {
+          assert.strictEqual(
+            err.message, 
+            "Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing"
+          )
+
+          return true;
+        }
+      );
     });
   });
 
