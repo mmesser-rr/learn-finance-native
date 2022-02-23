@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { PlaidLink, LinkSuccess, LinkExit } from 'react-native-plaid-link-sdk';
+import { getUniqueId } from 'react-native-device-info';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -8,11 +11,42 @@ import { Text } from 'src/components/common/Texts';
 import { RedLinnerGradient } from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
+import { createLinkToken, getExistingLinkToken } from 'src/services/plaid';
 
 import styles from './styles';
 
 const Home: React.FC = () => {
+  const [linkToken, setLinkToken] = useState('');
+
+  useEffect(() => {
+    getPlaidLinkToken();
+  }, []);
+
+  const getPlaidLinkToken = async() => {
+    let token = await AsyncStorage.getItem('@plaid_link_token');
+
+    if (token && await getExistingLinkToken(token)) {
+      return setLinkToken(token);
+    }
+
+    token = await createLinkToken(getUniqueId());
+
+    if (token) {
+      setLinkToken(token);
+      await AsyncStorage.setItem('@plaid_link_token', token);
+    }
+  };
+
   const onSetupDirectDeposit = () => NavigationService.navigate('TransferStack', { screen: 'DirectDeposit' });
+
+  const onPlaidSuccessHandler = (success: LinkSuccess) => {
+    console.log(success);
+    NavigationService.navigate('TransferStack');
+  };
+  const onPlaidExitHandler = (exit: LinkExit) => {
+    console.log(exit);
+    // NavigationService.navigate('TransferStack');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
@@ -38,12 +72,23 @@ const Home: React.FC = () => {
         </View>
         <View>
           <View>
-            <Button>
-              <Text type='Body/Large'>Transfer from another bank</Text>
-            </Button>
+            {linkToken && (
+              <PlaidLink
+                tokenConfig={{
+                  token: linkToken,
+                  noLoadingState: false
+                }}
+                onSuccess={(success: LinkSuccess) => onPlaidSuccessHandler(success)}
+                onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}
+              >
+                <View style={styles.transferWrapper}>
+                  <Text type='Body/Large' style={styles.transfer}>Transfer from another bank</Text>
+                </View>
+              </PlaidLink>
+            )}
           </View>
           <View>
-            <Button actionStyle={styles.depositButton} onPress={onSetupDirectDeposit}>
+            <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit}>
               <Text type='Body/Large'>Set up direct deposit</Text>
             </Button>
           </View>

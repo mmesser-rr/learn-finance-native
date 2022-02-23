@@ -3,6 +3,7 @@
 const ApiConfig = {
   BASE_URL: '',
   LOGIN: '',
+  PLAID: 'https://development.plaid.com'
 };
 
 export default ApiConfig;

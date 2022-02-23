@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  actionWrapper: {
+    marginTop: scale(32),
+  },
 });
 
 export default styles;

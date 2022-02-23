@@ -12,7 +12,7 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 import styles from './styles';
 
 const Welcome: React.FC = () => {
-  const onJoin = () => NavigationService.navigate('SignUp');
+  const onJoin = () => NavigationService.navigate('HomeStack');
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
@@ -32,14 +32,9 @@ const Welcome: React.FC = () => {
             </Text>
           </View>
         </View>
-        <View>
-          <View style={styles.actionLabelWrapper}>
-            <Text type='Body/Large'>
-              Let's get this money!
-            </Text>
-          </View>
-          <View style={styles.joinActionWrapper}>
-            <Button onPress={onJoin}>
+        <View style={styles.actionWrapper}>
+          <View>
+            <Button actionStyle={styles.joinAction} onPress={onJoin}>
               <Text type='Body/Large'>Enter the club</Text>
             </Button>
           </View>
