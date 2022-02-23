@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { KeyboardType, View, Animated, TouchableOpacity } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {KeyboardType, View, Animated, TouchableOpacity} from 'react-native';
 import RNTextInputMask from 'react-native-text-input-mask';
 
 import AppColors from 'src/config/colors';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
 import ExclamationIcon from 'src/assets/icons/exclamation.svg';
-import { scale } from 'src/config/dimentions';
-import { Text } from '../Texts';
+import {scale} from 'src/config/dimentions';
+import {Text} from '../Texts';
 
 import styles from './styles';
 
@@ -19,7 +19,7 @@ interface TextInputMaskProps {
   autoFocus?: boolean;
   isSecure?: boolean;
   keyboardType?: KeyboardType;
-  changeValue: (text: string) => void
+  changeValue: (text: string) => void;
 }
 
 const TextInputMask: React.FC<TextInputMaskProps> = ({
@@ -60,9 +60,11 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   };
 
   const transformStyle = {
-    transform : [{ 
-      translateY : translateYAnim,
-    }],
+    transform: [
+      {
+        translateY: translateYAnim,
+      },
+    ],
   };
 
   const labelStyle = !!error ? styles.errorLabel : styles.label;
@@ -70,11 +72,10 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <Animated.View style={[
-          styles.animatedStyle,
-          transformStyle
-        ]}>
-          <Text type='Body/Medium' style={labelStyle}>{label}</Text>
+        <Animated.View style={[styles.animatedStyle, transformStyle]}>
+          <Text type="Body/Medium" style={labelStyle}>
+            {label}
+          </Text>
         </Animated.View>
         <View style={styles.inputWrapper}>
           <RNTextInputMask
@@ -101,9 +102,11 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
       {!!error && (
         <View style={styles.helperContainer}>
           <ExclamationIcon style={styles.helperIcon} />
-          <Text type='Body/Medium' style={styles.helperText}>{error}</Text>
+          <Text type="Body/Medium" style={styles.helperText}>
+            {error}
+          </Text>
         </View>
-        )}
+      )}
     </View>
   );
 };

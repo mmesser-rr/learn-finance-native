@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   View,
   ViewStyle,
-} from "react-native";
+} from 'react-native';
 import {
   Checkbox,
   Divider,
@@ -13,7 +13,7 @@ import {
   TextInput,
   TouchableRipple,
   useTheme,
-} from "react-native-paper";
+} from 'react-native-paper';
 import React, {
   ReactNode,
   forwardRef,
@@ -21,11 +21,11 @@ import React, {
   useState,
   useCallback,
   Fragment,
-} from "react";
-import { Theme } from "react-native-paper/lib/typescript/types";
-import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+} from 'react';
+import {Theme} from 'react-native-paper/lib/typescript/types';
+import {TextInputProps} from 'react-native-paper/lib/typescript/components/TextInput/TextInput';
 
-import { IconSource } from "react-native-paper/lib/typescript/components/Icon";
+import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 
 type Without<T, K> = Pick<T, Exclude<keyof T, K>>;
 
@@ -38,7 +38,7 @@ export interface DropDownPropsInterface {
   setValue: (_value: any) => void;
   label?: string | undefined;
   placeholder?: string | undefined;
-  mode?: "outlined" | "flat" | undefined;
+  mode?: 'outlined' | 'flat' | undefined;
   inputProps?: TextInputPropsWithoutTheme;
   list: Array<{
     label: string;
@@ -62,7 +62,7 @@ export interface DropDownPropsInterface {
   dropdownDownIcon: IconSource;
 }
 
-type TextInputPropsWithoutTheme = Without<TextInputProps, "theme">;
+type TextInputPropsWithoutTheme = Without<TextInputProps, 'theme'>;
 
 const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
   (props, ref) => {
@@ -95,7 +95,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
       dropdownUpIcon,
       dropdownDownIcon,
     } = props;
-    const [displayValue, setDisplayValue] = useState("");
+    const [displayValue, setDisplayValue] = useState('');
     const [inputLayout, setInputLayout] = useState({
       height: 0,
       width: 0,
@@ -110,12 +110,12 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
     useEffect(() => {
       if (multiSelect) {
         const _labels = list
-          .filter((_) => value.indexOf(_.value) !== -1)
-          .map((_) => _.label)
-          .join(", ");
+          .filter(_ => value.indexOf(_.value) !== -1)
+          .map(_ => _.label)
+          .join(', ');
         setDisplayValue(_labels);
       } else {
-        const _label = list.find((_) => _.value === value)?.label;
+        const _label = list.find(_ => _.value === value)?.label;
         if (_label) {
           setDisplayValue(_label);
         }
@@ -130,26 +130,26 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
           return value === currentValue;
         }
       },
-      [value]
+      [value],
     );
 
     const setActive = useCallback(
       (currentValue: any) => {
         if (multiSelect) {
           const valueIndex = value.indexOf(currentValue);
-          const values = value.split(",");
+          const values = value.split(',');
           if (valueIndex === -1) {
-            setValue([...values, currentValue].join(","));
+            setValue([...values, currentValue].join(','));
           } else {
             setValue(
-              [...values].filter((value) => value !== currentValue).join(",")
+              [...values].filter(value => value !== currentValue).join(','),
             );
           }
         } else {
           setValue(currentValue);
         }
       },
-      [value]
+      [value],
     );
 
     return (
@@ -164,13 +164,13 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
             onLayout={onLayout}
             accessibilityLabel={accessibilityLabel}
           >
-            <View pointerEvents={"none"}>
+            <View pointerEvents={'none'}>
               <TextInput
                 value={displayValue}
                 mode={mode}
                 label={label}
                 placeholder={placeholder}
-                pointerEvents={"none"}
+                pointerEvents={'none'}
                 theme={theme}
                 right={
                   <TextInput.Icon
@@ -207,8 +207,8 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
             <Fragment key={_item.value}>
               <TouchableRipple
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
                 onPress={() => {
                   setActive(_item.value);
@@ -239,9 +239,9 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
                   {multiSelect && (
                     <Checkbox.Android
                       theme={{
-                        colors: { accent: activeTheme?.colors.primary },
+                        colors: {accent: activeTheme?.colors.primary},
                       }}
-                      status={isActive(_item.value) ? "checked" : "unchecked"}
+                      status={isActive(_item.value) ? 'checked' : 'unchecked'}
                       onPress={() => setActive(_item.value)}
                     />
                   )}
@@ -253,7 +253,7 @@ const DropDown = forwardRef<TouchableWithoutFeedback, DropDownPropsInterface>(
         </ScrollView>
       </Menu>
     );
-  }
+  },
 );
 
 export default DropDown;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { TextStyle, Dimensions } from "react-native";
+import {useEffect, useState} from 'react';
+import {TextStyle, Dimensions} from 'react-native';
 import SafeArea from 'react-native-safe-area';
 
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 export const generateTextStyle = (
   ownStyle: TextStyle,
@@ -13,31 +13,28 @@ export const generateTextStyle = (
   if (propsStyle) {
     style = Array.isArray(propsStyle) ? [...propsStyle] : [propsStyle];
   }
-  
+
   return [ownStyle, ...style];
 };
 
 export const useDebounce = (value: string | number, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(
-    () => {
-      const handler = setTimeout(() => {
-        setDebouncedValue(value);
-      }, delay);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-      return () => {
-        clearTimeout(handler);
-      };
-    },
-    [value, delay]
-  );
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
   return debouncedValue;
 };
 
 export const calculateContentHeight = async () => {
   let top = 0;
   let bottom = 0;
-  const { safeAreaInsets } = await SafeArea.getSafeAreaInsetsForRootView();
+  const {safeAreaInsets} = await SafeArea.getSafeAreaInsetsForRootView();
 
   if (safeAreaInsets) {
     top = safeAreaInsets.top;

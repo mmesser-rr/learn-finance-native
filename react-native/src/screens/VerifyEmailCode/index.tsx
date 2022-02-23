@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { useForm, Controller } from "react-hook-form";
+import React, {useEffect, useState} from 'react';
+import {TouchableOpacity, View} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
 import Button from 'src/components/common/Button';
-import { GradientButtonColors } from 'src/utils/constants';
+import {GradientButtonColors} from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
-import { calculateContentHeight } from 'src/utils/functions';
+import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -32,8 +32,8 @@ const VerifyEmailCode: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-    formState: { isValid }
+    formState: {errors},
+    formState: {isValid},
   } = useForm<FormData>({
     defaultValues: {
       code: '',
@@ -42,38 +42,41 @@ const VerifyEmailCode: React.FC = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(111, data)
-    NavigationService.navigate('LastStepWelcome')
+    console.log(111, data);
+    NavigationService.navigate('LastStepWelcome');
   };
 
   return (
     <AppLayout containerStyle={styles.container}>
       <View style={{height: safeviewHeight / 2}}>
         <View>
-          <Text type='Headline/Small' style={styles.head}>Enter your verification code</Text>
+          <Text type="Headline/Small" style={styles.head}>
+            Enter your verification code
+          </Text>
         </View>
         <View>
-          <Text type='Body/Large' style={styles.caption}>
-            Confirming your email address helps protect your personal info. We sent a verification code to john.smith@mail.com.
+          <Text type="Body/Large" style={styles.caption}>
+            Confirming your email address helps protect your personal info. We
+            sent a verification code to john.smith@mail.com.
           </Text>
         </View>
         <View>
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Field is required' },
-              minLength: { value: 6, message: 'The length should be 6' }
+              required: {value: true, message: 'Field is required'},
+              minLength: {value: 6, message: 'The length should be 6'},
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='Enter 6-digit Code'
+                label="Enter 6-digit Code"
                 showErrorMessage
                 value={value}
                 errorMssage={errors?.code?.message}
                 maxLength={6}
                 autoFocus
                 isNumeric
-                keyboardType='number-pad'
+                keyboardType="number-pad"
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
@@ -83,14 +86,16 @@ const VerifyEmailCode: React.FC = () => {
         </View>
         <View>
           <TouchableOpacity style={styles.askAction} onPress={() => {}}>
-            <Text type='Body/Large' style={styles.askActionLabel}>Resend code</Text>
+            <Text type="Body/Large" style={styles.askActionLabel}>
+              Resend code
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={isValid}
-          actionLabel='Verify code'
+          actionLabel="Verify code"
           style={styles.submit}
           onSubmit={handleSubmit(onSubmit)}
         />
@@ -101,7 +106,7 @@ const VerifyEmailCode: React.FC = () => {
           colors={GradientButtonColors}
         >
           <Button>
-            <Text type='Body/Large'>Maybe Later</Text>
+            <Text type="Body/Large">Maybe Later</Text>
           </Button>
         </LinearGradient>
       </View>

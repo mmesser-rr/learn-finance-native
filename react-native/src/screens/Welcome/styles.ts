@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,23 +10,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   logo: {
-    marginBottom: scale(40),
+    marginTop: scale(21),
+    marginBottom: scale(96),
   },
   title: {
     marginBottom: scale(8),
   },
-  actionLabelWrapper: {
-    marginTop: scale(72),
-    marginBottom: scale(16),
-    alignItems: 'center'
+  actionWrapper: {
+    marginTop: scale(96),
   },
-  joinActionWrapper: {
+  joinAction: {
     marginBottom: scale(16),
   },
   loginAction: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: AppColors.gray20
+    borderColor: AppColors.gray20,
   },
 });
 

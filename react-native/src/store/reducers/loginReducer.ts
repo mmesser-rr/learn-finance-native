@@ -4,7 +4,7 @@
 import createReducer from 'src/lib/createReducer';
 import * as types from 'src/store/actions/types';
 
-import { ILoginState } from 'src/models/reducers/login';
+import {ILoginState} from 'src/models/reducers/login';
 import {
   ILoginRequestState,
   ILoginResponseState,
@@ -25,7 +25,7 @@ export const loginReducer = createReducer(initialState, {
     };
   },
   [types.LOGIN_LOADING_ENDED](state: ILoginState) {
-    return { ...state };
+    return {...state};
   },
   [types.LOGIN_RESPONSE](state: ILoginState, action: ILoginResponseState) {
     return {
