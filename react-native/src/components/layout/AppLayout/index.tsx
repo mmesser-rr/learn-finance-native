@@ -9,7 +9,6 @@ import {
   Keyboard,
 } from 'react-native';
 
-
 import styles from './styles';
 
 interface AppLayoutProps {
@@ -33,7 +32,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView
             contentContainerStyle={styles.scrollViewContent}
-            keyboardShouldPersistTaps='handled'
+            keyboardShouldPersistTaps="handled"
           >
             <View style={[styles.view, viewStyle]}>{children}</View>
           </ScrollView>

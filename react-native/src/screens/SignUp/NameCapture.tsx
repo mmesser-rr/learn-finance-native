@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -11,9 +11,7 @@ interface NameCaptureProps {
   goToNextStep: () => void;
 }
 
-const NameCapture: React.FC<NameCaptureProps> = ({
-  goToNextStep,
-}) => {
+const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -36,30 +34,28 @@ const NameCapture: React.FC<NameCaptureProps> = ({
     <>
       <View>
         <View>
-          <Text type='Headline/Small' style={styles.head}>
+          <Text type="Headline/Small" style={styles.head}>
             What's your name?
           </Text>
         </View>
         <View>
-          <Text type='Body/Large' style={styles.description}>
+          <Text type="Body/Large" style={styles.description}>
             Your legal name is required
           </Text>
         </View>
         <View style={styles.firstName}>
-          <TextInput
-            label='First Name'
-            onChangeText={changeFirstName}
-          />
+          <TextInput label="First Name" onChangeText={changeFirstName} />
         </View>
         <View>
-          <TextInput
-            label='Last Name'
-            onChangeText={changeLastName}
-          />
+          <TextInput label="Last Name" onChangeText={changeLastName} />
         </View>
       </View>
       <View>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel="Continue"
+          onSubmit={goToNextStep}
+        />
       </View>
     </>
   );

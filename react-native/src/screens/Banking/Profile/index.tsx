@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text} from 'react-native';
 
 const Profile: React.FC = () => {
-  return (
-    <Text>Profile</Text>
-  );
+  return <Text>Profile</Text>;
 };
 
 export default Profile;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
@@ -22,19 +22,26 @@ const SelectPlayerTag: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
         <View>
-          <Text type='Headline/Small' style={styles.head}>Create your player tag</Text>
+          <Text type="Headline/Small" style={styles.head}>
+            Create your player tag
+          </Text>
         </View>
         <View>
-          <Text type='Body/Large' style={styles.caption}>
-            You player tag will be your public profile handle in the community. You can change your player tag at any time.
+          <Text type="Body/Large" style={styles.caption}>
+            You player tag will be your public profile handle in the community.
+            You can change your player tag at any time.
           </Text>
         </View>
         <View>
           <TextInput
-            label='Player Tag'
-            placeholder='Player Tag'
+            label="Player Tag"
+            placeholder="Player Tag"
             autoFocus={true}
-            left={<Text type='Body/Large' style={styles.left}>@</Text>}
+            left={
+              <Text type="Body/Large" style={styles.left}>
+                @
+              </Text>
+            }
             onChangeText={changeValue}
           />
         </View>
@@ -42,7 +49,7 @@ const SelectPlayerTag: React.FC = () => {
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={isValid}
-          actionLabel='Continue'
+          actionLabel="Continue"
           style={styles.submit}
           onSubmit={goToNextStep}
         />
