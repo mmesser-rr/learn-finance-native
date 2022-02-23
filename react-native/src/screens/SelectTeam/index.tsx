@@ -12,7 +12,7 @@ import styles from './styles';
 const suggestions: ItemInterface[] = [
   {
     value: '1',
-    label: 'University of California, Berkely'
+    label: 'University of California, Berkeley'
   },
   {
     value: '2',
@@ -29,6 +29,10 @@ const suggestions: ItemInterface[] = [
   {
     value: '5',
     label: 'University of California, Merced'
+  },
+  {
+    value: '6',
+    label: 'University of California, Riverside'
   },
 ];
 
@@ -57,7 +61,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({ navigation, route }: SelectTeam
           <AutoComplete suggestions={suggestions} onChange={onChangeOption} />
         </View>
       </View>
-      <View>
+      <View style={styles.actionWrapper}>
         <SubmitButton isValid={!!value} actionLabel='OK' onSubmit={goToNextStep} />
       </View>
     </AppLayout>

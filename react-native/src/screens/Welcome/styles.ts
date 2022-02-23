@@ -10,17 +10,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   logo: {
-    marginBottom: scale(40),
+    marginTop: scale(21),
+    marginBottom: scale(96),
   },
   title: {
     marginBottom: scale(8),
   },
-  actionLabelWrapper: {
-    marginTop: scale(72),
-    marginBottom: scale(16),
-    alignItems: 'center'
+  actionWrapper: {
+    marginTop: scale(96),
   },
-  joinActionWrapper: {
+  joinAction: {
     marginBottom: scale(16),
   },
   loginAction: {

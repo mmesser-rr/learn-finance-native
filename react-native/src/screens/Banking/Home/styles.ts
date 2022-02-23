@@ -35,7 +35,15 @@ const styles = StyleSheet.create({
   cardBody: {
     marginBottom: scale(16),
   },
-  depositButton: {
+  transferWrapper: {
+    borderRadius: scale(23),
+    backgroundColor: AppColors.coreBlack100
+  },
+  transfer: {
+    padding: scale(10),
+    textAlign: 'center',
+  },
+  deposit: {
     marginTop: scale(8),
     backgroundColor: 'transparent',
     borderWidth: 1,

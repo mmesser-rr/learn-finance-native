@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
   head: {
     marginBottom: scale(32),
   },
+  actionWrapper: {
+    marginTop: scale(32),
+  },
 });
 
 export default styles;

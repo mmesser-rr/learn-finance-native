@@ -45,7 +45,7 @@ const SelectSport: React.FC<SelectSportProps> = ({ navigation, route }: SelectSp
           <AutoComplete suggestions={suggestions} onChange={onChangeOption} />
         </View>
       </View>
-      <View>
+      <View style={styles.actionWrapper}>
         <SubmitButton isValid={!!value} actionLabel='OK' onSubmit={goToNextStep} />
       </View>
     </AppLayout>

@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   },
   selectLabel: {
     color: AppColors.coreBlack40,
+    marginRight: scale(8),
+    flex: 1,
   },
   active: {
     color: AppColors.gray20,
