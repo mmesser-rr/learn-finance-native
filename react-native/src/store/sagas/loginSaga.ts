@@ -4,10 +4,10 @@
  * un - username
  * pwd - password
  */
-import { put } from 'redux-saga/effects';
+import {put} from 'redux-saga/effects';
 // import { delay } from 'redux-saga';
 
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 // import loginUser from 'app/services/loginUser';
 import * as loginActions from 'src/store/actions/loginActions';
 
@@ -18,7 +18,7 @@ export default function* loginAsync() {
   //how to call api
   //const response = yield call(loginUser, action.username, action.password);
   //mock response
-  const response = { success: true, data: { id: 1 }, message: 'Success' };
+  const response = {success: true, data: {id: 1}, message: 'Success'};
 
   if (response.success) {
     yield put(loginActions.onLoginResponse(response.data));

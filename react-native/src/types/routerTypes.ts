@@ -1,13 +1,13 @@
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Welcome: undefined;
-  SignUp: { step: string };
+  SignUp: {step: string};
   Terms: undefined;
   SelectLevel: undefined;
-  SelectSport: { type: string };
-  SelectTeam: { type: string };
+  SelectSport: {type: string};
+  SelectTeam: {type: string};
   BankAccountIntro: undefined;
   CaptureDOB: undefined;
   CaptureAddress: undefined;

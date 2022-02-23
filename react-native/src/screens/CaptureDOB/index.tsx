@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
 import dayjs from 'dayjs';
 
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import NavigationService from 'src/navigation/NavigationService';
-import { validateDOB } from 'src/utils/validation';
-import { calculateContentHeight } from 'src/utils/functions';
+import {validateDOB} from 'src/utils/validation';
+import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -29,7 +29,10 @@ const CaptureDOB: React.FC = () => {
     let valid = validateDOB(value);
 
     if (value.length === 8) {
-      const date = `${value.substring(0, 2)}/${value.substring(2, 4)}/${value.substring(4, 8)}`;
+      const date = `${value.substring(0, 2)}/${value.substring(
+        2,
+        4,
+      )}/${value.substring(4, 8)}`;
       valid = dayjs(date).isBefore(dayjs().subtract(18, 'year'));
       setError(!valid);
     }
@@ -43,17 +46,21 @@ const CaptureDOB: React.FC = () => {
     <AppLayout containerStyle={styles.container}>
       <View style={{height: safeviewHeight / 2}}>
         <View>
-          <Text type='Headline/Small' style={styles.head}>
+          <Text type="Headline/Small" style={styles.head}>
             What's your date of birth?
           </Text>
         </View>
         <View>
           <TextInputMask
-            label='Date of Birth (mm/dd/yyyy)'
-            mask='[00]/[00]/[0000]'
+            label="Date of Birth (mm/dd/yyyy)"
+            mask="[00]/[00]/[0000]"
             autoFocus
-            keyboardType='number-pad'
-            error={isError ? 'You must be 18 years or older to open a checking account in your name only. Please come back later.' : ''}
+            keyboardType="number-pad"
+            error={
+              isError
+                ? 'You must be 18 years or older to open a checking account in your name only. Please come back later.'
+                : ''
+            }
             changeValue={changeValue}
           />
         </View>
@@ -61,7 +68,7 @@ const CaptureDOB: React.FC = () => {
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={isValid}
-          actionLabel='Continue'
+          actionLabel="Continue"
           style={styles.submit}
           onSubmit={goToNextStep}
         />

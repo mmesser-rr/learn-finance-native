@@ -5,8 +5,8 @@
 import createReducer from 'src/lib/createReducer';
 import * as types from 'src/store/actions/types';
 
-import { IThemeState } from 'src/models/reducers/theme';
-import { IThemeToggleAction } from 'src/models/actions/theme';
+import {IThemeState} from 'src/models/reducers/theme';
+import {IThemeToggleAction} from 'src/models/actions/theme';
 
 const initialState: IThemeState = {
   isDark: false,
@@ -14,6 +14,6 @@ const initialState: IThemeState = {
 
 export const themeReducer = createReducer(initialState, {
   [types.TOGGLE_THEME](state: IThemeState, action: IThemeToggleAction) {
-    return { ...state, isDark: action.isDark };
+    return {...state, isDark: action.isDark};
   },
 });

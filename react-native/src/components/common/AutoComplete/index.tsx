@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { TextStyle, TouchableOpacity, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import React, {useEffect, useRef, useState} from 'react';
+import {TextStyle, TouchableOpacity, View} from 'react-native';
+import {Searchbar} from 'react-native-paper';
 
 import AppColors from 'src/config/colors';
 import SearchIcon from 'src/assets/icons/search.svg';
 import CloseIcon from 'src/assets/icons/searchbar-close.svg';
 import CheckIcon from 'src/assets/icons/autocomplete-check.svg';
 
-import { useDebounce } from 'src/utils/functions';
-import { Text } from 'src/components/common/Texts';
+import {useDebounce} from 'src/utils/functions';
+import {Text} from 'src/components/common/Texts';
 
 import styles from './styles';
 
@@ -41,9 +41,11 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
         }, 600);
       } else {
         setFiltered(
-          suggestions.filter(
-            s => s.label.toLowerCase().includes((debouncedSearchQuery as string).toLowerCase())
-          )
+          suggestions.filter(s =>
+            s.label
+              .toLowerCase()
+              .includes((debouncedSearchQuery as string).toLowerCase()),
+          ),
         );
         setSelectedValue('');
       }
@@ -54,7 +56,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
         }
       };
     },
-    [debouncedSearchQuery] // Only call effect if debounced search term changes
+    [debouncedSearchQuery], // Only call effect if debounced search term changes
   );
 
   const updateSelect = (value: string) => {
@@ -90,16 +92,16 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
         value={searchQuery}
         style={styles.searchStyle}
         inputStyle={styles.searchInputStyle}
-        autoCapitalize='none'
+        autoCapitalize="none"
         autoFocus={true}
         icon={() => <SearchIcon />}
-        clearIcon={() => searchQuery? <CloseIcon />: null}
+        clearIcon={() => (searchQuery ? <CloseIcon /> : null)}
         theme={{
           colors: {
             placeholder: AppColors.searchPlaceholderColor,
             primary: AppColors.gray20,
-          }
-       }}
+          },
+        }}
       />
       <View>
         {filtered.map(s => {
@@ -113,9 +115,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
           }
 
           return (
-            <TouchableOpacity onPress={() => onSelect(s.value, s.label)} key={s.value}>
+            <TouchableOpacity
+              onPress={() => onSelect(s.value, s.label)}
+              key={s.value}
+            >
               <View style={wrapperStyle}>
-                <Text type='Body/Large' style={labelStyle}>{s.label}</Text>
+                <Text type="Body/Large" style={labelStyle}>
+                  {s.label}
+                </Text>
                 {isSelected && <CheckIcon />}
               </View>
             </TouchableOpacity>

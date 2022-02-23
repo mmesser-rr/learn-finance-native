@@ -1,13 +1,12 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
-  viewWrapper: {
-  },
+  viewWrapper: {},
   head: {
     marginBottom: scale(16),
   },
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     marginTop: scale(-22),
   },
   textAffixColor: {
-    color: AppColors.gray20
+    color: AppColors.gray20,
   },
   left: {
     fontSize: scale(16),

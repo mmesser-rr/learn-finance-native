@@ -1,7 +1,7 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import { DefaultTheme } from 'react-native-paper';
+import React, {ReactNode, useEffect, useState} from 'react';
+import {DefaultTheme} from 'react-native-paper';
 
-import DropDown from "./library";
+import DropDown from './library';
 import AppColors from 'src/config/colors';
 import ArrowDownIcon from 'src/assets/icons/arrow-down.svg';
 
@@ -73,7 +73,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           text: AppColors.gray20,
           disabled: AppColors.gray120,
           placeholder: AppColors.coreBlack40,
-        }
+        },
       }}
       contentStyle={styles.contentStyle}
       dividerStyle={styles.dividerStyle}
