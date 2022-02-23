@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity onPress={onPress} style={actionStyle}>
-      <View style={styles.label}>{children}</View>
+      <View style={labelStyle}>{children}</View>
     </TouchableOpacity>
   );
 };

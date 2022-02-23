@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TextStyle, TouchableOpacity, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
@@ -26,23 +26,33 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = useState<ItemInterface[]>([]);
   const [selectedValue, setSelectedValue] = React.useState<string>('');
-  const [showRecommendation, setShowRecommendation] = useState(true);
+  const showRecommendation = useRef(false);
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   useEffect(
     () => {
-      if (!debouncedSearchQuery || !showRecommendation) {
-        setFiltered([]);
+      let timerHandler: null | ReturnType<typeof setTimeout> = null;
+
+      if (!debouncedSearchQuery || !showRecommendation.current) {
+        timerHandler = setTimeout(() => {
+          setFiltered([]);
+          setSelectedValue('');
+        }, 600);
       } else {
         setFiltered(
           suggestions.filter(
             s => s.label.toLowerCase().includes((debouncedSearchQuery as string).toLowerCase())
           )
         );
+        setSelectedValue('');
       }
 
-      setSelectedValue('');
+      return () => {
+        if (timerHandler) {
+          clearTimeout(timerHandler);
+        }
+      };
     },
     [debouncedSearchQuery] // Only call effect if debounced search term changes
   );
@@ -63,13 +73,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
       setFiltered([]);
     }
 
-    setShowRecommendation(true);
+    showRecommendation.current = true;
   };
 
   const onSelect = (value: string, label: string) => {
     setSearchQuery(label);
     updateSelect(value);
-    setShowRecommendation(false);
+    showRecommendation.current = false;
   };
 
   return (
@@ -81,6 +91,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
         style={styles.searchStyle}
         inputStyle={styles.searchInputStyle}
         autoCapitalize='none'
+        autoFocus={true}
         icon={() => <SearchIcon />}
         clearIcon={() => searchQuery? <CloseIcon />: null}
         theme={{
