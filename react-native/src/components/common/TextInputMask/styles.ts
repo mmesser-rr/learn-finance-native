@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   helperIcon: {
     marginLeft: scale(16),
     marginRight: scale(8),
-    marginTop: scale(4)
+    marginTop: scale(4),
   },
   helperText: {
     fontSize: scale(14),

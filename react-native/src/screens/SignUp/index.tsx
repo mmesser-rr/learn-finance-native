@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { SignUpProps } from 'src/types/routerTypes';
-import { SignUpSteps } from 'src/utils/constants';
+import {SignUpProps} from 'src/types/routerTypes';
+import {SignUpSteps} from 'src/utils/constants';
 import AppLayout from 'src/components/layout/AppLayout';
 import InvitationCode from './InvitationCode';
 import PhoneCapture from './PhoneCapture';
@@ -11,7 +11,10 @@ import EmailCapture from './EmailCapture';
 
 import styles from './styles';
 
-const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps) => {
+const Verification: React.FC<SignUpProps> = ({
+  route,
+  navigation,
+}: SignUpProps) => {
   const [stepCount, setStepCount] = useState(-1);
   const [phone, setPhone] = useState('');
   const stepName = route.params.step;
@@ -23,7 +26,7 @@ const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps)
 
   const goToNextStep = () => {
     if (stepCount < 4) {
-      navigation.navigate('SignUp', { step: SignUpSteps[stepCount + 1] });
+      navigation.navigate('SignUp', {step: SignUpSteps[stepCount + 1]});
     } else {
       navigation.navigate('SelectLevel');
     }
@@ -35,11 +38,15 @@ const Verification: React.FC<SignUpProps> = ({ route, navigation }: SignUpProps)
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      {stepCount === 0 && (<InvitationCode goToNextStep={goToNextStep} />)}
-      {stepCount === 1 && (<PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />)}
-      {stepCount === 2 && (<PhoneCodeVerify phoneNumber={phone} goToNextStep={goToNextStep} />)}
-      {stepCount === 3 && (<NameCapture goToNextStep={goToNextStep} />)}
-      {stepCount === 4 && (<EmailCapture goToNextStep={goToNextStep} />)}
+      {stepCount === 0 && <InvitationCode goToNextStep={goToNextStep} />}
+      {stepCount === 1 && (
+        <PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />
+      )}
+      {stepCount === 2 && (
+        <PhoneCodeVerify phoneNumber={phone} goToNextStep={goToNextStep} />
+      )}
+      {stepCount === 3 && <NameCapture goToNextStep={goToNextStep} />}
+      {stepCount === 4 && <EmailCapture goToNextStep={goToNextStep} />}
     </AppLayout>
   );
 };

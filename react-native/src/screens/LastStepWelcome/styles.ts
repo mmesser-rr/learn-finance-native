@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { scale } from 'src/config/dimentions';
+import {StyleSheet} from 'react-native';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {

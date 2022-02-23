@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   transferWrapper: {
     borderRadius: scale(23),
-    backgroundColor: AppColors.coreBlack100
+    backgroundColor: AppColors.coreBlack100,
   },
   transfer: {
     padding: scale(10),
