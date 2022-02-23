@@ -14,6 +14,7 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - InputMask (6.1.0)
+  - Plaid (2.3.2)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -214,6 +215,9 @@ PODS:
     - glog
   - react-native-netinfo (7.1.7):
     - React-Core
+  - react-native-plaid-link-sdk (7.2.1):
+    - Plaid (~> 2.3.2)
+    - React-Core
   - react-native-safe-area (0.5.1):
     - React
   - react-native-safe-area-context (3.3.2):
@@ -291,11 +295,13 @@ PODS:
     - React-perflogger (= 0.66.3)
   - RNAWSCognito (5.2.6):
     - React-Core
-  - RNCAsyncStorage (1.15.17):
+  - RNCAsyncStorage (1.16.1):
     - React-Core
   - RNCMaskedView (0.1.11):
     - React
   - RNCPicker (2.2.1):
+    - React-Core
+  - RNDeviceInfo (8.4.9):
     - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
@@ -358,6 +364,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-plaid-link-sdk (from `../node_modules/react-native-plaid-link-sdk`)
   - react-native-safe-area (from `../node_modules/react-native-safe-area`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
@@ -378,6 +385,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -389,6 +397,7 @@ SPEC REPOS:
   trunk:
     - fmt
     - InputMask
+    - Plaid
 
 EXTERNAL SOURCES:
   boost:
@@ -429,6 +438,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
+  react-native-plaid-link-sdk:
+    :path: "../node_modules/react-native-plaid-link-sdk"
   react-native-safe-area:
     :path: "../node_modules/react-native-safe-area"
   react-native-safe-area-context:
@@ -469,6 +480,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -491,6 +504,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
+  Plaid: 4d8d4ff0a6d627f5faf3055a9cba8890ea6b5076
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 59d2b744d8c2bf2d9bc7032a9f654809adcf7d50
   RCTTypeSafety: d0aaf7ccae5c70a4aaa3a5c3e9e0db97efae760e
@@ -504,6 +518,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d9c8eb0b53f0da206fed56612b289fec84991157
   React-logger: e522e76fa3e9ec3e7d7115b49485cc065cf4ae06
   react-native-netinfo: 27f287f2d191693f3b9d01a4273137fcf91c3b5d
+  react-native-plaid-link-sdk: 33cb904b956dc3b56799ac3027de8aa6fbb4b0ab
   react-native-safe-area: e8230b0017d76c00de6b01e2412dcf86b127c6a3
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
@@ -521,9 +536,10 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
   RNAWSCognito: d2db2cc6adffe0a2452cc44d7776dadc21541c75
-  RNCAsyncStorage: 6bd5a7ba3dde1c3facba418aa273f449bdc5437a
+  RNCAsyncStorage: b49b4e38a1548d03b74b30e558a1d18465b94be7
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNCPicker: cb57c823d5ce8d2d0b5dfb45ad97b737260dc59e
+  RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 569c269480a76e39196aa17a5df08ef1561db5ff
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e

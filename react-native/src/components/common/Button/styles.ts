@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   action: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(10),
     paddingVertical: scale(10),
     textAlign: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 });
 

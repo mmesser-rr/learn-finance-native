@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { TextInput, View } from 'react-native';
+import React, {useState} from 'react';
+import {TextInput, View} from 'react-native';
 import SubmitButton from 'src/components/common/SubmitButton';
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
@@ -20,9 +20,9 @@ const TransferAmount: React.FC = () => {
 
     const decimalIndex = txt.indexOf('.');
     setValue(
-      (decimalIndex >= 0) ?
-        (txt.slice(0, decimalIndex) + txt.slice(decimalIndex, decimalIndex + 3)) :
-        txt
+      decimalIndex >= 0
+        ? txt.slice(0, decimalIndex) + txt.slice(decimalIndex, decimalIndex + 3)
+        : txt,
     );
     setIsValid(Number(txt) !== 0);
   };
@@ -36,15 +36,16 @@ const TransferAmount: React.FC = () => {
           <DepositNav />
         </View>
         <View>
-          <Text type='Body/Large' style={styles.body}>
-            Let's get some money into your Players Co. account. Choose how much you want to transfer:
+          <Text type="Body/Large" style={styles.body}>
+            Let's get some money into your Players Co. account. Choose how much
+            you want to transfer:
           </Text>
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.inputWrapper}>
-            <Text type='Display/Small'>$</Text>
+            <Text type="Display/Small">$</Text>
             <TextInput
-              keyboardType = 'decimal-pad'
+              keyboardType="decimal-pad"
               value={value}
               style={styles.input}
               autoFocus={true}
@@ -55,7 +56,11 @@ const TransferAmount: React.FC = () => {
         </View>
       </View>
       <View>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={onContinue} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel="Continue"
+          onSubmit={onContinue}
+        />
       </View>
     </AppLayout>
   );

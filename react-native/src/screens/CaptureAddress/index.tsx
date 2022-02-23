@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import { useForm, Controller } from "react-hook-form";
+import {View} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
@@ -22,8 +22,8 @@ const CaptureAddress: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
-    formState: { isValid }
+    formState: {errors},
+    formState: {isValid},
   } = useForm<FormData>({
     defaultValues: {
       address: '',
@@ -43,17 +43,19 @@ const CaptureAddress: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
         <View>
-          <Text type='Headline/Small' style={styles.head}>What's your address?</Text>
+          <Text type="Headline/Small" style={styles.head}>
+            What's your address?
+          </Text>
         </View>
         <View style={styles.inputWrapper}>
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field.' },
+              required: {value: true, message: 'Please fill out this field.'},
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='Street Address'
+                label="Street Address"
                 showErrorMessage
                 value={value}
                 errorMssage={errors?.address?.message}
@@ -67,10 +69,10 @@ const CaptureAddress: React.FC = () => {
         <View style={styles.inputWrapper}>
           <Controller
             control={control}
-            rules={{ required: false }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            rules={{required: false}}
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='Apartment Number'
+                label="Apartment Number"
                 showErrorMessage
                 value={value}
                 errorMssage={errors?.apartment_number?.message}
@@ -85,11 +87,11 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field.' },
+              required: {value: true, message: 'Please fill out this field.'},
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='City'
+                label="City"
                 showErrorMessage
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -104,11 +106,11 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field.' },
+              required: {value: true, message: 'Please fill out this field.'},
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='State'
+                label="State"
                 showErrorMessage
                 value={value}
                 errorMssage={errors?.state?.message}
@@ -123,14 +125,17 @@ const CaptureAddress: React.FC = () => {
           <Controller
             control={control}
             rules={{
-              required: { value: true, message: 'Please fill out this field.' },
-              minLength: { value: 5, message: 'Please provide a valid Zip code.' },
+              required: {value: true, message: 'Please fill out this field.'},
+              minLength: {
+                value: 5,
+                message: 'Please provide a valid Zip code.',
+              },
             }}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({field: {onChange, onBlur, value}}) => (
               <TextInput
-                label='ZIP Code'
+                label="ZIP Code"
                 showErrorMessage
-                keyboardType='number-pad'
+                keyboardType="number-pad"
                 isNumeric
                 value={value}
                 errorMssage={errors?.zipcode?.message}
@@ -144,7 +149,11 @@ const CaptureAddress: React.FC = () => {
         </View>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={isValid} actionLabel='Continue' onSubmit={handleSubmit(onSubmit)} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel="Continue"
+          onSubmit={handleSubmit(onSubmit)}
+        />
       </View>
     </AppLayout>
   );
