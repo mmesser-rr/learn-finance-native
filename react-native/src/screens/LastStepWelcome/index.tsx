@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import React, {useEffect} from 'react';
+import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { RedLinnerGradient } from 'src/utils/constants';
+import {RedLinnerGradient} from 'src/utils/constants';
 import AppLayout from 'src/components/layout/AppLayout';
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import LogoIcon from 'src/assets/icons/logo.svg';
 import NavigationService from 'src/navigation/NavigationService';
 
@@ -25,7 +25,7 @@ const ProfileIntro: React.FC = () => {
             <LogoIcon />
           </View>
           <View>
-            <Text type='Headline/Large'>Welcome to the club!</Text>
+            <Text type="Headline/Large">Welcome to the club!</Text>
           </View>
         </View>
       </AppLayout>

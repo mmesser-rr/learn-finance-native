@@ -1,5 +1,7 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    'module:metro-react-native-babel-preset'
+  ],
   env: {
     production: {
       plugins: ['react-native-paper/babel'],
@@ -18,5 +20,13 @@ module.exports = {
     ],
     'jest-hoist',
     'react-native-reanimated/plugin',
+    ['module:react-native-dotenv', {
+      'moduleName': '@env',
+      'path': '.env',
+      'blacklist': null,
+      'whitelist': null,
+      'safe': false,
+      'allowUndefined': true
+    }]
   ],
 };

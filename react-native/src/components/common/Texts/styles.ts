@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
-import { convertPTToPX } from 'src/utils/functions';
+import {scale} from 'src/config/dimentions';
+import {convertPTToPX} from 'src/utils/functions';
 
 const styles = StyleSheet.create({
   text: {

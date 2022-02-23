@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack80,
     color: AppColors.gray20,
     borderRadius: scale(100),
-    height: scale(40)
+    height: scale(40),
   },
   searchInputStyle: {
     fontFamily: 'Lato-Medium',
@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
   },
   selectLabel: {
     color: AppColors.coreBlack40,
+    marginRight: scale(8),
+    flex: 1,
   },
   active: {
     color: AppColors.gray20,
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
   },
   checkIcon: {
     fontFamily: 'SF Pro Display Light',
-  }
+  },
 });
 
 export default styles;

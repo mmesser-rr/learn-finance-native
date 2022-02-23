@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     color: AppColors.interactionBlue,
     fontSize: scale(16),
     letterSpacing: 0.5,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   laterActionGradient: {
     marginTop: scale(16),

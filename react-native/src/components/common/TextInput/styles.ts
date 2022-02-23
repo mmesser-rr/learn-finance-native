@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   helperIcon: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     left: 0,
     marginTop: scale(4),
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   helperText: {
     fontSize: scale(14),

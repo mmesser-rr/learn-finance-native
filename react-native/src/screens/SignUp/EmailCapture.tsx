@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 
-import { Text } from 'src/components/common/Texts';
+import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
@@ -12,9 +12,7 @@ interface EmailCaptureProps {
   goToNextStep: () => void;
 }
 
-const EmailCapture: React.FC<EmailCaptureProps> = ({
-  goToNextStep,
-}) => {
+const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
   const [isValid, setIsValid] = useState(false);
 
   const codeChangeHandler = (value: string) => {
@@ -30,26 +28,37 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({
     <>
       <View>
         <View>
-          <Text type='Headline/Small' style={styles.head}>
+          <Text type="Headline/Small" style={styles.head}>
             What's your email?
           </Text>
         </View>
         <View>
           <TextInput
-            label='Email Address'
-            placeholder='Email Address'
+            label="Email Address"
+            placeholder="Email Address"
             onChangeText={codeChangeHandler}
           />
         </View>
       </View>
       <View>
         <View style={styles.agreementWrapper}>
-          <Text type='Body/Large' style={styles.agreementText}>
-            By tapping 'sign up', you consent to our {' '}
-            <Text type='Body/Large' style={styles.agreementLink} onPress={onTerms}>Terms & Privacy Policy</Text>.
+          <Text type="Body/Large" style={styles.agreementText}>
+            By tapping 'sign up', you consent to our{' '}
+            <Text
+              type="Body/Large"
+              style={styles.agreementLink}
+              onPress={onTerms}
+            >
+              Terms & Privacy Policy
+            </Text>
+            .
           </Text>
         </View>
-        <SubmitButton isValid={isValid} actionLabel='Sign Up' onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={isValid}
+          actionLabel="Sign Up"
+          onSubmit={goToNextStep}
+        />
       </View>
     </>
   );
