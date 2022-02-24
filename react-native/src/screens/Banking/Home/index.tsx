@@ -73,8 +73,8 @@ const Home: React.FC = () => {
           </Text>
         </View>
         <View>
-          <View>
-            {linkToken && (
+          {!!linkToken && (
+            <View>
               <PlaidLink
                 tokenConfig={{
                   token: linkToken,
@@ -91,8 +91,8 @@ const Home: React.FC = () => {
                   </Text>
                 </View>
               </PlaidLink>
-            )}
-          </View>
+            </View>
+          )}
           <View>
             <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit}>
               <Text type="Body/Large">Set up direct deposit</Text>
