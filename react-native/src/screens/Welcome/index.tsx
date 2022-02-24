@@ -12,7 +12,7 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 import styles from './styles';
 
 const Welcome: React.FC = () => {
-  const onJoin = () => NavigationService.navigate('SignUp');
+  const onJoin = () => NavigationService.navigate('HomeStack');
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>

@@ -5,10 +5,39 @@ import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import DepositNav from 'src/components/common/DepositNav';
 import EditIcon from 'src/assets/icons/edit.svg';
+import NavigationService from 'src/navigation/NavigationService';
+import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
 
 import styles from './styles';
 
 const TransferReview: React.FC = () => {
+  const onDeposit = () => NavigationService.navigate('ProcessDeposit');
+
+  const list: InfoItemInterface[] = [
+    {
+      label: 'Deposit',
+      data: (
+        <>
+          <Text type="Body/Large">$500.00</Text>
+          <EditIcon style={styles.editIcon} />
+        </>
+      )
+    },
+    {
+      label: 'Plaid Account Name',
+      data: (
+        <>
+          <Text type="Body/Large">Total Checking</Text>
+          <EditIcon style={styles.editIcon} />
+        </>
+      )
+    },
+    {
+      label: 'Date',
+      data: <Text type="Body/Large">12/09/2021</Text>
+    }
+  ];
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
@@ -19,30 +48,7 @@ const TransferReview: React.FC = () => {
       </View>
       <View style={styles.contentContainer}>
         <View>
-          <View style={styles.info}>
-            <Text style={styles.infoTitle} type="Body/Large">
-              Deposit
-            </Text>
-            <View style={styles.infoData}>
-              <Text type="Body/Large">$500.00</Text>
-              <EditIcon style={styles.editIcon} />
-            </View>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.infoTitle} type="Body/Large">
-              Plaid Account Name
-            </Text>
-            <View style={styles.infoData}>
-              <Text type="Body/Large">Total Checking</Text>
-              <EditIcon style={styles.editIcon} />
-            </View>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.infoTitle} type="Body/Large">
-              Date
-            </Text>
-            <Text type="Body/Large">12/09/2021</Text>
-          </View>
+          <InfoList list={list} />
         </View>
         <View>
           <Text style={styles.center} type="Body/Large">
@@ -51,9 +57,9 @@ const TransferReview: React.FC = () => {
           </Text>
           <SubmitButton
             isValid={true}
-            actionLabel="Continue"
+            actionLabel="Deposit"
             style={styles.submit}
-            onSubmit={() => {}}
+            onSubmit={onDeposit}
           />
           <Text style={styles.center} type="Title/Small">
             Transactions made after 3:00pm [ET] or on a weekend or holiday will
