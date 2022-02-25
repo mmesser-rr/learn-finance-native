@@ -14,3 +14,4 @@ export const GradientButtonColors = [
 ];
 
 export const RedLinnerGradient = ['#FF5A5F', '#CA3D45', '#97283C'];
+export const PodsCardGradient = ['#FF5A5F', '#1735BC'];
