@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import Swiper from 'react-native-swiper';
+import LinearGradient from 'react-native-linear-gradient';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
@@ -10,11 +11,9 @@ import UnionIcon from 'src/assets/icons/union.svg';
 import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
+import {GradientButtonColors} from 'src/utils/constants';
 
 import styles from './styles';
-import AppColors from 'src/config/colors';
-import LinearGradient from 'react-native-linear-gradient';
-import { GradientButtonColors } from 'src/utils/constants';
 
 const PodsExplain: React.FC = () => {
   const onNext = () => {};
