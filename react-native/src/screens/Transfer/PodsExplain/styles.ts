@@ -9,15 +9,17 @@ const styles = StyleSheet.create({
   viewWrapper: {
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginHorizontal: 0,
   },
   nav: {
     marginBottom: scale(24),
+    marginHorizontal: scale(27),
   },
   body: {
     marginBottom: scale(57),
+    marginHorizontal: scale(27),
   },
   diagram: {
-    marginHorizontal: scale(-27),
     position: 'relative',
   },
   union: {
@@ -54,6 +56,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: scale(8),
+  },
+  swiper: {
+    flex: 1
+  },
+  action: {
+    marginHorizontal: scale(27),
   }
 });
 
