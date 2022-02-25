@@ -8,6 +8,7 @@ const AppColors = {
   coreBlack40: '#999',
   searchPlaceholderColor: '#F7F7F738',
   accentRed100: '#FF5A5F',
+  coreWhite100: '#FFF'
 };
 
 export default AppColors;
