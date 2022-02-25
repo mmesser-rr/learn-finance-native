@@ -34,10 +34,11 @@ const PodsExplain: React.FC = () => {
       <View style={styles.nav}>
         <DepositNav />
       </View>
-      <View style={styles.swiper}>
+      <View style={styles.swiperView}>
         <Swiper
           dot={<Dot />}
           activeDot={<ActiveDot />}
+          height={100}
         >
           <View>
             <View>
