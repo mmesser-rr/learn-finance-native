@@ -7,6 +7,7 @@ import ProcessIcon from 'src/assets/icons/process.svg';
 import InfoList, { InfoItemInterface } from 'src/components/common/InfoList';
 
 import styles from './styles';
+import NavigationService from 'src/navigation/NavigationService';
 
 const ProcessDeposit: React.FC = () => {
   const list: InfoItemInterface[] = [
@@ -23,6 +24,10 @@ const ProcessDeposit: React.FC = () => {
       data: <Text type="Body/Large">12/09/2021</Text>
     }
   ];
+
+  const onDone = () => {
+    NavigationService.navigate('HomeStack');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -45,7 +50,7 @@ const ProcessDeposit: React.FC = () => {
               isValid={true}
               actionLabel="Done"
               style={styles.submit}
-              onSubmit={() => {}}
+              onSubmit={onDone}
             />
           </View>
         </View>
