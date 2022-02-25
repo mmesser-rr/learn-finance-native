@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: scale(8),
   },
-  swiper: {
-    flex: 1
+  swiperView: {
+    flex: 1,
   },
   action: {
     marginHorizontal: scale(27),
