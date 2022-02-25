@@ -62,7 +62,17 @@ const styles = StyleSheet.create({
   },
   action: {
     marginHorizontal: scale(27),
-  }
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3,
+    backgroundColor: AppColors.coreWhite100
+  },
 });
 
 export default styles;
