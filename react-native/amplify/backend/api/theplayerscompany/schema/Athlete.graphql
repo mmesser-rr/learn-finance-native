@@ -12,6 +12,13 @@ enum AthleteLevel {
   PROFESSIONAL
 }
 
+type AthletePlaidLookup {
+  access_token: String
+  item_id: String
+  request_id: String
+}
+
+
 type AthleteSport {
   name: String!
   airTableId: String!
@@ -36,11 +43,14 @@ type Athlete @model {
   dateOfBirth: String!
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
+  plaid: AthletePlaidLookup 
+  wyreId: String
   isActive: Boolean!
 }
 
 type AthleteAccount @model {
   athlete: Athlete! @belongsTo
+  unitAccountId: String!
   routingCode: String!
   accountNumber: String!
 }

@@ -1,0 +1,28 @@
+{
+  "fieldName": "creditAccount",
+  "arguments": {
+    "data":{
+      "type":"achPayment",
+      "attributes": {
+        "amount": 7,
+        "direction": "Credit",
+        "description": "Testing #5",
+              "addenda": "Some very long description of the payment",
+              "counterparty": {
+                  "name": "Unit Finance Inc",
+                  "routingNumber": "091311229",
+                  "accountNumber": "864800000000",
+                  "accountType": "Checking"
+              }           
+      },
+      "relationships": {
+        "account": {
+          "data": {
+            "type": "depositAccount",
+            "id": "10000"
+          }
+        }
+      }
+    }
+  }
+}

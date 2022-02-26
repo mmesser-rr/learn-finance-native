@@ -1,9 +1,16 @@
 type Mutation {
   initiatePhoneChallenge(phoneNumber: String!): PhoneChallenge @function(name: "PlayerVerifyService-${env}")
+  returnUserChallenge(phoneNumber: String!): PhoneChallenge @function(name: "PlayerVerifyService-${env}")
+  validateReturnUser(phoneNumber: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
   tryPhoneChallenge(phoneNumber: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
   generateInvite: Invite @function(name: "InviteService-${env}")
   initiateEmailChallenge(email: String!): EmailChallenge @function(name: "PlayerVerifyService-${env}")
   tryEmailChallenge(email: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
   openAppAndAccount(ssn: String!, athleteId: ID!): [AthleteAccount] @function(name: "AccountOpenService-${env}")
   openAccount(athleteId: ID!): AthleteAccount @function(name: "AccountOpenService-${env}")
+  getAthleteUnitAccounts(athleteId: ID!): AthleteAccount @function(name: "AccountOpenService-${env}")
+  getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): AthleteAccount @function(name: "AccountOpenService-${env}")
+  debitAccount(athleteId: ID!, athleteAccountId: int!, amount: float!, description: String, name: String!, routingNumber: int!, accountNumber: int!, accountType: String): [AthleteAccount] @function(name: "AccountOpenService-${env}")
+  creditAccount(athleteId: ID!, athleteAccountId: int!, amount: float!, description: String, name: String!, routingNumber: int!, accountNumber: int!, accountType: String): [AthleteAccount] @function(name: "AccountOpenService-${env}")
+  bookPayment: (athleteId: ID!, athleteAccountId: int!, amount: float!, description: String, name: String!, routingNumber: int!, accountNumber: int!, accountType: String): [AthleteAccount] @function(name: "AccountOpenService-${env}")
 }

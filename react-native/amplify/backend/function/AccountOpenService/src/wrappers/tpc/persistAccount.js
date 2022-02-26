@@ -2,16 +2,17 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const persistAccountStatement = gql`
-  mutation createAthleteAccount($athleteId: ID!, $routingCode: String!, $accountNumber: String!) {
+  mutation createAthleteAccount($athleteId: ID!, $routingCode: String!, $accountNumber: String!, $unitAccountId: String!) {
     createAthleteAccount(
-      input: {routingCode: $routingCode, accountNumber: $accountNumber, athleteAccountsId: $athleteId}
+      input: {routingCode: $routingCode, accountNumber: $accountNumber, athleteAccountsId: $athleteId, unitAccountId: $unitAccountId}
     ) {
       accountNumber,
       athleteAccountsId,
       id,
       createdAt,
       updatedAt,
-      routingCode
+      routingCode,
+      unitAccountId
     }
   } 
 `
@@ -20,14 +21,16 @@ const persistAccount = (axios) => (
   {
     athleteId,
     routingCode,
-    accountNumber
+    accountNumber,
+    unitAccountId
   }
 ) => axios.post("/", {
   query: print(persistAccountStatement),
   variables: {
     athleteId,
     routingCode,
-    accountNumber
+    accountNumber,
+    unitAccountId
   }
 }).then(resultLens);
 
