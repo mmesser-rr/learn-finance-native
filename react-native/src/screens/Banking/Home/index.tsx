@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
 import {Text} from 'src/components/common/Texts';
-import {RedLinnerGradient} from 'src/utils/constants';
+import {PodsCardGradient} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import {createLinkToken, getExistingLinkToken} from 'src/services/plaid';
@@ -44,9 +44,14 @@ const Home: React.FC = () => {
     console.log(success);
     NavigationService.navigate('TransferStack');
   };
+
   const onPlaidExitHandler = (exit: LinkExit) => {
     console.log(exit);
     // NavigationService.navigate('TransferStack');
+  };
+
+  const onSetupPods = () => {
+    NavigationService.navigate('TransferStack', {screen: 'PodsExplain'});
   };
 
   return (
@@ -61,7 +66,7 @@ const Home: React.FC = () => {
         <Text type="Title/Medium">PLAYER'S ACCOUNT</Text>
       </View>
       <LinearGradient
-        colors={RedLinnerGradient}
+        colors={PodsCardGradient}
         style={[styles.card, styles.accountCard]}
       >
         <View style={styles.cardHead}>
@@ -115,7 +120,7 @@ const Home: React.FC = () => {
         </View>
         <View>
           <View>
-            <Button>
+            <Button onPress={onSetupPods}>
               <Text type="Body/Large">Set up Pods</Text>
             </Button>
           </View>

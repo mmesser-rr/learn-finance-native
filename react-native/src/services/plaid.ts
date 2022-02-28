@@ -1,4 +1,5 @@
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 import {PLAID_CLIENT_ID, PLAID_SECRET} from '@env';
 import ApiConfig from 'src/config/api-config';
@@ -37,6 +38,9 @@ export const getExistingLinkToken = async (linkToken: string) => {
 
   try {
     const res = await axios.post(`${ApiConfig.PLAID}/link/token/get`, payload);
+    if (dayjs(res.data.expiration).isBefore(dayjs())) {
+      return '';
+    }
     return res.data.link_token;
   } catch (error) {
     return '';
