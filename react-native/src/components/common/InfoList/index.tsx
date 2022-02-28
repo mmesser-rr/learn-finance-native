@@ -16,8 +16,8 @@ interface InfoListProps {
 const InfoList: React.FC<InfoListProps> = ({list}) => {
   return (
     <View>
-      {list.map(item => (
-        <View style={styles.info}>
+      {list.map((item, index) => (
+        <View style={styles.info} key={`info_list_${index}`}>
           <Text style={styles.label} type="Body/Large">
             {item.label}
           </Text>
