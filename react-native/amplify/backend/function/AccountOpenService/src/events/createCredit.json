@@ -1,28 +1,16 @@
 {
   "fieldName": "creditAccount",
   "arguments": {
+    "athleteId": "f021851d-51ea-4f02-b9d7-e2ee7b8034fb",
     "data":{
-      "type":"achPayment",
-      "attributes": {
-        "amount": 7,
-        "direction": "Credit",
-        "description": "Testing #5",
-              "addenda": "Some very long description of the payment",
-              "counterparty": {
-                  "name": "Unit Finance Inc",
-                  "routingNumber": "091311229",
-                  "accountNumber": "864800000000",
-                  "accountType": "Checking"
-              }           
-      },
-      "relationships": {
-        "account": {
-          "data": {
-            "type": "depositAccount",
-            "id": "10000"
-          }
-        }
-      }
+      "unitAccountId" : "333452",
+      "amount": 10,
+      "addenda": "Some very long description of the payment",
+      "description": "Testing #5",
+      "receiverName": "dee tres",
+      "receiverRoutingNumber": "091311229",
+      "receiverAccountNumber": "864800000000",
+      "receiverAccountType" : "Checking"
     }
   }
 }

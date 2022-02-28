@@ -7,36 +7,32 @@ const APPLICATION_TYPE = "bookPayment";
 const DIRECTION = "Credit";
 const TYPE = "depositAccount";
 
-//TODO ADD ACCOUNT-ID
-const parseApplicationParams = () => (
-  amount,
-  description,
-  counterpartyAccountId
-) => ({
+const parseApplicationParams = (data) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: amount,
+    amount: data.amount,
     direction: DIRECTION,
-    description: description,
-    relationships:{
-        account:{
-            data:{
-              type: TYPE,
-              id: 13224
-            }
-        }
-    },
-    counterpartyAccount:{
-        data:{
-          type: TYPE,
-          id:counterpartyAccountId 
-        }
-    }
-  }
+    description: data.description
+  },
+  relationships:{
+      account:{
+          data:{
+            type: TYPE,
+            id: data.unitAccountId
+          }
+        },
+      counterpartyAccount:{
+          data:{
+            type: data.receiverAccountType,
+            id:data.receiverUnitAccountId
+          }
+      }
+   }
 });
 
-const bookPayment = (unit) => (athlete) => {
-  const unitParams = parseApplicationParams(unit)(athlete);
+
+const bookPayment = (unit) => (data) => {
+  const unitParams = parseApplicationParams(data);
   return unit.payments.create(unitParams)
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err.message}`));

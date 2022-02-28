@@ -1,4 +1,5 @@
 const { Unit } = require("@unit-finance/unit-node-sdk");
+const { JS } = require("aws-amplify");
 
 const IP = "127.0.0.1";
 const COUNTRY_CODE = "US";
@@ -6,51 +7,43 @@ const APPLICATION_TYPE = "achPayment";
 const DIRECTION = "Debit";
 const TYPE = "depositAccount";
 
-//TODO ADD ACCOUNT-ID
-const parseApplicationParams = () => (
-  amount,
-  description,
-  addenda,
-  name,
-  routingNumber,
-  accountNumber,
-  accountType
-) => ({
+const parseApplicationParams = (data) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: amount,
+    amount: data.amount,
     direction: DIRECTION,
-    description: description,
-    addenda: addenda,
+    description: data.description,
+    addenda: data.addenda,
     counterparty:{
-      name: name,
-      routingNumber: routingNumber,
-      accountNumber: accountNumber,
-      accountType: accountType
+      name: data.receiverName,
+      routingNumber: data.receiverRoutingNumber,
+      accountNumber: data.receiverAccountNumber,
+      accountType: data.receiverAccountType
     }
   },
   relationships:{
     account:{
-      data:{
-        type: TYPE,
-        id
+        data:{
+          type: TYPE,
+          id: data.unitAccountId
+        }
       }
     }
-  }
 });
 
-const debitAccount = (unit) => (athlete) => {
-  const unitParams = parseApplicationParams(unit)(athlete);
+const debitAccount = (unit) => (data) => {
+  const unitParams = parseApplicationParams(data);
   return unit.payments.create(unitParams)
     .then(resultLens)
-    .catch(err => Promise.reject(`Failed to submit application to Unit API. Error: ${err.message}`));
+    .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));
 }
 
 const resultLens = (res) => ({
-  transactionId: res.id,
-  status: res.attributes.status,
-  createdAt: res.attributes.createdAt,
-  counterparty: res.attributes.counterparty
+  transactionId: res.data.id,
+  status: res.data.attributes.status,
+  amount: res.data.attributes.amount,
+  createdAt: res.data.attributes.createdAt,
+  counterparty: res.data.attributes.counterparty
 });
 
 module.exports = {

@@ -17,6 +17,13 @@ const getAthleteStatement = gql`
         streetAddress
         zipCode
       }
+      accounts {
+        items{
+          unitAccountId
+          routingCode
+          accountNumber
+        }
+      }
       unitLookup {
         appId
         custId

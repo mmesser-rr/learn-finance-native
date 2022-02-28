@@ -3,8 +3,9 @@ const { createAccount } = require("./createAccount");
 const { bookPayment } = require("./bookPayment");
 const { debitAccount } = require("./debitAccount");
 const { creditAccount } = require("./creditAccount");
-const { getAthleteAccountById } = require("./getAthleteAccountById");
+const { getAthleteUnitAccountById } = require("./getAthleteUnitAccountById");
 const { getAllAthleteAccounts } = require("./getAllAthleteAccounts");
+const {getUnitTransactionById} = require("./getUnitTransactionById");
 const { unit } = require("../../env.js");
 
 module.exports = {
@@ -12,7 +13,8 @@ module.exports = {
   createAccount: createAccount(unit),
   debitAccount: debitAccount(unit),
   getAllAthleteAccounts: getAllAthleteAccounts(unit),
-  getAthleteAccountById: getAthleteAccountById(unit),
+  getAthleteUnitAccountById: getAthleteUnitAccountById(unit),
   creditAccount: creditAccount(unit),
+  getUnitTransactionById: getUnitTransactionById(unit),
   bookPayment: bookPayment(unit)
 }

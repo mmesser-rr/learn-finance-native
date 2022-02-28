@@ -1,28 +1,14 @@
 {
     "fieldName": "bookPayment",
     "arguments": {
+      "athleteId": "f021851d-51ea-4f02-b9d7-e2ee7b8034fb",
         "data":{
+          "unitAccountId" : "333452",
           "type":"bookPayment",
-          "attributes": {
-            "amount": 200,
-            "direction": "Credit",
-            "description": "Book payment"
-          },
-          "relationships": {
-            "account": {
-              "data": {
-                "type": "depositAccount",
-                "id": "20025"
-              }
-            },
-                  "counterpartyAccount": {
-                      "data": {
-                          "type": "depositAccount",
-                          "id": "4005"
-                      
-                  }
-          }
-        }
+          "amount": 10,
+          "description": "Book payment",
+          "receiverUnitAccountId" : "4005",
+          "receiverAccountType" : "depositAccount"
       }
     }
   }

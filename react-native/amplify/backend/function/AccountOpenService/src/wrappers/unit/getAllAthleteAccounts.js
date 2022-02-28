@@ -1,5 +1,5 @@
 const getAllAthleteAccounts = (unit) => (custId) => {
-    return unit.accounts.get(custId);
+    return unit.accounts.list(custId);
   };
   
   module.exports = {

@@ -12,17 +12,22 @@ const { creditAccount } = require("./workflows/creditAccount");
 const { bookPayment } = require("./workflows/bookPayment");
 const { getAthleteUnitAccounts } = require("./workflows/getAllAccounts");
 const {getAthleteUnitAccountById} = require("./workflows/getAthleteAccountById");
+const {getUnitTransactionById} = require("./workflows/getUnitTransactionById");
+const { event } = require("react-native-reanimated");
 
 const resolvers = Object.freeze({
   openAccount: (event) => createAndPersistAccount(event.arguments.athlete.id),
-  bookPayment: bookPayment,
-  debitAccount: debitAccount,
-  creditAccount: creditAccount,
-  getAthleteUnitAccounts: getAthleteUnitAccounts(event.arguments.athlete.id),
-  getAthleteUnitAccountById: getAthleteUnitAccountById(event.arguments.athlete.id, event.arguments.unitAccountId),
+  bookPayment: (event) => bookPayment(event),
+  debitAccount: (event) => debitAccount(event),
+  creditAccount: (event) => creditAccount(event),
+  getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.athleteId, event.arguments.unitTransactionId),
+  getAthleteUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
+  getAthleteUnitAccountById: (event) => getAthleteUnitAccountById(event.arguments.athleteId, event.arguments.unitAccountId),
   openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
 });
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);
 
 exports.handler = async (event) => (resolvers[event.fieldName] || fallback)(event);
+
+
