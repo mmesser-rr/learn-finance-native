@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch } from 'react-redux';
+
 import Button from 'src/components/common/Button';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import {GradientButtonColors} from 'src/utils/constants';
 import CloseIcon from 'src/assets/icons/close.svg';
+import { updateHomeStep } from 'src/store/actions/bankingActions';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
 const DirectDeposit: React.FC = () => {
+  const dispatch = useDispatch();
   const [copyRouting, setCopyRouting] = useState(false);
   const [copyAccount, setCopyAccount] = useState(false);
 
@@ -30,7 +35,10 @@ const DirectDeposit: React.FC = () => {
     }
   }, [copyAccount]);
 
-  const onDone = () => {};
+  const onDone = () => {
+    dispatch(updateHomeStep('pods'));
+    NavigationService.navigate('HomeStack');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>

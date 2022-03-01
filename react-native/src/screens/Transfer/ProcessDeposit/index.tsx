@@ -1,15 +1,19 @@
 import React from 'react';
 import {View} from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import ProcessIcon from 'src/assets/icons/process.svg';
 import InfoList, { InfoItemInterface } from 'src/components/common/InfoList';
+import NavigationService from 'src/navigation/NavigationService';
+import { updateHomeStep } from 'src/store/actions/bankingActions';
 
 import styles from './styles';
-import NavigationService from 'src/navigation/NavigationService';
 
 const ProcessDeposit: React.FC = () => {
+  const dispatch = useDispatch();
   const list: InfoItemInterface[] = [
     {
       label: 'Amount',
@@ -26,6 +30,7 @@ const ProcessDeposit: React.FC = () => {
   ];
 
   const onDone = () => {
+    dispatch(updateHomeStep('pods'));
     NavigationService.navigate('HomeStack');
   };
 
