@@ -11,3 +11,7 @@ export const LOGIN_RESPONSE = 'LOGIN_RESPONSE';
 export const LOGIN_LOADING_ENDED = 'LOGIN_LOADING_ENDED';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOG_OUT = 'LOG_OUT';
+
+
+// banking
+export const UPDATE_HOME_STEP = 'UPDATE_HOME_STEP';
