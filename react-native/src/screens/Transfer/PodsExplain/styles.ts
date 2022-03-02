@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginHorizontal: 0,
+    marginTop: 0
   },
   nav: {
     marginBottom: scale(24),
@@ -72,6 +73,14 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginBottom: 3,
     backgroundColor: AppColors.coreWhite100
+  },
+  videoContent: {
+    marginTop: scale(25),
+    marginHorizontal: scale(29),
+  },
+  videoDescription: {
+    marginTop: scale(8),
+    marginBottom: scale(24)
   },
 });
 
