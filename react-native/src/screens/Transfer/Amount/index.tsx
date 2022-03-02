@@ -5,7 +5,7 @@ import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
-import DepositNav from 'src/components/common/DepositNav';
+import TopNav from 'src/components/common/TopNav';
 
 import styles from './styles';
 
@@ -33,7 +33,7 @@ const TransferAmount: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View style={styles.nav}>
-          <DepositNav />
+          <TopNav title="Deposit" goPreviousScreen={() => {}} />
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
