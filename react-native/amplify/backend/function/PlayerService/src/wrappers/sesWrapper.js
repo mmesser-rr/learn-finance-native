@@ -4,7 +4,7 @@ const ses = new aws.SES();
 const paramsForEmail = (email, code) => ({
   Destination: {
     ToAddresses: [
-      'jenna.murrell@kunaico.com',
+      email,
     ]
   },
   Message: {
@@ -19,7 +19,7 @@ const paramsForEmail = (email, code) => ({
       Data: 'Verify Your Email For The Players Company'
      }
     },
-  Source: 'jenna.murrell@kunaico.com',
+  Source: 'no-reply@tpc.com',
 });
 
 const sendEmailChallenge = (emailChallenge) =>  {
