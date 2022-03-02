@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {View} from 'react-native';
 import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
+import VideoPlayer from 'react-native-video-player';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
-import DepositNav from 'src/components/common/DepositNav';
+import TopNav from 'src/components/common/TopNav';
 import UnionIcon from 'src/assets/icons/union.svg';
 import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
@@ -16,6 +17,7 @@ import {GradientButtonColors} from 'src/utils/constants';
 import styles from './styles';
 
 const PodsExplain: React.FC = () => {
+  const [swiperIndex, setSwiperIndex] = useState(1);
   const onNext = () => {};
 
   const ActiveDot = () => {
@@ -28,16 +30,23 @@ const PodsExplain: React.FC = () => {
 
   const Dot = () => <View style={styles.dot} />;
 
+  const handleChangeSwiper = (index: number) => {
+    setSwiperIndex(index);
+  };
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <DepositNav />
+        <TopNav title="Set up Pods" />
       </View>
       <View style={styles.swiperView}>
         <Swiper
           dot={<Dot />}
           activeDot={<ActiveDot />}
           height={100}
+          showsVerticalScrollIndicator={true}
+          loop={false}
+          onIndexChanged={handleChangeSwiper}
         >
           <View>
             <View>
@@ -69,16 +78,29 @@ const PodsExplain: React.FC = () => {
             </View>
           </View>
           <View>
-            <Text type="Headline/Small">
-              Watch how Pods work
-            </Text>
+            <View>
+              <VideoPlayer
+                video={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }}
+              />
+            </View>
+            <View style={styles.videoContent}>
+              <Text type="Headline/Small">
+                Watch how Pods work
+              </Text>
+              <Text type="Body/Large" style={styles.videoDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultrices mi in elit vitae sed.
+              </Text>
+              <Text type="Body/Large">
+                Egestas iaculis venenatis et ac. Fringilla risus, tempor consectetur egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              </Text>
+            </View>
           </View>
         </Swiper>
       </View>
       <View style={styles.action}>
         <SubmitButton
           isValid={true}
-          actionLabel="Next"
+          actionLabel={swiperIndex === 0 ? 'Next' : 'Set up Pods'}
           onSubmit={onNext}
         />
       </View>
