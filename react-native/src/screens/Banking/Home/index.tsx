@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {TextStyle, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
 import {getUniqueId} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -12,14 +13,45 @@ import {PodsCardGradient} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import {createLinkToken, getExistingLinkToken} from 'src/services/plaid';
+import { RootState } from 'src/store';
+import { generateTextStyle } from 'src/utils/functions';
+import { updateHomeStep } from 'src/store/actions/bankingActions';
 
 import styles from './styles';
 
+interface CardProps {
+  style?: TextStyle;
+  active: boolean;
+  children: React.ReactNode;
+}
+
+const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
+  const style = generateTextStyle(styles.card, propsStyle);
+  if (active) {
+    return (
+      <LinearGradient
+        colors={PodsCardGradient}
+        style={style}
+      >{children}</LinearGradient>
+    );
+  }
+
+  return (
+    <View style={style}>{children}</View>
+  );
+};
+
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
+  const { step } = useSelector((state: RootState) => state.bankingReducer);
   const [linkToken, setLinkToken] = useState('');
 
   useEffect(() => {
     getPlaidLinkToken();
+
+    return () => {
+      dispatch(updateHomeStep('account'));
+    };
   }, []);
 
   const getPlaidLinkToken = async () => {
@@ -54,6 +86,8 @@ const Home: React.FC = () => {
     NavigationService.navigate('TransferStack', {screen: 'PodsExplain'});
   };
 
+  const isPods = step === 'pods';
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View style={styles.dotMenu}>
@@ -65,10 +99,7 @@ const Home: React.FC = () => {
       <View style={styles.subTitle}>
         <Text type="Title/Medium">PLAYER'S ACCOUNT</Text>
       </View>
-      <LinearGradient
-        colors={PodsCardGradient}
-        style={[styles.card, styles.accountCard]}
-      >
+      <Card active={!isPods} style={styles.accountCard}>
         <View style={styles.cardHead}>
           <Text type="Headline/Small">Add money to your account</Text>
         </View>
@@ -80,35 +111,41 @@ const Home: React.FC = () => {
         <View>
           {!!linkToken && (
             <View>
-              <PlaidLink
-                tokenConfig={{
-                  token: linkToken,
-                  noLoadingState: false,
-                }}
-                onSuccess={(success: LinkSuccess) =>
-                  onPlaidSuccessHandler(success)
-                }
-                onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}
-              >
-                <View style={styles.transferWrapper}>
-                  <Text type="Body/Large" style={styles.transfer}>
-                    Transfer from another bank
-                  </Text>
-                </View>
-              </PlaidLink>
+              {isPods ? (
+                <Button disabled>
+                  <Text type="Body/Large">Transfer from another bank</Text>
+                </Button>
+              ) : (
+                <PlaidLink
+                  tokenConfig={{
+                    token: linkToken,
+                    noLoadingState: false,
+                  }}
+                  onSuccess={(success: LinkSuccess) =>
+                    onPlaidSuccessHandler(success)
+                  }
+                  onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}
+                >
+                  <View style={styles.transferWrapper}>
+                    <Text type="Body/Large" style={styles.transfer}>
+                      Transfer from another bank
+                    </Text>
+                  </View>
+                </PlaidLink>
+              )}
             </View>
           )}
           <View>
-            <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit}>
+            <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit} disabled={isPods}>
               <Text type="Body/Large">Set up direct deposit</Text>
             </Button>
           </View>
         </View>
-      </LinearGradient>
+      </Card>
       <View style={styles.subTitle}>
         <Text type="Title/Medium">PODS</Text>
       </View>
-      <View style={styles.card}>
+      <Card active={isPods}>
         <View style={styles.cardHead}>
           <Text type="Headline/Small">Let's set up your pods</Text>
         </View>
@@ -120,12 +157,12 @@ const Home: React.FC = () => {
         </View>
         <View>
           <View>
-            <Button onPress={onSetupPods}>
+            <Button onPress={onSetupPods} disabled={!isPods}>
               <Text type="Body/Large">Set up Pods</Text>
             </Button>
           </View>
         </View>
-      </View>
+      </Card>
     </AppLayout>
   );
 };
