@@ -1,9 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
+
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
-import DepositNav from 'src/components/common/DepositNav';
+import TopNav from 'src/components/common/TopNav';
 import EditIcon from 'src/assets/icons/edit.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
@@ -41,7 +42,7 @@ const TransferReview: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <DepositNav />
+        <TopNav title="Deposit" goPreviousScreen={() => {}} />
       </View>
       <View>
         <Text type="Body/Large">Please review the deposit.</Text>
