@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "api": {
+      "theplayerscompany": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "function": {
+      "PlayerVerifyService": [
+        "create",
+        "read"
+      ],
+      "AccountOpenService": [
+        "create",
+        "read"
+      ]
+    },
+    "storage": {
+      "Athlete:@model(appsync)": [
+        "create",
+        "read"
+      ],
+      "PhoneChallenge:@model(appsync)": [
+        "create",
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "secretNames": [
+    "CLIENT_ID",
+    "SECRET_KEY"
+  ]
+}
