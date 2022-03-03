@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   input: {
-    fontFamily: 'Lato Regular',
+    fontFamily: 'Lato-Regular',
     color: AppColors.gray20,
     fontSize: scale(16),
     letterSpacing: 0.25,
