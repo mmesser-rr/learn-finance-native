@@ -222,6 +222,8 @@ PODS:
     - React
   - react-native-safe-area-context (3.3.2):
     - React-Core
+  - react-native-slider (4.2.0):
+    - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
   - react-native-text-input-mask (3.1.4):
@@ -372,6 +374,7 @@ DEPENDENCIES:
   - react-native-plaid-link-sdk (from `../node_modules/react-native-plaid-link-sdk`)
   - react-native-safe-area (from `../node_modules/react-native-safe-area`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-text-input-mask (from `../node_modules/react-native-text-input-mask`)
   - react-native-video (from `../node_modules/react-native-video`)
@@ -450,6 +453,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   react-native-text-input-mask:
@@ -529,6 +534,7 @@ SPEC CHECKSUMS:
   react-native-plaid-link-sdk: 33cb904b956dc3b56799ac3027de8aa6fbb4b0ab
   react-native-safe-area: e8230b0017d76c00de6b01e2412dcf86b127c6a3
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
+  react-native-slider: 37e1cf275dab20d3c015e40969aa9f5c309645a8
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-text-input-mask: 36a546b378fadd2efe1b7484a859d34bc2c80395
   react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28

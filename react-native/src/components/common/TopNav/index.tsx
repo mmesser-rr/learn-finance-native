@@ -10,9 +10,14 @@ import styles from './styles';
 interface TopNavProps {
   title: string;
   goPreviousScreen?: () => void;
+  goCloseScreen?: () => void;
 }
 
-const TopNav: React.FC<TopNavProps> = ({title, goPreviousScreen}) => {
+const TopNav: React.FC<TopNavProps> = ({
+  title,
+  goPreviousScreen,
+  goCloseScreen
+}) => {
   return (
     <View style={styles.container}>
       {goPreviousScreen ?
@@ -24,9 +29,16 @@ const TopNav: React.FC<TopNavProps> = ({title, goPreviousScreen}) => {
           <View />
         )
       }
-      
       <Text type="Title/Large">{title}</Text>
-      <CloseIcon />
+      {goCloseScreen ?
+        (
+          <TouchableOpacity onPress={() => goCloseScreen()}>
+            <CloseIcon />
+          </TouchableOpacity>
+        ) : (
+          <View />
+        )
+      }
     </View>
   );
 };
