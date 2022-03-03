@@ -55,10 +55,6 @@ const styles = StyleSheet.create({
   submit: {
     marginTop: scale(-22),
   },
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0
-  },
 });
 
 export default styles;

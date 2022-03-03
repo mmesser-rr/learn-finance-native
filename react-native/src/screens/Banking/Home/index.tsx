@@ -5,7 +5,6 @@ import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
 import {getUniqueId} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from 'react-native-modal';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -172,9 +171,7 @@ const Home: React.FC = () => {
           </View>
         </View>
       </Card>
-      <Modal isVisible={isModalVisible} style={styles.modal} onBackdropPress={() => setModalVisible(false)}>
-        <UserHomeModal />
-      </Modal>
+      <UserHomeModal visible={isModalVisible} onClose={() => setModalVisible(false)} />
     </AppLayout>
   );
 };
