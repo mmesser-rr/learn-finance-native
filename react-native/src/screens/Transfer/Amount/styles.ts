@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   input: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     color: AppColors.gray20,
     fontSize: scale(36),
     lineHeight: scale(44),
