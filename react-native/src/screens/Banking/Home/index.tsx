@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {TextStyle, View} from 'react-native';
+import {TextStyle, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
 import {getUniqueId} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
+import Modal from 'react-native-modal';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -18,6 +19,7 @@ import { generateTextStyle } from 'src/utils/functions';
 import { updateHomeStep } from 'src/store/actions/bankingActions';
 
 import styles from './styles';
+import UserHomeModal from 'src/components/common/UserHomeModal';
 
 interface CardProps {
   style?: TextStyle;
@@ -45,6 +47,7 @@ const Home: React.FC = () => {
   const dispatch = useDispatch();
   const { step } = useSelector((state: RootState) => state.bankingReducer);
   const [linkToken, setLinkToken] = useState('');
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     getPlaidLinkToken();
@@ -86,12 +89,18 @@ const Home: React.FC = () => {
     NavigationService.navigate('TransferStack', {screen: 'PodsExplain'});
   };
 
+  const onMenu = () => {
+    setModalVisible(true);
+  };
+
   const isPods = step === 'pods';
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View style={styles.dotMenu}>
-        <ThreeDotsIcon />
+        <TouchableOpacity onPress={() => onMenu()}>
+          <ThreeDotsIcon />
+        </TouchableOpacity>
       </View>
       <View style={styles.title}>
         <Text type="Headline/Small">Hi John!</Text>
@@ -163,6 +172,9 @@ const Home: React.FC = () => {
           </View>
         </View>
       </Card>
+      <Modal isVisible={isModalVisible} style={styles.modal} onBackdropPress={() => setModalVisible(false)}>
+        <UserHomeModal />
+      </Modal>
     </AppLayout>
   );
 };
