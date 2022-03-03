@@ -5,7 +5,6 @@ import { scale } from 'src/config/dimentions';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack80,
-    // paddingnHorizontal: scale(28),
     paddingLeft: scale(28),
     paddingRight: scale(28),
     paddingBottom: scale(34),
@@ -13,15 +12,21 @@ const styles = StyleSheet.create({
     borderTopRightRadius: scale(10)
   },
   item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: scale(16),
     borderBottomWidth: 1,
     borderBottomColor: AppColors.coreBlack60
   },
+  action: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: scale(16),
+  },
   disabled: {
     color: AppColors.coreBlack40
-  }
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0
+  },
 });
 
 export default styles;
