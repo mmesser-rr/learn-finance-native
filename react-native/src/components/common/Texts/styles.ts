@@ -5,43 +5,43 @@ import {convertPTToPX} from 'src/utils/functions';
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Lato Regular',
+    fontFamily: 'Lato-Regular',
     color: AppColors.gray20,
   },
 
   largeDisplay: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(57),
     lineHeight: scale(64),
     color: AppColors.gray20,
     letterSpacing: convertPTToPX(-0.25),
   },
   mediumDisplay: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(45),
     lineHeight: scale(52),
     color: AppColors.gray20,
   },
   smallDisplay: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(36),
     lineHeight: scale(44),
     color: AppColors.gray20,
   },
   largeHeadline: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(28),
     lineHeight: scale(36),
     color: AppColors.gray20,
   },
   mediumHeadline: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(28),
     lineHeight: scale(36),
     color: AppColors.gray20,
   },
   smallHeadline: {
-    fontFamily: 'Lato Bold',
+    fontFamily: 'Lato-Bold',
     fontSize: scale(20),
     lineHeight: scale(28),
     color: AppColors.gray20,
@@ -67,21 +67,21 @@ const styles = StyleSheet.create({
     letterSpacing: convertPTToPX(0.1),
   },
   largeBody: {
-    fontFamily: 'Lato Medium',
+    fontFamily: 'Lato-Medium',
     fontSize: scale(16),
     lineHeight: scale(24),
     color: AppColors.gray20,
     letterSpacing: convertPTToPX(0.5),
   },
   mediumBody: {
-    fontFamily: 'Lato Medium',
+    fontFamily: 'Lato-Medium',
     fontSize: scale(14),
     lineHeight: scale(20),
     color: AppColors.gray20,
     letterSpacing: convertPTToPX(0.25),
   },
   smallBody: {
-    fontFamily: 'Lato Medium',
+    fontFamily: 'Lato-Medium',
     fontSize: scale(12),
     lineHeight: scale(16),
     color: AppColors.gray20,
