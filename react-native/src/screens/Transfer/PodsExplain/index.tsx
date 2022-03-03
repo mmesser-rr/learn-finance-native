@@ -13,12 +13,13 @@ import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import {GradientButtonColors} from 'src/utils/constants';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
 const PodsExplain: React.FC = () => {
   const [swiperIndex, setSwiperIndex] = useState(1);
-  const onNext = () => {};
+  const onNext = () => NavigationService.navigate('TransferStack', {screen: 'SetupPods'});
 
   const ActiveDot = () => {
     return (
@@ -34,10 +35,12 @@ const PodsExplain: React.FC = () => {
     setSwiperIndex(index);
   };
 
+  const onClose = () => NavigationService.navigate('HomeStack');
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <TopNav title="Set up Pods" />
+        <TopNav title="Set up Pods" goCloseScreen={onClose} />
       </View>
       <View style={styles.swiperView}>
         <Swiper

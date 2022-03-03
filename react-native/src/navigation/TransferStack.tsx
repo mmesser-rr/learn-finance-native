@@ -5,6 +5,7 @@ import TransferReview from 'src/screens/Transfer/Review';
 import DirectDeposit from 'src/screens/Transfer/DirectDeposit';
 import ProcessDeposit from 'src/screens/Transfer/ProcessDeposit';
 import PodsExplain from 'src/screens/Transfer/PodsExplain';
+import SetupPods from 'src/screens/Transfer/SetupPods';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ const TransferStack: React.FC = () => {
       <Stack.Screen name="DirectDeposit" component={DirectDeposit} />
       <Stack.Screen name="ProcessDeposit" component={ProcessDeposit} />
       <Stack.Screen name="PodsExplain" component={PodsExplain} />
+      <Stack.Screen name="SetupPods" component={SetupPods} />
     </Stack.Navigator>
   );
 };
