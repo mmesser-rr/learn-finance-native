@@ -42,7 +42,6 @@ const VerifyEmailCode: React.FC = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log(111, data);
     NavigationService.navigate('LastStepWelcome');
   };
 

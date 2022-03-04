@@ -11,6 +11,7 @@ import {GradientButtonColors} from 'src/utils/constants';
 import CloseIcon from 'src/assets/icons/close.svg';
 import { updateHomeStep } from 'src/store/actions/bankingActions';
 import NavigationService from 'src/navigation/NavigationService';
+import TopNav from 'src/components/common/TopNav';
 
 import styles from './styles';
 
@@ -40,13 +41,15 @@ const DirectDeposit: React.FC = () => {
     NavigationService.navigate('HomeStack');
   };
 
+  const onClose = () => {
+    NavigationService.navigate('HomeStack');
+  };
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
-        <View style={styles.head}>
-          <View></View>
-          <Text type="Title/Large">Direct Deposit</Text>
-          <CloseIcon />
+        <View style={styles.nav}>
+          <TopNav title="Direct Deposit" goCloseScreen={onClose} />
         </View>
         <View>
           <Text type="Body/Large" style={styles.label}>
