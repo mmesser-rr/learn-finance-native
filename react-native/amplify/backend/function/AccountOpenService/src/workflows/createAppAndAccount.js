@@ -8,7 +8,7 @@ const NO_OF_ACCOUNTS = 3;
 const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
 
-  if (custId !== undefined) {
+  if (custId) {
     throw new Error("Looks like this athlete is already affiliated with a Unit customer. Continuing will overwrite and lose current unit data. Bailing");
   }
 
@@ -17,6 +17,7 @@ const createAppAndAccount = (ssn, athlete) => {
       Promise.reject(tpc.addUnitDataToAthlete(athlete.id, err))
       : Promise.reject(err)
     )
+
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
     .then(res => Promise.all(
       map(
