@@ -38,12 +38,9 @@ const styles = StyleSheet.create({
     marginTop: scale(8),
     marginBottom: scale(24),
   },
-  head: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: scale(8),
+  nav: {
     marginBottom: scale(24),
+    marginHorizontal: scale(27),
   },
 });
 
