@@ -4,11 +4,11 @@ const tpc = require("../wrappers/tpc");
 const accountFromUnitParams = (athleteId, unitResponse) => (
   {
     athleteId,
+    unitAccountId: unitResponse.data.id,
     routingCode: unitResponse.data.attributes.routingNumber,
     accountNumber: unitResponse.data.attributes.accountNumber
   }
 );
-
 const persistAccountInBackend = (athleteId, unitResponse) => tpc.persistAccount(accountFromUnitParams(athleteId, unitResponse));
 
 const createAndPersistAccount = (athlete) => {
@@ -19,10 +19,10 @@ const createAndPersistAccount = (athlete) => {
     throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
   }
 
-  return unit.createAccount(custId)
+  return unit.createAccount(custId, athleteId)
     .then(res => persistAccountInBackend(athleteId, res))
     .catch(err => {
-      throw new Error(`Failed to create account in Unit. Reason: ${err}`);
+      throw new Error(`Failed to create account in Unit. Reason: ${JSON.stringify(err)}`);
     });
 }
 
