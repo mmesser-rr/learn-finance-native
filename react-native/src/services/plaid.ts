@@ -22,10 +22,8 @@ export const createLinkToken = async (userId: string) => {
       `${ApiConfig.PLAID}/link/token/create`,
       payload,
     );
-    console.log(222, response)
     return response.data.link_token;
   } catch (error) {
-    console.log(111, error);
     return '';
   }
 };
