@@ -20,7 +20,8 @@ const parseApplicationParams = (unit) => (
     dateOfBirth,
     address,
     email,
-    mobilePhone
+    mobilePhone,
+    id
   }
 ) => ({
   type: APPLICATION_TYPE,
@@ -30,7 +31,10 @@ const parseApplicationParams = (unit) => (
     dateOfBirth: dateOfBirth,
     address: parseAddress(unit)(address),
     email: email,
-    phone: unit.helpers.createPhone("1", mobilePhone)
+    phone: unit.helpers.createPhone("1", mobilePhone.substring(2)),
+    tags:{
+      athleteId: id
+    }
   }
 });
 

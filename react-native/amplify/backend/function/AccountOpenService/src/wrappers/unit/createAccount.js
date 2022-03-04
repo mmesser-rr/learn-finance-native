@@ -1,9 +1,10 @@
-const paramsFromCustId = (custId) => ({
+const paramsFromCustId = (custId, athleteId) => ({
   type: "depositAccount",
   attributes: {
     "depositProduct": "checking",
     "tags": {
-      "purpose": "checking"
+      "purpose": "checking",
+      "athleteId": athleteId
     }
   },
   relationships: {
@@ -16,8 +17,8 @@ const paramsFromCustId = (custId) => ({
   }
 });
 
-const createAccount = (unit) => (custId) => {
-  const params = paramsFromCustId(custId);
+const createAccount = (unit) => (custId, athleteId) => {
+  const params = paramsFromCustId(custId, athleteId);
   return unit.accounts.create(params);
 };
 
