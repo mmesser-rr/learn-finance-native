@@ -36,12 +36,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: scale(28),
     marginTop: scale(26)
   },
   slider: {
     height: scale(28),
     backgroundColor: 'transparent'
+  },
+  tooltip: {
+  },
+  tooltipContent: {
+    color: AppColors.coreBlack100,
+  },
+  tooltipBackground: {
+    backgroundColor: AppColors.gray20,
+    paddingHorizontal: scale(16),
+    paddingVertical: scale(12),
+  },
+  error: {
+    color: AppColors.accentRed100
+  },
+  errorWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   }
 });
 

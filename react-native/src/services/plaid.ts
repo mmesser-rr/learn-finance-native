@@ -1,7 +1,7 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-
 import {PLAID_CLIENT_ID, PLAID_SECRET} from '@env';
+
 import ApiConfig from 'src/config/api-config';
 
 export const createLinkToken = async (userId: string) => {
@@ -22,9 +22,10 @@ export const createLinkToken = async (userId: string) => {
       `${ApiConfig.PLAID}/link/token/create`,
       payload,
     );
+    console.log(222, response)
     return response.data.link_token;
   } catch (error) {
-    console.log(error);
+    console.log(111, error);
     return '';
   }
 };

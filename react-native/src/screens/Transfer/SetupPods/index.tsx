@@ -1,6 +1,7 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import {View, TouchableOpacity} from 'react-native';
 import Slider from '@react-native-community/slider';
+import Tooltip from 'react-native-walkthrough-tooltip';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
@@ -12,8 +13,29 @@ import InfoIcon from 'src/assets/icons/info.svg';
 
 import styles from './styles';
 
+interface ToolTipContentProps {
+  text: string;
+}
+
+const ToolTipContent: React.FC<ToolTipContentProps> = ({ text }) => {
+  return (
+    <View style={styles.tooltip}>
+      <Text style={styles.tooltipContent} type="Title/Medium">{text}</Text>
+    </View>
+  );
+};
+
 const SetupPods: React.FC = () => {
-  const onDone = () => {};
+  const [savings, setSavings] = useState(30);
+  const [investments, setInvestments] = useState(40);
+  const [spending, setSpending] = useState(30);
+  const [savingsTip, setSavingTip] = useState(false);
+  const [investmentsTip, setInvestmentsTip] = useState(false);
+  const [spendingTip, setSpendingTip] = useState(false);
+  const onDone = () => NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'});
+
+  const total = savings + investments + spending;
+  const isValid = total === 100;
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -35,62 +57,122 @@ const SetupPods: React.FC = () => {
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
                 <Text type="Title/Medium" style={styles.label}>SAVINGS</Text>
-                <InfoIcon />
+                <Tooltip
+                  isVisible={savingsTip}
+                  content={
+                    <ToolTipContent
+                      text="Money in Savings Pod supports you in a financial emergency."
+                    />
+                  }
+                  placement="top"
+                  backgroundColor="transparent"
+                  contentStyle={styles.tooltipBackground}
+                  onClose={() => setSavingTip(false)}
+                >
+                  <TouchableOpacity onPress={() => setSavingTip(true)}>
+                    <InfoIcon />
+                  </TouchableOpacity>
+                </Tooltip>
               </View>
-              <Text type="Headline/Small">30%</Text>
+              <Text type="Headline/Small">{savings}%</Text>
             </View>
             <Slider
               style={styles.slider}
               minimumValue={0}
               maximumValue={100}
-              value={30}
+              value={savings}
+              step={5}
               minimumTrackTintColor={AppColors.accentRed100}
               maximumTrackTintColor={AppColors.coreWhite100}
+              onSlidingComplete={(value) => setSavings(value)}
             />
           </View>
           <View style={styles.sliderWrapper}>
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
                 <Text type="Title/Medium" style={styles.label}>INVESTMENTS</Text>
-                <InfoIcon />
+                <Tooltip
+                  isVisible={investmentsTip}
+                  content={
+                    <ToolTipContent
+                      text="Money in Investments pod allows you to grow your wealth and beat inflation."
+                    />
+                  }
+                  placement="top"
+                  backgroundColor="transparent"
+                  contentStyle={styles.tooltipBackground}
+                  onClose={() => setInvestmentsTip(false)}
+                >
+                  <TouchableOpacity onPress={() => setInvestmentsTip(true)}>
+                    <InfoIcon />
+                  </TouchableOpacity>
+                </Tooltip>
               </View>
-              <Text type="Headline/Small">40%</Text>
+              <Text type="Headline/Small">{investments}%</Text>
             </View>
             <Slider
               style={styles.slider}
               minimumValue={0}
               maximumValue={100}
-              value={40}
+              step={5}
+              value={investments}
               minimumTrackTintColor={AppColors.accentRed100}
               maximumTrackTintColor={AppColors.coreWhite100}
+              onSlidingComplete={(value) => setInvestments(value)}
             />
           </View>
           <View style={styles.sliderWrapper}>
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
                 <Text type="Title/Medium" style={styles.label}>SPENDING</Text>
-                <InfoIcon />
+                <Tooltip
+                  isVisible={spendingTip}
+                  content={
+                    <ToolTipContent
+                      text="Money in Spending Pod is for your daily expenses."
+                    />
+                  }
+                  placement="top"
+                  backgroundColor="transparent"
+                  contentStyle={styles.tooltipBackground}
+                  onClose={() => setSpendingTip(false)}
+                >
+                  <TouchableOpacity onPress={() => setSpendingTip(true)}>
+                    <InfoIcon />
+                  </TouchableOpacity>
+                </Tooltip>
               </View>
-              <Text type="Headline/Small">30%</Text>
+              <Text type="Headline/Small">{spending}%</Text>
             </View>
             <Slider
               style={styles.slider}
               minimumValue={0}
               maximumValue={100}
-              value={30}
+              step={5}
+              value={spending}
               minimumTrackTintColor={AppColors.accentRed100}
               maximumTrackTintColor={AppColors.coreWhite100}
+              onSlidingComplete={(value) => setSpending(value)}
             />
           </View>
         </View>
         <View style={styles.total}>
           <Text type="Title/Medium">TOTAL</Text>
-          <Text type="Headline/Small">100%</Text>
+          <Text type="Headline/Small" style={!isValid ? styles.error : {}}>
+            {total}%
+          </Text>
         </View>
+        {!isValid && (
+          <View style={styles.errorWrapper}>
+            <Text type="Body/Medium" style={styles.error}>
+              Re-adjust to make total 100%
+            </Text>
+          </View>
+        )}
       </View>
       <View>
         <SubmitButton
-          isValid={true}
+          isValid={isValid}
           actionLabel="Done"
           onSubmit={onDone}
         />
