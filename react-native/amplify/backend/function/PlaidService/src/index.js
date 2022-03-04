@@ -29,10 +29,16 @@ Amplify Params - DO NOT EDIT */
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
- const {updateToken} = require('./updateToken.js');
+ const {updatePlaidToken} = require('./workflows/updateToken');
+ const {createToken} = require('./workflows/createToken');
+ const {processorToken} = require('./workflows/processorToken');
+ const {getPlaidAccount} = require('./workflows/getPlaidAccount');
 
  const resolvers = {
-  updateToken: updateToken
+	updatePlaidToken: updatePlaidToken,
+  	createToken: createToken,
+  	processorToken: processorToken,
+  	getPlaidAccount: getPlaidAccount
  };
  
  const fallback = (event) => {throw new Error `No handler defined for fieldName: ${event.fieldName}`};

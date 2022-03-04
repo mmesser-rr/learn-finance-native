@@ -1,5 +1,7 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
+const createToken = require("./createToken");
+const createProcessorToken = require("./processorToken");
 
 const tokenFromPlaidParams = (athleteId, plaidResponse) => (
   {
@@ -9,23 +11,19 @@ const tokenFromPlaidParams = (athleteId, plaidResponse) => (
     accountNumber: plaidResponse.data.attributes.accountNumber
   }
 );
-const persistAccountInBackend = (athleteId, plaidResponse) => tpc.persistAccount(tokenFromPlaidParams(athleteId, plaidResponse));
+const updatePlaidBackend = (athleteId, plaidResponse) => tpc.addPlaidToken(tokenFromPlaidParams(athleteId, plaidResponse));
 
-const updateToken = (athlete) => {
-  const custId = athlete?.unitLookup?.custId;
-  const athleteId = athlete.id;
 
-  if (custId === undefined) {
-    throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
-  }
+const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete => 
+  (athlete?.plaidLookup?.access_token != null) ? 
+      plaid.updateToken(token, athleteId)
+      .then(res => createProcessorToken(res.access_token, athleteId))
+      .then(res => updatePlaidBackend(athleteId, res)) : 
+       createToken(athleteId)
+);
 
-  return plaid.updateToken(custId, athleteId)
-    .then(res => persistAccountInBackend(athleteId, res))
-    .catch(err => {
-      throw new Error(`Failed to create account in Unit. Reason: ${JSON.stringify(err)}`);
-    });
+module.exports.updateToken = async (event) => {
+  const {athleteId, token} = event.arguments;
+   return updateToken(athleteId, token)
 }
 
-module.exports = {
-    updateToken: (athleteId) => tpc.getAthlete(athleteId).then(updateToken)
-}

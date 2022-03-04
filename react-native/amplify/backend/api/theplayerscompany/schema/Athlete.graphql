@@ -12,12 +12,22 @@ enum AthleteLevel {
   PROFESSIONAL
 }
 
-type AthletePlaidLookup {
-  access_token: String
-  item_id: String
-  request_id: String
+enum Pods {
+  SAVINGS
+  INVESTMENTS
+  SPENDING
 }
 
+type PodSettings {
+  SAVINGS: Int!
+  INVESTMENTS: Int!
+  SPENDING: Int!
+}
+
+type AthletePlaidLookup {
+  access_token: String
+  processor_token: String
+}
 
 type AthleteSport {
   name: String!
@@ -43,7 +53,8 @@ type Athlete @model {
   dateOfBirth: String!
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
-  plaid: AthletePlaidLookup 
+  podSettings: PodSettings
+  plaid: AthletePlaidLookup
   wyreId: String
   isActive: Boolean!
 }
@@ -53,4 +64,5 @@ type AthleteAccount @model {
   unitAccountId: String!
   routingCode: String!
   accountNumber: String!
+  podName: Pods!
 }

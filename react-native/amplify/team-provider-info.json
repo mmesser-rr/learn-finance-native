@@ -15,24 +15,23 @@
       "function": {
         "InviteService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/InviteService-744b624a78726d514b51-build.zip"
+          "s3Key": "amplify-builds/InviteService-375666735a7078447476-build.zip"
         },
         "PlayerVerifyService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlayerVerifyService-6872506c72316279372b-build.zip"
+          "s3Key": "amplify-builds/PlayerVerifyService-6c6142386f746e6b4868-build.zip"
         },
         "AccountOpenService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/AccountOpenService-53676471643978414737-build.zip",
+          "s3Key": "amplify-builds/AccountOpenService-776232354e6c656e7364-build.zip",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxNTI2Iiwic3ViIjoiamVubmEubXVycmVsbEBrdW5haWNvLmNvbSIsImV4cCI6IjIwMjItMTItMTVUMjE6MDQ6MjAuNTI0WiIsImp0aSI6Ijk5NzI5Iiwib3JnSWQiOiI4ODIiLCJzY29wZSI6ImFwcGxpY2F0aW9ucyBhcHBsaWNhdGlvbnMtd3JpdGUgY3VzdG9tZXJzIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtc2Vuc2l0aXZlIHRyYW5zYWN0aW9ucyBhdXRob3JpemF0aW9ucyBzdGF0ZW1lbnRzIHBheW1lbnRzIHBheW1lbnRzLXdyaXRlLWNvdW50ZXJwYXJ0eSBwYXltZW50cy13cml0ZS1hY2gtZGViaXQgY291bnRlcnBhcnRpZXMgYmF0Y2gtcmVsZWFzZXMgYmF0Y2gtcmVsZWFzZXMtd3JpdGUgd2ViaG9va3Mgd2ViaG9va3Mtd3JpdGUgZXZlbnRzIGV2ZW50cy13cml0ZSBhdXRob3JpemF0aW9uLXJlcXVlc3RzIGF1dGhvcml6YXRpb24tcmVxdWVzdHMtd3JpdGUgY2hlY2stZGVwb3NpdHMgY2hlY2stZGVwb3NpdHMtd3JpdGUiLCJvcmciOiJkdW5ubyIsInNvdXJjZUlwIjoiIiwidXNlclR5cGUiOiJvcmcifRQEwuNgZzfOtRy-BRqkSvOHncypr7Y9I_SS_5_qwRWxKuquPgZcb6_cDrV-qKwIL7uWtjTUCb45-WCk01UglA0",
           "unitApiUrl": "https://api.s.unit.sh/",
           "nodeEnv": "production"
         },
         "PlaidService": {
-          "secretsPathAmplifyAppId": "d3dzwrbiqysm7k"
-        },
-        "UnitService": {
-          "secretsPathAmplifyAppId": "d3dzwrbiqysm7k"
+          "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
+          "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+          "s3Key": "amplify-builds/PlaidService-31576c677141562b3731-build.zip"
         }
       }
     }
