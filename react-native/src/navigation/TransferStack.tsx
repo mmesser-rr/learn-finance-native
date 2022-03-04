@@ -6,6 +6,7 @@ import DirectDeposit from 'src/screens/Transfer/DirectDeposit';
 import ProcessDeposit from 'src/screens/Transfer/ProcessDeposit';
 import PodsExplain from 'src/screens/Transfer/PodsExplain';
 import SetupPods from 'src/screens/Transfer/SetupPods';
+import PodSetupSuccess from 'src/screens/Transfer/PodSetupSuccess';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const TransferStack: React.FC = () => {
       <Stack.Screen name="ProcessDeposit" component={ProcessDeposit} />
       <Stack.Screen name="PodsExplain" component={PodsExplain} />
       <Stack.Screen name="SetupPods" component={SetupPods} />
+      <Stack.Screen name="PodSetupSuccess" component={PodSetupSuccess} />
     </Stack.Navigator>
   );
 };
