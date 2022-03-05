@@ -7,10 +7,12 @@
 Amplify Params - DO NOT EDIT */
 const { createToken } = require("./workflows/createToken.js");
 const { updateToken } = require("./workflows/updateToken.js");
+const { getPlaidAccounts } = require("./workflows/getPlaidAccount.js");
 
 const resolvers = Object.freeze({
     createPlaidLink: (event) => createToken(event.arguments.athleteId),
-    updatePlaidLink: (event) => updateToken(event)
+    updatePlaidLink: (event) => updateToken(event),
+	getPlaidAccounts: (event) => getPlaidAccounts(event)
 });
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);

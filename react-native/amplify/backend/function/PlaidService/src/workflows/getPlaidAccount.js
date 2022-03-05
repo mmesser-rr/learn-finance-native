@@ -3,7 +3,6 @@ const tpc = require("../wrappers/tpc");
 
 const getPlaidAccount = (athlete) => {
     const token = athlete?.plaidLookup?.access_token;
-    
     if (!token) {
         throw new Error("Looks like this athlete haven't linked plaid");
       }

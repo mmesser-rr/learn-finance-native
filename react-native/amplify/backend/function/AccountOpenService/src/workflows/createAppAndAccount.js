@@ -3,6 +3,11 @@ const { repeat, map } = require("ramda");
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
 
+/********************************************* /
+
+Note : The app creates 3 accounts on setup
+
+*********************************************/
 const NO_OF_ACCOUNTS = 3;
 
 const createAppAndAccount = (ssn, athlete) => {

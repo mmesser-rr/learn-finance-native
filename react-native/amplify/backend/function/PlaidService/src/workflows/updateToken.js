@@ -1,5 +1,6 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
+const getPlaidAccount = require("./getPlaidAccount");
 const createProcessorToken = require("./processorToken");
 
 const tokenFromPlaidParams = (athleteId, plaidResponse) => (
@@ -16,6 +17,7 @@ const updatePlaidBackend = (athleteId, plaidResponse) => tpc.addPlaidToken(token
 const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete => 
   (athlete?.unitLookup?.custId != null) ? 
       plaid.updateToken(token)
+      .then(res => getPlaidAccount(res.access_token))
       .then(res => createProcessorToken(res.access_token))
       .then(res => updatePlaidBackend(athleteId, res)) : 
       Promise.reject(`Athlete doesn't have account ${athleteId}`)

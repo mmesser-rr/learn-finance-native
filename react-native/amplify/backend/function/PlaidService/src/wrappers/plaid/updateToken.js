@@ -4,7 +4,10 @@ const paramsFromId = (accessToken) => ({
 
 const updateToken = (plaid) => (accessToken) => {
   const param = paramsFromId(accessToken);
-  return plaid.itemPublicTokenExchange(param).then((res) => (res.data))
+  return plaid.itemPublicTokenExchange(param)
+  .then((res) => res.data.access_token)
+  .then((accessToken) => plaid.accountsGet({accessToken}))
+  .then((accountsResponse) => accountsResponse.accounts)
   .catch((error) => {
     const err = error.response.data;
     // Indicates plaid API error

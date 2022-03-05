@@ -18,9 +18,14 @@ type PodSettings {
   SPENDING: Int!
 }
 
+type ProcessorToken{
+  plaidAccountId: String!
+  processorToken: String
+}
+
 type AthletePlaidLookup {
-  access_token: String
-  processor_token: String
+  accessToken: String
+  processorToken: [ProcessorToken] @hasMany
 }
 
 type AthleteSport {
