@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "plaid": "^10.0.0",
     "graphql": "^16.2.0",
     "graphql-tag": "^2.12.6"
   },

@@ -1,8 +1,6 @@
-import { Configuration, PlaidApi, PlaidEnvironments } from 'plaid';
 const fs = require('fs');
 const { compose } = require("ramda");
-
-const { Unit } = require("@unit-finance/unit-node-sdk");
+const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 const axios = require('axios');
 
 const jsonFile = compose(JSON.parse, fs.readFileSync)("./defaultEnv.json")
@@ -27,10 +25,12 @@ const getJson = (varName, required = true) => {
   return varValue;
 }
 
+
 const getEnvOrJson = (varName, required = true) => getEnv(varName, false) || getJson(varName, required);
 
+
 const configuration = new Configuration({
-  basePath: PlaidEnvironments.sandbox,
+  basePath: PlaidEnvironments.development,
   baseOptions: {
     headers: {
       'PLAID-CLIENT-ID': getEnvOrJson('CLIENT_ID'),
@@ -39,9 +39,10 @@ const configuration = new Configuration({
   },
 });
 
+
 const devEnv = () => ({
   plaid: new PlaidApi(configuration),
-  plaid: axios.create({
+  axios: axios.create({
     baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
       'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
@@ -51,10 +52,10 @@ const devEnv = () => ({
 
 const liveEnv = () => ({
   plaid: new PlaidApi(configuration),
-  plaid: axios.create({
-    baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
+  axios: axios.create({
+    baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
+      'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 });

@@ -1,4 +1,19 @@
 {
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "clientId",
+      "environmentVariableName": "CLIENT_ID"
+    },
+    {
+      "cloudFormationParameterName": "secretKey",
+      "environmentVariableName": "SECRET_KEY"
+    },
+    {
+      "cloudFormationParameterName": "nodeEnv",
+      "environmentVariableName": "NODE_ENV"
+    }
+  ],
   "permissions": {
     "api": {
       "theplayerscompany": [
@@ -7,29 +22,17 @@
       ]
     },
     "function": {
-      "PlayerVerifyService": [
-        "create",
-        "read"
-      ],
       "AccountOpenService": [
-        "create",
-        "read"
+        "read",
+        "update"
       ]
     },
     "storage": {
       "Athlete:@model(appsync)": [
         "create",
-        "read"
-      ],
-      "PhoneChallenge:@model(appsync)": [
-        "create",
-        "read"
+        "read",
+        "update"
       ]
     }
-  },
-  "lambdaLayers": [],
-  "secretNames": [
-    "CLIENT_ID",
-    "SECRET_KEY"
-  ]
+  }
 }

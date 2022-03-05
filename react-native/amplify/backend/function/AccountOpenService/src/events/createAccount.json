@@ -1,24 +1,6 @@
 {
   "fieldName": "openAccount",
   "arguments": {
-    "athlete": {
-      "id": "f021851d-51ea-4f02-b9d7-e2ee7b8034fb",
-      "firstName": "Richard",
-      "lastName": "Hendricks",
-      "dateOfBirth": "2001-08-10",
-      "address": {
-        "streetAddress": "20 Ingram St.",
-        "apt": "3",
-        "city": "Forest Hills",
-        "state": "CA",
-        "zipCode": "11375"
-      },
-      "unitLookup": {
-        "appId": "1243657545",
-        "custId": "191485"
-      },
-      "email": "april@baxter.com",
-      "phone": "2025550158"
-    }
+    "athleteId": "d746d13f-5a6c-4f23-91d6-69125ff27f5b"
   }
 }

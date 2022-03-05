@@ -12,12 +12,6 @@ enum AthleteLevel {
   PROFESSIONAL
 }
 
-enum Pods {
-  SAVINGS
-  INVESTMENTS
-  SPENDING
-}
-
 type PodSettings {
   SAVINGS: Int!
   INVESTMENTS: Int!
@@ -53,7 +47,7 @@ type Athlete @model {
   dateOfBirth: String!
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
-  podSettings: PodSettings
+  podSettings: PodSettings!
   plaid: AthletePlaidLookup
   wyreId: String
   isActive: Boolean!
@@ -64,5 +58,5 @@ type AthleteAccount @model {
   unitAccountId: String!
   routingCode: String!
   accountNumber: String!
-  podName: Pods!
+  podName: String!
 }

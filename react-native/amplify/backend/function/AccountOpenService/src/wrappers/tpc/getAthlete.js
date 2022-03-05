@@ -10,6 +10,11 @@ const getAthleteStatement = gql`
       email
       mobilePhone
       dateOfBirth
+      podSettings{
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
       address {
         apt
         city
@@ -22,6 +27,7 @@ const getAthleteStatement = gql`
           unitAccountId
           routingCode
           accountNumber
+          podName
         }
       }
       unitLookup {

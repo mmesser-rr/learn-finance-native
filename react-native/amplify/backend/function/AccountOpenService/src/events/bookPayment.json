@@ -1,7 +1,7 @@
 {
     "fieldName": "bookPayment",
     "arguments": {
-      "athleteId": "f021851d-51ea-4f02-b9d7-e2ee7b8034fb",
+      "athleteId": "46cc980b-46b7-459e-95ea-1b9ac9b85523",
         "data":{
           "unitAccountId" : "333452",
           "type":"bookPayment",

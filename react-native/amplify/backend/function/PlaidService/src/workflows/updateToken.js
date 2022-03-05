@@ -1,6 +1,5 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
-const createToken = require("./createToken");
 const createProcessorToken = require("./processorToken");
 
 const tokenFromPlaidParams = (athleteId, plaidResponse) => (
@@ -15,15 +14,15 @@ const updatePlaidBackend = (athleteId, plaidResponse) => tpc.addPlaidToken(token
 
 
 const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete => 
-  (athlete?.plaidLookup?.access_token != null) ? 
-      plaid.updateToken(token, athleteId)
-      .then(res => createProcessorToken(res.access_token, athleteId))
+  (athlete?.unitLookup?.custId != null) ? 
+      plaid.updateToken(token)
+      .then(res => createProcessorToken(res.access_token))
       .then(res => updatePlaidBackend(athleteId, res)) : 
-       createToken(athleteId)
+      Promise.reject(`Athlete doesn't have account ${athleteId}`)
 );
 
 module.exports.updateToken = async (event) => {
-  const {athleteId, token} = event.arguments;
-   return updateToken(athleteId, token)
+  const {athleteId, accessToken} = event.arguments;
+   return updateToken(athleteId, accessToken)
 }
 

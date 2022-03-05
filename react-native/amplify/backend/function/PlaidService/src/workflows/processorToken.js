@@ -2,8 +2,8 @@ const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
 
 const processorToken = (athleteId, token, accountId) => {
-    const token = athlete?.plaidLookup?.access_token;
-    if (token === undefined) {
+    const custId = athlete?.unitLookup?.custId;;
+    if (custId === undefined) {
       throw new Error("Looks like this athlete haven't linked plaid");
     }
   return plaid.processorToken(athleteId, token, accountId)
@@ -13,7 +13,7 @@ const processorToken = (athleteId, token, accountId) => {
 }
 
 module.exports.processorToken = async (event) => {
-    const {athleteId, token, accountId} = event.arguments;
-     return processorToken(athleteId, token, accountId)
+    const {athleteId, accessToken, accountId} = event.arguments;
+     return processorToken(athleteId, accessToken, accountId)
 }
   
