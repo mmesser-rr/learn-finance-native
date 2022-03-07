@@ -71,7 +71,7 @@ const VerifyEmailCode: React.FC = () => {
                 label="Enter 6-digit Code"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.code?.message}
+                errorMessage={errors?.code?.message}
                 maxLength={6}
                 autoFocus
                 isNumeric
@@ -102,8 +102,7 @@ const VerifyEmailCode: React.FC = () => {
           style={styles.laterActionGradient}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
-          colors={GradientButtonColors}
-        >
+          colors={GradientButtonColors}>
           <Button>
             <Text type="Body/Large">Maybe Later</Text>
           </Button>
