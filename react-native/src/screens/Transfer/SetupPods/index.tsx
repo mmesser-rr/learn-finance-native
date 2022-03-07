@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import {View, TouchableOpacity} from 'react-native';
-// import Slider from '@react-native-community/slider';
-// import {Slider} from '@miblanchard/react-native-slider';
 import {Slider} from 'src/components/common/Slider';
 import Tooltip from 'react-native-walkthrough-tooltip';
 
