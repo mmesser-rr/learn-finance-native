@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import Slider from '@react-native-community/slider';
+// import Slider from '@react-native-community/slider';
+// import {Slider} from '@miblanchard/react-native-slider';
+import {Slider} from 'src/components/common/Slider';
 import Tooltip from 'react-native-walkthrough-tooltip';
 
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -10,8 +12,11 @@ import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import InfoIcon from 'src/assets/icons/info.svg';
+import {RedLinnerGradient} from 'src/utils/constants';
 
 import styles from './styles';
+
+const sliderMarginHorizontalWidth = 27;
 
 interface ToolTipContentProps {
   text: string;
@@ -77,14 +82,17 @@ const SetupPods: React.FC = () => {
               <Text type="Headline/Small">{savings}%</Text>
             </View>
             <Slider
-              style={styles.slider}
-              minimumValue={0}
-              maximumValue={100}
-              value={savings}
+              type="Single"
+              min={0}
+              max={100}
               step={5}
+              value={savings}
+              onChange={(low: number, high: number) => setSavings(low)}
               minimumTrackTintColor={AppColors.accentRed100}
-              maximumTrackTintColor={AppColors.coreWhite100}
-              onSlidingComplete={(value) => setSavings(value)}
+              maximumTrackTintColor={AppColors.gray20}
+              thumbStyle={styles.sliderThumb}
+              gradientColors={RedLinnerGradient}
+              marginHorizontalWidth={sliderMarginHorizontalWidth}
             />
           </View>
           <View style={styles.sliderWrapper}>
@@ -111,14 +119,17 @@ const SetupPods: React.FC = () => {
               <Text type="Headline/Small">{investments}%</Text>
             </View>
             <Slider
-              style={styles.slider}
-              minimumValue={0}
-              maximumValue={100}
+              type="Single"
+              min={0}
+              max={100}
               step={5}
               value={investments}
+              onChange={(low: number, high: number) => setInvestments(low)}
               minimumTrackTintColor={AppColors.accentRed100}
-              maximumTrackTintColor={AppColors.coreWhite100}
-              onSlidingComplete={(value) => setInvestments(value)}
+              maximumTrackTintColor={AppColors.gray20}
+              thumbStyle={styles.sliderThumb}
+              gradientColors={RedLinnerGradient}
+              marginHorizontalWidth={sliderMarginHorizontalWidth}
             />
           </View>
           <View style={styles.sliderWrapper}>
@@ -145,14 +156,17 @@ const SetupPods: React.FC = () => {
               <Text type="Headline/Small">{spending}%</Text>
             </View>
             <Slider
-              style={styles.slider}
-              minimumValue={0}
-              maximumValue={100}
+              type="Single"
+              min={0}
+              max={100}
               step={5}
               value={spending}
+              onChange={(low: number, high: number) => setSpending(low)}
               minimumTrackTintColor={AppColors.accentRed100}
-              maximumTrackTintColor={AppColors.coreWhite100}
-              onSlidingComplete={(value) => setSpending(value)}
+              maximumTrackTintColor={AppColors.gray20}
+              thumbStyle={styles.sliderThumb}
+              gradientColors={RedLinnerGradient}
+              marginHorizontalWidth={sliderMarginHorizontalWidth}
             />
           </View>
         </View>
