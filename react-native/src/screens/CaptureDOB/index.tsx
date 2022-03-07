@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import dayjs from 'dayjs';
+import {useDispatch} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -11,9 +12,12 @@ import {validateDOB} from 'src/utils/validation';
 import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 const CaptureDOB: React.FC = () => {
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
+  const [dateOfBirthString, setDateOfBirthString] = useState('');
   const [isError, setError] = useState(false);
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
 
@@ -38,9 +42,19 @@ const CaptureDOB: React.FC = () => {
     }
 
     setIsValid(valid);
+    if (valid) {
+      setDateOfBirthString(value);
+    }
   };
 
-  const goToNextStep = () => NavigationService.navigate('CaptureAddress');
+  const goToNextStep = () => {
+    const year = dateOfBirthString.slice(-4);
+    const month = dateOfBirthString.slice(0, 2);
+    const day = dateOfBirthString.slice(2, 4);
+    const dateOfBirth = year + '-' + month + '-' + day;
+    dispatch(updateOnboarding({dateOfBirth}));
+    NavigationService.navigate('CaptureAddress');
+  };
 
   return (
     <AppLayout containerStyle={styles.container}>
