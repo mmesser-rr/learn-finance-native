@@ -6,11 +6,11 @@ export interface IOnboardingState {
   dateOfBirth?: string;
   level?: 'COLLEGE' | 'PROFESSIONAL';
   sport?: {
-    airTableId: number;
+    airTableId: string;
     name: string;
   };
   team?: {
-    airTableId: number;
+    airTableId: string;
     name: string;
   };
   address?: {

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {API, graphqlOperation} from 'aws-amplify';
+import {useDispatch} from 'react-redux';
 
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -8,6 +9,7 @@ import {Text} from 'src/components/common/Texts';
 
 import styles from './styles';
 import {initiatePhoneChallenge} from 'src/graphql/mutations';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
@@ -18,6 +20,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
   updatePhone,
 }) => {
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
 
@@ -34,6 +37,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
       //   }),
       // );
       updatePhone(phoneNumber);
+      dispatch(updateOnboarding({mobilePhone: phoneNumber}));
       goToNextStep();
     } catch (error) {
       console.log(error);

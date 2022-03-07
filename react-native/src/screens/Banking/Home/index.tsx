@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
 import {getUniqueId} from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -13,9 +13,9 @@ import {PodsCardGradient} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import {createLinkToken, getExistingLinkToken} from 'src/services/plaid';
-import { RootState } from 'src/store';
-import { generateTextStyle } from 'src/utils/functions';
-import { updateHomeStep } from 'src/store/actions/bankingActions';
+import {RootState} from 'src/store/root-state';
+import {generateTextStyle} from 'src/utils/functions';
+import {updateHomeStep} from 'src/store/actions/bankingActions';
 
 import styles from './styles';
 import UserHomeModal from 'src/components/common/UserHomeModal';
@@ -30,21 +30,18 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
   const style = generateTextStyle(styles.card, propsStyle);
   if (active) {
     return (
-      <LinearGradient
-        colors={PodsCardGradient}
-        style={style}
-      >{children}</LinearGradient>
+      <LinearGradient colors={PodsCardGradient} style={style}>
+        {children}
+      </LinearGradient>
     );
   }
 
-  return (
-    <View style={style}>{children}</View>
-  );
+  return <View style={style}>{children}</View>;
 };
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const { step } = useSelector((state: RootState) => state.bankingReducer);
+  const {step} = useSelector((state: RootState) => state.bankingReducer);
   const [linkToken, setLinkToken] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -132,8 +129,7 @@ const Home: React.FC = () => {
                   onSuccess={(success: LinkSuccess) =>
                     onPlaidSuccessHandler(success)
                   }
-                  onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}
-                >
+                  onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}>
                   <View style={styles.transferWrapper}>
                     <Text type="Body/Large" style={styles.transfer}>
                       Transfer from another bank
@@ -144,7 +140,10 @@ const Home: React.FC = () => {
             </View>
           )}
           <View>
-            <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit} disabled={isPods}>
+            <Button
+              actionStyle={styles.deposit}
+              onPress={onSetupDirectDeposit}
+              disabled={isPods}>
               <Text type="Body/Large">Set up direct deposit</Text>
             </Button>
           </View>
@@ -171,7 +170,10 @@ const Home: React.FC = () => {
           </View>
         </View>
       </Card>
-      <UserHomeModal visible={isModalVisible} onClose={() => setModalVisible(false)} />
+      <UserHomeModal
+        visible={isModalVisible}
+        onClose={() => setModalVisible(false)}
+      />
     </AppLayout>
   );
 };
