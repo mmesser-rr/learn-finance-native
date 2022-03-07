@@ -1,0 +1,12 @@
+{
+    "fieldName": "podSettings",
+    "arguments": {
+      "athleteId": "46cc980b-46b7-459e-95ea-1b9ac9b85523",
+      "data":{
+        "investments": 40, 
+        "savings": 40, 
+        "spending": 20
+      }
+    }
+  }
+  

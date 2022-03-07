@@ -28,9 +28,9 @@
       "Type": "String",
       "Default": "apitheplayerscompanyGraphQLAPIKeyOutput"
     },
-    "functionAccountOpenServiceName": {
+    "functionUnitServiceName": {
       "Type": "String",
-      "Default": "functionAccountOpenServiceName"
+      "Default": "functionUnitServiceName"
     },
     "clientId": {
       "Type": "String"
@@ -107,9 +107,6 @@
             "API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apitheplayerscompanyGraphQLAPIKeyOutput"
             },
-            "FUNCTION_ACCOUNTOPENSERVICE_NAME": {
-              "Ref": "functionAccountOpenServiceName"
-            },
             "API_THEPLAYERSCOMPANY_ATHLETETABLE_NAME": {
               "Fn::ImportValue": {
                 "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteTable:Name"
@@ -131,6 +128,87 @@
                   {
                     "Fn::ImportValue": {
                       "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "FUNCTION_UNITSERVICE_NAME": {
+              "Ref": "functionUnitServiceName"
+            },
+            "API_THEPLAYERSCOMPANY_ATHLETEACCOUNTTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+              }
+            },
+            "API_THEPLAYERSCOMPANY_ATHLETEACCOUNTTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
+              }
+            },
+            "API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_THEPLAYERSCOMPANY_PROCESSORTOKENTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:ProcessorTokenTable:Name"
+              }
+            },
+            "API_THEPLAYERSCOMPANY_PROCESSORTOKENTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:ProcessorTokenTable:Name"
                     }
                   }
                 ]
@@ -309,17 +387,24 @@
             {
               "Effect": "Allow",
               "Action": [
-                "lambda:Get*",
-                "lambda:List*",
-                "lambda:Invoke*",
-                "lambda:Update*"
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*"
               ],
               "Resource": [
                 {
                   "Fn::Join": [
                     "",
                     [
-                      "arn:aws:lambda:",
+                      "arn:aws:dynamodb:",
                       {
                         "Ref": "AWS::Region"
                       },
@@ -327,10 +412,34 @@
                       {
                         "Ref": "AWS::AccountId"
                       },
-                      ":function:",
+                      ":table/",
                       {
-                        "Ref": "functionAccountOpenServiceName"
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:ProcessorTokenTable:Name"
+                        }
                       }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:ProcessorTokenTable:Name"
+                        }
+                      },
+                      "/index/*"
                     ]
                   ]
                 }
@@ -389,6 +498,128 @@
                       {
                         "Fn::ImportValue": {
                           "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
                         }
                       },
                       "/index/*"

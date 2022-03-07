@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.22\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -161,6 +161,32 @@
                   {
                     "Fn::ImportValue": {
                       "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
+              }
+            },
+            "API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
                     }
                   }
                 ]
@@ -513,6 +539,67 @@
                       {
                         "Fn::ImportValue": {
                           "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:AthleteAccountTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apitheplayerscompanyGraphQLAPIIdOutput}:GetAtt:TransanctionsTable:Name"
                         }
                       },
                       "/index/*"

@@ -21,16 +21,9 @@
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
           "s3Key": "amplify-builds/PlayerVerifyService-6c6142386f746e6b4868-build.zip"
         },
-        "AccountOpenService": {
-          "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/AccountOpenService-4e557437304d6c727233-build.zip",
-          "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxNTI2Iiwic3ViIjoiamVubmEubXVycmVsbEBrdW5haWNvLmNvbSIsImV4cCI6IjIwMjItMTItMTVUMjE6MDQ6MjAuNTI0WiIsImp0aSI6Ijk5NzI5Iiwib3JnSWQiOiI4ODIiLCJzY29wZSI6ImFwcGxpY2F0aW9ucyBhcHBsaWNhdGlvbnMtd3JpdGUgY3VzdG9tZXJzIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtc2Vuc2l0aXZlIHRyYW5zYWN0aW9ucyBhdXRob3JpemF0aW9ucyBzdGF0ZW1lbnRzIHBheW1lbnRzIHBheW1lbnRzLXdyaXRlLWNvdW50ZXJwYXJ0eSBwYXltZW50cy13cml0ZS1hY2gtZGViaXQgY291bnRlcnBhcnRpZXMgYmF0Y2gtcmVsZWFzZXMgYmF0Y2gtcmVsZWFzZXMtd3JpdGUgd2ViaG9va3Mgd2ViaG9va3Mtd3JpdGUgZXZlbnRzIGV2ZW50cy13cml0ZSBhdXRob3JpemF0aW9uLXJlcXVlc3RzIGF1dGhvcml6YXRpb24tcmVxdWVzdHMtd3JpdGUgY2hlY2stZGVwb3NpdHMgY2hlY2stZGVwb3NpdHMtd3JpdGUiLCJvcmciOiJkdW5ubyIsInNvdXJjZUlwIjoiIiwidXNlclR5cGUiOiJvcmcifRQEwuNgZzfOtRy-BRqkSvOHncypr7Y9I_SS_5_qwRWxKuquPgZcb6_cDrV-qKwIL7uWtjTUCb45-WCk01UglA0",
-          "unitApiUrl": "https://api.s.unit.sh/",
-          "nodeEnv": "production"
-        },
         "PlaidService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlaidService-45634530784f30393263-build.zip",
+          "s3Key": "amplify-builds/PlaidService-713938726a4f39527378-build.zip",
           "clientId": "62152ee09cc120001ae1550f",
           "secretKey": "23a7b3327cf22b0c2d9332b39a8ab6",
           "nodeEnv": "development",
@@ -39,7 +32,9 @@
         "UnitService": {
           "unitApiUrl": "https://api.s.unit.sh/",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMDRUMTY6NTc6NTguMDA1WiIsImp0aSI6IjEyMzUxNSIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfQXSRXfL2joVCb2ZLDMOKL9InJsOYz2YM7bayH8A-RBKAPS_Lm38I_ibTYKi0Wdh6GIPMmdoZmF5qPP2Yvb8bwM",
-          "nodeEnv": "development"
+          "nodeEnv": "development",
+          "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+          "s3Key": "amplify-builds/UnitService-4e675065303259735452-build.zip"
         }
       },
       "auth": {

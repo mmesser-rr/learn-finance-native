@@ -25,14 +25,23 @@
         "Mutation"
       ]
     },
-    "function": {
-      "AccountOpenService": [
+    "storage": {
+      "ProcessorToken:@model(appsync)": [
+        "create",
         "read",
         "update"
-      ]
-    },
-    "storage": {
+      ],
       "Athlete:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "AthleteAccount:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "Transanctions:@model(appsync)": [
         "create",
         "read",
         "update"

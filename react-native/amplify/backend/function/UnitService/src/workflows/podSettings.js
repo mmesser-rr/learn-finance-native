@@ -16,8 +16,9 @@ const checkPodData = (data, athleteId) => {
     INVESTMENTS: data.investments,
     SPENDING:data.spending
     });
-  return tpc.updateAthleteAccount(athleteId, podSettings) 
+  return tpc.updatePodSettings(athleteId, podSettings)
 }
-module.exports = {
-    podSettings: podSettingsUpdate
+module.exports.podSettings = async (event) => {
+  const {athleteId, data} = event.arguments;
+  return podSettingsUpdate(data, athleteId)
 }

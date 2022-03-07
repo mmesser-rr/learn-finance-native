@@ -56,22 +56,6 @@
         }
       ]
     },
-    "AccountOpenService": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "theplayerscompany",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ]
-        }
-      ]
-    },
     "PlaidService": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -84,13 +68,6 @@
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "AccountOpenService",
-          "attributes": [
-            "Name"
           ]
         }
       ]

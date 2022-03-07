@@ -4,4 +4,5 @@ type PlaidToken{
   link_token: String
   request_id: String
   new_access_token: String
+  accounts: PlaidAccount
 }

@@ -18,14 +18,9 @@ type PodSettings {
   SPENDING: Int!
 }
 
-type ProcessorToken{
+type ProcessorToken @model{
   plaidAccountId: String!
   processorToken: String
-}
-
-type AthletePlaidLookup @model{
-  accessToken: String!
-  processorToken: [ProcessorToken] @hasMany
 }
 
 type AthleteSport {
@@ -53,7 +48,8 @@ type Athlete @model {
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
   podSettings: PodSettings!
-  plaidToken: AthletePlaidLookup
+  plaidToken: String
+  plaidProcessorToken: [ProcessorToken] @hasMany
   transactions: [Transanctions] @hasMany
   wyreId: String
   isActive: Boolean!

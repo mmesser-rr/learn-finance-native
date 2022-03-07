@@ -6,7 +6,6 @@ const updateToken = (plaid) => (publicToken) => {
   const param = paramsFromId(publicToken);
   return plaid.itemPublicTokenExchange(param)
   .then((tokenResponse) => (tokenResponse.data.access_token))
-  .then(resultLens)
   .catch((error) => {
     const err = error.response.data;
     // Indicates plaid API error
@@ -26,7 +25,6 @@ const resultLens = (res) => ({
 });
 
 module.exports = {
-  resultLens,
   updateToken
 }
 
