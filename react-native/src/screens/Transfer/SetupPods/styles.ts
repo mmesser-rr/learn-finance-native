@@ -38,10 +38,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: scale(26)
   },
-  slider: {
-    height: scale(28),
-    backgroundColor: 'transparent'
-  },
   tooltip: {
   },
   tooltipContent: {
@@ -58,6 +54,20 @@ const styles = StyleSheet.create({
   errorWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  gradient: {
+    height: scale(4),
+    zIndex: -1,
+    borderRadius: 3,
+  },
+  gradientWrap: {
+    borderRadius: 3,
+    marginTop: scale(12)
+  },
+  sliderThumb: {
+    width: scale(28),
+    height: scale(28),
+    backgroundColor: AppColors.gray20,
   }
 });
 
