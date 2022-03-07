@@ -1,25 +1,13 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
-const getPlaidAccount = require("./getPlaidAccount");
-const createProcessorToken = require("./processorToken");
-
-const tokenFromPlaidParams = (athleteId, plaidResponse) => (
-  {
-    athleteId,
-    unitAccountId: plaidResponse.data.id,
-    routingCode: plaidResponse.data.attributes.routingNumber,
-    accountNumber: plaidResponse.data.attributes.accountNumber
-  }
-);
-const updatePlaidBackend = (athleteId, plaidResponse) => tpc.addPlaidToken(tokenFromPlaidParams(athleteId, plaidResponse));
+const {getPlaidAccount} = require("./getPlaidAccount");
 
 
 const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete => 
   (athlete?.unitLookup?.custId != null) ? 
-      plaid.updateToken(token)
-      .then(res => getPlaidAccount(res.access_token))
-      .then(res => createProcessorToken(res.access_token))
-      .then(res => updatePlaidBackend(athleteId, res)) : 
+       plaid.updateToken(token)
+      .then(access_token => tpc.addPlaidToken(athleteId, access_token))
+      .then(getPlaidAccount(athleteId)):
       Promise.reject(`Athlete doesn't have account ${athleteId}`)
 );
 
@@ -28,3 +16,10 @@ module.exports.updateToken = async (event) => {
    return updateToken(athleteId, accessToken)
 }
 
+
+
+// const formatResponse = (token, accounts) => {
+//   const plaidAccount = acc => getProcessor(acc, token);
+//   forEach(plaidAccount, map(prop('account_id'), accounts))
+//   processorToken(hardAccount, token)
+// } tpc.addPlaidToken(athleteId, access_token)

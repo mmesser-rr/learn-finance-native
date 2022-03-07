@@ -40,6 +40,9 @@
     },
     "nodeEnv": {
       "Type": "String"
+    },
+    "sandKey": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -141,6 +144,9 @@
             },
             "NODE_ENV": {
               "Ref": "nodeEnv"
+            },
+            "SAND_KEY": {
+              "Ref": "sandKey"
             }
           }
         },

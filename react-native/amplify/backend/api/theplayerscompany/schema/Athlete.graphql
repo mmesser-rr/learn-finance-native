@@ -23,8 +23,8 @@ type ProcessorToken{
   processorToken: String
 }
 
-type AthletePlaidLookup {
-  accessToken: String
+type AthletePlaidLookup @model{
+  accessToken: String!
   processorToken: [ProcessorToken] @hasMany
 }
 
@@ -53,7 +53,8 @@ type Athlete @model {
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup
   podSettings: PodSettings!
-  plaid: AthletePlaidLookup
+  plaidToken: AthletePlaidLookup
+  transactions: [Transanctions] @hasMany
   wyreId: String
   isActive: Boolean!
 }
@@ -64,4 +65,11 @@ type AthleteAccount @model {
   routingCode: String!
   accountNumber: String!
   podName: String!
+}
+
+
+type Transanctions  @model{
+  transactionId: String!
+  status: String
+  amount: Float
 }

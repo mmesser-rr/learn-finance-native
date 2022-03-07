@@ -2,28 +2,26 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateAthletePlaidLookupStatement = gql`
-  mutation updateAthletePlaidLookup($athleteId: ID!, $plaidLookup: AthletePlaidLookupInput!) {
-    updateAthlete(input: {plaidLookup: $plaidLookup, id: $athleteId}) {
-      email
-      firstName
+  mutation updateAthletePlaidLookup($athleteId: ID!, $plaidToken: AthletePlaidLookupInput!) {
+    updateAthlete(input: {plaidToken: $plaidToken, id: $athleteId}) {
       createdAt
       id
       isActive
       lastName
       level
-      mobilePhone
+      mobilePhone 
     }
   } 
 `
 
 const addPlaidToken = (axios) => (
   athleteId,
-  plaidLookup
+  plaidToken
 ) => axios.post("/", {
   query: print(updateAthletePlaidLookupStatement),
   variables: {
     athleteId,
-    plaidLookup
+    plaidToken
   }
 }).then(resultLens);
 
