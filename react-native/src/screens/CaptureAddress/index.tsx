@@ -58,7 +58,7 @@ const CaptureAddress: React.FC = () => {
                 label="Street Address"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.address?.message}
+                errorMessage={errors?.address?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
@@ -75,7 +75,7 @@ const CaptureAddress: React.FC = () => {
                 label="Apartment Number"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.apartment_number?.message}
+                errorMessage={errors?.apartment_number?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
@@ -96,7 +96,7 @@ const CaptureAddress: React.FC = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                errorMssage={errors?.city?.message}
+                errorMessage={errors?.city?.message}
               />
             )}
             name="city"
@@ -113,7 +113,7 @@ const CaptureAddress: React.FC = () => {
                 label="State"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.state?.message}
+                errorMessage={errors?.state?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
@@ -138,7 +138,7 @@ const CaptureAddress: React.FC = () => {
                 keyboardType="number-pad"
                 isNumeric
                 value={value}
-                errorMssage={errors?.zipcode?.message}
+                errorMessage={errors?.zipcode?.message}
                 maxLength={5}
                 onBlur={onBlur}
                 onChangeText={onChange}
