@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
@@ -8,8 +9,10 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import {SelectTeamProps} from 'src/types/routerTypes';
 
 import styles from './styles';
+import {RootState} from 'src/store/root-state';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
-const suggestions: ItemInterface[] = [
+const collegeSuggestions: ItemInterface[] = [
   {
     value: '1',
     label: 'University of California, Berkeley',
@@ -36,25 +39,64 @@ const suggestions: ItemInterface[] = [
   },
 ];
 
-const SelectTeam: React.FC<SelectTeamProps> = ({
-  navigation,
-  route,
-}: SelectTeamProps) => {
+const proSuggestions: ItemInterface[] = [
+  {
+    value: '1',
+    label: 'Detroit Lions',
+  },
+  {
+    value: '2',
+    label: 'Detroit Pistons',
+  },
+  {
+    value: '3',
+    label: 'Los Angeles Lakers',
+  },
+  {
+    value: '4',
+    label: 'Los Angeles Rams',
+  },
+];
+
+const SelectTeam: React.FC<SelectTeamProps> = ({navigation}) => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
-  const type = route.params.type;
+
+  const {level} = useSelector((state: RootState) => state.onboardingReducer);
+
+  const suggestions = useMemo(() => {
+    if (level === 'PROFESSIONAL') {
+      return proSuggestions;
+    } else {
+      return collegeSuggestions;
+    }
+  }, [level]);
 
   const onChangeOption = (option: string) => {
     setValue(option);
   };
 
-  const goToNextStep = () => navigation.navigate('BankAccountIntro');
+  const goToNextStep = () => {
+    const selectedTeam = suggestions.find(
+      team => team.value === value,
+    ) as ItemInterface;
+    dispatch(
+      updateOnboarding({
+        team: {
+          airTableId: selectedTeam.value,
+          name: selectedTeam.label,
+        },
+      }),
+    );
+    navigation.navigate('BankAccountIntro');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
-            {type === 'profession'
+            {level === 'PROFESSIONAL'
               ? 'What team do you play for?'
               : 'What school do you go to?'}
           </Text>
