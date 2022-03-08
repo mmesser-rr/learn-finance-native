@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -11,6 +11,8 @@ import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import Loading from 'src/components/common/Loading';
+import {RootState} from 'src/store/root-state';
 
 const label = 'SSN (xxx-xx-xxxx)';
 
@@ -19,6 +21,8 @@ const CaptureSSN: React.FC = () => {
   const [ssn, setSsn] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
 
   useEffect(() => {
     async function getContentHeight() {
@@ -65,6 +69,7 @@ const CaptureSSN: React.FC = () => {
           onSubmit={goToNextStep}
         />
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

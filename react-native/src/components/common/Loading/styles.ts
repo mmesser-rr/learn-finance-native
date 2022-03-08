@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from 'src/config/colors';
 
 const styles = StyleSheet.create({
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppColors.backdrop,
+    backgroundColor: AppColors.overlayBackdrop,
   },
   spinnerContainer: {
     transform: [{translateY: -56}],

@@ -77,9 +77,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({navigation}) => {
   };
 
   const goToNextStep = () => {
-    const selectedTeam = suggestions.find(
-      team => team.value === value,
-    ) as ItemInterface;
+    const selectedTeam = suggestions.find(team => team.value === value)!;
     dispatch(
       updateOnboarding({
         team: {
