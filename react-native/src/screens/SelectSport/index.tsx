@@ -35,9 +35,7 @@ const SelectSport: React.FC = () => {
   };
 
   const goToNextStep = () => {
-    const selectedSport = suggestions.find(
-      sport => sport.value === value,
-    ) as ItemInterface;
+    const selectedSport = suggestions.find(sport => sport.value === value)!;
     dispatch(
       updateOnboarding({
         sport: {
