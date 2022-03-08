@@ -1,3 +1,4 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
@@ -19,6 +20,31 @@ export const onCreateAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaid {
+        access_token
+        processor_token
+      }
+      wyreId
       isActive
       id
       createdAt
@@ -44,6 +70,31 @@ export const onUpdateAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaid {
+        access_token
+        processor_token
+      }
+      wyreId
       isActive
       id
       createdAt
@@ -69,10 +120,116 @@ export const onDeleteAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaid {
+        access_token
+        processor_token
+      }
+      wyreId
       isActive
       id
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateAthleteAccount = /* GraphQL */ `
+  subscription OnCreateAthleteAccount {
+    onCreateAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const onUpdateAthleteAccount = /* GraphQL */ `
+  subscription OnUpdateAthleteAccount {
+    onUpdateAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const onDeleteAthleteAccount = /* GraphQL */ `
+  subscription OnDeleteAthleteAccount {
+    onDeleteAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
     }
   }
 `;
