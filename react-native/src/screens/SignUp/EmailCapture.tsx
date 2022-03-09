@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -7,21 +8,30 @@ import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 interface EmailCaptureProps {
   goToNextStep: () => void;
 }
 
 const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
+  const [email, setEmail] = useState('');
 
   const codeChangeHandler = (value: string) => {
     const reg = /\S+@\S+\.\S+/;
     setIsValid(!!value && reg.test(value));
+    setEmail(value);
   };
 
   const onTerms = () => {
     NavigationService.navigate('Terms');
+  };
+
+  const handleSignUp = () => {
+    dispatch(updateOnboarding({email}));
+    goToNextStep();
   };
 
   return (
@@ -47,8 +57,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
             <Text
               type="Body/Large"
               style={styles.agreementLink}
-              onPress={onTerms}
-            >
+              onPress={onTerms}>
               Terms & Privacy Policy
             </Text>
             .
@@ -57,7 +66,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
         <SubmitButton
           isValid={isValid}
           actionLabel="Sign Up"
-          onSubmit={goToNextStep}
+          onSubmit={handleSignUp}
         />
       </View>
     </>

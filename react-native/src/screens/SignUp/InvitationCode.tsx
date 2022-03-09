@@ -80,7 +80,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep}) => {
                 showErrorMessage
                 autoFocus
                 maxLength={6}
-                errorMssage={errors?.code?.message}
+                errorMessage={errors?.code?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />

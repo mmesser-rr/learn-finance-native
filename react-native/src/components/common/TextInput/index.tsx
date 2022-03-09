@@ -16,7 +16,7 @@ import styles from './styles';
 type TextInputProps = RNTextInputProps & {
   label?: string;
   isNumeric?: boolean;
-  errorMssage?: string;
+  errorMessage?: string;
   showErrorMessage?: boolean;
   left?: ReactNode;
   onChangeText: (text: string) => void;
@@ -26,7 +26,7 @@ type TextInputProps = RNTextInputProps & {
 const TextInput: React.FC<TextInputProps> = ({
   value,
   showErrorMessage,
-  errorMssage,
+  errorMessage,
   isNumeric,
   label,
   onChangeText,
@@ -87,7 +87,7 @@ const TextInput: React.FC<TextInputProps> = ({
     ],
   };
 
-  const isError = possibleErrorMessage && !!showErrorMessage && !!errorMssage;
+  const isError = possibleErrorMessage && !!showErrorMessage && !!errorMessage;
 
   const labelStyle = {
     color: isError ? AppColors.accentRed100 : AppColors.coreBlack40,
@@ -114,8 +114,7 @@ const TextInput: React.FC<TextInputProps> = ({
                 ? AppColors.accentRed100
                 : AppColors.gray20,
             },
-          ]}
-        >
+          ]}>
           {(!!text || focused) && !!left && <>{left}</>}
           <RNTextInput
             value={text}
@@ -139,7 +138,7 @@ const TextInput: React.FC<TextInputProps> = ({
             size={16}
           />
           <Text type="Body/Medium" style={styles.helperText}>
-            {errorMssage}
+            {errorMessage}
           </Text>
         </View>
       )}

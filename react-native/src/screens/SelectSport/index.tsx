@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch} from 'react-redux';
 
-import {SelectSportProps} from 'src/types/routerTypes';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
 import AutoComplete, {ItemInterface} from 'src/components/common/AutoComplete';
 import SubmitButton from 'src/components/common/SubmitButton';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 const suggestions: ItemInterface[] = [
   {
@@ -24,18 +26,26 @@ const suggestions: ItemInterface[] = [
   },
 ];
 
-const SelectSport: React.FC<SelectSportProps> = ({
-  navigation,
-  route,
-}: SelectSportProps) => {
+const SelectSport: React.FC = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
 
   const onChangeOption = (option: string) => {
     setValue(option);
   };
 
-  const goToNextStep = () =>
-    navigation.navigate('SelectTeam', {type: route.params.type});
+  const goToNextStep = () => {
+    const selectedSport = suggestions.find(sport => sport.value === value)!;
+    dispatch(
+      updateOnboarding({
+        sport: {
+          airTableId: selectedSport.value,
+          name: selectedSport.label,
+        },
+      }),
+    );
+    NavigationService.navigate('SelectTeam');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
