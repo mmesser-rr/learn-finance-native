@@ -13,7 +13,6 @@ import {PodsCardGradient, PODsSteps} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import {createLinkToken, getExistingLinkToken} from 'src/services/plaid';
-import { RootState } from 'src/store';
 import { generateTextStyle } from 'src/utils/functions';
 import UserHomeModal from 'src/components/common/UserHomeModal';
 import ProcessingIcon from 'src/assets/icons/processing.svg';
@@ -21,6 +20,7 @@ import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import SwitchIcon from 'src/assets/icons/switch.svg';
+import { RootState } from 'src/store/root-state';
 
 import styles from './styles';
 

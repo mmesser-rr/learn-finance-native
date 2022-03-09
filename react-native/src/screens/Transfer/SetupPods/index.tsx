@@ -12,12 +12,12 @@ import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import InfoIcon from 'src/assets/icons/info.svg';
 import {GradientButtonColors, PODsSteps, RedLinnerGradient} from 'src/utils/constants';
-
-import styles from './styles';
 import { updateHomeStep } from 'src/store/actions/bankingActions';
-import { RootState } from 'src/store';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'src/components/common/Button';
+import { RootState } from 'src/store/root-state';
+
+import styles from './styles';
 
 const sliderMarginHorizontalWidth = 27;
 
