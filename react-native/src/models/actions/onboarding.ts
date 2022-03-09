@@ -4,3 +4,8 @@ export interface IOnboardingUpdate {
   type: String;
   update: Partial<IOnboardingState>;
 }
+
+export interface ICreateAthleteAndAccount {
+  type: String;
+  ssn: string;
+}

@@ -1,6 +1,38 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getProcessorToken = /* GraphQL */ `
+  query GetProcessorToken($id: ID!) {
+    getProcessorToken(id: $id) {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const listProcessorTokens = /* GraphQL */ `
+  query ListProcessorTokens(
+    $filter: ModelProcessorTokenFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProcessorTokens(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        plaidAccountId
+        processorToken
+        id
+        createdAt
+        updatedAt
+        athletePlaidProcessorTokenId
+      }
+      nextToken
+    }
+  }
+`;
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -19,6 +51,34 @@ export const getAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
+      }
+      wyreId
       isActive
       id
       createdAt
@@ -39,20 +99,95 @@ export const listAthletes = /* GraphQL */ `
         mobilePhone
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
+        dateOfBirth
+        plaidToken
+        wyreId
         isActive
         id
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAthleteAccount = /* GraphQL */ `
+  query GetAthleteAccount($id: ID!) {
+    getAthleteAccount(id: $id) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const listAthleteAccounts = /* GraphQL */ `
+  query ListAthleteAccounts(
+    $filter: ModelAthleteAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        unitAccountId
+        routingCode
+        accountNumber
+        podName
+        id
+        createdAt
+        updatedAt
+        athleteAccountsId
+      }
+      nextToken
+    }
+  }
+`;
+export const getTransanctions = /* GraphQL */ `
+  query GetTransanctions($id: ID!) {
+    getTransanctions(id: $id) {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const listTransanctions = /* GraphQL */ `
+  query ListTransanctions(
+    $filter: ModelTransanctionsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTransanctions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        transactionId
+        status
+        amount
+        id
+        createdAt
+        updatedAt
+        athleteTransactionsId
       }
       nextToken
     }

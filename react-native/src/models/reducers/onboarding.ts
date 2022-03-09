@@ -1,10 +1,12 @@
+import {AthleteLevel} from 'src/types/API';
+
 export interface IOnboardingState {
   firstName: string;
   lastName: string;
   mobilePhone: string;
   email: string;
   dateOfBirth?: string;
-  level?: 'COLLEGE' | 'PROFESSIONAL';
+  level?: AthleteLevel;
   sport?: {
     airTableId: string;
     name: string;
@@ -21,4 +23,5 @@ export interface IOnboardingState {
     apt: string;
   };
   ssn: string;
+  isOnboardingComplete: boolean;
 }
