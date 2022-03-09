@@ -7,10 +7,10 @@ import {Text} from 'src/components/common/Texts';
 import AutoComplete, {ItemInterface} from 'src/components/common/AutoComplete';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {SelectTeamProps} from 'src/types/routerTypes';
-
-import styles from './styles';
 import {RootState} from 'src/store/root-state';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
+
+import styles from './styles';
 
 const collegeSuggestions: ItemInterface[] = [
   {

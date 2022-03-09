@@ -59,7 +59,12 @@ const styles = StyleSheet.create({
     width: scale(28),
     height: scale(28),
     backgroundColor: AppColors.gray20,
-  }
+  },
+  laterActionGradient: {
+    marginTop: scale(16),
+    borderRadius: scale(100),
+    padding: 1,
+  },
 });
 
 export default styles;

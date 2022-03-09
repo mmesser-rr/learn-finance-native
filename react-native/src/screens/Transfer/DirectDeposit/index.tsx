@@ -7,8 +7,7 @@ import Button from 'src/components/common/Button';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
-import {GradientButtonColors} from 'src/utils/constants';
-import CloseIcon from 'src/assets/icons/close.svg';
+import {GradientButtonColors, PODsSteps} from 'src/utils/constants';
 import { updateHomeStep } from 'src/store/actions/bankingActions';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
@@ -37,7 +36,7 @@ const DirectDeposit: React.FC = () => {
   }, [copyAccount]);
 
   const onDone = () => {
-    dispatch(updateHomeStep('pods'));
+    dispatch(updateHomeStep(PODsSteps[1]));
     NavigationService.navigate('HomeStack');
   };
 
