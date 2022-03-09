@@ -1,6 +1,43 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateProcessorToken = /* GraphQL */ `
+  subscription OnCreateProcessorToken {
+    onCreateProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const onUpdateProcessorToken = /* GraphQL */ `
+  subscription OnUpdateProcessorToken {
+    onUpdateProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const onDeleteProcessorToken = /* GraphQL */ `
+  subscription OnDeleteProcessorToken {
+    onDeleteProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
 export const onCreateAthlete = /* GraphQL */ `
   subscription OnCreateAthlete {
     onCreateAthlete {
@@ -19,6 +56,34 @@ export const onCreateAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
+      }
+      wyreId
       isActive
       id
       createdAt
@@ -44,6 +109,34 @@ export const onUpdateAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
+      }
+      wyreId
       isActive
       id
       createdAt
@@ -69,10 +162,161 @@ export const onDeleteAthlete = /* GraphQL */ `
         airTableId
         isActive
       }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
+      }
+      wyreId
       isActive
       id
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateAthleteAccount = /* GraphQL */ `
+  subscription OnCreateAthleteAccount {
+    onCreateAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const onUpdateAthleteAccount = /* GraphQL */ `
+  subscription OnUpdateAthleteAccount {
+    onUpdateAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const onDeleteAthleteAccount = /* GraphQL */ `
+  subscription OnDeleteAthleteAccount {
+    onDeleteAthleteAccount {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const onCreateTransanctions = /* GraphQL */ `
+  subscription OnCreateTransanctions {
+    onCreateTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const onUpdateTransanctions = /* GraphQL */ `
+  subscription OnUpdateTransanctions {
+    onUpdateTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const onDeleteTransanctions = /* GraphQL */ `
+  subscription OnDeleteTransanctions {
+    onDeleteTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
     }
   }
 `;

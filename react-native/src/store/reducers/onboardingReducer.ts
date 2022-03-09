@@ -13,6 +13,7 @@ const initialState: IOnboardingState = {
   mobilePhone: '',
   email: '',
   ssn: '',
+  isOnboardingComplete: false,
 };
 
 export const onboardingReducer = createReducer(initialState, {

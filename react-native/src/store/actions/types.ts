@@ -9,7 +9,10 @@ export const TOGGLE_THEME = 'TOGGLE_THEME';
 
 // onboarding
 export const ONBOARDING_UPDATE = 'ONBOARDING_UPDATE';
-export const CREATE_ATHLETE_REQUEST = 'CREATE_ATHLETE_REQUEST';
+export const CREATE_ATHLETE_AND_ACCOUNT = 'CREATE_ATHLETE_AND_ACCOUNT';
+
+// user
+export const USER_UPDATE = 'USER_UPDATE';
 
 // login
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
