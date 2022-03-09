@@ -5,7 +5,10 @@ import createReducer from 'src/lib/createReducer';
 import * as types from 'src/store/actions/types';
 
 import {IOnboardingState} from 'src/models/reducers/onboarding';
-import {IOnboardingUpdate} from 'src/models/actions/onboarding';
+import {
+  IOnboardingUpdate,
+  IOnboardingUpdateSsn,
+} from 'src/models/actions/onboarding';
 
 const initialState: IOnboardingState = {
   firstName: '',
@@ -13,6 +16,7 @@ const initialState: IOnboardingState = {
   mobilePhone: '',
   email: '',
   ssn: '',
+  isOnboardingComplete: false,
 };
 
 export const onboardingReducer = createReducer(initialState, {
