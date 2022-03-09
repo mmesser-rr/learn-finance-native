@@ -11,6 +11,7 @@ import NavigationService from 'src/navigation/NavigationService';
 import { updateHomeStep } from 'src/store/actions/bankingActions';
 
 import styles from './styles';
+import { PODsSteps } from 'src/utils/constants';
 
 const ProcessDeposit: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ProcessDeposit: React.FC = () => {
   ];
 
   const onDone = () => {
-    dispatch(updateHomeStep('pods'));
+    dispatch(updateHomeStep(PODsSteps[1]));
     NavigationService.navigate('HomeStack');
   };
 
