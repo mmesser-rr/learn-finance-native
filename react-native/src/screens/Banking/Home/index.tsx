@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {TextStyle, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
-import {getUniqueId} from 'react-native-device-info';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {API, graphqlOperation} from 'aws-amplify';
+import {GraphQLResult} from '@aws-amplify/api';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
@@ -12,7 +12,6 @@ import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient, PODsSteps} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
-import {createLinkToken, getExistingLinkToken} from 'src/services/plaid';
 import { generateTextStyle } from 'src/utils/functions';
 import UserHomeModal from 'src/components/common/UserHomeModal';
 import ProcessingIcon from 'src/assets/icons/processing.svg';
@@ -21,6 +20,8 @@ import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import SwitchIcon from 'src/assets/icons/switch.svg';
 import { RootState } from 'src/store/root-state';
+import { createPlaidLink } from 'src/graphql/mutations';
+import { CreatePlaidLink } from 'src/types/graphql';
 
 import styles from './styles';
 
@@ -45,25 +46,25 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
 
 const Home: React.FC = () => {
   const { step } = useSelector((state: RootState) => state.bankingReducer);
+  const { user } = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    getPlaidLinkToken();
-  }, []);
-
-  const getPlaidLinkToken = async () => {
-    let token = await AsyncStorage.getItem('@plaid_link_token');
-
-    if (token && (await getExistingLinkToken(token))) {
-      return setLinkToken(token);
+    if (user?.id) {
+      getPlaidLinkToken(user.id);
     }
+  }, [user]);
 
-    token = await createLinkToken(getUniqueId());
+  const getPlaidLinkToken = async (athleteId: string) => {
+    const {data} = (await API.graphql(
+      graphqlOperation(createPlaidLink, {
+        athleteId
+      }),
+    )) as GraphQLResult<CreatePlaidLink>;
 
-    if (token) {
-      setLinkToken(token);
-      await AsyncStorage.setItem('@plaid_link_token', token);
+    if (data?.createPlaidLink.link_token) {
+      setLinkToken(data.createPlaidLink.link_token);
     }
   };
 
