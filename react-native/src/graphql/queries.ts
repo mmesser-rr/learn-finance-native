@@ -2,6 +2,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getProcessorToken = /* GraphQL */ `
+  query GetProcessorToken($id: ID!) {
+    getProcessorToken(id: $id) {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const listProcessorTokens = /* GraphQL */ `
+  query ListProcessorTokens(
+    $filter: ModelProcessorTokenFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProcessorTokens(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        plaidAccountId
+        processorToken
+        id
+        createdAt
+        updatedAt
+        athletePlaidProcessorTokenId
+      }
+      nextToken
+    }
+  }
+`;
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -40,9 +71,12 @@ export const getAthlete = /* GraphQL */ `
         INVESTMENTS
         SPENDING
       }
-      plaid {
-        access_token
-        processor_token
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
       }
       wyreId
       isActive
@@ -66,6 +100,7 @@ export const listAthletes = /* GraphQL */ `
         email
         level
         dateOfBirth
+        plaidToken
         wyreId
         isActive
         id
@@ -86,6 +121,7 @@ export const getAthleteAccount = /* GraphQL */ `
         email
         level
         dateOfBirth
+        plaidToken
         wyreId
         isActive
         id
@@ -119,6 +155,39 @@ export const listAthleteAccounts = /* GraphQL */ `
         createdAt
         updatedAt
         athleteAccountsId
+      }
+      nextToken
+    }
+  }
+`;
+export const getTransanctions = /* GraphQL */ `
+  query GetTransanctions($id: ID!) {
+    getTransanctions(id: $id) {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const listTransanctions = /* GraphQL */ `
+  query ListTransanctions(
+    $filter: ModelTransanctionsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTransanctions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        transactionId
+        status
+        amount
+        id
+        createdAt
+        updatedAt
+        athleteTransactionsId
       }
       nextToken
     }

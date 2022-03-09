@@ -2,6 +2,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateProcessorToken = /* GraphQL */ `
+  subscription OnCreateProcessorToken {
+    onCreateProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const onUpdateProcessorToken = /* GraphQL */ `
+  subscription OnUpdateProcessorToken {
+    onUpdateProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
+export const onDeleteProcessorToken = /* GraphQL */ `
+  subscription OnDeleteProcessorToken {
+    onDeleteProcessorToken {
+      plaidAccountId
+      processorToken
+      id
+      createdAt
+      updatedAt
+      athletePlaidProcessorTokenId
+    }
+  }
+`;
 export const onCreateAthlete = /* GraphQL */ `
   subscription OnCreateAthlete {
     onCreateAthlete {
@@ -40,9 +76,12 @@ export const onCreateAthlete = /* GraphQL */ `
         INVESTMENTS
         SPENDING
       }
-      plaid {
-        access_token
-        processor_token
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
       }
       wyreId
       isActive
@@ -90,9 +129,12 @@ export const onUpdateAthlete = /* GraphQL */ `
         INVESTMENTS
         SPENDING
       }
-      plaid {
-        access_token
-        processor_token
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
       }
       wyreId
       isActive
@@ -140,9 +182,12 @@ export const onDeleteAthlete = /* GraphQL */ `
         INVESTMENTS
         SPENDING
       }
-      plaid {
-        access_token
-        processor_token
+      plaidToken
+      plaidProcessorToken {
+        nextToken
+      }
+      transactions {
+        nextToken
       }
       wyreId
       isActive
@@ -162,6 +207,7 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         email
         level
         dateOfBirth
+        plaidToken
         wyreId
         isActive
         id
@@ -189,6 +235,7 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         email
         level
         dateOfBirth
+        plaidToken
         wyreId
         isActive
         id
@@ -216,6 +263,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         email
         level
         dateOfBirth
+        plaidToken
         wyreId
         isActive
         id
@@ -230,6 +278,45 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+    }
+  }
+`;
+export const onCreateTransanctions = /* GraphQL */ `
+  subscription OnCreateTransanctions {
+    onCreateTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const onUpdateTransanctions = /* GraphQL */ `
+  subscription OnUpdateTransanctions {
+    onUpdateTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
+    }
+  }
+`;
+export const onDeleteTransanctions = /* GraphQL */ `
+  subscription OnDeleteTransanctions {
+    onDeleteTransanctions {
+      transactionId
+      status
+      amount
+      id
+      createdAt
+      updatedAt
+      athleteTransactionsId
     }
   }
 `;
