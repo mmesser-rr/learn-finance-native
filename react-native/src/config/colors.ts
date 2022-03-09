@@ -11,6 +11,7 @@ const AppColors = {
   accentRed100: '#FF5A5F',
   coreWhite100: '#FFF',
   toolTip: 'rgba(0, 0, 0, 0.15)',
+  overlayBackdrop: 'rgba(0, 0, 0, 0.5)',
 };
 
 export default AppColors;

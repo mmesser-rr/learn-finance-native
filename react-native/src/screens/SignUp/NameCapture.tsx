@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
 
@@ -12,6 +14,7 @@ interface NameCaptureProps {
 }
 
 const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -28,6 +31,11 @@ const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
   const changeLastName = (value: string) => {
     setLastName(value);
     checkValidation(firstName, value);
+  };
+
+  const handleContinue = () => {
+    dispatch(updateOnboarding({firstName, lastName}));
+    goToNextStep();
   };
 
   return (
@@ -54,7 +62,7 @@ const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
         <SubmitButton
           isValid={isValid}
           actionLabel="Continue"
-          onSubmit={goToNextStep}
+          onSubmit={handleContinue}
         />
       </View>
     </>

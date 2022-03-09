@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {useDispatch} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -9,16 +10,18 @@ import NavigationService from 'src/navigation/NavigationService';
 import TextInput from 'src/components/common/TextInput';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 type FormData = {
-  address: string;
-  apartment_number: string;
+  streetAddress: string;
+  apt: string;
   city: string;
-  zipcode: string;
+  zipCode: string;
   state: string;
 };
 
 const CaptureAddress: React.FC = () => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -26,16 +29,17 @@ const CaptureAddress: React.FC = () => {
     formState: {isValid},
   } = useForm<FormData>({
     defaultValues: {
-      address: '',
-      apartment_number: '',
+      streetAddress: '',
+      apt: '',
       city: '',
-      zipcode: '',
+      zipCode: '',
       state: '',
     },
     mode: 'onChange',
   });
 
   const onSubmit = (data: FormData) => {
+    dispatch(updateOnboarding({address: data}));
     NavigationService.navigate('CaptureSSN');
   };
 
@@ -58,12 +62,12 @@ const CaptureAddress: React.FC = () => {
                 label="Street Address"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.address?.message}
+                errorMessage={errors?.streetAddress?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
             )}
-            name="address"
+            name="streetAddress"
           />
         </View>
         <View style={styles.inputWrapper}>
@@ -75,12 +79,12 @@ const CaptureAddress: React.FC = () => {
                 label="Apartment Number"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.apartment_number?.message}
+                errorMessage={errors?.apt?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
             )}
-            name="apartment_number"
+            name="apt"
           />
         </View>
         <View style={styles.inputWrapper}>
@@ -96,7 +100,7 @@ const CaptureAddress: React.FC = () => {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                errorMssage={errors?.city?.message}
+                errorMessage={errors?.city?.message}
               />
             )}
             name="city"
@@ -113,7 +117,7 @@ const CaptureAddress: React.FC = () => {
                 label="State"
                 showErrorMessage
                 value={value}
-                errorMssage={errors?.state?.message}
+                errorMessage={errors?.state?.message}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
@@ -138,13 +142,13 @@ const CaptureAddress: React.FC = () => {
                 keyboardType="number-pad"
                 isNumeric
                 value={value}
-                errorMssage={errors?.zipcode?.message}
+                errorMessage={errors?.zipCode?.message}
                 maxLength={5}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
             )}
-            name="zipcode"
+            name="zipCode"
           />
         </View>
       </View>

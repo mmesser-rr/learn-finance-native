@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch} from 'react-redux';
 
 import {RedLinnerGradient} from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
@@ -11,8 +12,10 @@ import LogoIcon from 'src/assets/icons/logo.svg';
 import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 const SelectLevel: React.FC = () => {
+  const dispatch = useDispatch();
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
 
   useEffect(() => {
@@ -23,8 +26,10 @@ const SelectLevel: React.FC = () => {
     getContentHeight();
   }, []);
 
-  const onSelectLevel = (type: String) =>
-    NavigationService.navigate('SelectSport', {type});
+  const onSelectLevel = (level: 'COLLEGE' | 'PROFESSIONAL') => {
+    dispatch(updateOnboarding({level}));
+    NavigationService.navigate('SelectSport');
+  };
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
@@ -45,15 +50,14 @@ const SelectLevel: React.FC = () => {
         </View>
         <View style={styles.actionWrapper}>
           <View style={styles.proActionWrapper}>
-            <Button onPress={() => onSelectLevel('profession')}>
+            <Button onPress={() => onSelectLevel('PROFESSIONAL')}>
               <Text type="Body/Large">I'm a professional athlete</Text>
             </Button>
           </View>
           <View>
             <Button
               actionStyle={styles.collegeAction}
-              onPress={() => onSelectLevel('college')}
-            >
+              onPress={() => onSelectLevel('COLLEGE')}>
               <Text type="Body/Large">I'm a college athlete</Text>
             </Button>
           </View>

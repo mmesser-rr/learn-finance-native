@@ -28,7 +28,7 @@ const enhancers = [applyMiddleware(...middleware)];
 // const initialState = {};
 const persistConfig: any = {enhancers};
 const store = createStore(reducers, undefined, compose(...enhancers));
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;
 const persistor = persistStore(store, persistConfig, () => {
   //   console.log('Test', store.getState());
 });
