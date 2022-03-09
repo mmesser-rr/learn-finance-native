@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Slider} from 'src/components/common/Slider';
 import Tooltip from 'react-native-walkthrough-tooltip';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
@@ -10,9 +11,13 @@ import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import InfoIcon from 'src/assets/icons/info.svg';
-import {RedLinnerGradient} from 'src/utils/constants';
+import {GradientButtonColors, PODsSteps, RedLinnerGradient} from 'src/utils/constants';
 
 import styles from './styles';
+import { updateHomeStep } from 'src/store/actions/bankingActions';
+import { RootState } from 'src/store';
+import LinearGradient from 'react-native-linear-gradient';
+import Button from 'src/components/common/Button';
 
 const sliderMarginHorizontalWidth = 27;
 
@@ -35,7 +40,24 @@ const SetupPods: React.FC = () => {
   const [savingsTip, setSavingTip] = useState(false);
   const [investmentsTip, setInvestmentsTip] = useState(false);
   const [spendingTip, setSpendingTip] = useState(false);
-  const onDone = () => NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'});
+  const dispatch = useDispatch();
+  const { step } = useSelector((state: RootState) => state.bankingReducer);
+
+  const isEdit = step === PODsSteps[2];
+
+  const onDone = () => {
+    if (isEdit) {
+      NavigationService.navigate('HomeStack');
+      return;
+    }
+
+    dispatch(updateHomeStep(PODsSteps[2]));
+    NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'})
+  };
+
+  const onCancel = () => {
+    NavigationService.navigate('HomeStack');
+  };
 
   const total = savings + investments + spending;
   const isValid = total === 100;
@@ -45,14 +67,17 @@ const SetupPods: React.FC = () => {
       <View>
         <View style={styles.nav}>
           <TopNav
-            title="Set up Pods"
+            title={isEdit ? 'Change Pods Allocations' : 'Set up Pods'}
             goPreviousScreen={() => NavigationService.navigate('TransferStack', {screen: 'PodsExplain'})}
             goCloseScreen={() => NavigationService.navigate('HomeStack')}
           />
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
-            How do you want to allocate your money? Here is the setup most people start with. You can always adjust later.
+            {isEdit ?
+              "How do you want to allocate your money? The change will not apply to what's in the Pods already but apply to the future deposits." :
+              'How do you want to allocate your money? Here is the setup most people start with. You can always adjust later.'
+            }
           </Text>
         </View>
         <View>
@@ -185,9 +210,21 @@ const SetupPods: React.FC = () => {
       <View>
         <SubmitButton
           isValid={isValid}
-          actionLabel="Done"
+          actionLabel={isEdit ? 'Change Pod Allocations' : 'Done'}
           onSubmit={onDone}
         />
+        {isEdit && (
+          <LinearGradient
+            style={styles.laterActionGradient}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            colors={GradientButtonColors}
+          >
+            <Button onPress={onCancel}>
+              <Text type="Body/Large">Cancel</Text>
+            </Button>
+          </LinearGradient>
+        )}
       </View>
     </AppLayout>
   );

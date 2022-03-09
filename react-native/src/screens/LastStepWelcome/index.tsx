@@ -1,18 +1,23 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch } from 'react-redux';
 
-import {RedLinnerGradient} from 'src/utils/constants';
+import {PODsSteps, RedLinnerGradient} from 'src/utils/constants';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
 import LogoIcon from 'src/assets/icons/logo.svg';
 import NavigationService from 'src/navigation/NavigationService';
+import { updateHomeStep } from 'src/store/actions/bankingActions';
 
 import styles from './styles';
 
 const ProfileIntro: React.FC = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setTimeout(() => {
+      dispatch(updateHomeStep(PODsSteps[0]));
       NavigationService.navigate('HomeStack');
     }, 3000);
   }, []);

@@ -3,22 +3,25 @@ import {View, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 
 import {Text} from 'src/components/common/Texts';
-import BackIcon from 'src/assets/icons/back.svg';
 import CancelIcon from 'src/assets/icons/cancel.svg';
 import DirectDepositIcon from 'src/assets/icons/direct-deposit.svg';
 import WithdrawGreyIcon from 'src/assets/icons/withdraw-grey.svg';
 import ChangePodGreyIcon from 'src/assets/icons/change-pod-allocations-grey.svg';
+import ChangePodIcon from 'src/assets/icons/change-pod-allocation.svg';
 import TransactionHistoryGreyIcon from 'src/assets/icons/transaction-history-grey.svg';
+import TransactionHistoryIcon from 'src/assets/icons/transaction-history.svg';
 
 import styles from './styles';
 import NavigationService from 'src/navigation/NavigationService';
+import { PODsSteps } from 'src/utils/constants';
 
 interface UserHomeModalProps {
   visible: boolean;
+  step: string;
   onClose: () => void;
 }
 
-const UserHomeModal: React.FC<UserHomeModalProps> = ({visible, onClose}) => {
+const UserHomeModal: React.FC<UserHomeModalProps> = ({visible, step, onClose}) => {
   const [isModalVisible, setModalVisible] = useState(visible);
 
   useEffect(() => {
@@ -36,6 +39,13 @@ const UserHomeModal: React.FC<UserHomeModalProps> = ({visible, onClose}) => {
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
   };
 
+  const onChangePods = () => {
+    onClose();
+    NavigationService.navigate('TransferStack', {screen: 'SetupPods'});
+  };
+
+  const podLabelStyle = step === PODsSteps[2] ? {} : styles.disabled;
+
   return (
     <Modal isVisible={isModalVisible} style={styles.modal}>
       <View style={styles.container}>
@@ -52,15 +62,26 @@ const UserHomeModal: React.FC<UserHomeModalProps> = ({visible, onClose}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.item}>
-          <TouchableOpacity style={styles.action} disabled>
-            <Text type="Body/Large" style={styles.disabled}>Change Pods allocations</Text>
-            <View><ChangePodGreyIcon /></View>
+          <TouchableOpacity
+            style={styles.action}
+            disabled={step !== PODsSteps[2]}
+            onPress={onChangePods}
+          >
+            <Text type="Body/Large" style={podLabelStyle}>Change Pods allocations</Text>
+            <View>
+              {step === PODsSteps[2] ? <ChangePodIcon /> : <ChangePodGreyIcon />}
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles.item}>
-          <TouchableOpacity style={styles.action} disabled>
-            <Text type="Body/Large" style={styles.disabled}>Transaction History</Text>
-            <View><TransactionHistoryGreyIcon /></View>
+          <TouchableOpacity
+            style={styles.action}
+            disabled={step !== PODsSteps[2]}
+          >
+            <Text type="Body/Large" style={podLabelStyle}>Transaction History</Text>
+            <View>
+              {step === PODsSteps[2] ? <TransactionHistoryIcon /> : <TransactionHistoryGreyIcon />}
+            </View>
           </TouchableOpacity>
         </View>
         <View style={styles.item}>
