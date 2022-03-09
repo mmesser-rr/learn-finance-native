@@ -6,11 +6,13 @@ import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
-import NavigationService from 'src/navigation/NavigationService';
 import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
-import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import {
+  createAthleteAndAccount,
+  updateOnboarding,
+} from 'src/store/actions/onboardingActions';
 import Loading from 'src/components/common/Loading';
 import {RootState} from 'src/store/root-state';
 
@@ -39,7 +41,7 @@ const CaptureSSN: React.FC = () => {
 
   const goToNextStep = () => {
     dispatch(updateOnboarding({ssn}));
-    NavigationService.navigate('AccountCreateSuccess');
+    dispatch(createAthleteAndAccount(ssn));
   };
 
   return (
