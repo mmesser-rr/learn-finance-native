@@ -22,6 +22,7 @@ import SwitchIcon from 'src/assets/icons/switch.svg';
 import { RootState } from 'src/store/root-state';
 import { createPlaidLink } from 'src/graphql/mutations';
 import { CreatePlaidLink } from 'src/types/graphql';
+import Loading from 'src/components/common/Loading';
 
 import styles from './styles';
 
@@ -222,6 +223,7 @@ const Home: React.FC = () => {
         step={step}
         onClose={() => setModalVisible(false)}
       />
+      {!linkToken && <Loading />}
     </AppLayout>
   );
 };
