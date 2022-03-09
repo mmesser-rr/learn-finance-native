@@ -13,3 +13,13 @@ export type GetInviteQuery = {
     updatedAt?: Date;
   };
 };
+
+export type CreatePlaidLink = {
+  createPlaidLink: {
+    access_token?: string;
+    item_id?: string;
+    link_token: string;
+    new_access_token?: string;
+    request_id: string;
+  };
+};

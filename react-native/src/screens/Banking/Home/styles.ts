@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   title: {
-    marginBottom: scale(44),
   },
   subTitle: {
     marginBottom: scale(16),
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   accountCard: {
     marginBottom: scale(24),
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(16),
   },
   transferWrapper: {
-    borderRadius: scale(23),
+    borderRadius: scale(100),
     backgroundColor: AppColors.coreBlack100,
   },
   transfer: {
@@ -55,6 +56,48 @@ const styles = StyleSheet.create({
   submit: {
     marginTop: scale(-22),
   },
+  submitted: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: scale(24),
+    minHeight: scale(20),
+  },
+  submittedLabel: {
+    marginLeft: scale(4),
+  },
+  podItem: {
+    paddingVertical: scale(16),
+    paddingHorizontal: scale(13),
+    marginBottom: scale(16),
+    backgroundColor: AppColors.coreBlack90,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: scale(8)
+  },
+  podLabel: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  podLabelText: {
+    marginLeft: scale(8)
+  },
+  balanceLabel: {
+    marginBottom: scale(2)
+  },
+  switch: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: scale(6),
+    paddingHorizontal: scale(9),
+    borderWidth: 1,
+    borderColor: AppColors.coreBlack40,
+    borderRadius: scale(20)
+  },
+  switchLabel: {
+    marginLeft:  scale(4),
+    color: AppColors.coreBlack40,
+  }
 });
 
 export default styles;
