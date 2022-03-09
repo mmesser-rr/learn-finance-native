@@ -24,4 +24,5 @@ export interface IOnboardingState {
   };
   ssn: string;
   isOnboardingComplete: boolean;
+  error?: string;
 }

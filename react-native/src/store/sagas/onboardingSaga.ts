@@ -7,6 +7,7 @@ import {GraphQLResult} from '@aws-amplify/api';
 
 import {createAthlete, openAppAndAccount} from 'src/graphql/mutations';
 import * as loadingActions from 'src/store/actions/loadingActions';
+import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as userActions from 'src/store/actions/userActions';
 import {
   Athlete,
@@ -23,13 +24,14 @@ const getOnboardingState = (state: RootState) => state.onboardingReducer;
 
 export function* addAthlete({ssn}: ICreateAthleteAndAccount) {
   yield put(loadingActions.enableLoader());
+  yield put(onboardingActions.clearError());
   const onboardingState = (yield select(
     getOnboardingState,
   )) as IOnboardingState;
   const athlete: CreateAthleteInput = {
     firstName: onboardingState.firstName!,
     lastName: onboardingState.lastName!,
-    mobilePhone: onboardingState.mobilePhone!,
+    mobilePhone: '+1' + onboardingState.mobilePhone,
     email: onboardingState.email!,
     level: onboardingState.level!,
     sport: onboardingState.sport!,
@@ -68,9 +70,19 @@ export function* addAthlete({ssn}: ICreateAthleteAndAccount) {
       NavigationService.navigate('AccountCreateSuccess');
     } catch (error) {
       console.log('Error attempting to openAppAndAccount:', error);
+      yield put(
+        onboardingActions.accountCreationFailed(
+          'Sorry, we were unable to create your account at this time.',
+        ),
+      );
     }
   } catch (error) {
     console.log('Error attempting to create Athlete:', error);
+    yield put(
+      onboardingActions.accountCreationFailed(
+        'Sorry, we were unable to create your account at this time.',
+      ),
+    );
   }
 
   yield put(loadingActions.disableLoader());
