@@ -20,7 +20,7 @@ import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import SwitchIcon from 'src/assets/icons/switch.svg';
 import { RootState } from 'src/store/root-state';
-import { createPlaidLink } from 'src/graphql/mutations';
+import { createPlaidLink, updatePlaidLink } from 'src/graphql/mutations';
 import { CreatePlaidLink } from 'src/types/graphql';
 import Loading from 'src/components/common/Loading';
 
@@ -49,6 +49,7 @@ const Home: React.FC = () => {
   const { step } = useSelector((state: RootState) => state.bankingReducer);
   const { user } = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
+  const [loading, setLoading] = useState(true);
   const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -67,13 +68,22 @@ const Home: React.FC = () => {
     if (data?.createPlaidLink.link_token) {
       setLinkToken(data.createPlaidLink.link_token);
     }
+
+    setLoading(false);
   };
 
   const onSetupDirectDeposit = () =>
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
 
-  const onPlaidSuccessHandler = (success: LinkSuccess) => {
-    console.log(success);
+  const onPlaidSuccessHandler = async (success: LinkSuccess) => {
+    setLoading(true);
+    await API.graphql(
+      graphqlOperation(updatePlaidLink, {
+        athleteId: user?.id,
+        accessToken: success.publicToken
+      })
+    );
+    setLoading(false);
     NavigationService.navigate('TransferStack');
   };
 
@@ -223,7 +233,7 @@ const Home: React.FC = () => {
         step={step}
         onClose={() => setModalVisible(false)}
       />
-      {!linkToken && <Loading />}
+      {loading && <Loading />}
     </AppLayout>
   );
 };
