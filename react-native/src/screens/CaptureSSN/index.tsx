@@ -25,6 +25,7 @@ const CaptureSSN: React.FC = () => {
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
 
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const {error} = useSelector((state: RootState) => state.onboardingReducer);
 
   useEffect(() => {
     async function getContentHeight() {
@@ -62,6 +63,13 @@ const CaptureSSN: React.FC = () => {
             changeValue={changeValue}
           />
         </View>
+        {!!error && (
+          <View style={styles.errorWrapper}>
+            <Text type="Body/Medium" style={styles.error}>
+              {error}
+            </Text>
+          </View>
+        )}
       </View>
       <View style={styles.actionWrapper}>
         <SubmitButton
