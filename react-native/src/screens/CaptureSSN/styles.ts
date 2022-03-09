@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
   submit: {
     marginTop: scale(-22),
   },
+  error: {
+    color: AppColors.accentRed100,
+  },
+  errorWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
 });
 
 export default styles;
