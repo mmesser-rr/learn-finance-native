@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -9,12 +10,19 @@ import NavigationService from 'src/navigation/NavigationService';
 import {calculateContentHeight} from 'src/utils/functions';
 
 import styles from './styles';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import Loading from 'src/components/common/Loading';
+import {RootState} from 'src/store/root-state';
 
 const label = 'SSN (xxx-xx-xxxx)';
 
 const CaptureSSN: React.FC = () => {
+  const dispatch = useDispatch();
+  const [ssn, setSsn] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
 
   useEffect(() => {
     async function getContentHeight() {
@@ -26,9 +34,13 @@ const CaptureSSN: React.FC = () => {
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 9);
+    setSsn(value);
   };
 
-  const goToNextStep = () => NavigationService.navigate('AccountCreateSuccess');
+  const goToNextStep = () => {
+    dispatch(updateOnboarding({ssn}));
+    NavigationService.navigate('AccountCreateSuccess');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -57,6 +69,7 @@ const CaptureSSN: React.FC = () => {
           onSubmit={goToNextStep}
         />
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };
