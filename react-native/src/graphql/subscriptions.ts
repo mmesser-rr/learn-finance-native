@@ -416,3 +416,144 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
+export const onCreatePlaidAccount = /* GraphQL */ `
+  subscription OnCreatePlaidAccount {
+    onCreatePlaidAccount {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePlaidAccount = /* GraphQL */ `
+  subscription OnUpdatePlaidAccount {
+    onUpdatePlaidAccount {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePlaidAccount = /* GraphQL */ `
+  subscription OnDeletePlaidAccount {
+    onDeletePlaidAccount {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUnitAccount = /* GraphQL */ `
+  subscription OnCreateUnitAccount {
+    onCreateUnitAccount {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUnitAccount = /* GraphQL */ `
+  subscription OnUpdateUnitAccount {
+    onUpdateUnitAccount {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUnitAccount = /* GraphQL */ `
+  subscription OnDeleteUnitAccount {
+    onDeleteUnitAccount {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
