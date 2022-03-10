@@ -20,6 +20,7 @@ export type RootStackParamList = {
   HomeStack: undefined;
   TransferStack: undefined;
   LastStepWelcome: undefined;
+  UserLoginStack: undefined;
 };
 
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
