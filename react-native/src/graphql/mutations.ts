@@ -116,107 +116,6 @@ export const openAccount = /* GraphQL */ `
     }
   }
 `;
-export const getAthleteUnitAccounts = /* GraphQL */ `
-  mutation GetAthleteUnitAccounts($athleteId: ID!) {
-    getAthleteUnitAccounts(athleteId: $athleteId) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-    }
-  }
-`;
-export const getUnitTransactionById = /* GraphQL */ `
-  mutation GetUnitTransactionById(
-    $athleteId: ID!
-    $unitTransactionId: String!
-  ) {
-    getUnitTransactionById(
-      athleteId: $athleteId
-      unitTransactionId: $unitTransactionId
-    ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-    }
-  }
-`;
-export const getAllUnitTransaction = /* GraphQL */ `
-  mutation GetAllUnitTransaction($athleteId: ID!) {
-    getAllUnitTransaction(athleteId: $athleteId) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-    }
-  }
-`;
-export const getAthleteUnitAccountById = /* GraphQL */ `
-  mutation GetAthleteUnitAccountById($athleteId: ID!, $unitAccountId: String!) {
-    getAthleteUnitAccountById(
-      athleteId: $athleteId
-      unitAccountId: $unitAccountId
-    ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-    }
-  }
-`;
 export const podSettings = /* GraphQL */ `
   mutation PodSettings(
     $athleteId: ID!
@@ -263,6 +162,17 @@ export const createPlaidLink = /* GraphQL */ `
       link_token
       request_id
       new_access_token
+      accounts {
+        account_id
+        mask
+        name
+        official_name
+        subtype
+        type
+        id
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -274,17 +184,17 @@ export const updatePlaidLink = /* GraphQL */ `
       link_token
       request_id
       new_access_token
-    }
-  }
-`;
-export const getPlaidAccounts = /* GraphQL */ `
-  mutation GetPlaidAccounts($athleteId: ID!) {
-    getPlaidAccounts(athleteId: $athleteId) {
-      access_token
-      item_id
-      link_token
-      request_id
-      new_access_token
+      accounts {
+        account_id
+        mask
+        name
+        official_name
+        subtype
+        type
+        id
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
@@ -322,6 +232,8 @@ export const createPlaidPayment = /* GraphQL */ `
         hold
         available
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -359,6 +271,8 @@ export const bookPayment = /* GraphQL */ `
         hold
         available
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -402,6 +316,8 @@ export const debitAccount = /* GraphQL */ `
         hold
         available
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -445,6 +361,8 @@ export const creditAccount = /* GraphQL */ `
         hold
         available
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -920,6 +838,165 @@ export const deletePhoneChallenge = /* GraphQL */ `
       code
       phoneNumber
       verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlaidAccount = /* GraphQL */ `
+  mutation CreatePlaidAccount(
+    $input: CreatePlaidAccountInput!
+    $condition: ModelPlaidAccountConditionInput
+  ) {
+    createPlaidAccount(input: $input, condition: $condition) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePlaidAccount = /* GraphQL */ `
+  mutation UpdatePlaidAccount(
+    $input: UpdatePlaidAccountInput!
+    $condition: ModelPlaidAccountConditionInput
+  ) {
+    updatePlaidAccount(input: $input, condition: $condition) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePlaidAccount = /* GraphQL */ `
+  mutation DeletePlaidAccount(
+    $input: DeletePlaidAccountInput!
+    $condition: ModelPlaidAccountConditionInput
+  ) {
+    deletePlaidAccount(input: $input, condition: $condition) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUnitAccount = /* GraphQL */ `
+  mutation CreateUnitAccount(
+    $input: CreateUnitAccountInput!
+    $condition: ModelUnitAccountConditionInput
+  ) {
+    createUnitAccount(input: $input, condition: $condition) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUnitAccount = /* GraphQL */ `
+  mutation UpdateUnitAccount(
+    $input: UpdateUnitAccountInput!
+    $condition: ModelUnitAccountConditionInput
+  ) {
+    updateUnitAccount(input: $input, condition: $condition) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUnitAccount = /* GraphQL */ `
+  mutation DeleteUnitAccount(
+    $input: DeleteUnitAccountInput!
+    $condition: ModelUnitAccountConditionInput
+  ) {
+    deleteUnitAccount(input: $input, condition: $condition) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
       createdAt
       updatedAt
     }
