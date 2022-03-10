@@ -13,6 +13,7 @@ import styles from './styles';
 
 const Welcome: React.FC = () => {
   const onJoin = () => NavigationService.navigate('SignUp');
+  const onLogin = () => NavigationService.navigate('UserLoginStack');
 
   return (
     <LinearGradient colors={RedLinnerGradient} style={styles.container}>
@@ -39,7 +40,7 @@ const Welcome: React.FC = () => {
             </Button>
           </View>
           <View>
-            <Button actionStyle={styles.loginAction} onPress={() => {}}>
+            <Button actionStyle={styles.loginAction} onPress={onLogin}>
               <Text type="Body/Large">Log in</Text>
             </Button>
           </View>
