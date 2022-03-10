@@ -308,3 +308,89 @@ export const listPhoneChallenges = /* GraphQL */ `
     }
   }
 `;
+export const getPlaidAccount = /* GraphQL */ `
+  query GetPlaidAccount($id: ID!) {
+    getPlaidAccount(id: $id) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlaidAccounts = /* GraphQL */ `
+  query ListPlaidAccounts(
+    $filter: ModelPlaidAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlaidAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        account_id
+        mask
+        name
+        official_name
+        subtype
+        type
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUnitAccount = /* GraphQL */ `
+  query GetUnitAccount($id: ID!) {
+    getUnitAccount(id: $id) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUnitAccounts = /* GraphQL */ `
+  query ListUnitAccounts(
+    $filter: ModelUnitAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUnitAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        type
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
