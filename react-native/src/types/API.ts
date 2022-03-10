@@ -154,11 +154,46 @@ export type Transanctions = {
   athleteTransactionsId?: string | null,
 };
 
+export type PlaidToken = {
+  __typename: "PlaidToken",
+  access_token?: string | null,
+  item_id?: string | null,
+  link_token?: string | null,
+  request_id?: string | null,
+  new_access_token?: string | null,
+  accounts?: PlaidAccount | null,
+};
+
+export type PlaidAccount = {
+  __typename: "PlaidAccount",
+  account_id?: string | null,
+  balances?: Balance | null,
+  mask?: string | null,
+  name?: string | null,
+  official_name?: string | null,
+  subtype?: string | null,
+  type?: string | null,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type Balance = {
+  __typename: "Balance",
+  available?: number | null,
+  current?: string | null,
+  iso_currency_code?: string | null,
+  limit?: string | null,
+  unofficial_currency_code?: string | null,
+};
+
 export type UnitAccount = {
   __typename: "UnitAccount",
   type?: string | null,
   id?: string | null,
   attributes?: Attributes | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type Attributes = {
@@ -185,15 +220,6 @@ export type Counterparty = {
   routingNumber?: string | null,
   accountNumber?: string | null,
   accountType?: string | null,
-};
-
-export type PlaidToken = {
-  __typename: "PlaidToken",
-  access_token?: string | null,
-  item_id?: string | null,
-  link_token?: string | null,
-  request_id?: string | null,
-  new_access_token?: string | null,
 };
 
 export type CreateProcessorTokenInput = {
@@ -521,6 +547,100 @@ export type DeletePhoneChallengeInput = {
   phoneNumber: string,
 };
 
+export type CreatePlaidAccountInput = {
+  account_id?: string | null,
+  balances?: BalanceInput | null,
+  mask?: string | null,
+  name?: string | null,
+  official_name?: string | null,
+  subtype?: string | null,
+  type?: string | null,
+  id?: string | null,
+};
+
+export type BalanceInput = {
+  available?: number | null,
+  current?: string | null,
+  iso_currency_code?: string | null,
+  limit?: string | null,
+  unofficial_currency_code?: string | null,
+};
+
+export type ModelPlaidAccountConditionInput = {
+  account_id?: ModelStringInput | null,
+  mask?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  official_name?: ModelStringInput | null,
+  subtype?: ModelStringInput | null,
+  type?: ModelStringInput | null,
+  and?: Array< ModelPlaidAccountConditionInput | null > | null,
+  or?: Array< ModelPlaidAccountConditionInput | null > | null,
+  not?: ModelPlaidAccountConditionInput | null,
+};
+
+export type UpdatePlaidAccountInput = {
+  account_id?: string | null,
+  balances?: BalanceInput | null,
+  mask?: string | null,
+  name?: string | null,
+  official_name?: string | null,
+  subtype?: string | null,
+  type?: string | null,
+  id: string,
+};
+
+export type DeletePlaidAccountInput = {
+  id: string,
+};
+
+export type CreateUnitAccountInput = {
+  type?: string | null,
+  id?: string | null,
+  attributes?: AttributesInput | null,
+};
+
+export type AttributesInput = {
+  createdAt?: string | null,
+  direction?: string | null,
+  amount?: number | null,
+  balance?: number | null,
+  summary?: string | null,
+  description?: string | null,
+  counterparty?: CounterpartyInput | null,
+  name?: string | null,
+  status?: string | null,
+  routingNumber?: string | null,
+  accountNumber?: string | null,
+  currency?: string | null,
+  hold?: number | null,
+  available?: number | null,
+};
+
+export type CounterpartyInput = {
+  name?: string | null,
+  routingNumber?: string | null,
+  accountNumber?: string | null,
+  accountType?: string | null,
+};
+
+export type ModelUnitAccountConditionInput = {
+  type?: ModelStringInput | null,
+  id?: ModelStringInput | null,
+  and?: Array< ModelUnitAccountConditionInput | null > | null,
+  or?: Array< ModelUnitAccountConditionInput | null > | null,
+  not?: ModelUnitAccountConditionInput | null,
+};
+
+export type UpdateUnitAccountInput = {
+  type?: string | null,
+  id: string,
+  attributes?: AttributesInput | null,
+};
+
+export type DeleteUnitAccountInput = {
+  id: string,
+};
+
 export type ModelProcessorTokenFilterInput = {
   plaidAccountId?: ModelStringInput | null,
   processorToken?: ModelStringInput | null,
@@ -634,6 +754,38 @@ export type ModelPhoneChallengeFilterInput = {
 export type ModelPhoneChallengeConnection = {
   __typename: "ModelPhoneChallengeConnection",
   items:  Array<PhoneChallenge | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPlaidAccountFilterInput = {
+  account_id?: ModelStringInput | null,
+  mask?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  official_name?: ModelStringInput | null,
+  subtype?: ModelStringInput | null,
+  type?: ModelStringInput | null,
+  and?: Array< ModelPlaidAccountFilterInput | null > | null,
+  or?: Array< ModelPlaidAccountFilterInput | null > | null,
+  not?: ModelPlaidAccountFilterInput | null,
+};
+
+export type ModelPlaidAccountConnection = {
+  __typename: "ModelPlaidAccountConnection",
+  items:  Array<PlaidAccount | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUnitAccountFilterInput = {
+  type?: ModelStringInput | null,
+  id?: ModelStringInput | null,
+  and?: Array< ModelUnitAccountFilterInput | null > | null,
+  or?: Array< ModelUnitAccountFilterInput | null > | null,
+  not?: ModelUnitAccountFilterInput | null,
+};
+
+export type ModelUnitAccountConnection = {
+  __typename: "ModelUnitAccountConnection",
+  items:  Array<UnitAccount | null >,
   nextToken?: string | null,
 };
 
@@ -786,120 +938,6 @@ export type OpenAccountMutation = {
   } | null,
 };
 
-export type GetAthleteUnitAccountsMutationVariables = {
-  athleteId: string,
-};
-
-export type GetAthleteUnitAccountsMutation = {
-  getAthleteUnitAccounts?:  Array< {
-    __typename: "UnitAccount",
-    type?: string | null,
-    id?: string | null,
-    attributes?:  {
-      __typename: "Attributes",
-      createdAt?: string | null,
-      direction?: string | null,
-      amount?: number | null,
-      balance?: number | null,
-      summary?: string | null,
-      description?: string | null,
-      name?: string | null,
-      status?: string | null,
-      routingNumber?: string | null,
-      accountNumber?: string | null,
-      currency?: string | null,
-      hold?: number | null,
-      available?: number | null,
-    } | null,
-  } | null > | null,
-};
-
-export type GetUnitTransactionByIdMutationVariables = {
-  athleteId: string,
-  unitTransactionId: string,
-};
-
-export type GetUnitTransactionByIdMutation = {
-  getUnitTransactionById?:  Array< {
-    __typename: "UnitAccount",
-    type?: string | null,
-    id?: string | null,
-    attributes?:  {
-      __typename: "Attributes",
-      createdAt?: string | null,
-      direction?: string | null,
-      amount?: number | null,
-      balance?: number | null,
-      summary?: string | null,
-      description?: string | null,
-      name?: string | null,
-      status?: string | null,
-      routingNumber?: string | null,
-      accountNumber?: string | null,
-      currency?: string | null,
-      hold?: number | null,
-      available?: number | null,
-    } | null,
-  } | null > | null,
-};
-
-export type GetAllUnitTransactionMutationVariables = {
-  athleteId: string,
-};
-
-export type GetAllUnitTransactionMutation = {
-  getAllUnitTransaction?:  Array< {
-    __typename: "UnitAccount",
-    type?: string | null,
-    id?: string | null,
-    attributes?:  {
-      __typename: "Attributes",
-      createdAt?: string | null,
-      direction?: string | null,
-      amount?: number | null,
-      balance?: number | null,
-      summary?: string | null,
-      description?: string | null,
-      name?: string | null,
-      status?: string | null,
-      routingNumber?: string | null,
-      accountNumber?: string | null,
-      currency?: string | null,
-      hold?: number | null,
-      available?: number | null,
-    } | null,
-  } | null > | null,
-};
-
-export type GetAthleteUnitAccountByIdMutationVariables = {
-  athleteId: string,
-  unitAccountId: string,
-};
-
-export type GetAthleteUnitAccountByIdMutation = {
-  getAthleteUnitAccountById?:  Array< {
-    __typename: "UnitAccount",
-    type?: string | null,
-    id?: string | null,
-    attributes?:  {
-      __typename: "Attributes",
-      createdAt?: string | null,
-      direction?: string | null,
-      amount?: number | null,
-      balance?: number | null,
-      summary?: string | null,
-      description?: string | null,
-      name?: string | null,
-      status?: string | null,
-      routingNumber?: string | null,
-      accountNumber?: string | null,
-      currency?: string | null,
-      hold?: number | null,
-      available?: number | null,
-    } | null,
-  } | null > | null,
-};
-
 export type PodSettingsMutationVariables = {
   athleteId: string,
   savings: number,
@@ -948,6 +986,18 @@ export type CreatePlaidLinkMutation = {
     link_token?: string | null,
     request_id?: string | null,
     new_access_token?: string | null,
+    accounts?:  {
+      __typename: "PlaidAccount",
+      account_id?: string | null,
+      mask?: string | null,
+      name?: string | null,
+      official_name?: string | null,
+      subtype?: string | null,
+      type?: string | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -964,21 +1014,18 @@ export type UpdatePlaidLinkMutation = {
     link_token?: string | null,
     request_id?: string | null,
     new_access_token?: string | null,
-  } | null,
-};
-
-export type GetPlaidAccountsMutationVariables = {
-  athleteId: string,
-};
-
-export type GetPlaidAccountsMutation = {
-  getPlaidAccounts?:  {
-    __typename: "PlaidToken",
-    access_token?: string | null,
-    item_id?: string | null,
-    link_token?: string | null,
-    request_id?: string | null,
-    new_access_token?: string | null,
+    accounts?:  {
+      __typename: "PlaidAccount",
+      account_id?: string | null,
+      mask?: string | null,
+      name?: string | null,
+      official_name?: string | null,
+      subtype?: string | null,
+      type?: string | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -1012,6 +1059,8 @@ export type CreatePlaidPaymentMutation = {
       hold?: number | null,
       available?: number | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1045,6 +1094,8 @@ export type BookPaymentMutation = {
       hold?: number | null,
       available?: number | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1081,6 +1132,8 @@ export type DebitAccountMutation = {
       hold?: number | null,
       available?: number | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1117,6 +1170,8 @@ export type CreditAccountMutation = {
       hold?: number | null,
       available?: number | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1666,6 +1721,183 @@ export type DeletePhoneChallengeMutation = {
   } | null,
 };
 
+export type CreatePlaidAccountMutationVariables = {
+  input: CreatePlaidAccountInput,
+  condition?: ModelPlaidAccountConditionInput | null,
+};
+
+export type CreatePlaidAccountMutation = {
+  createPlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePlaidAccountMutationVariables = {
+  input: UpdatePlaidAccountInput,
+  condition?: ModelPlaidAccountConditionInput | null,
+};
+
+export type UpdatePlaidAccountMutation = {
+  updatePlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePlaidAccountMutationVariables = {
+  input: DeletePlaidAccountInput,
+  condition?: ModelPlaidAccountConditionInput | null,
+};
+
+export type DeletePlaidAccountMutation = {
+  deletePlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUnitAccountMutationVariables = {
+  input: CreateUnitAccountInput,
+  condition?: ModelUnitAccountConditionInput | null,
+};
+
+export type CreateUnitAccountMutation = {
+  createUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUnitAccountMutationVariables = {
+  input: UpdateUnitAccountInput,
+  condition?: ModelUnitAccountConditionInput | null,
+};
+
+export type UpdateUnitAccountMutation = {
+  updateUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUnitAccountMutationVariables = {
+  input: DeleteUnitAccountInput,
+  condition?: ModelUnitAccountConditionInput | null,
+};
+
+export type DeleteUnitAccountMutation = {
+  deleteUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetProcessorTokenQueryVariables = {
   id: string,
 };
@@ -2005,6 +2237,108 @@ export type ListPhoneChallengesQuery = {
       code: string,
       phoneNumber: string,
       verified: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPlaidAccountQueryVariables = {
+  id: string,
+};
+
+export type GetPlaidAccountQuery = {
+  getPlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPlaidAccountsQueryVariables = {
+  filter?: ModelPlaidAccountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPlaidAccountsQuery = {
+  listPlaidAccounts?:  {
+    __typename: "ModelPlaidAccountConnection",
+    items:  Array< {
+      __typename: "PlaidAccount",
+      account_id?: string | null,
+      mask?: string | null,
+      name?: string | null,
+      official_name?: string | null,
+      subtype?: string | null,
+      type?: string | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUnitAccountQueryVariables = {
+  id: string,
+};
+
+export type GetUnitAccountQuery = {
+  getUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListUnitAccountsQueryVariables = {
+  filter?: ModelUnitAccountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUnitAccountsQuery = {
+  listUnitAccounts?:  {
+    __typename: "ModelUnitAccountConnection",
+    items:  Array< {
+      __typename: "UnitAccount",
+      type?: string | null,
+      id?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2448,6 +2782,153 @@ export type OnDeletePhoneChallengeSubscription = {
     code: string,
     phoneNumber: string,
     verified: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePlaidAccountSubscription = {
+  onCreatePlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePlaidAccountSubscription = {
+  onUpdatePlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePlaidAccountSubscription = {
+  onDeletePlaidAccount?:  {
+    __typename: "PlaidAccount",
+    account_id?: string | null,
+    balances?:  {
+      __typename: "Balance",
+      available?: number | null,
+      current?: string | null,
+      iso_currency_code?: string | null,
+      limit?: string | null,
+      unofficial_currency_code?: string | null,
+    } | null,
+    mask?: string | null,
+    name?: string | null,
+    official_name?: string | null,
+    subtype?: string | null,
+    type?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUnitAccountSubscription = {
+  onCreateUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUnitAccountSubscription = {
+  onUpdateUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUnitAccountSubscription = {
+  onDeleteUnitAccount?:  {
+    __typename: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      name?: string | null,
+      status?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
