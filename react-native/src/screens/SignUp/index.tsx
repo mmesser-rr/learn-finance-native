@@ -8,6 +8,7 @@ import PhoneCapture from './PhoneCapture';
 import PhoneCodeVerify from './PhoneCodeVerify';
 import NameCapture from './NameCapture';
 import EmailCapture from './EmailCapture';
+import Loading from 'src/components/common/Loading';
 
 import styles from './styles';
 
@@ -17,6 +18,7 @@ const Verification: React.FC<SignUpProps> = ({
 }: SignUpProps) => {
   const [stepCount, setStepCount] = useState(-1);
   const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
   const stepName = route.params.step;
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const Verification: React.FC<SignUpProps> = ({
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      {stepCount === 0 && <InvitationCode goToNextStep={goToNextStep} />}
+      {stepCount === 0 && <InvitationCode goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />}
       {stepCount === 1 && (
         <PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />
       )}
@@ -47,6 +49,7 @@ const Verification: React.FC<SignUpProps> = ({
       )}
       {stepCount === 3 && <NameCapture goToNextStep={goToNextStep} />}
       {stepCount === 4 && <EmailCapture goToNextStep={goToNextStep} />}
+      {loading && <Loading />}
     </AppLayout>
   );
 };

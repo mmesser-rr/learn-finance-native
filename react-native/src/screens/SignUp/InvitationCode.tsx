@@ -14,6 +14,7 @@ import styles from './styles';
 
 interface InvitationCodeProps {
   goToNextStep: () => void;
+  updateLoading: (status: boolean) => void;
 }
 
 type FormData = {
@@ -22,7 +23,7 @@ type FormData = {
 
 const invalidCodeMessage = 'Invalid code. Please try again.';
 
-const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep}) => {
+const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoading}) => {
   const {
     control,
     handleSubmit,
@@ -37,12 +38,14 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep}) => {
   });
 
   const onSubmit = async (formData: FormData) => {
+    updateLoading(true);
     const {data} = (await API.graphql(
       graphqlOperation(getInvite, {
         code: formData.code,
         status: InviteStatus.AVAILABLE,
       }),
     )) as GraphQLResult<GetInviteQuery>;
+    updateLoading(false);
 
     if (data && data.getInvite) {
       goToNextStep();

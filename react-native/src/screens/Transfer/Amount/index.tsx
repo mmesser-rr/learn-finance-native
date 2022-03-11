@@ -28,12 +28,14 @@ const TransferAmount: React.FC = () => {
   };
 
   const onContinue = () => NavigationService.navigate('TransferReview');
+  const goPreviousScreen = () => NavigationService.navigate('PodSelectAccount');
+  const goCloseScreen = () => NavigationService.navigate('HomeStack');
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View style={styles.nav}>
-          <TopNav title="Deposit" goPreviousScreen={() => {}} />
+          <TopNav title="Deposit" goPreviousScreen={goPreviousScreen} goCloseScreen={goCloseScreen} />
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
