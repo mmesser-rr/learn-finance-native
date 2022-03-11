@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import UserFaceId from 'src/screens/User/FaceId';
+import UserFaceId from 'src/screens/UserBanking/FaceId';
 
 const Stack = createStackNavigator();
 
