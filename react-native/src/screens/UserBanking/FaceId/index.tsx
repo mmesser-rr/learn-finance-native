@@ -1,47 +1,57 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
 import {GradientButtonColors} from 'src/utils/constants';
-import {calculateContentHeight} from 'src/utils/functions';
+import FaceIDIcon from 'src/assets/icons/face-id.svg';
 
 import styles from './styles';
 
 const UserFaceId: React.FC = () => {
-  const [safeviewHeight, SetSafeviewHeight] = useState(0);
+  const [isFaceID, setIsFaceID] = useState(false);
 
   useEffect(() => {
-    async function getContentHeight() {
-      SetSafeviewHeight(await calculateContentHeight());
-    }
-
-    getContentHeight();
+    checkBiometricsSupport();
   }, []);
+
+  const checkBiometricsSupport = async () => {
+    const { available, biometryType } = await ReactNativeBiometrics.isSensorAvailable();
+    setIsFaceID(available && biometryType === ReactNativeBiometrics.FaceID);
+  };
+
+  const onTurnOnFaceID = async () => {
+    let {success, error} = await ReactNativeBiometrics.simplePrompt({
+      promptMessage: 'Sign in with Touch ID',
+      cancelButtonText: 'Close',
+    });
+  };
 
   return (
     <AppLayout containerStyle={styles.container}>
-      <View style={{height: safeviewHeight / 2}}>
-        <View>
-          <Text type="Headline/Small" style={styles.head}>
-            Turn on Face ID
-          </Text>
-        </View>
-        <View>
-          <Text type="Body/Large" style={styles.caption}>
-            Would you like to turn on Face ID for your future login?
-          </Text>
-        </View>
+      <View>
+        <Text type="Headline/Small" style={styles.head}>
+          Turn on Face ID
+        </Text>
       </View>
-      <View style={styles.actionWrapper}>
+      <View>
+        <Text type="Body/Large" style={styles.caption}>
+          Would you like to turn on Face ID for your future login?
+        </Text>
+      </View>
+      <View style={styles.style}>
+        <FaceIDIcon />
+      </View>
+      <View>
         <SubmitButton
-          isValid={true}
+          isValid={isFaceID}
           actionLabel="Turn on Face ID"
           style={styles.submit}
-          onSubmit={() => {}}
+          onSubmit={onTurnOnFaceID}
         />
         <LinearGradient
           style={styles.laterActionGradient}
