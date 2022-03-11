@@ -25,3 +25,5 @@ export const LOG_OUT = 'LOG_OUT';
 
 // banking
 export const UPDATE_HOME_STEP = 'UPDATE_HOME_STEP';
+export const UPDATE_POD_SETTINGS = 'UPDATE_POD_SETTINGS';
+export const POD_SETTINGS_UPDATED = 'POD_SETTINGS_UPDATED';
