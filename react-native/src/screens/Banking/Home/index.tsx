@@ -83,7 +83,6 @@ const Home: React.FC = () => {
         accessToken: success.publicToken
       })
     );
-    console.log(7888, res)
     setLoading(false);
     NavigationService.navigate('TransferStack');
   };
