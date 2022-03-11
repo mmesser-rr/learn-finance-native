@@ -163,12 +163,6 @@ export const createPlaidLink = /* GraphQL */ `
       request_id
       new_access_token
       accounts {
-        account_id
-        mask
-        name
-        official_name
-        subtype
-        type
         id
         createdAt
         updatedAt
@@ -185,12 +179,6 @@ export const updatePlaidLink = /* GraphQL */ `
       request_id
       new_access_token
       accounts {
-        account_id
-        mask
-        name
-        official_name
-        subtype
-        type
         id
         createdAt
         updatedAt
@@ -849,19 +837,9 @@ export const createPlaidAccount = /* GraphQL */ `
     $condition: ModelPlaidAccountConditionInput
   ) {
     createPlaidAccount(input: $input, condition: $condition) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
+      accounts {
+        nextToken
       }
-      mask
-      name
-      official_name
-      subtype
-      type
       id
       createdAt
       updatedAt
@@ -874,19 +852,9 @@ export const updatePlaidAccount = /* GraphQL */ `
     $condition: ModelPlaidAccountConditionInput
   ) {
     updatePlaidAccount(input: $input, condition: $condition) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
+      accounts {
+        nextToken
       }
-      mask
-      name
-      official_name
-      subtype
-      type
       id
       createdAt
       updatedAt
@@ -899,6 +867,21 @@ export const deletePlaidAccount = /* GraphQL */ `
     $condition: ModelPlaidAccountConditionInput
   ) {
     deletePlaidAccount(input: $input, condition: $condition) {
+      accounts {
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAccounts = /* GraphQL */ `
+  mutation CreateAccounts(
+    $input: CreateAccountsInput!
+    $condition: ModelAccountsConditionInput
+  ) {
+    createAccounts(input: $input, condition: $condition) {
       account_id
       balances {
         available
@@ -915,6 +898,59 @@ export const deletePlaidAccount = /* GraphQL */ `
       id
       createdAt
       updatedAt
+      plaidAccountAccountsId
+    }
+  }
+`;
+export const updateAccounts = /* GraphQL */ `
+  mutation UpdateAccounts(
+    $input: UpdateAccountsInput!
+    $condition: ModelAccountsConditionInput
+  ) {
+    updateAccounts(input: $input, condition: $condition) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+      plaidAccountAccountsId
+    }
+  }
+`;
+export const deleteAccounts = /* GraphQL */ `
+  mutation DeleteAccounts(
+    $input: DeleteAccountsInput!
+    $condition: ModelAccountsConditionInput
+  ) {
+    deleteAccounts(input: $input, condition: $condition) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+      plaidAccountAccountsId
     }
   }
 `;
