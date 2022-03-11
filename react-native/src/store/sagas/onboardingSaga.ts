@@ -61,7 +61,7 @@ export function* addAthlete({ssn}: ICreateAthleteAndAccount) {
         [API, 'graphql'],
         graphqlOperation(openAppAndAccount, {
           athleteId: newlyCreatedAthlete.id,
-          ssn: onboardingState.ssn,
+          ssn: ssn,
         }),
       );
 
