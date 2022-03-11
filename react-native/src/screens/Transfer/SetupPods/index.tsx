@@ -46,9 +46,9 @@ const ToolTipContent: React.FC<ToolTipContentProps> = ({text}) => {
 };
 
 const SetupPods: React.FC = () => {
-  const [savings, setSavings] = useState(30);
-  const [investments, setInvestments] = useState(40);
-  const [spending, setSpending] = useState(30);
+  const [savings, setSavings] = useState(0);
+  const [investments, setInvestments] = useState(0);
+  const [spending, setSpending] = useState(0);
   const [savingsTip, setSavingTip] = useState(false);
   const [investmentsTip, setInvestmentsTip] = useState(false);
   const [spendingTip, setSpendingTip] = useState(false);
@@ -57,6 +57,9 @@ const SetupPods: React.FC = () => {
     (state: RootState) => state.bankingReducer,
   );
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const userPodSettings = useSelector(
+    (state: RootState) => state.userReducer.user?.podSettings,
+  );
 
   const isEdit = step === PODsSteps[2];
 
@@ -69,6 +72,7 @@ const SetupPods: React.FC = () => {
     }, []),
   );
 
+  // when settings update completes, navigate to correct screen
   useEffect(() => {
     if (podSettingsUpdated) {
       if (isEdit) {
@@ -80,6 +84,22 @@ const SetupPods: React.FC = () => {
       NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'});
     }
   }, [podSettingsUpdated]);
+
+  useEffect(() => {
+    if (
+      userPodSettings?.SAVINGS === 0 &&
+      userPodSettings?.INVESTMENTS === 0 &&
+      userPodSettings?.SPENDING === 0
+    ) {
+      setSavings(30);
+      setInvestments(40);
+      setSpending(30);
+    } else if (userPodSettings) {
+      setSavings(userPodSettings.SAVINGS);
+      setInvestments(userPodSettings.INVESTMENTS);
+      setSpending(userPodSettings.SPENDING);
+    }
+  }, [userPodSettings]);
 
   const onDone = () => {
     dispatch(
