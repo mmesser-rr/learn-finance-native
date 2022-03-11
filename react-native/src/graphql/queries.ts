@@ -311,6 +311,34 @@ export const listPhoneChallenges = /* GraphQL */ `
 export const getPlaidAccount = /* GraphQL */ `
   query GetPlaidAccount($id: ID!) {
     getPlaidAccount(id: $id) {
+      accounts {
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlaidAccounts = /* GraphQL */ `
+  query ListPlaidAccounts(
+    $filter: ModelPlaidAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlaidAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAccounts = /* GraphQL */ `
+  query GetAccounts($id: ID!) {
+    getAccounts(id: $id) {
       account_id
       balances {
         available
@@ -327,16 +355,17 @@ export const getPlaidAccount = /* GraphQL */ `
       id
       createdAt
       updatedAt
+      plaidAccountAccountsId
     }
   }
 `;
-export const listPlaidAccounts = /* GraphQL */ `
-  query ListPlaidAccounts(
-    $filter: ModelPlaidAccountFilterInput
+export const listAccounts = /* GraphQL */ `
+  query ListAccounts(
+    $filter: ModelAccountsFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPlaidAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         account_id
         mask
@@ -347,6 +376,7 @@ export const listPlaidAccounts = /* GraphQL */ `
         id
         createdAt
         updatedAt
+        plaidAccountAccountsId
       }
       nextToken
     }
