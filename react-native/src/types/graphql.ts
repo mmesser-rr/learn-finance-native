@@ -23,3 +23,10 @@ export type CreatePlaidLink = {
     request_id: string;
   };
 };
+
+export type PodSettingsMutationInput = {
+  athleteId: string;
+  savings: number;
+  investments: number;
+  spending: number;
+};
