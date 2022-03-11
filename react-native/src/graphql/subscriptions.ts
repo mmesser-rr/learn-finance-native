@@ -419,19 +419,9 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
 export const onCreatePlaidAccount = /* GraphQL */ `
   subscription OnCreatePlaidAccount {
     onCreatePlaidAccount {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
+      accounts {
+        nextToken
       }
-      mask
-      name
-      official_name
-      subtype
-      type
       id
       createdAt
       updatedAt
@@ -441,19 +431,9 @@ export const onCreatePlaidAccount = /* GraphQL */ `
 export const onUpdatePlaidAccount = /* GraphQL */ `
   subscription OnUpdatePlaidAccount {
     onUpdatePlaidAccount {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
+      accounts {
+        nextToken
       }
-      mask
-      name
-      official_name
-      subtype
-      type
       id
       createdAt
       updatedAt
@@ -463,6 +443,18 @@ export const onUpdatePlaidAccount = /* GraphQL */ `
 export const onDeletePlaidAccount = /* GraphQL */ `
   subscription OnDeletePlaidAccount {
     onDeletePlaidAccount {
+      accounts {
+        nextToken
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAccounts = /* GraphQL */ `
+  subscription OnCreateAccounts {
+    onCreateAccounts {
       account_id
       balances {
         available
@@ -479,6 +471,53 @@ export const onDeletePlaidAccount = /* GraphQL */ `
       id
       createdAt
       updatedAt
+      plaidAccountAccountsId
+    }
+  }
+`;
+export const onUpdateAccounts = /* GraphQL */ `
+  subscription OnUpdateAccounts {
+    onUpdateAccounts {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+      plaidAccountAccountsId
+    }
+  }
+`;
+export const onDeleteAccounts = /* GraphQL */ `
+  subscription OnDeleteAccounts {
+    onDeleteAccounts {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
+      id
+      createdAt
+      updatedAt
+      plaidAccountAccountsId
     }
   }
 `;
