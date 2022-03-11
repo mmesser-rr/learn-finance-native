@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
-import {Slider} from 'src/components/common/Slider';
 import Tooltip from 'react-native-walkthrough-tooltip';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useFocusEffect} from '@react-navigation/native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
+import {Slider} from 'src/components/common/Slider';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import InfoIcon from 'src/assets/icons/info.svg';
-import {GradientButtonColors, PODsSteps, RedLinnerGradient} from 'src/utils/constants';
-import { updateHomeStep } from 'src/store/actions/bankingActions';
+import {
+  GradientButtonColors,
+  PODsSteps,
+  RedLinnerGradient,
+} from 'src/utils/constants';
+import {
+  podSettingsUpdated as podSettingsUpdatedAction,
+  updateHomeStep,
+  updatePodSettings,
+} from 'src/store/actions/bankingActions';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from 'src/components/common/Button';
-import { RootState } from 'src/store/root-state';
+import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
+import Loading from 'src/components/common/Loading';
 
 const sliderMarginHorizontalWidth = 27;
 
@@ -25,34 +35,80 @@ interface ToolTipContentProps {
   text: string;
 }
 
-const ToolTipContent: React.FC<ToolTipContentProps> = ({ text }) => {
+const ToolTipContent: React.FC<ToolTipContentProps> = ({text}) => {
   return (
     <View style={styles.tooltip}>
-      <Text style={styles.tooltipContent} type="Title/Medium">{text}</Text>
+      <Text style={styles.tooltipContent} type="Title/Medium">
+        {text}
+      </Text>
     </View>
   );
 };
 
 const SetupPods: React.FC = () => {
-  const [savings, setSavings] = useState(30);
-  const [investments, setInvestments] = useState(40);
-  const [spending, setSpending] = useState(30);
+  const [savings, setSavings] = useState(0);
+  const [investments, setInvestments] = useState(0);
+  const [spending, setSpending] = useState(0);
   const [savingsTip, setSavingTip] = useState(false);
   const [investmentsTip, setInvestmentsTip] = useState(false);
   const [spendingTip, setSpendingTip] = useState(false);
   const dispatch = useDispatch();
-  const { step } = useSelector((state: RootState) => state.bankingReducer);
+  const {step, podSettingsUpdated} = useSelector(
+    (state: RootState) => state.bankingReducer,
+  );
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const userPodSettings = useSelector(
+    (state: RootState) => state.userReducer.user?.podSettings,
+  );
 
   const isEdit = step === PODsSteps[2];
 
-  const onDone = () => {
-    if (isEdit) {
-      NavigationService.navigate('HomeStack');
-      return;
-    }
+  // when screen loses focus, reset the podSettingsUpdated state
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        dispatch(podSettingsUpdatedAction(false));
+      };
+    }, []),
+  );
 
-    dispatch(updateHomeStep(PODsSteps[2]));
-    NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'})
+  // when settings update completes, navigate to correct screen
+  useEffect(() => {
+    if (podSettingsUpdated) {
+      if (isEdit) {
+        NavigationService.navigate('HomeStack');
+        return;
+      }
+
+      dispatch(updateHomeStep(PODsSteps[2]));
+      NavigationService.navigate('TransferStack', {screen: 'PodSetupSuccess'});
+    }
+  }, [podSettingsUpdated]);
+
+  useEffect(() => {
+    if (
+      userPodSettings?.SAVINGS === 0 &&
+      userPodSettings?.INVESTMENTS === 0 &&
+      userPodSettings?.SPENDING === 0
+    ) {
+      setSavings(30);
+      setInvestments(40);
+      setSpending(30);
+    } else if (userPodSettings) {
+      setSavings(userPodSettings.SAVINGS);
+      setInvestments(userPodSettings.INVESTMENTS);
+      setSpending(userPodSettings.SPENDING);
+    }
+  }, [userPodSettings]);
+
+  const onDone = () => {
+    dispatch(
+      updatePodSettings({
+        SAVINGS: savings,
+        INVESTMENTS: investments,
+        SPENDING: spending,
+      }),
+    );
   };
 
   const onCancel = () => {
@@ -68,35 +124,37 @@ const SetupPods: React.FC = () => {
         <View style={styles.nav}>
           <TopNav
             title={isEdit ? 'Change Pods Allocations' : 'Set up Pods'}
-            goPreviousScreen={() => NavigationService.navigate('TransferStack', {screen: 'PodsExplain'})}
+            goPreviousScreen={() =>
+              NavigationService.navigate('TransferStack', {
+                screen: 'PodsExplain',
+              })
+            }
             goCloseScreen={() => NavigationService.navigate('HomeStack')}
           />
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
-            {isEdit ?
-              "How do you want to allocate your money? The change will not apply to what's in the Pods already but apply to the future deposits." :
-              'How do you want to allocate your money? Here is the setup most people start with. You can always adjust later.'
-            }
+            {isEdit
+              ? "How do you want to allocate your money? The change will not apply to what's in the Pods already but apply to the future deposits."
+              : 'How do you want to allocate your money? Here is the setup most people start with. You can always adjust later.'}
           </Text>
         </View>
         <View>
           <View style={styles.sliderWrapper}>
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
-                <Text type="Title/Medium" style={styles.label}>SAVINGS</Text>
+                <Text type="Title/Medium" style={styles.label}>
+                  SAVINGS
+                </Text>
                 <Tooltip
                   isVisible={savingsTip}
                   content={
-                    <ToolTipContent
-                      text="Money in Savings Pod supports you in a financial emergency."
-                    />
+                    <ToolTipContent text="Money in Savings Pod supports you in a financial emergency." />
                   }
                   placement="top"
                   backgroundColor="transparent"
                   contentStyle={styles.tooltipBackground}
-                  onClose={() => setSavingTip(false)}
-                >
+                  onClose={() => setSavingTip(false)}>
                   <TouchableOpacity onPress={() => setSavingTip(true)}>
                     <InfoIcon />
                   </TouchableOpacity>
@@ -121,19 +179,18 @@ const SetupPods: React.FC = () => {
           <View style={styles.sliderWrapper}>
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
-                <Text type="Title/Medium" style={styles.label}>INVESTMENTS</Text>
+                <Text type="Title/Medium" style={styles.label}>
+                  INVESTMENTS
+                </Text>
                 <Tooltip
                   isVisible={investmentsTip}
                   content={
-                    <ToolTipContent
-                      text="Money in Investments pod allows you to grow your wealth and beat inflation."
-                    />
+                    <ToolTipContent text="Money in Investments pod allows you to grow your wealth and beat inflation." />
                   }
                   placement="top"
                   backgroundColor="transparent"
                   contentStyle={styles.tooltipBackground}
-                  onClose={() => setInvestmentsTip(false)}
-                >
+                  onClose={() => setInvestmentsTip(false)}>
                   <TouchableOpacity onPress={() => setInvestmentsTip(true)}>
                     <InfoIcon />
                   </TouchableOpacity>
@@ -158,19 +215,18 @@ const SetupPods: React.FC = () => {
           <View style={styles.sliderWrapper}>
             <View style={styles.info}>
               <View style={styles.labelWrapper}>
-                <Text type="Title/Medium" style={styles.label}>SPENDING</Text>
+                <Text type="Title/Medium" style={styles.label}>
+                  SPENDING
+                </Text>
                 <Tooltip
                   isVisible={spendingTip}
                   content={
-                    <ToolTipContent
-                      text="Money in Spending Pod is for your daily expenses."
-                    />
+                    <ToolTipContent text="Money in Spending Pod is for your daily expenses." />
                   }
                   placement="top"
                   backgroundColor="transparent"
                   contentStyle={styles.tooltipBackground}
-                  onClose={() => setSpendingTip(false)}
-                >
+                  onClose={() => setSpendingTip(false)}>
                   <TouchableOpacity onPress={() => setSpendingTip(true)}>
                     <InfoIcon />
                   </TouchableOpacity>
@@ -218,14 +274,14 @@ const SetupPods: React.FC = () => {
             style={styles.laterActionGradient}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
-            colors={GradientButtonColors}
-          >
+            colors={GradientButtonColors}>
             <Button onPress={onCancel}>
               <Text type="Body/Large">Cancel</Text>
             </Button>
           </LinearGradient>
         )}
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };
