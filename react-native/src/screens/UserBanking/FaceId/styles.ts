@@ -15,10 +15,6 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
   },
-  actionWrapper: {
-    width: '100%',
-    flex: 1,
-  },
   submit: {
     marginTop: scale(-22),
   },
@@ -39,6 +35,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(100),
     padding: 1,
   },
+  style: {
+    alignItems: 'center',
+  }
 });
 
 export default styles;
