@@ -1,5 +1,5 @@
 /*
- * combines all th existing reducers
+ * combines all existing reducers
  */
 import * as loadingReducer from './loadingReducer';
 import * as loginReducer from './loginReducer';
