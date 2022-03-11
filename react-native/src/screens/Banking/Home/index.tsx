@@ -77,7 +77,7 @@ const Home: React.FC = () => {
 
   const onPlaidSuccessHandler = async (success: LinkSuccess) => {
     setLoading(true);
-    await API.graphql(
+    const res = await API.graphql(
       graphqlOperation(updatePlaidLink, {
         athleteId: user?.id,
         accessToken: success.publicToken
