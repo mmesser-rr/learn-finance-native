@@ -11,6 +11,7 @@ import {GradientButtonColors} from 'src/utils/constants';
 import FaceIDIcon from 'src/assets/icons/face-id.svg';
 
 import styles from './styles';
+import NavigationService from 'src/navigation/NavigationService';
 
 const UserFaceId: React.FC = () => {
   const [isFaceID, setIsFaceID] = useState(false);
@@ -29,6 +30,12 @@ const UserFaceId: React.FC = () => {
       promptMessage: 'Sign in with Touch ID',
       cancelButtonText: 'Close',
     });
+
+    if (success) {}
+  };
+
+  const onLater = () => {
+    NavigationService.navigate('UserBankingStack', {screen: 'WithdrawDetails'});
   };
 
   return (
@@ -43,7 +50,7 @@ const UserFaceId: React.FC = () => {
           Would you like to turn on Face ID for your future login?
         </Text>
       </View>
-      <View style={styles.style}>
+      <View style={styles.faceId}>
         <FaceIDIcon />
       </View>
       <View>
@@ -58,7 +65,7 @@ const UserFaceId: React.FC = () => {
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
           colors={GradientButtonColors}>
-          <Button>
+          <Button onPress={onLater}>
             <Text type="Body/Large">Maybe Later</Text>
           </Button>
         </LinearGradient>
