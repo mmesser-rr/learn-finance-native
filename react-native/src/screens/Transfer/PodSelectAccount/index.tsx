@@ -1,10 +1,12 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
+
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import GoIcon from 'src/assets/icons/go.svg';
+import { twoDecimalFormatter } from 'src/utils/functions';
 
 import styles from './styles';
 
@@ -20,11 +22,6 @@ const accounts = [
     money: 323.56
   }
 ];
-
-const twoDecimalFormatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 const PodSelectAccount: React.FC = () => {
   const onContinue = (id: any) => {
