@@ -64,7 +64,7 @@ const WithdrawReview: React.FC = () => {
       <View style={styles.nav}>
         <TopNav
           title="Withdraw"
-          goPreviousScreen={() => NavigationService.navigate('WithdrawAmount')}
+          goPreviousScreen={() => NavigationService.navigate('UserBankingStack', {screen: 'WithdrawAmount'})}
           goCloseScreen={() => {}}
         />
       </View>

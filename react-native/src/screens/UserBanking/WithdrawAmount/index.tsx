@@ -27,8 +27,8 @@ const WithdrawAmount: React.FC = () => {
     setIsValid(Number(txt) !== 0 && Number(txt) <= 100);
   };
 
-  const onContinue = () => NavigationService.navigate('WithdrawReview');
-  const goPreviousScreen = () => NavigationService.navigate('WithdrawDetails');
+  const onContinue = () => NavigationService.navigate('UserBankingStack', {screen: 'WithdrawReview'});
+  const goPreviousScreen = () => NavigationService.navigate('UserBankingStack', {screen: 'WithdrawDetails'});
   const goCloseScreen = () => {};
 
   return (
