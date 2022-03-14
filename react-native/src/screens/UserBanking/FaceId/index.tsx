@@ -35,7 +35,7 @@ const UserFaceId: React.FC = () => {
   };
 
   const onLater = () => {
-    NavigationService.navigate('WithdrawDetails');
+    NavigationService.navigate('UserBankingStack', {screen: 'WithdrawDetails'});
   };
 
   return (
