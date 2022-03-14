@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: scale(100),
     padding: 1,
   },
-  style: {
+  faceId: {
     alignItems: 'center',
   }
 });
