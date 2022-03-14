@@ -24,6 +24,7 @@ import HomeStack from './HomeStack';
 import TransferStack from './TransferStack';
 import LastStepWelcome from 'src/screens/LastStepWelcome';
 import UserLoginStack from './UserLoginStack';
+import UserBankingStack from './UserBankingStack';
 
 interface IProps {
   theme: Theme;
@@ -74,6 +75,7 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen name="HomeStack" component={HomeStack} />
         <RootStack.Screen name="TransferStack" component={TransferStack} />
         <RootStack.Screen name="UserLoginStack" component={UserLoginStack} />
+        <RootStack.Screen name="UserBankingStack" component={UserBankingStack} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

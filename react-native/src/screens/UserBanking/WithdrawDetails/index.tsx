@@ -38,7 +38,7 @@ const WithdrawDetails: React.FC = () => {
   };
 
   const handleContinue = () => {
-    NavigationService.navigate('WithdrawAmount');
+    NavigationService.navigate('UserBankingStack', {screen: 'WithdrawAmount'});
   };
 
   return (
