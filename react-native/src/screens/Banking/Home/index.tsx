@@ -12,16 +12,16 @@ import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient, PODsSteps} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
-import { generateTextStyle } from 'src/utils/functions';
+import {generateTextStyle} from 'src/utils/functions';
 import UserHomeModal from 'src/components/common/UserHomeModal';
 import ProcessingIcon from 'src/assets/icons/processing.svg';
 import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import SwitchIcon from 'src/assets/icons/switch.svg';
-import { RootState } from 'src/store/root-state';
-import { createPlaidLink, updatePlaidLink } from 'src/graphql/mutations';
-import { CreatePlaidLink } from 'src/types/graphql';
+import {RootState} from 'src/store/root-state';
+import {createPlaidLink, updatePlaidLink} from 'src/graphql/mutations';
+import {CreatePlaidLink} from 'src/types/graphql';
 import Loading from 'src/components/common/Loading';
 
 import styles from './styles';
@@ -46,10 +46,10 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
 };
 
 const Home: React.FC = () => {
-  const { step } = useSelector((state: RootState) => state.bankingReducer);
-  const { user } = useSelector((state: RootState) => state.userReducer);
+  const {step} = useSelector((state: RootState) => state.bankingReducer);
+  const {user} = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
   const getPlaidLinkToken = async (athleteId: string) => {
     const {data} = (await API.graphql(
       graphqlOperation(createPlaidLink, {
-        athleteId
+        athleteId,
       }),
     )) as GraphQLResult<CreatePlaidLink>;
 
@@ -80,8 +80,8 @@ const Home: React.FC = () => {
     const res = await API.graphql(
       graphqlOperation(updatePlaidLink, {
         athleteId: user?.id,
-        accessToken: success.publicToken
-      })
+        accessToken: success.publicToken,
+      }),
     );
     setLoading(false);
     NavigationService.navigate('TransferStack');
@@ -108,7 +108,7 @@ const Home: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.title}>
-        <Text type="Headline/Small">Hi John!</Text>
+        <Text type="Headline/Small">Hi {user?.firstName}!</Text>
       </View>
       <View style={styles.submitted}>
         {step === PODsSteps[2] && (
@@ -159,7 +159,10 @@ const Home: React.FC = () => {
             </View>
           )}
           <View>
-            <Button actionStyle={styles.deposit} onPress={onSetupDirectDeposit} disabled={step !== PODsSteps[0]}>
+            <Button
+              actionStyle={styles.deposit}
+              onPress={onSetupDirectDeposit}
+              disabled={step !== PODsSteps[0]}>
               <Text type="Body/Large">Set up direct deposit</Text>
             </Button>
           </View>
@@ -170,7 +173,9 @@ const Home: React.FC = () => {
         {step === PODsSteps[2] && (
           <View style={styles.switch}>
             <SwitchIcon />
-            <Text type="Body/Medium" style={styles.switchLabel}>Move Money</Text>
+            <Text type="Body/Medium" style={styles.switchLabel}>
+              Move Money
+            </Text>
           </View>
         )}
       </View>
@@ -199,30 +204,42 @@ const Home: React.FC = () => {
           <View style={styles.podItem}>
             <View style={styles.podLabel}>
               <SpendingIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>Spending</Text>
+              <Text type="Body/Large" style={styles.podLabelText}>
+                Spending
+              </Text>
             </View>
             <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>Balance</Text>
+              <Text type="Title/Small" style={styles.balanceLabel}>
+                Balance
+              </Text>
               <Text type="Headline/Small">$0.00</Text>
             </View>
           </View>
           <View style={styles.podItem}>
             <View style={styles.podLabel}>
               <InvestmentIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>Investments</Text>
+              <Text type="Body/Large" style={styles.podLabelText}>
+                Investments
+              </Text>
             </View>
             <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>Balance</Text>
+              <Text type="Title/Small" style={styles.balanceLabel}>
+                Balance
+              </Text>
               <Text type="Headline/Small">$0.00</Text>
             </View>
           </View>
           <View style={styles.podItem}>
             <View style={styles.podLabel}>
               <SavingIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>Saving</Text>
+              <Text type="Body/Large" style={styles.podLabelText}>
+                Saving
+              </Text>
             </View>
             <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>Balance</Text>
+              <Text type="Title/Small" style={styles.balanceLabel}>
+                Balance
+              </Text>
               <Text type="Headline/Small">$0.00</Text>
             </View>
           </View>
