@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import WithdrawDetails from 'src/screens/UserBanking/WithdrawDetails';
 import WithdrawAmount from 'src/screens/UserBanking/WithdrawAmount';
 import WithdrawReview from 'src/screens/UserBanking/WithdrawReview';
+import WithdrawProcessed from 'src/screens/UserBanking/WithdrawProcessed';
+import MoneyMoveProcessed from 'src/screens/UserBanking/MoneyMoveProcessed';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +19,8 @@ const UserBankingStack: React.FC = () => {
       <Stack.Screen name="WithdrawDetails" component={WithdrawDetails} />
       <Stack.Screen name="WithdrawAmount" component={WithdrawAmount} />
       <Stack.Screen name="WithdrawReview" component={WithdrawReview} />
+      <Stack.Screen name="WithdrawProcessed" component={WithdrawProcessed} />
+      <Stack.Screen name="MoneyMoveProcessed" component={MoneyMoveProcessed} />
     </Stack.Navigator>
   );
 };
