@@ -10,8 +10,7 @@ const UserLoginStack: React.FC = () => {
       initialRouteName="UserFaceId"
       screenOptions={{
         headerShown: false,
-      }}
-    >
+      }}>
       <Stack.Screen name="UserFaceId" component={UserFaceId} />
     </Stack.Navigator>
   );
