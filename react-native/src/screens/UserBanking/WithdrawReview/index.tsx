@@ -14,7 +14,7 @@ import { twoDecimalFormatter } from 'src/utils/functions';
 import styles from './styles';
 
 const WithdrawReview: React.FC = () => {
-  const onDeposit = () => {};
+  const onWithdraw = () => NavigationService.navigate('UserBankingStack', {screen: 'WithdrawProcessed'});
 
   const list: InfoItemInterface[] = [
     {
@@ -81,9 +81,9 @@ const WithdrawReview: React.FC = () => {
           </Text>
           <SubmitButton
             isValid={true}
-            actionLabel="Deposit"
+            actionLabel="Withdraw"
             style={styles.submit}
-            onSubmit={onDeposit}
+            onSubmit={onWithdraw}
           />
           <Text style={styles.center} type="Title/Small">
             Transactions made after 3:00pm [ET] or on a weekend or holiday will be processed the next business day. It is recommended that you print a copy of this automation and maintain it for your record.
