@@ -1,8 +1,13 @@
 import createReducer from 'src/lib/createReducer';
 
-import {POD_SETTINGS_UPDATED, UPDATE_HOME_STEP} from '../actions/types';
+import {
+  POD_SETTINGS_UPDATED,
+  RECENT_TRANSACTIONS_LOADED,
+  UPDATE_HOME_STEP,
+} from '../actions/types';
 import {
   IPodSettingsUpdated,
+  IRecentTransactionsLoaded,
   IUpdateHomeStepAction,
 } from 'src/models/actions/banking';
 import {IBankingState} from 'src/models/reducers/banking';
@@ -19,5 +24,11 @@ export const bankingReducer = createReducer(initialState, {
   },
   [POD_SETTINGS_UPDATED](state: IBankingState, action: IPodSettingsUpdated) {
     return {...state, podSettingsUpdated: action.updated};
+  },
+  [RECENT_TRANSACTIONS_LOADED](
+    state: IBankingState,
+    action: IRecentTransactionsLoaded,
+  ) {
+    return {...state, recentTransactions: action.transactions};
   },
 });

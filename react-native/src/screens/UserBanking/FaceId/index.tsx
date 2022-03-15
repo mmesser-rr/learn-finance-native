@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import ReactNativeBiometrics from 'react-native-biometrics';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
-import Button from 'src/components/common/Button';
-import {GradientButtonColors} from 'src/utils/constants';
 import FaceIDIcon from 'src/assets/icons/face-id.svg';
 
 import styles from './styles';
 import NavigationService from 'src/navigation/NavigationService';
+import SecondaryButton from 'src/components/common/SecondaryButton';
 
 const UserFaceId: React.FC = () => {
   const [isFaceID, setIsFaceID] = useState(false);
@@ -21,7 +19,8 @@ const UserFaceId: React.FC = () => {
   }, []);
 
   const checkBiometricsSupport = async () => {
-    const { available, biometryType } = await ReactNativeBiometrics.isSensorAvailable();
+    const {available, biometryType} =
+      await ReactNativeBiometrics.isSensorAvailable();
     setIsFaceID(available && biometryType === ReactNativeBiometrics.FaceID);
   };
 
@@ -31,11 +30,16 @@ const UserFaceId: React.FC = () => {
       cancelButtonText: 'Close',
     });
 
-    if (success) {}
+    if (success) {
+    }
   };
 
   const onLater = () => {
     NavigationService.navigate('UserBankingStack', {screen: 'WithdrawDetails'});
+  };
+
+  const next = () => {
+    NavigationService.navigate('TransferStack', {screen: 'DepositResult'});
   };
 
   return (
@@ -60,15 +64,11 @@ const UserFaceId: React.FC = () => {
           style={styles.submit}
           onSubmit={onTurnOnFaceID}
         />
-        <LinearGradient
-          style={styles.laterActionGradient}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          colors={GradientButtonColors}>
-          <Button onPress={onLater}>
-            <Text type="Body/Large">Maybe Later</Text>
-          </Button>
-        </LinearGradient>
+        <SecondaryButton
+          isValid={true}
+          actionLabel="Maybe Later"
+          onPress={next}
+        />
       </View>
     </AppLayout>
   );

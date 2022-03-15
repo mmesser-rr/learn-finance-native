@@ -12,22 +12,17 @@ import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import InfoIcon from 'src/assets/icons/info.svg';
-import {
-  GradientButtonColors,
-  PODsSteps,
-  RedLinnerGradient,
-} from 'src/utils/constants';
+import {PODsSteps, RedLinnerGradient} from 'src/utils/constants';
 import {
   podSettingsUpdated as podSettingsUpdatedAction,
   updateHomeStep,
   updatePodSettings,
 } from 'src/store/actions/bankingActions';
-import LinearGradient from 'react-native-linear-gradient';
-import Button from 'src/components/common/Button';
 import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
 import Loading from 'src/components/common/Loading';
+import SecondaryButton from 'src/components/common/SecondaryButton';
 
 const sliderMarginHorizontalWidth = 27;
 
@@ -270,15 +265,11 @@ const SetupPods: React.FC = () => {
           onSubmit={onDone}
         />
         {isEdit && (
-          <LinearGradient
-            style={styles.laterActionGradient}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
-            colors={GradientButtonColors}>
-            <Button onPress={onCancel}>
-              <Text type="Body/Large">Cancel</Text>
-            </Button>
-          </LinearGradient>
+          <SecondaryButton
+            isValid={true}
+            actionLabel="Cancel"
+            onPress={onCancel}
+          />
         )}
       </View>
       {isLoading && <Loading />}

@@ -67,10 +67,44 @@ export const openAppAndAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -95,10 +129,44 @@ export const openAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -113,6 +181,35 @@ export const openAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+    }
+  }
+`;
+export const unitWebhookService = /* GraphQL */ `
+  mutation UnitWebhookService($data: String) {
+    unitWebhookService(data: $data) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
@@ -133,10 +230,44 @@ export const podSettings = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -162,11 +293,6 @@ export const createPlaidLink = /* GraphQL */ `
       link_token
       request_id
       new_access_token
-      accounts {
-        id
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -178,11 +304,6 @@ export const updatePlaidLink = /* GraphQL */ `
       link_token
       request_id
       new_access_token
-      accounts {
-        id
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -192,16 +313,12 @@ export const createPlaidPayment = /* GraphQL */ `
     $plaidAccountId: String!
     $amount: Float!
     $description: String
-    $receiverUnitAccountId: String!
-    $receiverAccountType: String
   ) {
     createPlaidPayment(
       athleteId: $athleteId
       plaidAccountId: $plaidAccountId
       amount: $amount
       description: $description
-      receiverUnitAccountId: $receiverUnitAccountId
-      receiverAccountType: $receiverAccountType
     ) {
       type
       id
@@ -212,6 +329,12 @@ export const createPlaidPayment = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -220,8 +343,6 @@ export const createPlaidPayment = /* GraphQL */ `
         hold
         available
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -251,6 +372,12 @@ export const bookPayment = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -259,8 +386,6 @@ export const bookPayment = /* GraphQL */ `
         hold
         available
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -296,6 +421,12 @@ export const debitAccount = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -304,8 +435,6 @@ export const debitAccount = /* GraphQL */ `
         hold
         available
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -341,6 +470,12 @@ export const creditAccount = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -349,53 +484,6 @@ export const creditAccount = /* GraphQL */ `
         hold
         available
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createProcessorToken = /* GraphQL */ `
-  mutation CreateProcessorToken(
-    $input: CreateProcessorTokenInput!
-    $condition: ModelProcessorTokenConditionInput
-  ) {
-    createProcessorToken(input: $input, condition: $condition) {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
-    }
-  }
-`;
-export const updateProcessorToken = /* GraphQL */ `
-  mutation UpdateProcessorToken(
-    $input: UpdateProcessorTokenInput!
-    $condition: ModelProcessorTokenConditionInput
-  ) {
-    updateProcessorToken(input: $input, condition: $condition) {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
-    }
-  }
-`;
-export const deleteProcessorToken = /* GraphQL */ `
-  mutation DeleteProcessorToken(
-    $input: DeleteProcessorTokenInput!
-    $condition: ModelProcessorTokenConditionInput
-  ) {
-    deleteProcessorToken(input: $input, condition: $condition) {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
     }
   }
 `;
@@ -408,6 +496,7 @@ export const createAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -429,6 +518,16 @@ export const createAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -442,10 +541,8 @@ export const createAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -464,6 +561,7 @@ export const updateAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -485,6 +583,16 @@ export const updateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -498,10 +606,8 @@ export const updateAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -520,6 +626,7 @@ export const deleteAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -541,6 +648,16 @@ export const deleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -554,10 +671,8 @@ export const deleteAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -577,10 +692,44 @@ export const createAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -608,10 +757,44 @@ export const updateAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -639,10 +822,44 @@ export const deleteAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -660,51 +877,75 @@ export const deleteAthleteAccount = /* GraphQL */ `
     }
   }
 `;
-export const createTransanctions = /* GraphQL */ `
-  mutation CreateTransanctions(
-    $input: CreateTransanctionsInput!
-    $condition: ModelTransanctionsConditionInput
+export const createRecentTransaction = /* GraphQL */ `
+  mutation CreateRecentTransaction(
+    $input: CreateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
   ) {
-    createTransanctions(input: $input, condition: $condition) {
+    createRecentTransaction(input: $input, condition: $condition) {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
-export const updateTransanctions = /* GraphQL */ `
-  mutation UpdateTransanctions(
-    $input: UpdateTransanctionsInput!
-    $condition: ModelTransanctionsConditionInput
+export const updateRecentTransaction = /* GraphQL */ `
+  mutation UpdateRecentTransaction(
+    $input: UpdateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
   ) {
-    updateTransanctions(input: $input, condition: $condition) {
+    updateRecentTransaction(input: $input, condition: $condition) {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
-export const deleteTransanctions = /* GraphQL */ `
-  mutation DeleteTransanctions(
-    $input: DeleteTransanctionsInput!
-    $condition: ModelTransanctionsConditionInput
+export const deleteRecentTransaction = /* GraphQL */ `
+  mutation DeleteRecentTransaction(
+    $input: DeleteRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
   ) {
-    deleteTransanctions(input: $input, condition: $condition) {
+    deleteRecentTransaction(input: $input, condition: $condition) {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
@@ -826,213 +1067,6 @@ export const deletePhoneChallenge = /* GraphQL */ `
       code
       phoneNumber
       verified
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createPlaidAccount = /* GraphQL */ `
-  mutation CreatePlaidAccount(
-    $input: CreatePlaidAccountInput!
-    $condition: ModelPlaidAccountConditionInput
-  ) {
-    createPlaidAccount(input: $input, condition: $condition) {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePlaidAccount = /* GraphQL */ `
-  mutation UpdatePlaidAccount(
-    $input: UpdatePlaidAccountInput!
-    $condition: ModelPlaidAccountConditionInput
-  ) {
-    updatePlaidAccount(input: $input, condition: $condition) {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePlaidAccount = /* GraphQL */ `
-  mutation DeletePlaidAccount(
-    $input: DeletePlaidAccountInput!
-    $condition: ModelPlaidAccountConditionInput
-  ) {
-    deletePlaidAccount(input: $input, condition: $condition) {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAccounts = /* GraphQL */ `
-  mutation CreateAccounts(
-    $input: CreateAccountsInput!
-    $condition: ModelAccountsConditionInput
-  ) {
-    createAccounts(input: $input, condition: $condition) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const updateAccounts = /* GraphQL */ `
-  mutation UpdateAccounts(
-    $input: UpdateAccountsInput!
-    $condition: ModelAccountsConditionInput
-  ) {
-    updateAccounts(input: $input, condition: $condition) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const deleteAccounts = /* GraphQL */ `
-  mutation DeleteAccounts(
-    $input: DeleteAccountsInput!
-    $condition: ModelAccountsConditionInput
-  ) {
-    deleteAccounts(input: $input, condition: $condition) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const createUnitAccount = /* GraphQL */ `
-  mutation CreateUnitAccount(
-    $input: CreateUnitAccountInput!
-    $condition: ModelUnitAccountConditionInput
-  ) {
-    createUnitAccount(input: $input, condition: $condition) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateUnitAccount = /* GraphQL */ `
-  mutation UpdateUnitAccount(
-    $input: UpdateUnitAccountInput!
-    $condition: ModelUnitAccountConditionInput
-  ) {
-    updateUnitAccount(input: $input, condition: $condition) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteUnitAccount = /* GraphQL */ `
-  mutation DeleteUnitAccount(
-    $input: DeleteUnitAccountInput!
-    $condition: ModelUnitAccountConditionInput
-  ) {
-    deleteUnitAccount(input: $input, condition: $condition) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
       createdAt
       updatedAt
     }

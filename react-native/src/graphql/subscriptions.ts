@@ -2,48 +2,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateProcessorToken = /* GraphQL */ `
-  subscription OnCreateProcessorToken {
-    onCreateProcessorToken {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
-    }
-  }
-`;
-export const onUpdateProcessorToken = /* GraphQL */ `
-  subscription OnUpdateProcessorToken {
-    onUpdateProcessorToken {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
-    }
-  }
-`;
-export const onDeleteProcessorToken = /* GraphQL */ `
-  subscription OnDeleteProcessorToken {
-    onDeleteProcessorToken {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
-    }
-  }
-`;
 export const onCreateAthlete = /* GraphQL */ `
   subscription OnCreateAthlete {
     onCreateAthlete {
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -65,6 +30,16 @@ export const onCreateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -78,10 +53,8 @@ export const onCreateAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -97,6 +70,7 @@ export const onUpdateAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -118,6 +92,16 @@ export const onUpdateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -131,10 +115,8 @@ export const onUpdateAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -150,6 +132,7 @@ export const onDeleteAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -171,6 +154,16 @@ export const onDeleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -184,10 +177,8 @@ export const onDeleteAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -204,10 +195,44 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -232,10 +257,44 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -260,10 +319,44 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -281,42 +374,66 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTransanctions = /* GraphQL */ `
-  subscription OnCreateTransanctions {
-    onCreateTransanctions {
+export const onCreateRecentTransaction = /* GraphQL */ `
+  subscription OnCreateRecentTransaction {
+    onCreateRecentTransaction {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
-export const onUpdateTransanctions = /* GraphQL */ `
-  subscription OnUpdateTransanctions {
-    onUpdateTransanctions {
+export const onUpdateRecentTransaction = /* GraphQL */ `
+  subscription OnUpdateRecentTransaction {
+    onUpdateRecentTransaction {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
-export const onDeleteTransanctions = /* GraphQL */ `
-  subscription OnDeleteTransanctions {
-    onDeleteTransanctions {
+export const onDeleteRecentTransaction = /* GraphQL */ `
+  subscription OnDeleteRecentTransaction {
+    onDeleteRecentTransaction {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
@@ -411,186 +528,6 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
       code
       phoneNumber
       verified
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreatePlaidAccount = /* GraphQL */ `
-  subscription OnCreatePlaidAccount {
-    onCreatePlaidAccount {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePlaidAccount = /* GraphQL */ `
-  subscription OnUpdatePlaidAccount {
-    onUpdatePlaidAccount {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePlaidAccount = /* GraphQL */ `
-  subscription OnDeletePlaidAccount {
-    onDeletePlaidAccount {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateAccounts = /* GraphQL */ `
-  subscription OnCreateAccounts {
-    onCreateAccounts {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const onUpdateAccounts = /* GraphQL */ `
-  subscription OnUpdateAccounts {
-    onUpdateAccounts {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const onDeleteAccounts = /* GraphQL */ `
-  subscription OnDeleteAccounts {
-    onDeleteAccounts {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const onCreateUnitAccount = /* GraphQL */ `
-  subscription OnCreateUnitAccount {
-    onCreateUnitAccount {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUnitAccount = /* GraphQL */ `
-  subscription OnUpdateUnitAccount {
-    onUpdateUnitAccount {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUnitAccount = /* GraphQL */ `
-  subscription OnDeleteUnitAccount {
-    onDeleteUnitAccount {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
       createdAt
       updatedAt
     }

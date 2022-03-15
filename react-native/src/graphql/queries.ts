@@ -2,34 +2,144 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getProcessorToken = /* GraphQL */ `
-  query GetProcessorToken($id: ID!) {
-    getProcessorToken(id: $id) {
-      plaidAccountId
-      processorToken
-      id
-      createdAt
-      updatedAt
-      athletePlaidProcessorTokenId
+export const listPlaidAccounts = /* GraphQL */ `
+  query ListPlaidAccounts($athleteId: ID!) {
+    listPlaidAccounts(athleteId: $athleteId) {
+      account_id
+      balances {
+        available
+        current
+        iso_currency_code
+        limit
+        unofficial_currency_code
+      }
+      mask
+      name
+      official_name
+      subtype
+      type
     }
   }
 `;
-export const listProcessorTokens = /* GraphQL */ `
-  query ListProcessorTokens(
-    $filter: ModelProcessorTokenFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProcessorTokens(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        plaidAccountId
-        processorToken
-        id
+export const listAthletUnitAccounts = /* GraphQL */ `
+  query ListAthletUnitAccounts($athleteId: ID!) {
+    listAthletUnitAccounts(athleteId: $athleteId) {
+      type
+      id
+      attributes {
         createdAt
-        updatedAt
-        athletePlaidProcessorTokenId
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
       }
-      nextToken
+    }
+  }
+`;
+export const getAthleteUnitAccountById = /* GraphQL */ `
+  query GetAthleteUnitAccountById($athleteId: ID!, $unitAccountId: String!) {
+    getAthleteUnitAccountById(
+      athleteId: $athleteId
+      unitAccountId: $unitAccountId
+    ) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+    }
+  }
+`;
+export const getUnitTransactionById = /* GraphQL */ `
+  query GetUnitTransactionById($athleteId: ID!, $unitTransactionId: String!) {
+    getUnitTransactionById(
+      athleteId: $athleteId
+      unitTransactionId: $unitTransactionId
+    ) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
+    }
+  }
+`;
+export const listAllUnitTransactions = /* GraphQL */ `
+  query ListAllUnitTransactions($athleteId: ID!) {
+    listAllUnitTransactions(athleteId: $athleteId) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
@@ -39,6 +149,7 @@ export const getAthlete = /* GraphQL */ `
       firstName
       lastName
       mobilePhone
+      athleteTag
       email
       level
       sport {
@@ -60,6 +171,16 @@ export const getAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -73,10 +194,8 @@ export const getAthlete = /* GraphQL */ `
       }
       plaidToken
       plaidProcessorToken {
-        nextToken
-      }
-      transactions {
-        nextToken
+        plaidAccountId
+        processorToken
       }
       wyreId
       isActive
@@ -97,10 +216,44 @@ export const listAthletes = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -118,10 +271,44 @@ export const getAthleteAccount = /* GraphQL */ `
         firstName
         lastName
         mobilePhone
+        athleteTag
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         id
@@ -147,6 +334,21 @@ export const listAthleteAccounts = /* GraphQL */ `
   ) {
     listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        athlete {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          id
+          createdAt
+          updatedAt
+        }
         unitAccountId
         routingCode
         accountNumber
@@ -160,34 +362,54 @@ export const listAthleteAccounts = /* GraphQL */ `
     }
   }
 `;
-export const getTransanctions = /* GraphQL */ `
-  query GetTransanctions($id: ID!) {
-    getTransanctions(id: $id) {
+export const getRecentTransaction = /* GraphQL */ `
+  query GetRecentTransaction($id: ID!) {
+    getRecentTransaction(id: $id) {
       transactionId
+      athleteId
       status
       amount
-      id
+      direction
       createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
-      athleteTransactionsId
     }
   }
 `;
-export const listTransanctions = /* GraphQL */ `
-  query ListTransanctions(
-    $filter: ModelTransanctionsFilterInput
+export const listRecentTransactions = /* GraphQL */ `
+  query ListRecentTransactions(
+    $filter: ModelRecentTransactionFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTransanctions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listRecentTransactions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         transactionId
+        athleteId
         status
         amount
-        id
+        direction
         createdAt
+        read
+        settled
+        podAllocation {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        id
         updatedAt
-        athleteTransactionsId
       }
       nextToken
     }
@@ -301,122 +523,6 @@ export const listPhoneChallenges = /* GraphQL */ `
         code
         phoneNumber
         verified
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPlaidAccount = /* GraphQL */ `
-  query GetPlaidAccount($id: ID!) {
-    getPlaidAccount(id: $id) {
-      accounts {
-        nextToken
-      }
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPlaidAccounts = /* GraphQL */ `
-  query ListPlaidAccounts(
-    $filter: ModelPlaidAccountFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlaidAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getAccounts = /* GraphQL */ `
-  query GetAccounts($id: ID!) {
-    getAccounts(id: $id) {
-      account_id
-      balances {
-        available
-        current
-        iso_currency_code
-        limit
-        unofficial_currency_code
-      }
-      mask
-      name
-      official_name
-      subtype
-      type
-      id
-      createdAt
-      updatedAt
-      plaidAccountAccountsId
-    }
-  }
-`;
-export const listAccounts = /* GraphQL */ `
-  query ListAccounts(
-    $filter: ModelAccountsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        account_id
-        mask
-        name
-        official_name
-        subtype
-        type
-        id
-        createdAt
-        updatedAt
-        plaidAccountAccountsId
-      }
-      nextToken
-    }
-  }
-`;
-export const getUnitAccount = /* GraphQL */ `
-  query GetUnitAccount($id: ID!) {
-    getUnitAccount(id: $id) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        name
-        status
-        routingNumber
-        accountNumber
-        currency
-        hold
-        available
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listUnitAccounts = /* GraphQL */ `
-  query ListUnitAccounts(
-    $filter: ModelUnitAccountFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUnitAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        type
-        id
         createdAt
         updatedAt
       }
