@@ -5,6 +5,7 @@ import {NavigationContainerRef} from '@react-navigation/native';
 export const navigationRef = React.createRef<NavigationContainerRef>();
 
 function navigate(name: string, params?: any) {
+  console.log('navigating to ' + name);
   navigationRef.current?.navigate(name, params);
 }
 
