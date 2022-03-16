@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import TransferAmount from 'src/screens/Transfer/Amount';
 import TransferReview from 'src/screens/Transfer/Review';
 import DirectDeposit from 'src/screens/Transfer/DirectDeposit';
-import ProcessDeposit from 'src/screens/Transfer/ProcessDeposit';
+import DepositProcessed from 'src/screens/Transfer/DepositProcessed';
 import PodsExplain from 'src/screens/Transfer/PodsExplain';
 import SetupPods from 'src/screens/Transfer/SetupPods';
 import PodSetupSuccess from 'src/screens/Transfer/PodSetupSuccess';
@@ -23,7 +23,7 @@ const TransferStack: React.FC = () => {
       <Stack.Screen name="TransferAmount" component={TransferAmount} />
       <Stack.Screen name="TransferReview" component={TransferReview} />
       <Stack.Screen name="DirectDeposit" component={DirectDeposit} />
-      <Stack.Screen name="ProcessDeposit" component={ProcessDeposit} />
+      <Stack.Screen name="DepositProcessed" component={DepositProcessed} />
       <Stack.Screen name="PodsExplain" component={PodsExplain} />
       <Stack.Screen name="SetupPods" component={SetupPods} />
       <Stack.Screen name="PodSetupSuccess" component={PodSetupSuccess} />

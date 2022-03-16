@@ -1,30 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
+import Loading from 'src/components/common/Loading';
 import GoIcon from 'src/assets/icons/go.svg';
 import {twoDecimalFormatter} from 'src/utils/functions';
+import * as bankingActions from 'src/store/actions/bankingActions';
+import {RootState} from 'src/store/root-state';
+import {PlaidAccountDetail} from 'src/types/API';
 
 import styles from './styles';
 
-const accounts = [
-  {
-    id: 1,
-    address: 'Wells Fargo Checking - 4931',
-    money: 2301.3,
-  },
-  {
-    id: 2,
-    address: 'Wells Fargo Saving - 4311',
-    money: 323.56,
-  },
-];
-
 const PodSelectAccount: React.FC = () => {
-  const onContinue = (id: any) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(bankingActions.getAccounts());
+  }, []);
+
+  const {accounts} = useSelector((state: RootState) => state.bankingReducer);
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+
+  const onContinue = (account: PlaidAccountDetail) => {
+    dispatch(bankingActions.accountSelected(account));
     NavigationService.navigate('TransferAmount');
   };
   const goPreviousScreen = () => NavigationService.navigate('HomeStack');
@@ -45,28 +47,36 @@ const PodSelectAccount: React.FC = () => {
         </Text>
       </View>
       <View>
-        {accounts.map(account => (
-          <View style={styles.accountWrapper}>
-            <TouchableOpacity
-              style={styles.account}
-              onPress={() => onContinue(account.id)}>
-              <View>
+        {accounts &&
+          !isLoading &&
+          accounts.map(account => (
+            <View style={styles.accountWrapper} key={account.account_id}>
+              <TouchableOpacity
+                style={styles.account}
+                onPress={() => onContinue(account)}>
                 <View>
-                  <Text type="Body/Large">{account.address}</Text>
+                  <View>
+                    <Text type="Body/Large">
+                      {account.name} - {account.mask}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text type="Body/Large">
+                      $
+                      {twoDecimalFormatter.format(
+                        account.balances?.available ?? 0,
+                      )}
+                    </Text>
+                  </View>
                 </View>
                 <View>
-                  <Text type="Body/Large">
-                    ${twoDecimalFormatter.format(account.money)}
-                  </Text>
+                  <GoIcon />
                 </View>
-              </View>
-              <View>
-                <GoIcon />
-              </View>
-            </TouchableOpacity>
-          </View>
-        ))}
+              </TouchableOpacity>
+            </View>
+          ))}
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

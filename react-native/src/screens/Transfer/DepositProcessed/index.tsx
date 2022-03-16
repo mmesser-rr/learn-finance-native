@@ -1,33 +1,44 @@
 import React from 'react';
 import {View} from 'react-native';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {format} from 'date-fns';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import ProcessIcon from 'src/assets/icons/process.svg';
-import InfoList, { InfoItemInterface } from 'src/components/common/InfoList';
+import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
 import NavigationService from 'src/navigation/NavigationService';
-import { updateHomeStep } from 'src/store/actions/bankingActions';
+import {updateHomeStep} from 'src/store/actions/bankingActions';
+import {PODsSteps} from 'src/utils/constants';
+import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
-import { PODsSteps } from 'src/utils/constants';
 
-const ProcessDeposit: React.FC = () => {
+const DepositProcessed: React.FC = () => {
   const dispatch = useDispatch();
+  const {selectedAccount, transferAmount} = useSelector(
+    (state: RootState) => state.bankingReducer,
+  );
+  const today = format(new Date(), 'MM/dd/yyyy');
+
   const list: InfoItemInterface[] = [
     {
       label: 'Amount',
-      data: <Text type="Body/Large">$500.00</Text>
+      data: <Text type="Body/Large">${transferAmount}</Text>,
     },
     {
       label: 'From',
-      data: <Text type="Body/Large">Wells Fargo Checking - 4931</Text>
+      data: (
+        <Text type="Body/Large">
+          {selectedAccount?.name} - {selectedAccount?.mask}
+        </Text>
+      ),
     },
     {
       label: 'Date',
-      data: <Text type="Body/Large">12/09/2021</Text>
-    }
+      data: <Text type="Body/Large">{today}</Text>,
+    },
   ];
 
   const onDone = () => {
@@ -43,11 +54,14 @@ const ProcessDeposit: React.FC = () => {
             <ProcessIcon />
           </View>
           <View style={styles.header}>
-            <Text type="Headline/Small" style={styles.center}>Processed</Text>
+            <Text type="Headline/Small" style={styles.center}>
+              Processed
+            </Text>
           </View>
           <View style={styles.description}>
             <Text type="Body/Large" style={styles.center}>
-              Your payment has been processed. It will take 4-5 business days to arrive at your Player's account.
+              Your payment has been processed. It will take 4-5 business days to
+              arrive at your Player's account.
             </Text>
           </View>
           <InfoList list={list} />
@@ -65,4 +79,4 @@ const ProcessDeposit: React.FC = () => {
   );
 };
 
-export default ProcessDeposit;
+export default DepositProcessed;
