@@ -1098,7 +1098,6 @@ export type BookPaymentMutation = {
 
 export type DebitAccountMutationVariables = {
   athleteId: string,
-  unitAccountId: string,
   amount: number,
   description?: string | null,
   receiverName: string,
@@ -1141,7 +1140,6 @@ export type DebitAccountMutation = {
 
 export type CreditAccountMutationVariables = {
   athleteId: string,
-  unitAccountId: string,
   amount: number,
   description?: string | null,
   receiverName: string,

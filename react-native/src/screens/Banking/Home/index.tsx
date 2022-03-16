@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {TextStyle, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {API, graphqlOperation} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
 
@@ -23,6 +23,7 @@ import {RootState} from 'src/store/root-state';
 import {createPlaidLink, updatePlaidLink} from 'src/graphql/mutations';
 import {CreatePlaidLink} from 'src/types/graphql';
 import Loading from 'src/components/common/Loading';
+import * as userActions from 'src/store/actions/userActions';
 
 import styles from './styles';
 
@@ -46,6 +47,7 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
 };
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
   const {step} = useSelector((state: RootState) => state.bankingReducer);
   const {user} = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
@@ -83,8 +85,9 @@ const Home: React.FC = () => {
         accessToken: success.publicToken,
       }),
     );
+    dispatch(userActions.updateUser({plaidToken: success.publicToken}));
     setLoading(false);
-    NavigationService.navigate('TransferStack');
+    NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
   };
 
   const onPlaidExitHandler = (exit: LinkExit) => {

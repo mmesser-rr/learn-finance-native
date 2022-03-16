@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {API, graphqlOperation} from 'aws-amplify';
+import {useSelector} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -8,18 +9,23 @@ import {Text} from 'src/components/common/Texts';
 import {tryPhoneChallenge} from 'src/graphql/mutations';
 
 import styles from './styles';
+import {RootState} from 'src/store/root-state';
 
 interface PhoneCodeVerifyProps {
-  phoneNumber: String;
   goToNextStep: () => void;
 }
 
-const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
-  phoneNumber,
-  goToNextStep,
-}) => {
+const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep}) => {
   const [isValid, setIsValid] = useState(false);
   const [code, setCode] = useState('');
+
+  const phoneNumber = useSelector((state: RootState) => {
+    const mobilePhone = state.onboardingReducer.mobilePhone;
+    const firstThree = mobilePhone.slice(0, 3);
+    const secondThree = mobilePhone.slice(3, 6);
+    const lastFour = mobilePhone.slice(-4);
+    return `(${firstThree}) ${secondThree} ${lastFour}`;
+  });
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 6);
@@ -50,7 +56,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         </View>
         <View>
           <Text type="Body/Large" style={styles.description}>
-            We sent a verification code to (333) 666 9999
+            We sent a verification code to {phoneNumber}
           </Text>
         </View>
         <View>

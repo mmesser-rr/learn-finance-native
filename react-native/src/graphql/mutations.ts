@@ -392,7 +392,6 @@ export const bookPayment = /* GraphQL */ `
 export const debitAccount = /* GraphQL */ `
   mutation DebitAccount(
     $athleteId: ID!
-    $unitAccountId: String!
     $amount: Float!
     $description: String
     $receiverName: String!
@@ -403,7 +402,6 @@ export const debitAccount = /* GraphQL */ `
   ) {
     debitAccount(
       athleteId: $athleteId
-      unitAccountId: $unitAccountId
       amount: $amount
       description: $description
       receiverName: $receiverName
@@ -441,7 +439,6 @@ export const debitAccount = /* GraphQL */ `
 export const creditAccount = /* GraphQL */ `
   mutation CreditAccount(
     $athleteId: ID!
-    $unitAccountId: String!
     $amount: Float!
     $description: String
     $receiverName: String!
@@ -452,7 +449,6 @@ export const creditAccount = /* GraphQL */ `
   ) {
     creditAccount(
       athleteId: $athleteId
-      unitAccountId: $unitAccountId
       amount: $amount
       description: $description
       receiverName: $receiverName

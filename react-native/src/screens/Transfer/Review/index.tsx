@@ -1,48 +1,67 @@
 import React from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {format} from 'date-fns';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import TopNav from 'src/components/common/TopNav';
-import EditIcon from 'src/assets/icons/edit.svg';
-import NavigationService from 'src/navigation/NavigationService';
 import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
+import Loading from 'src/components/common/Loading';
+import EditIcon from 'src/assets/icons/edit.svg';
+import {RootState} from 'src/store/root-state';
+import * as bankingActions from 'src/store/actions/bankingActions';
 
 import styles from './styles';
+import NavigationService from 'src/navigation/NavigationService';
 
 const TransferReview: React.FC = () => {
-  const onDeposit = () => NavigationService.navigate('ProcessDeposit');
+  const dispatch = useDispatch();
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const {selectedAccount, transferAmount} = useSelector(
+    (state: RootState) => state.bankingReducer,
+  );
+  const today = format(new Date(), 'MM/dd/yyyy');
+
+  const onDeposit = () => dispatch(bankingActions.createDeposit());
+  const goBack = () => NavigationService.goBack();
+  const goToAccountSelection = () =>
+    NavigationService.navigate('PodSelectAccount');
 
   const list: InfoItemInterface[] = [
     {
-      label: 'Deposit',
+      label: 'Amount',
       data: (
         <>
-          <Text type="Body/Large">$500.00</Text>
-          <EditIcon style={styles.editIcon} />
+          <Text type="Body/Large">${transferAmount}</Text>
+          <TouchableOpacity onPress={goBack}>
+            <EditIcon style={styles.editIcon} />
+          </TouchableOpacity>
         </>
-      )
+      ),
     },
     {
-      label: 'Plaid Account Name',
+      label: 'From',
       data: (
         <>
-          <Text type="Body/Large">Total Checking</Text>
-          <EditIcon style={styles.editIcon} />
+          <Text type="Body/Large">{selectedAccount?.name}</Text>
+          <TouchableOpacity onPress={goToAccountSelection}>
+            <EditIcon style={styles.editIcon} />
+          </TouchableOpacity>
         </>
-      )
+      ),
     },
     {
       label: 'Date',
-      data: <Text type="Body/Large">12/09/2021</Text>
-    }
+      data: <Text type="Body/Large">{today}</Text>,
+    },
   ];
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <TopNav title="Deposit" goPreviousScreen={() => {}} />
+        <TopNav title="Deposit" goPreviousScreen={goBack} />
       </View>
       <View>
         <Text type="Body/Large">Please review the deposit.</Text>
@@ -69,6 +88,7 @@ const TransferReview: React.FC = () => {
           </Text>
         </View>
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

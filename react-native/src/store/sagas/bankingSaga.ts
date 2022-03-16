@@ -4,7 +4,11 @@
 import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {API, graphqlOperation} from 'aws-amplify';
 
-import {podSettings, updateRecentTransaction} from 'src/graphql/mutations';
+import {
+  createPlaidPayment,
+  podSettings,
+  updateRecentTransaction,
+} from 'src/graphql/mutations';
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
@@ -15,14 +19,20 @@ import {
 } from 'src/models/actions/banking';
 import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
-import {listRecentTransactions} from 'src/graphql/queries';
+import {listPlaidAccounts, listRecentTransactions} from 'src/graphql/queries';
 import {GraphQLResult} from '@aws-amplify/api';
 import {
+  CreatePlaidPaymentMutation,
+  CreatePlaidPaymentMutationVariables,
+  ListPlaidAccountsQuery,
+  ListPlaidAccountsQueryVariables,
   ListRecentTransactionsQuery,
   ListRecentTransactionsQueryVariables,
+  PlaidAccountDetail,
   RecentTransaction,
   UpdateRecentTransactionMutationVariables,
 } from 'src/types/API';
+import NavigationService from 'src/navigation/NavigationService';
 
 const getAthleteId = (state: RootState) => state.userReducer.user?.id;
 
@@ -122,6 +132,78 @@ export function* markRecentTransactionRead({
   }
 }
 
+export function* getAccounts() {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('Athlete ID is required to get accounts');
+    }
+
+    console.log('Attempting to get accounts for user:', athleteId);
+
+    const queryFilter: ListPlaidAccountsQueryVariables = {athleteId};
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(listPlaidAccounts, queryFilter),
+    )) as GraphQLResult<ListPlaidAccountsQuery>;
+
+    const accounts = response.data?.listPlaidAccounts as PlaidAccountDetail[];
+    yield put(bankingActions.accountsLoaded(accounts));
+
+    yield put(loadingActions.disableLoader());
+  } catch (error) {
+    console.log('Error attempting to retrieve accounts:', error);
+    yield put(loadingActions.disableLoader());
+  }
+}
+
+export function* createDeposit() {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+  const transferAmount = (yield select(
+    (state: RootState) => state.bankingReducer.transferAmount,
+  )) as string | undefined;
+  const accountId = (yield select(
+    (state: RootState) => state.bankingReducer.selectedAccount?.account_id,
+  )) as string | undefined;
+
+  try {
+    if (!athleteId || !transferAmount || !accountId) {
+      throw new Error(
+        'Athlete ID, transfer amount, and account ID are required to create a deposit',
+      );
+    }
+
+    console.log('Attempting to create a deposit');
+    const amountInCents = +transferAmount * 100;
+
+    const mutationInput: CreatePlaidPaymentMutationVariables = {
+      athleteId: athleteId,
+      plaidAccountId: accountId,
+      amount: amountInCents,
+      description: 'One time deposit',
+    };
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(createPlaidPayment, mutationInput),
+    )) as GraphQLResult<CreatePlaidPaymentMutation>;
+
+    console.log('Create Deposit response:', response);
+
+    yield put(loadingActions.disableLoader());
+    NavigationService.navigate('DepositProcessed');
+  } catch (error) {
+    console.log('Error attempting to create deposit:', error);
+    yield put(loadingActions.disableLoader());
+  }
+}
+
 export default function* bankingSaga() {
   yield takeLatest(types.UPDATE_POD_SETTINGS, updatePodSettings);
   yield takeLatest(types.GET_RECENT_TRANSACTIONS, getRecentTransactions);
@@ -129,4 +211,6 @@ export default function* bankingSaga() {
     types.MARK_RECENT_TRANSACTION_READ,
     markRecentTransactionRead,
   );
+  yield takeLatest(types.GET_ACCOUNTS, getAccounts);
+  yield takeLatest(types.CREATE_DEPOSIT, createDeposit);
 }

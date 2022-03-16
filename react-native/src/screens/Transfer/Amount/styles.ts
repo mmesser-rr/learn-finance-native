@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
     fontSize: scale(36),
     lineHeight: scale(44),
   },
+  error: {
+    color: AppColors.accentRed100,
+  },
+  errorWrapper: {
+    marginTop: 10,
+  },
 });
 
 export default styles;
