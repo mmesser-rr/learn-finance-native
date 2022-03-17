@@ -54,3 +54,10 @@ export const twoDecimalFormatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+
+export const decimalFormatter = (minimumFractionDigits: number, maximumFractionDigits: number) => {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+};
