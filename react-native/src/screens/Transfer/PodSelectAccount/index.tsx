@@ -19,7 +19,7 @@ const PodSelectAccount: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(bankingActions.getAccounts());
+    dispatch(bankingActions.getConnectedAccounts());
   }, []);
 
   const {accounts} = useSelector((state: RootState) => state.bankingReducer);

@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
     marginVertical: scale(12),
     alignItems: 'flex-end',
   },
-  title: {
-  },
+  title: {},
   subTitle: {
     marginBottom: scale(16),
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   accountCard: {
     marginBottom: scale(24),
@@ -73,17 +72,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: scale(8)
+    borderRadius: scale(8),
   },
   podLabel: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   podLabelText: {
-    marginLeft: scale(8)
+    marginLeft: scale(8),
   },
   balanceLabel: {
-    marginBottom: scale(2)
+    marginBottom: scale(2),
   },
   switch: {
     flexDirection: 'row',
@@ -92,12 +91,49 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(9),
     borderWidth: 1,
     borderColor: AppColors.coreBlack40,
-    borderRadius: scale(20)
+    borderRadius: scale(20),
   },
   switchLabel: {
-    marginLeft:  scale(4),
+    marginLeft: scale(4),
     color: AppColors.coreBlack40,
-  }
+  },
+  buttonLinearGradient: {
+    borderRadius: scale(100),
+    padding: 1,
+  },
+  depositButtonText: {
+    textAlign: 'center',
+    marginLeft: scale(5),
+    color: AppColors.gray20,
+  },
+  depositButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+    minWidth: 128,
+    height: 32,
+  },
+  totalBalanceContainer: {
+    alignItems: 'center',
+  },
+  chartContainer: {
+    marginBottom: 44,
+  },
+  moveMoneyButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    minWidth: 128,
+    height: 32,
+    backgroundColor: AppColors.coreBlack100,
+    borderRadius: scale(100),
+  },
+  moveMoneyButtonText: {
+    color: AppColors.gray20,
+    marginLeft: scale(5),
+  },
 });
 
 export default styles;
