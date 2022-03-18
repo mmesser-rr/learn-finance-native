@@ -12,6 +12,14 @@
     {
       "cloudFormationParameterName": "nodeEnv",
       "environmentVariableName": "NODE_ENV"
+    },
+    {
+      "cloudFormationParameterName": "clientId",
+      "environmentVariableName": "CLIENT_ID"
+    },
+    {
+      "cloudFormationParameterName": "sandKey",
+      "environmentVariableName": "SAND_KEY"
     }
   ],
   "permissions": {
@@ -40,11 +48,6 @@
         "update"
       ],
       "AthleteAccount:@model(appsync)": [
-        "create",
-        "read",
-        "update"
-      ],
-      "Transanctions:@model(appsync)": [
         "create",
         "read",
         "update"

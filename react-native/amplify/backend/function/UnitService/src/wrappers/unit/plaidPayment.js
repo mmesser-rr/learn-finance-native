@@ -5,39 +5,43 @@ const IP = "127.0.0.1";
 const COUNTRY_CODE = "US";
 const APPLICATION_TYPE = "achPayment";
 const TYPE = "depositAccount";
+const DIRECTION = "Credit";
 
 
-const parseApplicationParams = (data) => ({
+const parseApplicationParams = (unitAccountId, plaidProcessorToken, description, amount) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: data.amount,
-    direction: data.direction,
-    description: data.description,
-    plaidProcessorToken: data.token
+    amount: amount,
+    direction: DIRECTION,
+    description: description,
+    plaidProcessorToken: plaidProcessorToken
   },
   relationships:{
       account:{
           data:{
             type: TYPE,
-            id: data.unitAccountId
+            id: unitAccountId
           }
         }
    }
 });
 
 
-const plaidPayment = (unit) => (data) => {
-  const unitParams = parseApplicationParams(data);
-  return unit.payments.create(unitParams)
-    .then(resultLens)
-    .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err.message}`));
+const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description, amount) => {
+  const unitParams = parseApplicationParams(unitAccountId, plaidProcessorToken, description, amount);
+  return unit.payments.create(unitParams).then(resultLens)
+    .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err}`));
 }
 
 const resultLens = (res) => ({
-  transactionId: res.id,
-  status: res.attributes.status,
-  createdAt: res.attributes.createdAt,
-  counterparty: res.attributes.counterparty
+  transactionId: res.data.id,
+  amount: res.data.attributes.amount,
+  direction: res.data.attributes.direction,
+  status: res.data.attributes.status,
+  createdAt: res.data.attributes.createdAt,
+  reason: res.data.attributes.reason,
+  account: res.data.relationships.account.data.id,
+  counterparty: res.data.attributes.counterparty
 });
 
 module.exports = {

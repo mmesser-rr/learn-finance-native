@@ -1,8 +1,8 @@
 {
     "fieldName": "getUnitTransactionById",
     "arguments": {
-      "athleteId": "f021851d-51ea-4f02-b9d7-e2ee7b8034fb",
-      "unitAccountId": "308158"
+      "athleteId": "281b7b68-3f7b-4095-8f48-42e56f24fbc3",
+      "transactionId": "350065"
     }
   }
   

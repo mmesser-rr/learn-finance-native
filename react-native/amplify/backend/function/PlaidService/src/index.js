@@ -6,12 +6,6 @@
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIIDOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT
-	API_THEPLAYERSCOMPANY_PROCESSORTOKENTABLE_ARN
-	API_THEPLAYERSCOMPANY_PROCESSORTOKENTABLE_NAME
-	API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_ARN
-	API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_NAME
-	ENV
-	REGION
 Amplify Params - DO NOT EDIT */
 const { createToken } = require("./workflows/createToken.js");
 const { updateToken } = require("./workflows/updateToken.js");
@@ -20,7 +14,7 @@ const { getPlaidAccounts } = require("./workflows/getPlaidAccount.js");
 const resolvers = Object.freeze({
     createPlaidLink: (event) => createToken(event.arguments.athleteId),
     updatePlaidLink: (event) => updateToken(event),
-	getPlaidAccounts: (event) => getPlaidAccounts(event)
+	listPlaidAccounts: (event) => getPlaidAccounts(event.arguments.athleteId)
 });
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);

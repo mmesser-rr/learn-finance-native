@@ -1,7 +1,7 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
 
-const createBookRequest = (athleteId, data) => unit.getAthleteUnitAccountById(data.unitAccountId).then(res => (res.data.attributes.available >= data.amount) ? 
+const createBookRequest = (athleteId, data) => unit.getAthleteUnitAccountById(data.unitAccountId).then(res => (res.data.attributes.available < data.amount) ? 
   unit.bookPayment(data) : 
   Promise.reject(`Athlet doesn't have enough balance for this transaction ${athleteId}`)
   );

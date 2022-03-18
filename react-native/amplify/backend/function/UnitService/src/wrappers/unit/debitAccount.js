@@ -7,18 +7,18 @@ const APPLICATION_TYPE = "achPayment";
 const DIRECTION = "Debit";
 const TYPE = "depositAccount";
 
-const parseApplicationParams = (data) => ({
+const parseApplicationParams = (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: data.amount,
+    amount: amount,
     direction: DIRECTION,
-    description: data.description,
-    addenda: data.addenda,
+    description: description,
+    addenda: addenda,
     counterparty:{
-      name: data.receiverName,
-      routingNumber: data.receiverRoutingNumber,
-      accountNumber: data.receiverAccountNumber,
-      accountType: data.receiverAccountType
+      name: receiverName,
+      routingNumber: receiverRoutingNumber,
+      accountNumber: receiverAccountNumber,
+      accountType: receiverAccountType
     }
   },
   relationships:{
@@ -31,8 +31,8 @@ const parseApplicationParams = (data) => ({
     }
 });
 
-const debitAccount = (unit) => (data) => {
-  const unitParams = parseApplicationParams(data);
+const debitAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType) => {
+  const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType);
   return unit.payments.create(unitParams)
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));
@@ -40,11 +40,15 @@ const debitAccount = (unit) => (data) => {
 
 const resultLens = (res) => ({
   transactionId: res.data.id,
-  status: res.data.attributes.status,
   amount: res.data.attributes.amount,
+  direction: res.data.attributes.direction,
+  status: res.data.attributes.status,
   createdAt: res.data.attributes.createdAt,
+  reason: res.data.attributes.reason,
+  account: res.data.relationships.account.data.id,
   counterparty: res.data.attributes.counterparty
 });
+
 
 module.exports = {
   resultLens,

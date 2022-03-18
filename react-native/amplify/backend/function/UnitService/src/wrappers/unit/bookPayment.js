@@ -39,11 +39,15 @@ const bookPayment = (unit) => (data) => {
 }
 
 const resultLens = (res) => ({
-  transactionId: res.id,
-  status: res.attributes.status,
-  createdAt: res.attributes.createdAt,
-  counterparty: res.attributes.counterparty
+  transactionId: res.data.id,
+  amount: res.data.attributes.amount,
+  status: res.data.attributes.status,
+  createdAt: res.data.attributes.createdAt,
+  reason: res.data.attributes.reason,
+  account: res.data.relationships.account.data.id,
+  counterparty: res.data.relationships.counterpartyAccount
 });
+
 
 module.exports = {
   resultLens,

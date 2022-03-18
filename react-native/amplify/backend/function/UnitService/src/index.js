@@ -6,8 +6,6 @@
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIIDOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT
-	API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_ARN
-	API_THEPLAYERSCOMPANY_TRANSANCTIONSTABLE_NAME
 	FUNCTION_PLAIDSERVICE_NAME
 	FUNCTION_PLAYERVERIFYSERVICE_NAME
 Amplify Params - DO NOT EDIT */
@@ -21,7 +19,9 @@ const {podSettings} = require("./workflows/podSettings");
 const { getAthleteUnitAccounts } = require("./workflows/getAllAccounts");
 const {getAthleteUnitAccountById} = require("./workflows/getAthleteAccountById");
 const {getUnitTransactionById} = require("./workflows/getUnitTransactionById");
-const {getAllUnitTransaction} = require("./workflows/getAllUnitTransaction")
+const {getAllUnitTransaction} = require("./workflows/getAllUnitTransaction");
+const {listUnitBalanceHistory} = require("./workflows/listUnitBalanceHistory");
+const {unitWebhook} = require("./workflows/unitWebhook");
 
 const resolvers = Object.freeze({
   openAccount: (event) => createAndPersistAccount(event.arguments.athleteId),
@@ -30,12 +30,16 @@ const resolvers = Object.freeze({
   creditAccount: (event) => creditAccount(event),
   createPlaidPayment: (event) => plaidPayment(event),
   podSettings: (event) => podSettings(event),
+  unitWebhookService: (event) => unitWebhook(event),
   getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.athleteId, event.arguments.unitTransactionId),
-  getAllUnitTransaction: (event) => getAllUnitTransaction(event.arguments.athleteId, event.arguments.unitAccountId ),
-  getAthleteUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
+  listAllUnitTransactions: (event) => getAllUnitTransaction(event.arguments.athleteId, event.arguments.unitAccountId ),
+
+  listUnitBalanceHistory: (event) => listUnitBalanceHistory(event.arguments.athleteId),
+  listAthletUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
   getAthleteUnitAccountById: (event) => getAthleteUnitAccountById(event.arguments.athleteId, event.arguments.unitAccountId),
   openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
 });
+
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);
 

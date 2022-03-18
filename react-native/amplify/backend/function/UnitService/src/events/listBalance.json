@@ -1,5 +1,5 @@
 {
-    "fieldName": "listAthletUnitAccounts",
+    "fieldName": "listUnitBalanceHistory",
     "arguments": {
       "athleteId": "8b613b2a-9fca-47e0-8007-c52a99ad15b7"
     }

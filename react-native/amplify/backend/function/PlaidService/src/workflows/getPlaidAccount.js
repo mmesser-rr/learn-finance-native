@@ -1,7 +1,7 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
 
-const getPlaidAccount = (athlete) => {
+const getPlaidAccounts = (athlete) => {
     const token = athlete?.plaidToken;
     if (!token) {
         throw new Error("Looks like this athlete haven't linked plaid, use the createLink");
@@ -14,5 +14,7 @@ const getPlaidAccount = (athlete) => {
 }
 
 module.exports = {
-    getPlaidAccount: (athleteId) => tpc.getAthlete(athleteId).then(getPlaidAccount)
+    getPlaidAccounts: (athleteId) => tpc.getAthlete(athleteId).then(getPlaidAccounts)
 }
+
+

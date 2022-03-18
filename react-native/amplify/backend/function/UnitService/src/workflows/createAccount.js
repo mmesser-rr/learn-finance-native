@@ -1,10 +1,12 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { podNaming } = require("./podNaming");
 
-let podName = "SAVINGS";
-const accountFromUnitParams = (athleteId, unitResponse) => (
+let podName = "";
+
+const accountFromUnitParams = (athlete, unitResponse) => (
   {
-    athleteId,
+    athleteId: athlete.id,
     podName: podName,
     unitAccountId: unitResponse.data.id,
     routingCode: unitResponse.data.attributes.routingNumber,
@@ -12,29 +14,22 @@ const accountFromUnitParams = (athleteId, unitResponse) => (
   }
 );
 
-const persistAccountInBackend = (athleteId, unitResponse) => tpc.persistAccount(accountFromUnitParams(athleteId, unitResponse));
+const persistAccountInBackend = (athlete, unitResponse) => tpc.persistAccount(accountFromUnitParams(athlete, unitResponse));
+
 
 const createAndPersistAccount = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
-  const pods = athlete?.podSettings;
-  const accounts = athlete?.accounts;
   const athleteId = athlete.id;
+  podName = podNaming(athlete);
 
   if (custId === undefined) {
     throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
   }
+  //podName check here
 
-  
-  // if(pods.SAVINGS === 0){
-  //    podName = "SAVINGS";
-  // }else if(pods.INVESTMENTS  === 0){
-  //   podName = "INVESTMENTS";
-  // }else{
-  //   podName = "SPENDING";
-  // }
 
-  return unit.createAccount(custId, athleteId)
-    .then(res => persistAccountInBackend(athleteId, res))
+  return unit.createAccount(custId, athleteId, podName)
+    .then(res => persistAccountInBackend(athlete, res))
     .catch(err => {
       throw new Error(`Failed to create account in Unit. Reason: ${JSON.stringify(err)}`);
     });

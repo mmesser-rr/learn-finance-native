@@ -1,5 +1,5 @@
-const getAllUnitTransaction = (unit) => (unitAccountId) => {
-    return unit.transactions.get(unitAccountId);
+const getAllUnitTransaction = (unit) => (custId) => {
+    return unit.transactions.list({customerId: custId}).then(res => res.data)
   };
   
   module.exports = {

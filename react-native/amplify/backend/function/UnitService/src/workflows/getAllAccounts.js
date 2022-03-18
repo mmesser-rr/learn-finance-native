@@ -3,6 +3,7 @@ const tpc = require("../wrappers/tpc");
 
 const getAthleteUnitAccounts = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
+  const pods = athlete?.accounts?.items;
 
   if (custId === undefined) {
     throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");

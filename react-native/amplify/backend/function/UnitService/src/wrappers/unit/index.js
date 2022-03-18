@@ -7,6 +7,7 @@ const { plaidPayment } = require("./plaidPayment");
 const { getAthleteUnitAccountById } = require("./getAthleteUnitAccountById");
 const { getAllAthleteAccounts } = require("./getAllAthleteAccounts");
 const {getUnitTransactionById} = require("./getUnitTransactionById");
+const {listUnitBalanceHistory} = require("./listUnitBalanceHistory");
 const { unit } = require("../../env.js");
 
 module.exports = {
@@ -17,6 +18,7 @@ module.exports = {
   getAthleteUnitAccountById: getAthleteUnitAccountById(unit),
   creditAccount: creditAccount(unit),
   plaidPayment: plaidPayment(unit),
+  listUnitBalanceHistory: listUnitBalanceHistory(unit),
   getUnitTransactionById: getUnitTransactionById(unit),
   bookPayment: bookPayment(unit)
 }

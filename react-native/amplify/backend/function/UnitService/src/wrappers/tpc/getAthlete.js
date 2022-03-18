@@ -10,6 +10,11 @@ const getAthleteStatement = gql`
       email
       mobilePhone
       dateOfBirth
+      plaidToken
+      plaidProcessorToken{
+        plaidAccountId
+        processorToken
+      }
       podSettings{
         SAVINGS
         INVESTMENTS

@@ -2,8 +2,6 @@ const paramsFromId = (accessToken) => ({
   access_token: accessToken
 });
 
-
-
 const getPlaidAccount = (plaid) => (accessToken) => {
     const params = paramsFromId(accessToken);
     return plaid.accountsGet(params).then(res => res.data.accounts)
@@ -20,6 +18,7 @@ const getPlaidAccount = (plaid) => (accessToken) => {
       });
     })
   };
+
   
   module.exports = {
     getPlaidAccount

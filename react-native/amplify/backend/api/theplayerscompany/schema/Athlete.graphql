@@ -18,7 +18,7 @@ type PodSettings {
   SPENDING: Int!
 }
 
-type ProcessorToken @model{
+type ProcessorToken{
   plaidAccountId: String!
   processorToken: String
 }
@@ -39,6 +39,7 @@ type Athlete @model {
   firstName: String!
   lastName: String!
   mobilePhone: String!
+  athleteTag: String
   email: String!
   level: AthleteLevel!
   sport: AthleteSport!
@@ -46,11 +47,10 @@ type Athlete @model {
   address: Address!
   dateOfBirth: String!
   accounts: [AthleteAccount] @hasMany
-  unitLookup: AthleteUnitLookup
+  unitLookup: AthleteUnitLookup 
   podSettings: PodSettings!
   plaidToken: String
-  plaidProcessorToken: [ProcessorToken] @hasMany
-  transactions: [Transanctions] @hasMany
+  plaidProcessorToken: ProcessorToken
   wyreId: String
   isActive: Boolean!
 }
@@ -63,9 +63,16 @@ type AthleteAccount @model {
   podName: String!
 }
 
-
-type Transanctions  @model{
-  transactionId: String!
+type RecentTransaction @model  {
+  transactionId: String! 
+  athleteId: String
   status: String
   amount: Float
+  direction: String
+  createdAt: String
+  read: Boolean
+  settled: String
+  podAllocation: PodSettings
 }
+
+# @function(name: "listAthletUnitAccounts-${env}")

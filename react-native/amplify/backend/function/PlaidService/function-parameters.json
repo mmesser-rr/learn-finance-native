@@ -26,22 +26,12 @@
       ]
     },
     "storage": {
-      "ProcessorToken:@model(appsync)": [
-        "create",
-        "read",
-        "update"
-      ],
       "Athlete:@model(appsync)": [
         "create",
         "read",
         "update"
       ],
       "AthleteAccount:@model(appsync)": [
-        "create",
-        "read",
-        "update"
-      ],
-      "Transanctions:@model(appsync)": [
         "create",
         "read",
         "update"

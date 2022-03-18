@@ -1,4 +1,4 @@
-type PlaidAccount{
+type PlaidAccountDetail{
     account_id: String
     balances: Balance
     mask: String
