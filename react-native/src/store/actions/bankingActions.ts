@@ -1,14 +1,16 @@
 import {
   IAccountSelected,
-  IAccountsLoaded,
+  IPlaidAccountsLoaded,
   IMarkRecentTransactionRead,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
   ITransferAmountEntered,
   ITypeOnlyAction,
   IUpdatePodSettings,
+  IAthleteAccountsLoaded,
 } from 'src/models/actions/banking';
 import {
+  AthleteAccount,
   PlaidAccountDetail,
   PodSettings,
   RecentTransaction,
@@ -62,24 +64,24 @@ export function markRecentTransactionRead(
   };
 }
 
-export function getAccounts(): ITypeOnlyAction {
+export function getConnectedAccounts(): ITypeOnlyAction {
   return {
-    type: types.GET_ACCOUNTS,
+    type: types.GET_CONNECTED_ACCOUNTS,
   };
 }
 
-export function accountsLoaded(
+export function plaidAccountsLoaded(
   accounts: PlaidAccountDetail[],
-): IAccountsLoaded {
+): IPlaidAccountsLoaded {
   return {
-    type: types.ACCOUNTS_LOADED,
+    type: types.PLAID_ACCOUNTS_LOADED,
     accounts,
   };
 }
 
 export function accountSelected(account: PlaidAccountDetail): IAccountSelected {
   return {
-    type: types.ACCOUNT_SELECTED,
+    type: types.PLAID_ACCOUNT_SELECTED,
     account,
   };
 }
@@ -96,5 +98,20 @@ export function transferAmountEntered(
 export function createDeposit(): ITypeOnlyAction {
   return {
     type: types.CREATE_DEPOSIT,
+  };
+}
+
+export function getAthleteAccounts(): ITypeOnlyAction {
+  return {
+    type: types.GET_ATHLETE_ACCOUNTS,
+  };
+}
+
+export function athleteAccountsLoaded(
+  accounts: AthleteAccount[],
+): IAthleteAccountsLoaded {
+  return {
+    type: types.ATHLETE_ACCOUNTS_LOADED,
+    accounts,
   };
 }

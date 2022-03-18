@@ -11,10 +11,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
     backgroundColor: AppColors.coreBlack90,
+    borderRadius: 8,
     width: '100%',
   },
   cardLeft: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   cardRight: {
     alignItems: 'flex-end',

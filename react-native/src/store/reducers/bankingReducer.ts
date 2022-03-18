@@ -1,8 +1,9 @@
 import createReducer from 'src/lib/createReducer';
 
 import {
-  ACCOUNTS_LOADED,
-  ACCOUNT_SELECTED,
+  ATHLETE_ACCOUNTS_LOADED,
+  PLAID_ACCOUNTS_LOADED,
+  PLAID_ACCOUNT_SELECTED,
   POD_SETTINGS_UPDATED,
   RECENT_TRANSACTIONS_LOADED,
   TRANSFER_AMOUNT_ENTERED,
@@ -10,7 +11,8 @@ import {
 } from '../actions/types';
 import {
   IAccountSelected,
-  IAccountsLoaded,
+  IAthleteAccountsLoaded,
+  IPlaidAccountsLoaded,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
   ITransferAmountEntered,
@@ -37,10 +39,10 @@ export const bankingReducer = createReducer(initialState, {
   ) {
     return {...state, recentTransactions: action.transactions};
   },
-  [ACCOUNTS_LOADED](state: IBankingState, action: IAccountsLoaded) {
+  [PLAID_ACCOUNTS_LOADED](state: IBankingState, action: IPlaidAccountsLoaded) {
     return {...state, accounts: action.accounts};
   },
-  [ACCOUNT_SELECTED](state: IBankingState, action: IAccountSelected) {
+  [PLAID_ACCOUNT_SELECTED](state: IBankingState, action: IAccountSelected) {
     return {...state, selectedAccount: action.account};
   },
   [TRANSFER_AMOUNT_ENTERED](
@@ -48,5 +50,13 @@ export const bankingReducer = createReducer(initialState, {
     action: ITransferAmountEntered,
   ) {
     return {...state, transferAmount: action.transferAmount};
+  },
+  [ATHLETE_ACCOUNTS_LOADED](
+    state: IBankingState,
+    action: IAthleteAccountsLoaded,
+  ) {
+    // TODO: update state properly
+    // return {...state, totalBalance: 100};
+    return {...state};
   },
 });
