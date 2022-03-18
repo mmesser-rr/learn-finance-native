@@ -7,4 +7,5 @@ export interface IBankingState {
   accounts?: PlaidAccountDetail[];
   selectedAccount?: PlaidAccountDetail;
   transferAmount?: string;
+  totalBalance?: number;
 }

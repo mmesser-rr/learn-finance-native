@@ -1,4 +1,5 @@
 import {
+  AthleteAccount,
   PlaidAccountDetail,
   PodSettings,
   RecentTransaction,
@@ -33,7 +34,7 @@ export interface IMarkRecentTransactionRead {
   transactionId: string;
 }
 
-export interface IAccountsLoaded {
+export interface IPlaidAccountsLoaded {
   type: String;
   accounts: PlaidAccountDetail[];
 }
@@ -46,4 +47,9 @@ export interface IAccountSelected {
 export interface ITransferAmountEntered {
   type: String;
   transferAmount: string;
+}
+
+export interface IAthleteAccountsLoaded {
+  type: String;
+  accounts: AthleteAccount[];
 }

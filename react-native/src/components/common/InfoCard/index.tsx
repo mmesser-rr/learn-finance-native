@@ -31,7 +31,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       </View>
       <View style={styles.cardRight}>
         <Text type="Title/Small">{rightTopText}</Text>
-        <Text type="Body/Large" style={rightBottomStyle}>
+        <Text type="Headline/Small" style={rightBottomStyle}>
           {rightBottomText}
         </Text>
       </View>

@@ -9,21 +9,31 @@ import {GraphQLResult} from '@aws-amplify/api';
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
 import {Text} from 'src/components/common/Texts';
-import {PodsCardGradient, PODsSteps} from 'src/utils/constants';
+import {
+  GradientButtonColors,
+  PodsCardGradient,
+  PODsSteps,
+} from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import {generateTextStyle} from 'src/utils/functions';
 import UserHomeModal from 'src/components/common/UserHomeModal';
+import DepositIcon from 'src/assets/icons/deposit.svg';
 import ProcessingIcon from 'src/assets/icons/processing.svg';
 import SpendingIcon from 'src/assets/icons/spending.svg';
 import InvestmentIcon from 'src/assets/icons/investment.svg';
 import SavingIcon from 'src/assets/icons/saving.svg';
 import SwitchIcon from 'src/assets/icons/switch.svg';
+import SwitchWhiteIcon from 'src/assets/icons/switch-white.svg';
 import {RootState} from 'src/store/root-state';
 import {createPlaidLink, updatePlaidLink} from 'src/graphql/mutations';
 import {CreatePlaidLink} from 'src/types/graphql';
 import Loading from 'src/components/common/Loading';
+import InfoCard from 'src/components/common/InfoCard';
+import SubmitButton from 'src/components/common/SubmitButton';
+import SecondaryButton from 'src/components/common/SecondaryButton';
 import * as userActions from 'src/store/actions/userActions';
+import * as bankingActions from 'src/store/actions/bankingActions';
 
 import styles from './styles';
 
@@ -48,7 +58,12 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const {step} = useSelector((state: RootState) => state.bankingReducer);
+  const {step, totalBalance} = useSelector(
+    (state: RootState) => state.bankingReducer,
+  );
+  const hasMoneyInAccount = useSelector(
+    (state: RootState) => (state.bankingReducer.totalBalance ?? 0) > 0,
+  );
   const {user} = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
@@ -56,7 +71,18 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (user?.id) {
+      dispatch(bankingActions.getAthleteAccounts());
+    }
+    if (user?.id && !user.plaidToken) {
       getPlaidLinkToken(user.id);
+    }
+
+    if (
+      (user?.podSettings?.SPENDING ?? 0) > 0 ||
+      (user?.podSettings?.INVESTMENTS ?? 0) > 0 ||
+      (user?.podSettings?.SAVINGS ?? 0) > 0
+    ) {
+      dispatch(bankingActions.updateHomeStep(PODsSteps[2]));
     }
   }, [user]);
 
@@ -77,6 +103,12 @@ const Home: React.FC = () => {
   const onSetupDirectDeposit = () =>
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
 
+  const goToDepositSelectAccount = () =>
+    NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
+
+  const goToMoveMoney = () => {};
+  // NavigationService.navigate('UserBankingStack', {screen: 'MoveMoney'});
+
   const onPlaidSuccessHandler = async (success: LinkSuccess) => {
     setLoading(true);
     const res = await API.graphql(
@@ -87,7 +119,7 @@ const Home: React.FC = () => {
     );
     dispatch(userActions.updateUser({plaidToken: success.publicToken}));
     setLoading(false);
-    NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
+    goToDepositSelectAccount();
   };
 
   const onPlaidExitHandler = (exit: LinkExit) => {
@@ -124,21 +156,52 @@ const Home: React.FC = () => {
         )}
       </View>
       <View style={styles.subTitle}>
-        <Text type="Title/Medium">PLAYER'S ACCOUNT</Text>
+        <Text type="Title/Medium">BankDAO</Text>
+        {hasMoneyInAccount && (
+          <View>
+            <LinearGradient
+              style={styles.buttonLinearGradient}
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 0}}
+              locations={[0, 0, 0.2388, 1]}
+              colors={GradientButtonColors}>
+              <TouchableOpacity
+                onPress={goToDepositSelectAccount}
+                style={styles.depositButton}>
+                <DepositIcon />
+                <Text type="Body/Medium" style={styles.depositButtonText}>
+                  Deposit
+                </Text>
+              </TouchableOpacity>
+            </LinearGradient>
+          </View>
+        )}
       </View>
-      <Card active={step === PODsSteps[0]} style={styles.accountCard}>
-        <View style={styles.cardHead}>
-          <Text type="Headline/Small">Add money to your account</Text>
-        </View>
-        <View style={styles.cardBody}>
-          <Text type="Body/Large">
-            Let's get some money into your account so you can start using it!
-          </Text>
-        </View>
-        <View>
-          {!!linkToken && (
-            <View>
-              {step === PODsSteps[0] ? (
+      {hasMoneyInAccount ? (
+        <>
+          <View style={styles.totalBalanceContainer}>
+            <Text type="Title/Small">Total Balance</Text>
+            <Text type="Headline/Small">${totalBalance}</Text>
+          </View>
+          <View style={styles.chartContainer}></View>
+        </>
+      ) : (
+        <Card active={step === PODsSteps[0]} style={styles.accountCard}>
+          <View style={styles.cardHead}>
+            <Text type="Headline/Small">Add money to your account</Text>
+          </View>
+          <View style={styles.cardBody}>
+            <Text type="Body/Large">
+              Let's get some money into your account so you can start using it!
+            </Text>
+          </View>
+          <View>
+            {user?.plaidToken ? (
+              <Button onPress={goToDepositSelectAccount}>
+                <Text type="Body/Large">Transfer from another bank</Text>
+              </Button>
+            ) : (
+              !!linkToken && (
                 <PlaidLink
                   tokenConfig={{
                     token: linkToken,
@@ -154,26 +217,41 @@ const Home: React.FC = () => {
                     </Text>
                   </View>
                 </PlaidLink>
-              ) : (
-                <Button disabled>
-                  <Text type="Body/Large">Transfer from another bank</Text>
-                </Button>
-              )}
+              )
+            )}
+
+            <View>
+              <Button
+                actionStyle={styles.deposit}
+                onPress={onSetupDirectDeposit}
+                disabled={step !== PODsSteps[0]}>
+                <Text type="Body/Large">Set up direct deposit</Text>
+              </Button>
             </View>
-          )}
-          <View>
-            <Button
-              actionStyle={styles.deposit}
-              onPress={onSetupDirectDeposit}
-              disabled={step !== PODsSteps[0]}>
-              <Text type="Body/Large">Set up direct deposit</Text>
-            </Button>
           </View>
-        </View>
-      </Card>
+        </Card>
+      )}
+
       <View style={styles.subTitle}>
         <Text type="Title/Medium">PODS</Text>
-        {step === PODsSteps[2] && (
+        {hasMoneyInAccount ? (
+          <>
+            <LinearGradient
+              style={styles.buttonLinearGradient}
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 0}}
+              colors={GradientButtonColors}>
+              <TouchableOpacity
+                onPress={goToMoveMoney}
+                style={styles.moveMoneyButton}>
+                <SwitchWhiteIcon />
+                <Text type="Body/Medium" style={styles.moveMoneyButtonText}>
+                  Move Money
+                </Text>
+              </TouchableOpacity>
+            </LinearGradient>
+          </>
+        ) : (
           <View style={styles.switch}>
             <SwitchIcon />
             <Text type="Body/Medium" style={styles.switchLabel}>
@@ -204,48 +282,24 @@ const Home: React.FC = () => {
       )}
       {step === PODsSteps[2] && (
         <View>
-          <View style={styles.podItem}>
-            <View style={styles.podLabel}>
-              <SpendingIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>
-                Spending
-              </Text>
-            </View>
-            <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>
-                Balance
-              </Text>
-              <Text type="Headline/Small">$0.00</Text>
-            </View>
-          </View>
-          <View style={styles.podItem}>
-            <View style={styles.podLabel}>
-              <InvestmentIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>
-                Investments
-              </Text>
-            </View>
-            <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>
-                Balance
-              </Text>
-              <Text type="Headline/Small">$0.00</Text>
-            </View>
-          </View>
-          <View style={styles.podItem}>
-            <View style={styles.podLabel}>
-              <SavingIcon />
-              <Text type="Body/Large" style={styles.podLabelText}>
-                Saving
-              </Text>
-            </View>
-            <View>
-              <Text type="Title/Small" style={styles.balanceLabel}>
-                Balance
-              </Text>
-              <Text type="Headline/Small">$0.00</Text>
-            </View>
-          </View>
+          <InfoCard
+            IconSvg={SpendingIcon}
+            labelText="Spending"
+            rightTopText="Balance"
+            rightBottomText={'$0.00'}
+          />
+          <InfoCard
+            IconSvg={InvestmentIcon}
+            labelText="Investments"
+            rightTopText="Balance"
+            rightBottomText={'$0.00'}
+          />
+          <InfoCard
+            IconSvg={SavingIcon}
+            labelText="Savings"
+            rightTopText="Balance"
+            rightBottomText={'$0.00'}
+          />
         </View>
       )}
       <UserHomeModal
