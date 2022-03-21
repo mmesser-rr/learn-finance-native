@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {TextStyle, View, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {PlaidLink, LinkSuccess, LinkExit} from 'react-native-plaid-link-sdk';
@@ -16,7 +16,7 @@ import {
 } from 'src/utils/constants';
 import ThreeDotsIcon from 'src/assets/icons/three-dots.svg';
 import NavigationService from 'src/navigation/NavigationService';
-import {generateTextStyle} from 'src/utils/functions';
+import {generateTextStyle, twoDecimalFormatter} from 'src/utils/functions';
 import UserHomeModal from 'src/components/common/UserHomeModal';
 import DepositIcon from 'src/assets/icons/deposit.svg';
 import ProcessingIcon from 'src/assets/icons/processing.svg';
@@ -30,8 +30,6 @@ import {createPlaidLink, updatePlaidLink} from 'src/graphql/mutations';
 import {CreatePlaidLink} from 'src/types/graphql';
 import Loading from 'src/components/common/Loading';
 import InfoCard from 'src/components/common/InfoCard';
-import SubmitButton from 'src/components/common/SubmitButton';
-import SecondaryButton from 'src/components/common/SecondaryButton';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 
@@ -58,9 +56,13 @@ const Card: React.FC<CardProps> = ({active, children, style: propsStyle}) => {
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const {step, totalBalance} = useSelector(
-    (state: RootState) => state.bankingReducer,
-  );
+  const {
+    step,
+    totalBalance,
+    spendingAccount,
+    investmentsAccount,
+    savingsAccount,
+  } = useSelector((state: RootState) => state.bankingReducer);
   const hasMoneyInAccount = useSelector(
     (state: RootState) => (state.bankingReducer.totalBalance ?? 0) > 0,
   );
@@ -69,9 +71,25 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const amounts = useMemo(() => {
+    return {
+      total: twoDecimalFormatter.format((totalBalance ?? 0) / 100),
+      spending: twoDecimalFormatter.format(
+        (spendingAccount?.attributes?.balance ?? 0) / 100,
+      ),
+      investments: twoDecimalFormatter.format(
+        (investmentsAccount?.attributes?.balance ?? 0) / 100,
+      ),
+      savings: twoDecimalFormatter.format(
+        (savingsAccount?.attributes?.balance ?? 0) / 100,
+      ),
+    };
+  }, [totalBalance, spendingAccount, investmentsAccount, savingsAccount]);
+
   useEffect(() => {
     if (user?.id) {
       dispatch(bankingActions.getAthleteAccounts());
+      dispatch(bankingActions.getBalanceHistory());
     }
     if (user?.id && !user.plaidToken) {
       getPlaidLinkToken(user.id);
@@ -106,8 +124,8 @@ const Home: React.FC = () => {
   const goToDepositSelectAccount = () =>
     NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
 
-  const goToMoveMoney = () => {};
-  // NavigationService.navigate('UserBankingStack', {screen: 'MoveMoney'});
+  const goToMoveMoney = () =>
+    NavigationService.navigate('UserBankingStack', {screen: 'MoveMoney'});
 
   const onPlaidSuccessHandler = async (success: LinkSuccess) => {
     setLoading(true);
@@ -181,7 +199,7 @@ const Home: React.FC = () => {
         <>
           <View style={styles.totalBalanceContainer}>
             <Text type="Title/Small">Total Balance</Text>
-            <Text type="Headline/Small">${totalBalance}</Text>
+            <Text type="Headline/Small">${amounts.total}</Text>
           </View>
           <View style={styles.chartContainer}></View>
         </>
@@ -286,19 +304,19 @@ const Home: React.FC = () => {
             IconSvg={SpendingIcon}
             labelText="Spending"
             rightTopText="Balance"
-            rightBottomText={'$0.00'}
+            rightBottomText={'$' + amounts.spending}
           />
           <InfoCard
             IconSvg={InvestmentIcon}
             labelText="Investments"
             rightTopText="Balance"
-            rightBottomText={'$0.00'}
+            rightBottomText={'$' + amounts.investments}
           />
           <InfoCard
             IconSvg={SavingIcon}
             labelText="Savings"
             rightTopText="Balance"
-            rightBottomText={'$0.00'}
+            rightBottomText={'$' + amounts.savings}
           />
         </View>
       )}
@@ -306,6 +324,7 @@ const Home: React.FC = () => {
         visible={isModalVisible}
         step={step}
         onClose={() => setModalVisible(false)}
+        hasMoneyInAccount={hasMoneyInAccount}
       />
       {loading && <Loading />}
     </AppLayout>

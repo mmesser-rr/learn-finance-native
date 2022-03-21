@@ -204,11 +204,16 @@ export const unitWebhookService = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -337,11 +342,16 @@ export const createPlaidPayment = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -380,11 +390,16 @@ export const bookPayment = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -427,11 +442,16 @@ export const debitAccount = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -474,11 +494,16 @@ export const creditAccount = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }

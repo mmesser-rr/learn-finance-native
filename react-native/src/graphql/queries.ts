@@ -41,11 +41,16 @@ export const listAthletUnitAccounts = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -73,11 +78,16 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -105,11 +115,16 @@ export const getUnitTransactionById = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
@@ -134,11 +149,50 @@ export const listAllUnitTransactions = /* GraphQL */ `
         }
         name
         status
+        date
         routingNumber
         accountNumber
         currency
         hold
         available
+        tags {
+          podName
+          athleteId
+        }
+      }
+    }
+  }
+`;
+export const listUnitBalanceHistory = /* GraphQL */ `
+  query ListUnitBalanceHistory($athleteId: ID!) {
+    listUnitBalanceHistory(athleteId: $athleteId) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        date
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+        tags {
+          podName
+          athleteId
+        }
       }
     }
   }
