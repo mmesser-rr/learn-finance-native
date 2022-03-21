@@ -58,6 +58,7 @@ const DepositResult: React.FC = () => {
       spendingFactor > 0 || investmentsFactor > 0 || savingsFactor > 0;
     return {
       depositDate: format(date, 'MMM do, yyyy'),
+      depositAmount: twoDecimalFormatter.format((deposit!.amount ?? 0) / 100), // divide by 100 because amount comes in cents
       spendingAmount: twoDecimalFormatter.format(
         (deposit.amount ?? 0) * spendingFactor,
       ),
@@ -75,12 +76,7 @@ const DepositResult: React.FC = () => {
   }, [deposit]);
 
   const onContinue = () => {
-    dispatch(
-      bankingActions.markRecentTransactionRead(
-        deposit!.id,
-        deposit!.transactionId,
-      ),
-    );
+    markDepositRead();
     const newIndex = index + 1;
     if (recentTransactions![newIndex]) {
       setDeposit(recentTransactions![newIndex]);
@@ -90,16 +86,29 @@ const DepositResult: React.FC = () => {
     }
   };
   const setUpPods = () => {
+    markDepositRead();
+    NavigationService.navigate('TransferStack', {screen: 'SetupPods'});
+  };
+  const depositAgain = () => {
+    markDepositRead();
+    NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
+  };
+
+  const markReadAndGoToHome = () => {
+    markDepositRead();
+    goToHome();
+  };
+
+  const goToHome = () => NavigationService.navigate('HomeStack');
+
+  const markDepositRead = () => {
     dispatch(
       bankingActions.markRecentTransactionRead(
         deposit!.id,
         deposit!.transactionId,
       ),
     );
-    NavigationService.navigate('TransferStack', {screen: 'SetupPods'});
   };
-  const depositAgain = () => NavigationService.navigate('HomeStack'); // TODO: navigate to deposit flow
-  const goToHome = () => NavigationService.navigate('HomeStack');
 
   const renderSuccess = () => (
     <>
@@ -120,7 +129,7 @@ const DepositResult: React.FC = () => {
         IconSvg={DepositIcon}
         labelText="Deposit"
         rightTopText={calculatedValues!.depositDate}
-        rightBottomText={'$' + twoDecimalFormatter.format(deposit!.amount ?? 0)}
+        rightBottomText={'$' + calculatedValues?.depositAmount}
         cardStyle={
           calculatedValues?.podsHaveBeenSetUp
             ? styles.depositCardSuccess
@@ -199,7 +208,7 @@ const DepositResult: React.FC = () => {
         IconSvg={DepositIcon}
         labelText="Deposit"
         rightTopText={calculatedValues!.depositDate}
-        rightBottomText={'$' + twoDecimalFormatter.format(deposit!.amount ?? 0)}
+        rightBottomText={'$' + calculatedValues?.depositAmount}
         rightBottomStyle={styles.strikethrough}
         cardStyle={styles.depositCardFailure}
       />
@@ -212,7 +221,7 @@ const DepositResult: React.FC = () => {
         <SecondaryButton
           isValid={true}
           actionLabel="Go to Home"
-          onPress={goToHome}
+          onPress={markReadAndGoToHome}
         />
       </View>
     </>

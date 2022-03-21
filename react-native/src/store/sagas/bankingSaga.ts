@@ -21,8 +21,10 @@ import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
 import {
   listAthleteAccounts,
+  listAthletUnitAccounts,
   listPlaidAccounts,
   listRecentTransactions,
+  listUnitBalanceHistory,
 } from 'src/graphql/queries';
 import {GraphQLResult} from '@aws-amplify/api';
 import {
@@ -31,12 +33,17 @@ import {
   CreatePlaidPaymentMutationVariables,
   ListAthleteAccountsQuery,
   ListAthleteAccountsQueryVariables,
+  ListAthletUnitAccountsQuery,
+  ListAthletUnitAccountsQueryVariables,
   ListPlaidAccountsQuery,
   ListPlaidAccountsQueryVariables,
   ListRecentTransactionsQuery,
   ListRecentTransactionsQueryVariables,
+  ListUnitBalanceHistoryQuery,
+  ListUnitBalanceHistoryQueryVariables,
   PlaidAccountDetail,
   RecentTransaction,
+  UnitAccount,
   UpdateRecentTransactionMutationVariables,
 } from 'src/types/API';
 import NavigationService from 'src/navigation/NavigationService';
@@ -226,18 +233,49 @@ export function* getAthleteAccounts() {
 
     console.log('Attempting to get accounts for user:', athleteId);
 
-    const queryFilter: ListAthleteAccountsQueryVariables = {
-      filter: {athleteAccountsId: {eq: athleteId}},
+    const queryFilter: ListAthletUnitAccountsQueryVariables = {
+      athleteId,
     };
 
     const response = (yield call(
       [API, 'graphql'],
-      graphqlOperation(listAthleteAccounts, queryFilter),
-    )) as GraphQLResult<ListAthleteAccountsQuery>;
+      graphqlOperation(listAthletUnitAccounts, queryFilter),
+    )) as GraphQLResult<ListAthletUnitAccountsQuery>;
 
-    const accounts = response.data?.listAthleteAccounts
-      ?.items as AthleteAccount[];
+    const accounts = response.data?.listAthletUnitAccounts as UnitAccount[];
     yield put(bankingActions.athleteAccountsLoaded(accounts));
+
+    yield put(loadingActions.disableLoader());
+  } catch (error) {
+    console.log('Error attempting to retrieve accounts:', error);
+    yield put(loadingActions.disableLoader());
+  }
+}
+
+export function* getBalanceHistory() {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('Athlete ID is required to get accounts');
+    }
+
+    console.log('Attempting to get accounts for user:', athleteId);
+
+    const queryFilter: ListUnitBalanceHistoryQueryVariables = {
+      athleteId,
+    };
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(listUnitBalanceHistory, queryFilter),
+    )) as GraphQLResult<ListUnitBalanceHistoryQuery>;
+
+    const historyEntries = response.data
+      ?.listUnitBalanceHistory as UnitAccount[];
+    yield put(bankingActions.balanceHistoryLoaded(historyEntries));
 
     yield put(loadingActions.disableLoader());
   } catch (error) {
@@ -256,4 +294,5 @@ export default function* bankingSaga() {
   yield takeLatest(types.GET_CONNECTED_ACCOUNTS, getConnectedAccounts);
   yield takeLatest(types.CREATE_DEPOSIT, createDeposit);
   yield takeLatest(types.GET_ATHLETE_ACCOUNTS, getAthleteAccounts);
+  yield takeLatest(types.GET_BALANCE_HISTORY, getBalanceHistory);
 }

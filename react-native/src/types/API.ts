@@ -145,11 +145,13 @@ export type Attributes = {
   counterparty?: Counterparty | null,
   name?: string | null,
   status?: string | null,
+  date?: string | null,
   routingNumber?: string | null,
   accountNumber?: string | null,
   currency?: string | null,
   hold?: number | null,
   available?: number | null,
+  tags?: Tags | null,
 };
 
 export type Counterparty = {
@@ -158,6 +160,12 @@ export type Counterparty = {
   routingNumber?: string | null,
   accountNumber?: string | null,
   accountType?: string | null,
+};
+
+export type Tags = {
+  __typename?: "Tags",
+  podName?: string | null,
+  athleteId?: string | null,
 };
 
 export type PlaidToken = {
@@ -901,11 +909,17 @@ export type UnitWebhookServiceMutation = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1047,11 +1061,17 @@ export type CreatePlaidPaymentMutation = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1087,11 +1107,17 @@ export type BookPaymentMutation = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1129,11 +1155,17 @@ export type DebitAccountMutation = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1171,11 +1203,17 @@ export type CreditAccountMutation = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1902,11 +1940,17 @@ export type ListAthletUnitAccountsQuery = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null > | null,
 };
@@ -1938,11 +1982,17 @@ export type GetAthleteUnitAccountByIdQuery = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -1974,11 +2024,17 @@ export type GetUnitTransactionByIdQuery = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null,
 };
@@ -2009,11 +2065,58 @@ export type ListAllUnitTransactionsQuery = {
       } | null,
       name?: string | null,
       status?: string | null,
+      date?: string | null,
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
       hold?: number | null,
       available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
+    } | null,
+  } | null > | null,
+};
+
+export type ListUnitBalanceHistoryQueryVariables = {
+  athleteId: string,
+};
+
+export type ListUnitBalanceHistoryQuery = {
+  listUnitBalanceHistory?:  Array< {
+    __typename?: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename?: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      counterparty?:  {
+        __typename?: "Counterparty",
+        name?: string | null,
+        routingNumber?: string | null,
+        accountNumber?: string | null,
+        accountType?: string | null,
+      } | null,
+      name?: string | null,
+      status?: string | null,
+      date?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      hold?: number | null,
+      available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
     } | null,
   } | null > | null,
 };

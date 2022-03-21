@@ -8,12 +8,14 @@ import {
   ITypeOnlyAction,
   IUpdatePodSettings,
   IAthleteAccountsLoaded,
+  IBalanceHistoryLoaded,
 } from 'src/models/actions/banking';
 import {
   AthleteAccount,
   PlaidAccountDetail,
   PodSettings,
   RecentTransaction,
+  UnitAccount,
 } from 'src/types/API';
 import * as types from './types';
 
@@ -108,10 +110,25 @@ export function getAthleteAccounts(): ITypeOnlyAction {
 }
 
 export function athleteAccountsLoaded(
-  accounts: AthleteAccount[],
+  accounts: UnitAccount[],
 ): IAthleteAccountsLoaded {
   return {
     type: types.ATHLETE_ACCOUNTS_LOADED,
     accounts,
+  };
+}
+
+export function getBalanceHistory(): ITypeOnlyAction {
+  return {
+    type: types.GET_BALANCE_HISTORY,
+  };
+}
+
+export function balanceHistoryLoaded(
+  entries: UnitAccount[],
+): IBalanceHistoryLoaded {
+  return {
+    type: types.BALANCE_HISTORY_LOADED,
+    entries,
   };
 }

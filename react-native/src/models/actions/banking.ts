@@ -3,6 +3,7 @@ import {
   PlaidAccountDetail,
   PodSettings,
   RecentTransaction,
+  UnitAccount,
 } from 'src/types/API';
 
 export interface IUpdateHomeStepAction {
@@ -51,5 +52,10 @@ export interface ITransferAmountEntered {
 
 export interface IAthleteAccountsLoaded {
   type: String;
-  accounts: AthleteAccount[];
+  accounts: UnitAccount[];
+}
+
+export interface IBalanceHistoryLoaded {
+  type: String;
+  entries: UnitAccount[];
 }
