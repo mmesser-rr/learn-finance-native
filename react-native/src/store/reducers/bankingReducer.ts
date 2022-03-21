@@ -2,6 +2,7 @@ import createReducer from 'src/lib/createReducer';
 
 import {
   ATHLETE_ACCOUNTS_LOADED,
+  BALANCE_HISTORY_LOADED,
   PLAID_ACCOUNTS_LOADED,
   PLAID_ACCOUNT_SELECTED,
   POD_SETTINGS_UPDATED,
@@ -12,6 +13,7 @@ import {
 import {
   IAccountSelected,
   IAthleteAccountsLoaded,
+  IBalanceHistoryLoaded,
   IPlaidAccountsLoaded,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
@@ -55,8 +57,34 @@ export const bankingReducer = createReducer(initialState, {
     state: IBankingState,
     action: IAthleteAccountsLoaded,
   ) {
-    // TODO: update state properly
-    // return {...state, totalBalance: 100};
-    return {...state};
+    const spendingAccount = action.accounts.find(
+      account => account.attributes?.tags?.podName === 'SPENDING',
+    );
+    const investmentsAccount = action.accounts.find(
+      account => account.attributes?.tags?.podName === 'INVESTMENTS',
+    );
+    const savingsAccount = action.accounts.find(
+      account => account.attributes?.tags?.podName === 'SAVINGS',
+    );
+
+    const totalBalance =
+      // 100 +
+      (spendingAccount?.attributes?.balance ?? 0) +
+      (savingsAccount?.attributes?.balance ?? 0) +
+      (investmentsAccount?.attributes?.balance ?? 0);
+
+    return {
+      ...state,
+      spendingAccount,
+      investmentsAccount,
+      savingsAccount,
+      totalBalance,
+    };
+  },
+  [BALANCE_HISTORY_LOADED](
+    state: IBankingState,
+    action: IBalanceHistoryLoaded,
+  ) {
+    return {...state, balanceHistory: action.entries};
   },
 });

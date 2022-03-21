@@ -1,4 +1,8 @@
-import {PlaidAccountDetail, RecentTransaction} from 'src/types/API';
+import {
+  PlaidAccountDetail,
+  RecentTransaction,
+  UnitAccount,
+} from 'src/types/API';
 
 export interface IBankingState {
   step: string;
@@ -8,4 +12,8 @@ export interface IBankingState {
   selectedAccount?: PlaidAccountDetail;
   transferAmount?: string;
   totalBalance?: number;
+  spendingAccount?: UnitAccount;
+  investmentsAccount?: UnitAccount;
+  savingsAccount?: UnitAccount;
+  balanceHistory?: UnitAccount[];
 }
