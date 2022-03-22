@@ -11,6 +11,12 @@ import styles from './styles';
 
 const AccountCreateSuccess: React.FC = () => {
   const goToNextStep = () => NavigationService.navigate('ProfileIntro');
+  const onTerms = () => {
+    NavigationService.navigate('Terms', {fromScreen: 'AccountCreateSuccess'});
+  };
+  const onDisclosures = () => {
+    NavigationService.navigate('Disclosures');
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -28,10 +34,22 @@ const AccountCreateSuccess: React.FC = () => {
           bank account is now established.
         </Text>
       </View>
+      <View>
+        <Text type="Body/Large" style={[styles.caption, styles.secondCaption]}>
+          By tapping ‘Open BankDAO accounts’, you agree to our{' '}
+          <Text type="Body/Large" style={styles.link} onPress={onTerms}>
+            Terms and Conditions
+          </Text>{' '}
+          and{' '}
+          <Text type="Body/Large" style={styles.link} onPress={onDisclosures}>
+            Disclosures
+          </Text>
+        </Text>
+      </View>
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={true}
-          actionLabel="Continue"
+          actionLabel="Open BankDAO accounts"
           onSubmit={goToNextStep}
         />
       </View>

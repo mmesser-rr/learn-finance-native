@@ -8,7 +8,7 @@ export interface IBankingState {
   step: string;
   podSettingsUpdated: boolean;
   recentTransactions?: RecentTransaction[];
-  accounts?: PlaidAccountDetail[];
+  plaidAccounts?: PlaidAccountDetail[];
   selectedAccount?: PlaidAccountDetail;
   transferAmount?: string;
   totalBalance?: number;
