@@ -13,8 +13,12 @@ type Mutation {
   podSettings(athleteId: ID!, savings: Int!, investments: Int!, spending: Int!): AthleteAccount @function(name: "UnitService-${env}")
   createPlaidLink(athleteId: ID!): PlaidToken @function(name: "PlaidService-${env}")
   updatePlaidLink(athleteId: ID!, accessToken: String!): PlaidToken @function(name: "PlaidService-${env}")
-  createPlaidPayment(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String): UnitAccount @function(name: "UnitService-${env}")
-  bookPayment(athleteId: ID!, unitAccountId: String!, amount: Float!, description: String, receiverUnitAccountId: String!, receiverAccountType: String): UnitAccount @function(name: "UnitService-${env}")
-  debitAccount(athleteId: ID!, amount: Float!, description: String, receiverName: String!, receiverRoutingNumber: String!, receiverAccountNumber: String!, receiverAccountType: String, addenda: String): UnitAccount @function(name: "UnitService-${env}")
-  creditAccount(athleteId: ID!, amount: Float!, description: String, receiverName: String!, receiverRoutingNumber: String!, receiverAccountNumber: String!, receiverAccountType: String, addenda: String): UnitAccount @function(name: "UnitService-${env}")
+  
+  createAtleteUnitToken(athleteId: ID!, verificationToken: String!, verificationCode: String!): UnitAccount @function(name: "UnitService-${env}")
+  athleteUnitTokenVerification(athleteId: ID!): UnitAccount @function(name: "UnitService-${env}")
+  
+  createPlaidPayment(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")
+  bookPayment(athleteId: ID!, unitAccountId: String!, amount: Float!, description: String, receiverUnitAccountId: String!, receiverAccountType: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")
+  debitAccount(athleteId: ID!, amount: Float!, description: String, receiverName: String!, receiverRoutingNumber: String!, receiverAccountNumber: String!, receiverAccountType: String, addenda: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")
+  creditAccount(athleteId: ID!, amount: Float!, description: String, receiverName: String!, receiverRoutingNumber: String!, receiverAccountNumber: String!, receiverAccountType: String, addenda: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")
 }

@@ -7,32 +7,33 @@ const APPLICATION_TYPE = "bookPayment";
 const DIRECTION = "Credit";
 const TYPE = "depositAccount";
 
-const parseApplicationParams = (data) => ({
+const parseApplicationParams = (unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: data.amount,
+    amount: amount,
     direction: DIRECTION,
-    description: data.description
+    description: description,
+    idempotencyKey: idempotencyKey
   },
   relationships:{
       account:{
           data:{
             type: TYPE,
-            id: data.unitAccountId
+            id: unitAccountId
           }
         },
       counterpartyAccount:{
           data:{
-            type: data.receiverAccountType,
-            id:data.receiverUnitAccountId
+            type: receiverAccountType,
+            id: receiverUnitAccountId
           }
       }
    }
 });
 
 
-const bookPayment = (unit) => (data) => {
-  const unitParams = parseApplicationParams(data);
+const bookPayment = (unit) => (unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey) => {
+  const unitParams = parseApplicationParams(unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey);
   return unit.payments.create(unitParams)
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err.message}`));
@@ -44,6 +45,7 @@ const resultLens = (res) => ({
   status: res.data.attributes.status,
   createdAt: res.data.attributes.createdAt,
   reason: res.data.attributes.reason,
+  idempotencyKey: res.data.idempotencyKey,
   account: res.data.relationships.account.data.id,
   counterparty: res.data.relationships.counterpartyAccount
 });

@@ -20,7 +20,8 @@ const paramsFromCustId = (custId, athleteId, podName) => ({
 
 const createAccount = (unit) => (custId, athleteId, podName) => {
   const params = paramsFromCustId(custId, athleteId, podName);
-  return unit.accounts.create(params);
+  return unit.accounts.create(params)
+  .catch(err => Promise.reject(`Failed to reach Unit API. Error: ${err.message}`));
 };
 
 module.exports = {

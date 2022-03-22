@@ -1,16 +1,16 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
 
-const getUnitAllTransactions = (unitAccountId) => {
-  return unit.getAllUnitTransaction(unitAccountId)
+const getUnitAllTransactions = (unitCustomerId) => {
+  return unit.getAllUnitTransaction(unitCustomerId)
     .catch(err => {
       throw new Error(`Failed to reach Unit. Reason: ${JSON.stringify(err)}`);
     });
 }
 
-const getUnitTransactions = (athleteId, unitAccountId) => tpc.getAthlete(athleteId).then(athlete => 
+const getUnitTransactions = (athleteId) => tpc.getAthlete(athleteId).then(athlete => 
     (athlete != null) ? 
-    getUnitAllTransactions(unitAccountId) : 
+    getUnitAllTransactions(athlete.unitLookup.custId) : 
       Promise.reject(`No athlete found with id ${athleteId}`)
   )
   

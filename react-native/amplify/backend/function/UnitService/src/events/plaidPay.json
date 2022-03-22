@@ -4,6 +4,7 @@
       "athleteId": "281b7b68-3f7b-4095-8f48-42e56f24fbc3",
       "plaidAccountId": "3MxzoVQQNzc8RK6gMEMKSWbNJ54MMntMWeLMk",
       "amount": 40,
+      "idempotencyKey": "4095-8f48-42e56f24fbc3",
       "description": "testing"
 
     }

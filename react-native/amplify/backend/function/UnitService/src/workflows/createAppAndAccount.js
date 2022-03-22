@@ -8,7 +8,7 @@ const tpc = require("../wrappers/tpc");
 Note : The app creates 3 accounts on setup
 
 *********************************************/
-const NO_OF_ACCOUNTS = 3;
+const availableName = ["SAVINGS", "SPENDING","INVESTMENTS"];
 
 const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
@@ -25,15 +25,10 @@ const createAppAndAccount = (ssn, athlete) => {
 
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
     .then(res => Promise.all(
-      map(
-        fn => fn(athlete.id), 
-        repeat(
-          createAndPersistAccount,
-          NO_OF_ACCOUNTS
-        )
-      )
+      map(pod => createAndPersistAccount(athlete.id, pod), availableName)
     ));
 }
+
 
 const createAppAndAccountFromId = (ssn, athleteId) => tpc.getAthlete(athleteId).then(athlete => 
   (athlete != null) ? 

@@ -7,13 +7,14 @@ const APPLICATION_TYPE = "achPayment";
 const DIRECTION = "Credit";
 const TYPE = "depositAccount";
 
-const parseApplicationParams = (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType) => ({
+const parseApplicationParams = (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey) => ({
   type: APPLICATION_TYPE,
   attributes: {
     amount: amount,
     direction: DIRECTION,
     description: description,
     addenda: addenda,
+    idempotencyKey: idempotencyKey,
     counterparty:{
       name: receiverName,
       routingNumber: receiverRoutingNumber,
@@ -31,8 +32,8 @@ const parseApplicationParams = (unitAccountId, amount, addenda, description, rec
     }
 });
 
-const creditAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType) => {
-  const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType);
+const creditAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey) => {
+  const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey);
   return unit.payments.create(unitParams)
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));

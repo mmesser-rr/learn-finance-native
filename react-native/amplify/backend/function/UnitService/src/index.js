@@ -21,6 +21,10 @@ const {getAthleteUnitAccountById} = require("./workflows/getAthleteAccountById")
 const {getUnitTransactionById} = require("./workflows/getUnitTransactionById");
 const {getAllUnitTransaction} = require("./workflows/getAllUnitTransaction");
 const {listUnitBalanceHistory} = require("./workflows/listUnitBalanceHistory");
+const {createAtleteUnitToken} = require("./workflows/createAtleteUnitToken");
+const {unitAccountStatement} = require("./workflows/unitAccountStatement");
+const {athleteUnitTokenVerification} = require("./workflows/athleteUnitTokenVerification");
+
 const {unitWebhook} = require("./workflows/unitWebhook");
 
 const resolvers = Object.freeze({
@@ -31,11 +35,16 @@ const resolvers = Object.freeze({
   createPlaidPayment: (event) => plaidPayment(event),
   podSettings: (event) => podSettings(event),
   unitWebhookService: (event) => unitWebhook(event),
+
+  createAtleteUnitToken: (event) => createAtleteUnitToken(event),
+  unitAccountStatement: (event) => unitAccountStatement(event.arguments.athleteId),
+  athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event.arguments.athleteId), 
+
   getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.athleteId, event.arguments.unitTransactionId),
-  listAllUnitTransactions: (event) => getAllUnitTransaction(event.arguments.athleteId, event.arguments.unitAccountId ),
+  listAllUnitTransactions: (event) => getAllUnitTransaction(event.arguments.athleteId),
 
   listUnitBalanceHistory: (event) => listUnitBalanceHistory(event.arguments.athleteId),
-  listAthletUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
+  listAthleteUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
   getAthleteUnitAccountById: (event) => getAthleteUnitAccountById(event.arguments.athleteId, event.arguments.unitAccountId),
   openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
 });
