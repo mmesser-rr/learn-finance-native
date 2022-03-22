@@ -22,7 +22,9 @@ const PodSelectAccount: React.FC = () => {
     dispatch(bankingActions.getConnectedAccounts());
   }, []);
 
-  const {accounts} = useSelector((state: RootState) => state.bankingReducer);
+  const {plaidAccounts} = useSelector(
+    (state: RootState) => state.bankingReducer,
+  );
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
 
   const onContinue = (account: PlaidAccountDetail) => {
@@ -47,9 +49,9 @@ const PodSelectAccount: React.FC = () => {
         </Text>
       </View>
       <View>
-        {accounts &&
+        {plaidAccounts &&
           !isLoading &&
-          accounts.map(account => (
+          plaidAccounts.map(account => (
             <View style={styles.accountWrapper} key={account.account_id}>
               <TouchableOpacity
                 style={styles.account}

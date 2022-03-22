@@ -25,6 +25,7 @@ import TransferStack from './TransferStack';
 import LastStepWelcome from 'src/screens/LastStepWelcome';
 import UserLoginStack from './UserLoginStack';
 import UserBankingStack from './UserBankingStack';
+import Disclosures from 'src/screens/Disclosures';
 
 interface IProps {
   theme: Theme;
@@ -41,8 +42,7 @@ const App: React.FC<IProps> = (props: IProps) => {
         initialRouteName="Welcome"
         screenOptions={{
           headerShown: false,
-        }}
-      >
+        }}>
         <RootStack.Screen name="Welcome" component={Welcome} />
         <RootStack.Screen
           name="SignUp"
@@ -50,6 +50,7 @@ const App: React.FC<IProps> = (props: IProps) => {
           initialParams={{step: SignUpSteps[0]}}
         />
         <RootStack.Screen name="Terms" component={Terms} />
+        <RootStack.Screen name="Disclosures" component={Disclosures} />
         <RootStack.Screen name="SelectLevel" component={SelectLevel} />
         <RootStack.Screen name="SelectSport" component={SelectSport} />
         <RootStack.Screen name="SelectTeam" component={SelectTeam} />
@@ -75,7 +76,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen name="HomeStack" component={HomeStack} />
         <RootStack.Screen name="TransferStack" component={TransferStack} />
         <RootStack.Screen name="UserLoginStack" component={UserLoginStack} />
-        <RootStack.Screen name="UserBankingStack" component={UserBankingStack} />
+        <RootStack.Screen
+          name="UserBankingStack"
+          component={UserBankingStack}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );

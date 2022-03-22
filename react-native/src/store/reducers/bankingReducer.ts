@@ -42,7 +42,7 @@ export const bankingReducer = createReducer(initialState, {
     return {...state, recentTransactions: action.transactions};
   },
   [PLAID_ACCOUNTS_LOADED](state: IBankingState, action: IPlaidAccountsLoaded) {
-    return {...state, accounts: action.accounts};
+    return {...state, plaidAccounts: action.accounts};
   },
   [PLAID_ACCOUNT_SELECTED](state: IBankingState, action: IAccountSelected) {
     return {...state, selectedAccount: action.account};
