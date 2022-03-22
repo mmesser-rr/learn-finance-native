@@ -5,7 +5,6 @@ import {scale} from 'src/config/dimentions';
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    marginBottom: scale(24),
   },
   inputContainer: {
     position: 'relative',
@@ -33,19 +32,9 @@ const styles = StyleSheet.create({
     left: scale(16),
     zIndex: 10,
   },
-  helperContainer: {
-    marginTop: scale(4),
-    flexDirection: 'row',
-  },
-  helperIcon: {
+  error: {
     marginLeft: scale(16),
-    marginRight: scale(8),
     marginTop: scale(4),
-  },
-  helperText: {
-    fontSize: scale(14),
-    color: AppColors.accentRed100,
-    flex: 1,
   },
   label: {
     color: AppColors.coreBlack40,

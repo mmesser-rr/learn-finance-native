@@ -17,7 +17,6 @@ const Verification: React.FC<SignUpProps> = ({
   navigation,
 }: SignUpProps) => {
   const [stepCount, setStepCount] = useState(-1);
-  const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const stepName = route.params.step;
 
@@ -34,10 +33,6 @@ const Verification: React.FC<SignUpProps> = ({
     }
   };
 
-  const updatePhone = (phoneNumber: string) => {
-    setPhone(phoneNumber);
-  };
-
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       {stepCount === 0 && (
@@ -47,7 +42,7 @@ const Verification: React.FC<SignUpProps> = ({
         />
       )}
       {stepCount === 1 && (
-        <PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />
+        <PhoneCapture goToNextStep={goToNextStep} />
       )}
       {stepCount === 2 && <PhoneCodeVerify goToNextStep={goToNextStep} />}
       {stepCount === 3 && <NameCapture goToNextStep={goToNextStep} />}
