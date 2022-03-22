@@ -10,6 +10,7 @@ import {scale} from 'src/config/dimentions';
 import {Text} from '../Texts';
 
 import styles from './styles';
+import Alert from '../Alert';
 
 interface TextInputMaskProps {
   label: string;
@@ -100,12 +101,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
         </View>
       </View>
       {!!error && (
-        <View style={styles.helperContainer}>
-          <ExclamationIcon style={styles.helperIcon} />
-          <Text type="Body/Medium" style={styles.helperText}>
-            {error}
-          </Text>
-        </View>
+        <Alert style={styles.error}>{error}</Alert>
       )}
     </View>
   );
