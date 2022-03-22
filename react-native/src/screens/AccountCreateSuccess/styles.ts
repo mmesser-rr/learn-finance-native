@@ -20,12 +20,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: scale(78),
   },
+  secondCaption: {
+    marginBottom: scale(16),
+  },
   actionWrapper: {
     width: '100%',
   },
   iconWrapper: {
     height: scale(62),
     justifyContent: 'center',
+  },
+  link: {
+    color: AppColors.interactionBlue,
   },
 });
 

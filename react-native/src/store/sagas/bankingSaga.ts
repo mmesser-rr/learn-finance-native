@@ -20,7 +20,6 @@ import {
 import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
 import {
-  listAthleteAccounts,
   listAthletUnitAccounts,
   listPlaidAccounts,
   listRecentTransactions,
@@ -28,11 +27,8 @@ import {
 } from 'src/graphql/queries';
 import {GraphQLResult} from '@aws-amplify/api';
 import {
-  AthleteAccount,
   CreatePlaidPaymentMutation,
   CreatePlaidPaymentMutationVariables,
-  ListAthleteAccountsQuery,
-  ListAthleteAccountsQueryVariables,
   ListAthletUnitAccountsQuery,
   ListAthletUnitAccountsQueryVariables,
   ListPlaidAccountsQuery,

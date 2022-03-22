@@ -1,21 +1,18 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 
-import {TermsProps} from 'src/types/routerTypes';
+import {DisclosuresProps} from 'src/types/routerTypes';
 import CloseIcon from 'src/assets/icons/close.svg';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
-import {SignUpSteps} from 'src/utils/constants';
 
 import styles from './styles';
 
-const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
+const Disclosures: React.FC<DisclosuresProps> = ({
+  navigation,
+}: DisclosuresProps) => {
   const onClose = () => {
-    if (route.params.fromScreen === 'EmailCapture') {
-      navigation.navigate('SignUp', {step: SignUpSteps[4]});
-    } else {
-      navigation.goBack();
-    }
+    navigation.goBack();
   };
 
   return (
@@ -24,7 +21,7 @@ const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
         <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
           <CloseIcon />
         </TouchableOpacity>
-        <Text type="Title/Large">Terms and Conditions</Text>
+        <Text type="Title/Large">Disclosures</Text>
       </View>
       <View>
         <View>
@@ -81,4 +78,4 @@ const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
   );
 };
 
-export default Terms;
+export default Disclosures;
