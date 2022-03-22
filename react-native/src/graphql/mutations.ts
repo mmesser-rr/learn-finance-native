@@ -114,6 +114,8 @@ export const openAppAndAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -176,6 +178,8 @@ export const openAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -208,6 +212,9 @@ export const unitWebhookService = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -282,6 +289,8 @@ export const podSettings = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -312,18 +321,16 @@ export const updatePlaidLink = /* GraphQL */ `
     }
   }
 `;
-export const createPlaidPayment = /* GraphQL */ `
-  mutation CreatePlaidPayment(
+export const createAtleteUnitToken = /* GraphQL */ `
+  mutation CreateAtleteUnitToken(
     $athleteId: ID!
-    $plaidAccountId: String!
-    $amount: Float!
-    $description: String
+    $verificationToken: String!
+    $verificationCode: String!
   ) {
-    createPlaidPayment(
+    createAtleteUnitToken(
       athleteId: $athleteId
-      plaidAccountId: $plaidAccountId
-      amount: $amount
-      description: $description
+      verificationToken: $verificationToken
+      verificationCode: $verificationCode
     ) {
       type
       id
@@ -346,6 +353,95 @@ export const createPlaidPayment = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
+        hold
+        available
+        tags {
+          podName
+          athleteId
+        }
+      }
+    }
+  }
+`;
+export const athleteUnitTokenVerification = /* GraphQL */ `
+  mutation AthleteUnitTokenVerification($athleteId: ID!) {
+    athleteUnitTokenVerification(athleteId: $athleteId) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        date
+        routingNumber
+        accountNumber
+        currency
+        verificationToken
+        token
+        expiresIn
+        hold
+        available
+        tags {
+          podName
+          athleteId
+        }
+      }
+    }
+  }
+`;
+export const createPlaidPayment = /* GraphQL */ `
+  mutation CreatePlaidPayment(
+    $athleteId: ID!
+    $plaidAccountId: String!
+    $amount: Float!
+    $description: String
+    $idempotencyKey: String!
+  ) {
+    createPlaidPayment(
+      athleteId: $athleteId
+      plaidAccountId: $plaidAccountId
+      amount: $amount
+      description: $description
+      idempotencyKey: $idempotencyKey
+    ) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        date
+        routingNumber
+        accountNumber
+        currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -364,6 +460,7 @@ export const bookPayment = /* GraphQL */ `
     $description: String
     $receiverUnitAccountId: String!
     $receiverAccountType: String
+    $idempotencyKey: String!
   ) {
     bookPayment(
       athleteId: $athleteId
@@ -372,6 +469,7 @@ export const bookPayment = /* GraphQL */ `
       description: $description
       receiverUnitAccountId: $receiverUnitAccountId
       receiverAccountType: $receiverAccountType
+      idempotencyKey: $idempotencyKey
     ) {
       type
       id
@@ -394,6 +492,9 @@ export const bookPayment = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -414,6 +515,7 @@ export const debitAccount = /* GraphQL */ `
     $receiverAccountNumber: String!
     $receiverAccountType: String
     $addenda: String
+    $idempotencyKey: String!
   ) {
     debitAccount(
       athleteId: $athleteId
@@ -424,6 +526,7 @@ export const debitAccount = /* GraphQL */ `
       receiverAccountNumber: $receiverAccountNumber
       receiverAccountType: $receiverAccountType
       addenda: $addenda
+      idempotencyKey: $idempotencyKey
     ) {
       type
       id
@@ -446,6 +549,9 @@ export const debitAccount = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -466,6 +572,7 @@ export const creditAccount = /* GraphQL */ `
     $receiverAccountNumber: String!
     $receiverAccountType: String
     $addenda: String
+    $idempotencyKey: String!
   ) {
     creditAccount(
       athleteId: $athleteId
@@ -476,6 +583,7 @@ export const creditAccount = /* GraphQL */ `
       receiverAccountNumber: $receiverAccountNumber
       receiverAccountType: $receiverAccountType
       addenda: $addenda
+      idempotencyKey: $idempotencyKey
     ) {
       type
       id
@@ -498,6 +606,9 @@ export const creditAccount = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -543,6 +654,8 @@ export const createAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -608,6 +721,8 @@ export const updateAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -673,6 +788,8 @@ export const deleteAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -760,6 +877,8 @@ export const createAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -825,6 +944,8 @@ export const updateAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -890,6 +1011,8 @@ export const deleteAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt

@@ -42,6 +42,8 @@ export type AthleteAccount = {
   unitAccountId: string,
   routingCode: string,
   accountNumber: string,
+  token?: string | null,
+  expiresIn?: number | null,
   podName: string,
   id: string,
   createdAt: string,
@@ -149,6 +151,9 @@ export type Attributes = {
   routingNumber?: string | null,
   accountNumber?: string | null,
   currency?: string | null,
+  verificationToken?: string | null,
+  token?: string | null,
+  expiresIn?: number | null,
   hold?: number | null,
   available?: number | null,
   tags?: Tags | null,
@@ -329,6 +334,8 @@ export type CreateAthleteAccountInput = {
   unitAccountId: string,
   routingCode: string,
   accountNumber: string,
+  token?: string | null,
+  expiresIn?: number | null,
   podName: string,
   id?: string | null,
   athleteAccountsId?: string | null,
@@ -338,11 +345,25 @@ export type ModelAthleteAccountConditionInput = {
   unitAccountId?: ModelStringInput | null,
   routingCode?: ModelStringInput | null,
   accountNumber?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  expiresIn?: ModelIntInput | null,
   podName?: ModelStringInput | null,
   and?: Array< ModelAthleteAccountConditionInput | null > | null,
   or?: Array< ModelAthleteAccountConditionInput | null > | null,
   not?: ModelAthleteAccountConditionInput | null,
   athleteAccountsId?: ModelIDInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type ModelIDInput = {
@@ -365,6 +386,8 @@ export type UpdateAthleteAccountInput = {
   unitAccountId?: string | null,
   routingCode?: string | null,
   accountNumber?: string | null,
+  token?: string | null,
+  expiresIn?: number | null,
   podName?: string | null,
   id: string,
   athleteAccountsId?: string | null,
@@ -560,6 +583,8 @@ export type ModelAthleteAccountFilterInput = {
   unitAccountId?: ModelStringInput | null,
   routingCode?: ModelStringInput | null,
   accountNumber?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  expiresIn?: ModelIntInput | null,
   podName?: ModelStringInput | null,
   and?: Array< ModelAthleteAccountFilterInput | null > | null,
   or?: Array< ModelAthleteAccountFilterInput | null > | null,
@@ -801,6 +826,8 @@ export type OpenAppAndAccountMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -875,6 +902,8 @@ export type OpenAccountMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -913,6 +942,9 @@ export type UnitWebhookServiceMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -993,6 +1025,8 @@ export type PodSettingsMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -1032,11 +1066,102 @@ export type UpdatePlaidLinkMutation = {
   } | null,
 };
 
+export type CreateAtleteUnitTokenMutationVariables = {
+  athleteId: string,
+  verificationToken: string,
+  verificationCode: string,
+};
+
+export type CreateAtleteUnitTokenMutation = {
+  createAtleteUnitToken?:  {
+    __typename?: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename?: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      counterparty?:  {
+        __typename?: "Counterparty",
+        name?: string | null,
+        routingNumber?: string | null,
+        accountNumber?: string | null,
+        accountType?: string | null,
+      } | null,
+      name?: string | null,
+      status?: string | null,
+      date?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
+      hold?: number | null,
+      available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
+    } | null,
+  } | null,
+};
+
+export type AthleteUnitTokenVerificationMutationVariables = {
+  athleteId: string,
+};
+
+export type AthleteUnitTokenVerificationMutation = {
+  athleteUnitTokenVerification?:  {
+    __typename?: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename?: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      counterparty?:  {
+        __typename?: "Counterparty",
+        name?: string | null,
+        routingNumber?: string | null,
+        accountNumber?: string | null,
+        accountType?: string | null,
+      } | null,
+      name?: string | null,
+      status?: string | null,
+      date?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
+      hold?: number | null,
+      available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
+    } | null,
+  } | null,
+};
+
 export type CreatePlaidPaymentMutationVariables = {
   athleteId: string,
   plaidAccountId: string,
   amount: number,
   description?: string | null,
+  idempotencyKey: string,
 };
 
 export type CreatePlaidPaymentMutation = {
@@ -1065,6 +1190,9 @@ export type CreatePlaidPaymentMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -1083,6 +1211,7 @@ export type BookPaymentMutationVariables = {
   description?: string | null,
   receiverUnitAccountId: string,
   receiverAccountType?: string | null,
+  idempotencyKey: string,
 };
 
 export type BookPaymentMutation = {
@@ -1111,6 +1240,9 @@ export type BookPaymentMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -1131,6 +1263,7 @@ export type DebitAccountMutationVariables = {
   receiverAccountNumber: string,
   receiverAccountType?: string | null,
   addenda?: string | null,
+  idempotencyKey: string,
 };
 
 export type DebitAccountMutation = {
@@ -1159,6 +1292,9 @@ export type DebitAccountMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -1179,6 +1315,7 @@ export type CreditAccountMutationVariables = {
   receiverAccountNumber: string,
   receiverAccountType?: string | null,
   addenda?: string | null,
+  idempotencyKey: string,
 };
 
 export type CreditAccountMutation = {
@@ -1207,6 +1344,9 @@ export type CreditAccountMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -1260,6 +1400,8 @@ export type CreateAthleteMutation = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -1335,6 +1477,8 @@ export type UpdateAthleteMutation = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -1410,6 +1554,8 @@ export type DeleteAthleteMutation = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -1510,6 +1656,8 @@ export type CreateAthleteAccountMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -1585,6 +1733,8 @@ export type UpdateAthleteAccountMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -1660,6 +1810,8 @@ export type DeleteAthleteAccountMutation = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -1914,12 +2066,12 @@ export type ListPlaidAccountsQuery = {
   } | null > | null,
 };
 
-export type ListAthletUnitAccountsQueryVariables = {
+export type ListAthleteUnitAccountsQueryVariables = {
   athleteId: string,
 };
 
-export type ListAthletUnitAccountsQuery = {
-  listAthletUnitAccounts?:  Array< {
+export type ListAthleteUnitAccountsQuery = {
+  listAthleteUnitAccounts?:  Array< {
     __typename?: "UnitAccount",
     type?: string | null,
     id?: string | null,
@@ -1944,6 +2096,9 @@ export type ListAthletUnitAccountsQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -1986,6 +2141,9 @@ export type GetAthleteUnitAccountByIdQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -2028,6 +2186,9 @@ export type GetUnitTransactionByIdQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -2069,6 +2230,9 @@ export type ListAllUnitTransactionsQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -2110,6 +2274,53 @@ export type ListUnitBalanceHistoryQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
+      hold?: number | null,
+      available?: number | null,
+      tags?:  {
+        __typename?: "Tags",
+        podName?: string | null,
+        athleteId?: string | null,
+      } | null,
+    } | null,
+  } | null > | null,
+};
+
+export type UnitAccountStatementQueryVariables = {
+  athleteId: string,
+};
+
+export type UnitAccountStatementQuery = {
+  unitAccountStatement?:  Array< {
+    __typename?: "UnitAccount",
+    type?: string | null,
+    id?: string | null,
+    attributes?:  {
+      __typename?: "Attributes",
+      createdAt?: string | null,
+      direction?: string | null,
+      amount?: number | null,
+      balance?: number | null,
+      summary?: string | null,
+      description?: string | null,
+      counterparty?:  {
+        __typename?: "Counterparty",
+        name?: string | null,
+        routingNumber?: string | null,
+        accountNumber?: string | null,
+        accountType?: string | null,
+      } | null,
+      name?: string | null,
+      status?: string | null,
+      date?: string | null,
+      routingNumber?: string | null,
+      accountNumber?: string | null,
+      currency?: string | null,
+      verificationToken?: string | null,
+      token?: string | null,
+      expiresIn?: number | null,
       hold?: number | null,
       available?: number | null,
       tags?:  {
@@ -2162,6 +2373,8 @@ export type GetAthleteQuery = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -2330,6 +2543,8 @@ export type GetAthleteAccountQuery = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -2368,6 +2583,8 @@ export type ListAthleteAccountsQuery = {
       unitAccountId: string,
       routingCode: string,
       accountNumber: string,
+      token?: string | null,
+      expiresIn?: number | null,
       podName: string,
       id: string,
       createdAt: string,
@@ -2591,6 +2808,8 @@ export type OnCreateAthleteSubscription = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -2661,6 +2880,8 @@ export type OnUpdateAthleteSubscription = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -2731,6 +2952,8 @@ export type OnDeleteAthleteSubscription = {
         unitAccountId: string,
         routingCode: string,
         accountNumber: string,
+        token?: string | null,
+        expiresIn?: number | null,
         podName: string,
         id: string,
         createdAt: string,
@@ -2826,6 +3049,8 @@ export type OnCreateAthleteAccountSubscription = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -2896,6 +3121,8 @@ export type OnUpdateAthleteAccountSubscription = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,
@@ -2966,6 +3193,8 @@ export type OnDeleteAthleteAccountSubscription = {
     unitAccountId: string,
     routingCode: string,
     accountNumber: string,
+    token?: string | null,
+    expiresIn?: number | null,
     podName: string,
     id: string,
     createdAt: string,

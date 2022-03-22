@@ -66,6 +66,14 @@ const Home: React.FC = () => {
   const hasMoneyInAccount = useSelector(
     (state: RootState) => (state.bankingReducer.totalBalance ?? 0) > 0,
   );
+  const hasSetUpPods = useSelector((state: RootState) => {
+    return (
+      state.userReducer.user &&
+      (state.userReducer.user.podSettings.SPENDING > 0 ||
+        state.userReducer.user.podSettings.INVESTMENTS > 0 ||
+        state.userReducer.user.podSettings.SAVINGS > 0)
+    );
+  });
   const {user} = useSelector((state: RootState) => state.userReducer);
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
@@ -94,15 +102,13 @@ const Home: React.FC = () => {
     if (user?.id && !user.plaidToken) {
       getPlaidLinkToken(user.id);
     }
+  }, [user]);
 
-    if (
-      (user?.podSettings?.SPENDING ?? 0) > 0 ||
-      (user?.podSettings?.INVESTMENTS ?? 0) > 0 ||
-      (user?.podSettings?.SAVINGS ?? 0) > 0
-    ) {
+  useEffect(() => {
+    if (hasSetUpPods) {
       dispatch(bankingActions.updateHomeStep(PODsSteps[2]));
     }
-  }, [user]);
+  }, [hasSetUpPods]);
 
   const getPlaidLinkToken = async (athleteId: string) => {
     const {data} = (await API.graphql(
@@ -278,7 +284,7 @@ const Home: React.FC = () => {
           </View>
         )}
       </View>
-      {step !== PODsSteps[2] && (
+      {!hasSetUpPods && (
         <Card active={step === PODsSteps[1]}>
           <View style={styles.cardHead}>
             <Text type="Headline/Small">Let's set up your pods</Text>
@@ -298,7 +304,7 @@ const Home: React.FC = () => {
           </View>
         </Card>
       )}
-      {step === PODsSteps[2] && (
+      {hasSetUpPods && (
         <View>
           <InfoCard
             IconSvg={SpendingIcon}
