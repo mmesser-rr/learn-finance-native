@@ -4,7 +4,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type RootStackParamList = {
   Welcome: undefined;
   SignUp: {step: string};
-  Terms: undefined;
+  Terms: {fromScreen: string};
+  Disclosures: {fromScreen: string};
   SelectLevel: undefined;
   SelectSport: {type: string};
   SelectTeam: {type: string};
@@ -27,6 +28,8 @@ export type RootStackParamList = {
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
 type SelectSportScreenRouteProp = RouteProp<RootStackParamList, 'SelectSport'>;
 type SelectTeamScreenRouteProp = RouteProp<RootStackParamList, 'SelectTeam'>;
+type TermsRouteProp = RouteProp<RootStackParamList, 'Terms'>;
+type DisclosuresRouteProp = RouteProp<RootStackParamList, 'Disclosures'>;
 
 type SignUpScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -46,6 +49,12 @@ type TermsScreenNavigationProp = StackNavigationProp<
 
 export type TermsProps = {
   navigation: TermsScreenNavigationProp;
+  route: TermsRouteProp;
+};
+
+export type DisclosuresProps = {
+  navigation: TermsScreenNavigationProp;
+  route: DisclosuresRouteProp;
 };
 
 // SelectSport

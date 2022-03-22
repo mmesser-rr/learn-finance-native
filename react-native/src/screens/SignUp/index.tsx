@@ -40,13 +40,16 @@ const Verification: React.FC<SignUpProps> = ({
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      {stepCount === 0 && <InvitationCode goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />}
+      {stepCount === 0 && (
+        <InvitationCode
+          goToNextStep={goToNextStep}
+          updateLoading={status => setLoading(status)}
+        />
+      )}
       {stepCount === 1 && (
         <PhoneCapture goToNextStep={goToNextStep} updatePhone={updatePhone} />
       )}
-      {stepCount === 2 && (
-        <PhoneCodeVerify phoneNumber={phone} goToNextStep={goToNextStep} />
-      )}
+      {stepCount === 2 && <PhoneCodeVerify goToNextStep={goToNextStep} />}
       {stepCount === 3 && <NameCapture goToNextStep={goToNextStep} />}
       {stepCount === 4 && <EmailCapture goToNextStep={goToNextStep} />}
       {loading && <Loading />}
