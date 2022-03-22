@@ -4,12 +4,15 @@ import {
   TextInput as RNTextInput,
   Animated,
   TextInputProps as RNTextInputProps,
+  TouchableOpacity,
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
 import {Text} from '../Texts';
 import {scale} from 'src/config/dimentions';
+import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
+import EyeIcon from 'src/assets/icons/eye.svg';
 
 import styles from './styles';
 
@@ -19,6 +22,7 @@ type TextInputProps = RNTextInputProps & {
   errorMessage?: string;
   showErrorMessage?: boolean;
   left?: ReactNode;
+  isSecure?: boolean;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
 };
@@ -32,11 +36,13 @@ const TextInput: React.FC<TextInputProps> = ({
   onChangeText,
   onBlur,
   left,
+  isSecure,
   ...rest
 }) => {
   const [text, setText] = React.useState(value || '');
   const [focused, setFocused] = useState(false);
   const [possibleErrorMessage, setPossibleErrorMessage] = useState(false);
+  const [securityState, setSecurityState] = useState(true);
   const translateYAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -121,12 +127,18 @@ const TextInput: React.FC<TextInputProps> = ({
             autoCapitalize="none"
             style={styles.input}
             selectionColor={AppColors.accentRed100}
+            secureTextEntry={isSecure && securityState}
             onChangeText={text => textChangeHandler(text)}
             onFocus={() => focusHandler()}
             onBlur={() => blurHandler()}
             onSelectionChange={() => setPossibleErrorMessage(false)}
             {...rest}
           />
+          {isSecure && (
+            <TouchableOpacity onPress={() => setSecurityState(!securityState)}>
+              {securityState ? <EyeSlashIcon /> : <EyeIcon />}
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       {isError && (
