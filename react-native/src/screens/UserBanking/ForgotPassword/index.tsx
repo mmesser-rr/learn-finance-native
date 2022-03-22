@@ -11,7 +11,7 @@ import TopNav from 'src/components/common/TopNav';
 
 import styles from './styles';
 
-const UserLogin: React.FC = () => {
+const ForgotPassword: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
 
   const checkValidation = (phone: string, value: string) => {
@@ -86,4 +86,4 @@ const UserLogin: React.FC = () => {
   );
 };
 
-export default UserLogin;
+export default ForgotPassword;
