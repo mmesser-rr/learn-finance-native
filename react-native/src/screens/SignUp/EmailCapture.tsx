@@ -26,7 +26,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
   };
 
   const onTerms = () => {
-    NavigationService.navigate('Terms');
+    NavigationService.navigate('Terms', {fromScreen: 'EmailCapture'});
   };
 
   const handleSignUp = () => {
