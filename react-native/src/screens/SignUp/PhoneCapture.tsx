@@ -13,12 +13,10 @@ import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
-  updatePhone: (phone: string) => void;
 }
 
 const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   goToNextStep,
-  updatePhone,
 }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
@@ -36,7 +34,6 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
       //     phoneNumber,
       //   }),
       // );
-      updatePhone(phoneNumber);
       dispatch(updateOnboarding({mobilePhone: phoneNumber}));
       goToNextStep();
     } catch (error) {
