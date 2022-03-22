@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
-import Button from 'src/components/common/Button';
-import {GradientButtonColors} from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import {calculateContentHeight} from 'src/utils/functions';
+import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
 
@@ -20,6 +19,10 @@ type FormData = {
 
 const VerifyEmailCode: React.FC = () => {
   const [safeviewHeight, SetSafeviewHeight] = useState(0);
+
+  const email = useSelector(
+    (state: RootState) => state.onboardingReducer.email,
+  );
 
   useEffect(() => {
     async function getContentHeight() {
@@ -56,7 +59,7 @@ const VerifyEmailCode: React.FC = () => {
         <View>
           <Text type="Body/Large" style={styles.caption}>
             Confirming your email address helps protect your personal info. We
-            sent a verification code to john.smith@mail.com.
+            sent a verification code to {email}.
           </Text>
         </View>
         <View>
@@ -98,15 +101,6 @@ const VerifyEmailCode: React.FC = () => {
           style={styles.submit}
           onSubmit={handleSubmit(onSubmit)}
         />
-        <LinearGradient
-          style={styles.laterActionGradient}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          colors={GradientButtonColors}>
-          <Button>
-            <Text type="Body/Large">Maybe Later</Text>
-          </Button>
-        </LinearGradient>
       </View>
     </AppLayout>
   );
