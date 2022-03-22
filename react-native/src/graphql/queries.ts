@@ -21,9 +21,9 @@ export const listPlaidAccounts = /* GraphQL */ `
     }
   }
 `;
-export const listAthletUnitAccounts = /* GraphQL */ `
-  query ListAthletUnitAccounts($athleteId: ID!) {
-    listAthletUnitAccounts(athleteId: $athleteId) {
+export const listAthleteUnitAccounts = /* GraphQL */ `
+  query ListAthleteUnitAccounts($athleteId: ID!) {
+    listAthleteUnitAccounts(athleteId: $athleteId) {
       type
       id
       attributes {
@@ -45,6 +45,9 @@ export const listAthletUnitAccounts = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -82,6 +85,9 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -119,6 +125,9 @@ export const getUnitTransactionById = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -153,6 +162,9 @@ export const listAllUnitTransactions = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -187,6 +199,46 @@ export const listUnitBalanceHistory = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        verificationToken
+        token
+        expiresIn
+        hold
+        available
+        tags {
+          podName
+          athleteId
+        }
+      }
+    }
+  }
+`;
+export const unitAccountStatement = /* GraphQL */ `
+  query UnitAccountStatement($athleteId: ID!) {
+    unitAccountStatement(athleteId: $athleteId) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        date
+        routingNumber
+        accountNumber
+        currency
+        verificationToken
+        token
+        expiresIn
         hold
         available
         tags {
@@ -229,6 +281,8 @@ export const getAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -372,6 +426,8 @@ export const getAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -406,6 +462,8 @@ export const listAthleteAccounts = /* GraphQL */ `
         unitAccountId
         routingCode
         accountNumber
+        token
+        expiresIn
         podName
         id
         createdAt

@@ -22,6 +22,7 @@ import {
 } from 'src/models/actions/banking';
 import {IBankingState} from 'src/models/reducers/banking';
 import {PODsSteps} from 'src/utils/constants';
+import {UnitAccount} from 'src/types/API';
 
 const initialState: IBankingState = {
   step: PODsSteps[0],
@@ -85,6 +86,57 @@ export const bankingReducer = createReducer(initialState, {
     state: IBankingState,
     action: IBalanceHistoryLoaded,
   ) {
-    return {...state, balanceHistory: action.entries};
+    // const entries = action.entries;
+    const entries: UnitAccount[] = [
+      {
+        id: 'fizz',
+        type: 'history entry',
+        attributes: {
+          balance: 0,
+          date: '2021-12-06',
+        },
+      },
+      {
+        id: 'buzz',
+        type: 'history entry',
+        attributes: {
+          balance: 0,
+          date: '2021-12-07',
+        },
+      },
+      {
+        id: 'bizz',
+        type: 'history entry',
+        attributes: {
+          balance: 100,
+          date: '2021-12-08',
+        },
+      },
+      {
+        id: 'bazz',
+        type: 'history entry',
+        attributes: {
+          balance: 90,
+          date: '2021-12-09',
+        },
+      },
+      {
+        id: 'bozz',
+        type: 'history entry',
+        attributes: {
+          balance: 115,
+          date: '2021-12-10',
+        },
+      },
+      {
+        id: 'fazz',
+        type: 'history entry',
+        attributes: {
+          balance: 120,
+          date: '2021-12-11',
+        },
+      },
+    ];
+    return {...state, balanceHistory: entries};
   },
 });

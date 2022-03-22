@@ -34,6 +34,8 @@ export const onCreateAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -96,6 +98,8 @@ export const onUpdateAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -158,6 +162,8 @@ export const onDeleteAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
+          token
+          expiresIn
           podName
           id
           createdAt
@@ -242,6 +248,8 @@ export const onCreateAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -304,6 +312,8 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt
@@ -366,6 +376,8 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
+      token
+      expiresIn
       podName
       id
       createdAt

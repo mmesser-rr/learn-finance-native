@@ -3,6 +3,7 @@
  */
 import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {API, graphqlOperation} from 'aws-amplify';
+import {format} from 'date-fns';
 
 import {
   createPlaidPayment,
@@ -20,7 +21,7 @@ import {
 import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
 import {
-  listAthletUnitAccounts,
+  listAthleteUnitAccounts,
   listPlaidAccounts,
   listRecentTransactions,
   listUnitBalanceHistory,
@@ -29,8 +30,8 @@ import {GraphQLResult} from '@aws-amplify/api';
 import {
   CreatePlaidPaymentMutation,
   CreatePlaidPaymentMutationVariables,
-  ListAthletUnitAccountsQuery,
-  ListAthletUnitAccountsQueryVariables,
+  ListAthleteUnitAccountsQuery,
+  ListAthleteUnitAccountsQueryVariables,
   ListPlaidAccountsQuery,
   ListPlaidAccountsQueryVariables,
   ListRecentTransactionsQuery,
@@ -195,11 +196,19 @@ export function* createDeposit() {
     console.log('Attempting to create a deposit');
     const amountInCents = +transferAmount * 100;
 
+    // idempotency key that will prevent duplicate transactions
+    // in case the user accidentally submits the same deposit quantity within the same minute
+    const timeStamp = format(new Date(), 'yyyy-MM-dd-HH:mm');
+    const idempotencyKey =
+      amountInCents + '_' + athleteId.substring(0, 13) + '_' + timeStamp;
+    console.log('Deposit has idempotency key:', idempotencyKey);
+
     const mutationInput: CreatePlaidPaymentMutationVariables = {
       athleteId: athleteId,
       plaidAccountId: accountId,
       amount: amountInCents,
       description: 'One time deposit',
+      idempotencyKey: idempotencyKey,
     };
 
     const response = (yield call(
@@ -229,16 +238,16 @@ export function* getAthleteAccounts() {
 
     console.log('Attempting to get accounts for user:', athleteId);
 
-    const queryFilter: ListAthletUnitAccountsQueryVariables = {
+    const queryFilter: ListAthleteUnitAccountsQueryVariables = {
       athleteId,
     };
 
     const response = (yield call(
       [API, 'graphql'],
-      graphqlOperation(listAthletUnitAccounts, queryFilter),
-    )) as GraphQLResult<ListAthletUnitAccountsQuery>;
+      graphqlOperation(listAthleteUnitAccounts, queryFilter),
+    )) as GraphQLResult<ListAthleteUnitAccountsQuery>;
 
-    const accounts = response.data?.listAthletUnitAccounts as UnitAccount[];
+    const accounts = response.data?.listAthleteUnitAccounts as UnitAccount[];
     yield put(bankingActions.athleteAccountsLoaded(accounts));
 
     yield put(loadingActions.disableLoader());
