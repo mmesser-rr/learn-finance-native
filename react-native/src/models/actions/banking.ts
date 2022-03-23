@@ -69,3 +69,8 @@ export interface ISetUnitVerificationCodeValidity {
   type: String;
   valid?: boolean;
 }
+
+export interface ISetUnitTokenExpiration {
+  type: String;
+  expiration: number;
+}

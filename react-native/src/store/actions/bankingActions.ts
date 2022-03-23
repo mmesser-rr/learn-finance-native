@@ -160,3 +160,12 @@ export function setUnitVerificationCodeValidity(
     valid,
   };
 }
+
+export function setUnitTokenExpiration(
+  expiration: number,
+): returnTypes.ISetUnitTokenExpiration {
+  return {
+    type: types.SET_UNIT_TOKEN_EXPIRATION,
+    expiration,
+  };
+}

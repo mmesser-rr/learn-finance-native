@@ -7,6 +7,7 @@ import {
   PLAID_ACCOUNT_SELECTED,
   POD_SETTINGS_UPDATED,
   RECENT_TRANSACTIONS_LOADED,
+  SET_UNIT_TOKEN_EXPIRATION,
   SET_UNIT_VERIFICATION_CODE_VALIDITY,
   TRANSFER_AMOUNT_ENTERED,
   UNIT_VERIFICATION_TOKEN_LOADED,
@@ -19,6 +20,7 @@ import {
   IPlaidAccountsLoaded,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
+  ISetUnitTokenExpiration,
   ISetUnitVerificationCodeValidity,
   ITransferAmountEntered,
   IUnitVerificationCodeLoaded,
@@ -154,5 +156,11 @@ export const bankingReducer = createReducer(initialState, {
     action: ISetUnitVerificationCodeValidity,
   ) {
     return {...state, unitVerificationCodeValid: action.valid};
+  },
+  [SET_UNIT_TOKEN_EXPIRATION](
+    state: IBankingState,
+    action: ISetUnitTokenExpiration,
+  ) {
+    return {...state, unitTokenExpiration: action.expiration};
   },
 });

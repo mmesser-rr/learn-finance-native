@@ -18,4 +18,5 @@ export interface IBankingState {
   balanceHistory?: UnitAccount[];
   unitVerificationToken?: string;
   unitVerificationCodeValid?: boolean;
+  unitTokenExpiration?: number;
 }
