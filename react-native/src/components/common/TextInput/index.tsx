@@ -23,6 +23,7 @@ type TextInputProps = RNTextInputProps & {
   showErrorMessage?: boolean;
   left?: ReactNode;
   isSecure?: boolean;
+  editable?: boolean;
   onChangeText: (text: string) => void;
   onBlur?: () => void;
 };
@@ -37,6 +38,7 @@ const TextInput: React.FC<TextInputProps> = ({
   onBlur,
   left,
   isSecure,
+  editable = true,
   ...rest
 }) => {
   const [text, setText] = React.useState(value || '');
@@ -132,6 +134,7 @@ const TextInput: React.FC<TextInputProps> = ({
             onFocus={() => focusHandler()}
             onBlur={() => blurHandler()}
             onSelectionChange={() => setPossibleErrorMessage(false)}
+            editable={editable}
             {...rest}
           />
           {isSecure && (

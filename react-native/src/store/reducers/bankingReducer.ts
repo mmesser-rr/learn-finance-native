@@ -7,7 +7,10 @@ import {
   PLAID_ACCOUNT_SELECTED,
   POD_SETTINGS_UPDATED,
   RECENT_TRANSACTIONS_LOADED,
+  SET_UNIT_TOKEN_EXPIRATION,
+  SET_UNIT_VERIFICATION_CODE_VALIDITY,
   TRANSFER_AMOUNT_ENTERED,
+  UNIT_VERIFICATION_TOKEN_LOADED,
   UPDATE_HOME_STEP,
 } from '../actions/types';
 import {
@@ -17,7 +20,10 @@ import {
   IPlaidAccountsLoaded,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
+  ISetUnitTokenExpiration,
+  ISetUnitVerificationCodeValidity,
   ITransferAmountEntered,
+  IUnitVerificationCodeLoaded,
   IUpdateHomeStepAction,
 } from 'src/models/actions/banking';
 import {IBankingState} from 'src/models/reducers/banking';
@@ -138,5 +144,23 @@ export const bankingReducer = createReducer(initialState, {
       },
     ];
     return {...state, balanceHistory: entries};
+  },
+  [UNIT_VERIFICATION_TOKEN_LOADED](
+    state: IBankingState,
+    action: IUnitVerificationCodeLoaded,
+  ) {
+    return {...state, unitVerificationToken: action.verificationToken};
+  },
+  [SET_UNIT_VERIFICATION_CODE_VALIDITY](
+    state: IBankingState,
+    action: ISetUnitVerificationCodeValidity,
+  ) {
+    return {...state, unitVerificationCodeValid: action.valid};
+  },
+  [SET_UNIT_TOKEN_EXPIRATION](
+    state: IBankingState,
+    action: ISetUnitTokenExpiration,
+  ) {
+    return {...state, unitTokenExpiration: action.expiration};
   },
 });
