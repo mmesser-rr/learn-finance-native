@@ -9,6 +9,7 @@ import SetupPods from 'src/screens/Transfer/SetupPods';
 import PodSetupSuccess from 'src/screens/Transfer/PodSetupSuccess';
 import DepositResult from 'src/screens/Transfer/DepositResult';
 import PodSelectAccount from 'src/screens/Transfer/PodSelectAccount';
+import DepositUnitAuthVerify from 'src/screens/Transfer/DepositUnitAuthVerify';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,10 @@ const TransferStack: React.FC = () => {
       <Stack.Screen name="PodSelectAccount" component={PodSelectAccount} />
       <Stack.Screen name="TransferAmount" component={TransferAmount} />
       <Stack.Screen name="TransferReview" component={TransferReview} />
+      <Stack.Screen
+        name="DepositUnitAuthVerify"
+        component={DepositUnitAuthVerify}
+      />
       <Stack.Screen name="DirectDeposit" component={DirectDeposit} />
       <Stack.Screen name="DepositProcessed" component={DepositProcessed} />
       <Stack.Screen name="PodsExplain" component={PodsExplain} />
