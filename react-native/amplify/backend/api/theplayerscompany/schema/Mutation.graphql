@@ -14,7 +14,7 @@ type Mutation {
   createPlaidLink(athleteId: ID!): PlaidToken @function(name: "PlaidService-${env}")
   updatePlaidLink(athleteId: ID!, accessToken: String!): PlaidToken @function(name: "PlaidService-${env}")
   
-  createAtleteUnitToken(athleteId: ID!, verificationToken: String!, verificationCode: String!): UnitAccount @function(name: "UnitService-${env}")
+  createAthleteUnitToken(athleteId: ID!, verificationToken: String!, verificationCode: String!): UnitAccount @function(name: "UnitService-${env}")
   athleteUnitTokenVerification(athleteId: ID!): UnitAccount @function(name: "UnitService-${env}")
   
   createPlaidPayment(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")

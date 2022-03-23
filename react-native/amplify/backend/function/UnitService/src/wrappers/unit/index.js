@@ -9,7 +9,7 @@ const { getAllAthleteAccounts } = require("./getAllAthleteAccounts");
 const {getAllUnitTransaction} = require("./getAllUnitTransaction");
 const {getUnitTransactionById} = require("./getUnitTransactionById");
 const {listUnitBalanceHistory} = require("./listUnitBalanceHistory");
-const {createAtleteUnitToken} = require("./createAtleteUnitToken");
+const {createAthleteUnitToken} = require("./createAthleteUnitToken");
 const {getAccountStatement} = require("./getAccountStatement");
 const {athleteTokenVerification} = require("./athleteTokenVerification");
 
@@ -18,7 +18,7 @@ const { unit } = require("../../env.js");
 module.exports = {
   createApplication: createApplication(unit),
   createAccount: createAccount(unit),
-  createAtleteUnitToken: createAtleteUnitToken(unit),
+  createAthleteUnitToken: createAthleteUnitToken(unit),
   getAccountStatement: getAccountStatement(unit),
   athleteTokenVerification: athleteTokenVerification(unit),
   debitAccount: debitAccount(unit),

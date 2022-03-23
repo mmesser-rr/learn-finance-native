@@ -21,7 +21,7 @@ const {getAthleteUnitAccountById} = require("./workflows/getAthleteAccountById")
 const {getUnitTransactionById} = require("./workflows/getUnitTransactionById");
 const {getAllUnitTransaction} = require("./workflows/getAllUnitTransaction");
 const {listUnitBalanceHistory} = require("./workflows/listUnitBalanceHistory");
-const {createAtleteUnitToken} = require("./workflows/createAtleteUnitToken");
+const {createAthleteUnitToken} = require("./workflows/createAthleteUnitToken");
 const {unitAccountStatement} = require("./workflows/unitAccountStatement");
 const {athleteUnitTokenVerification} = require("./workflows/athleteUnitTokenVerification");
 
@@ -36,7 +36,7 @@ const resolvers = Object.freeze({
   podSettings: (event) => podSettings(event),
   unitWebhookService: (event) => unitWebhook(event),
 
-  createAtleteUnitToken: (event) => createAtleteUnitToken(event),
+  createAthleteUnitToken: (event) => createAthleteUnitToken(event),
   unitAccountStatement: (event) => unitAccountStatement(event.arguments.athleteId),
   athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event.arguments.athleteId), 
 

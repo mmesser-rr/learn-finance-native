@@ -101,6 +101,29 @@
           ]
         }
       ]
+    },
+    "MailService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "UnitService",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ]
     }
   },
   "auth": {
