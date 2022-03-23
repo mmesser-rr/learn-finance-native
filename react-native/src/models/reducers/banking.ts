@@ -16,4 +16,7 @@ export interface IBankingState {
   investmentsAccount?: UnitAccount;
   savingsAccount?: UnitAccount;
   balanceHistory?: UnitAccount[];
+  unitVerificationToken?: string;
+  unitVerificationCodeValid?: boolean;
+  unitTokenExpiration?: number;
 }

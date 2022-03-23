@@ -11,4 +11,5 @@ export const ActionCreators = Object.assign(
   navigationActions,
   themeActions,
   bankingActions,
+  userActions,
 );

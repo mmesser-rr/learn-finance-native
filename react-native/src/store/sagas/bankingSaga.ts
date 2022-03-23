@@ -6,6 +6,8 @@ import {API, graphqlOperation} from 'aws-amplify';
 import {format} from 'date-fns';
 
 import {
+  athleteUnitTokenVerification,
+  createAthleteUnitToken,
   createPlaidPayment,
   podSettings,
   updateRecentTransaction,
@@ -17,6 +19,7 @@ import * as types from '../actions/types';
 import {
   IMarkRecentTransactionRead,
   IUpdatePodSettings,
+  IVerifyUnitChallengeCode,
 } from 'src/models/actions/banking';
 import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
@@ -28,6 +31,9 @@ import {
 } from 'src/graphql/queries';
 import {GraphQLResult} from '@aws-amplify/api';
 import {
+  AthleteUnitTokenVerificationMutation,
+  CreateAthleteUnitTokenMutation,
+  CreateAthleteUnitTokenMutationVariables,
   CreatePlaidPaymentMutation,
   CreatePlaidPaymentMutationVariables,
   ListAthleteUnitAccountsQuery,
@@ -224,6 +230,8 @@ export function* createDeposit() {
     console.log('Error attempting to create deposit:', error);
     yield put(loadingActions.disableLoader());
   }
+
+  yield put(bankingActions.setUnitVerificationCodeValidity(undefined));
 }
 
 export function* getAthleteAccounts() {
@@ -289,6 +297,92 @@ export function* getBalanceHistory() {
   }
 }
 
+export function* initiateUnitVerificationChallenge() {
+  console.log('initiating Banking phone challenge');
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('initiateBankingPhoneChallenge is for logged in users');
+    }
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(athleteUnitTokenVerification, {
+        athleteId,
+      }),
+    )) as GraphQLResult<AthleteUnitTokenVerificationMutation>;
+
+    const verificationToken =
+      response.data?.athleteUnitTokenVerification?.attributes
+        ?.verificationToken;
+    if (verificationToken) {
+      yield put(bankingActions.unitVerificationTokenLoaded(verificationToken!));
+    } else {
+      console.log('Unable to initialize token verification');
+    }
+  } catch (error) {
+    console.log('Error attempting to initiate phone challenge:', error);
+  }
+}
+
+export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+  const verificationToken = (yield select(
+    (state: RootState) => state.bankingReducer.unitVerificationToken,
+  )) as string | undefined;
+
+  try {
+    if (!athleteId || !verificationToken) {
+      throw new Error(
+        'Athlete ID, and Unit verification token are required to create Athlete Unit Token',
+      );
+    }
+
+    const mutationInput: CreateAthleteUnitTokenMutationVariables = {
+      athleteId: athleteId,
+      verificationToken: verificationToken,
+      verificationCode: code,
+    };
+
+    console.log('Create Athlete Unit Token input:', mutationInput);
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(createAthleteUnitToken, mutationInput),
+    )) as GraphQLResult<CreateAthleteUnitTokenMutation>;
+
+    console.log(
+      'Create Athlete Unit Token response:',
+      response.data?.createAthleteUnitToken,
+    );
+
+    const expiresIn =
+      response.data?.createAthleteUnitToken?.attributes?.expiresIn;
+    const isValid = !!expiresIn && expiresIn > 0;
+    yield put(bankingActions.setUnitVerificationCodeValidity(isValid));
+
+    yield put(loadingActions.disableLoader());
+
+    if (isValid) {
+      const expirationDate = Date.now() + expiresIn;
+      yield put(bankingActions.setUnitTokenExpiration(expirationDate));
+    }
+  } catch (error: any) {
+    console.log('Error attempting to create Athlete Unit Token:', error);
+    if (
+      error?.errors[0]?.message?.includes(
+        'Error: 400 - Verification check failed',
+      )
+    ) {
+      yield put(bankingActions.setUnitVerificationCodeValidity(false));
+    }
+    yield put(loadingActions.disableLoader());
+  }
+}
+
 export default function* bankingSaga() {
   yield takeLatest(types.UPDATE_POD_SETTINGS, updatePodSettings);
   yield takeLatest(types.GET_RECENT_TRANSACTIONS, getRecentTransactions);
@@ -300,4 +394,9 @@ export default function* bankingSaga() {
   yield takeLatest(types.CREATE_DEPOSIT, createDeposit);
   yield takeLatest(types.GET_ATHLETE_ACCOUNTS, getAthleteAccounts);
   yield takeLatest(types.GET_BALANCE_HISTORY, getBalanceHistory);
+  yield takeLatest(
+    types.INITIATE_UNIT_VERIFICATION,
+    initiateUnitVerificationChallenge,
+  );
+  yield takeLatest(types.VERIFY_UNIT_CHALLENGE_CODE, verifyUnitChallengeCode);
 }

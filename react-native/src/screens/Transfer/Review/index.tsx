@@ -19,12 +19,19 @@ import NavigationService from 'src/navigation/NavigationService';
 const TransferReview: React.FC = () => {
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
-  const {selectedAccount, transferAmount} = useSelector(
+  const {selectedAccount, transferAmount, unitTokenExpiration} = useSelector(
     (state: RootState) => state.bankingReducer,
   );
   const today = format(new Date(), 'MM/dd/yyyy');
 
-  const onDeposit = () => dispatch(bankingActions.createDeposit());
+  const onDeposit = () => {
+    if (!unitTokenExpiration || Date.now() > unitTokenExpiration) {
+      dispatch(bankingActions.initiateUnitVerificationChallenge());
+      NavigationService.navigate('DepositUnitAuthVerify');
+    } else {
+      dispatch(bankingActions.createDeposit());
+    }
+  };
   const goBack = () => NavigationService.goBack();
   const goToAccountSelection = () =>
     NavigationService.navigate('PodSelectAccount');
