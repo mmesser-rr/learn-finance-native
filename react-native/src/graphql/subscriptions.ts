@@ -10,6 +10,7 @@ export const onCreateAthlete = /* GraphQL */ `
       mobilePhone
       athleteTag
       email
+      tag
       level
       sport {
         name
@@ -34,8 +35,6 @@ export const onCreateAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
-          token
-          expiresIn
           podName
           id
           createdAt
@@ -54,6 +53,7 @@ export const onCreateAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
+      unitToken
       plaidProcessorToken {
         plaidAccountId
         processorToken
@@ -74,6 +74,7 @@ export const onUpdateAthlete = /* GraphQL */ `
       mobilePhone
       athleteTag
       email
+      tag
       level
       sport {
         name
@@ -98,8 +99,6 @@ export const onUpdateAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
-          token
-          expiresIn
           podName
           id
           createdAt
@@ -118,6 +117,7 @@ export const onUpdateAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
+      unitToken
       plaidProcessorToken {
         plaidAccountId
         processorToken
@@ -138,6 +138,7 @@ export const onDeleteAthlete = /* GraphQL */ `
       mobilePhone
       athleteTag
       email
+      tag
       level
       sport {
         name
@@ -162,8 +163,6 @@ export const onDeleteAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
-          token
-          expiresIn
           podName
           id
           createdAt
@@ -182,6 +181,7 @@ export const onDeleteAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
+      unitToken
       plaidProcessorToken {
         plaidAccountId
         processorToken
@@ -203,6 +203,7 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         mobilePhone
         athleteTag
         email
+        tag
         level
         sport {
           name
@@ -235,6 +236,7 @@ export const onCreateAthleteAccount = /* GraphQL */ `
           SPENDING
         }
         plaidToken
+        unitToken
         plaidProcessorToken {
           plaidAccountId
           processorToken
@@ -248,8 +250,6 @@ export const onCreateAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
-      token
-      expiresIn
       podName
       id
       createdAt
@@ -267,6 +267,7 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         mobilePhone
         athleteTag
         email
+        tag
         level
         sport {
           name
@@ -299,6 +300,7 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
           SPENDING
         }
         plaidToken
+        unitToken
         plaidProcessorToken {
           plaidAccountId
           processorToken
@@ -312,8 +314,6 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
-      token
-      expiresIn
       podName
       id
       createdAt
@@ -331,6 +331,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         mobilePhone
         athleteTag
         email
+        tag
         level
         sport {
           name
@@ -363,6 +364,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
           SPENDING
         }
         plaidToken
+        unitToken
         plaidProcessorToken {
           plaidAccountId
           processorToken
@@ -376,8 +378,6 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
-      token
-      expiresIn
       podName
       id
       createdAt

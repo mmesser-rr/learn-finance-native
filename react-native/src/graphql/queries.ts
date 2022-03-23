@@ -257,6 +257,7 @@ export const getAthlete = /* GraphQL */ `
       mobilePhone
       athleteTag
       email
+      tag
       level
       sport {
         name
@@ -281,8 +282,6 @@ export const getAthlete = /* GraphQL */ `
           unitAccountId
           routingCode
           accountNumber
-          token
-          expiresIn
           podName
           id
           createdAt
@@ -301,6 +300,7 @@ export const getAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
+      unitToken
       plaidProcessorToken {
         plaidAccountId
         processorToken
@@ -326,6 +326,7 @@ export const listAthletes = /* GraphQL */ `
         mobilePhone
         athleteTag
         email
+        tag
         level
         sport {
           name
@@ -358,6 +359,7 @@ export const listAthletes = /* GraphQL */ `
           SPENDING
         }
         plaidToken
+        unitToken
         plaidProcessorToken {
           plaidAccountId
           processorToken
@@ -381,6 +383,7 @@ export const getAthleteAccount = /* GraphQL */ `
         mobilePhone
         athleteTag
         email
+        tag
         level
         sport {
           name
@@ -413,6 +416,7 @@ export const getAthleteAccount = /* GraphQL */ `
           SPENDING
         }
         plaidToken
+        unitToken
         plaidProcessorToken {
           plaidAccountId
           processorToken
@@ -426,8 +430,6 @@ export const getAthleteAccount = /* GraphQL */ `
       unitAccountId
       routingCode
       accountNumber
-      token
-      expiresIn
       podName
       id
       createdAt
@@ -450,9 +452,11 @@ export const listAthleteAccounts = /* GraphQL */ `
           mobilePhone
           athleteTag
           email
+          tag
           level
           dateOfBirth
           plaidToken
+          unitToken
           wyreId
           isActive
           id
@@ -462,8 +466,6 @@ export const listAthleteAccounts = /* GraphQL */ `
         unitAccountId
         routingCode
         accountNumber
-        token
-        expiresIn
         podName
         id
         createdAt
