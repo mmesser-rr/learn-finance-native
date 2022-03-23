@@ -21,6 +21,7 @@ export type RootStackParamList = {
   HomeStack: undefined;
   TransferStack: undefined;
   LastStepWelcome: undefined;
+  WyreFullScreenNotification: undefined;
   UserLoginStack: undefined;
   UserBankingStack: undefined;
 };
