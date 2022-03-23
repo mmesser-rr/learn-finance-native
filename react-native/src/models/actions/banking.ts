@@ -1,5 +1,4 @@
 import {
-  AthleteAccount,
   PlaidAccountDetail,
   PodSettings,
   RecentTransaction,
@@ -18,10 +17,6 @@ export interface IUpdatePodSettings {
 export interface IPodSettingsUpdated {
   type: String;
   updated: boolean;
-}
-
-export interface ITypeOnlyAction {
-  type: String;
 }
 
 export interface IRecentTransactionsLoaded {
@@ -58,4 +53,19 @@ export interface IAthleteAccountsLoaded {
 export interface IBalanceHistoryLoaded {
   type: String;
   entries: UnitAccount[];
+}
+
+export interface IUnitVerificationCodeLoaded {
+  type: String;
+  verificationToken: string;
+}
+
+export interface IVerifyUnitChallengeCode {
+  type: String;
+  code: string;
+}
+
+export interface ISetUnitVerificationCodeValidity {
+  type: String;
+  valid?: boolean;
 }

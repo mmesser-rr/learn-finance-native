@@ -24,7 +24,10 @@ const TransferReview: React.FC = () => {
   );
   const today = format(new Date(), 'MM/dd/yyyy');
 
-  const onDeposit = () => dispatch(bankingActions.createDeposit());
+  const onDeposit = () => {
+    dispatch(bankingActions.initiateUnitVerificationChallenge());
+    NavigationService.navigate('DepositUnitAuthVerify');
+  };
   const goBack = () => NavigationService.goBack();
   const goToAccountSelection = () =>
     NavigationService.navigate('PodSelectAccount');
