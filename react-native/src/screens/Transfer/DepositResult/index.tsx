@@ -21,6 +21,7 @@ import {twoDecimalFormatter} from 'src/utils/functions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import {RootState} from 'src/store/root-state';
 import {RecentTransaction} from 'src/types/API';
+import {NoWyreStates} from 'src/config/data';
 
 const DepositResult: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const DepositResult: React.FC = () => {
   const [index, setIndex] = useState(0);
 
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const {user} = useSelector((state: RootState) => state.userReducer);
   const {recentTransactions} = useSelector(
     (state: RootState) => state.bankingReducer,
   );
@@ -99,7 +101,13 @@ const DepositResult: React.FC = () => {
     goToHome();
   };
 
-  const goToHome = () => NavigationService.navigate('HomeStack');
+  const goToHome = () => {
+    if (user && NoWyreStates.indexOf(user.address.state) === -1) {
+      NavigationService.navigate('WyreFullScreenNotification');
+    } else {
+      NavigationService.navigate('HomeStack');
+    }
+  };
 
   const markDepositRead = () => {
     dispatch(
