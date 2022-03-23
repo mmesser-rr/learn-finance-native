@@ -7,7 +7,7 @@ import {format} from 'date-fns';
 
 import {
   athleteUnitTokenVerification,
-  createAtleteUnitToken,
+  createAthleteUnitToken,
   createPlaidPayment,
   podSettings,
   updateRecentTransaction,
@@ -32,8 +32,8 @@ import {
 import {GraphQLResult} from '@aws-amplify/api';
 import {
   AthleteUnitTokenVerificationMutation,
-  CreateAtleteUnitTokenMutation,
-  CreateAtleteUnitTokenMutationVariables,
+  CreateAthleteUnitTokenMutation,
+  CreateAthleteUnitTokenMutationVariables,
   CreatePlaidPaymentMutation,
   CreatePlaidPaymentMutationVariables,
   ListAthleteUnitAccountsQuery,
@@ -50,10 +50,8 @@ import {
   UpdateRecentTransactionMutationVariables,
 } from 'src/types/API';
 import NavigationService from 'src/navigation/NavigationService';
-import {IUserState} from 'src/models/reducers/user';
 
 const getAthleteId = (state: RootState) => state.userReducer.user?.id;
-const getUserState = (state: RootState) => state.userReducer;
 
 export function* updatePodSettings({settings}: IUpdatePodSettings) {
   yield put(loadingActions.enableLoader());
@@ -232,6 +230,8 @@ export function* createDeposit() {
     console.log('Error attempting to create deposit:', error);
     yield put(loadingActions.disableLoader());
   }
+
+  yield put(bankingActions.setUnitVerificationCodeValidity(undefined));
 }
 
 export function* getAthleteAccounts() {
@@ -341,7 +341,7 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
       );
     }
 
-    const mutationInput: CreateAtleteUnitTokenMutationVariables = {
+    const mutationInput: CreateAthleteUnitTokenMutationVariables = {
       athleteId: athleteId,
       verificationToken: verificationToken,
       verificationCode: code,
@@ -351,18 +351,25 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
 
     const response = (yield call(
       [API, 'graphql'],
-      graphqlOperation(createAtleteUnitToken, mutationInput),
-    )) as GraphQLResult<CreateAtleteUnitTokenMutation>;
+      graphqlOperation(createAthleteUnitToken, mutationInput),
+    )) as GraphQLResult<CreateAthleteUnitTokenMutation>;
 
     console.log(
       'Create Athlete Unit Token response:',
-      response.data?.createAtleteUnitToken?.attributes,
+      response.data?.createAthleteUnitToken,
     );
 
-    const isValid = !!response.data?.createAtleteUnitToken?.attributes?.token;
+    const expiresIn =
+      response.data?.createAthleteUnitToken?.attributes?.expiresIn;
+    const isValid = !!expiresIn && expiresIn > 0;
     yield put(bankingActions.setUnitVerificationCodeValidity(isValid));
 
     yield put(loadingActions.disableLoader());
+
+    if (isValid) {
+      const expirationDate = Date.now() + expiresIn;
+      yield put(bankingActions.setUnitTokenExpiration(expirationDate));
+    }
   } catch (error: any) {
     console.log('Error attempting to create Athlete Unit Token:', error);
     if (
