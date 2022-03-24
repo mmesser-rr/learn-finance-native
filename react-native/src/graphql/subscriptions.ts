@@ -393,6 +393,7 @@ export const onCreateRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
@@ -414,6 +415,7 @@ export const onUpdateRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
@@ -435,6 +437,7 @@ export const onDeleteRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read

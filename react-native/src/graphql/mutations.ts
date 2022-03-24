@@ -213,7 +213,6 @@ export const unitWebhookService = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -354,7 +353,6 @@ export const createAthleteUnitToken = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -391,7 +389,6 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -440,7 +437,6 @@ export const createPlaidPayment = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -493,7 +489,6 @@ export const bookPayment = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -550,7 +545,6 @@ export const debitAccount = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -607,7 +601,6 @@ export const creditAccount = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -1031,6 +1024,7 @@ export const createRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
@@ -1055,6 +1049,7 @@ export const updateRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
@@ -1079,6 +1074,7 @@ export const deleteRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
