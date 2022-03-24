@@ -62,12 +62,12 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoad
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
-            Welcome to Players Co.
+            Welcome to BankDAO
           </Text>
         </View>
         <View>
           <Text type="Body/Large" style={styles.description}>
-            Enter your invitation code to get started.
+            Enter your invitation code to enter the club.
           </Text>
         </View>
         <View>
