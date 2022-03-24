@@ -10,9 +10,15 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
   },
-  dotMenu: {
+  topRow: {
     marginVertical: scale(12),
-    alignItems: 'flex-end',
+    // width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  dotMenu: {
+    alignSelf: 'flex-end',
   },
   title: {},
   subTitle: {
@@ -49,9 +55,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: AppColors.gray20,
   },
-  actionWrapper: {
-    flex: 1,
-  },
   submit: {
     marginTop: scale(-22),
   },
@@ -63,26 +66,6 @@ const styles = StyleSheet.create({
   },
   submittedLabel: {
     marginLeft: scale(4),
-  },
-  podItem: {
-    paddingVertical: scale(16),
-    paddingHorizontal: scale(13),
-    marginBottom: scale(16),
-    backgroundColor: AppColors.coreBlack90,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: scale(8),
-  },
-  podLabel: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  podLabelText: {
-    marginLeft: scale(8),
-  },
-  balanceLabel: {
-    marginBottom: scale(2),
   },
   switch: {
     flexDirection: 'row',
@@ -133,6 +116,9 @@ const styles = StyleSheet.create({
   moveMoneyButtonText: {
     color: AppColors.gray20,
     marginLeft: scale(5),
+  },
+  link: {
+    color: AppColors.interactionBlue,
   },
 });
 
