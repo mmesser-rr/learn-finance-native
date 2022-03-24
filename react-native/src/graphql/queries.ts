@@ -46,7 +46,6 @@ export const listAthleteUnitAccounts = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -86,7 +85,6 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -126,7 +124,6 @@ export const getUnitTransactionById = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -163,7 +160,6 @@ export const listAllUnitTransactions = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -200,7 +196,6 @@ export const listUnitBalanceHistory = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -237,7 +232,6 @@ export const unitAccountStatement = /* GraphQL */ `
         accountNumber
         currency
         verificationToken
-        token
         expiresIn
         hold
         available
@@ -483,6 +477,7 @@ export const getRecentTransaction = /* GraphQL */ `
       athleteId
       status
       amount
+      idempotencyKey
       direction
       createdAt
       read
@@ -513,6 +508,7 @@ export const listRecentTransactions = /* GraphQL */ `
         athleteId
         status
         amount
+        idempotencyKey
         direction
         createdAt
         read
