@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {API, graphqlOperation} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
 
+import styles from './styles';
 import AppLayout from 'src/components/layout/AppLayout';
 import Button from 'src/components/common/Button';
 import {Text} from 'src/components/common/Texts';
@@ -32,8 +33,7 @@ import Loading from 'src/components/common/Loading';
 import InfoCard from 'src/components/common/InfoCard';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
-
-import styles from './styles';
+import {NoWyreStates} from 'src/config/data';
 
 interface CardProps {
   style?: TextStyle;
@@ -75,6 +75,11 @@ const Home: React.FC = () => {
     );
   });
   const {user} = useSelector((state: RootState) => state.userReducer);
+  const wyreEligible = useSelector(
+    (state: RootState) =>
+      !!state.userReducer.user &&
+      NoWyreStates.indexOf(state.userReducer.user.address.state) === -1,
+  );
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -159,10 +164,19 @@ const Home: React.FC = () => {
     setModalVisible(true);
   };
 
+  const goToRewards = () => {};
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
-      <View style={styles.dotMenu}>
-        <TouchableOpacity onPress={() => onMenu()}>
+      <View style={styles.topRow}>
+        <View>
+          {hasMoneyInAccount && wyreEligible && (
+            <Text type="Body/Large" style={styles.link} onPress={goToRewards}>
+              New! Rewards Account
+            </Text>
+          )}
+        </View>
+        <TouchableOpacity onPress={() => onMenu()} style={styles.dotMenu}>
           <ThreeDotsIcon />
         </TouchableOpacity>
       </View>

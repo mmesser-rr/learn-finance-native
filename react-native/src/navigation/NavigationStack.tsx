@@ -26,6 +26,7 @@ import LastStepWelcome from 'src/screens/LastStepWelcome';
 import UserLoginStack from './UserLoginStack';
 import UserBankingStack from './UserBankingStack';
 import Disclosures from 'src/screens/Disclosures';
+import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotification';
 
 interface IProps {
   theme: Theme;
@@ -73,6 +74,10 @@ const App: React.FC<IProps> = (props: IProps) => {
         <RootStack.Screen name="SelectPlayerTag" component={SelectPlayerTag} />
         <RootStack.Screen name="VerifyEmailCode" component={VerifyEmailCode} />
         <RootStack.Screen name="LastStepWelcome" component={LastStepWelcome} />
+        <RootStack.Screen
+          name="WyreFullScreenNotification"
+          component={WyreFullScreenNotification}
+        />
         <RootStack.Screen name="HomeStack" component={HomeStack} />
         <RootStack.Screen name="TransferStack" component={TransferStack} />
         <RootStack.Screen name="UserLoginStack" component={UserLoginStack} />
