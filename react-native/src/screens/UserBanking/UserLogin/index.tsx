@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import { Auth } from 'aws-amplify';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -8,6 +9,7 @@ import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import Alert from 'src/components/common/Alert';
 import NavigationService from 'src/navigation/NavigationService';
+import Loading from 'src/components/common/Loading';
 
 import styles from './styles';
 
@@ -15,6 +17,9 @@ const UserLogin: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const [notFoundUser, setNotFoundUser] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const checkValidation = (phone: string, value: string) => {
     setIsValid(!!phone && !!value && phone.length === 10);
@@ -30,19 +35,43 @@ const UserLogin: React.FC = () => {
     checkValidation(phone, value);
   };
 
-  const handleContinue = () => {
-    NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
+  const handleContinue = async () => {
+    setLoading(true);
+    let isUserNotExist = false;
+    let msg = '';
+    try {
+      await Auth.signIn({
+        username: phone,
+        password,
+      });
+      setLoading(true);
+      NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
+    } catch (error: any) {
+      switch (error.message) {
+        case 'Username should be either an email or a phone number.':
+        case 'Password did not conform with policy: Password not long enough':
+        case 'User is not confirmed.':
+          msg = error.message;
+          break;
+        case 'Incorrect username or password.':
+          msg = 'The phone number and password do not match. Please try again.';
+          break;
+        case 'User does not exist.':
+          isUserNotExist = true;
+          break;
+        default:
+          msg = error.message;
+      }
+    }
+
+    setNotFoundUser(isUserNotExist);
+    setError(msg);
+    setLoading(false);
   };
 
   const goToForgotPassword = () => {
     NavigationService.navigate('UserLoginStack', {screen: 'ForgotPassword'});
   };
-
-  // TODO: if api returns register error, show register error
-  const isRegisterError = false;
-
-  // TODO: if api returns mismatch error, show mismatch error
-  const isMismatchError = false;
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -57,9 +86,9 @@ const UserLogin: React.FC = () => {
             Welcome back
           </Text>
         </View>
-        {isMismatchError && (
+        {!!error && (
           <View style={styles.misMatchAlert}>
-            <Alert>The phone number and password do not match. Please try again.</Alert>
+            <Alert>{error}</Alert>
           </View>
         )}
         <View style={styles.phoneNumber}>
@@ -75,7 +104,7 @@ const UserLogin: React.FC = () => {
               <Alert style={styles.phoneNumberAlert}>Phone numbers are always 10 digits long. Please check.</Alert>
             </View>
           )}
-          {isRegisterError && (
+          {notFoundUser && (
             <View>
               <Alert style={styles.phoneNumberAlert}>
                 This phone number hasn't been registered. Please{' '}
@@ -105,6 +134,7 @@ const UserLogin: React.FC = () => {
           onSubmit={handleContinue}
         />
       </View>
+      {loading && <Loading />}
     </AppLayout>
   );
 };

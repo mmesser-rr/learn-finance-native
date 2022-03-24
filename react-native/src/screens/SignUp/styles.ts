@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   head: {
-    marginBottom: scale(24),
+    marginBottom: scale(16),
   },
   description: {
-    marginBottom: scale(32),
+    marginBottom: scale(16),
   },
   askAction: {
     marginTop: scale(32),
@@ -46,6 +46,20 @@ const styles = StyleSheet.create({
   },
   firstName: {
     marginBottom: scale(16),
+  },
+  rulesWrapper: {
+    marginTop: scale(16)
+  },
+  rule: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  ruleLable: {
+    marginLeft: scale(8)
+  },
+  error: {
+    marginLeft: scale(16),
+    marginTop: scale(4),
   },
 });
 
