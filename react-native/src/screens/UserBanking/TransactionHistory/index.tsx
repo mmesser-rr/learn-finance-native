@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
+import styles from './styles';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import {twoDecimalFormatter} from 'src/utils/functions';
-
-import styles from './styles';
-import LinearGradient from 'react-native-linear-gradient';
-import { GradientButtonColors } from 'src/utils/constants';
+import {GradientButtonColors} from 'src/utils/constants';
 
 const histories = [
   {
@@ -19,7 +18,7 @@ const histories = [
     from: 'Spending',
     to: 'Investments',
     isPosted: true,
-    amount: 200
+    amount: 200,
   },
   {
     id: 2,
@@ -28,7 +27,7 @@ const histories = [
     from: 'Spending',
     to: 'Investments',
     isPosted: true,
-    amount: -200
+    amount: -200,
   },
   {
     id: 3,
@@ -37,7 +36,7 @@ const histories = [
     from: 'Spending',
     to: 'Savings',
     isPosted: true,
-    amount: 100
+    amount: 100,
   },
   {
     id: 4,
@@ -46,7 +45,7 @@ const histories = [
     from: 'Spending',
     to: 'Savings',
     isPosted: true,
-    amount: -100
+    amount: -100,
   },
   {
     id: 5,
@@ -55,45 +54,37 @@ const histories = [
     from: 'Plaid',
     to: 'Spending',
     isPosted: true,
-    amount: 500
-  }
+    amount: 500,
+  },
 ];
 
-const tabs = [
-  'All',
-  'Spending',
-  'Investments',
-  'Savings'
-];
+const tabs = ['All', 'Spending', 'Investments', 'Savings'];
 
 const TransactionHistory: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
+  const goBack = () => NavigationService.goBack();
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <TopNav
-          title="Transaction History"
-          goPreviousScreen={() => {}}
-        />
+        <TopNav title="Transaction History" goPreviousScreen={goBack} />
       </View>
       <View style={styles.tabs}>
         {tabs.map((tab, index) => (
-          <View style={styles.tab}>
+          <View style={styles.tab} key={index}>
             {tabIndex === index ? (
               <LinearGradient
                 style={styles.activeGradient}
                 colors={GradientButtonColors}
-                locations={[0, 0, 0.2388, 1]}
-              >
+                locations={[0, 0, 0.2388, 1]}>
                 <Text type="Body/Medium">{tab}</Text>
               </LinearGradient>
             ) : (
               <TouchableOpacity
                 key={`tab_${index}`}
                 style={styles.inactiveButton}
-                onPress={() => setTabIndex(index)}
-              >
+                onPress={() => setTabIndex(index)}>
                 <Text type="Title/Small">{tab}</Text>
               </TouchableOpacity>
             )}
@@ -102,7 +93,7 @@ const TransactionHistory: React.FC = () => {
       </View>
       <View>
         {histories.map(history => (
-          <View style={styles.history}>
+          <View style={styles.history} key={history.id}>
             <View style={styles.info}>
               <View style={styles.details}>
                 <View>
@@ -113,13 +104,16 @@ const TransactionHistory: React.FC = () => {
                     <Text type="Body/Large">{history.transfer}</Text>
                   </View>
                   <View>
-                    <Text type="Body/Large">from {history.from} to {history.to}</Text>
+                    <Text type="Body/Large">
+                      from {history.from} to {history.to}
+                    </Text>
                   </View>
                 </View>
               </View>
               <View>
                 <Text type="Body/Large">
-                  {history.amount > 0 ? '+' : '-'}${twoDecimalFormatter.format(Math.abs(history.amount))}
+                  {history.amount > 0 ? '+' : '-'}$
+                  {twoDecimalFormatter.format(Math.abs(history.amount))}
                 </Text>
               </View>
             </View>

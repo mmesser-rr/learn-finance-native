@@ -1,8 +1,11 @@
 import React from 'react';
 import {TextStyle, View, ViewStyle} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './styles';
 import {Text} from 'src/components/common/Texts';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {GradientButtonColors} from 'src/utils/constants';
 
 interface InfoCardProps {
   IconSvg: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
@@ -11,6 +14,7 @@ interface InfoCardProps {
   rightBottomText: string;
   rightBottomStyle?: TextStyle;
   cardStyle?: ViewStyle;
+  onPress?: () => void;
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({
@@ -20,9 +24,10 @@ const InfoCard: React.FC<InfoCardProps> = ({
   rightBottomText,
   rightBottomStyle,
   cardStyle,
+  onPress,
 }) => {
-  return (
-    <View style={[styles.container, cardStyle]}>
+  const renderCard = () => (
+    <View style={[styles.card]}>
       <View style={styles.cardLeft}>
         <IconSvg style={styles.icon} />
         <Text type="Body/Large" style={styles.label}>
@@ -37,6 +42,20 @@ const InfoCard: React.FC<InfoCardProps> = ({
       </View>
     </View>
   );
+
+  if (!!onPress) {
+    return (
+      <LinearGradient
+        style={[styles.container, styles.outlineGradient, cardStyle]}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        colors={GradientButtonColors}>
+        <TouchableOpacity onPress={onPress}>{renderCard()}</TouchableOpacity>
+      </LinearGradient>
+    );
+  } else {
+    return <View style={[styles.container, cardStyle]}>{renderCard()}</View>;
+  }
 };
 
 export default InfoCard;

@@ -30,6 +30,11 @@ export interface IMarkRecentTransactionRead {
   transactionId: string;
 }
 
+export interface ITransactionHistoryLoaded {
+  type: String;
+  entries: UnitAccount[];
+}
+
 export interface IPlaidAccountsLoaded {
   type: String;
   accounts: PlaidAccountDetail[];

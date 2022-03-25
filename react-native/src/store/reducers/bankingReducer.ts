@@ -9,6 +9,7 @@ import {
   RECENT_TRANSACTIONS_LOADED,
   SET_UNIT_TOKEN_EXPIRATION,
   SET_UNIT_VERIFICATION_CODE_VALIDITY,
+  TRANSACTION_HISTORY_LOADED,
   TRANSFER_AMOUNT_ENTERED,
   UNIT_VERIFICATION_TOKEN_LOADED,
   UPDATE_HOME_STEP,
@@ -22,6 +23,7 @@ import {
   IRecentTransactionsLoaded,
   ISetUnitTokenExpiration,
   ISetUnitVerificationCodeValidity,
+  ITransactionHistoryLoaded,
   ITransferAmountEntered,
   IUnitVerificationCodeLoaded,
   IUpdateHomeStepAction,
@@ -47,6 +49,100 @@ export const bankingReducer = createReducer(initialState, {
     action: IRecentTransactionsLoaded,
   ) {
     return {...state, recentTransactions: action.transactions};
+  },
+  [TRANSACTION_HISTORY_LOADED](
+    state: IBankingState,
+    action: ITransactionHistoryLoaded,
+  ) {
+    // const entries = action.entries;
+    const entries: UnitAccount[] = [
+      {
+        id: 'fizz',
+        type: 'history entry',
+        attributes: {
+          amount: 20000,
+          date: '2021-12-06T22:18:34Z',
+          status: 'Posted',
+          summary: 'Pods Allocation',
+          description: 'from Spending to Investments',
+          direction: 'debit',
+        },
+      },
+      {
+        id: 'buzz',
+        type: 'history entry',
+        attributes: {
+          amount: 10000,
+          date: '2021-12-07T22:18:34Z',
+          status: 'Posted',
+          summary: 'Pods Allocation',
+          description: 'from Spending to Savings',
+          direction: 'debit',
+        },
+      },
+      {
+        id: 'bizz',
+        type: 'history entry',
+        attributes: {
+          amount: 50000,
+          date: '2021-12-08T22:18:34Z',
+          status: 'Posted',
+          summary: 'Deposit',
+          description: 'from Plaid to Spending',
+          direction: 'credit',
+        },
+      },
+      {
+        id: 'bazz',
+        type: 'history entry',
+        attributes: {
+          amount: 950,
+          date: '2021-12-09',
+          status: 'Posted',
+          summary: 'Deposit',
+          description: 'from Plaid to Spending',
+          direction: 'credit',
+        },
+      },
+      {
+        id: 'bozz',
+        type: 'history entry',
+        attributes: {
+          amount: 11500,
+          date: '2021-12-10T22:18:34Z',
+          status: 'Posted',
+          summary: 'Deposit',
+          description: 'from Plaid to Spending',
+          direction: 'credit',
+        },
+      },
+      {
+        id: 'fazz',
+        type: 'history entry',
+        attributes: {
+          amount: 1200,
+          date: '2021-12-11T22:18:34Z',
+          status: 'Pending',
+          summary: 'Deposit',
+          description: 'from Plaid to Spending',
+          direction: 'credit',
+        },
+      },
+      {
+        id: 'fozz',
+        type: 'history entry',
+        attributes: {
+          amount: 100000,
+          date: '2021-12-12T22:18:34Z',
+          status: 'Pending',
+          summary: 'Purchase',
+          description: 'from Uninvested to Rewards',
+          direction: 'debit',
+        },
+      },
+    ];
+
+    return {...state, transactionHistory: entries};
   },
   [PLAID_ACCOUNTS_LOADED](state: IBankingState, action: IPlaidAccountsLoaded) {
     return {...state, plaidAccounts: action.accounts};

@@ -3,25 +3,21 @@ import AppColors from 'src/config/colors';
 import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 16,
-    width: '100%',
-  },
   card: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 16,
     paddingHorizontal: 16,
     backgroundColor: AppColors.coreBlack85,
     borderRadius: 8,
     width: '100%',
   },
-  cardLeft: {
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    flex: 1,
+    marginBottom: 16,
   },
-  cardRight: {
+  historyItem: {
     alignItems: 'flex-end',
   },
   icon: {
@@ -35,6 +31,9 @@ const styles = StyleSheet.create({
   outlineGradient: {
     borderRadius: 8,
     padding: 1,
+  },
+  entriesContainer: {
+    width: '100%',
   },
 });
 

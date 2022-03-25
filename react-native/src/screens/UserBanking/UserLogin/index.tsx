@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import { Auth } from 'aws-amplify';
+import {Auth} from 'aws-amplify';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -37,11 +37,13 @@ const UserLogin: React.FC = () => {
 
   const handleContinue = async () => {
     setLoading(true);
+    setNotFoundUser(false);
     let isUserNotExist = false;
     let msg = '';
+    const formattedPhone = '+1' + phone;
     try {
       await Auth.signIn({
-        username: phone,
+        username: formattedPhone,
         password,
       });
       setLoading(true);
@@ -82,7 +84,9 @@ const UserLogin: React.FC = () => {
       <View>
         <View style={styles.signUp}>
           <TouchableOpacity onPress={() => {}}>
-            <Text type="Body/Large" style={styles.signUpLabel}>Sign up</Text>
+            <Text type="Body/Large" style={styles.signUpLabel}>
+              Sign up
+            </Text>
           </TouchableOpacity>
         </View>
         <View>
@@ -105,29 +109,34 @@ const UserLogin: React.FC = () => {
           />
           {phone.length < 10 && (
             <View>
-              <Alert style={styles.phoneNumberAlert}>Phone numbers are always 10 digits long. Please check.</Alert>
+              <Alert style={styles.phoneNumberAlert}>
+                Phone numbers are always 10 digits long. Please check.
+              </Alert>
             </View>
           )}
           {notFoundUser && (
             <View>
               <Alert style={styles.phoneNumberAlert}>
                 This phone number hasn't been registered. Please{' '}
-                <Text type="Body/Large" style={styles.signUpLabel} onPress={goToSignUp}>sign up</Text>
-                {' '}first.
+                <Text
+                  type="Body/Large"
+                  style={styles.signUpLabel}
+                  onPress={goToSignUp}>
+                  sign up
+                </Text>{' '}
+                first.
               </Alert>
             </View>
           )}
         </View>
         <View>
-          <TextInput
-            isSecure
-            label="Password"
-            onChangeText={changePassword}
-          />
+          <TextInput isSecure label="Password" onChangeText={changePassword} />
         </View>
         <View style={styles.forgotPassword}>
           <TouchableOpacity onPress={goToForgotPassword}>
-            <Text type="Body/Large" style={styles.forgotPasswordLabel}>Forgot Password</Text>
+            <Text type="Body/Large" style={styles.forgotPasswordLabel}>
+              Forgot Password
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -27,7 +27,7 @@ const Verification: React.FC<SignUpProps> = ({
   }, [stepName]);
 
   const goToNextStep = () => {
-    if (stepCount < 4) {
+    if (stepCount < 5) {
       navigation.navigate('SignUp', {step: SignUpSteps[stepCount + 1]});
     } else {
       navigation.navigate('SelectLevel');
@@ -42,13 +42,19 @@ const Verification: React.FC<SignUpProps> = ({
           updateLoading={status => setLoading(status)}
         />
       )}
-      {stepCount === 1 && (
-        <PhoneCapture goToNextStep={goToNextStep} />
-      )}
+      {stepCount === 1 && <PhoneCapture goToNextStep={goToNextStep} />}
       {stepCount === 2 && (
-        <CreatePassword goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />
+        <CreatePassword
+          goToNextStep={goToNextStep}
+          updateLoading={status => setLoading(status)}
+        />
       )}
-      {stepCount === 3 && <PhoneCodeVerify goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />}
+      {stepCount === 3 && (
+        <PhoneCodeVerify
+          goToNextStep={goToNextStep}
+          updateLoading={status => setLoading(status)}
+        />
+      )}
       {stepCount === 4 && <NameCapture goToNextStep={goToNextStep} />}
       {stepCount === 5 && <EmailCapture goToNextStep={goToNextStep} />}
       {loading && <Loading />}

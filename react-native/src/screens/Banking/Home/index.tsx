@@ -33,7 +33,7 @@ import Loading from 'src/components/common/Loading';
 import InfoCard from 'src/components/common/InfoCard';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
-import {NoWyreStates} from 'src/config/data';
+import {wyreEligibleSelector} from 'src/store/selectors/banking';
 
 interface CardProps {
   style?: TextStyle;
@@ -75,11 +75,7 @@ const Home: React.FC = () => {
     );
   });
   const {user} = useSelector((state: RootState) => state.userReducer);
-  const wyreEligible = useSelector(
-    (state: RootState) =>
-      !!state.userReducer.user &&
-      NoWyreStates.indexOf(state.userReducer.user.address.state) === -1,
-  );
+  const wyreEligible = useSelector(wyreEligibleSelector);
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -137,6 +133,13 @@ const Home: React.FC = () => {
 
   const goToMoveMoney = () =>
     NavigationService.navigate('UserBankingStack', {screen: 'MoveMoney'});
+
+  const goToSpendingPod = () =>
+    NavigationService.navigate('UserBankingStack', {screen: 'SpendingPod'});
+  const goToInvestmentsPod = () =>
+    NavigationService.navigate('UserBankingStack', {screen: 'InvestmentsPod'});
+  const goToSavingsPod = () =>
+    NavigationService.navigate('UserBankingStack', {screen: 'SavingsPod'});
 
   const onPlaidSuccessHandler = async (success: LinkSuccess) => {
     setLoading(true);
@@ -325,18 +328,21 @@ const Home: React.FC = () => {
             labelText="Spending"
             rightTopText="Balance"
             rightBottomText={'$' + amounts.spending}
+            onPress={goToSpendingPod}
           />
           <InfoCard
             IconSvg={InvestmentIcon}
             labelText="Investments"
             rightTopText="Balance"
             rightBottomText={'$' + amounts.investments}
+            onPress={goToInvestmentsPod}
           />
           <InfoCard
             IconSvg={SavingIcon}
             labelText="Savings"
             rightTopText="Balance"
             rightBottomText={'$' + amounts.savings}
+            onPress={goToSavingsPod}
           />
         </View>
       )}
