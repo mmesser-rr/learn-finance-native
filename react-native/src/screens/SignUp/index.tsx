@@ -9,6 +9,7 @@ import PhoneCodeVerify from './PhoneCodeVerify';
 import NameCapture from './NameCapture';
 import EmailCapture from './EmailCapture';
 import Loading from 'src/components/common/Loading';
+import CreatePassword from './CreatePassword';
 
 import styles from './styles';
 
@@ -44,9 +45,12 @@ const Verification: React.FC<SignUpProps> = ({
       {stepCount === 1 && (
         <PhoneCapture goToNextStep={goToNextStep} />
       )}
-      {stepCount === 2 && <PhoneCodeVerify goToNextStep={goToNextStep} />}
-      {stepCount === 3 && <NameCapture goToNextStep={goToNextStep} />}
-      {stepCount === 4 && <EmailCapture goToNextStep={goToNextStep} />}
+      {stepCount === 2 && (
+        <CreatePassword goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />
+      )}
+      {stepCount === 3 && <PhoneCodeVerify goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />}
+      {stepCount === 4 && <NameCapture goToNextStep={goToNextStep} />}
+      {stepCount === 5 && <EmailCapture goToNextStep={goToNextStep} />}
       {loading && <Loading />}
     </AppLayout>
   );

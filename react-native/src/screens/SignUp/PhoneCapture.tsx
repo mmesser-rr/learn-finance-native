@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-import {API, graphqlOperation} from 'aws-amplify';
 import {useDispatch} from 'react-redux';
 
 import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
-import {initiatePhoneChallenge} from 'src/graphql/mutations';
-import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 interface PhoneCaptureProps {
   goToNextStep: () => void;
@@ -29,11 +27,6 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
 
   const handleSubmit = async () => {
     try {
-      // await API.graphql(
-      //   graphqlOperation(initiatePhoneChallenge, {
-      //     phoneNumber,
-      //   }),
-      // );
       dispatch(updateOnboarding({mobilePhone: phoneNumber}));
       goToNextStep();
     } catch (error) {
@@ -47,12 +40,12 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
         <View>
           <View>
             <Text type="Headline/Small" style={styles.head}>
-              To continue, verify your phone number
+              First, tell us your phone number
             </Text>
           </View>
           <View>
             <Text type="Body/Large" style={styles.description}>
-              We'll text a verification code to this number.
+              You'll use the phone number for log in.
             </Text>
           </View>
           <View>

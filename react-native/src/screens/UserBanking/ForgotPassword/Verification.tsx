@@ -1,44 +1,39 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Auth} from 'aws-amplify';
-import {useSelector} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
-import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
 
-interface PhoneCodeVerifyProps {
+interface VerificationProps {
+  username: string;
   goToNextStep: () => void;
   updateLoading: (status: boolean) => void;
+  updateCode: (code: string) => void;
 }
 
-const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLoading}) => {
+const Verification: React.FC<VerificationProps> = ({
+  username,
+  goToNextStep,
+  updateLoading,
+  updateCode
+}) => {
   const [isValid, setIsValid] = useState(false);
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
 
-  const {mobilePhone} = useSelector((state: RootState) => state.onboardingReducer);
-
-  const generatePhoneNumber = () => {
-    const firstThree = mobilePhone.slice(0, 3);
-    const secondThree = mobilePhone.slice(3, 6);
-    const lastFour = mobilePhone.slice(-4);
-    return `(${firstThree}) ${secondThree} ${lastFour}`;
-  };
-
   const changeValue = (value: string) => {
     setIsValid(value.length === 6);
     setCode(value);
+    updateCode(value);
   };
 
   const handleSubmit = async () => {
     updateLoading(true);
     try {
-      await Auth.confirmSignUp(`+1${mobilePhone}`, code);
-      goToNextStep();
     } catch (error: any) {
       console.log(error);
       setError(error.message || 'Unkown error');
@@ -47,16 +42,15 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLo
   };
 
   return (
-    <>
+    <View style={styles.contentContainer}>
       <View>
-        <View>
-          <Text type="Headline/Small" style={styles.head}>
-            To continue, verify your phone number
+        <View style={styles.head}>
+          <Text type="Body/Large">
+            We sent a verification code to
           </Text>
-        </View>
-        <View>
-          <Text type="Body/Large" style={styles.description}>
-            We sent a verification code to {generatePhoneNumber()}
+          <Text type="Body/Large">{username}</Text>
+          <Text type="Body/Large">
+            We sent a verification code to
           </Text>
         </View>
         <View>
@@ -69,9 +63,9 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLo
             onChangeText={changeValue}
           />
         </View>
-        <View>
-          <TouchableOpacity style={styles.askAction} onPress={() => {}}>
-            <Text type="Body/Large" style={styles.askActionLabel}>
+        <View style={styles.helpLink}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text type="Body/Large" style={styles.helpLinkLabel}>
               Resend code
             </Text>
           </TouchableOpacity>
@@ -84,8 +78,8 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLo
           onSubmit={handleSubmit}
         />
       </View>
-    </>
+    </View>
   );
 };
 
-export default PhoneCodeVerify;
+export default Verification;
