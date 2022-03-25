@@ -73,6 +73,10 @@ const UserLogin: React.FC = () => {
     NavigationService.navigate('UserLoginStack', {screen: 'ForgotPassword'});
   };
 
+  const goToSignUp = () => {
+    NavigationService.navigate('SignUp');
+  };
+
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
@@ -108,7 +112,7 @@ const UserLogin: React.FC = () => {
             <View>
               <Alert style={styles.phoneNumberAlert}>
                 This phone number hasn't been registered. Please{' '}
-                <Text type="Body/Large" style={styles.signUpLabel}>sign up</Text>
+                <Text type="Body/Large" style={styles.signUpLabel} onPress={goToSignUp}>sign up</Text>
                 {' '}first.
               </Alert>
             </View>

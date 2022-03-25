@@ -48,7 +48,7 @@ const Verification: React.FC<SignUpProps> = ({
       {stepCount === 2 && (
         <CreatePassword goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />
       )}
-      {stepCount === 3 && <PhoneCodeVerify goToNextStep={goToNextStep} />}
+      {stepCount === 3 && <PhoneCodeVerify goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />}
       {stepCount === 4 && <NameCapture goToNextStep={goToNextStep} />}
       {stepCount === 5 && <EmailCapture goToNextStep={goToNextStep} />}
       {loading && <Loading />}
