@@ -37,17 +37,9 @@ const styles = StyleSheet.create({
     left: scale(16),
     zIndex: 10,
   },
-  helperContainer: {
-    position: 'absolute',
-    bottom: scale(-24),
-    left: 0,
+  error: {
+    marginLeft: scale(16),
     marginTop: scale(4),
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  helperText: {
-    fontSize: scale(14),
-    color: AppColors.accentRed100,
   },
 });
 

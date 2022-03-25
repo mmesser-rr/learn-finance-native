@@ -14,19 +14,23 @@ const styles = StyleSheet.create({
     marginBottom: scale(96),
   },
   title: {
-    marginBottom: scale(8),
+    marginBottom: scale(44),
   },
   actionWrapper: {
     marginTop: scale(96),
   },
   joinAction: {
     marginBottom: scale(16),
+    backgroundColor: AppColors.gray20,
   },
   loginAction: {
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: AppColors.gray20,
   },
+  joinLabel: {
+    color: AppColors.coreBlack100,
+  }
 });
 
 export default styles;

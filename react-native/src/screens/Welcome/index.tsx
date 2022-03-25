@@ -24,7 +24,7 @@ const Welcome: React.FC = () => {
           </View>
           <View style={styles.title}>
             <Text type="Headline/Large">
-              A social wealth club for the culture
+              Banking for the People
             </Text>
           </View>
           <View>
@@ -36,7 +36,7 @@ const Welcome: React.FC = () => {
         <View style={styles.actionWrapper}>
           <View>
             <Button actionStyle={styles.joinAction} onPress={onJoin}>
-              <Text type="Body/Large">Enter the club</Text>
+              <Text type="Body/Large" style={styles.joinLabel}>Join the club</Text>
             </Button>
           </View>
           <View>
