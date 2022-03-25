@@ -6,13 +6,13 @@ import {
   TextInputProps as RNTextInputProps,
   TouchableOpacity,
 } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import AppColors from 'src/config/colors';
 import {Text} from '../Texts';
 import {scale} from 'src/config/dimentions';
 import EyeSlashIcon from 'src/assets/icons/eye-slash.svg';
 import EyeIcon from 'src/assets/icons/eye.svg';
+import Alert from '../Alert';
 
 import styles from './styles';
 
@@ -145,17 +145,7 @@ const TextInput: React.FC<TextInputProps> = ({
         </View>
       </View>
       {isError && (
-        <View style={styles.helperContainer}>
-          <MaterialCommunityIcons
-            style={styles.helperIcon}
-            name="information-outline"
-            color={AppColors.accentRed100}
-            size={16}
-          />
-          <Text type="Body/Medium" style={styles.helperText}>
-            {errorMessage}
-          </Text>
-        </View>
+        <Alert style={styles.error}>{errorMessage}</Alert>
       )}
     </View>
   );
