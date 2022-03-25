@@ -100,17 +100,15 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
     updateLoading(true);
     try {
       const phoneNumber = `+1${mobilePhone}`;
-      const res = await Auth.signUp({
+      await Auth.signUp({
         username: phoneNumber,
         password,
         attributes: {
           phone_number: phoneNumber
         }
       });
-      console.log(111, res)
-      // goToNextStep();
+      goToNextStep();
     } catch (error: any) {
-      console.log(333, error.message)
       setError(error.message || 'Unknown Error');
     }
     updateLoading(false);

@@ -9,23 +9,21 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack100
   },
   viewWrapper: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     marginTop: scale(17),
   },
   head: {
     marginBottom: scale(32),
   },
   phoneNumber: {
-    marginBottom: scale(32),
   },
   signUpLabel: {
     color: AppColors.interactionBlue
   },
-  forgotPassword: {
+  helpLink: {
     alignItems: 'center',
+    marginTop: scale(32),
   },
-  forgotPasswordLabel: {
+  helpLinkLabel: {
     color: AppColors.interactionBlue
   },
   misMatchAlert: {
@@ -37,6 +35,11 @@ const styles = StyleSheet.create({
   },
   nav: {
     marginBottom: scale(24)
+  },
+  contentContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 });
 
