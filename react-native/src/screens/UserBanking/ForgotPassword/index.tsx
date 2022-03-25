@@ -6,9 +6,9 @@ import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import Loading from 'src/components/common/Loading';
 import ForgotPasswordRequest from './ForgotPasswordRequest';
+import Verification from './Verification';
 
 import styles from './styles';
-import Verification from './Verification';
 
 const steps = [
   'request',
@@ -19,6 +19,7 @@ const ForgotPassword: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(steps[0]);
   const [username, setUsername] = useState('');
+  const [code, setCode] = useState('');
 
   const goToLogin = () => {
     NavigationService.navigate('UserLoginStack', {screen: 'UserLogin'});
@@ -44,6 +45,7 @@ const ForgotPassword: React.FC = () => {
         <Verification
           username={username}
           updateLoading={setLoading}
+          updateCode={setCode}
           goToNextStep={() => {}}
         />
       )}
