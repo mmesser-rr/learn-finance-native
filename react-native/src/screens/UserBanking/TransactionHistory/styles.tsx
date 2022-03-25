@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   viewWrapper: {
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: 0,
   },
   nav: {
     marginBottom: scale(24),
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     paddingBottom: scale(7),
     marginBottom: scale(24),
     borderBottomWidth: 1,
-    borderBottomColor: AppColors.coreBlack40
+    borderBottomColor: AppColors.coreBlack40,
   },
   info: {
     flexDirection: 'row',
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: scale(26),
     borderStartColor: 'green',
-    width: '100%'
+    width: '100%',
   },
   tab: {
     flexShrink: 0,
-    flexGrow: 1
+    flexGrow: 1,
   },
   inactiveButton: {
     paddingVertical: scale(6),
@@ -47,15 +47,15 @@ const styles = StyleSheet.create({
     paddingVertical: scale(6),
     paddingHorizontal: scale(8),
     borderRadius: scale(7),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   method: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   details: {
     flex: 1,
-    paddingRight: scale(8)
+    paddingRight: scale(8),
   },
 });
 

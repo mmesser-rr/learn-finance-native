@@ -4,6 +4,7 @@ const AppColors = {
   interactionBlue: '#40B9FF',
   coreBlack100: '#000',
   coreBlack90: '#1A1A1A',
+  coreBlack85: '#252525',
   coreBlack80: '#333',
   coreBlack60: '#666',
   coreBlack40: '#999',

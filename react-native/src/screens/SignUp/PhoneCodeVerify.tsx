@@ -15,12 +15,17 @@ interface PhoneCodeVerifyProps {
   updateLoading: (status: boolean) => void;
 }
 
-const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLoading}) => {
+const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
+  goToNextStep,
+  updateLoading,
+}) => {
   const [isValid, setIsValid] = useState(false);
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
 
-  const {mobilePhone} = useSelector((state: RootState) => state.onboardingReducer);
+  const {mobilePhone} = useSelector(
+    (state: RootState) => state.onboardingReducer,
+  );
 
   const generatePhoneNumber = () => {
     const firstThree = mobilePhone.slice(0, 3);
@@ -67,6 +72,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({goToNextStep, updateLo
             showErrorMessage={true}
             errorMessage={error}
             onChangeText={changeValue}
+            keyboardType="number-pad"
           />
         </View>
         <View>

@@ -59,6 +59,21 @@ export function markRecentTransactionRead(
   };
 }
 
+export function getTransactionHistory(): ITypeOnlyAction {
+  return {
+    type: types.GET_TRANSACTION_HISTORY,
+  };
+}
+
+export function transactionHistoryLoaded(
+  entries: UnitAccount[],
+): returnTypes.ITransactionHistoryLoaded {
+  return {
+    type: types.TRANSACTION_HISTORY_LOADED,
+    entries,
+  };
+}
+
 export function getConnectedAccounts(): ITypeOnlyAction {
   return {
     type: types.GET_CONNECTED_ACCOUNTS,

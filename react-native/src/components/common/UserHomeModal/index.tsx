@@ -56,6 +56,13 @@ const UserHomeModal: React.FC<UserHomeModalProps> = ({
     NavigationService.navigate('UserBankingStack', {screen: 'WithdrawDetails'});
   };
 
+  const goToTransactionHistory = () => {
+    onClose();
+    NavigationService.navigate('UserBankingStack', {
+      screen: 'TransactionHistory',
+    });
+  };
+
   const podLabelStyle = step === PODsSteps[2] ? {} : styles.disabled;
 
   return (
@@ -110,7 +117,8 @@ const UserHomeModal: React.FC<UserHomeModalProps> = ({
         <View style={styles.item}>
           <TouchableOpacity
             style={styles.action}
-            disabled={step !== PODsSteps[2]}>
+            disabled={step !== PODsSteps[2]}
+            onPress={goToTransactionHistory}>
             <Text type="Body/Large" style={podLabelStyle}>
               Transaction History
             </Text>
