@@ -28,7 +28,8 @@ const parseApplicationParams = (unitAccountId, plaidProcessorToken, description,
 });
 
 
-const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description, amount, idempotencyKey) => {
+const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description, amount, idempotencyKey, token) => {
+  unit.payments.headers.Authorization = `Bearer ${token}`
   const unitParams = parseApplicationParams(unitAccountId, plaidProcessorToken, description, amount, idempotencyKey);
   return unit.payments.create(unitParams).then(resultLens)
     .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err}`));

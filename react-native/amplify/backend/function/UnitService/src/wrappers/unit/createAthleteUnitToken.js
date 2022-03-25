@@ -16,7 +16,10 @@ const createAthleteUnitToken = (unit) => (custId, verificationCode, token) => {
 
   const resultLens = (res) => ({
     type: res.data.type,
-    expiresIn: res.data.attributes.expiresIn
+    attributes: {
+      expiresIn: res.data.attributes.expiresIn
+    }, 
+    token: res.data.attributes.token
   });
   
   module.exports = {

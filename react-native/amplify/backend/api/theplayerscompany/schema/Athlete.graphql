@@ -70,6 +70,7 @@ type RecentTransaction @model  {
   athleteId: String
   status: String
   amount: Float
+  idempotencyKey: String
   direction: String
   createdAt: String
   read: Boolean

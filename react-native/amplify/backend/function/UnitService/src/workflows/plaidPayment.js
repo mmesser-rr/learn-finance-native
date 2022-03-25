@@ -5,13 +5,13 @@ const createPlaidRequest = (athlete, plaidAccountId, amount, description, idempo
 
 const getOrCreateProcessorToken = (athlete, plaidAccountId, amount, description,idempotencyKey) => {
   if(athlete.plaidProcessorToken?.plaidAccountId !== null && athlete.plaidProcessorToken?.plaidAccountId === plaidAccountId){
-      return unit.plaidPayment(athlete.accounts.items[0].unitAccountId, athlete.plaidProcessorToken.processorToken, description, amount, idempotencyKey)
-      .then(res => tpc.persistTransaction(res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, athlete.podSettings))
+      return unit.plaidPayment(athlete.accounts.items[0].unitAccountId, athlete.plaidProcessorToken.processorToken, description, amount, idempotencyKey, athlete.unitToken)
+      .then(res => tpc.persistTransaction(res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, athlete.podSettings, idempotencyKey))
   }else{
      return tpc.createProcessorToken(athlete.plaidToken, plaidAccountId)
      .then(res => tpc.updateAthleteAccount(athlete.id, {plaidAccountId: plaidAccountId, processorToken: res}))
      .then(res => unit.plaidPayment(athlete.accounts.items[0].unitAccountId, res, description, amount, idempotencyKey))
-     .then(res => tpc.persistTransaction(res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, athlete.podSettings, res.idempotencyKey))
+     .then(res => tpc.persistTransaction(res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, athlete.podSettings, idempotencyKey))
   }
 }
 

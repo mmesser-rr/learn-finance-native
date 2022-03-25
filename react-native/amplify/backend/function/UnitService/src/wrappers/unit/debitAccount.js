@@ -32,7 +32,8 @@ const parseApplicationParams = (unitAccountId, amount, addenda, description, rec
     }
 });
 
-const debitAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey) => {
+const debitAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey, token) => {
+  unit.payments.headers.Authorization = `Bearer ${token}`
   const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey);
   return unit.payments.create(unitParams)
     .then(resultLens)

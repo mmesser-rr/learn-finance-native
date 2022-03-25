@@ -19,7 +19,6 @@ type Attributes{
    accountNumber: String
    currency: String
    verificationToken: String
-   token: String
    expiresIn: Int
    hold: Float
    available: Float   

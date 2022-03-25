@@ -32,7 +32,8 @@ const parseApplicationParams = (unitAccountId, amount, description, receiverAcco
 });
 
 
-const bookPayment = (unit) => (unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey) => {
+const bookPayment = (unit) => (unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, token) => {
+  unit.payments.headers.Authorization = `Bearer ${token}`
   const unitParams = parseApplicationParams(unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey);
   return unit.payments.create(unitParams)
     .then(resultLens)

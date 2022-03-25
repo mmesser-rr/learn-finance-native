@@ -6,6 +6,7 @@ const {updateAthlete} = require("./updateAthleteAccount");
 const {updateTransaction} = require("./updateTransaction");
 const {createProcessorToken} = require("./createProcessorToken")
 const {persistTransaction} = require("./persistTransaction");
+const {updateAthleteUnitToken} = require("./updateAthleteUnitToken");
 const env = require("../../env.js");
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
   updateAthleteAccount: updateAthlete(env.axios),
   updateTransaction: updateTransaction(env.axios),
   persistTransaction: persistTransaction(env.axios),
+  updateAthleteUnitToken: updateAthleteUnitToken(env.axios),
   getAthlete: getAthlete(env.axios)
 }

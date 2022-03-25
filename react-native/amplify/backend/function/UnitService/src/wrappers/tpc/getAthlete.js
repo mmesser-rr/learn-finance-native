@@ -11,6 +11,7 @@ const getAthleteStatement = gql`
       mobilePhone
       dateOfBirth
       plaidToken
+      unitToken
       plaidProcessorToken{
         plaidAccountId
         processorToken

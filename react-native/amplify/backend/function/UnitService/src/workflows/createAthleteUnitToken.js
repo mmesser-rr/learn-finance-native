@@ -9,7 +9,7 @@ const createAthleteUnitToken = (athlete, verificationCode, verificationToken) =>
   }
 
   return unit.createAthleteUnitToken(custId, verificationCode, verificationToken)
- // .then(res => tpc.updateAthleteAccount(res.attributes.token, res.attributes.token))
+  .then(res => tpc.updateAthleteUnitToken(athlete.id, res.token))
     .catch(err => {
       throw new Error(`Failed to reach Unit. Reason: ${JSON.stringify(err)}`);
     });
