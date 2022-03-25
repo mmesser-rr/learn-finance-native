@@ -21,7 +21,7 @@ import {twoDecimalFormatter} from 'src/utils/functions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import {RootState} from 'src/store/root-state';
 import {RecentTransaction} from 'src/types/API';
-import {NoWyreStates} from 'src/config/data';
+import {wyreEligibleSelector} from 'src/store/selectors/banking';
 
 const DepositResult: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const DepositResult: React.FC = () => {
   const [index, setIndex] = useState(0);
 
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
-  const {user} = useSelector((state: RootState) => state.userReducer);
+  const wyreEligible = useSelector(wyreEligibleSelector);
   const {recentTransactions} = useSelector(
     (state: RootState) => state.bankingReducer,
   );
@@ -102,7 +102,7 @@ const DepositResult: React.FC = () => {
   };
 
   const goToHome = () => {
-    if (user && NoWyreStates.indexOf(user.address.state) === -1) {
+    if (wyreEligible) {
       NavigationService.navigate('WyreFullScreenNotification');
     } else {
       NavigationService.navigate('HomeStack');

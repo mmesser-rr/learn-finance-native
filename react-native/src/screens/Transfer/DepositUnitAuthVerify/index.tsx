@@ -76,6 +76,7 @@ const DepositUnitAuthVerify: React.FC = () => {
             autoFocus
             onChangeText={changeValue}
             editable={!unitVerificationCodeValid}
+            keyboardType="number-pad"
           />
           {unitVerificationCodeValid === false && (
             <Alert>This code is not valid</Alert>

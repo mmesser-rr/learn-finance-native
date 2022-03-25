@@ -1,6 +1,7 @@
 export const SignUpSteps = [
   'invite_code',
   'phone_number',
+  'create_password',
   'verification_code',
   'name_capture',
   'email_capture',

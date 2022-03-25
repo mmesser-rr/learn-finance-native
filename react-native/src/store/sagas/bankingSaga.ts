@@ -24,6 +24,7 @@ import {
 import {RootState} from '../root-state';
 import {PodSettingsMutationInput} from 'src/types/graphql';
 import {
+  listAllUnitTransactions,
   listAthleteUnitAccounts,
   listPlaidAccounts,
   listRecentTransactions,
@@ -36,6 +37,8 @@ import {
   CreateAthleteUnitTokenMutationVariables,
   CreatePlaidPaymentMutation,
   CreatePlaidPaymentMutationVariables,
+  ListAllUnitTransactionsQuery,
+  ListAllUnitTransactionsQueryVariables,
   ListAthleteUnitAccountsQuery,
   ListAthleteUnitAccountsQueryVariables,
   ListPlaidAccountsQuery,
@@ -146,6 +149,39 @@ export function* markRecentTransactionRead({
     );
   } catch (error) {
     console.log('Error marking recent transaction as read:', error);
+  }
+}
+
+export function* getTransactionHistory() {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('Athlete ID is required to transaction history');
+    }
+
+    console.log('Attempting to get transaction history for user:', athleteId);
+
+    const queryFilter: ListAllUnitTransactionsQueryVariables = {athleteId};
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(listAllUnitTransactions, queryFilter),
+    )) as GraphQLResult<ListAllUnitTransactionsQuery>;
+
+    const transactions =
+      response.data && response.data.listAllUnitTransactions
+        ? (response.data.listAllUnitTransactions as UnitAccount[])
+        : [];
+    console.log(transactions);
+    yield put(bankingActions.transactionHistoryLoaded(transactions));
+
+    yield put(loadingActions.disableLoader());
+  } catch (error) {
+    console.log('Error attempting to retrieve transaction history:', error);
+    yield put(loadingActions.disableLoader());
   }
 }
 
@@ -391,6 +427,7 @@ export default function* bankingSaga() {
     markRecentTransactionRead,
   );
   yield takeLatest(types.GET_CONNECTED_ACCOUNTS, getConnectedAccounts);
+  yield takeLatest(types.GET_TRANSACTION_HISTORY, getTransactionHistory);
   yield takeLatest(types.CREATE_DEPOSIT, createDeposit);
   yield takeLatest(types.GET_ATHLETE_ACCOUNTS, getAthleteAccounts);
   yield takeLatest(types.GET_BALANCE_HISTORY, getBalanceHistory);
