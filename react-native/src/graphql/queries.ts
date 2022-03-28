@@ -243,6 +243,15 @@ export const unitAccountStatement = /* GraphQL */ `
     }
   }
 `;
+export const getAthleteSchool = /* GraphQL */ `
+  query GetAthleteSchool {
+    getAthleteSchool {
+      name
+      airTableId
+      isActive
+    }
+  }
+`;
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -470,61 +479,6 @@ export const listAthleteAccounts = /* GraphQL */ `
     }
   }
 `;
-export const getRecentTransaction = /* GraphQL */ `
-  query GetRecentTransaction($id: ID!) {
-    getRecentTransaction(id: $id) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const listRecentTransactions = /* GraphQL */ `
-  query ListRecentTransactions(
-    $filter: ModelRecentTransactionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listRecentTransactions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        transactionId
-        athleteId
-        status
-        amount
-        idempotencyKey
-        direction
-        createdAt
-        read
-        settled
-        podAllocation {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        id
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getEmailChallenge = /* GraphQL */ `
   query GetEmailChallenge($code: String!, $email: String!) {
     getEmailChallenge(code: $code, email: $email) {
@@ -633,6 +587,130 @@ export const listPhoneChallenges = /* GraphQL */ `
         code
         phoneNumber
         verified
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getRecentTransaction = /* GraphQL */ `
+  query GetRecentTransaction($id: ID!) {
+    getRecentTransaction(id: $id) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const listRecentTransactions = /* GraphQL */ `
+  query ListRecentTransactions(
+    $filter: ModelRecentTransactionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRecentTransactions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        transactionId
+        athleteId
+        status
+        amount
+        idempotencyKey
+        direction
+        createdAt
+        read
+        settled
+        podAllocation {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        id
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const athleteByPhone = /* GraphQL */ `
+  query AthleteByPhone(
+    $mobilePhone: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    athleteByPhone(
+      mobilePhone: $mobilePhone
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreId
+        isActive
+        id
         createdAt
         updatedAt
       }
