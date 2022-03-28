@@ -125,8 +125,8 @@ export const openAppAndAccount = /* GraphQL */ `
   }
 `;
 export const openAccount = /* GraphQL */ `
-  mutation OpenAccount($athleteId: ID!) {
-    openAccount(athleteId: $athleteId) {
+  mutation OpenAccount($athleteId: ID!, $podName: String!) {
+    openAccount(athleteId: $athleteId, podName: $podName) {
       athlete {
         firstName
         lastName
@@ -1014,81 +1014,6 @@ export const deleteAthleteAccount = /* GraphQL */ `
     }
   }
 `;
-export const createRecentTransaction = /* GraphQL */ `
-  mutation CreateRecentTransaction(
-    $input: CreateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    createRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const updateRecentTransaction = /* GraphQL */ `
-  mutation UpdateRecentTransaction(
-    $input: UpdateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    updateRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const deleteRecentTransaction = /* GraphQL */ `
-  mutation DeleteRecentTransaction(
-    $input: DeleteRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    deleteRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
 export const createEmailChallenge = /* GraphQL */ `
   mutation CreateEmailChallenge(
     $input: CreateEmailChallengeInput!
@@ -1208,6 +1133,81 @@ export const deletePhoneChallenge = /* GraphQL */ `
       phoneNumber
       verified
       createdAt
+      updatedAt
+    }
+  }
+`;
+export const createRecentTransaction = /* GraphQL */ `
+  mutation CreateRecentTransaction(
+    $input: CreateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    createRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const updateRecentTransaction = /* GraphQL */ `
+  mutation UpdateRecentTransaction(
+    $input: UpdateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    updateRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const deleteRecentTransaction = /* GraphQL */ `
+  mutation DeleteRecentTransaction(
+    $input: DeleteRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    deleteRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
     }
   }

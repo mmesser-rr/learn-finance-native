@@ -25,6 +25,7 @@ export type RootStackParamList = {
   WyreFullScreenNotification: undefined;
   UserLoginStack: undefined;
   UserBankingStack: undefined;
+  WyreStack: undefined;
 };
 
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
