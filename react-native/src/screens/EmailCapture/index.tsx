@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
+import { Auth } from 'aws-amplify';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import AppLayout from 'src/components/layout/AppLayout';
+import Loading from 'src/components/common/Loading';
 
 import styles from './styles';
-import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
-interface EmailCaptureProps {
-  goToNextStep: () => void;
-}
-
-const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
+const EmailCapture: React.FC = () => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
 
   const codeChangeHandler = (value: string) => {
@@ -25,21 +25,32 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
     setEmail(value);
   };
 
-  const onTerms = () => {
-    NavigationService.navigate('Terms', {fromScreen: 'EmailCapture'});
-  };
-
-  const handleSignUp = () => {
-    dispatch(updateOnboarding({email}));
-    goToNextStep();
+  const handleContinue = async () => {
+    setLoading(true);
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+       await Auth.updateUserAttributes(user, {
+        email
+      });
+      dispatch(updateOnboarding({email}));
+      NavigationService.navigate('VerifyEmailCode');
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   return (
-    <>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             What's your email?
+          </Text>
+        </View>
+        <View>
+          <Text type="Body/Large" style={styles.description}>
+            We'll send a verification code to your email.
           </Text>
         </View>
         <View>
@@ -51,25 +62,14 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep}) => {
         </View>
       </View>
       <View>
-        <View style={styles.agreementWrapper}>
-          <Text type="Body/Large" style={styles.agreementText}>
-            By tapping 'sign up', you consent to our{' '}
-            <Text
-              type="Body/Large"
-              style={styles.agreementLink}
-              onPress={onTerms}>
-              Terms & Privacy Policy
-            </Text>
-            .
-          </Text>
-        </View>
         <SubmitButton
           isValid={isValid}
-          actionLabel="Sign Up"
-          onSubmit={handleSignUp}
+          actionLabel="Continue"
+          onSubmit={handleContinue}
         />
       </View>
-    </>
+      {loading && <Loading />}
+    </AppLayout>
   );
 };
 
