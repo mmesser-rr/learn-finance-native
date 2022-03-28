@@ -10,6 +10,7 @@ import styles from './styles';
 
 interface VerificationProps {
   username: string;
+  isPhoneVerification: boolean;
   goToNextStep: () => void;
   updateLoading: (status: boolean) => void;
   updateCode: (code: string) => void;
@@ -17,6 +18,7 @@ interface VerificationProps {
 
 const Verification: React.FC<VerificationProps> = ({
   username,
+  isPhoneVerification,
   goToNextStep,
   updateLoading,
   updateCode
@@ -34,12 +36,38 @@ const Verification: React.FC<VerificationProps> = ({
   const handleSubmit = async () => {
     updateLoading(true);
     try {
+      goToNextStep();
     } catch (error: any) {
       console.log(error);
       setError(error.message || 'Unkown error');
     }
     updateLoading(false);
   };
+
+  const onResendCode = async () => {
+    let msg = '';
+    updateLoading(true);
+    try {
+      if (isPhoneVerification) {
+        await Auth.forgotPassword(`+1${username}`);
+      } else {
+        await Auth.forgotPassword(username);
+      }
+    } catch (error: any) {
+      msg = error.message;
+    }
+    setError(msg);
+    updateLoading(false);
+  };
+
+  let updateUsername = username;
+
+  if (isPhoneVerification) {
+    const firstThree = username.slice(0, 3);
+    const secondThree = username.slice(3, 6);
+    const lastFour = username.slice(-4);
+    updateUsername = `${firstThree} ${secondThree} ${lastFour}`
+  }
 
   return (
     <View style={styles.contentContainer}>
@@ -48,9 +76,9 @@ const Verification: React.FC<VerificationProps> = ({
           <Text type="Body/Large">
             We sent a verification code to
           </Text>
-          <Text type="Body/Large">{username}</Text>
+          <Text type="Body/Large">{updateUsername}</Text>
           <Text type="Body/Large">
-            We sent a verification code to
+            Enter your verification code below
           </Text>
         </View>
         <View>
@@ -64,7 +92,7 @@ const Verification: React.FC<VerificationProps> = ({
           />
         </View>
         <View style={styles.helpLink}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={onResendCode}>
             <Text type="Body/Large" style={styles.helpLinkLabel}>
               Resend code
             </Text>
@@ -74,7 +102,7 @@ const Verification: React.FC<VerificationProps> = ({
       <View>
         <SubmitButton
           isValid={isValid}
-          actionLabel="Verify Code"
+          actionLabel="Continue"
           onSubmit={handleSubmit}
         />
       </View>
