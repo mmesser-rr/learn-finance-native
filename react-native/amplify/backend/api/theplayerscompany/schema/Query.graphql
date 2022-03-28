@@ -2,9 +2,12 @@ type Query{
     listPlaidAccounts(athleteId: ID!): [PlaidAccountDetail] @function(name: "PlaidService-${env}")
     listAthleteUnitAccounts(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
     getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): UnitAccount @function(name: "UnitService-${env}")
+    #getAthleteByPhone(athleteId: String!): Athlete @function(name: "PlayerVerifyService-${env}")
 
-    getUnitTransactionById(athleteId: ID!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}")
+    getUnitTransactionById(unitAccountId: String!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}")
     listAllUnitTransactions(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
     listUnitBalanceHistory(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
     unitAccountStatement(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
+    getAthleteSchool: [AthleteTeam] @function(name: "AirtableService-${env}")
 }
+

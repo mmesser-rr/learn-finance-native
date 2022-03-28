@@ -16,9 +16,7 @@ const createAthleteUnitToken = (unit) => (custId, verificationCode, token) => {
 
   const resultLens = (res) => ({
     type: res.data.type,
-    attributes: {
-      expiresIn: res.data.attributes.expiresIn
-    }, 
+    expiresIn: res.data.attributes.expiresIn,
     token: res.data.attributes.token
   });
   
@@ -26,3 +24,6 @@ const createAthleteUnitToken = (unit) => (custId, verificationCode, token) => {
     resultLens,
     createAthleteUnitToken
   }
+  // attributes: {
+  //   expiresIn: res.data.attributes.expiresIn
+  // }, 

@@ -26,6 +26,7 @@ const { initiateEmailChallenge } = require("./email/initiateEmailChallenge.js");
 const tryEmailChallenge = require("./email/tryEmailChallenge.js");
 const tryPhoneChallenge = require("./phone/tryPhoneChallenge.js");
 const validateReturnUser = require("./login/validateReturnUser.js");
+//const {getAthleteByPhone} = require("./login/getAthleteByPhone");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
@@ -33,7 +34,8 @@ const resolvers = {
   returnUserChallenge: returnUserChallenge,
   validateReturnUser: validateReturnUser,
   tryPhoneChallenge: tryPhoneChallenge,
-  tryEmailChallenge: tryEmailChallenge
+  tryEmailChallenge: tryEmailChallenge,
+  //getAthleteByPhone: getAthleteByPhone
 };
 
 const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};

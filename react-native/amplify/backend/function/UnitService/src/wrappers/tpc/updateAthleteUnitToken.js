@@ -8,7 +8,6 @@ const updateAthleteUnitStatement = gql`
       id
       isActive
       unitToken
- 
     }
   } 
 `

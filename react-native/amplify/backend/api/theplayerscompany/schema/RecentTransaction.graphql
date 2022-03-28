@@ -1,0 +1,14 @@
+type RecentTransaction @model{
+  transactionId: String! 
+  athleteId: String!
+  status: String!
+  amount: Float
+  idempotencyKey: String
+  direction: String
+  createdAt: String
+  read: Boolean
+  settled: String
+  podAllocation: PodSettings
+}
+
+#@auth(rules: [{ allow: owner }]) 

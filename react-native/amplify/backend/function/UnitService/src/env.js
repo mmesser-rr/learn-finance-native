@@ -4,8 +4,8 @@ const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 
 const { Unit } = require("@unit-finance/unit-node-sdk");
 const axios = require('axios');
-
-const jsonFile = compose(JSON.parse, fs.readFileSync)("./defaultEnv.json")
+const dir = '/Users/deboajagbe/Desktop/Projects/theplayerscompany-react-native/react-native/amplify/backend/function/UnitService/src';
+const jsonFile = compose(JSON.parse, fs.readFileSync)(dir + "/defaultEnv.json")
 
 const getEnv = (varName, required = true) => {
   const varValue = process.env[varName];
@@ -64,7 +64,7 @@ const liveEnv = () => ({
 });
 
 const fetchDevOrLiveEnv = () => {
-  const nodeEnv = getEnv('NODE_ENV');
+  const nodeEnv = getEnvOrJson('NODE_ENV');
 
   if (nodeEnv == 'production') {
     return liveEnv();

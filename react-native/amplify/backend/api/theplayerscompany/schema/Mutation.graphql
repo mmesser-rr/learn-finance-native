@@ -7,7 +7,7 @@ type Mutation {
   initiateEmailChallenge(email: String!): EmailChallenge @function(name: "PlayerVerifyService-${env}")
   tryEmailChallenge(email: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
   openAppAndAccount(ssn: String!, athleteId: ID!): [AthleteAccount] @function(name: "UnitService-${env}")
-  openAccount(athleteId: ID!): AthleteAccount @function(name: "UnitService-${env}")
+  openAccount(athleteId: ID!, podName: String!): AthleteAccount @function(name: "UnitService-${env}")
   unitWebhookService(data: String): UnitAccount @function(name: "UnitService-${env}")
 
   podSettings(athleteId: ID!, savings: Int!, investments: Int!, spending: Int!): AthleteAccount @function(name: "UnitService-${env}")
@@ -16,6 +16,13 @@ type Mutation {
   
   createAthleteUnitToken(athleteId: ID!, verificationToken: String!, verificationCode: String!): UnitAccount @function(name: "UnitService-${env}")
   athleteUnitTokenVerification(athleteId: ID!): UnitAccount @function(name: "UnitService-${env}")
+
+  createWyreAccount(athleteId: ID!): AthleteAccount @function(name: "WyreService-${env}")
+  #debitWryeAccount()
+  #creditWyreAccount()
+  #getAthleteWyreAccount()
+  #getWryeTransactionById()
+  #listAllWryeTransaction()
   
   createPlaidPayment(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")
   bookPayment(athleteId: ID!, unitAccountId: String!, amount: Float!, description: String, receiverUnitAccountId: String!, receiverAccountType: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}")

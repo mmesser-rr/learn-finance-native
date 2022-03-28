@@ -28,7 +28,7 @@ const {athleteUnitTokenVerification} = require("./workflows/athleteUnitTokenVeri
 const {unitWebhook} = require("./workflows/unitWebhook");
 
 const resolvers = Object.freeze({
-  openAccount: (event) => createAndPersistAccount(event.arguments.athleteId),
+  openAccount: (event) => createAndPersistAccount(event.arguments.athleteId, event.arguments.podName),
   bookPayment: (event) => bookPayment(event),
   debitAccount: (event) => debitAccount(event),
   creditAccount: (event) => creditAccount(event),
@@ -40,7 +40,7 @@ const resolvers = Object.freeze({
   unitAccountStatement: (event) => unitAccountStatement(event.arguments.athleteId),
   athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event.arguments.athleteId), 
 
-  getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.athleteId, event.arguments.unitTransactionId),
+  getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.unitAccountId, event.arguments.unitTransactionId),
   listAllUnitTransactions: (event) => getAllUnitTransaction(event.arguments.athleteId),
 
   listUnitBalanceHistory: (event) => listUnitBalanceHistory(event.arguments.athleteId),

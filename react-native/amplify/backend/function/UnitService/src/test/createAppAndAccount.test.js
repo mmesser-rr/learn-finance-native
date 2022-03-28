@@ -53,7 +53,9 @@ describe('createAppAndAccount', () => {
     data: {
       attributes: {
         accountNumber: "1000271603",
-        routingNumber: "20025"
+        routingNumber: "20025",
+        unitAccountId: "10000",
+        podName : "SAVINGS"
       }
     }
   };
@@ -226,6 +228,8 @@ describe('createAppAndAccount', () => {
 
       const athleteAccount = {
         athleteId,
+        podName: unitAccountResponse.data.attributes.podName,
+        unitAccountId: unitAccountResponse.data.id,
         accountNumber: unitAccountResponse.data.attributes.accountNumber,
         routingCode: unitAccountResponse.data.attributes.routingNumber
       }

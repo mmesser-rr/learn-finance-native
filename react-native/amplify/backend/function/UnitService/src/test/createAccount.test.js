@@ -31,7 +31,9 @@ describe('createAccount', () => {
     data: {
       attributes: {
         accountNumber: "1000271603",
-        routingNumber: "20025"
+        routingNumber: "20025",
+        unitAccountId: "10000",
+        podName : "SAVINGS"
       }
     }
   };
@@ -100,12 +102,14 @@ describe('createAccount', () => {
       createAccountStub.resolves(unitResponse);
       persistAccountStub.resolves(arbitrary);
 
-      await createAndPersistAccount(athlete.id);
+      await createAndPersistAccount(athlete.id, unitResponse.data.attributes.podName);
 
       const athleteId = athlete.id
 
       const athleteAccount = {
         athleteId,
+        podName: unitResponse.data.attributes.podName,
+        unitAccountId: unitResponse.data.id,
         accountNumber: unitResponse.data.attributes.accountNumber,
         routingCode: unitResponse.data.attributes.routingNumber
       }

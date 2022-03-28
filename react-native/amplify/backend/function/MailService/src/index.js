@@ -14,17 +14,34 @@ Amplify Params - DO NOT EDIT */
 /**
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
-exports.handler = async (event) => {
-
-    
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-    return {
-        statusCode: 200,
-    //  Uncomment below to enable CORS requests
-    //  headers: {
-    //      "Access-Control-Allow-Origin": "*",
-    //      "Access-Control-Allow-Headers": "*"
-    //  }, 
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-};
+ const aws = require('aws-sdk')
+ const ses = new aws.SES()
+ 
+ exports.handler = async (event) => {
+     //listAthletes
+     //unitAccountStatement
+   for (const streamedItem of event.Records) {
+     if (streamedItem.eventName === 'INSERT') {
+       //pull off items from stream
+       const firstName = streamedItem.dynamodb.NewImage.name.S
+       const athleteEmail = streamedItem.dynamodb.NewImage.email.S
+ 
+       await ses
+           .sendEmail({
+             Destination: {
+               ToAddresses: [athleteEmail],
+             },
+             Source: process.env.SES_EMAIL,
+             Message: {
+               Subject: { Data: 'Account Statement' },
+               Body: {
+                 Text: { Data: `Dear ${firstName}. Please find attached your monthly statement. ${candidateEmail}` },
+               },
+             },
+           })
+           .promise()
+     }
+   }
+   return { status: 'done' }
+ }
+ 

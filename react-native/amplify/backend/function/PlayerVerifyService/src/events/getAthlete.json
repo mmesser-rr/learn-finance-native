@@ -1,0 +1,7 @@
+{
+    "fieldName": "getAthleteByPhone",
+    "arguments": {
+      "phoneNumber": "+12345654328"
+    }
+  }
+  

@@ -28,4 +28,3 @@ const paramsFromId = (athleteId) => ({
   module.exports = {
     createToken
   }
- 
