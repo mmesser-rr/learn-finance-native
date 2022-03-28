@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {Auth} from 'aws-amplify';
+import {useDispatch} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -10,10 +11,12 @@ import TextInputMask from 'src/components/common/TextInputMask';
 import Alert from 'src/components/common/Alert';
 import NavigationService from 'src/navigation/NavigationService';
 import Loading from 'src/components/common/Loading';
+import * as userActions from 'src/store/actions/userActions';
 
 import styles from './styles';
 
 const UserLogin: React.FC = () => {
+  const dispatch = useDispatch();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -42,11 +45,14 @@ const UserLogin: React.FC = () => {
     let msg = '';
     const formattedPhone = '+1' + phone;
     try {
-      await Auth.signIn({
+      const response = await Auth.signIn({
         username: formattedPhone,
         password,
       });
-      setLoading(true);
+      console.log('Sign In Response:');
+      console.log(response);
+      setLoading(false);
+      dispatch(userActions.getUserByPhone(formattedPhone));
       NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
     } catch (error: any) {
       switch (error.message) {

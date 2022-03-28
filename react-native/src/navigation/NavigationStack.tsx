@@ -27,6 +27,7 @@ import UserLoginStack from './UserLoginStack';
 import UserBankingStack from './UserBankingStack';
 import Disclosures from 'src/screens/Disclosures';
 import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotification';
+import WyreStack from './WyreStack';
 import EmailCapture from 'src/screens/EmailCapture';
 
 interface IProps {
@@ -87,6 +88,7 @@ const App: React.FC<IProps> = (props: IProps) => {
           name="UserBankingStack"
           component={UserBankingStack}
         />
+        <RootStack.Screen name="WyreStack" component={WyreStack} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

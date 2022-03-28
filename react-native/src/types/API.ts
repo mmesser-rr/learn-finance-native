@@ -384,81 +384,6 @@ export type DeleteAthleteAccountInput = {
   id: string,
 };
 
-export type CreateRecentTransactionInput = {
-  transactionId: string,
-  athleteId?: string | null,
-  status?: string | null,
-  amount?: number | null,
-  idempotencyKey?: string | null,
-  direction?: string | null,
-  createdAt?: string | null,
-  read?: boolean | null,
-  settled?: string | null,
-  podAllocation?: PodSettingsInput | null,
-  id?: string | null,
-};
-
-export type ModelRecentTransactionConditionInput = {
-  transactionId?: ModelStringInput | null,
-  athleteId?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  amount?: ModelFloatInput | null,
-  idempotencyKey?: ModelStringInput | null,
-  direction?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  read?: ModelBooleanInput | null,
-  settled?: ModelStringInput | null,
-  and?: Array< ModelRecentTransactionConditionInput | null > | null,
-  or?: Array< ModelRecentTransactionConditionInput | null > | null,
-  not?: ModelRecentTransactionConditionInput | null,
-};
-
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type RecentTransaction = {
-  __typename?: "RecentTransaction",
-  transactionId: string,
-  athleteId?: string | null,
-  status?: string | null,
-  amount?: number | null,
-  idempotencyKey?: string | null,
-  direction?: string | null,
-  createdAt?: string | null,
-  read?: boolean | null,
-  settled?: string | null,
-  podAllocation?: PodSettings | null,
-  id: string,
-  updatedAt: string,
-};
-
-export type UpdateRecentTransactionInput = {
-  transactionId?: string | null,
-  athleteId?: string | null,
-  status?: string | null,
-  amount?: number | null,
-  idempotencyKey?: string | null,
-  direction?: string | null,
-  createdAt?: string | null,
-  read?: boolean | null,
-  settled?: string | null,
-  podAllocation?: PodSettingsInput | null,
-  id: string,
-};
-
-export type DeleteRecentTransactionInput = {
-  id: string,
-};
-
 export type CreateEmailChallengeInput = {
   code: string,
   email: string,
@@ -528,6 +453,81 @@ export type DeletePhoneChallengeInput = {
   phoneNumber: string,
 };
 
+export type CreateRecentTransactionInput = {
+  transactionId: string,
+  athleteId: string,
+  status: string,
+  amount?: number | null,
+  idempotencyKey?: string | null,
+  direction?: string | null,
+  createdAt?: string | null,
+  read?: boolean | null,
+  settled?: string | null,
+  podAllocation?: PodSettingsInput | null,
+  id?: string | null,
+};
+
+export type ModelRecentTransactionConditionInput = {
+  transactionId?: ModelStringInput | null,
+  athleteId?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  amount?: ModelFloatInput | null,
+  idempotencyKey?: ModelStringInput | null,
+  direction?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  read?: ModelBooleanInput | null,
+  settled?: ModelStringInput | null,
+  and?: Array< ModelRecentTransactionConditionInput | null > | null,
+  or?: Array< ModelRecentTransactionConditionInput | null > | null,
+  not?: ModelRecentTransactionConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type RecentTransaction = {
+  __typename?: "RecentTransaction",
+  transactionId: string,
+  athleteId: string,
+  status: string,
+  amount?: number | null,
+  idempotencyKey?: string | null,
+  direction?: string | null,
+  createdAt?: string | null,
+  read?: boolean | null,
+  settled?: string | null,
+  podAllocation?: PodSettings | null,
+  id: string,
+  updatedAt: string,
+};
+
+export type UpdateRecentTransactionInput = {
+  transactionId?: string | null,
+  athleteId?: string | null,
+  status?: string | null,
+  amount?: number | null,
+  idempotencyKey?: string | null,
+  direction?: string | null,
+  createdAt?: string | null,
+  read?: boolean | null,
+  settled?: string | null,
+  podAllocation?: PodSettingsInput | null,
+  id: string,
+};
+
+export type DeleteRecentTransactionInput = {
+  id: string,
+};
+
 export type PlaidAccountDetail = {
   __typename?: "PlaidAccountDetail",
   account_id?: string | null,
@@ -581,27 +581,6 @@ export type ModelAthleteAccountFilterInput = {
   or?: Array< ModelAthleteAccountFilterInput | null > | null,
   not?: ModelAthleteAccountFilterInput | null,
   athleteAccountsId?: ModelIDInput | null,
-};
-
-export type ModelRecentTransactionFilterInput = {
-  transactionId?: ModelStringInput | null,
-  athleteId?: ModelStringInput | null,
-  status?: ModelStringInput | null,
-  amount?: ModelFloatInput | null,
-  idempotencyKey?: ModelStringInput | null,
-  direction?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  read?: ModelBooleanInput | null,
-  settled?: ModelStringInput | null,
-  and?: Array< ModelRecentTransactionFilterInput | null > | null,
-  or?: Array< ModelRecentTransactionFilterInput | null > | null,
-  not?: ModelRecentTransactionFilterInput | null,
-};
-
-export type ModelRecentTransactionConnection = {
-  __typename?: "ModelRecentTransactionConnection",
-  items:  Array<RecentTransaction | null >,
-  nextToken?: string | null,
 };
 
 export type ModelStringKeyConditionInput = {
@@ -666,6 +645,27 @@ export type ModelPhoneChallengeFilterInput = {
 export type ModelPhoneChallengeConnection = {
   __typename?: "ModelPhoneChallengeConnection",
   items:  Array<PhoneChallenge | null >,
+  nextToken?: string | null,
+};
+
+export type ModelRecentTransactionFilterInput = {
+  transactionId?: ModelStringInput | null,
+  athleteId?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  amount?: ModelFloatInput | null,
+  idempotencyKey?: ModelStringInput | null,
+  direction?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  read?: ModelBooleanInput | null,
+  settled?: ModelStringInput | null,
+  and?: Array< ModelRecentTransactionFilterInput | null > | null,
+  or?: Array< ModelRecentTransactionFilterInput | null > | null,
+  not?: ModelRecentTransactionFilterInput | null,
+};
+
+export type ModelRecentTransactionConnection = {
+  __typename?: "ModelRecentTransactionConnection",
+  items:  Array<RecentTransaction | null >,
   nextToken?: string | null,
 };
 
@@ -830,6 +830,7 @@ export type OpenAppAndAccountMutation = {
 
 export type OpenAccountMutationVariables = {
   athleteId: string,
+  podName: string,
 };
 
 export type OpenAccountMutation = {
@@ -1805,90 +1806,6 @@ export type DeleteAthleteAccountMutation = {
   } | null,
 };
 
-export type CreateRecentTransactionMutationVariables = {
-  input: CreateRecentTransactionInput,
-  condition?: ModelRecentTransactionConditionInput | null,
-};
-
-export type CreateRecentTransactionMutation = {
-  createRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateRecentTransactionMutationVariables = {
-  input: UpdateRecentTransactionInput,
-  condition?: ModelRecentTransactionConditionInput | null,
-};
-
-export type UpdateRecentTransactionMutation = {
-  updateRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteRecentTransactionMutationVariables = {
-  input: DeleteRecentTransactionInput,
-  condition?: ModelRecentTransactionConditionInput | null,
-};
-
-export type DeleteRecentTransactionMutation = {
-  deleteRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type CreateEmailChallengeMutationVariables = {
   input: CreateEmailChallengeInput,
   condition?: ModelEmailChallengeConditionInput | null,
@@ -2026,6 +1943,90 @@ export type DeletePhoneChallengeMutation = {
     phoneNumber: string,
     verified: boolean,
     createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateRecentTransactionMutationVariables = {
+  input: CreateRecentTransactionInput,
+  condition?: ModelRecentTransactionConditionInput | null,
+};
+
+export type CreateRecentTransactionMutation = {
+  createRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateRecentTransactionMutationVariables = {
+  input: UpdateRecentTransactionInput,
+  condition?: ModelRecentTransactionConditionInput | null,
+};
+
+export type UpdateRecentTransactionMutation = {
+  updateRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteRecentTransactionMutationVariables = {
+  input: DeleteRecentTransactionInput,
+  condition?: ModelRecentTransactionConditionInput | null,
+};
+
+export type DeleteRecentTransactionMutation = {
+  deleteRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
     updatedAt: string,
   } | null,
 };
@@ -2314,6 +2315,15 @@ export type UnitAccountStatementQuery = {
   } | null > | null,
 };
 
+export type GetAthleteSchoolQuery = {
+  getAthleteSchool?:  Array< {
+    __typename?: "AthleteTeam",
+    name: string,
+    airTableId: string,
+    isActive?: boolean | null,
+  } | null > | null,
+};
+
 export type GetAthleteQueryVariables = {
   id: string,
 };
@@ -2579,66 +2589,6 @@ export type ListAthleteAccountsQuery = {
   } | null,
 };
 
-export type GetRecentTransactionQueryVariables = {
-  id: string,
-};
-
-export type GetRecentTransactionQuery = {
-  getRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListRecentTransactionsQueryVariables = {
-  filter?: ModelRecentTransactionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListRecentTransactionsQuery = {
-  listRecentTransactions?:  {
-    __typename?: "ModelRecentTransactionConnection",
-    items:  Array< {
-      __typename?: "RecentTransaction",
-      transactionId: string,
-      athleteId?: string | null,
-      status?: string | null,
-      amount?: number | null,
-      idempotencyKey?: string | null,
-      direction?: string | null,
-      createdAt?: string | null,
-      read?: boolean | null,
-      settled?: string | null,
-      podAllocation?:  {
-        __typename?: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      id: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetEmailChallengeQueryVariables = {
   code: string,
   email: string,
@@ -2750,6 +2700,139 @@ export type ListPhoneChallengesQuery = {
       code: string,
       phoneNumber: string,
       verified: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetRecentTransactionQueryVariables = {
+  id: string,
+};
+
+export type GetRecentTransactionQuery = {
+  getRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListRecentTransactionsQueryVariables = {
+  filter?: ModelRecentTransactionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListRecentTransactionsQuery = {
+  listRecentTransactions?:  {
+    __typename?: "ModelRecentTransactionConnection",
+    items:  Array< {
+      __typename?: "RecentTransaction",
+      transactionId: string,
+      athleteId: string,
+      status: string,
+      amount?: number | null,
+      idempotencyKey?: string | null,
+      direction?: string | null,
+      createdAt?: string | null,
+      read?: boolean | null,
+      settled?: string | null,
+      podAllocation?:  {
+        __typename?: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      id: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type AthleteByPhoneQueryVariables = {
+  mobilePhone: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelAthleteFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type AthleteByPhoneQuery = {
+  athleteByPhone?:  {
+    __typename?: "ModelAthleteConnection",
+    items:  Array< {
+      __typename?: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email: string,
+      tag?: string | null,
+      level: AthleteLevel,
+      sport:  {
+        __typename?: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      },
+      team:  {
+        __typename?: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      },
+      address:  {
+        __typename?: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      },
+      dateOfBirth: string,
+      accounts?:  {
+        __typename?: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename?: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings:  {
+        __typename?: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      },
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename?: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      id: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3189,75 +3272,6 @@ export type OnDeleteAthleteAccountSubscription = {
   } | null,
 };
 
-export type OnCreateRecentTransactionSubscription = {
-  onCreateRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateRecentTransactionSubscription = {
-  onUpdateRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteRecentTransactionSubscription = {
-  onDeleteRecentTransaction?:  {
-    __typename?: "RecentTransaction",
-    transactionId: string,
-    athleteId?: string | null,
-    status?: string | null,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename?: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type OnCreateEmailChallengeSubscription = {
   onCreateEmailChallenge?:  {
     __typename?: "EmailChallenge",
@@ -3350,6 +3364,75 @@ export type OnDeletePhoneChallengeSubscription = {
     phoneNumber: string,
     verified: boolean,
     createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateRecentTransactionSubscription = {
+  onCreateRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateRecentTransactionSubscription = {
+  onUpdateRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteRecentTransactionSubscription = {
+  onDeleteRecentTransaction?:  {
+    __typename?: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename?: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
     updatedAt: string,
   } | null,
 };

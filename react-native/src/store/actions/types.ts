@@ -15,6 +15,7 @@ export const ONBOARDING_CLEAR_ERROR = 'ONBOARDING_CLEAR_ERROR';
 
 // user
 export const USER_UPDATE = 'USER_UPDATE';
+export const GET_USER_BY_PHONE = 'GET_USER_BY_PHONE';
 
 // login
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

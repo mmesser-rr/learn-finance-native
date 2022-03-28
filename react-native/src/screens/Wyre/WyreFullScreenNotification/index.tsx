@@ -11,7 +11,8 @@ import SecondaryButton from 'src/components/common/SecondaryButton';
 import styles from './styles';
 
 const WyreFullScreenNotification: React.FC = () => {
-  const onLearnMore = () => {};
+  const onLearnMore = () =>
+    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
 
   const next = () => {
     NavigationService.navigate('HomeStack');
