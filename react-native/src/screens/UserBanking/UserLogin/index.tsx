@@ -83,7 +83,7 @@ const UserLogin: React.FC = () => {
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
         <View style={styles.signUp}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={goToSignUp}>
             <Text type="Body/Large" style={styles.signUpLabel}>
               Sign up
             </Text>
