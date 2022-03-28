@@ -9,6 +9,7 @@ import PhoneCodeVerify from './PhoneCodeVerify';
 import NameCapture from './NameCapture';
 import Loading from 'src/components/common/Loading';
 import CreatePassword from './CreatePassword';
+import EmailCapture from './EmailCapture';
 
 import styles from './styles';
 
@@ -26,7 +27,7 @@ const Verification: React.FC<SignUpProps> = ({
   }, [stepName]);
 
   const goToNextStep = () => {
-    if (stepCount < 4) {
+    if (stepCount < 5) {
       navigation.navigate('SignUp', {step: SignUpSteps[stepCount + 1]});
     } else {
       navigation.navigate('SelectLevel');
@@ -55,6 +56,9 @@ const Verification: React.FC<SignUpProps> = ({
         />
       )}
       {stepCount === 4 && <NameCapture goToNextStep={goToNextStep} />}
+      {stepCount === 5 && (
+        <EmailCapture goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />
+      )}
       {loading && <Loading />}
     </AppLayout>
   );
