@@ -26,16 +26,15 @@ const HomeStack = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: AppColors.coreBlack90,
+          backgroundColor: AppColors.coreBlack85,
           borderTopWidth: 0,
           paddingTop: scale(12),
         },
       }}
       tabBarOptions={{
-        activeBackgroundColor: AppColors.coreBlack90,
-        inactiveBackgroundColor: AppColors.coreBlack90,
-      }}
-    >
+        activeBackgroundColor: AppColors.coreBlack85,
+        inactiveBackgroundColor: AppColors.coreBlack85,
+      }}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -45,8 +44,7 @@ const HomeStack = () => {
           tabBarLabel: ({focused}) => (
             <Text
               type="Body/Small"
-              style={focused ? {color: AppColors.accentRed100} : {}}
-            >
+              style={focused ? {color: AppColors.accentRed100} : {}}>
               Home
             </Text>
           ),
@@ -61,8 +59,7 @@ const HomeStack = () => {
           tabBarLabel: ({focused}) => (
             <Text
               type="Body/Small"
-              style={focused ? {color: AppColors.accentRed100} : {}}
-            >
+              style={focused ? {color: AppColors.accentRed100} : {}}>
               Opportunities
             </Text>
           ),
@@ -77,8 +74,7 @@ const HomeStack = () => {
           tabBarLabel: ({focused}) => (
             <Text
               type="Body/Small"
-              style={focused ? {color: AppColors.accentRed100} : {}}
-            >
+              style={focused ? {color: AppColors.accentRed100} : {}}>
               Community
             </Text>
           ),
@@ -93,8 +89,7 @@ const HomeStack = () => {
           tabBarLabel: ({focused}) => (
             <Text
               type="Body/Small"
-              style={focused ? {color: AppColors.accentRed100} : {}}
-            >
+              style={focused ? {color: AppColors.accentRed100} : {}}>
               Profile
             </Text>
           ),
