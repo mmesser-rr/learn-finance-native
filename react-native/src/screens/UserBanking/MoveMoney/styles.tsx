@@ -14,33 +14,33 @@ const styles = StyleSheet.create({
     marginVertical: scale(24),
   },
   balanceLabel: {
-    marginBottom: scale(2)
+    marginBottom: scale(2),
   },
   podGradient: {
     padding: 1,
-    borderRadius: scale(8)
+    borderRadius: scale(8),
   },
   podCard: {
-    marginBottom: scale(24)
+    marginBottom: scale(24),
   },
   podCardLabel: {
-    marginBottom: scale(4)
+    marginBottom: scale(4),
   },
   balance: {
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   moveAmount: {
-    backgroundColor: AppColors.coreBlack90,
+    backgroundColor: AppColors.coreBlack85,
     borderRadius: scale(8),
     paddingVertical: scale(8),
     paddingHorizontal: scale(16),
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   submit: {
-    marginTop: scale(20)
+    marginTop: scale(20),
   },
   description: {
-    marginBottom: scale(24)
+    marginBottom: scale(24),
   },
   inputContainer: {
     alignItems: 'center',
@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
   },
   errorWrapper: {
     alignItems: 'flex-end',
-    marginTop: scale(4)
+    marginTop: scale(4),
   },
   errorMove: {
-    color: AppColors.accentRed100
-  }
+    color: AppColors.accentRed100,
+  },
 });
 
 export default styles;
