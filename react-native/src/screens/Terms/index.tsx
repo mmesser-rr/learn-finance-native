@@ -12,7 +12,7 @@ import styles from './styles';
 const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
   const onClose = () => {
     if (route.params.fromScreen === 'EmailCapture') {
-      navigation.navigate('SignUp', {step: SignUpSteps[4]});
+      navigation.navigate('SignUp', {step: SignUpSteps[5]});
     } else {
       navigation.goBack();
     }

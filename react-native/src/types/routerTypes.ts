@@ -17,7 +17,6 @@ export type RootStackParamList = {
   AccountCreateFailure: undefined;
   ProfileIntro: undefined;
   SelectPlayerTag: undefined;
-  EmailCapture: undefined;
   VerifyEmailCode: undefined;
   HomeStack: undefined;
   TransferStack: undefined;
