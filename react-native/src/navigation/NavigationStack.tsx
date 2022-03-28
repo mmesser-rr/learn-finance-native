@@ -27,6 +27,7 @@ import UserLoginStack from './UserLoginStack';
 import UserBankingStack from './UserBankingStack';
 import Disclosures from 'src/screens/Disclosures';
 import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotification';
+import EmailCapture from 'src/screens/EmailCapture';
 
 interface IProps {
   theme: Theme;
@@ -72,6 +73,7 @@ const App: React.FC<IProps> = (props: IProps) => {
         />
         <RootStack.Screen name="ProfileIntro" component={ProfileIntro} />
         <RootStack.Screen name="SelectPlayerTag" component={SelectPlayerTag} />
+        <RootStack.Screen name="EmailCapture" component={EmailCapture} />
         <RootStack.Screen name="VerifyEmailCode" component={VerifyEmailCode} />
         <RootStack.Screen name="LastStepWelcome" component={LastStepWelcome} />
         <RootStack.Screen

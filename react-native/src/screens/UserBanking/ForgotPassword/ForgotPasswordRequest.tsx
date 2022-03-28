@@ -6,20 +6,23 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import TextInputMask from 'src/components/common/TextInputMask';
 import Alert from 'src/components/common/Alert';
+import TextInput from 'src/components/common/TextInput';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
-import TextInput from 'src/components/common/TextInput';
 
 interface ForgotPasswordRequestProps {
   updateLoading: (status: boolean) => void;
   goToNextStep: () => void;
   updateUsername: (status: string) => void;
+  updatePhoneVerification: (status: boolean) => void;
 }
 
 const ForgotPasswordRequest: React.FC<ForgotPasswordRequestProps> = ({
   updateLoading,
   goToNextStep,
-  updateUsername
+  updateUsername,
+  updatePhoneVerification
 }) => {
   const [isValid, setIsValid] = useState(false);
   const [phone, setPhone] = useState('');
@@ -36,10 +39,6 @@ const ForgotPasswordRequest: React.FC<ForgotPasswordRequestProps> = ({
     setPhone(value);
     checkValidation(value);
     updateUsername(value);
-    // const firstThree = value.slice(0, 3);
-    // const secondThree = value.slice(3, 6);
-    // const lastFour = value.slice(-4);
-    // updateUsername(`${firstThree} ${secondThree} ${lastFour}`);
   };
 
   const handleContinue = async () => {
@@ -68,7 +67,9 @@ const ForgotPasswordRequest: React.FC<ForgotPasswordRequestProps> = ({
   };
 
   const onInstead = () => {
-    setIsPhoneVerification(!isPhoneVerification);
+    const phoneVerificationStatus = !isPhoneVerification;
+    setIsPhoneVerification(phoneVerificationStatus);
+    updatePhoneVerification(phoneVerificationStatus)
   };
 
   const onChangeEmail = (value: string) => {
@@ -76,6 +77,10 @@ const ForgotPasswordRequest: React.FC<ForgotPasswordRequestProps> = ({
     setIsValid(!!value && reg.test(value));
     setEmail(value);
     updateUsername(value);
+  };
+
+  const goToSignUp = () => {
+    NavigationService.navigate('SignUp');
   };
 
   return (
@@ -107,7 +112,7 @@ const ForgotPasswordRequest: React.FC<ForgotPasswordRequestProps> = ({
             <View>
               <Alert style={styles.phoneNumberAlert}>
                 This {isPhoneVerification ? 'phone number' : 'email address'} hasn't been registered. Please{' '}
-                <Text type="Body/Large" style={styles.signUpLabel}>sign up</Text>
+                <Text type="Body/Large" style={styles.signUpLabel} onPress={goToSignUp}>sign up</Text>
                 {' '}first.
               </Alert>
             </View>
