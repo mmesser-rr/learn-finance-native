@@ -25,8 +25,6 @@ const {createAthleteUnitToken} = require("./workflows/createAthleteUnitToken");
 const {unitAccountStatement} = require("./workflows/unitAccountStatement");
 const {athleteUnitTokenVerification} = require("./workflows/athleteUnitTokenVerification");
 
-const {unitWebhook} = require("./workflows/unitWebhook");
-
 const resolvers = Object.freeze({
   openAccount: (event) => createAndPersistAccount(event.arguments.athleteId, event.arguments.podName),
   bookPayment: (event) => bookPayment(event),
@@ -34,8 +32,6 @@ const resolvers = Object.freeze({
   creditAccount: (event) => creditAccount(event),
   createPlaidPayment: (event) => plaidPayment(event),
   podSettings: (event) => podSettings(event),
-  unitWebhookService: (event) => unitWebhook(event),
-
   createAthleteUnitToken: (event) => createAthleteUnitToken(event),
   unitAccountStatement: (event) => unitAccountStatement(event.arguments.athleteId),
   athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event.arguments.athleteId), 

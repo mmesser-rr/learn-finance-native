@@ -1,4 +1,4 @@
-type RecentTransaction @model{
+type RecentTransaction @model (mutations: null){
   transactionId: String! 
   athleteId: String!
   status: String!

@@ -6,14 +6,14 @@ const {getAllWyreTransaction} = require("./getAllWyreTransaction");
 const {getWyreTransactionById} = require("./getWyreTransactionById");
 const {createAthleteWyreToken} = require("./createAthleteWyreToken");
 
-const { wrye } = require("../../env.js");
+const { wyre } = require("../../env.js");
 
 module.exports = {
-  createAccount: createAccount(wrye),
-  createAthleteWyreToken: createAthleteWyreToken(wrye),
-  debitAccount: debitAccount(wrye),
-  creditAccount: creditAccount(wrye),
-  getAthleteWyreAccount: getAthleteWyreAccount(wrye),
-  getWyreTransactionById: getWyreTransactionById(wrye),
-  getAllWyreTransaction: getAllWyreTransaction(wrye)
+  createAccount: createAccount(wyre),
+  createAthleteWyreToken: createAthleteWyreToken(wyre),
+  debitAccount: debitAccount(wyre),
+  creditAccount: creditAccount(wyre),
+  getAthleteWyreAccount: getAthleteWyreAccount(wyre),
+  getWyreTransactionById: getWyreTransactionById(wyre),
+  getAllWyreTransaction: getAllWyreTransaction(wyre)
 }

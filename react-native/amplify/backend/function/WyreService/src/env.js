@@ -3,8 +3,7 @@ const { compose } = require("ramda");
 const WyreClient = require('@wyre/api').WyreClient
 //const tryWrye = require('api')('@wyre-hub/v3#2afn2qkwnogh9o');
 const axios = require('axios');
-const dir = '/Users/deboajagbe/Desktop/Projects/theplayerscompany-react-native/react-native/amplify/backend/function/UnitService/src';
-const jsonFile = compose(JSON.parse, fs.readFileSync)(dir + "/defaultEnv.json")
+const jsonFile = compose(JSON.parse, fs.readFileSync)("./defaultEnv.json")
 
 const getEnv = (varName, required = true) => {
   const varValue = process.env[varName];

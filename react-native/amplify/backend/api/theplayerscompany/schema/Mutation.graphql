@@ -8,7 +8,6 @@ type Mutation {
   tryEmailChallenge(email: String!, code: String!): Boolean! @function(name: "PlayerVerifyService-${env}")
   openAppAndAccount(ssn: String!, athleteId: ID!): [AthleteAccount] @function(name: "UnitService-${env}")
   openAccount(athleteId: ID!, podName: String!): AthleteAccount @function(name: "UnitService-${env}")
-  unitWebhookService(data: String): UnitAccount @function(name: "UnitService-${env}")
 
   podSettings(athleteId: ID!, savings: Int!, investments: Int!, spending: Int!): AthleteAccount @function(name: "UnitService-${env}")
   createPlaidLink(athleteId: ID!): PlaidToken @function(name: "PlaidService-${env}")

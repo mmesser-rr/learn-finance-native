@@ -1,8 +1,8 @@
 const fs = require('fs');
 const { compose } = require("ramda");
-const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 
-const { Unit } = require("@unit-finance/unit-node-sdk");
+const {Unit} = require("@unit-finance/unit-node-sdk");
+const WyreClient = require('@wyre/api').WyreClient
 const axios = require('axios');
 const jsonFile = compose(JSON.parse, fs.readFileSync)("./defaultEnv.json")
 
@@ -28,20 +28,14 @@ const getJson = (varName, required = true) => {
 
 const getEnvOrJson = (varName, required = true) => getEnv(varName, false) || getJson(varName, required);
 
-const configuration = new Configuration({
-  basePath: PlaidEnvironments.sandbox,
-  baseOptions: {
-    headers: {
-      'PLAID-CLIENT-ID': getEnvOrJson('CLIENT_ID'),
-      'PLAID-SECRET': getEnvOrJson('SAND_KEY'),
-    },
-  },
-});
-
 
 const devEnv = () => ({
-  plaid: new PlaidApi(configuration),
-  webhooksecret: getEnvOrJson('UNIT_TOKEN'),
+  wyre: new WyreClient({
+    format: "json_numberstring",
+    apiKey: getEnvOrJson('API_KEY'),
+    secretKey: getEnvOrJson('WYRE_TOKEN'),
+    baseUrl: "https://api.testwyre.com"
+  }),
   unit: new Unit(getEnvOrJson('UNIT_TOKEN'), getEnvOrJson('UNIT_API_URL')),
   axios: axios.create({
     baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
@@ -52,7 +46,12 @@ const devEnv = () => ({
 })
 
 const liveEnv = () => ({
-  plaid: new PlaidApi(configuration),
+  wyre: new WyreClient({
+    format: "json_numberstring",
+    apiKey: getEnvOrJson('API_KEY'),
+    secretKey: getEnvOrJson('WYRE_TOKEN'),
+    baseUrl: "https://api.sendwyre.com"
+  }),
   unit: new Unit(getEnv('UNIT_TOKEN'), getEnv('UNIT_API_URL')),
   axios: axios.create({
     baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),

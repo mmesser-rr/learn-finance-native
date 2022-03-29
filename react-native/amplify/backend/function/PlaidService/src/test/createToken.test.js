@@ -55,10 +55,6 @@ describe('createToken', () => {
     const athleteWithoutCustId = clone(athlete);
     athleteWithoutCustId.unitLookup = undefined;
   
-    const unitCustAndAppId = {
-      custId: '199630',
-      appId: '2005'
-    }
 
     beforeEach(() => {
         getAthleteStub = sinon.stub(tpc, "getAthlete");
@@ -71,32 +67,37 @@ describe('createToken', () => {
     });
 
     describe("before doing any work", () => {
-        it("should reject if athlete doesn't have custID", async () => {
-          getAthleteStub.resolves(athleteWithoutCustId);
-        });
+      it("should throw if athlete has not made a unit application or have account", () => {
+        const athleteWithoutCustId = clone(athlete);
+        athleteWithoutCustId.unitLookup.custId = undefined;
+  
+        getAthleteStub.resolves(athleteWithoutCustId);
+  
+        assert.rejects(createToken(athlete.id), "Athlete does not have a unit customer id. Has their unit application been approved?");
       });
+    });
 
       describe("shold return error if plaid failed", () => {
       it("should return failed, if plaid call is not successful", async () => {
+        getAthleteStub.resolves(athlete);
         plaidFailedResponse.returns(Promise.resolve(false));
         plaidFailedResponse.returns(Promise.reject());
         
         try {
-          await initiateEmailChallenge(event);
+          await createTokenStub(event);
         } catch {} finally {
-          assert.equal(persistChallengeStub.callCount, 0);
+          assert.rejects(createToken(athlete));
         }
       });
     });
     
   
-    it("should return generated link for the athlete if plaid return successful", async () => {
-        emailHasChallengeStub.returns(Promise.resolve(false));
-        sendEmailChallengeStub.returns(Promise.resolve());
+    it("should return token for the athlete if plaid return successful", async () => {
+        getAthleteStub.resolves(athlete);
+        plaidSuccessResponse.returns(Promise.resolve(true));
+        plaidSuccessResponse.returns(Promise.resolve());
         
-        await initiateEmailChallenge(event);
+        await createToken(event);
         assert.equal(persistChallengeStub.callCount, 1);
       });
-
-
 });

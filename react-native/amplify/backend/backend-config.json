@@ -153,6 +153,11 @@
           ]
         }
       ]
+    },
+    "WebhookService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "auth": {

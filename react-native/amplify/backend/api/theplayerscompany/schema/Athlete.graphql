@@ -35,8 +35,7 @@ type AthleteTeam {
   isActive: Boolean
 }
 
-type Athlete @model
-{
+type Athlete @model @auth(rules: [{ allow: owner } {allow: public, operations: [read]}]){
   firstName: String!
   lastName: String!
   mobilePhone: String! @index(name: "byPhone", queryField: "athleteByPhone")
@@ -58,7 +57,7 @@ type Athlete @model
   isActive: Boolean!
 }
 
-type AthleteAccount @model
+type AthleteAccount @model @auth(rules: [{ allow: owner }]) 
 {
   athlete: Athlete! @belongsTo
   unitAccountId: String!
@@ -66,7 +65,3 @@ type AthleteAccount @model
   accountNumber: String!
   podName: String!
 }
-
- #@auth(rules: [{ allow: owner }]) 
-
-  #@auth(rules: [{ allow: owner } {allow: public, operations: [read]}])

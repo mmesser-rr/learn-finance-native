@@ -6,4 +6,10 @@ const getAthleteWyreAccount = (wyre) => (wyreAccountId) => {
   module.exports = {
     getAthleteWyreAccount
   }
-  
+  // wyre.get("/v2/account")
+  //   .then(account => {
+  //       console.log("I am Wyre account ", account.id);
+  //   },
+  //   err => {
+  //       console.log("Problems, cap'n: ", err);
+  //   });
