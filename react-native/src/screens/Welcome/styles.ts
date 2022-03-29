@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   logo: {
-    marginTop: scale(21),
-    marginBottom: scale(96),
+    width: scale(188),
+    height: scale(200),
   },
   title: {
     marginBottom: scale(44),

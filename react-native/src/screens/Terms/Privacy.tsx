@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 
-import {TermsProps} from 'src/types/routerTypes';
+import {PrivacyProps} from 'src/types/routerTypes';
 import CloseIcon from 'src/assets/icons/close.svg';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
@@ -9,22 +9,22 @@ import {SignUpSteps} from 'src/utils/constants';
 
 import styles from './styles';
 
-const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
+const Privacy: React.FC<PrivacyProps> = ({navigation, route}: PrivacyProps) => {
   const onClose = () => {
-    if (route.params.fromScreen === 'EmailCapture') {
-      navigation.navigate('SignUp', {step: SignUpSteps[5]});
-    } else {
+    if (route.params && route.params.fromScreen === 'AccountCreateSuccess') {
       navigation.goBack();
+    } else {
+      navigation.navigate('SignUp', {step: SignUpSteps[5]});
     }
   };
 
   return (
-    <AppLayout containerStyle={styles.container}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
           <CloseIcon />
         </TouchableOpacity>
-        <Text type="Title/Large">Terms and Conditions</Text>
+        <Text type="Title/Large">Terms & Privacy</Text>
       </View>
       <View>
         <View>
@@ -45,7 +45,7 @@ const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
         </View>
 
         <View>
-          <Text type="Body/Large" style={styles.text}>
+          <Text type="Title/Medium" style={styles.text}>
             Interpretation and Definitions.
           </Text>
         </View>
@@ -60,8 +60,14 @@ const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
         </View>
 
         <View>
+          <Text type="Body/Large">
+            Definitions
+          </Text>
+        </View>
+
+        <View>
           <Text type="Body/Large" style={styles.text}>
-            Definitions For the purposes of this Privacy Policy: Account means a
+            For the purposes of this Privacy Policy: Account means a
             unique account created for You to access our Service or parts of our
             Service. AF(iliate means an entity that controls, is controlled by
             or is under common control with a party, where "control" means
@@ -81,4 +87,4 @@ const Terms: React.FC<TermsProps> = ({navigation, route}: TermsProps) => {
   );
 };
 
-export default Terms;
+export default Privacy;

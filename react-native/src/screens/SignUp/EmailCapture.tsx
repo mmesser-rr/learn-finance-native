@@ -27,8 +27,12 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
     setEmail(value);
   };
 
-  const onTerms = () => {
-    NavigationService.navigate('Terms');
+  const onPrivacy = () => {
+    NavigationService.navigate('Privacy');
+  };
+
+  const onAgreement = () => {
+    NavigationService.navigate('Agreement');
   };
 
   const handleContinue = async () => {
@@ -74,7 +78,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
             <Text
               type="Body/Large"
               style={styles.agreementLink}
-              onPress={onTerms}
+              onPress={onAgreement}
             >
               Mobile Deposit Agreement
             </Text>
@@ -82,7 +86,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
             <Text
               type="Body/Large"
               style={styles.agreementLink}
-              onPress={onTerms}
+              onPress={onPrivacy}
             >
               Players Co's Terms & Privacy Policy
             </Text>

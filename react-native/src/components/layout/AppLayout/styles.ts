@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    marginTop: scale(43),
     marginHorizontal: scale(27),
     marginBottom: scale(50),
   },
