@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
+  viewStyle: {
+    marginTop: 0,
+  },
   header: {
     justifyContent: 'center',
     alignItems: 'center',

@@ -9,18 +9,26 @@ const styles = StyleSheet.create({
   viewWrapper: {
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginTop: 0
   },
   block: {
     marginBottom: scale(32),
   },
   logo: {
-    marginBottom: scale(40),
+    width: scale(188),
+    height: scale(200),
   },
   title: {
     fontFamily: 'Lato-Light',
     fontSize: scale(22),
     marginBottom: scale(8),
   },
+  actionStyle: {
+    backgroundColor: AppColors.gray20,
+  },
+  actionLabel: {
+    color: AppColors.coreBlack100,
+  }
 });
 
 export default styles;

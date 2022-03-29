@@ -9,10 +9,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
+    marginBottom: scale(200)
   },
   logo: {
-    marginBottom: scale(48),
     alignItems: 'center',
+    width: scale(188),
+    height: scale(200),
   },
 });
 
