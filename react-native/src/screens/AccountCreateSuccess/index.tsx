@@ -11,8 +11,8 @@ import styles from './styles';
 
 const AccountCreateSuccess: React.FC = () => {
   const goToNextStep = () => NavigationService.navigate('ProfileIntro');
-  const onTerms = () => {
-    NavigationService.navigate('Terms', {fromScreen: 'AccountCreateSuccess'});
+  const onPrivacy = () => {
+    NavigationService.navigate('Privacy', {fromScreen: 'AccountCreateSuccess'});
   };
   const onDisclosures = () => {
     NavigationService.navigate('Disclosures');
@@ -36,8 +36,8 @@ const AccountCreateSuccess: React.FC = () => {
       </View>
       <View>
         <Text type="Body/Large" style={[styles.caption, styles.secondCaption]}>
-          By tapping ‘Open BankDAO accounts’, you agree to our{' '}
-          <Text type="Body/Large" style={styles.link} onPress={onTerms}>
+          By tapping 'Open BankDAO accounts', you agree to our{' '}
+          <Text type="Body/Large" style={styles.link} onPress={onPrivacy}>
             Terms and Conditions
           </Text>{' '}
           and{' '}

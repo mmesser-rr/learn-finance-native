@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
+  viewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginTop: 0
+  },
   head: {
     marginBottom: scale(16),
   },
@@ -16,8 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   actionWrapper: {
-    width: '100%',
-    flex: 1,
+    width: '100%'
   },
   submit: {
     marginTop: scale(-22),
