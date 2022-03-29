@@ -10,12 +10,12 @@
          let params = {
              Item: {
                  'id': {S: event.request.userAttributes.sub},
-                 '__typename': {S: 'User'},
+                 '__typename': {S: 'Athlete'},
                  'mobilePhone': {S: event.request.userAttributes.phone_number},
                  'createdAt': {S: date.toISOString()},
-                 'isActive': false,
+                 'isActive': {S: false},
              },
-             TableName: process.env.USERTABLE
+             TableName: process.env.ATHLETETABLE
          }
  
          try {

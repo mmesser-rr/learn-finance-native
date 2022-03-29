@@ -60,7 +60,7 @@
         },
         "theplayerscompany2db5774e2db5774ePostConfirmation": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-2f68646c7334636b5256-build.zip"
+          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-43544e4b2b7a466b6745-build.zip"
         }
       },
       "auth": {
