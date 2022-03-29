@@ -49,8 +49,8 @@ const VerifyEmailCode: React.FC = () => {
   };
 
   return (
-    <AppLayout containerStyle={styles.container}>
-      <View style={{height: safeviewHeight / 2}}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
+      <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             Enter your verification code

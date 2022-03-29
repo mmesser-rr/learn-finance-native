@@ -4,7 +4,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type RootStackParamList = {
   Welcome: undefined;
   SignUp: {step: string};
-  Terms: {fromScreen: string};
+  Privacy: {fromScreen: string};
+  Agreement: {fromScreen: string};
   Disclosures: {fromScreen: string};
   SelectLevel: undefined;
   SelectSport: {type: string};
@@ -30,7 +31,8 @@ export type RootStackParamList = {
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
 type SelectSportScreenRouteProp = RouteProp<RootStackParamList, 'SelectSport'>;
 type SelectTeamScreenRouteProp = RouteProp<RootStackParamList, 'SelectTeam'>;
-type TermsRouteProp = RouteProp<RootStackParamList, 'Terms'>;
+type PrivacyRouteProp = RouteProp<RootStackParamList, 'Privacy'>;
+type AgreementRouteProp = RouteProp<RootStackParamList, 'Agreement'>;
 type DisclosuresRouteProp = RouteProp<RootStackParamList, 'Disclosures'>;
 
 type SignUpScreenNavigationProp = StackNavigationProp<
@@ -43,19 +45,29 @@ export type SignUpProps = {
   navigation: SignUpScreenNavigationProp;
 };
 
-// terms
-type TermsScreenNavigationProp = StackNavigationProp<
+// Privacy
+type PrivacyScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'Terms'
+  'Privacy'
 >;
 
-export type TermsProps = {
-  navigation: TermsScreenNavigationProp;
-  route: TermsRouteProp;
+export type PrivacyProps = {
+  navigation: PrivacyScreenNavigationProp;
+  route: PrivacyRouteProp;
+};
+
+type AgreementScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Agreement'
+>;
+
+export type AgreementProps = {
+  navigation: AgreementScreenNavigationProp;
+  route: AgreementRouteProp;
 };
 
 export type DisclosuresProps = {
-  navigation: TermsScreenNavigationProp;
+  navigation: PrivacyScreenNavigationProp;
   route: DisclosuresRouteProp;
 };
 
