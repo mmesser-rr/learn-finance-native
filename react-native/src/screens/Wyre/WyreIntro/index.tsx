@@ -39,7 +39,7 @@ const WyreFullScreenNotification: React.FC = () => {
       setEducationItem(educationItems[nextIndex]);
       setEducationItemIndex(nextIndex);
     } else {
-      // NavigationService.navigate('');
+      NavigationService.navigate('CountrySelection');
     }
   };
   const previous = () => {
@@ -51,7 +51,7 @@ const WyreFullScreenNotification: React.FC = () => {
   };
 
   const onClose = () => {
-    NavigationService.goBack();
+    NavigationService.navigate('HomeStack', {screen: 'Home'});
   };
 
   return (
