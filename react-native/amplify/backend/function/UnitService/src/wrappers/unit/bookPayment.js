@@ -35,13 +35,13 @@ const parseApplicationParams = (unitAccountId, amount, description, receiverAcco
 const bookPayment = (unit) => (unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, token) => {
   unit.payments.headers.Authorization = `Bearer ${token}`
   const unitParams = parseApplicationParams(unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey);
-  return unit.payments.create(unitParams)
+  return unit.payments.create(unitParams)//.then(res => console.log(">>>>>>>>>>>", JSON.stringify(res)))
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err.message}`));
 }
 
 const resultLens = (res) => ({
-  transactionId: res.data.id,
+  transactionId: res.data.relationships.transaction.data.id,
   amount: res.data.attributes.amount,
   status: res.data.attributes.status,
   createdAt: res.data.attributes.createdAt,

@@ -1,4 +1,5 @@
-type RecentTransaction @model (mutations: null){
+type RecentTransaction @model #(mutations: null) @auth(rules: [{ allow: owner }]) 
+{
   transactionId: String! 
   athleteId: String!
   status: String!

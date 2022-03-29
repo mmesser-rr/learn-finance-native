@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-theplayerscompany-devjenna-150520-unauthRole",
       "StackName": "amplify-theplayerscompany-devjenna-150520",
       "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-devjenna-150520/54e6b590-7d59-11ec-9ade-125bddb2acd9",
-      "AmplifyAppId": "d3dzwrbiqysm7k"
+      "AmplifyAppId": "d3dzwrbiqysm7k",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-devjenna-150520-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "function": {
@@ -23,7 +24,7 @@
         },
         "PlaidService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/PlaidService-7435444335754e6d4345-build.zip",
+          "s3Key": "amplify-builds/PlaidService-364a302b466e6c667750-build.zip",
           "clientId": "62152ee09cc120001ae1550f",
           "secretKey": "23a7b3327cf22b0c2d9332b39a8ab6",
           "nodeEnv": "development",
@@ -31,7 +32,7 @@
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/UnitService-484a6c42366f65336655-build.zip",
+          "s3Key": "amplify-builds/UnitService-52426c4a4f4678796b55-build.zip",
           "unitApiUrl": "https://api.s.unit.sh/",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMDRUMTY6NTc6NTguMDA1WiIsImp0aSI6IjEyMzUxNSIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfQXSRXfL2joVCb2ZLDMOKL9InJsOYz2YM7bayH8A-RBKAPS_Lm38I_ibTYKi0Wdh6GIPMmdoZmF5qPP2Yvb8bwM",
           "nodeEnv": "development",
@@ -40,22 +41,30 @@
         },
         "MailService": {
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/MailService-2f6e7476337454724f7a-build.zip"
+          "s3Key": "amplify-builds/MailService-2b572b77554e33426e2f-build.zip"
         },
         "AirtableService": {
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/AirtableService-6d416b36497079594f73-build.zip"
+          "s3Key": "amplify-builds/AirtableService-35663858484445753274-build.zip"
         },
         "WyreService": {
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
           "nodeEnv": "development",
           "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
-          "s3Key": "amplify-builds/WyreService-5277497361726e454b38-build.zip"
+          "s3Key": "amplify-builds/WyreService-337354762b5656546951-build.zip"
+        },
+        "WebhookService": {
+          "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+          "s3Key": "amplify-builds/WebhookService-4c526762347259516261-build.zip"
+        },
+        "theplayerscompany2db5774e2db5774ePostConfirmation": {
+          "deploymentBucketName": "amplify-theplayerscompany-devjenna-150520-deployment",
+          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-2f68646c7334636b5256-build.zip"
         }
       },
       "auth": {
-        "Auth": {}
+        "theplayerscompany2db5774e2db5774e": {}
       }
     }
   },
@@ -69,7 +78,8 @@
       "UnauthRoleName": "amplify-theplayerscompany-dev-104409-unauthRole",
       "StackName": "amplify-theplayerscompany-dev-104409",
       "StackId": "arn:aws:cloudformation:us-east-1:444012541784:stack/amplify-theplayerscompany-dev-104409/832f7140-adf5-11ec-8466-1243e91d4e99",
-      "AmplifyAppId": "d3dzwrbiqysm7k"
+      "AmplifyAppId": "d3dzwrbiqysm7k",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-theplayerscompany-dev-104409-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "function": {
@@ -83,7 +93,7 @@
         },
         "PlaidService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/PlaidService-7435444335754e6d4345-build.zip",
+          "s3Key": "amplify-builds/PlaidService-364a302b466e6c667750-build.zip",
           "clientId": "62152ee09cc120001ae1550f",
           "secretKey": "23a7b3327cf22b0c2d9332b39a8ab6",
           "nodeEnv": "development",
@@ -91,7 +101,7 @@
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/UnitService-41323379654766376853-build.zip",
+          "s3Key": "amplify-builds/UnitService-52426c4a4f4678796b55-build.zip",
           "unitApiUrl": "https://api.s.unit.sh/",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMDRUMTY6NTc6NTguMDA1WiIsImp0aSI6IjEyMzUxNSIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfQXSRXfL2joVCb2ZLDMOKL9InJsOYz2YM7bayH8A-RBKAPS_Lm38I_ibTYKi0Wdh6GIPMmdoZmF5qPP2Yvb8bwM",
           "nodeEnv": "development",
@@ -100,22 +110,30 @@
         },
         "MailService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/MailService-2f6e7476337454724f7a-build.zip"
+          "s3Key": "amplify-builds/MailService-2b572b77554e33426e2f-build.zip"
         },
         "AirtableService": {
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/AirtableService-6d416b36497079594f73-build.zip"
+          "s3Key": "amplify-builds/AirtableService-35663858484445753274-build.zip"
         },
         "WyreService": {
           "nodeEnv": "development",
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/WyreService-7432384a59417059382f-build.zip"
+          "s3Key": "amplify-builds/WyreService-337354762b5656546951-build.zip"
+        },
+        "WebhookService": {
+          "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
+          "s3Key": "amplify-builds/WebhookService-4c526762347259516261-build.zip"
+        },
+        "theplayerscompany2db5774e2db5774ePostConfirmation": {
+          "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
+          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-2f68646c7334636b5256-build.zip"
         }
       },
       "auth": {
-        "Auth": {}
+        "theplayerscompany2db5774e2db5774e": {}
       }
     }
   }

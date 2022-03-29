@@ -35,21 +35,22 @@ type AthleteTeam {
   isActive: Boolean
 }
 
-type Athlete @model @auth(rules: [{ allow: owner } {allow: public, operations: [read]}]){
-  firstName: String!
-  lastName: String!
+type Athlete @model @auth(rules: [{ allow: owner } {allow: public, operations: [read]}])
+{
+  firstName: String
+  lastName: String
   mobilePhone: String! @index(name: "byPhone", queryField: "athleteByPhone")
   athleteTag: String
-  email: AWSEmail!
+  email: AWSEmail
   tag: String
-  level: AthleteLevel!
-  sport: AthleteSport!
-  team: AthleteTeam!
-  address: Address!
-  dateOfBirth: String!
+  level: AthleteLevel
+  sport: AthleteSport
+  team: AthleteTeam
+  address: Address
+  dateOfBirth: String
   accounts: [AthleteAccount] @hasMany
   unitLookup: AthleteUnitLookup 
-  podSettings: PodSettings!
+  podSettings: PodSettings
   plaidToken: String
   unitToken: String
   plaidProcessorToken: ProcessorToken
@@ -57,7 +58,7 @@ type Athlete @model @auth(rules: [{ allow: owner } {allow: public, operations: [
   isActive: Boolean!
 }
 
-type AthleteAccount @model @auth(rules: [{ allow: owner }]) 
+type AthleteAccount @model 
 {
   athlete: Athlete! @belongsTo
   unitAccountId: String!

@@ -49,10 +49,22 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "WebhookService": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "theplayerscompany2db5774e2db5774ePostConfirmation": {
+            "Name": "string",
+            "Arn": "string",
+            "LambdaExecutionRole": "string",
+            "Region": "string"
         }
     },
     "auth": {
-        "Auth": {
+        "theplayerscompany2db5774e2db5774e": {
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",

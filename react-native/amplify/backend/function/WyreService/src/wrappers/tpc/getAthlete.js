@@ -31,6 +31,10 @@ const getAthleteStatement = gql`
           podName
         }
       }
+      unitLookup {
+        appId
+        custId
+      }
     }
   }
 `
