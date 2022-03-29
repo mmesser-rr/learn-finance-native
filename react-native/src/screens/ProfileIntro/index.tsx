@@ -1,13 +1,13 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {RedLinnerGradient} from 'src/utils/constants';
+import {BlackRedGradient} from 'src/utils/constants';
 import NavigationService from 'src/navigation/NavigationService';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
-import LogoIcon from 'src/assets/icons/logo.svg';
+import LogoIcon from 'src/assets/icons/logo_white_transparent.png';
 
 import styles from './styles';
 
@@ -15,11 +15,11 @@ const ProfileIntro: React.FC = () => {
   const onFinish = () => NavigationService.navigate('SelectPlayerTag');
 
   return (
-    <LinearGradient colors={RedLinnerGradient} style={styles.container}>
+    <LinearGradient colors={BlackRedGradient} style={styles.container}>
       <AppLayout viewStyle={styles.viewWrapper}>
         <View>
-          <View style={styles.logo}>
-            <LogoIcon />
+          <View>
+            <Image source={LogoIcon} resizeMode="contain" style={styles.logo} />
           </View>
           <View style={styles.block}>
             <Text type="Headline/Large">One last thing</Text>

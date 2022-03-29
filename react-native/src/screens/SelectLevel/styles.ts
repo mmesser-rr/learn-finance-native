@@ -11,13 +11,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   logo: {
-    marginBottom: scale(40),
+    width: scale(188),
+    height: scale(200),
   },
   title: {
     marginBottom: scale(16),
   },
-  proActionWrapper: {
+  proAction: {
     marginBottom: scale(16),
+    backgroundColor: AppColors.gray20,
+  },
+  proLabel: {
+    color: AppColors.coreBlack100,
   },
   collegeAction: {
     backgroundColor: 'transparent',

@@ -7,7 +7,7 @@ import {RootStackParamList} from 'src/types/routerTypes';
 import {SignUpSteps} from 'src/utils/constants';
 import Welcome from 'src/screens/Welcome';
 import SignUp from 'src/screens/SignUp';
-import Terms from 'src/screens/Terms';
+import Privacy from 'src/screens/Terms/Privacy';
 import SelectLevel from 'src/screens/SelectLevel';
 import SelectSport from 'src/screens/SelectSport';
 import SelectTeam from 'src/screens/SelectTeam';
@@ -28,6 +28,7 @@ import UserBankingStack from './UserBankingStack';
 import Disclosures from 'src/screens/Disclosures';
 import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotification';
 import WyreStack from './WyreStack';
+import Agreement from 'src/screens/Terms/Agreement';
 
 interface IProps {
   theme: Theme;
@@ -51,7 +52,8 @@ const App: React.FC<IProps> = (props: IProps) => {
           component={SignUp}
           initialParams={{step: SignUpSteps[0]}}
         />
-        <RootStack.Screen name="Terms" component={Terms} />
+        <RootStack.Screen name="Privacy" component={Privacy} />
+        <RootStack.Screen name="Agreement" component={Agreement} />
         <RootStack.Screen name="Disclosures" component={Disclosures} />
         <RootStack.Screen name="SelectLevel" component={SelectLevel} />
         <RootStack.Screen name="SelectSport" component={SelectSport} />
