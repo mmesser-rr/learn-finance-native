@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   contentWrapper: {},
   actionWrapper: {
     marginTop: scale(48),
-  },
+  }
 });
 
 export default styles;

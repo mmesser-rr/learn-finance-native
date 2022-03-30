@@ -6,18 +6,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
-  viewWrapper: {},
+  viewWrapper: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
   head: {
     marginBottom: scale(16),
   },
   contentWrapper: {
     flex: 1,
-  },
-  actionWrapper: {
-    flex: 1,
-  },
-  submit: {
-    marginTop: scale(-22),
   },
   error: {
     color: AppColors.accentRed100,
@@ -25,7 +22,7 @@ const styles = StyleSheet.create({
   errorWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  },
+  }
 });
 
 export default styles;
