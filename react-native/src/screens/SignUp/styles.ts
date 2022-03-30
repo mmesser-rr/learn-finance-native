@@ -63,9 +63,6 @@ const styles = StyleSheet.create({
   error: {
     marginLeft: scale(16),
     marginTop: scale(4),
-  },
-  step: {
-    marginBottom: scale(8)
   }
 });
 

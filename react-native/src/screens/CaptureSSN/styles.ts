@@ -16,19 +16,12 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
   },
-  actionWrapper: {
-  },
-  submit: {
-  },
   error: {
     color: AppColors.accentRed100,
   },
   errorWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  },
-  step: {
-    marginTop: scale(8)
   }
 });
 

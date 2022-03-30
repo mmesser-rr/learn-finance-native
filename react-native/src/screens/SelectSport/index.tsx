@@ -55,7 +55,7 @@ const SelectSport: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
-        <View style={styles.step}>
+        <View>
           <OnboardingSteps />
         </View>
         <View>
