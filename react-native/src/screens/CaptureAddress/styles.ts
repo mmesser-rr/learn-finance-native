@@ -16,9 +16,6 @@ const styles = StyleSheet.create({
   contentWrapper: {},
   actionWrapper: {
     marginTop: scale(48),
-  },
-  step: {
-    marginTop: scale(8),
   }
 });
 

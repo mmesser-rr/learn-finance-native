@@ -42,7 +42,7 @@ const CaptureSSN: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
-        <View style={styles.step}>
+        <View>
           <OnboardingSteps />
         </View>
         <View>
@@ -68,11 +68,10 @@ const CaptureSSN: React.FC = () => {
           </View>
         )}
       </View>
-      <View style={styles.actionWrapper}>
+      <View>
         <SubmitButton
           isValid={isValid}
           actionLabel="Continue"
-          style={styles.submit}
           onSubmit={goToNextStep}
         />
       </View>

@@ -40,7 +40,7 @@ const Verification: React.FC<SignUpProps> = ({
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={styles.step}>
+      <View>
         <OnboardingSteps />
       </View>
       {stepCount === 0 && (
