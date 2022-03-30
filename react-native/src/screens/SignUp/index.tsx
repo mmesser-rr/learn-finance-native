@@ -12,6 +12,8 @@ import CreatePassword from './CreatePassword';
 import EmailCapture from './EmailCapture';
 
 import styles from './styles';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
+import { View } from 'react-native';
 
 const Verification: React.FC<SignUpProps> = ({
   route,
@@ -19,6 +21,8 @@ const Verification: React.FC<SignUpProps> = ({
 }: SignUpProps) => {
   const [stepCount, setStepCount] = useState(-1);
   const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState('');
+
   const stepName = route.params.step;
 
   useEffect(() => {
@@ -36,28 +40,36 @@ const Verification: React.FC<SignUpProps> = ({
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
+      <View>
+        <OnboardingSteps />
+      </View>
       {stepCount === 0 && (
         <InvitationCode
           goToNextStep={goToNextStep}
-          updateLoading={status => setLoading(status)}
+          updateLoading={setLoading}
         />
       )}
-      {stepCount === 1 && <PhoneCapture goToNextStep={goToNextStep} />}
+      {stepCount === 1 && (
+        <PhoneCapture
+          goToNextStep={goToNextStep}
+        />
+      )}
       {stepCount === 2 && (
         <CreatePassword
           goToNextStep={goToNextStep}
-          updateLoading={status => setLoading(status)}
+          updateLoading={setLoading}
+          updatePassword={setPassword}
         />
       )}
       {stepCount === 3 && (
         <PhoneCodeVerify
           goToNextStep={goToNextStep}
-          updateLoading={status => setLoading(status)}
+          updateLoading={setLoading}
         />
       )}
       {stepCount === 4 && <NameCapture goToNextStep={goToNextStep} />}
       {stepCount === 5 && (
-        <EmailCapture goToNextStep={goToNextStep} updateLoading={status => setLoading(status)} />
+        <EmailCapture password={password} goToNextStep={goToNextStep} updateLoading={setLoading} />
       )}
       {loading && <Loading />}
     </AppLayout>

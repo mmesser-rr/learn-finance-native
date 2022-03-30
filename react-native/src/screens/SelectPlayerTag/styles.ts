@@ -16,19 +16,13 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flex: 1,
   },
-  actionWrapper: {
-    flex: 1,
-  },
-  submit: {
-    marginTop: scale(-22),
-  },
   textAffixColor: {
     color: AppColors.gray20,
   },
   left: {
     fontSize: scale(16),
     color: AppColors.gray20,
-  },
+  }
 });
 
 export default styles;

@@ -4,17 +4,20 @@ import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColors.coreBlack100,
+    flex: 1,
   },
   viewWrapper: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around'
   },
-  head: {
+  contentWrapper: {
     marginBottom: scale(32),
   },
   actionWrapper: {
-    marginTop: scale(32),
+  },
+  joinAction: {
+    marginBottom: scale(16),
+    backgroundColor: AppColors.gray20,
   }
 });
 
