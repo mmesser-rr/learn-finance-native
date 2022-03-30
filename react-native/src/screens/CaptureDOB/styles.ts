@@ -12,13 +12,6 @@ const styles = StyleSheet.create({
   },
   head: {
     marginBottom: scale(32),
-  },
-  actionWrapper: {
-  },
-  submit: {
-  },
-  step: {
-    marginTop: scale(8),
   }
 });
 

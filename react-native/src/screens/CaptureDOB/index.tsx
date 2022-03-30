@@ -54,7 +54,7 @@ const CaptureDOB: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View>
-        <View style={styles.step}>
+        <View>
           <OnboardingSteps />
         </View>
         <View>
@@ -77,11 +77,10 @@ const CaptureDOB: React.FC = () => {
           />
         </View>
       </View>
-      <View style={styles.actionWrapper}>
+      <View>
         <SubmitButton
           isValid={isValid}
           actionLabel="Continue"
-          style={styles.submit}
           onSubmit={goToNextStep}
         />
       </View>

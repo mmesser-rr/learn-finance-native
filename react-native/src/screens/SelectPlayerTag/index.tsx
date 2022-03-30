@@ -32,7 +32,7 @@ const SelectPlayerTag: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
-        <View style={styles.step}>
+        <View>
           <OnboardingSteps />
         </View>
         <View>

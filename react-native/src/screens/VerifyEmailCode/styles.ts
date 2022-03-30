@@ -42,9 +42,6 @@ const styles = StyleSheet.create({
     marginTop: scale(16),
     borderRadius: scale(100),
     padding: 1,
-  },
-  step: {
-    marginBottom: scale(8)
   }
 });
 

@@ -22,9 +22,6 @@ const styles = StyleSheet.create({
   left: {
     fontSize: scale(16),
     color: AppColors.gray20,
-  },
-  step: {
-    marginBottom: scale(8)
   }
 });
 
