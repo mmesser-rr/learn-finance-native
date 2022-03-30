@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
@@ -7,9 +7,10 @@ import {Text} from 'src/components/common/Texts';
 import AutoComplete, {ItemInterface} from 'src/components/common/AutoComplete';
 import SubmitButton from 'src/components/common/SubmitButton';
 import NavigationService from 'src/navigation/NavigationService';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
 
 import styles from './styles';
-import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 const suggestions: ItemInterface[] = [
   {
@@ -29,6 +30,10 @@ const suggestions: ItemInterface[] = [
 const SelectSport: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 7}));
+  }, []);
 
   const onChangeOption = (option: string) => {
     setValue(option);
@@ -50,6 +55,9 @@ const SelectSport: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             What sports do you play?

@@ -9,24 +9,19 @@ import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
 import NavigationService from 'src/navigation/NavigationService';
 import {validateDOB} from 'src/utils/validation';
-import {calculateContentHeight} from 'src/utils/functions';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
 
 import styles from './styles';
-import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 const CaptureDOB: React.FC = () => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
   const [dateOfBirthString, setDateOfBirthString] = useState('');
   const [isError, setError] = useState(false);
-  const [safeviewHeight, SetSafeviewHeight] = useState(0);
 
   useEffect(() => {
-    async function getContentHeight() {
-      SetSafeviewHeight(await calculateContentHeight());
-    }
-
-    getContentHeight();
+    dispatch(updateOnboarding({isSignInLink: false, step: 9}));
   }, []);
 
   const changeValue = (value: string) => {
@@ -57,8 +52,11 @@ const CaptureDOB: React.FC = () => {
   };
 
   return (
-    <AppLayout containerStyle={styles.container}>
-      <View style={{height: safeviewHeight / 2}}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
+      <View>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             What's your date of birth?

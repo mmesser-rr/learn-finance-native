@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
   actionWrapper: {
     marginTop: scale(48),
   },
+  step: {
+    marginTop: scale(8),
+  }
 });
 
 export default styles;

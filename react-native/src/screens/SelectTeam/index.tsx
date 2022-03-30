@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -9,6 +9,7 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import {SelectTeamProps} from 'src/types/routerTypes';
 import {RootState} from 'src/store/root-state';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
 
 import styles from './styles';
 
@@ -64,6 +65,10 @@ const SelectTeam: React.FC<SelectTeamProps> = ({navigation}) => {
 
   const {level} = useSelector((state: RootState) => state.onboardingReducer);
 
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 8}));
+  }, []);
+
   const suggestions = useMemo(() => {
     if (level === 'PROFESSIONAL') {
       return proSuggestions;
@@ -92,6 +97,9 @@ const SelectTeam: React.FC<SelectTeamProps> = ({navigation}) => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             {level === 'PROFESSIONAL'

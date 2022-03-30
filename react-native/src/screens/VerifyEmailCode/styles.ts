@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     borderRadius: scale(100),
     padding: 1,
   },
+  step: {
+    marginBottom: scale(8)
+  }
 });
 
 export default styles;

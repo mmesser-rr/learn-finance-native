@@ -9,8 +9,11 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack100,
   },
   viewWrapper: {
+  },
+  contentWrapper: {
     flexDirection: 'column',
     justifyContent: 'space-between',
+    flex: 1,
   },
   head: {
     marginBottom: scale(16),
@@ -61,6 +64,9 @@ const styles = StyleSheet.create({
     marginLeft: scale(16),
     marginTop: scale(4),
   },
+  step: {
+    marginBottom: scale(8)
+  }
 });
 
 export default styles;
