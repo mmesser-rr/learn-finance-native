@@ -2,9 +2,267 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateRecentTransaction = /* GraphQL */ `
+  subscription OnCreateRecentTransaction {
+    onCreateRecentTransaction {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRecentTransaction = /* GraphQL */ `
+  subscription OnUpdateRecentTransaction {
+    onUpdateRecentTransaction {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRecentTransaction = /* GraphQL */ `
+  subscription OnDeleteRecentTransaction {
+    onDeleteRecentTransaction {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const onCreateAthlete = /* GraphQL */ `
+  subscription OnCreateAthlete($id: String) {
+    onCreateAthlete(id: $id) {
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAthlete = /* GraphQL */ `
+  subscription OnUpdateAthlete($id: String) {
+    onUpdateAthlete(id: $id) {
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAthlete = /* GraphQL */ `
+  subscription OnDeleteAthlete($id: String) {
+    onDeleteAthlete(id: $id) {
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateAthleteAccount = /* GraphQL */ `
-  subscription OnCreateAthleteAccount {
-    onCreateAthleteAccount {
+  subscription OnCreateAthleteAccount($athlete: String) {
+    onCreateAthleteAccount(athlete: $athlete) {
       athlete {
         firstName
         lastName
@@ -54,7 +312,6 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         id
         createdAt
         updatedAt
-        owner
       }
       unitAccountId
       routingCode
@@ -68,8 +325,8 @@ export const onCreateAthleteAccount = /* GraphQL */ `
   }
 `;
 export const onUpdateAthleteAccount = /* GraphQL */ `
-  subscription OnUpdateAthleteAccount {
-    onUpdateAthleteAccount {
+  subscription OnUpdateAthleteAccount($athlete: String) {
+    onUpdateAthleteAccount(athlete: $athlete) {
       athlete {
         firstName
         lastName
@@ -119,7 +376,6 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         id
         createdAt
         updatedAt
-        owner
       }
       unitAccountId
       routingCode
@@ -133,8 +389,8 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
   }
 `;
 export const onDeleteAthleteAccount = /* GraphQL */ `
-  subscription OnDeleteAthleteAccount {
-    onDeleteAthleteAccount {
+  subscription OnDeleteAthleteAccount($athlete: String) {
+    onDeleteAthleteAccount(athlete: $athlete) {
       athlete {
         firstName
         lastName
@@ -184,7 +440,6 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         id
         createdAt
         updatedAt
-        owner
       }
       unitAccountId
       routingCode
@@ -290,267 +545,6 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
       verified
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateRecentTransaction = /* GraphQL */ `
-  subscription OnCreateRecentTransaction {
-    onCreateRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const onUpdateRecentTransaction = /* GraphQL */ `
-  subscription OnUpdateRecentTransaction {
-    onUpdateRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const onDeleteRecentTransaction = /* GraphQL */ `
-  subscription OnDeleteRecentTransaction {
-    onDeleteRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const onCreateAthlete = /* GraphQL */ `
-  subscription OnCreateAthlete($owner: String) {
-    onCreateAthlete(owner: $owner) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      plaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateAthlete = /* GraphQL */ `
-  subscription OnUpdateAthlete($owner: String) {
-    onUpdateAthlete(owner: $owner) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      plaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteAthlete = /* GraphQL */ `
-  subscription OnDeleteAthlete($owner: String) {
-    onDeleteAthlete(owner: $owner) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      plaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
-      id
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
