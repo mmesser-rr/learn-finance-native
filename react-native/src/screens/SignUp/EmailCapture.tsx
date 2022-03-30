@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 
 import {Text} from 'src/components/common/Texts';
@@ -8,18 +8,25 @@ import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 import { Auth } from 'aws-amplify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateOnboarding } from 'src/store/actions/onboardingActions';
+import { RootState } from 'src/store/root-state';
 
 interface EmailCaptureProps {
+  password: string;
   goToNextStep: () => void;
   updateLoading: (status: boolean) => void;
 }
 
-const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}) => {
+const EmailCapture: React.FC<EmailCaptureProps> = ({password, goToNextStep, updateLoading}) => {
   const dispatch = useDispatch();
+  const {mobilePhone} = useSelector((state: RootState) => state.onboardingReducer);
   const [isValid, setIsValid] = useState(false);
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 6}));
+  }, []);
 
   const codeChangeHandler = (value: string) => {
     const reg = /\S+@\S+\.\S+/;
@@ -38,6 +45,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
   const handleContinue = async () => {
     updateLoading(true);
     try {
+      await Auth.signIn(`+1${mobilePhone}`, password);
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, {
         email
@@ -51,7 +59,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
@@ -99,7 +107,7 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({goToNextStep, updateLoading}
           onSubmit={handleContinue}
         />
       </View>
-    </>
+    </View>
   );
 };
 

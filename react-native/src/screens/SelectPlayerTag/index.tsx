@@ -1,16 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
+import {
+  updateOnboarding,
+} from 'src/store/actions/onboardingActions';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
 
 import styles from './styles';
 
+
 const SelectPlayerTag: React.FC = () => {
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 12}));
+  }, []);
 
   const changeValue = (value: string) => {
     setIsValid(!!value);
@@ -21,6 +32,9 @@ const SelectPlayerTag: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             Create your player tag
@@ -46,11 +60,10 @@ const SelectPlayerTag: React.FC = () => {
           />
         </View>
       </View>
-      <View style={styles.actionWrapper}>
+      <View>
         <SubmitButton
           isValid={isValid}
           actionLabel="Continue"
-          style={styles.submit}
           onSubmit={goToNextStep}
         />
       </View>

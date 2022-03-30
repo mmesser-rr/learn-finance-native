@@ -18,6 +18,8 @@ const initialState: IOnboardingState = {
   ssn: '',
   isOnboardingComplete: false,
   error: undefined,
+  step: 1,
+  isSignInLink: true
 };
 
 export const onboardingReducer = createReducer(initialState, {
