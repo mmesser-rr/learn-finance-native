@@ -5,16 +5,19 @@ import styles from './styles';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-import ComingSoonIcon from 'src/assets/icons/coming-soon.svg';
+import TopNav from 'src/components/common/TopNav';
+import ReadyIcon from 'src/assets/icons/ready.svg';
 import SubmitButton from 'src/components/common/SubmitButton';
-import SecondaryButton from 'src/components/common/SecondaryButton';
 
-const NonUS: React.FC = () => {
-  const onSignUp = () => {
-    // TODO: link to sign up web page?
+const OpenRewardsAccount: React.FC = () => {
+  const openRewardsAccount = () => {
+    // TODO:
+  };
+  const previous = () => {
+    NavigationService.navigate('WyreIntro');
   };
 
-  const onMaybeLater = () => {
+  const onClose = () => {
     NavigationService.navigate('HomeStack', {screen: 'Home'});
   };
 
@@ -22,8 +25,15 @@ const NonUS: React.FC = () => {
     <AppLayout
       containerStyle={styles.container}
       viewStyle={styles.containerView}>
+      <View style={styles.nav}>
+        <TopNav
+          title="Open Rewards Account"
+          goCloseScreen={onClose}
+          goPreviousScreen={previous}
+        />
+      </View>
       <View style={styles.iconWrapper}>
-        <ComingSoonIcon />
+        <ReadyIcon />
       </View>
       <View>
         <Text type="Headline/Small" style={styles.headline}>
@@ -40,17 +50,12 @@ const NonUS: React.FC = () => {
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={true}
-          actionLabel="Sign up for the newsletter"
-          onSubmit={onSignUp}
-        />
-        <SecondaryButton
-          isValid={true}
-          actionLabel="Maybe Later"
-          onPress={onMaybeLater}
+          actionLabel="Open Rewards Account"
+          onSubmit={openRewardsAccount}
         />
       </View>
     </AppLayout>
   );
 };
 
-export default NonUS;
+export default OpenRewardsAccount;

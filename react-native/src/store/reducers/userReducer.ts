@@ -5,7 +5,7 @@ import createReducer from 'src/lib/createReducer';
 import * as types from 'src/store/actions/types';
 
 import {IUserState} from 'src/models/reducers/user';
-import {IUserUpdate} from 'src/models/actions/user';
+import {ILoginSuccess, IUserUpdate} from 'src/models/actions/user';
 
 const initialState: IUserState = {
   isLoggedIn: false,
@@ -13,6 +13,14 @@ const initialState: IUserState = {
 };
 
 export const userReducer = createReducer(initialState, {
+  [types.LOGIN_SUCCESS](state: IUserState, action: ILoginSuccess) {
+    return {
+      ...state,
+      isLoggedIn: true,
+      userId: action.id,
+      token: action.token,
+    };
+  },
   [types.USER_UPDATE](state: IUserState, action: IUserUpdate) {
     const user = {...state.user, ...action.update};
     return {...state, user};

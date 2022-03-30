@@ -12,7 +12,7 @@ import UnCheckIcon from 'src/assets/icons/uncheck.svg';
 import CheckedIcon from 'src/assets/icons/checked.svg';
 
 import styles from './styles';
-import { RootState } from 'src/store/root-state';
+import {RootState} from 'src/store/root-state';
 import Alert from 'src/components/common/Alert';
 
 interface CreatePasswordProps {
@@ -22,23 +22,25 @@ interface CreatePasswordProps {
 
 const CreatePassword: React.FC<CreatePasswordProps> = ({
   goToNextStep,
-  updateLoading
+  updateLoading,
 }) => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [contains816C, setContains816C] = useState(false); // 8-16 characters
-  const [containsUL, setContainsUL] = useState(false) // uppercase and lowercase letter
-  const [containsN, setContainsN] = useState(false) // number
-  const [containsSC, setContainsSC] = useState(false) // special character
-  const {mobilePhone} = useSelector((state: RootState) => state.onboardingReducer);
+  const [containsUL, setContainsUL] = useState(false); // uppercase and lowercase letter
+  const [containsN, setContainsN] = useState(false); // number
+  const [containsSC, setContainsSC] = useState(false); // special character
+  const {mobilePhone} = useSelector(
+    (state: RootState) => state.onboardingReducer,
+  );
 
   const rules = [
     ['8-16 characters', contains816C],
     ['Upper and lower cases', containsUL],
     ['Numbers', containsN],
-    ['Special characters (! @ # $ % ^ & *)', containsSC]
+    ['Special characters (! @ # $ % ^ & *)', containsSC],
   ];
 
   const validatePassword = (value: string) => {
@@ -100,13 +102,15 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
     updateLoading(true);
     try {
       const phoneNumber = `+1${mobilePhone}`;
-      await Auth.signUp({
+      const response = await Auth.signUp({
         username: phoneNumber,
         password,
         attributes: {
-          phone_number: phoneNumber
-        }
+          phone_number: phoneNumber,
+        },
       });
+      console.log('signUp response', response);
+      dispatch(updateOnboarding({id: response.userSub, password}));
       goToNextStep();
     } catch (error: any) {
       setError(error.message || 'Unknown Error');
@@ -134,9 +138,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
               label="Password"
               onChangeText={changePassword}
             />
-            {!!error && (
-              <Alert style={styles.error}>{error}</Alert>
-            )}
+            {!!error && <Alert style={styles.error}>{error}</Alert>}
           </View>
           <View style={styles.rulesWrapper}>
             {rules.map((rule, index) => (

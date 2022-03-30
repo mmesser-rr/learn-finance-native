@@ -18,11 +18,14 @@ export const ONBOARDING_UPDATE_STEP = 'ONBOARDING_UPDATE_STEP';
 export const USER_UPDATE = 'USER_UPDATE';
 export const GET_USER_BY_PHONE = 'GET_USER_BY_PHONE';
 
-// login
+// user/login
+export const ONBOARDING_SILENT_SIGN_IN = 'ONBOARDING_SILENT_SIGN_IN';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_RESPONSE = 'LOGIN_RESPONSE';
 export const LOGIN_LOADING_ENDED = 'LOGIN_LOADING_ENDED';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const CLEAR_LOGIN_ERRORS = 'CLEAR_LOGIN_ERRORS';
 export const LOG_OUT = 'LOG_OUT';
 
 // banking

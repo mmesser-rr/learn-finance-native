@@ -23,7 +23,10 @@ type FormData = {
 
 const invalidCodeMessage = 'Invalid code. Please try again.';
 
-const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoading}) => {
+const InvitationCode: React.FC<InvitationCodeProps> = ({
+  goToNextStep,
+  updateLoading,
+}) => {
   const {
     control,
     handleSubmit,
@@ -39,12 +42,14 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoad
 
   const onSubmit = async (formData: FormData) => {
     updateLoading(true);
-    const {data} = (await API.graphql(
-      graphqlOperation(getInvite, {
+    const {data} = (await API.graphql({
+      query: getInvite,
+      variables: {
         code: formData.code,
         status: InviteStatus.AVAILABLE,
-      }),
-    )) as GraphQLResult<GetInviteQuery>;
+      },
+      authMode: 'API_KEY',
+    })) as GraphQLResult<GetInviteQuery>;
     updateLoading(false);
 
     if (data && data.getInvite) {

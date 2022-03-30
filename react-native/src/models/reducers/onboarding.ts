@@ -1,9 +1,11 @@
 import {AthleteLevel} from 'src/types/API';
 
 export interface IOnboardingState {
+  id?: string;
   firstName: string;
   lastName: string;
   mobilePhone: string;
+  password?: string;
   email: string;
   dateOfBirth?: string;
   level?: AthleteLevel;
