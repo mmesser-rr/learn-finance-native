@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
@@ -11,6 +11,7 @@ import TextInput from 'src/components/common/TextInput';
 
 import styles from './styles';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
 
 type FormData = {
   streetAddress: string;
@@ -22,6 +23,10 @@ type FormData = {
 
 const CaptureAddress: React.FC = () => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 10}));
+  }, []);
+
   const {
     control,
     handleSubmit,
@@ -46,6 +51,9 @@ const CaptureAddress: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.contentWrapper}>
+        <View>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             What's your address?

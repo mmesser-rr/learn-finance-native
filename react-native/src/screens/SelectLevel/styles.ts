@@ -3,17 +3,6 @@ import AppColors from 'src/config/colors';
 import {scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  viewWrapper: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  logo: {
-    width: scale(188),
-    height: scale(200),
-  },
   title: {
     marginBottom: scale(16),
   },
@@ -28,9 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: AppColors.gray20,
-  },
-  actionWrapper: {
-    flex: 1,
   },
 });
 

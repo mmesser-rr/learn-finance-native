@@ -6,15 +6,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
+  viewStyle: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
   head: {
     marginBottom: scale(32),
-  },
-  actionWrapper: {
-    flex: 1,
-  },
-  submit: {
-    marginTop: scale(-22),
-  },
+  }
 });
 
 export default styles;

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {API, graphqlOperation} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
+import { useDispatch } from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
 import {getInvite} from 'src/graphql/queries';
 import {GetInviteQuery, InviteStatus} from 'src/types/graphql';
+import { updateOnboarding } from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
 
@@ -23,7 +25,11 @@ type FormData = {
 
 const invalidCodeMessage = 'Invalid code. Please try again.';
 
-const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoading}) => {
+const InvitationCode: React.FC<InvitationCodeProps> = ({
+  goToNextStep,
+  updateLoading
+}) => {
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
@@ -36,6 +42,10 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoad
     },
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: true, step: 1}));
+  }, []);
 
   const onSubmit = async (formData: FormData) => {
     updateLoading(true);
@@ -58,7 +68,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoad
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
@@ -106,7 +116,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({goToNextStep, updateLoad
           onSubmit={handleSubmit(onSubmit)}
         />
       </View>
-    </>
+    </View>
   );
 };
 

@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Auth} from 'aws-amplify';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
 import {RootState} from 'src/store/root-state';
+import { updateOnboarding } from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
 
@@ -19,6 +20,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   goToNextStep,
   updateLoading,
 }) => {
+  const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
@@ -26,6 +28,10 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   const {mobilePhone} = useSelector(
     (state: RootState) => state.onboardingReducer,
   );
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 4}));
+  }, []);
 
   const generatePhoneNumber = () => {
     const firstThree = mobilePhone.slice(0, 3);
@@ -52,7 +58,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
@@ -90,7 +96,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
           onSubmit={handleSubmit}
         />
       </View>
-    </>
+    </View>
   );
 };
 
