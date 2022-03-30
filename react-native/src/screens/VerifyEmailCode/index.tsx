@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInput from 'src/components/common/TextInput';
 import NavigationService from 'src/navigation/NavigationService';
-import {calculateContentHeight} from 'src/utils/functions';
 import {RootState} from 'src/store/root-state';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
+import { updateOnboarding } from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
 
@@ -18,18 +19,13 @@ type FormData = {
 };
 
 const VerifyEmailCode: React.FC = () => {
-  const [safeviewHeight, SetSafeviewHeight] = useState(0);
-
+  const dispatch = useDispatch();
   const email = useSelector(
     (state: RootState) => state.onboardingReducer.email,
   );
 
   useEffect(() => {
-    async function getContentHeight() {
-      SetSafeviewHeight(await calculateContentHeight());
-    }
-
-    getContentHeight();
+    dispatch(updateOnboarding({isSignInLink: false, step: 13}));
   }, []);
 
   const {
@@ -51,6 +47,9 @@ const VerifyEmailCode: React.FC = () => {
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             Enter your verification code

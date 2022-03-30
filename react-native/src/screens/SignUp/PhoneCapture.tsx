@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
@@ -14,11 +14,15 @@ interface PhoneCaptureProps {
 }
 
 const PhoneCapture: React.FC<PhoneCaptureProps> = ({
-  goToNextStep,
+  goToNextStep
 }) => {
   const dispatch = useDispatch();
   const [isValid, setIsValid] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: true, step: 2}));
+  }, []);
 
   const changeValue = (value: string) => {
     setIsValid(value.length === 10);
@@ -35,7 +39,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <View>
@@ -66,7 +70,7 @@ const PhoneCapture: React.FC<PhoneCaptureProps> = ({
           onSubmit={handleSubmit}
         />
       </View>
-    </>
+    </View>
   );
 };
 

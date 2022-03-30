@@ -6,15 +6,15 @@ import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import TextInputMask from 'src/components/common/TextInputMask';
-import {calculateContentHeight} from 'src/utils/functions';
-
-import styles from './styles';
 import {
   createAthleteAndAccount,
   updateOnboarding,
 } from 'src/store/actions/onboardingActions';
 import Loading from 'src/components/common/Loading';
 import {RootState} from 'src/store/root-state';
+import OnboardingSteps from 'src/components/common/OnboardingSteps';
+
+import styles from './styles';
 
 const label = 'SSN (xxx-xx-xxxx)';
 
@@ -22,17 +22,11 @@ const CaptureSSN: React.FC = () => {
   const dispatch = useDispatch();
   const [ssn, setSsn] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const [safeviewHeight, SetSafeviewHeight] = useState(0);
-
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
   const {error} = useSelector((state: RootState) => state.onboardingReducer);
 
   useEffect(() => {
-    async function getContentHeight() {
-      SetSafeviewHeight(await calculateContentHeight());
-    }
-
-    getContentHeight();
+    dispatch(updateOnboarding({isSignInLink: false, step: 11}));
   }, []);
 
   const changeValue = (value: string) => {
@@ -47,7 +41,10 @@ const CaptureSSN: React.FC = () => {
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
-      <View style={{height: safeviewHeight / 2}}>
+      <View>
+        <View style={styles.step}>
+          <OnboardingSteps />
+        </View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
             What's your Social Security number?

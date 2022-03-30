@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch} from 'react-redux';
 
@@ -18,6 +18,10 @@ const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 5}));
+  }, []);
 
   const checkValidation = (fName: string, lName: string) => {
     setIsValid(!!fName && !!lName);
@@ -39,7 +43,7 @@ const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <Text type="Headline/Small" style={styles.head}>
@@ -65,7 +69,7 @@ const NameCapture: React.FC<NameCaptureProps> = ({goToNextStep}) => {
           onSubmit={handleContinue}
         />
       </View>
-    </>
+    </View>
   );
 };
 

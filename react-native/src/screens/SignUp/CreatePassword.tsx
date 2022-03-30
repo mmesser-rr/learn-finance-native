@@ -1,28 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {Auth} from 'aws-amplify';
 
-import TextInputMask from 'src/components/common/TextInputMask';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
 import TextInput from 'src/components/common/TextInput';
 import UnCheckIcon from 'src/assets/icons/uncheck.svg';
 import CheckedIcon from 'src/assets/icons/checked.svg';
-
-import styles from './styles';
 import { RootState } from 'src/store/root-state';
 import Alert from 'src/components/common/Alert';
+
+import styles from './styles';
 
 interface CreatePasswordProps {
   goToNextStep: () => void;
   updateLoading: (status: boolean) => void;
+  updatePassword: (password: string) => void;
 }
 
 const CreatePassword: React.FC<CreatePasswordProps> = ({
   goToNextStep,
-  updateLoading
+  updateLoading,
+  updatePassword,
 }) => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState('');
@@ -33,6 +34,10 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
   const [containsN, setContainsN] = useState(false) // number
   const [containsSC, setContainsSC] = useState(false) // special character
   const {mobilePhone} = useSelector((state: RootState) => state.onboardingReducer);
+
+  useEffect(() => {
+    dispatch(updateOnboarding({isSignInLink: false, step: 3}));
+  }, []);
 
   const rules = [
     ['8-16 characters', contains816C],
@@ -94,6 +99,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
   const changePassword = (value: string) => {
     setIsValid(validatePassword(value));
     setPassword(value);
+    updatePassword(value);
   };
 
   const handleSubmit = async () => {
@@ -115,7 +121,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
   };
 
   return (
-    <>
+    <View style={styles.contentWrapper}>
       <View>
         <View>
           <View>
@@ -157,7 +163,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
           onSubmit={handleSubmit}
         />
       </View>
-    </>
+    </View>
   );
 };
 
