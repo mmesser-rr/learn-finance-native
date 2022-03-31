@@ -13,7 +13,6 @@ export type AthleteAccount = {
   createdAt: string,
   updatedAt: string,
   athleteAccountsId?: string | null,
-  athleteId?: string | null,
 };
 
 export type Athlete = {
@@ -148,62 +147,8 @@ export type Tags = {
   athleteId?: string | null,
 };
 
-export type UpdateAthleteInput = {
-  firstName?: string | null,
-  lastName?: string | null,
-  mobilePhone?: string | null,
-  athleteTag?: string | null,
-  email?: string | null,
-  tag?: string | null,
-  level?: AthleteLevel | null,
-  sport?: AthleteSportInput | null,
-  team?: AthleteTeamInput | null,
-  address?: AddressInput | null,
-  dateOfBirth?: string | null,
-  unitLookup?: AthleteUnitLookupInput | null,
-  podSettings?: PodSettingsInput | null,
-  plaidToken?: string | null,
-  unitToken?: string | null,
-  plaidProcessorToken?: ProcessorTokenInput | null,
-  wyreAccountId?: string | null,
-  isActive?: boolean | null,
+export type DeleteAthleteInput = {
   id: string,
-};
-
-export type AthleteSportInput = {
-  name: string,
-  airTableId: string,
-  isActive?: boolean | null,
-};
-
-export type AthleteTeamInput = {
-  name: string,
-  airTableId: string,
-  isActive?: boolean | null,
-};
-
-export type AddressInput = {
-  streetAddress: string,
-  apt?: string | null,
-  city: string,
-  state: string,
-  zipCode: string,
-};
-
-export type AthleteUnitLookupInput = {
-  appId: string,
-  custId?: string | null,
-};
-
-export type PodSettingsInput = {
-  SAVINGS: number,
-  INVESTMENTS: number,
-  SPENDING: number,
-};
-
-export type ProcessorTokenInput = {
-  plaidAccountId: string,
-  processorToken?: string | null,
 };
 
 export type ModelAthleteConditionInput = {
@@ -276,17 +221,8 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type DeleteAthleteInput = {
+export type DeleteAthleteAccountInput = {
   id: string,
-};
-
-export type CreateAthleteAccountInput = {
-  unitAccountId: string,
-  routingCode: string,
-  accountNumber: string,
-  podName: string,
-  id?: string | null,
-  athleteAccountsId?: string | null,
 };
 
 export type ModelAthleteAccountConditionInput = {
@@ -314,19 +250,6 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
-};
-
-export type UpdateAthleteAccountInput = {
-  unitAccountId?: string | null,
-  routingCode?: string | null,
-  accountNumber?: string | null,
-  podName?: string | null,
-  id: string,
-  athleteAccountsId?: string | null,
-};
-
-export type DeleteAthleteAccountInput = {
-  id: string,
 };
 
 export type DeleteEmailChallengeInput = {
@@ -412,6 +335,12 @@ export type UpdateRecentTransactionInput = {
   id: string,
 };
 
+export type PodSettingsInput = {
+  SAVINGS: number,
+  INVESTMENTS: number,
+  SPENDING: number,
+};
+
 export type ModelRecentTransactionConditionInput = {
   transactionId?: ModelStringInput | null,
   athleteId?: ModelStringInput | null,
@@ -479,6 +408,76 @@ export type CreateAthleteInput = {
   wyreAccountId?: string | null,
   isActive: boolean,
   id?: string | null,
+};
+
+export type AthleteSportInput = {
+  name: string,
+  airTableId: string,
+  isActive?: boolean | null,
+};
+
+export type AthleteTeamInput = {
+  name: string,
+  airTableId: string,
+  isActive?: boolean | null,
+};
+
+export type AddressInput = {
+  streetAddress: string,
+  apt?: string | null,
+  city: string,
+  state: string,
+  zipCode: string,
+};
+
+export type AthleteUnitLookupInput = {
+  appId: string,
+  custId?: string | null,
+};
+
+export type ProcessorTokenInput = {
+  plaidAccountId: string,
+  processorToken?: string | null,
+};
+
+export type UpdateAthleteInput = {
+  firstName?: string | null,
+  lastName?: string | null,
+  mobilePhone?: string | null,
+  athleteTag?: string | null,
+  email?: string | null,
+  tag?: string | null,
+  level?: AthleteLevel | null,
+  sport?: AthleteSportInput | null,
+  team?: AthleteTeamInput | null,
+  address?: AddressInput | null,
+  dateOfBirth?: string | null,
+  unitLookup?: AthleteUnitLookupInput | null,
+  podSettings?: PodSettingsInput | null,
+  plaidToken?: string | null,
+  unitToken?: string | null,
+  plaidProcessorToken?: ProcessorTokenInput | null,
+  wyreAccountId?: string | null,
+  isActive?: boolean | null,
+  id: string,
+};
+
+export type CreateAthleteAccountInput = {
+  unitAccountId: string,
+  routingCode: string,
+  accountNumber: string,
+  podName: string,
+  id?: string | null,
+  athleteAccountsId?: string | null,
+};
+
+export type UpdateAthleteAccountInput = {
+  unitAccountId?: string | null,
+  routingCode?: string | null,
+  accountNumber?: string | null,
+  podName?: string | null,
+  id: string,
+  athleteAccountsId?: string | null,
 };
 
 export type CreateEmailChallengeInput = {
@@ -549,17 +548,6 @@ export type Balance = {
   unofficial_currency_code?: string | null,
 };
 
-export type ModelAthleteAccountFilterInput = {
-  unitAccountId?: ModelStringInput | null,
-  routingCode?: ModelStringInput | null,
-  accountNumber?: ModelStringInput | null,
-  podName?: ModelStringInput | null,
-  and?: Array< ModelAthleteAccountFilterInput | null > | null,
-  or?: Array< ModelAthleteAccountFilterInput | null > | null,
-  not?: ModelAthleteAccountFilterInput | null,
-  athleteAccountsId?: ModelIDInput | null,
-};
-
 export type ModelAthleteFilterInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
@@ -589,6 +577,17 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type ModelAthleteAccountFilterInput = {
+  unitAccountId?: ModelStringInput | null,
+  routingCode?: ModelStringInput | null,
+  accountNumber?: ModelStringInput | null,
+  podName?: ModelStringInput | null,
+  and?: Array< ModelAthleteAccountFilterInput | null > | null,
+  or?: Array< ModelAthleteAccountFilterInput | null > | null,
+  not?: ModelAthleteAccountFilterInput | null,
+  athleteAccountsId?: ModelIDInput | null,
+};
 
 export type ModelStringKeyConditionInput = {
   eq?: string | null,
@@ -744,7 +743,6 @@ export type OpenAppAndAccountMutation = {
     createdAt: string,
     updatedAt: string,
     athleteAccountsId?: string | null,
-    athleteId?: string | null,
   } | null > | null,
 };
 
@@ -822,7 +820,6 @@ export type OpenAccountMutation = {
     createdAt: string,
     updatedAt: string,
     athleteAccountsId?: string | null,
-    athleteId?: string | null,
   } | null,
 };
 
@@ -876,7 +873,6 @@ export type PodSettingsMutation = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1072,7 +1068,6 @@ export type CreateWyreAccountMutation = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1300,84 +1295,6 @@ export type CreditAccountMutation = {
   } | null,
 };
 
-export type UpdateAthleteMutationVariables = {
-  input: UpdateAthleteInput,
-  condition?: ModelAthleteConditionInput | null,
-};
-
-export type UpdateAthleteMutation = {
-  updateAthlete?:  {
-    __typename: "Athlete",
-    firstName?: string | null,
-    lastName?: string | null,
-    mobilePhone: string,
-    athleteTag?: string | null,
-    email?: string | null,
-    tag?: string | null,
-    level?: AthleteLevel | null,
-    sport?:  {
-      __typename: "AthleteSport",
-      name: string,
-      airTableId: string,
-      isActive?: boolean | null,
-    } | null,
-    team?:  {
-      __typename: "AthleteTeam",
-      name: string,
-      airTableId: string,
-      isActive?: boolean | null,
-    } | null,
-    address?:  {
-      __typename: "Address",
-      streetAddress: string,
-      apt?: string | null,
-      city: string,
-      state: string,
-      zipCode: string,
-    } | null,
-    dateOfBirth?: string | null,
-    accounts?:  {
-      __typename: "ModelAthleteAccountConnection",
-      items:  Array< {
-        __typename: "AthleteAccount",
-        unitAccountId: string,
-        routingCode: string,
-        accountNumber: string,
-        podName: string,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-        athleteAccountsId?: string | null,
-        athleteId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    unitLookup?:  {
-      __typename: "AthleteUnitLookup",
-      appId: string,
-      custId?: string | null,
-    } | null,
-    podSettings?:  {
-      __typename: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    plaidToken?: string | null,
-    unitToken?: string | null,
-    plaidProcessorToken?:  {
-      __typename: "ProcessorToken",
-      plaidAccountId: string,
-      processorToken?: string | null,
-    } | null,
-    wyreAccountId?: string | null,
-    isActive: boolean,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type DeleteAthleteMutationVariables = {
   input: DeleteAthleteInput,
   condition?: ModelAthleteConditionInput | null,
@@ -1426,7 +1343,6 @@ export type DeleteAthleteMutation = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1453,162 +1369,6 @@ export type DeleteAthleteMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type CreateAthleteAccountMutationVariables = {
-  input: CreateAthleteAccountInput,
-  condition?: ModelAthleteAccountConditionInput | null,
-};
-
-export type CreateAthleteAccountMutation = {
-  createAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type UpdateAthleteAccountMutationVariables = {
-  input: UpdateAthleteAccountInput,
-  condition?: ModelAthleteAccountConditionInput | null,
-};
-
-export type UpdateAthleteAccountMutation = {
-  updateAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
   } | null,
 };
 
@@ -1686,7 +1446,6 @@ export type DeleteAthleteAccountMutation = {
     createdAt: string,
     updatedAt: string,
     athleteAccountsId?: string | null,
-    athleteId?: string | null,
   } | null,
 };
 
@@ -1841,7 +1600,6 @@ export type CreateAthleteMutation = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -1868,6 +1626,237 @@ export type CreateAthleteMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type UpdateAthleteMutationVariables = {
+  input: UpdateAthleteInput,
+  condition?: ModelAthleteConditionInput | null,
+};
+
+export type UpdateAthleteMutation = {
+  updateAthlete?:  {
+    __typename: "Athlete",
+    firstName?: string | null,
+    lastName?: string | null,
+    mobilePhone: string,
+    athleteTag?: string | null,
+    email?: string | null,
+    tag?: string | null,
+    level?: AthleteLevel | null,
+    sport?:  {
+      __typename: "AthleteSport",
+      name: string,
+      airTableId: string,
+      isActive?: boolean | null,
+    } | null,
+    team?:  {
+      __typename: "AthleteTeam",
+      name: string,
+      airTableId: string,
+      isActive?: boolean | null,
+    } | null,
+    address?:  {
+      __typename: "Address",
+      streetAddress: string,
+      apt?: string | null,
+      city: string,
+      state: string,
+      zipCode: string,
+    } | null,
+    dateOfBirth?: string | null,
+    accounts?:  {
+      __typename: "ModelAthleteAccountConnection",
+      items:  Array< {
+        __typename: "AthleteAccount",
+        unitAccountId: string,
+        routingCode: string,
+        accountNumber: string,
+        podName: string,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+        athleteAccountsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    unitLookup?:  {
+      __typename: "AthleteUnitLookup",
+      appId: string,
+      custId?: string | null,
+    } | null,
+    podSettings?:  {
+      __typename: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    plaidToken?: string | null,
+    unitToken?: string | null,
+    plaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyreAccountId?: string | null,
+    isActive: boolean,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateAthleteAccountMutationVariables = {
+  input: CreateAthleteAccountInput,
+  condition?: ModelAthleteAccountConditionInput | null,
+};
+
+export type CreateAthleteAccountMutation = {
+  createAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+  } | null,
+};
+
+export type UpdateAthleteAccountMutationVariables = {
+  input: UpdateAthleteAccountInput,
+  condition?: ModelAthleteAccountConditionInput | null,
+};
+
+export type UpdateAthleteAccountMutation = {
+  updateAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
   } | null,
 };
 
@@ -2335,126 +2324,6 @@ export type UnitAccountStatementQuery = {
   } | null > | null,
 };
 
-export type GetAthleteAccountQueryVariables = {
-  id: string,
-};
-
-export type GetAthleteAccountQuery = {
-  getAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type ListAthleteAccountsQueryVariables = {
-  filter?: ModelAthleteAccountFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAthleteAccountsQuery = {
-  listAthleteAccounts?:  {
-    __typename: "ModelAthleteAccountConnection",
-    items:  Array< {
-      __typename: "AthleteAccount",
-      athlete:  {
-        __typename: "Athlete",
-        firstName?: string | null,
-        lastName?: string | null,
-        mobilePhone: string,
-        athleteTag?: string | null,
-        email?: string | null,
-        tag?: string | null,
-        level?: AthleteLevel | null,
-        dateOfBirth?: string | null,
-        plaidToken?: string | null,
-        unitToken?: string | null,
-        wyreAccountId?: string | null,
-        isActive: boolean,
-        id: string,
-        createdAt: string,
-        updatedAt: string,
-      },
-      unitAccountId: string,
-      routingCode: string,
-      accountNumber: string,
-      podName: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      athleteAccountsId?: string | null,
-      athleteId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetAthleteQueryVariables = {
   id: string,
 };
@@ -2502,7 +2371,6 @@ export type GetAthleteQuery = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -2671,6 +2539,124 @@ export type AthleteByPhoneQuery = {
       id: string,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetAthleteAccountQueryVariables = {
+  id: string,
+};
+
+export type GetAthleteAccountQuery = {
+  getAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+  } | null,
+};
+
+export type ListAthleteAccountsQueryVariables = {
+  filter?: ModelAthleteAccountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAthleteAccountsQuery = {
+  listAthleteAccounts?:  {
+    __typename: "ModelAthleteAccountConnection",
+    items:  Array< {
+      __typename: "AthleteAccount",
+      athlete:  {
+        __typename: "Athlete",
+        firstName?: string | null,
+        lastName?: string | null,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        email?: string | null,
+        tag?: string | null,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        unitToken?: string | null,
+        wyreAccountId?: string | null,
+        isActive: boolean,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      unitAccountId: string,
+      routingCode: string,
+      accountNumber: string,
+      podName: string,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      athleteAccountsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2863,237 +2849,6 @@ export type GetAthleteSchoolQuery = {
   } | null > | null,
 };
 
-export type OnCreateAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnCreateAthleteAccountSubscription = {
-  onCreateAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type OnUpdateAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnUpdateAthleteAccountSubscription = {
-  onUpdateAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type OnDeleteAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnDeleteAthleteAccountSubscription = {
-  onDeleteAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      sport?:  {
-        __typename: "AthleteSport",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      team?:  {
-        __typename: "AthleteTeam",
-        name: string,
-        airTableId: string,
-        isActive?: boolean | null,
-      } | null,
-      address?:  {
-        __typename: "Address",
-        streetAddress: string,
-        apt?: string | null,
-        city: string,
-        state: string,
-        zipCode: string,
-      } | null,
-      dateOfBirth?: string | null,
-      accounts?:  {
-        __typename: "ModelAthleteAccountConnection",
-        nextToken?: string | null,
-      } | null,
-      unitLookup?:  {
-        __typename: "AthleteUnitLookup",
-        appId: string,
-        custId?: string | null,
-      } | null,
-      podSettings?:  {
-        __typename: "PodSettings",
-        SAVINGS: number,
-        INVESTMENTS: number,
-        SPENDING: number,
-      } | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      plaidProcessorToken?:  {
-        __typename: "ProcessorToken",
-        plaidAccountId: string,
-        processorToken?: string | null,
-      } | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
 export type OnCreateAthleteSubscriptionVariables = {
   id?: string | null,
 };
@@ -3141,7 +2896,6 @@ export type OnCreateAthleteSubscription = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3218,7 +2972,6 @@ export type OnUpdateAthleteSubscription = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3295,7 +3048,6 @@ export type OnDeleteAthleteSubscription = {
         createdAt: string,
         updatedAt: string,
         athleteAccountsId?: string | null,
-        athleteId?: string | null,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -3322,6 +3074,234 @@ export type OnDeleteAthleteSubscription = {
     id: string,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateAthleteAccountSubscriptionVariables = {
+  athleteAccountsId?: string | null,
+};
+
+export type OnCreateAthleteAccountSubscription = {
+  onCreateAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+  } | null,
+};
+
+export type OnUpdateAthleteAccountSubscriptionVariables = {
+  athleteAccountsId?: string | null,
+};
+
+export type OnUpdateAthleteAccountSubscription = {
+  onUpdateAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+  } | null,
+};
+
+export type OnDeleteAthleteAccountSubscriptionVariables = {
+  athleteAccountsId?: string | null,
+};
+
+export type OnDeleteAthleteAccountSubscription = {
+  onDeleteAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
   } | null,
 };
 

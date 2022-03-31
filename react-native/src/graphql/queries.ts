@@ -246,110 +246,6 @@ export const unitAccountStatement = /* GraphQL */ `
     }
   }
 `;
-export const getAthleteAccount = /* GraphQL */ `
-  query GetAthleteAccount($id: ID!) {
-    getAthleteAccount(id: $id) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
-    }
-  }
-`;
-export const listAthleteAccounts = /* GraphQL */ `
-  query ListAthleteAccounts(
-    $filter: ModelAthleteAccountFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        athlete {
-          firstName
-          lastName
-          mobilePhone
-          athleteTag
-          email
-          tag
-          level
-          dateOfBirth
-          plaidToken
-          unitToken
-          wyreAccountId
-          isActive
-          id
-          createdAt
-          updatedAt
-        }
-        unitAccountId
-        routingCode
-        accountNumber
-        podName
-        id
-        createdAt
-        updatedAt
-        athleteAccountsId
-        athleteId
-      }
-      nextToken
-    }
-  }
-`;
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -388,7 +284,6 @@ export const getAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
-          athleteId
         }
         nextToken
       }
@@ -540,6 +435,108 @@ export const athleteByPhone = /* GraphQL */ `
         id
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAthleteAccount = /* GraphQL */ `
+  query GetAthleteAccount($id: ID!) {
+    getAthleteAccount(id: $id) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const listAthleteAccounts = /* GraphQL */ `
+  query ListAthleteAccounts(
+    $filter: ModelAthleteAccountFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        athlete {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          email
+          tag
+          level
+          dateOfBirth
+          plaidToken
+          unitToken
+          wyreAccountId
+          isActive
+          id
+          createdAt
+          updatedAt
+        }
+        unitAccountId
+        routingCode
+        accountNumber
+        podName
+        id
+        createdAt
+        updatedAt
+        athleteAccountsId
       }
       nextToken
     }

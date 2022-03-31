@@ -8,6 +8,9 @@ const {createProcessorToken} = require("./createProcessorToken")
 const {persistTransaction} = require("./persistTransaction");
 const {updateAthleteUnitToken} = require("./updateAthleteUnitToken");
 const env = require("../../env.js");
+//const axios = env.axios;
+//axios.defaults.headers["Authorization"] = auth;
+
 
 module.exports = {
   persistAccount: persistAccount(env.axios),
@@ -19,4 +22,5 @@ module.exports = {
   persistTransaction: persistTransaction(env.axios),
   updateAthleteUnitToken: updateAthleteUnitToken(env.axios),
   getAthlete: getAthlete(env.axios)
+  
 }

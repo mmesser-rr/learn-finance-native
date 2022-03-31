@@ -36,6 +36,7 @@ const getAthleteStatement = gql`
 const responseLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.getAthlete);
 
 const getAthlete = (axios) => (
+  auth,
   athleteId
 ) => axios.post("/", {
   query: print(getAthleteStatement),

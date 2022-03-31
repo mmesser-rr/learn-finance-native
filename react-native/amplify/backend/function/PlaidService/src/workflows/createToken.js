@@ -1,5 +1,6 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
 const createToken = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
@@ -14,5 +15,5 @@ const createToken = (athlete) => {
  }
 
 module.exports = {
-    createToken: (athleteId) => tpc.getAthlete(athleteId).then(createToken)
+    createToken: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(createToken)
 }

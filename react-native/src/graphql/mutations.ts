@@ -63,7 +63,6 @@ export const openAppAndAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -128,7 +127,6 @@ export const openAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -180,7 +178,6 @@ export const podSettings = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
-          athleteId
         }
         nextToken
       }
@@ -347,7 +344,6 @@ export const createWyreAccount = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
-          athleteId
         }
         nextToken
       }
@@ -586,74 +582,6 @@ export const creditAccount = /* GraphQL */ `
     }
   }
 `;
-export const updateAthlete = /* GraphQL */ `
-  mutation UpdateAthlete(
-    $input: UpdateAthleteInput!
-    $condition: ModelAthleteConditionInput
-  ) {
-    updateAthlete(input: $input, condition: $condition) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      plaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const deleteAthlete = /* GraphQL */ `
   mutation DeleteAthlete(
     $input: DeleteAthleteInput!
@@ -695,7 +623,6 @@ export const deleteAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
-          athleteId
         }
         nextToken
       }
@@ -719,142 +646,6 @@ export const deleteAthlete = /* GraphQL */ `
       id
       createdAt
       updatedAt
-    }
-  }
-`;
-export const createAthleteAccount = /* GraphQL */ `
-  mutation CreateAthleteAccount(
-    $input: CreateAthleteAccountInput!
-    $condition: ModelAthleteAccountConditionInput
-  ) {
-    createAthleteAccount(input: $input, condition: $condition) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
-    }
-  }
-`;
-export const updateAthleteAccount = /* GraphQL */ `
-  mutation UpdateAthleteAccount(
-    $input: UpdateAthleteAccountInput!
-    $condition: ModelAthleteAccountConditionInput
-  ) {
-    updateAthleteAccount(input: $input, condition: $condition) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -922,7 +713,6 @@ export const deleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -1058,7 +848,6 @@ export const createAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
-          athleteId
         }
         nextToken
       }
@@ -1082,6 +871,207 @@ export const createAthlete = /* GraphQL */ `
       id
       createdAt
       updatedAt
+    }
+  }
+`;
+export const updateAthlete = /* GraphQL */ `
+  mutation UpdateAthlete(
+    $input: UpdateAthleteInput!
+    $condition: ModelAthleteConditionInput
+  ) {
+    updateAthlete(input: $input, condition: $condition) {
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAthleteAccount = /* GraphQL */ `
+  mutation CreateAthleteAccount(
+    $input: CreateAthleteAccountInput!
+    $condition: ModelAthleteAccountConditionInput
+  ) {
+    createAthleteAccount(input: $input, condition: $condition) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+    }
+  }
+`;
+export const updateAthleteAccount = /* GraphQL */ `
+  mutation UpdateAthleteAccount(
+    $input: UpdateAthleteAccountInput!
+    $condition: ModelAthleteAccountConditionInput
+  ) {
+    updateAthleteAccount(input: $input, condition: $condition) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
     }
   }
 `;

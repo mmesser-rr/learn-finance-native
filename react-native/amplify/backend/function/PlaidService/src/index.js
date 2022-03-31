@@ -10,9 +10,9 @@ const { updateToken } = require("./workflows/updateToken.js");
 const { getPlaidAccounts } = require("./workflows/getPlaidAccount.js");
 
 const resolvers = Object.freeze({
-    createPlaidLink: (event) => createToken(event.arguments.athleteId),
+    createPlaidLink: (event) => createToken(event, event.arguments.athleteId),
     updatePlaidLink: (event) => updateToken(event),
-	listPlaidAccounts: (event) => getPlaidAccounts(event.arguments.athleteId)
+	listPlaidAccounts: (event) => getPlaidAccounts(event, event.arguments.athleteId)
 });
 
 const fallback = (event) => Promise.reject(`No handler defined for fieldName: ${event.fieldName}`);

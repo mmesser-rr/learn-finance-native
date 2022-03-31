@@ -1,9 +1,10 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
 const {getPlaidAccount} = require("./getPlaidAccount");
+const { validateUser } = require("./validateUser");
 
 
-const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete => 
+const updateToken = (event, athleteId, token) => tpc.getAthlete(validateUser(event), athleteId).then(athlete => 
   (athlete?.unitLookup?.custId != null) ? 
        plaid.updateToken(token)
       .then(access_token => tpc.addPlaidToken(athleteId, access_token)) :
@@ -13,5 +14,5 @@ const updateToken = (athleteId, token) => tpc.getAthlete(athleteId).then(athlete
 
 module.exports.updateToken = async (event) => {
   const {athleteId, accessToken} = event.arguments;
-   return updateToken(athleteId, accessToken)
+   return updateToken(event, athleteId, accessToken)
 }
