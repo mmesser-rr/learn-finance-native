@@ -261,8 +261,13 @@ export const onDeleteAthlete = /* GraphQL */ `
   }
 `;
 export const onCreateAthleteAccount = /* GraphQL */ `
+<<<<<<< HEAD
   subscription OnCreateAthleteAccount($athlete: String) {
     onCreateAthleteAccount(athlete: $athlete) {
+=======
+  subscription OnCreateAthleteAccount($athleteAccountsId: String) {
+    onCreateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+>>>>>>> unit-fix
       athlete {
         firstName
         lastName
@@ -325,8 +330,13 @@ export const onCreateAthleteAccount = /* GraphQL */ `
   }
 `;
 export const onUpdateAthleteAccount = /* GraphQL */ `
+<<<<<<< HEAD
   subscription OnUpdateAthleteAccount($athlete: String) {
     onUpdateAthleteAccount(athlete: $athlete) {
+=======
+  subscription OnUpdateAthleteAccount($athleteAccountsId: String) {
+    onUpdateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+>>>>>>> unit-fix
       athlete {
         firstName
         lastName
@@ -389,8 +399,13 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
   }
 `;
 export const onDeleteAthleteAccount = /* GraphQL */ `
+<<<<<<< HEAD
   subscription OnDeleteAthleteAccount($athlete: String) {
     onDeleteAthleteAccount(athlete: $athlete) {
+=======
+  subscription OnDeleteAthleteAccount($athleteAccountsId: String) {
+    onDeleteAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+>>>>>>> unit-fix
       athlete {
         firstName
         lastName
@@ -544,6 +559,72 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
       phoneNumber
       verified
       createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateRecentTransaction = /* GraphQL */ `
+  subscription OnCreateRecentTransaction($athleteId: String) {
+    onCreateRecentTransaction(athleteId: $athleteId) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRecentTransaction = /* GraphQL */ `
+  subscription OnUpdateRecentTransaction($athleteId: String) {
+    onUpdateRecentTransaction(athleteId: $athleteId) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRecentTransaction = /* GraphQL */ `
+  subscription OnDeleteRecentTransaction($athleteId: String) {
+    onDeleteRecentTransaction(athleteId: $athleteId) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
       updatedAt
     }
   }

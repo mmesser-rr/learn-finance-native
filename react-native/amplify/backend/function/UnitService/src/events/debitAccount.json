@@ -1,0 +1,14 @@
+{
+  "fieldName": "debitAccount",
+  "arguments": {
+    "athleteId": "03052673-57a7-4cfc-81ef-4eea33676773",
+      "amount": 550,
+      "addenda": "Some very long payment",
+      "idempotencyKey": "4095-8f48-42e56f24f-bc3008",
+      "description": "Testing #5",
+      "receiverName": "dee tres",
+      "receiverRoutingNumber": "091311229",
+      "receiverAccountNumber": "1000376859",
+      "receiverAccountType" : "Checking"
+  }
+}

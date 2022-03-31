@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "api": {
+      "theplayerscompany": [
+        "Query"
+      ]
+    },
+    "function": {
+      "UnitService": [
+        "read"
+      ]
+    },
+    "storage": {
+      "Athlete:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

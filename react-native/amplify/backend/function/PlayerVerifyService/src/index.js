@@ -21,15 +21,21 @@ Amplify Params - DO NOT EDIT */
 "use strict"
 
 const { initiatePhoneChallenge } = require("./phone/initiatePhoneChallenge.js");
+const { returnUserChallenge } = require("./login/returnUserChallenge.js");
 const { initiateEmailChallenge } = require("./email/initiateEmailChallenge.js");
 const tryEmailChallenge = require("./email/tryEmailChallenge.js");
 const tryPhoneChallenge = require("./phone/tryPhoneChallenge.js");
+const validateReturnUser = require("./login/validateReturnUser.js");
+//const {getAthleteByPhone} = require("./login/getAthleteByPhone");
 
 const resolvers = {
   initiatePhoneChallenge: initiatePhoneChallenge,
   initiateEmailChallenge: initiateEmailChallenge,
+  returnUserChallenge: returnUserChallenge,
+  validateReturnUser: validateReturnUser,
   tryPhoneChallenge: tryPhoneChallenge,
-  tryEmailChallenge: tryEmailChallenge
+  tryEmailChallenge: tryEmailChallenge,
+  //getAthleteByPhone: getAthleteByPhone
 };
 
 const fallback = (event) => {throw new Error(`No handler defined for fieldName: ${event.fieldName}`)};

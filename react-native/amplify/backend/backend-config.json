@@ -6,12 +6,21 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "auththeplayerscompany2db5774e2db5774e"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "apiKeyExpirationDate": "2022-04-29T00:51:48.579Z",
+                "description": ""
+              }
+            }
+          ]
         }
       }
     }
@@ -56,7 +65,7 @@
         }
       ]
     },
-    "AccountOpenService": {
+    "PlaidService": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -71,6 +80,155 @@
           ]
         }
       ]
+    },
+    "UnitService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "PlayerVerifyService",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "PlaidService",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "WebhookService",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "theplayerscompany2db5774e2db5774ePostConfirmation",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "theplayerscompany2db5774e2db5774e",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "MailService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "UnitService",
+          "attributes": [
+            "Name"
+          ]
+        }
+      ]
+    },
+    "AirtableService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    },
+    "WyreService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "theplayerscompany",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    },
+    "WebhookService": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theplayerscompany2db5774e2db5774ePostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "auth": {
+    "theplayerscompany2db5774e2db5774e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "theplayerscompany2db5774e2db5774ePostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "PHONE_NUMBER"
+        ],
+        "signupAttributes": [
+          "PHONE_NUMBER"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ]
+        },
+        "mfaConfiguration": "OPTIONAL",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "PHONE_NUMBER"
+        ]
+      }
     }
   }
 }

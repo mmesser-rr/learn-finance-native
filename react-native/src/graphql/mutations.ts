@@ -143,6 +143,7 @@ export const podSettings = /* GraphQL */ `
       investments: $investments
       spending: $spending
     ) {
+<<<<<<< HEAD
       athlete {
         firstName
         lastName
@@ -201,6 +202,66 @@ export const podSettings = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+=======
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+>>>>>>> unit-fix
     }
   }
 `;
@@ -309,6 +370,7 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
 export const createWyreAccount = /* GraphQL */ `
   mutation CreateWyreAccount($athleteId: ID!) {
     createWyreAccount(athleteId: $athleteId) {
+<<<<<<< HEAD
       athlete {
         firstName
         lastName
@@ -367,6 +429,66 @@ export const createWyreAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+=======
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
+      isActive
+      id
+      createdAt
+      updatedAt
+>>>>>>> unit-fix
     }
   }
 `;
@@ -757,6 +879,7 @@ export const deletePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
 export const createRecentTransaction = /* GraphQL */ `
   mutation CreateRecentTransaction(
     $input: CreateRecentTransactionInput!
@@ -782,6 +905,8 @@ export const createRecentTransaction = /* GraphQL */ `
     }
   }
 `;
+=======
+>>>>>>> unit-fix
 export const updateRecentTransaction = /* GraphQL */ `
   mutation UpdateRecentTransaction(
     $input: UpdateRecentTransactionInput!
@@ -1182,6 +1307,34 @@ export const updatePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
+=======
+export const createRecentTransaction = /* GraphQL */ `
+  mutation CreateRecentTransaction(
+    $input: CreateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    createRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+>>>>>>> unit-fix
 export const initiatePhoneChallenge = /* GraphQL */ `
   mutation InitiatePhoneChallenge($phoneNumber: String!) {
     initiatePhoneChallenge(phoneNumber: $phoneNumber) {

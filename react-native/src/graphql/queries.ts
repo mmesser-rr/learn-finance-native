@@ -96,6 +96,51 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
+=======
+export const getUnitTransactionById = /* GraphQL */ `
+  query GetUnitTransactionById(
+    $unitAccountId: String!
+    $unitTransactionId: String!
+  ) {
+    getUnitTransactionById(
+      unitAccountId: $unitAccountId
+      unitTransactionId: $unitTransactionId
+    ) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
+        name
+        status
+        date
+        routingNumber
+        accountNumber
+        currency
+        verificationToken
+        expiresIn
+        hold
+        available
+        tags {
+          podName
+          athleteId
+        }
+      }
+    }
+  }
+`;
+>>>>>>> unit-fix
 export const listAllUnitTransactions = /* GraphQL */ `
   query ListAllUnitTransactions($athleteId: ID!) {
     listAllUnitTransactions(athleteId: $athleteId) {
@@ -204,6 +249,7 @@ export const unitAccountStatement = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
 export const getRecentTransaction = /* GraphQL */ `
   query GetRecentTransaction($id: ID!) {
     getRecentTransaction(id: $id) {
@@ -259,6 +305,8 @@ export const listRecentTransactions = /* GraphQL */ `
     }
   }
 `;
+=======
+>>>>>>> unit-fix
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -670,6 +718,7 @@ export const listPhoneChallenges = /* GraphQL */ `
     }
   }
 `;
+<<<<<<< HEAD
 export const getUnitTransactionById = /* GraphQL */ `
   query GetUnitTransactionById(
     $unitAccountId: String!
@@ -709,6 +758,60 @@ export const getUnitTransactionById = /* GraphQL */ `
           athleteId
         }
       }
+=======
+export const getRecentTransaction = /* GraphQL */ `
+  query GetRecentTransaction($id: ID!) {
+    getRecentTransaction(id: $id) {
+      transactionId
+      athleteId
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const listRecentTransactions = /* GraphQL */ `
+  query ListRecentTransactions(
+    $filter: ModelRecentTransactionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRecentTransactions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        transactionId
+        athleteId
+        status
+        amount
+        idempotencyKey
+        direction
+        createdAt
+        read
+        settled
+        podAllocation {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        id
+        updatedAt
+      }
+      nextToken
+>>>>>>> unit-fix
     }
   }
 `;

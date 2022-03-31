@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "api": {
+      "theplayerscompany": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "Athlete:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "RecentTransaction:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "secretNames": [
+    "API_KEY",
+    "WYRE_TOKEN"
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "nodeEnv",
+      "environmentVariableName": "NODE_ENV"
+    }
+  ]
+}
