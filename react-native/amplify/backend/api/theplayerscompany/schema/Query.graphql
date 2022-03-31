@@ -1,13 +1,13 @@
 type Query{
-    listPlaidAccounts(athleteId: ID!): [PlaidAccountDetail] @function(name: "PlaidService-${env}")
-    listAthleteUnitAccounts(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
-    getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): UnitAccount @function(name: "UnitService-${env}")
+    listPlaidAccounts(athleteId: ID!): [PlaidAccountDetail] @function(name: "PlaidService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+    listAthleteUnitAccounts(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")  @auth(rules: [{allow: private, provider: userPools}])
+    getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
     #getAthleteByPhone(athleteId: String!): Athlete @function(name: "PlayerVerifyService-${env}")
 
-    getUnitTransactionById(unitAccountId: String!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}")
-    listAllUnitTransactions(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
-    listUnitBalanceHistory(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
-    unitAccountStatement(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
-    getAthleteSchool: [AthleteTeam] @function(name: "AirtableService-${env}")
+    getUnitTransactionById(unitAccountId: String!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+    listAllUnitTransactions(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+    listUnitBalanceHistory(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+    unitAccountStatement(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")  @auth(rules: [{allow: private, provider: userPools}])
+    getAthleteSchool: [AthleteTeam] @function(name: "AirtableService-${env}") @auth(rules: [{ allow: public }])
 }
 

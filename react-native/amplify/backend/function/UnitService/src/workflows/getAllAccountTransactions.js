@@ -1,5 +1,6 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
 const getUnitAllTransactions = (unitCustomerId) => {
   return unit.getAllUnitTransaction(unitCustomerId)
@@ -8,7 +9,7 @@ const getUnitAllTransactions = (unitCustomerId) => {
     });
 }
 
-const getUnitTransactions = (athleteId, unitCustomerId) => tpc.getAthlete(athleteId).then(athlete => 
+const getUnitTransactions = (event, athleteId, unitCustomerId) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
     (athlete != null) ? 
     getUnitAllTransactions(unitCustomerId) : 
       Promise.reject(`No athlete found with id ${athleteId}`)

@@ -1,5 +1,6 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
 const getUnitBalanceHistory = (athlete) => {
   const accounts = athlete.accounts.items;
@@ -15,7 +16,7 @@ const getUnitBalanceHistory = (athlete) => {
     });
 }
 
-const listUnitBalanceHistory = (athleteId) => tpc.getAthlete(athleteId).then(athlete => 
+const listUnitBalanceHistory = (event, athleteId) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
   (athlete != null) ? 
   getUnitBalanceHistory(athlete) : 
     Promise.reject(`No athlete found with id ${athleteId}`)

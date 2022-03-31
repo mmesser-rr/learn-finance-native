@@ -1,12 +1,13 @@
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
-const podSettingsUpdate = (athleteId, savings, investments, spending) => tpc.getAthlete(athleteId).then(athlete => 
+const podSettingsUpdate = (event, athleteId, savings, investments, spending) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
   (athlete != null) ? 
-    checkPodData(savings, investments, spending, athleteId): 
+    checkPodData(event,savings, investments, spending, athleteId): 
     Promise.reject(`No athlete found with id ${athleteId}`)
 );
 
-const checkPodData = (savings, investments, spending, athleteId) => {
+const checkPodData = (event, savings, investments, spending, athleteId) => {
    const totalPod = savings + investments + spending;
    if(totalPod != 100){
     Promise.reject(`Invalid pod settings ${athleteId}`)
@@ -16,9 +17,9 @@ const checkPodData = (savings, investments, spending, athleteId) => {
     INVESTMENTS: investments,
     SPENDING: spending
     });
-  return tpc.updatePodSettings(athleteId, podSettings)
+  return tpc.updatePodSettings(event, athleteId, podSettings)
 }
 module.exports.podSettings = async (event) => {
   const {athleteId, savings, investments, spending} = event.arguments;
-  return podSettingsUpdate(athleteId, savings, investments, spending)
+  return podSettingsUpdate(event, athleteId, savings, investments, spending)
 }

@@ -1,6 +1,7 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
 const { podNaming } = require("./podNaming");
+const { validateUser } = require("./validateUser");
 
 const accountFromUnitParams = (athlete, unitResponse, podName) => (
   {
@@ -30,5 +31,5 @@ const createAndPersistAccount = (athlete, podName) => {
 }
 
 module.exports = {
-  createAndPersistAccount: (athleteId, podName) => tpc.getAthlete(athleteId).then(athlete => createAndPersistAccount(athlete, podName))
+  createAndPersistAccount: (event, athleteId, podName) => tpc.getAthlete(validateUser(event), athleteId).then(athlete => createAndPersistAccount(athlete, podName))
 }

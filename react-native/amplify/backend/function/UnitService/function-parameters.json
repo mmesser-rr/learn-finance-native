@@ -39,6 +39,17 @@
         "create",
         "read",
         "update"
+      ],
+      "WebhookService": [
+        "read"
+      ],
+      "theplayerscompany2db5774e2db5774ePostConfirmation": [
+        "read"
+      ]
+    },
+    "auth": {
+      "theplayerscompany2db5774e2db5774e": [
+        "read"
       ]
     },
     "storage": {
@@ -47,7 +58,7 @@
         "read",
         "update"
       ],
-      "AthleteAccount:@model(appsync)": [
+      "RecentTransaction:@model(appsync)": [
         "create",
         "read",
         "update"

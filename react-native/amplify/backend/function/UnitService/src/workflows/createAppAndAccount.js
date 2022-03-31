@@ -2,6 +2,7 @@ const { createAndPersistAccount } = require("./createAccount");
 const { repeat, map } = require("ramda");
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
 /********************************************* /
 
@@ -10,7 +11,7 @@ Note : The app creates 3 accounts on setup
 *********************************************/
 const availableName = ["SAVINGS", "SPENDING","INVESTMENTS"];
 
-const createAppAndAccount = (ssn, athlete) => {
+const createAppAndAccount = (event, ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
 
   if (custId) {
@@ -20,19 +21,19 @@ const createAppAndAccount = (ssn, athlete) => {
   return unit.createApplication(ssn, athlete)
     .catch(err => (err?.appId) ?
       Promise.reject(tpc.addUnitDataToAthlete(athlete.id, err))
-      : Promise.reject(err)
+      : Promise.reject(JSON.stringify(err))
     )
 
     .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
     .then(res => Promise.all(
-      map(pod => createAndPersistAccount(athlete.id, pod), availableName)
+      map(pod => createAndPersistAccount(event, athlete.id, pod), availableName)
     ));
 }
 
 
-const createAppAndAccountFromId = (ssn, athleteId) => tpc.getAthlete(athleteId).then(athlete => 
+const createAppAndAccountFromId = (event, ssn, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(athlete => 
   (athlete != null) ? 
-    createAppAndAccount(ssn, athlete) : 
+    createAppAndAccount(event, ssn, athlete) : 
     Promise.reject(`No athlete found with id ${athleteId}`)
 );
 

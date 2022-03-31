@@ -1,5 +1,6 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
 const unitAccountStatement = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
@@ -15,5 +16,5 @@ const unitAccountStatement = (athlete) => {
 }
 
 module.exports = {
-  unitAccountStatement: (athleteId) => tpc.getAthlete(athleteId).then(unitAccountStatement)
+  unitAccountStatement: (event, athleteId) => tpc.getAthlete(validateUser(event),athleteId).then(unitAccountStatement)
 }

@@ -13,9 +13,6 @@
     "storage": {
       "Athlete:@model(appsync)": [
         "read"
-      ],
-      "AthleteAccount:@model(appsync)": [
-        "read"
       ]
     }
   },

@@ -1,13 +1,16 @@
 /* Amplify Params - DO NOT EDIT
-	API_THEPLAYERSCOMPANY_ATHLETEACCOUNTTABLE_ARN
-	API_THEPLAYERSCOMPANY_ATHLETEACCOUNTTABLE_NAME
 	API_THEPLAYERSCOMPANY_ATHLETETABLE_ARN
 	API_THEPLAYERSCOMPANY_ATHLETETABLE_NAME
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIIDOUTPUT
 	API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT
+	API_THEPLAYERSCOMPANY_RECENTTRANSACTIONTABLE_ARN
+	API_THEPLAYERSCOMPANY_RECENTTRANSACTIONTABLE_NAME
+	AUTH_THEPLAYERSCOMPANY2DB5774E2DB5774E_USERPOOLID
 	FUNCTION_PLAIDSERVICE_NAME
 	FUNCTION_PLAYERVERIFYSERVICE_NAME
+	FUNCTION_THEPLAYERSCOMPANY2DB5774E2DB5774EPOSTCONFIRMATION_NAME
+	FUNCTION_WEBHOOKSERVICE_NAME
 Amplify Params - DO NOT EDIT */
 const { createAndPersistAccount } = require("./workflows/createAccount.js");
 const { createAppAndAccount } = require("./workflows/createAppAndAccount");
@@ -26,23 +29,23 @@ const {unitAccountStatement} = require("./workflows/unitAccountStatement");
 const {athleteUnitTokenVerification} = require("./workflows/athleteUnitTokenVerification");
 
 const resolvers = Object.freeze({
-  openAccount: (event) => createAndPersistAccount(event.arguments.athleteId, event.arguments.podName),
+  openAccount: (event) => createAndPersistAccount(event, event.arguments.athleteId, event.arguments.podName),
   bookPayment: (event) => bookPayment(event),
   debitAccount: (event) => debitAccount(event),
   creditAccount: (event) => creditAccount(event),
   createPlaidPayment: (event) => plaidPayment(event),
   podSettings: (event) => podSettings(event),
   createAthleteUnitToken: (event) => createAthleteUnitToken(event),
-  unitAccountStatement: (event) => unitAccountStatement(event.arguments.athleteId),
-  athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event.arguments.athleteId), 
+  unitAccountStatement: (event) => unitAccountStatement(event,event.arguments.athleteId),
+  athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event, event.arguments.athleteId), 
 
-  getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.unitAccountId, event.arguments.unitTransactionId),
-  listAllUnitTransactions: (event) => getAllUnitTransaction(event.arguments.athleteId),
+  getUnitTransactionById: (event) => getUnitTransactionById(event, event.arguments.unitAccountId, event.arguments.unitTransactionId),
+  listAllUnitTransactions: (event) => getAllUnitTransaction(event, event.arguments.athleteId),
 
-  listUnitBalanceHistory: (event) => listUnitBalanceHistory(event.arguments.athleteId),
-  listAthleteUnitAccounts: (event) => getAthleteUnitAccounts(event.arguments.athleteId),
-  getAthleteUnitAccountById: (event) => getAthleteUnitAccountById(event.arguments.athleteId, event.arguments.unitAccountId),
-  openAppAndAccount: (event) => createAppAndAccount(event.arguments.ssn, event.arguments.athleteId)
+  listUnitBalanceHistory: (event) => listUnitBalanceHistory(event, event.arguments.athleteId),
+  listAthleteUnitAccounts: (event) => getAthleteUnitAccounts(event, event.arguments.athleteId),
+  getAthleteUnitAccountById: (event) => getAthleteUnitAccountById(event, event.arguments.athleteId, event.arguments.unitAccountId),
+  openAppAndAccount: (event) => createAppAndAccount(event, event.arguments.ssn, event.arguments.athleteId)
 });
 
 

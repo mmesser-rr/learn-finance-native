@@ -6,16 +6,18 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "auththeplayerscompany2db5774e2db5774e"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authAuth"
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "apiKeyExpirationDate": "2022-04-29T00:51:48.579Z",
+                "description": ""
               }
             }
           ]
@@ -105,6 +107,27 @@
           "resourceName": "PlaidService",
           "attributes": [
             "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "WebhookService",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "theplayerscompany2db5774e2db5774ePostConfirmation",
+          "attributes": [
+            "Name"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "theplayerscompany2db5774e2db5774e",
+          "attributes": [
+            "UserPoolId"
           ]
         }
       ]

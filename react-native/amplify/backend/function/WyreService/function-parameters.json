@@ -11,11 +11,6 @@
         "read",
         "update"
       ],
-      "AthleteAccount:@model(appsync)": [
-        "create",
-        "read",
-        "update"
-      ],
       "RecentTransaction:@model(appsync)": [
         "create",
         "read",

@@ -1,4 +1,4 @@
-type RecentTransaction @model #(mutations: null) @auth(rules: [{ allow: owner }]) 
+type RecentTransaction @model @auth(rules: [{ allow: public, operations: [read, create] },  {allow: owner, provider: userPools, ownerField: "athleteId" }])
 {
   transactionId: String! 
   athleteId: String!

@@ -1,7 +1,8 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
+const { validateUser } = require("./validateUser");
 
-const createAthleteUnitToken = (athlete, verificationCode, verificationToken) => {
+const createAthleteUnitToken = (event, athlete, verificationCode, verificationToken) => {
   const custId = athlete?.unitLookup?.custId;
   let response = "";
 
@@ -20,5 +21,5 @@ const createAthleteUnitToken = (athlete, verificationCode, verificationToken) =>
 
 module.exports.createAthleteUnitToken = async (event) => {
   const {athleteId, verificationCode, verificationToken} = event.arguments;
-   return tpc.getAthlete(athleteId).then(athlete => createAthleteUnitToken(athlete, verificationCode, verificationToken)) 
+   return tpc.getAthlete(validateUser(event), athleteId).then(athlete => createAthleteUnitToken(event, athlete, verificationCode, verificationToken)) 
 }

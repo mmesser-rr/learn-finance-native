@@ -24,7 +24,8 @@ const addUnitDataToAthlete = (axios) => (
   variables: {
     athleteId,
     unitLookup
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthleteUnitLookup);

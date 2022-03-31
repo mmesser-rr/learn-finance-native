@@ -1,4 +1,4 @@
-type EmailChallenge @model {
+type EmailChallenge @model @auth(rules: [{ allow: public, operations: [read, create, update] }]){
   code: String! @primaryKey(sortKeyFields: ["email"])
   email: String!
   verified: Boolean!
