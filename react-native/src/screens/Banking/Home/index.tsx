@@ -69,6 +69,7 @@ const Home: React.FC = () => {
   const hasSetUpPods = useSelector((state: RootState) => {
     return (
       state.userReducer.user &&
+      state.userReducer.user.podSettings &&
       (state.userReducer.user.podSettings.SPENDING > 0 ||
         state.userReducer.user.podSettings.INVESTMENTS > 0 ||
         state.userReducer.user.podSettings.SAVINGS > 0)
@@ -167,7 +168,8 @@ const Home: React.FC = () => {
     setModalVisible(true);
   };
 
-  const goToRewards = () => {};
+  const goToRewards = () =>
+    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>

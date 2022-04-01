@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {API, graphqlOperation} from 'aws-amplify';
+import {API} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
 import {getInvite} from 'src/graphql/queries';
 import {GetInviteQuery, InviteStatus} from 'src/types/graphql';
-import { updateOnboarding } from 'src/store/actions/onboardingActions';
+import {updateOnboarding} from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
 
@@ -27,7 +27,7 @@ const invalidCodeMessage = 'Invalid code. Please try again.';
 
 const InvitationCode: React.FC<InvitationCodeProps> = ({
   goToNextStep,
-  updateLoading
+  updateLoading,
 }) => {
   const dispatch = useDispatch();
   const {
@@ -50,13 +50,15 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
   const onSubmit = async (formData: FormData) => {
     updateLoading(true);
     try {
-      const {data} = (await API.graphql(
-        graphqlOperation(getInvite, {
+      const {data} = (await API.graphql({
+        query: getInvite,
+        variables: {
           code: formData.code,
           status: InviteStatus.AVAILABLE,
-        }),
-      )) as GraphQLResult<GetInviteQuery>;
-  
+        },
+        authMode: 'API_KEY',
+      })) as GraphQLResult<GetInviteQuery>;
+
       if (data && data.getInvite) {
         goToNextStep();
       } else {
@@ -64,7 +66,7 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
           type: 'manual',
           message: invalidCodeMessage,
         });
-      } 
+      }
     } catch (error: any) {
       setError('code', {
         type: 'manual',

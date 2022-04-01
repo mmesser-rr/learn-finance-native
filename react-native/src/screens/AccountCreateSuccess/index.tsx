@@ -5,7 +5,7 @@ import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-import SuccessIcon from 'src/assets/icons/account-creation-success.svg';
+import SuccessIcon from 'src/assets/icons/success.svg';
 
 import styles from './styles';
 

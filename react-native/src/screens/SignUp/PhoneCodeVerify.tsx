@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Auth} from 'aws-amplify';
 import {useDispatch, useSelector} from 'react-redux';
@@ -7,9 +7,9 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
 import {Text} from 'src/components/common/Texts';
 import {RootState} from 'src/store/root-state';
-import { updateOnboarding } from 'src/store/actions/onboardingActions';
 
 import styles from './styles';
+import {onboardingSilentSignIn} from 'src/store/actions/loginActions';
 
 interface PhoneCodeVerifyProps {
   goToNextStep: () => void;
@@ -29,11 +29,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
     (state: RootState) => state.onboardingReducer,
   );
 
-  useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 4}));
-  }, []);
-
-  const generatePhoneNumber = () => {
+  const displayPhoneNumber = () => {
     const firstThree = mobilePhone.slice(0, 3);
     const secondThree = mobilePhone.slice(3, 6);
     const lastFour = mobilePhone.slice(-4);
@@ -48,11 +44,13 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   const handleSubmit = async () => {
     updateLoading(true);
     try {
-      await Auth.confirmSignUp(`+1${mobilePhone}`, code);
+      const response = await Auth.confirmSignUp(`+1${mobilePhone}`, code);
+      console.log('confirmSignUp response:', response);
+      dispatch(onboardingSilentSignIn());
       goToNextStep();
     } catch (error: any) {
       console.log(error);
-      setError(error.message || 'Unkown error');
+      setError(error.message || 'Unknown error');
     }
     updateLoading(false);
   };
@@ -67,7 +65,7 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
         </View>
         <View>
           <Text type="Body/Large" style={styles.description}>
-            We sent a verification code to {generatePhoneNumber()}
+            We sent a verification code to {displayPhoneNumber()}
           </Text>
         </View>
         <View>

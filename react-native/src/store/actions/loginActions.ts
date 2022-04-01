@@ -3,6 +3,13 @@
  */
 import * as types from './types';
 import {ILoginResponse} from 'src/models/api/login';
+import {ITypeOnlyAction} from 'src/models/actions/common';
+
+export function onboardingSilentSignIn() {
+  return {
+    type: types.ONBOARDING_SILENT_SIGN_IN,
+  };
+}
 
 export function requestLogin(username: string, password: string) {
   return {
@@ -12,7 +19,7 @@ export function requestLogin(username: string, password: string) {
   };
 }
 
-export function loginFailed() {
+export function clearLoginErrors(): ITypeOnlyAction {
   return {
     type: types.LOGIN_FAILED,
   };
