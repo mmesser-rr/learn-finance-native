@@ -14,7 +14,3 @@ export interface IOnboardingError {
   type: String;
   error: string;
 }
-
-export interface IOnboardingClearError {
-  type: String;
-}
