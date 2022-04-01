@@ -102,12 +102,8 @@ const TextInput: React.FC<TextInputProps> = ({
     fontSize: focused || !!text ? scale(14) : scale(16),
   };
 
-  const containerStyle = {
-    marginBottom: isError ? scale(24) : 0,
-  };
-
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View style={[styles.container]}>
       <View style={styles.inputContainer}>
         <Animated.View style={[styles.animatedStyle, transformStyle]}>
           <Text type="Body/Medium" style={labelStyle}>

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import {Text} from 'src/components/common/Texts';
 import NavigationService from 'src/navigation/NavigationService';
 import { RootState } from 'src/store/root-state';
+import { OnboardingStepNum } from 'src/utils/constants';
 
 import styles from './styles';
 
@@ -18,7 +19,7 @@ const OnboardingSteps: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text type="Title/Small">
-        {step}/13
+        {step}/{OnboardingStepNum}
       </Text>
       {isSignInLink && (
         <Text type="Body/Large" style={styles.signIn} onPress={goToSignIn}>

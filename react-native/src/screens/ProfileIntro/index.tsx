@@ -9,7 +9,7 @@ import OnBoardingStartLayout from 'src/components/layout/OnBoardingStartLayout';
 import styles from './styles';
 
 const ProfileIntro: React.FC = () => {
-  const onFinish = () => NavigationService.navigate('SelectPlayerTag');
+  const onFinish = () => NavigationService.navigate('SelectPlayer');
 
   const contentEle = () => {
     return (
