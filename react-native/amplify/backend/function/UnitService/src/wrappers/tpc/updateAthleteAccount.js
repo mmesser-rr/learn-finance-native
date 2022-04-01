@@ -19,7 +19,8 @@ const updateAthleteStatement = gql`
   } 
 `
 
-const updateAthlete = (axios) => (
+const updateAthlete = () => (
+  axios,
   athleteId,
   plaidProcessorToken
 ) => axios.post("/", {

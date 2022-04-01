@@ -16,5 +16,5 @@ const unitAccountStatement = (athlete) => {
 }
 
 module.exports = {
-  unitAccountStatement: (event, athleteId) => tpc.getAthlete(validateUser(event),athleteId).then(unitAccountStatement)
+  unitAccountStatement: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => unitAccountStatement(res))
 }

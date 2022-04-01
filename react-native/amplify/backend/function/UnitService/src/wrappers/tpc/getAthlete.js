@@ -60,3 +60,4 @@ const getAthlete = (axios) => (
 module.exports = {
   getAthlete
 }
+//  //axios.defaults.headers["Authorization"] = auth;  

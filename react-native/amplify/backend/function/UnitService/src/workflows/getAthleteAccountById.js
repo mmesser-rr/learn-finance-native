@@ -15,14 +15,14 @@ const getAthleteUnitAccountById = (athlete, unitAccountId) => {
     });
 }
 
-const getAthleteUnitAccount = (event, athleteId, unitAccountId) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
-  (athlete != null) ? 
-  getAthleteUnitAccountById(athlete, unitAccountId) : 
-    Promise.reject(`No athlete found with id ${athleteId}`)
-)
+// const getAthleteUnitAccount = (athleteId, unitAccountId) => tpc.getAthlete(athleteId).then(athlete => 
+//   (athlete != null) ? 
+//   getAthleteUnitAccountById(athlete, unitAccountId) : 
+//     Promise.reject(`No athlete found with id ${athleteId}`)
+// )
 
 module.exports = {
-  getAthleteUnitAccountById: getAthleteUnitAccount
+  getAthleteUnitAccountById: (event, athleteId, unitAccountId) => tpc.getAthlete(validateUser(event), athleteId).then(res => getAthleteUnitAccountById(res, unitAccountId))
 }
 
 

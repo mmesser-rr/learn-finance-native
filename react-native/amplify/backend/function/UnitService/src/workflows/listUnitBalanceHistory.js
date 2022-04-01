@@ -16,12 +16,12 @@ const getUnitBalanceHistory = (athlete) => {
     });
 }
 
-const listUnitBalanceHistory = (event, athleteId) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
-  (athlete != null) ? 
-  getUnitBalanceHistory(athlete) : 
-    Promise.reject(`No athlete found with id ${athleteId}`)
-)
+// const listUnitBalanceHistory = (athleteId) => tpc.getAthlete(athleteId).then(athlete => 
+//   (athlete != null) ? 
+//   getUnitBalanceHistory(athlete) : 
+//     Promise.reject(`No athlete found with id ${athleteId}`)
+// )
 
 module.exports = {
-    listUnitBalanceHistory: listUnitBalanceHistory
+    listUnitBalanceHistory: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => getUnitBalanceHistory(res))
 }

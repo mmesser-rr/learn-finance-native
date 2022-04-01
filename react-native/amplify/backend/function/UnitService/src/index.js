@@ -39,7 +39,7 @@ const resolvers = Object.freeze({
   unitAccountStatement: (event) => unitAccountStatement(event,event.arguments.athleteId),
   athleteUnitTokenVerification: (event) => athleteUnitTokenVerification(event, event.arguments.athleteId), 
 
-  getUnitTransactionById: (event) => getUnitTransactionById(event, event.arguments.unitAccountId, event.arguments.unitTransactionId),
+  getUnitTransactionById: (event) => getUnitTransactionById(event.arguments.unitAccountId, event.arguments.unitTransactionId),
   listAllUnitTransactions: (event) => getAllUnitTransaction(event, event.arguments.athleteId),
 
   listUnitBalanceHistory: (event) => listUnitBalanceHistory(event, event.arguments.athleteId),

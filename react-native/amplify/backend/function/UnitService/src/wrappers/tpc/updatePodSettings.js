@@ -14,7 +14,8 @@ const updateAthletePodSettingsStatement = gql`
   } 
 `
 
-const updatePodSettings = (axios) => (
+const updatePodSettings = () => (
+  axios,
   athleteId,
   podSettings
 ) => axios.post("/", {
@@ -22,7 +23,8 @@ const updatePodSettings = (axios) => (
   variables: {
     athleteId,
     podSettings
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthletePodSettingsLookup);

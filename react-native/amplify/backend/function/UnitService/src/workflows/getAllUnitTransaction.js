@@ -9,13 +9,13 @@ const getUnitAllTransactions = (unitCustomerId) => {
     });
 }
 
-const getUnitTransactions = (event, athleteId) => tpc.getAthlete(validateUser(event),athleteId).then(athlete => 
-    (athlete != null) ? 
-    getUnitAllTransactions(athlete.unitLookup.custId) : 
-      Promise.reject(`No athlete found with id ${athleteId}`)
-  )
+// const getUnitTransactions = (athleteId) => tpc.getAthlete(athleteId).then(athlete => 
+//     (athlete != null) ? 
+//     getUnitAllTransactions(athlete.unitLookup.custId) : 
+//       Promise.reject(`No athlete found with id ${athleteId}`)
+//   )
   
 
 module.exports = {
-    getAllUnitTransaction: getUnitTransactions
+    getAllUnitTransaction:(event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => getUnitAllTransactions(res.unitLookup.custId))
 }

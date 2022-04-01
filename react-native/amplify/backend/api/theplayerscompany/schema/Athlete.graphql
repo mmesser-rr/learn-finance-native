@@ -63,8 +63,8 @@ type Athlete @model @auth(rules: [
 
 type AthleteAccount @model 
 @auth(rules: [
-  {allow: public, operations: [read, create, update]}
-   {allow: owner, provider: userPools, ownerField: "athleteAccountsId"}
+  {allow: public, operations: [read, create]}
+   {allow: owner, provider: userPools, ownerField: "athleteId"}
 ])#@auth(rules: [{ allow: owner, provider: userPools, ownerField: "id" } {allow: public, operations: [read, create, update]}])
 {
   athlete: Athlete! @belongsTo 

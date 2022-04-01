@@ -12,7 +12,8 @@ const updateAthleteUnitStatement = gql`
   } 
 `
 
-const updateAthleteUnitToken = (axios) => (
+const updateAthleteUnitToken = () => (
+  axios,
   athleteId,
   unitToken
 ) => axios.post("/", {
@@ -20,7 +21,8 @@ const updateAthleteUnitToken = (axios) => (
   variables: {
     athleteId,
     unitToken
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);
