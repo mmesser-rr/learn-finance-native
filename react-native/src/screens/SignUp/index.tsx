@@ -34,7 +34,7 @@ const Verification: React.FC<SignUpProps> = ({
     if (stepCount < 5) {
       navigation.navigate('SignUp', {step: SignUpSteps[stepCount + 1]});
     } else {
-      navigation.navigate('SelectLevel');
+      navigation.navigate('BankAccountIntro');
     }
   };
 

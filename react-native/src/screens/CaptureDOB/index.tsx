@@ -21,7 +21,7 @@ const CaptureDOB: React.FC = () => {
   const [isError, setError] = useState(false);
 
   useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 9}));
+    dispatch(updateOnboarding({isSignInLink: false, step: 7}));
   }, []);
 
   const changeValue = (value: string) => {

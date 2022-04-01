@@ -7,15 +7,16 @@ import {Text} from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
 import OnBoardingStartLayout from 'src/components/layout/OnBoardingStartLayout';
+import { AthleteLevel } from 'src/types/API'
 
-import styles from './styles';
+import styles from './styles';;
 
 const SelectLevel: React.FC = () => {
   const dispatch = useDispatch();
 
-  const onSelectLevel = (level: 'COLLEGE' | 'PROFESSIONAL') => {
+  const onSelectLevel = (level: AthleteLevel) => {
     dispatch(updateOnboarding({level}));
-    NavigationService.navigate('BankAccountIntro');
+    NavigationService.navigate('SelectSport');
   };
 
   const contentEle = () => {
@@ -37,14 +38,14 @@ const SelectLevel: React.FC = () => {
     return (
       <>
         <View>
-          <Button onPress={() => onSelectLevel('PROFESSIONAL')} actionStyle={styles.proAction}>
+          <Button onPress={() => onSelectLevel(AthleteLevel.PROFESSIONAL)} actionStyle={styles.proAction}>
             <Text type="Body/Large" style={styles.proLabel}>I'm a professional athlete</Text>
           </Button>
         </View>
         <View>
           <Button
             actionStyle={styles.collegeAction}
-            onPress={() => onSelectLevel('COLLEGE')}>
+            onPress={() => onSelectLevel(AthleteLevel.COLLEGE)}>
             <Text type="Body/Large">I'm a college athlete</Text>
           </Button>
         </View>

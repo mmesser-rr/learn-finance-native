@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {Auth} from 'aws-amplify';
 import {useDispatch} from 'react-redux';
+import {useForm, Controller} from 'react-hook-form';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -15,39 +16,40 @@ import * as userActions from 'src/store/actions/userActions';
 
 import styles from './styles';
 
+type FormData = {
+  phone: string;
+  password: string;
+};
+
 const UserLogin: React.FC = () => {
   const dispatch = useDispatch();
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [isValid, setIsValid] = useState(false);
   const [notFoundUser, setNotFoundUser] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const checkValidation = (phone: string, value: string) => {
-    setIsValid(!!phone && !!value && phone.length === 10);
-  };
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+    formState: {isValid},
+  } = useForm<FormData>({
+    defaultValues: {
+      phone: '',
+      password: ''
+    },
+    mode: 'onChange',
+  });
 
-  const changePhoneNumber = (value: string) => {
-    setPhone(value);
-    checkValidation(value, password);
-  };
-
-  const changePassword = (value: string) => {
-    setPassword(value);
-    checkValidation(phone, value);
-  };
-
-  const handleContinue = async () => {
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
     setNotFoundUser(false);
     let isUserNotExist = false;
     let msg = '';
-    const formattedPhone = '+1' + phone;
+    const formattedPhone = '+1' + data.phone;
     try {
       const response = await Auth.signIn({
         username: formattedPhone,
-        password,
+        password: data.password,
       });
       console.log('Sign In Response:');
       console.log(response);
@@ -106,20 +108,27 @@ const UserLogin: React.FC = () => {
           </View>
         )}
         <View style={styles.phoneNumber}>
-          <TextInputMask
-            label="Phone Number"
-            mask="[000] [000] [0000]"
-            autoFocus
-            keyboardType="number-pad"
-            changeValue={changePhoneNumber}
+          <Controller
+            control={control}
+            rules={{
+              required: {value: true, message: 'Please fill out this field.'},
+              minLength: {value: 10, message: 'Phone numbers are always 10 digits long. Please check.'},
+              maxLength: {value: 10, message: 'Phone numbers are always 10 digits long. Please check.'},
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInputMask
+                label="Phone Number"
+                mask="[000] [000] [0000]"
+                autoFocus
+                keyboardType="number-pad"
+                error={errors?.phone?.message}
+                changeValue={onChange}
+                onBlur={onBlur}
+                value={value}
+              />
+            )}
+            name="phone"
           />
-          {phone.length < 10 && (
-            <View>
-              <Alert style={styles.phoneNumberAlert}>
-                Phone numbers are always 10 digits long. Please check.
-              </Alert>
-            </View>
-          )}
           {notFoundUser && (
             <View>
               <Alert style={styles.phoneNumberAlert}>
@@ -136,7 +145,24 @@ const UserLogin: React.FC = () => {
           )}
         </View>
         <View>
-          <TextInput isSecure label="Password" onChangeText={changePassword} />
+          <Controller
+            control={control}
+            rules={{
+              required: {value: true, message: 'Please fill out this field.'},
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                label="Password"
+                showErrorMessage
+                isSecure
+                value={value}
+                errorMessage={errors?.password?.message}
+                onBlur={onBlur}
+                onChangeText={onChange}
+              />
+            )}
+            name="password"
+          />
         </View>
         <View style={styles.forgotPassword}>
           <TouchableOpacity onPress={goToForgotPassword}>
@@ -150,7 +176,7 @@ const UserLogin: React.FC = () => {
         <SubmitButton
           isValid={isValid}
           actionLabel="Continue"
-          onSubmit={handleContinue}
+          onSubmit={handleSubmit(onSubmit)}
         />
       </View>
       {loading && <Loading />}
