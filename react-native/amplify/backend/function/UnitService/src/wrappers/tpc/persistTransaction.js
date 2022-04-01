@@ -20,7 +20,8 @@ const updateTransactionStatement = gql`
   } 
 `
 
-const persistTransaction = (axios) => (
+const persistTransaction = () => (
+  axios,
  transactionId,
  athleteId, 
  amount, 
@@ -42,7 +43,8 @@ const persistTransaction = (axios) => (
     direction,
     podAllocation,
     idempotencyKey
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve({ amount: res.data.data.createRecentTransaction.amount,

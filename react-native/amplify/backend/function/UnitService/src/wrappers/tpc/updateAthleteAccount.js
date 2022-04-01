@@ -28,7 +28,8 @@ const updateAthlete = () => (
   variables: {
     athleteId,
     plaidProcessorToken
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete.plaidProcessorToken.processorToken);

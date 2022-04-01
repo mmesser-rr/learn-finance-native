@@ -1,5 +1,4 @@
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
 const {axios} = require("../env");
 
 // const podSettingsUpdate = (athleteId, savings, investments, spending) => tpc.getAthlete(athleteId).then(athlete => 
@@ -21,8 +20,7 @@ const checkPodData = (athlete, savings, investments, spending) => {
   return tpc.updatePodSettings(axios, athleteId, podSettings)
 }
 module.exports.podSettings = async (event) => {
-  const authCheck = validateUser(event);
-  axios.defaults.headers["Authorization"] = authCheck; 
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
   const {athleteId, savings, investments, spending} = event.arguments;
-  return tpc.getAthlete(validateUser(event), athleteId).then(res => checkPodData(res, savings, investments, spending))
+  return tpc.getAthlete(axios, athleteId).then(res => checkPodData(res, savings, investments, spending))
 }

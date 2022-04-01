@@ -1,11 +1,11 @@
 
 const validateUser = (event) => {
-    authUser = event.requestContext.identity.claims.sub;
+    authUser = event.identity?.claims.sub;
     athleteId = event.arguments.athleteId;
   if (authUser !== athleteId) {
     throw new Error("Invalid auth!!");
   }
-  return event.headers.authorization;
+  return event.request.headers.authorization;
 }
 
 module.exports = {

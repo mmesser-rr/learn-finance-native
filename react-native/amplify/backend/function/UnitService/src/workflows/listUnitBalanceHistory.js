@@ -1,6 +1,6 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
+const {axios} = require("../env");
 
 const getUnitBalanceHistory = (athlete) => {
   const accounts = athlete.accounts.items;
@@ -22,6 +22,8 @@ const getUnitBalanceHistory = (athlete) => {
 //     Promise.reject(`No athlete found with id ${athleteId}`)
 // )
 
-module.exports = {
-    listUnitBalanceHistory: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => getUnitBalanceHistory(res))
+
+module.exports.listUnitBalanceHistory = async (event, athleteId) => {
+axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+return tpc.getAthlete(axios, athleteId).then(res => getUnitBalanceHistory(res))
 }

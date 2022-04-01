@@ -1,6 +1,5 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
 const {axios} = require("../env");
 
 const createAthleteUnitToken = (athlete, verificationCode, verificationToken) => {
@@ -22,7 +21,6 @@ const createAthleteUnitToken = (athlete, verificationCode, verificationToken) =>
 
 module.exports.createAthleteUnitToken = async (event) => {
   const {athleteId, verificationCode, verificationToken} = event.arguments;
-  const authCheck = validateUser(event);
-  axios.defaults.headers["Authorization"] = authCheck; 
-   return tpc.getAthlete(validateUser(event), athleteId).then(athlete => createAthleteUnitToken(athlete, verificationCode, verificationToken)) 
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+   return tpc.getAthlete(axios, athleteId).then(athlete => createAthleteUnitToken(athlete, verificationCode, verificationToken)) 
 }

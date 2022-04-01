@@ -18,8 +18,9 @@ const persistAccountStatement = gql`
   } 
 `
 
-const persistAccount = (axios) => (
+const persistAccount = () => (
   {
+    axios,
     athleteId,
     routingCode,
     accountNumber,
@@ -34,7 +35,8 @@ const persistAccount = (axios) => (
     accountNumber,
     unitAccountId,
     podName
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.createAthleteAccount);

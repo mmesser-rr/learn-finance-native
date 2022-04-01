@@ -268,42 +268,6 @@ export const listAthletes = /* GraphQL */ `
     }
   }
 `;
-export const athleteByPhone = /* GraphQL */ `
-  query AthleteByPhone(
-    $mobilePhone: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelAthleteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    athleteByPhone(
-      mobilePhone: $mobilePhone
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        dateOfBirth
-        plaidToken
-        unitToken
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getAthleteAccount = /* GraphQL */ `
   query GetAthleteAccount($id: ID!) {
     getAthleteAccount(id: $id) {
@@ -353,6 +317,42 @@ export const listAthleteAccounts = /* GraphQL */ `
         updatedAt
         athleteAccountsId
         athleteId
+      }
+      nextToken
+    }
+  }
+`;
+export const athleteByPhone = /* GraphQL */ `
+  query AthleteByPhone(
+    $mobilePhone: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    athleteByPhone(
+      mobilePhone: $mobilePhone
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        dateOfBirth
+        plaidToken
+        unitToken
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
       }
       nextToken
     }

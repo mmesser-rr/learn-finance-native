@@ -1,6 +1,7 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
+const {axios} = require("../env");
+
 
 const unitAccountStatement = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
@@ -15,6 +16,7 @@ const unitAccountStatement = (athlete) => {
     });
 }
 
-module.exports = {
-  unitAccountStatement: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => unitAccountStatement(res))
+module.exports.unitAccountStatement = async (event, athleteId)  => {
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+  return tpc.getAthlete(axios, athleteId).then(res => unitAccountStatement(res))
 }

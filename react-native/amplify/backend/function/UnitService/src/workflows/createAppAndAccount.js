@@ -2,7 +2,6 @@ const { createAndPersistAccount } = require("./createAccount");
 const { repeat, map } = require("ramda");
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
 const {axios} = require("../env");
 
 /********************************************* /
@@ -32,7 +31,6 @@ const createAppAndAccount = (athlete, ssn, event) => {
 }
 
 module.exports.createAppAndAccount = async (event, ssn, athleteId) => {
-  const authCheck = validateUser(event);
-  axios.defaults.headers["Authorization"] = authCheck; 
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
   return tpc.getAthlete(axios, athleteId).then(res => createAppAndAccount(res, ssn, event));
 }

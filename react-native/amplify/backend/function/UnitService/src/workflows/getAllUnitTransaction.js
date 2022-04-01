@@ -1,6 +1,6 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
+const {axios} = require("../env");
 
 const getUnitAllTransactions = (unitCustomerId) => {
   return unit.getAllUnitTransaction(unitCustomerId)
@@ -16,6 +16,7 @@ const getUnitAllTransactions = (unitCustomerId) => {
 //   )
   
 
-module.exports = {
-    getAllUnitTransaction:(event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(res => getUnitAllTransactions(res.unitLookup.custId))
+module.exports.getAllUnitTransaction = async (event, athleteId) => {
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+return tpc.getAthlete(axios, athleteId).then(res => getUnitAllTransactions(res.unitLookup.custId))
 }
