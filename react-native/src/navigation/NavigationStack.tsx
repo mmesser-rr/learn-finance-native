@@ -30,6 +30,7 @@ import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotificat
 import WyreStack from './WyreStack';
 import Agreement from 'src/screens/Terms/Agreement';
 import SelectPlayer from 'src/screens/SelectPlayer';
+import UniversalError from 'src/screens/UniversalError';
 
 interface IProps {
   theme: Theme;
@@ -83,6 +84,7 @@ const App: React.FC<IProps> = (props: IProps) => {
           name="WyreFullScreenNotification"
           component={WyreFullScreenNotification}
         />
+        <RootStack.Screen name="UniversalError" component={UniversalError} />
         <RootStack.Screen name="HomeStack" component={HomeStack} />
         <RootStack.Screen name="TransferStack" component={TransferStack} />
         <RootStack.Screen name="UserLoginStack" component={UserLoginStack} />

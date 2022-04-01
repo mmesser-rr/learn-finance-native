@@ -1,6 +1,6 @@
+import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
   ICreateAthleteAndAccount,
-  IOnboardingClearError,
   IOnboardingError,
   IOnboardingUpdate,
 } from 'src/models/actions/onboarding';
@@ -30,7 +30,7 @@ export function accountCreationFailed(error: string): IOnboardingError {
   };
 }
 
-export function clearError(): IOnboardingClearError {
+export function clearError(): ITypeOnlyAction {
   return {
     type: types.ONBOARDING_CLEAR_ERROR,
   };

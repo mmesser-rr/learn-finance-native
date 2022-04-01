@@ -403,6 +403,7 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
     yield put(loadingActions.disableLoader());
 
     if (isValid) {
+      console.log('unit token will expire in ' + expiresIn / 1000 + 'seconds');
       const expirationDate = Date.now() + expiresIn;
       yield put(bankingActions.setUnitTokenExpiration(expirationDate));
     }
