@@ -1,18 +1,12 @@
 /**
  *  Redux saga class init
  */
-import {takeEvery, all} from 'redux-saga/effects';
-// import * as types from '../actions/types';
+import {all} from 'redux-saga/effects';
 import bankingSaga from './bankingSaga';
-// import loginSaga from './loginSaga';
 import onboardingSaga from './onboardingSaga';
 import userSaga from './userSaga';
+import wyreSaga from './wyreSaga';
 
 export default function* rootSaga() {
-  yield all([
-    // takeEvery(types.LOGIN_REQUEST, loginSaga),
-    onboardingSaga(),
-    bankingSaga(),
-    userSaga(),
-  ]);
+  yield all([onboardingSaga(), bankingSaga(), userSaga(), wyreSaga()]);
 }
