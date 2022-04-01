@@ -13,7 +13,7 @@
                  '__typename': {S: 'Athlete'},
                  'mobilePhone': {S: event.request.userAttributes.phone_number},
                  'createdAt': {S: date.toISOString()},
-                 'isActive': {S: false},
+                 'isActive': {S: 'false'},
              },
              TableName: process.env.ATHLETETABLE
          }
