@@ -7,6 +7,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
 } from 'react-native';
 
 import styles from './styles';
@@ -34,6 +35,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({
             contentContainerStyle={styles.scrollViewContent}
             keyboardShouldPersistTaps="handled"
           >
+            <StatusBar barStyle = "light-content" />
             <View style={[styles.view, viewStyle]}>{children}</View>
           </ScrollView>
         </TouchableWithoutFeedback>
