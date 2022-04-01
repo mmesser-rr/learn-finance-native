@@ -246,12 +246,197 @@ export const unitAccountStatement = /* GraphQL */ `
     }
   }
 `;
-export const getAthleteSchool = /* GraphQL */ `
-  query GetAthleteSchool {
-    getAthleteSchool {
-      name
-      airTableId
+export const getAthlete = /* GraphQL */ `
+  query GetAthlete($id: ID!) {
+    getAthlete(id: $id) {
+      firstName
+      lastName
+      mobilePhone
+      athleteTag
+      email
+      tag
+      level
+      sport {
+        name
+        airTableId
+        isActive
+      }
+      team {
+        name
+        airTableId
+        isActive
+      }
+      address {
+        streetAddress
+        apt
+        city
+        state
+        zipCode
+      }
+      dateOfBirth
+      accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
+        nextToken
+      }
+      unitLookup {
+        appId
+        custId
+      }
+      podSettings {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      plaidToken
+      unitToken
+      plaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyreAccountId
       isActive
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAthletes = /* GraphQL */ `
+  query ListAthletes(
+    $filter: ModelAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAthletes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const athleteByPhone = /* GraphQL */ `
+  query AthleteByPhone(
+    $mobilePhone: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    athleteByPhone(
+      mobilePhone: $mobilePhone
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
+        dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
+        plaidToken
+        unitToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;
@@ -307,7 +492,6 @@ export const getAthleteAccount = /* GraphQL */ `
         id
         createdAt
         updatedAt
-        owner
       }
       unitAccountId
       routingCode
@@ -344,7 +528,6 @@ export const listAthleteAccounts = /* GraphQL */ `
           id
           createdAt
           updatedAt
-          owner
         }
         unitAccountId
         routingCode
@@ -529,200 +712,12 @@ export const listRecentTransactions = /* GraphQL */ `
     }
   }
 `;
-export const getAthlete = /* GraphQL */ `
-  query GetAthlete($id: ID!) {
-    getAthlete(id: $id) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      plaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
+export const getAthleteSchool = /* GraphQL */ `
+  query GetAthleteSchool {
+    getAthleteSchool {
+      name
+      airTableId
       isActive
-      id
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listAthletes = /* GraphQL */ `
-  query ListAthletes(
-    $filter: ModelAthleteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAthletes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const athleteByPhone = /* GraphQL */ `
-  query AthleteByPhone(
-    $mobilePhone: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelAthleteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    athleteByPhone(
-      mobilePhone: $mobilePhone
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
     }
   }
 `;
