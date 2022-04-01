@@ -19,5 +19,5 @@ const createDebitRequest = (athlete, unitAccountId, amount, addenda, description
 module.exports.debitAccount = async (event) => {
   axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
 const {athleteId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey } = event.arguments;
-return tpc.getAthlete(axios, athleteId).then(res => createDebitRequest(res, find(propEq('podName', 'SPENDING'))(athlete?.accounts?.items).unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey));
+return tpc.getAthlete(axios, athleteId).then(res => createDebitRequest(res, find(propEq('podName', 'SPENDING'))(res?.accounts?.items).unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey));
 }

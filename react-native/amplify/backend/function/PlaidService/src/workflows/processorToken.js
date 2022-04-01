@@ -17,4 +17,3 @@ const processorToken = (token, plaidAccount) => {
 module.exports.processorToken = async (plaidAccount, token) => {
      return processorToken(token, plaidAccount)
 }
-  

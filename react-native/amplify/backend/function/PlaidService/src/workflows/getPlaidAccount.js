@@ -1,6 +1,6 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
-const { validateUser } = require("./validateUser");
+const {axios} = require("../env");
 
 const getPlaidAccounts = (athlete) => {
     const token = athlete?.plaidToken;
@@ -14,8 +14,7 @@ const getPlaidAccounts = (athlete) => {
     });
 }
 
-module.exports = {
-    getPlaidAccounts: (event, athleteId) => tpc.getAthlete(validateUser(event), athleteId).then(getPlaidAccounts)
+module.exports.getPlaidAccounts = async (event, athleteId) => {
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+  return tpc.getAthlete(axios, athleteId).then(res => getPlaidAccounts(res));
 }
-
-

@@ -1,6 +1,5 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const { podNaming } = require("./podNaming");
 const {axios} = require("../env");
 
 const accountFromUnitParams = (athlete, unitResponse, podName) => (
@@ -13,9 +12,6 @@ const accountFromUnitParams = (athlete, unitResponse, podName) => (
   }
 );
 
-const persistAccountInBackend = (athlete, unitResponse, podName) => tpc.persistAccount(accountFromUnitParams(athlete, unitResponse, podName));
-
-
 const createAndPersistAccount = (athlete, podName) => {
   const custId = athlete?.unitLookup?.custId;
   const athleteId = athlete.id;
@@ -24,7 +20,7 @@ const createAndPersistAccount = (athlete, podName) => {
     throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
   }
   return unit.createAccount(custId, athleteId, podName)
-    .then(res => persistAccountInBackend(axios, athlete, res, podName))
+    .then(res => tpc.persistAccount(axios, accountFromUnitParams(athlete, res, podName)))
     .catch(err => {
       throw new Error(`Failed to create account in Unit. Reason: ${JSON.stringify(err)}`);
     });

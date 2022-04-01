@@ -19,8 +19,8 @@ const persistAccountStatement = gql`
 `
 
 const persistAccount = () => (
+  axios,
   {
-    axios,
     athleteId,
     routingCode,
     accountNumber,

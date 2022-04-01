@@ -93,7 +93,7 @@
         },
         "PlaidService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/PlaidService-31575343667a4b50576a-build.zip",
+          "s3Key": "amplify-builds/PlaidService-38723243345544343953-build.zip",
           "clientId": "62152ee09cc120001ae1550f",
           "secretKey": "23a7b3327cf22b0c2d9332b39a8ab6",
           "nodeEnv": "development",
@@ -101,7 +101,7 @@
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/UnitService-694c4e496d773536684e-build.zip",
+          "s3Key": "amplify-builds/UnitService-786965513430762b4c72-build.zip",
           "unitApiUrl": "https://api.s.unit.sh/",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMDRUMTY6NTc6NTguMDA1WiIsImp0aSI6IjEyMzUxNSIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfQXSRXfL2joVCb2ZLDMOKL9InJsOYz2YM7bayH8A-RBKAPS_Lm38I_ibTYKi0Wdh6GIPMmdoZmF5qPP2Yvb8bwM",
           "nodeEnv": "development",

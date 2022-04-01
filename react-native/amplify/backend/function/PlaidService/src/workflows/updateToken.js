@@ -1,18 +1,21 @@
 const plaid = require("../wrappers/plaid");
 const tpc = require("../wrappers/tpc");
-const {getPlaidAccount} = require("./getPlaidAccount");
-const { validateUser } = require("./validateUser");
+const {axios} = require("../env");
 
 
-const updateToken = (event, athleteId, token) => tpc.getAthlete(validateUser(event), athleteId).then(athlete => 
-  (athlete?.unitLookup?.custId != null) ? 
-       plaid.updateToken(token)
-      .then(access_token => tpc.addPlaidToken(athleteId, access_token)) :
-    //  .then(getPlaidAccount(athleteId)) :
-      Promise.reject(`Athlete doesn't have account ${athleteId}`)
-);
+const updateToken = (athlete, token) => {
+    const custId = athlete?.unitLookup?.custId
+
+    
+    if (custId === undefined) {
+      throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
+    }
+      return plaid.updateToken(token)
+      .then(access_token => tpc.addPlaidToken(axios, athleteId, access_token))
+    }
 
 module.exports.updateToken = async (event) => {
   const {athleteId, accessToken} = event.arguments;
-   return updateToken(event, athleteId, accessToken)
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+  return tpc.getAthlete(axios, athleteId).then(res => updateToken(res, accessToken));
 }
