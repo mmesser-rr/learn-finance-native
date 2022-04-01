@@ -2,72 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateRecentTransaction = /* GraphQL */ `
-  subscription OnCreateRecentTransaction {
-    onCreateRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const onUpdateRecentTransaction = /* GraphQL */ `
-  subscription OnUpdateRecentTransaction {
-    onUpdateRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const onDeleteRecentTransaction = /* GraphQL */ `
-  subscription OnDeleteRecentTransaction {
-    onDeleteRecentTransaction {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
 export const onCreateAthlete = /* GraphQL */ `
   subscription OnCreateAthlete($id: String) {
     onCreateAthlete(id: $id) {
@@ -97,16 +31,6 @@ export const onCreateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -161,16 +85,6 @@ export const onUpdateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -225,16 +139,6 @@ export const onDeleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -261,13 +165,8 @@ export const onDeleteAthlete = /* GraphQL */ `
   }
 `;
 export const onCreateAthleteAccount = /* GraphQL */ `
-<<<<<<< HEAD
-  subscription OnCreateAthleteAccount($athlete: String) {
-    onCreateAthleteAccount(athlete: $athlete) {
-=======
-  subscription OnCreateAthleteAccount($athleteAccountsId: String) {
-    onCreateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
->>>>>>> unit-fix
+  subscription OnCreateAthleteAccount($athleteId: String) {
+    onCreateAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -276,42 +175,9 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -326,17 +192,13 @@ export const onCreateAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
 export const onUpdateAthleteAccount = /* GraphQL */ `
-<<<<<<< HEAD
-  subscription OnUpdateAthleteAccount($athlete: String) {
-    onUpdateAthleteAccount(athlete: $athlete) {
-=======
-  subscription OnUpdateAthleteAccount($athleteAccountsId: String) {
-    onUpdateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
->>>>>>> unit-fix
+  subscription OnUpdateAthleteAccount($athleteId: String) {
+    onUpdateAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -345,42 +207,9 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -395,17 +224,13 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
 export const onDeleteAthleteAccount = /* GraphQL */ `
-<<<<<<< HEAD
-  subscription OnDeleteAthleteAccount($athlete: String) {
-    onDeleteAthleteAccount(athlete: $athlete) {
-=======
-  subscription OnDeleteAthleteAccount($athleteAccountsId: String) {
-    onDeleteAthleteAccount(athleteAccountsId: $athleteAccountsId) {
->>>>>>> unit-fix
+  subscription OnDeleteAthleteAccount($athleteId: String) {
+    onDeleteAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -414,42 +239,9 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -464,6 +256,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;

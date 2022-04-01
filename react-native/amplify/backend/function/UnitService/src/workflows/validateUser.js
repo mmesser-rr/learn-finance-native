@@ -1,6 +1,6 @@
 
 const validateUser = (event) => {
-    authUser = event.requestContext.authorizer.claims.sub;
+    authUser = event.requestContext.identity.claims.sub;
     athleteId = event.arguments.athleteId;
   if (authUser !== athleteId) {
     throw new Error("Invalid auth!!");

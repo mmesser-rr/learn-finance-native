@@ -33,12 +33,6 @@ export const listAthleteUnitAccounts = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -49,10 +43,6 @@ export const listAthleteUnitAccounts = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -72,12 +62,6 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -88,16 +72,10 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
 `;
-<<<<<<< HEAD
-=======
 export const getUnitTransactionById = /* GraphQL */ `
   query GetUnitTransactionById(
     $unitAccountId: String!
@@ -116,12 +94,6 @@ export const getUnitTransactionById = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -132,15 +104,10 @@ export const getUnitTransactionById = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
 `;
->>>>>>> unit-fix
 export const listAllUnitTransactions = /* GraphQL */ `
   query ListAllUnitTransactions($athleteId: ID!) {
     listAllUnitTransactions(athleteId: $athleteId) {
@@ -153,12 +120,6 @@ export const listAllUnitTransactions = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -169,10 +130,6 @@ export const listAllUnitTransactions = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -189,12 +146,6 @@ export const listUnitBalanceHistory = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -205,10 +156,6 @@ export const listUnitBalanceHistory = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -225,12 +172,6 @@ export const unitAccountStatement = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -241,72 +182,10 @@ export const unitAccountStatement = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
 `;
-<<<<<<< HEAD
-export const getRecentTransaction = /* GraphQL */ `
-  query GetRecentTransaction($id: ID!) {
-    getRecentTransaction(id: $id) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const listRecentTransactions = /* GraphQL */ `
-  query ListRecentTransactions(
-    $filter: ModelRecentTransactionFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listRecentTransactions(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        transactionId
-        athleteId
-        status
-        amount
-        idempotencyKey
-        direction
-        createdAt
-        read
-        settled
-        podAllocation {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        id
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-=======
->>>>>>> unit-fix
 export const getAthlete = /* GraphQL */ `
   query GetAthlete($id: ID!) {
     getAthlete(id: $id) {
@@ -336,16 +215,6 @@ export const getAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -386,42 +255,9 @@ export const listAthletes = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -455,42 +291,9 @@ export const athleteByPhone = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -512,42 +315,9 @@ export const getAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -562,6 +332,7 @@ export const getAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
@@ -573,23 +344,6 @@ export const listAthleteAccounts = /* GraphQL */ `
   ) {
     listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        athlete {
-          firstName
-          lastName
-          mobilePhone
-          athleteTag
-          email
-          tag
-          level
-          dateOfBirth
-          plaidToken
-          unitToken
-          wyreAccountId
-          isActive
-          id
-          createdAt
-          updatedAt
-        }
         unitAccountId
         routingCode
         accountNumber
@@ -598,6 +352,7 @@ export const listAthleteAccounts = /* GraphQL */ `
         createdAt
         updatedAt
         athleteAccountsId
+        athleteId
       }
       nextToken
     }
@@ -718,47 +473,6 @@ export const listPhoneChallenges = /* GraphQL */ `
     }
   }
 `;
-<<<<<<< HEAD
-export const getUnitTransactionById = /* GraphQL */ `
-  query GetUnitTransactionById(
-    $unitAccountId: String!
-    $unitTransactionId: String!
-  ) {
-    getUnitTransactionById(
-      unitAccountId: $unitAccountId
-      unitTransactionId: $unitTransactionId
-    ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
-      }
-=======
 export const getRecentTransaction = /* GraphQL */ `
   query GetRecentTransaction($id: ID!) {
     getRecentTransaction(id: $id) {
@@ -802,16 +516,10 @@ export const listRecentTransactions = /* GraphQL */ `
         createdAt
         read
         settled
-        podAllocation {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         id
         updatedAt
       }
       nextToken
->>>>>>> unit-fix
     }
   }
 `;

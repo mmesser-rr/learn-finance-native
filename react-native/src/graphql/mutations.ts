@@ -13,42 +13,9 @@ export const openAppAndAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -63,6 +30,7 @@ export const openAppAndAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
@@ -77,42 +45,9 @@ export const openAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -127,6 +62,7 @@ export const openAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
@@ -143,66 +79,6 @@ export const podSettings = /* GraphQL */ `
       investments: $investments
       spending: $spending
     ) {
-<<<<<<< HEAD
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-=======
       firstName
       lastName
       mobilePhone
@@ -229,16 +105,6 @@ export const podSettings = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -261,7 +127,6 @@ export const podSettings = /* GraphQL */ `
       id
       createdAt
       updatedAt
->>>>>>> unit-fix
     }
   }
 `;
@@ -307,12 +172,6 @@ export const createAthleteUnitToken = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -323,10 +182,6 @@ export const createAthleteUnitToken = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -343,12 +198,6 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -359,10 +208,6 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -370,66 +215,6 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
 export const createWyreAccount = /* GraphQL */ `
   mutation CreateWyreAccount($athleteId: ID!) {
     createWyreAccount(athleteId: $athleteId) {
-<<<<<<< HEAD
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-=======
       firstName
       lastName
       mobilePhone
@@ -456,16 +241,6 @@ export const createWyreAccount = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -488,7 +263,6 @@ export const createWyreAccount = /* GraphQL */ `
       id
       createdAt
       updatedAt
->>>>>>> unit-fix
     }
   }
 `;
@@ -516,12 +290,6 @@ export const createPlaidPayment = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -532,10 +300,6 @@ export const createPlaidPayment = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -568,12 +332,6 @@ export const bookPayment = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -584,10 +342,6 @@ export const bookPayment = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -624,12 +378,6 @@ export const debitAccount = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -640,10 +388,6 @@ export const debitAccount = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -680,12 +424,6 @@ export const creditAccount = /* GraphQL */ `
         balance
         summary
         description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
         name
         status
         date
@@ -696,10 +434,6 @@ export const creditAccount = /* GraphQL */ `
         expiresIn
         hold
         available
-        tags {
-          podName
-          athleteId
-        }
       }
     }
   }
@@ -736,16 +470,6 @@ export const deleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -771,12 +495,12 @@ export const deleteAthlete = /* GraphQL */ `
     }
   }
 `;
-export const deleteAthleteAccount = /* GraphQL */ `
-  mutation DeleteAthleteAccount(
-    $input: DeleteAthleteAccountInput!
+export const updateAthleteAccount = /* GraphQL */ `
+  mutation UpdateAthleteAccount(
+    $input: UpdateAthleteAccountInput!
     $condition: ModelAthleteAccountConditionInput
   ) {
-    deleteAthleteAccount(input: $input, condition: $condition) {
+    updateAthleteAccount(input: $input, condition: $condition) {
       athlete {
         firstName
         lastName
@@ -785,42 +509,9 @@ export const deleteAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -835,6 +526,42 @@ export const deleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
+    }
+  }
+`;
+export const deleteAthleteAccount = /* GraphQL */ `
+  mutation DeleteAthleteAccount(
+    $input: DeleteAthleteAccountInput!
+    $condition: ModelAthleteAccountConditionInput
+  ) {
+    deleteAthleteAccount(input: $input, condition: $condition) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        dateOfBirth
+        plaidToken
+        unitToken
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+      athleteId
     }
   }
 `;
@@ -879,34 +606,6 @@ export const deletePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
-<<<<<<< HEAD
-export const createRecentTransaction = /* GraphQL */ `
-  mutation CreateRecentTransaction(
-    $input: CreateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    createRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-=======
->>>>>>> unit-fix
 export const updateRecentTransaction = /* GraphQL */ `
   mutation UpdateRecentTransaction(
     $input: UpdateRecentTransactionInput!
@@ -989,16 +688,6 @@ export const createAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -1056,16 +745,6 @@ export const updateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -1105,42 +784,9 @@ export const createAthleteAccount = /* GraphQL */ `
         email
         tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
         unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreAccountId
         isActive
         id
@@ -1155,73 +801,7 @@ export const createAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-    }
-  }
-`;
-export const updateAthleteAccount = /* GraphQL */ `
-  mutation UpdateAthleteAccount(
-    $input: UpdateAthleteAccountInput!
-    $condition: ModelAthleteAccountConditionInput
-  ) {
-    updateAthleteAccount(input: $input, condition: $condition) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
-        dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
-        plaidToken
-        unitToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
+      athleteId
     }
   }
 `;
@@ -1307,8 +887,6 @@ export const updatePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
-<<<<<<< HEAD
-=======
 export const createRecentTransaction = /* GraphQL */ `
   mutation CreateRecentTransaction(
     $input: CreateRecentTransactionInput!
@@ -1334,7 +912,6 @@ export const createRecentTransaction = /* GraphQL */ `
     }
   }
 `;
->>>>>>> unit-fix
 export const initiatePhoneChallenge = /* GraphQL */ `
   mutation InitiatePhoneChallenge($phoneNumber: String!) {
     initiatePhoneChallenge(phoneNumber: $phoneNumber) {

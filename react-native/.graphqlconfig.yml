@@ -1,10 +1,6 @@
 projects:
   theplayerscompany:
-<<<<<<< HEAD
     schemaPath: amplify/backend/api/theplayerscompany/build/schema.graphql
-=======
-    schemaPath: src/graphql/schema.json
->>>>>>> unit-fix
     includes:
       - src/graphql/**/*.ts
     excludes:
@@ -12,16 +8,11 @@ projects:
     extensions:
       amplify:
         codeGenTarget: typescript
-<<<<<<< HEAD
-        generatedFileName: src/types/API.ts
+        generatedFileName: src/API.ts
         docsFilePath: src/graphql
         region: us-east-1
         apiId: null
-        maxDepth: 3
-=======
-        generatedFileName: src/API.ts
-        docsFilePath: src/graphql
->>>>>>> unit-fix
+        maxDepth: 2
 extensions:
   amplify:
     version: 3
