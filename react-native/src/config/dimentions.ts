@@ -20,7 +20,7 @@ const isWideDevice = () => {
 export const scale = (size: number) => {
   const baseWidth = isWideDevice() ? guidePadBaseWidth : guidelineBaseWidth;
   const shorterWindowDimension = width > height ? height : width;
-  return Math.floor((shorterWindowDimension / baseWidth) * size);
+  return Math.floor((shorterWindowDimension / baseWidth) * size * 100) / 100;
 };
 
 export const Metrics = {

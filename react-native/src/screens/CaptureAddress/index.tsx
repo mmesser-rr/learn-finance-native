@@ -8,10 +8,11 @@ import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
 import TextInput from 'src/components/common/TextInput';
-
-import styles from './styles';
 import {updateOnboarding} from 'src/store/actions/onboardingActions';
 import OnboardingSteps from 'src/components/common/OnboardingSteps';
+
+
+import styles from './styles';
 
 type FormData = {
   streetAddress: string;
@@ -24,7 +25,7 @@ type FormData = {
 const CaptureAddress: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 10}));
+    dispatch(updateOnboarding({isSignInLink: false, step: 8}));
   }, []);
 
   const {

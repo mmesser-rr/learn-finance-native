@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     marginRight: scale(8),
   },
   container: {
-    position: 'relative',
-    marginBottom: scale(24),
+    position: 'relative'
   },
   inputContainer: {
     position: 'relative',

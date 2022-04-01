@@ -26,6 +26,7 @@ export type RootStackParamList = {
   UserLoginStack: undefined;
   UserBankingStack: undefined;
   WyreStack: undefined;
+  SelectPlayer: undefined;
 };
 
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;

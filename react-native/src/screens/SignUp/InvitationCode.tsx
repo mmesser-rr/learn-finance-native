@@ -49,22 +49,29 @@ const InvitationCode: React.FC<InvitationCodeProps> = ({
 
   const onSubmit = async (formData: FormData) => {
     updateLoading(true);
-    const {data} = (await API.graphql(
-      graphqlOperation(getInvite, {
-        code: formData.code,
-        status: InviteStatus.AVAILABLE,
-      }),
-    )) as GraphQLResult<GetInviteQuery>;
-    updateLoading(false);
-
-    if (data && data.getInvite) {
-      goToNextStep();
-    } else {
+    try {
+      const {data} = (await API.graphql(
+        graphqlOperation(getInvite, {
+          code: formData.code,
+          status: InviteStatus.AVAILABLE,
+        }),
+      )) as GraphQLResult<GetInviteQuery>;
+  
+      if (data && data.getInvite) {
+        goToNextStep();
+      } else {
+        setError('code', {
+          type: 'manual',
+          message: invalidCodeMessage,
+        });
+      } 
+    } catch (error: any) {
       setError('code', {
         type: 'manual',
-        message: invalidCodeMessage,
+        message: error?.errors[0]?.message || 'Unknown error',
       });
     }
+    updateLoading(false);
   };
 
   return (

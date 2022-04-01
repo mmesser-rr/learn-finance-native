@@ -20,7 +20,7 @@ const SelectPlayerTag: React.FC = () => {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 12}));
+    dispatch(updateOnboarding({isSignInLink: false, step: 11}));
   }, []);
 
   const changeValue = (value: string) => {
