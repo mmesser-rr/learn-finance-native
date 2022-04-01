@@ -21,6 +21,7 @@ interface TextInputMaskProps {
   isSecure?: boolean;
   keyboardType?: KeyboardType;
   changeValue: (text: string) => void;
+  onBlur?: () => void;
 }
 
 const TextInputMask: React.FC<TextInputMaskProps> = ({
@@ -32,6 +33,7 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
   isSecure,
   keyboardType,
   changeValue,
+  onBlur
 }) => {
   const [text, setText] = useState(value || '');
   const [securityState, setSecurityState] = useState(true);
@@ -49,6 +51,10 @@ const TextInputMask: React.FC<TextInputMaskProps> = ({
         duration: 300,
         useNativeDriver: true,
       }).start();
+    }
+
+    if (onBlur) {
+      onBlur();
     }
   };
 

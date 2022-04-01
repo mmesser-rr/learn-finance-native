@@ -26,7 +26,7 @@ const CaptureSSN: React.FC = () => {
   const {error} = useSelector((state: RootState) => state.onboardingReducer);
 
   useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 11}));
+    dispatch(updateOnboarding({isSignInLink: false, step: 9}));
   }, []);
 
   const changeValue = (value: string) => {
