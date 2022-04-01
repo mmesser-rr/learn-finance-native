@@ -8,16 +8,15 @@ const styles = StyleSheet.create({
   },
   containerView: {
     marginTop: 0,
-    justifyContent: 'center',
   },
   nav: {
-    marginBottom: scale(37),
+    marginBottom: scale(125),
   },
-  headline: {
+  body: {
     textAlign: 'center',
     marginBottom: scale(40),
   },
-  body: {
+  headline: {
     textAlign: 'center',
     marginBottom: scale(40),
   },

@@ -13,7 +13,7 @@ import * as bankingActions from 'src/store/actions/bankingActions';
 import NavigationService from 'src/navigation/NavigationService';
 import TextInput from 'src/components/common/TextInput';
 import Alert from 'src/components/common/Alert';
-import SuccessIcon from 'src/assets/icons/account-creation-success.svg';
+import SuccessIcon from 'src/assets/icons/success.svg';
 
 import styles from './styles';
 

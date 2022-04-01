@@ -30,7 +30,7 @@ const educationItems = [
   },
 ];
 
-const WyreFullScreenNotification: React.FC = () => {
+const WyreIntro: React.FC = () => {
   const [educationItemIndex, setEducationItemIndex] = useState(0);
   const [educationItem, setEducationItem] = useState(educationItems[0]);
   const onContinue = () => {
@@ -91,4 +91,4 @@ const WyreFullScreenNotification: React.FC = () => {
   );
 };
 
-export default WyreFullScreenNotification;
+export default WyreIntro;

@@ -40,6 +40,7 @@ export const onCreateAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
+          athleteId
         }
         nextToken
       }
@@ -104,6 +105,7 @@ export const onUpdateAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
+          athleteId
         }
         nextToken
       }
@@ -168,6 +170,7 @@ export const onDeleteAthlete = /* GraphQL */ `
           createdAt
           updatedAt
           athleteAccountsId
+          athleteId
         }
         nextToken
       }
@@ -195,8 +198,8 @@ export const onDeleteAthlete = /* GraphQL */ `
   }
 `;
 export const onCreateAthleteAccount = /* GraphQL */ `
-  subscription OnCreateAthleteAccount($athleteAccountsId: String) {
-    onCreateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+  subscription OnCreateAthleteAccount($athleteId: String) {
+    onCreateAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -255,12 +258,13 @@ export const onCreateAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
 export const onUpdateAthleteAccount = /* GraphQL */ `
-  subscription OnUpdateAthleteAccount($athleteAccountsId: String) {
-    onUpdateAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+  subscription OnUpdateAthleteAccount($athleteId: String) {
+    onUpdateAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -319,12 +323,13 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
 export const onDeleteAthleteAccount = /* GraphQL */ `
-  subscription OnDeleteAthleteAccount($athleteAccountsId: String) {
-    onDeleteAthleteAccount(athleteAccountsId: $athleteAccountsId) {
+  subscription OnDeleteAthleteAccount($athleteId: String) {
+    onDeleteAthleteAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
@@ -383,6 +388,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
+      athleteId
     }
   }
 `;
