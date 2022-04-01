@@ -29,6 +29,7 @@ import Disclosures from 'src/screens/Disclosures';
 import WyreFullScreenNotification from 'src/screens/Wyre/WyreFullScreenNotification';
 import WyreStack from './WyreStack';
 import Agreement from 'src/screens/Terms/Agreement';
+import SelectPlayer from 'src/screens/SelectPlayer';
 
 interface IProps {
   theme: Theme;
@@ -74,6 +75,7 @@ const App: React.FC<IProps> = (props: IProps) => {
           component={AccountCreateFailure}
         />
         <RootStack.Screen name="ProfileIntro" component={ProfileIntro} />
+        <RootStack.Screen name="SelectPlayer" component={SelectPlayer} />
         <RootStack.Screen name="SelectPlayerTag" component={SelectPlayerTag} />
         <RootStack.Screen name="VerifyEmailCode" component={VerifyEmailCode} />
         <RootStack.Screen name="LastStepWelcome" component={LastStepWelcome} />
