@@ -10,10 +10,10 @@ import ForwardIcon from 'src/assets/icons/forward.svg';
 
 const countryOptions = ['United States', 'Canada', 'Mexico', 'Others'];
 
-const WyreFullScreenNotification: React.FC = () => {
+const CountrySelection: React.FC = () => {
   const onContinue = (country: string) => {
     if (country === 'United States') {
-      // NavigationService.navigate('');
+      NavigationService.navigate('OpenRewardsAccount');
     } else {
       NavigationService.navigate('NonUS');
     }
@@ -63,4 +63,4 @@ const WyreFullScreenNotification: React.FC = () => {
   );
 };
 
-export default WyreFullScreenNotification;
+export default CountrySelection;

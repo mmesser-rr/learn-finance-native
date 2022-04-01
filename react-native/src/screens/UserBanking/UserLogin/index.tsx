@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {Auth} from 'aws-amplify';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
 
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -13,6 +12,7 @@ import Alert from 'src/components/common/Alert';
 import NavigationService from 'src/navigation/NavigationService';
 import Loading from 'src/components/common/Loading';
 import * as userActions from 'src/store/actions/userActions';
+import {RootState} from 'src/store/root-state';
 
 import styles from './styles';
 
@@ -23,9 +23,10 @@ type FormData = {
 
 const UserLogin: React.FC = () => {
   const dispatch = useDispatch();
-  const [notFoundUser, setNotFoundUser] = useState(false);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const {loginError, userNotFound} = useSelector(
+    (state: RootState) => state.userReducer,
+  );
 
   const {
     control,
@@ -35,48 +36,14 @@ const UserLogin: React.FC = () => {
   } = useForm<FormData>({
     defaultValues: {
       phone: '',
-      password: ''
+      password: '',
     },
     mode: 'onChange',
   });
 
-  const onSubmit = async (data: FormData) => {
-    setLoading(true);
-    setNotFoundUser(false);
-    let isUserNotExist = false;
-    let msg = '';
+  const onSubmit = (data: FormData) => {
     const formattedPhone = '+1' + data.phone;
-    try {
-      const response = await Auth.signIn({
-        username: formattedPhone,
-        password: data.password,
-      });
-      console.log('Sign In Response:');
-      console.log(response);
-      setLoading(false);
-      dispatch(userActions.getUserByPhone(formattedPhone));
-      NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
-    } catch (error: any) {
-      switch (error.message) {
-        case 'Username should be either an email or a phone number.':
-        case 'Password did not conform with policy: Password not long enough':
-        case 'User is not confirmed.':
-          msg = error.message;
-          break;
-        case 'Incorrect username or password.':
-          msg = 'The phone number and password do not match. Please try again.';
-          break;
-        case 'User does not exist.':
-          isUserNotExist = true;
-          break;
-        default:
-          msg = error.message;
-      }
-    }
-
-    setNotFoundUser(isUserNotExist);
-    setError(msg);
-    setLoading(false);
+    dispatch(userActions.loginRequest(formattedPhone, data.password));
   };
 
   const goToForgotPassword = () => {
@@ -102,9 +69,9 @@ const UserLogin: React.FC = () => {
             Welcome back
           </Text>
         </View>
-        {!!error && (
+        {!!loginError && (
           <View style={styles.misMatchAlert}>
-            <Alert>{error}</Alert>
+            <Alert>{loginError}</Alert>
           </View>
         )}
         <View style={styles.phoneNumber}>
@@ -112,8 +79,16 @@ const UserLogin: React.FC = () => {
             control={control}
             rules={{
               required: {value: true, message: 'Please fill out this field.'},
-              minLength: {value: 10, message: 'Phone numbers are always 10 digits long. Please check.'},
-              maxLength: {value: 10, message: 'Phone numbers are always 10 digits long. Please check.'},
+              minLength: {
+                value: 10,
+                message:
+                  'Phone numbers are always 10 digits long. Please check.',
+              },
+              maxLength: {
+                value: 10,
+                message:
+                  'Phone numbers are always 10 digits long. Please check.',
+              },
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInputMask
@@ -129,7 +104,7 @@ const UserLogin: React.FC = () => {
             )}
             name="phone"
           />
-          {notFoundUser && (
+          {userNotFound && (
             <View>
               <Alert style={styles.phoneNumberAlert}>
                 This phone number hasn't been registered. Please{' '}
@@ -179,7 +154,7 @@ const UserLogin: React.FC = () => {
           onSubmit={handleSubmit(onSubmit)}
         />
       </View>
-      {loading && <Loading />}
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

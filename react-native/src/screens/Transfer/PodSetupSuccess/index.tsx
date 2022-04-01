@@ -5,7 +5,7 @@ import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-import SuccessIcon from 'src/assets/icons/account-creation-success.svg';
+import SuccessIcon from 'src/assets/icons/success.svg';
 
 import styles from './styles';
 
@@ -24,7 +24,8 @@ const PodSetupSuccess: React.FC = () => {
       </View>
       <View>
         <Text type="Body/Large" style={styles.caption}>
-          You have successfully set up your pods. All your incoming payments will be divided among your pods. 
+          You have successfully set up your pods. All your incoming payments
+          will be divided among your pods.
         </Text>
       </View>
       <View style={styles.actionWrapper}>

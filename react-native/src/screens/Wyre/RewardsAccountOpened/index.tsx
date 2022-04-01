@@ -5,17 +5,12 @@ import styles from './styles';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
-import ComingSoonIcon from 'src/assets/icons/coming-soon.svg';
+import SuccessIcon from 'src/assets/icons/success.svg';
 import SubmitButton from 'src/components/common/SubmitButton';
-import SecondaryButton from 'src/components/common/SecondaryButton';
 
-const NonUS: React.FC = () => {
-  const onSignUp = () => {
-    // TODO: link to sign up web page?
-  };
-
-  const onMaybeLater = () => {
-    NavigationService.navigate('HomeStack', {screen: 'Home'});
+const RewardsAccountOpened: React.FC = () => {
+  const goToFirstPurchase = () => {
+    // TODO:
   };
 
   return (
@@ -23,34 +18,28 @@ const NonUS: React.FC = () => {
       containerStyle={styles.container}
       viewStyle={styles.containerView}>
       <View style={styles.iconWrapper}>
-        <ComingSoonIcon />
+        <SuccessIcon />
       </View>
       <View>
         <Text type="Headline/Small" style={styles.headline}>
-          Coming soon!
+          Let's go!
         </Text>
       </View>
       <View>
         <Text type="Body/Large" style={styles.body}>
-          We are actively working to support more regions. Please sign up for
-          the newsletter so we will notify you as soon as the launch!
+          You have successfully opened your Rewards account.
         </Text>
       </View>
 
       <View style={styles.actionWrapper}>
         <SubmitButton
           isValid={true}
-          actionLabel="Sign up for the newsletter"
-          onSubmit={onSignUp}
-        />
-        <SecondaryButton
-          isValid={true}
-          actionLabel="Maybe Later"
-          onPress={onMaybeLater}
+          actionLabel="Make my first purchase"
+          onSubmit={goToFirstPurchase}
         />
       </View>
     </AppLayout>
   );
 };
 
-export default NonUS;
+export default RewardsAccountOpened;
