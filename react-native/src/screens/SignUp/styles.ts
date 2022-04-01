@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(16),
   },
   description: {
-    marginBottom: scale(16),
+    marginBottom: scale(32),
   },
   askAction: {
     marginTop: scale(32),
