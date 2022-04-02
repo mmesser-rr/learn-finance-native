@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles';
 import {Text} from 'src/components/common/Texts';
@@ -8,17 +9,27 @@ import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
 import ReadyIcon from 'src/assets/icons/ready.svg';
 import SubmitButton from 'src/components/common/SubmitButton';
+import * as wyreActions from 'src/store/actions/wyreActions';
+import {RootState} from 'src/store/root-state';
+import Loading from 'src/components/common/Loading';
 
 const OpenRewardsAccount: React.FC = () => {
+  const dispatch = useDispatch();
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+
   const openRewardsAccount = () => {
-    // TODO:
+    dispatch(wyreActions.openRewardsAccount());
   };
+
   const previous = () => {
     NavigationService.navigate('WyreIntro');
   };
 
   const onClose = () => {
     NavigationService.navigate('HomeStack', {screen: 'Home'});
+  };
+  const onTerms = () => {
+    NavigationService.navigate('Disclosures');
   };
 
   return (
@@ -42,8 +53,11 @@ const OpenRewardsAccount: React.FC = () => {
       </View>
       <View>
         <Text type="Body/Large" style={styles.body}>
-          By tapping ‘Open Rewards Account’, you agree to our Terms and
-          Conditions.
+          By tapping ‘Open Rewards Account’, you agree to our{' '}
+          <Text type="Body/Large" style={styles.link} onPress={onTerms}>
+            Terms and Conditions
+          </Text>
+          .
         </Text>
       </View>
 
@@ -54,6 +68,7 @@ const OpenRewardsAccount: React.FC = () => {
           onSubmit={openRewardsAccount}
         />
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

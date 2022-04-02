@@ -25,6 +25,7 @@ export type RootStackParamList = {
   WyreFullScreenNotification: undefined;
   UserLoginStack: undefined;
   UserBankingStack: undefined;
+  UniversalError: undefined;
   WyreStack: undefined;
   SelectPlayer: undefined;
 };
