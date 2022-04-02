@@ -7,18 +7,11 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack100,
   },
   containerView: {
-    marginTop: 0,
-  },
-  nav: {
-    marginBottom: scale(125),
+    justifyContent: 'center',
   },
   body: {
     textAlign: 'center',
-    marginBottom: scale(40),
-  },
-  headline: {
-    textAlign: 'center',
-    marginBottom: scale(40),
+    marginBottom: scale(74),
   },
   iconWrapper: {
     alignItems: 'center',
@@ -26,9 +19,6 @@ const styles = StyleSheet.create({
   },
   actionWrapper: {
     width: '100%',
-  },
-  link: {
-    color: AppColors.interactionBlue,
   },
 });
 
