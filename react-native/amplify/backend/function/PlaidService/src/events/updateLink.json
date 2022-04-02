@@ -1,8 +1,18 @@
 {
     "fieldName": "updatePlaidLink",
+    "request":{
+      "headers":{
+        "authorization": "eyJraWQiOiJUOGV3UHhocTdBSkxnQVZ2aU1PWkUzTUN4RUw1dWR4YVJId0lrNnNCaE5jPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJlMzZkYmJhMy1jZmRjLTQyOTUtOTU4Yy04YTE4NjM4NGU3ZjAiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX3Q5YkRqVXE1OSIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImUzNmRiYmEzLWNmZGMtNDI5NS05NThjLThhMTg2Mzg0ZTdmMCIsIm9yaWdpbl9qdGkiOiI2NjY3MzhiNy02MTQ1LTQ1MDgtYTE3OC04MDVjYmI0MDM0YjYiLCJhdWQiOiI1b2ZybzVraG0wZmE1Z3ViaWYyMzczZTF2cCIsImV2ZW50X2lkIjoiNGVlYTVhNjYtODg5ZC00MTdjLTg2NjUtM2UwMDFlNmMyNzFiIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NDg4MzA2OTYsInBob25lX251bWJlciI6IisxNDg0OTI2OTA2MCIsImV4cCI6MTY0ODg0MjYyMCwiaWF0IjoxNjQ4ODM5MDIwLCJqdGkiOiIzZjFkYzI4Zi0wM2QwLTRiYjAtOTdjYi1hNTJiODAzZWM2MzUiLCJlbWFpbCI6Im9tb0BtYWlsLmNvbSJ9.SZ1EKjmAwSVaiASnysZyYlFbwmPsyFXM-gusLKTf3tXyYg2_XpPnTjQ4DPg-cldKQ-e-MwXRP_db-E_I97G0ZnOufPjY-lQE9XQkiVbb30BH3ycEyyVT_2o93x71m5FTS6lPxpYZmMFPSzu0TjKJjlXNKc9_bRTh2kdQBNbMLH78ENyRBUVOv-Bwoi5dR-zT5gtSm-L-q9e7fhQ5robgKQKFSEB6Tzr10gFRm3z2PkyyhE2q5oQ-KHtVpxRNBpqcICfEjDR1aFVSfjpBbdb22_P1W63TKk1wUGZ6t81KetRHfuL_IqwgKy7jW17igo3FDz7pYonSf3jG47dIYsrG3g"
+      }
+    },
+    "identity":{
+      "claims":{
+        "sub": "e36dbba3-cfdc-4295-958c-8a186384e7f0"
+      }
+    },
     "arguments": {
-      "athleteId": "281b7b68-3f7b-4095-8f48-42e56f24fbc3",
-      "accessToken": "public-sandbox-ac72f18f-cbfe-4a89-93e3-40546c990346"
+      "athleteId": "e36dbba3-cfdc-4295-958c-8a186384e7f0",
+      "accessToken": "public-sandbox-18ea2a79-2cd2-4a0d-b872-05a18ccece4f"
     }
   }
   

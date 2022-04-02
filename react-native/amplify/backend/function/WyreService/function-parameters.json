@@ -19,14 +19,19 @@
     }
   },
   "lambdaLayers": [],
-  "secretNames": [
-    "API_KEY",
-    "WYRE_TOKEN"
-  ],
+  "secretNames": [],
   "environmentVariableList": [
     {
       "cloudFormationParameterName": "nodeEnv",
       "environmentVariableName": "NODE_ENV"
+    },
+    {
+      "cloudFormationParameterName": "apiKey",
+      "environmentVariableName": "API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "wyreToken",
+      "environmentVariableName": "WYRE_TOKEN"
     }
   ]
 }

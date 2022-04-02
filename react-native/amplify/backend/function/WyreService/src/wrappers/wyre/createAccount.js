@@ -1,5 +1,5 @@
 const paramsFromCustId = (athlete) => ({
-    name: athlete.id,
+    name: "ind4c3o3ib3irf4354765ss",//athlete.id,
     type: "SAVINGS",
   // type: "INDIVIDUAL",
   // "country": "US",
@@ -31,9 +31,10 @@ const paramsFromCustId = (athlete) => ({
   // ]
 });
 
-const createAccount = (wrye) => (athlete) => {
+const createAccount = (wyre) => (athlete) => {
+  
   const params = paramsFromCustId(athlete);
-  return wrye.CreateWallet(params)
+  return wyre.post("/v2/wallets", params)
   .catch(err => Promise.reject(`Failed to reach Wyre API. Error: ${err.message}`));
 };
 

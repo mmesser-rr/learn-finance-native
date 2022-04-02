@@ -12,12 +12,13 @@ const checkPodData = (athlete, savings, investments, spending) => {
    if(totalPod != 100){
     Promise.reject(`Invalid pod settings ${athlete.id}`)
    }
+
    const podSettings = ({
     SAVINGS: savings,
     INVESTMENTS: investments,
     SPENDING: spending
     });
-  return tpc.updatePodSettings(axios, athleteId, podSettings)
+  return tpc.updatePodSettings(axios, athlete.id, podSettings)
 }
 module.exports.podSettings = async (event) => {
   axios.defaults.headers["Authorization"] = event.request.headers.authorization; 

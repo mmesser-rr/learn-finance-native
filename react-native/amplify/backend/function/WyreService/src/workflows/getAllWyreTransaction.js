@@ -1,5 +1,6 @@
 const wyre = require("../wrappers/wyre");
 const tpc = require("../wrappers/tpc");
+const {axios} = require("../env");
 
 const getAllWyreTransactions = (wyreAccountId) => {
   return wyre.getAllWyreTransaction(wyreAccountId)
@@ -8,13 +9,9 @@ const getAllWyreTransactions = (wyreAccountId) => {
     });
 }
 
-const getAllWyreTransaction = (athleteId) => tpc.getAthlete(athleteId).then(athlete => 
-    (athlete != null) ? 
-    getAllWyreTransactions(athlete?.wyreAccountId) : 
-      Promise.reject(`No athlete found with id ${athleteId}`)
-  )
-  
 
-module.exports = {
-  getAllWyreTransaction: getAllWyreTransaction
+module.exports.getAllWyreTransaction = async (event, athleteId) => {
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+  return tpc.getAthlete(axios, athleteId).then(athlete => (athlete?.wyreAccountId != undefined) ? getAllWyreTransactions(athlete.wyreAccountId) : Promise.reject(`Athlete doesn't have a wyre account`)
+  )
 }

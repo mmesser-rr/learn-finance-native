@@ -11,7 +11,7 @@ const updateToken = (athlete, token) => {
       throw new Error("Athlete does not have a unit customer id. Has their unit application been approved?");
     }
       return plaid.updateToken(token)
-      .then(access_token => tpc.addPlaidToken(axios, athleteId, access_token))
+      .then(access_token => tpc.addPlaidToken(axios, athlete.id, access_token))
     }
 
 module.exports.updateToken = async (event) => {

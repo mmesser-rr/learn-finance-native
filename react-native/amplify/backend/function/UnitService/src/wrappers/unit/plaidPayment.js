@@ -36,7 +36,8 @@ const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description,
 }
 
 const resultLens = (res) => ({
-  transactionId: res.data.id,
+  transactionId: res.data.relationships.transaction.data.id,
+  transactionType: res.type,
   amount: res.data.attributes.amount,
   direction: res.data.attributes.direction,
   status: res.data.attributes.status,

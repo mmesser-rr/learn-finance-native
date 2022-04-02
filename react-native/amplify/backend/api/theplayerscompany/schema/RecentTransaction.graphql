@@ -2,6 +2,7 @@ type RecentTransaction @model @auth(rules: [{ allow: public, operations: [read, 
 {
   transactionId: String! 
   athleteId: String!
+  type: String!
   status: String!
   amount: Float
   idempotencyKey: String

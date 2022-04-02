@@ -1,4 +1,3 @@
-const { default: axios } = require('amplify/backend/function/UnitService/src/node_modules/@aws-amplify/storage/node_modules/axios');
 const { print } = require('graphql');
 const gql = require('graphql-tag');
 
@@ -9,8 +8,6 @@ const updateAthletePlaidStatement = gql`
       id
       isActive
       lastName
-      level
-      mobilePhone 
     }
   } 
 `
@@ -28,7 +25,7 @@ const addPlaidToken = () => (
   authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthletePlaidLookup);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);
 
 module.exports = {
   addPlaidToken

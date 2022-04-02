@@ -12,7 +12,8 @@ const updateAthleteWyreStatement = gql`
   } 
 `
 
-const updateWyreAccoundId = (axios) => (
+const updateWyreAccoundId = () => (
+  axios,
   athleteId,
   wyreAccountId
 ) => axios.post("/", {
@@ -20,7 +21,8 @@ const updateWyreAccoundId = (axios) => (
   variables: {
     athleteId,
     wyreAccountId
-  }
+  },
+  authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);

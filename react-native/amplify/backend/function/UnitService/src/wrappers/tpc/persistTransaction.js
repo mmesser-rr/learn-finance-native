@@ -2,14 +2,15 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateTransactionStatement = gql`
-  mutation persistRecentTransaction($transactionId: String!, $athleteId: String!, $amount: Float, $status: String!, $createdAt: String, $read: Boolean, $direction: String, $podAllocation: PodSettingsInput, $idempotencyKey: String) {
-    createRecentTransaction(input: {amount: $amount, transactionId: $transactionId, athleteId: $athleteId, status: $status, createdAt: $createdAt, read: $read, direction: $direction, podAllocation: $podAllocation, idempotencyKey: $idempotencyKey }) {
+  mutation persistRecentTransaction($transactionId: String!, $athleteId: String!, $amount: Float, $status: String!, $createdAt: String, $read: Boolean, $direction: String, $transactionType: transactionType, $podAllocation: PodSettingsInput, $idempotencyKey: String) {
+    createRecentTransaction(input: {amount: $amount, transactionId: $transactionId, athleteId: $athleteId, status: $status, createdAt: $createdAt, read: $read, direction: $direction, transactionType: $transactionType, podAllocation: $podAllocation, idempotencyKey: $idempotencyKey }) {
       transactionId
       createdAt
       athleteId
       amount
       status
       direction
+      transactionType
       idempotencyKey
       podAllocation{
         SAVINGS
@@ -29,6 +30,7 @@ const persistTransaction = () => (
  createdAt,
  read, 
  direction,
+ transactionType,
  podAllocation,
  idempotencyKey
 ) => axios.post("/", {
@@ -41,6 +43,7 @@ const persistTransaction = () => (
     createdAt,
     read, 
     direction,
+    transactionType,
     podAllocation,
     idempotencyKey
   },
@@ -48,7 +51,7 @@ const persistTransaction = () => (
 }).then(resultLens);
 
 const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve({ amount: res.data.data.createRecentTransaction.amount,
-  transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation, athleteId: res.data.data.createRecentTransaction.athleteId,
+  transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation, athleteId: res.data.data.createRecentTransaction.athleteId, transactionType: res.data.data.createRecentTransaction.transactionType,
   idempotencyKey: res.data.data.createRecentTransaction.idempotencyKey
 });
 

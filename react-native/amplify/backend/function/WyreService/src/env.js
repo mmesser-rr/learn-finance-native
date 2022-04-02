@@ -27,6 +27,8 @@ const getJson = (varName, required = true) => {
 
 const getEnvOrJson = (varName, required = true) => getEnv(varName, false) || getJson(varName, required);
 
+
+
 const devEnv = () => ({
   wyre: new WyreClient({
     format: "json_numberstring",
@@ -37,7 +39,7 @@ const devEnv = () => ({
   axios: axios.create({
     baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
+     // 'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 })
@@ -52,7 +54,7 @@ const liveEnv = () => ({
   axios: axios.create({
     baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
+      //'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 });

@@ -1,21 +1,21 @@
 const wyre = require("../wrappers/wyre");
 const tpc = require("../wrappers/tpc");
+const {axios} = require("../env");
 
-const getAthleteWyreAccountById = (wyreAccountId) => {
-  return wyre.getAthleteWyreAccount(wyreAccountId)
+const getAthleteWyreAccountById = (athlete) => {
+  const wyreId = athlete?.wyreAccountId;
+  
+  if (wyreId === undefined) {
+    throw new Error(`Athlete does not have a wyre account? ${athleteId}`);
+  }
+
+  return wyre.getAthleteWyreAccount(wyreId)
     .catch(err => {
       throw new Error(`Failed to reach wyre. Reason: ${JSON.stringify(err)}`);
     });
 }
 
-const getAthleteWyreAccount = (athleteId, wyreAccountId) => tpc.getAthlete(athleteId).then(athlete => 
-  (athlete != null && athlete?.wyreAccountId != undefined) ? 
-  getAthleteWyreAccountById(wyreAccountId) : 
-    Promise.reject(`No athlete found with id ${athleteId}`)
-)
-
-module.exports = {
-  getAthleteWyreAccount: getAthleteWyreAccount
+module.exports.getAthleteWyreAccount = async (event, athleteId) => {
+  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
+  return tpc.getAthlete(axios, athleteId).then(res => getAthleteWyreAccountById(res));
 }
-
-

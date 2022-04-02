@@ -1,5 +1,5 @@
 const getWyreTransactionById = (wyre) => (wyreTransactionId) => {
-    return wyre.GetTransfer({transferId: wyreTransactionId}).then(res => res.data)
+    return wyre.get(`/v3/transfers/${wyreTransactionId}`)
     .catch(err => Promise.reject(`Failed to reach wyre API. Error: ${err.message}`));
   };
   

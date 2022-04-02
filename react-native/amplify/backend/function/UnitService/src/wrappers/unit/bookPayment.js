@@ -42,6 +42,7 @@ const bookPayment = (unit) => (unitAccountId, amount, description, receiverAccou
 
 const resultLens = (res) => ({
   transactionId: res.data.relationships.transaction.data.id,
+  transactionType: res.type,
   amount: res.data.attributes.amount,
   status: res.data.attributes.status,
   createdAt: res.data.attributes.createdAt,
