@@ -52,8 +52,7 @@ const DirectDeposit: React.FC = () => {
         </View>
         <View>
           <Text type="Body/Large" style={styles.label}>
-            Get paychecks and other payments into your account by sharing the
-            account details below with an employer or other depositor.
+            Get paychecks and other payments into your BankDAO account by sharing the account details below with an employer or other depositor.
           </Text>
           <Text type="Body/Large" style={styles.label}>
             It may take 1 or 2 pay cycles to receive your direct deposit.
@@ -102,7 +101,13 @@ const DirectDeposit: React.FC = () => {
         </View>
         <View style={styles.address}>
           <Text type="Body/Large">
-            Blue Ridge Bank 17 West Main Street Lurgy, VA 22835
+            Blue Ridge Bank
+          </Text>
+          <Text type="Body/Large">
+            17 West Main Street
+          </Text>
+          <Text type="Body/Large">
+            Lurgy, VA 22835
           </Text>
         </View>
         <View>
