@@ -79,3 +79,8 @@ export interface ISetUnitTokenExpiration {
   type: String;
   expiration: number;
 }
+
+export interface IGetConnectedAccounts {
+  type: String;
+  indicateLoading?: boolean;
+}

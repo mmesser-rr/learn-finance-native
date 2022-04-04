@@ -1,7 +1,5 @@
-import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
   ICreateAthleteAndAccount,
-  IOnboardingError,
   IOnboardingUpdate,
 } from 'src/models/actions/onboarding';
 import {IOnboardingState} from 'src/models/reducers/onboarding';
@@ -20,18 +18,5 @@ export function createAthleteAndAccount(ssn: string): ICreateAthleteAndAccount {
   return {
     type: types.CREATE_ATHLETE_AND_ACCOUNT,
     ssn,
-  };
-}
-
-export function accountCreationFailed(error: string): IOnboardingError {
-  return {
-    type: types.ACCOUNT_CREATION_FAILED,
-    error,
-  };
-}
-
-export function clearError(): ITypeOnlyAction {
-  return {
-    type: types.ONBOARDING_CLEAR_ERROR,
   };
 }

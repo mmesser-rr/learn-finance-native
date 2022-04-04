@@ -74,9 +74,12 @@ export function transactionHistoryLoaded(
   };
 }
 
-export function getConnectedAccounts(): ITypeOnlyAction {
+export function getConnectedAccounts(
+  indicateLoading?: boolean,
+): returnTypes.IGetConnectedAccounts {
   return {
     type: types.GET_CONNECTED_ACCOUNTS,
+    indicateLoading,
   };
 }
 

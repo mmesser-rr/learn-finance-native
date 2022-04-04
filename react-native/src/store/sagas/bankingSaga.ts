@@ -17,6 +17,7 @@ import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import * as types from '../actions/types';
 import {
+  IGetConnectedAccounts,
   IMarkRecentTransactionRead,
   IUpdatePodSettings,
   IVerifyUnitChallengeCode,
@@ -152,41 +153,10 @@ export function* markRecentTransactionRead({
   }
 }
 
-export function* getTransactionHistory() {
-  yield put(loadingActions.enableLoader());
-
-  const athleteId = (yield select(getAthleteId)) as string | undefined;
-
-  try {
-    if (!athleteId) {
-      throw new Error('Athlete ID is required to transaction history');
-    }
-
-    console.log('Attempting to get transaction history for user:', athleteId);
-
-    const queryFilter: ListAllUnitTransactionsQueryVariables = {athleteId};
-
-    const response = (yield call(
-      [API, 'graphql'],
-      graphqlOperation(listAllUnitTransactions, queryFilter),
-    )) as GraphQLResult<ListAllUnitTransactionsQuery>;
-
-    const transactions =
-      response.data && response.data.listAllUnitTransactions
-        ? (response.data.listAllUnitTransactions as UnitAccount[])
-        : [];
-    console.log(transactions);
-    yield put(bankingActions.transactionHistoryLoaded(transactions));
-
-    yield put(loadingActions.disableLoader());
-  } catch (error) {
-    console.log('Error attempting to retrieve transaction history:', error);
-    yield put(loadingActions.disableLoader());
-  }
-}
-
-export function* getConnectedAccounts() {
-  yield put(loadingActions.enableLoader());
+export function* getConnectedAccounts({
+  indicateLoading,
+}: IGetConnectedAccounts) {
+  if (indicateLoading) yield put(loadingActions.enableLoader());
 
   const athleteId = (yield select(getAthleteId)) as string | undefined;
 
@@ -210,10 +180,10 @@ export function* getConnectedAccounts() {
     const accounts = response.data?.listPlaidAccounts as PlaidAccountDetail[];
     yield put(bankingActions.plaidAccountsLoaded(accounts));
 
-    yield put(loadingActions.disableLoader());
+    if (indicateLoading) yield put(loadingActions.disableLoader());
   } catch (error) {
     console.log('Error attempting to retrieve Plaid accounts:', error);
-    yield put(loadingActions.disableLoader());
+    if (indicateLoading) yield put(loadingActions.disableLoader());
   }
 }
 
@@ -333,6 +303,38 @@ export function* getBalanceHistory() {
   }
 }
 
+export function* getTransactionHistory() {
+  yield put(loadingActions.enableLoader());
+
+  const athleteId = (yield select(getAthleteId)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('Athlete ID is required to transaction history');
+    }
+
+    const queryFilter: ListAllUnitTransactionsQueryVariables = {athleteId};
+
+    const response = (yield call(
+      [API, 'graphql'],
+      graphqlOperation(listAllUnitTransactions, queryFilter),
+    )) as GraphQLResult<ListAllUnitTransactionsQuery>;
+
+    const transactions =
+      response.data && response.data.listAllUnitTransactions
+        ? (response.data.listAllUnitTransactions as UnitAccount[])
+        : [];
+    console.log('Transaction History');
+    console.log(transactions);
+    yield put(bankingActions.transactionHistoryLoaded(transactions));
+
+    yield put(loadingActions.disableLoader());
+  } catch (error) {
+    console.log('Error attempting to retrieve transaction history:', error);
+    yield put(loadingActions.disableLoader());
+  }
+}
+
 export function* initiateUnitVerificationChallenge() {
   console.log('initiating Banking phone challenge');
   const athleteId = (yield select(getAthleteId)) as string | undefined;
@@ -428,10 +430,10 @@ export default function* bankingSaga() {
     markRecentTransactionRead,
   );
   yield takeLatest(types.GET_CONNECTED_ACCOUNTS, getConnectedAccounts);
-  yield takeLatest(types.GET_TRANSACTION_HISTORY, getTransactionHistory);
   yield takeLatest(types.CREATE_DEPOSIT, createDeposit);
   yield takeLatest(types.GET_ATHLETE_ACCOUNTS, getAthleteAccounts);
   yield takeLatest(types.GET_BALANCE_HISTORY, getBalanceHistory);
+  yield takeLatest(types.GET_TRANSACTION_HISTORY, getTransactionHistory);
   yield takeLatest(
     types.INITIATE_UNIT_VERIFICATION,
     initiateUnitVerificationChallenge,

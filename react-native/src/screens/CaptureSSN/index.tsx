@@ -23,7 +23,6 @@ const CaptureSSN: React.FC = () => {
   const [ssn, setSsn] = useState('');
   const [isValid, setIsValid] = useState(false);
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
-  const {error} = useSelector((state: RootState) => state.onboardingReducer);
 
   useEffect(() => {
     dispatch(updateOnboarding({isSignInLink: false, step: 9}));
@@ -60,13 +59,6 @@ const CaptureSSN: React.FC = () => {
             changeValue={changeValue}
           />
         </View>
-        {!!error && (
-          <View style={styles.errorWrapper}>
-            <Text type="Body/Medium" style={styles.error}>
-              {error}
-            </Text>
-          </View>
-        )}
       </View>
       <View>
         <SubmitButton

@@ -28,7 +28,7 @@ const SpendingPod: React.FC = () => {
   );
   const balance = useSelector((state: RootState) =>
     twoDecimalFormatter.format(
-      (state.bankingReducer.savingsAccount?.attributes?.balance ?? 0) / 100,
+      (state.bankingReducer.spendingAccount?.attributes?.balance ?? 0) / 100,
     ),
   );
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);

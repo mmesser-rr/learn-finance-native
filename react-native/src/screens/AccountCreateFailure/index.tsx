@@ -10,7 +10,7 @@ import FailureIcon from 'src/assets/icons/account-creation-failure.svg';
 import styles from './styles';
 
 const AccountCreateFailure: React.FC = () => {
-  const goToNextStep = () => NavigationService.navigate('ProfileIntro');
+  const contactSupport = () => {};
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -24,12 +24,16 @@ const AccountCreateFailure: React.FC = () => {
       </View>
       <View>
         <Text type="Body/Large" style={styles.caption}>
-          We need more documentations to verify your identity. We will send
-          detailed instructions to john.smith@gmail.com
+          We need more documentations to verify your identity. Please contact us
+          for support.
         </Text>
       </View>
       <View style={styles.actionWrapper}>
-        <SubmitButton isValid={true} actionLabel="OK" onSubmit={goToNextStep} />
+        <SubmitButton
+          isValid={true}
+          actionLabel="Contact Support"
+          onSubmit={contactSupport}
+        />
       </View>
     </AppLayout>
   );

@@ -26,7 +26,6 @@ export interface IOnboardingState {
   };
   ssn: string;
   isOnboardingComplete: boolean;
-  error?: string;
   step: number;
   isSignInLink: boolean;
 }
