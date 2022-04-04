@@ -1,8 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Text} from 'react-native';
+import {View} from 'react-native';
+
+import { Text } from 'src/components/common/Texts';
+import AppLayout from 'src/components/layout/AppLayout';
+
+import styles from './styles';
 
 const Profile: React.FC = () => {
-  return <Text>Profile</Text>;
+  return (
+    <AppLayout containerStyle={styles.container} >
+      <View>
+        <Text type="Body/Medium">profile</Text>
+      </View>
+    </AppLayout>
+  );
 };
 
 export default Profile;

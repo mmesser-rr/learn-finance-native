@@ -11,6 +11,7 @@ import Alert from 'src/components/common/Alert';
 import UnCheckIcon from 'src/assets/icons/uncheck.svg';
 import CheckedIcon from 'src/assets/icons/checked.svg';
 import {RootState} from 'src/store/root-state';
+import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
@@ -36,6 +37,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
   const {mobilePhone} = useSelector(
     (state: RootState) => state.onboardingReducer,
   );
+  const [isAccountExsited, setIsAccountExsited] = useState(false);
 
   useEffect(() => {
     dispatch(updateOnboarding({isSignInLink: false, step: 3}));
@@ -119,9 +121,23 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
       dispatch(updateOnboarding({id: response.userSub, password}));
       goToNextStep();
     } catch (error: any) {
-      setError(error.message || 'Unknown Error');
+      let existedAccount = false;
+      switch (error.message) {
+        case 'An account with the given phone_number already exists.':
+          existedAccount = true;
+          break;
+      
+        default:
+          setError(error.message || 'Unknown Error');
+          break;
+      }
+      setIsAccountExsited(existedAccount);
     }
     updateLoading(false);
+  };
+
+  const goToLogin = () => {
+    NavigationService.navigate('UserLoginStack');
   };
 
   return (
@@ -145,6 +161,15 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
               onChangeText={changePassword}
             />
             {!!error && <Alert style={styles.error}>{error}</Alert>}
+            {isAccountExsited && (
+              <View>
+                <Alert style={styles.error}>
+                  This phone number is already registered. Please {' '}
+                  <Text type="Body/Large" style={styles.loginInLabel} onPress={goToLogin}>log in</Text>
+                  {' '}instead.
+                </Alert>
+              </View>
+            )}
           </View>
           <View style={styles.rulesWrapper}>
             {rules.map((rule, index) => (
