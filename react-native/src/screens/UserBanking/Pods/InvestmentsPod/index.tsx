@@ -17,7 +17,10 @@ import {RootState} from 'src/store/root-state';
 import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient} from 'src/utils/constants';
 import Button from 'src/components/common/Button';
-import {wyreEligibleSelector} from 'src/store/selectors/banking';
+import {
+  investmentsAccountBalanceSelector,
+  wyreEligibleSelector,
+} from 'src/store/selectors/banking';
 
 const InvestmentsPod: React.FC = () => {
   const dispatch = useDispatch();
@@ -31,11 +34,7 @@ const InvestmentsPod: React.FC = () => {
       entry.attributes?.description?.includes('Investments'),
     ),
   );
-  const balance = useSelector((state: RootState) =>
-    twoDecimalFormatter.format(
-      (state.bankingReducer.investmentsAccount?.attributes?.balance ?? 0) / 100,
-    ),
-  );
+  const balance = useSelector(investmentsAccountBalanceSelector);
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
   const wyreEligible = useSelector(wyreEligibleSelector);
 

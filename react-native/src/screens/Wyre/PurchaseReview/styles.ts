@@ -47,6 +47,12 @@ const styles = StyleSheet.create({
   editIcon: {
     marginLeft: scale(8),
   },
+  topText: {
+    marginBottom: scale(12),
+  },
+  rightAlign: {
+    alignItems: 'flex-end',
+  },
 });
 
 export default styles;

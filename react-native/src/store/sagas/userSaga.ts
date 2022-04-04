@@ -77,6 +77,8 @@ export function* loginRequest({phone, password}: ILoginRequest) {
       NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
 
       yield put(bankingActions.getConnectedAccounts(false));
+      yield put(bankingActions.getAthleteAccounts());
+      yield put(bankingActions.getBalanceHistory());
     } catch (err) {
       console.log('Error attempting to fetch Athlete info:', err);
     }
