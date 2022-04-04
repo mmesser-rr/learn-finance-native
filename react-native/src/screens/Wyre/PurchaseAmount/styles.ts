@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     marginBottom: scale(24),
   },
   body: {
-    marginBottom: scale(80),
+    marginBottom: scale(16),
   },
   inputContainer: {
     alignItems: 'center',
@@ -31,21 +31,30 @@ const styles = StyleSheet.create({
   },
   available: {
     marginTop: scale(8),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   availableText: {
-    width: scale(182),
-    textAlign: 'center'
+    textAlign: 'center',
   },
   error: {
     marginTop: scale(8),
     marginBottom: scale(24),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   errorText: {
     textAlign: 'center',
-    color: AppColors.accentRed100
-  }
+    color: AppColors.accentRed100,
+  },
+  projectionBox: {
+    backgroundColor: AppColors.coreBlack85,
+    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+  },
+  projectionBoxHeadline: {
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;
