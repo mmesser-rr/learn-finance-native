@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack100,
   },
   containerView: {
-    marginTop: 0,
+    justifyContent: 'center',
   },
   body: {
     textAlign: 'center',

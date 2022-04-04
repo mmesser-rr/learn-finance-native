@@ -13,8 +13,7 @@ import {
 } from 'src/types/API';
 import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
-import {RootState} from '../root-state';
-import {createWyreAccount} from 'src/graphql/mutations';
+import {createWyreAccount} from 'src/graphql/mutations_custom';
 import {athleteIdSelector} from '../selectors/user';
 
 export function* openRewardsAccount() {
