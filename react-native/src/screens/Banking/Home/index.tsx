@@ -33,7 +33,10 @@ import Loading from 'src/components/common/Loading';
 import InfoCard from 'src/components/common/InfoCard';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
-import {wyreEligibleSelector} from 'src/store/selectors/banking';
+import {
+  hasMoneyInAccountSelector,
+  wyreEligibleSelector,
+} from 'src/store/selectors/banking';
 
 interface CardProps {
   style?: TextStyle;
@@ -63,9 +66,7 @@ const Home: React.FC = () => {
     investmentsAccount,
     savingsAccount,
   } = useSelector((state: RootState) => state.bankingReducer);
-  const hasMoneyInAccount = useSelector(
-    (state: RootState) => (state.bankingReducer.totalBalance ?? 0) > 0,
-  );
+  const hasMoneyInAccount = useSelector(hasMoneyInAccountSelector);
   const hasSetUpPods = useSelector((state: RootState) => {
     return (
       state.userReducer.user &&
@@ -73,6 +74,13 @@ const Home: React.FC = () => {
       (state.userReducer.user.podSettings.SPENDING > 0 ||
         state.userReducer.user.podSettings.INVESTMENTS > 0 ||
         state.userReducer.user.podSettings.SAVINGS > 0)
+    );
+  });
+  const hasPlaidConnection = useSelector((state: RootState) => {
+    return (
+      (state.userReducer.user && state.userReducer.user.plaidToken) ||
+      (state.bankingReducer.plaidAccounts &&
+        state.bankingReducer.plaidAccounts.length > 0)
     );
   });
   const {user} = useSelector((state: RootState) => state.userReducer);
@@ -129,6 +137,13 @@ const Home: React.FC = () => {
   const onSetupDirectDeposit = () =>
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
 
+  const goToDeposit = () => {
+    if (hasPlaidConnection) {
+      goToDepositSelectAccount();
+    } else {
+    }
+  };
+
   const goToDepositSelectAccount = () =>
     NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
 
@@ -157,7 +172,6 @@ const Home: React.FC = () => {
 
   const onPlaidExitHandler = (exit: LinkExit) => {
     console.log(exit);
-    // NavigationService.navigate('TransferStack');
   };
 
   const onSetupPods = () => {
@@ -209,7 +223,7 @@ const Home: React.FC = () => {
               locations={[0, 0, 0.2388, 1]}
               colors={GradientButtonColors}>
               <TouchableOpacity
-                onPress={goToDepositSelectAccount}
+                onPress={goToDeposit}
                 style={styles.depositButton}>
                 <DepositIcon />
                 <Text type="Body/Medium" style={styles.depositButtonText}>
@@ -239,7 +253,7 @@ const Home: React.FC = () => {
             </Text>
           </View>
           <View>
-            {user?.plaidToken ? (
+            {hasPlaidConnection ? (
               <Button onPress={goToDepositSelectAccount}>
                 <Text type="Body/Large">Transfer from another bank</Text>
               </Button>

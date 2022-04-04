@@ -7,6 +7,7 @@ import {GraphQLResult} from '@aws-amplify/api';
 
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
+import * as bankingActions from 'src/store/actions/bankingActions';
 import {
   Athlete,
   AthleteByPhoneQuery,
@@ -50,10 +51,6 @@ export function* onboardingSilentSignIn() {
 
 export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(loadingActions.enableLoader());
-
-  const queryFilter: AthleteByPhoneQueryVariables = {
-    mobilePhone: phone,
-  };
   try {
     const loginResponse = yield Auth.signIn({username: phone, password});
     console.log('Sign In Response:');
@@ -63,24 +60,23 @@ export function* loginRequest({phone, password}: ILoginRequest) {
     yield put(userActions.loginSuccess(id, token));
 
     try {
-      console.log('token for getUserByPhone:', token);
+      const queryFilter: GetAthleteQueryVariables = {
+        id,
+      };
       const response = (yield call(
         [API, 'graphql'],
-        graphqlOperation(athleteByPhone, queryFilter, token),
-      )) as GraphQLResult<AthleteByPhoneQuery>;
-      const athletes = (response.data?.athleteByPhone?.items ??
-        []) as Athlete[];
-      if (athletes.length === 0) {
-        throw new Error('No user found with the phone number: ' + phone);
-      }
-      if (athletes.length > 1) {
-        athletes.sort(compareAthletesByCreationDate);
-      }
+        graphqlOperation(getAthlete, queryFilter),
+      )) as GraphQLResult<GetAthleteQuery>;
 
-      const athlete = athletes[0];
+      const athlete = response.data?.getAthlete as Athlete | undefined;
+      if (!athlete) {
+        throw new Error('No user found with id: ' + id);
+      }
       yield put(userActions.updateUser(athlete));
 
       NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
+
+      yield put(bankingActions.getConnectedAccounts(false));
     } catch (err) {
       console.log('Error attempting to fetch Athlete info:', err);
     }

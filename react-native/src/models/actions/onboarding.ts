@@ -9,8 +9,3 @@ export interface ICreateAthleteAndAccount {
   type: String;
   ssn: string;
 }
-
-export interface IOnboardingError {
-  type: String;
-  error: string;
-}
