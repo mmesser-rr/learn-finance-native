@@ -25,7 +25,7 @@ const VerifyEmailCode: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(updateOnboarding({isSignInLink: false, step: 12}));
+    dispatch(updateOnboarding({isSignInLink: false, step: 11}));
   }, []);
 
   const {

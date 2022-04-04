@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     marginBottom: scale(16),
   },
   rulesWrapper: {
-    marginTop: scale(16)
+    marginTop: scale(16),
+    marginBottom: scale(16),
   },
   rule: {
     flexDirection: 'row',
@@ -63,6 +64,9 @@ const styles = StyleSheet.create({
   error: {
     marginLeft: scale(16),
     marginTop: scale(4),
+  },
+  loginInLabel: {
+    color: AppColors.interactionBlue
   }
 });
 
