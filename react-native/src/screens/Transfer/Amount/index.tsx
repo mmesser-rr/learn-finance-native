@@ -10,6 +10,7 @@ import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import {RootState} from 'src/store/root-state';
+import {hasMoneyInAccountSelector} from 'src/store/selectors/banking';
 
 import styles from './styles';
 
@@ -21,6 +22,7 @@ const TransferAmount: React.FC = () => {
   const {selectedAccount} = useSelector(
     (state: RootState) => state.bankingReducer,
   );
+  const hasMoneyInAccount = useSelector(hasMoneyInAccountSelector);
 
   const textChangeHandler = (txt: string) => {
     if (!txt) {
@@ -58,8 +60,9 @@ const TransferAmount: React.FC = () => {
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
-            Let's get some money into your Players Co. account. Choose how much
-            you want to transfer:
+            {hasMoneyInAccount
+              ? `Choose how much you want to transfer:`
+              : `Let’s fund your BankDAO account. Choose an amount you’d like to transfer:`}
           </Text>
         </View>
         <View style={styles.inputContainer}>
