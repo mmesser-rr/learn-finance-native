@@ -9,10 +9,9 @@ const styles = StyleSheet.create({
   viewWrapper: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginTop: 0,
   },
   label: {
-    marginBottom: scale(24),
+    marginBottom: scale(24)
   },
   card: {
     display: 'flex',
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
   },
   nav: {
     marginBottom: scale(24),
-    marginHorizontal: scale(27),
   },
 });
 
