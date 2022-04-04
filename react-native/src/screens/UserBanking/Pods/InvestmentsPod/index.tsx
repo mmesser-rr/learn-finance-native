@@ -40,7 +40,8 @@ const InvestmentsPod: React.FC = () => {
   const wyreEligible = useSelector(wyreEligibleSelector);
 
   const goPreviousScreen = () => NavigationService.navigate('HomeStack');
-  const onLearnMore = () => {};
+  const onLearnMore = () =>
+    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
   const onMaybeLater = () => {};
 
   return (
