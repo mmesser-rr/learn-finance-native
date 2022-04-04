@@ -1,19 +1,29 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View} from 'react-native';
-import dayjs from 'dayjs';
+import {useSelector} from 'react-redux';
 
+import styles from './styles';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import TopNav from 'src/components/common/TopNav';
-import EditIcon from 'src/assets/icons/edit.svg';
 import NavigationService from 'src/navigation/NavigationService';
 import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
-import {twoDecimalFormatter} from 'src/utils/functions';
+import {getWyreTransactionFee, twoDecimalFormatter} from 'src/utils/functions';
 
-import styles from './styles';
+import {RootState} from 'src/store/root-state';
 
 const PurchaseReview: React.FC = () => {
+  const {purchaseAmount} = useSelector((state: RootState) => state.wyreReducer);
+  const calculatedValues = useMemo(() => {
+    const numericValue = Number(purchaseAmount);
+    const transactionFee = getWyreTransactionFee(numericValue);
+    return {
+      transactionFee: twoDecimalFormatter.format(transactionFee),
+      purchaseAmount: twoDecimalFormatter.format(numericValue - transactionFee),
+    };
+  }, [purchaseAmount]);
+
   const onPurchase = () => {
     // TODO:
   };
@@ -23,8 +33,7 @@ const PurchaseReview: React.FC = () => {
       label: 'Total',
       data: (
         <>
-          <Text type="Body/Large">John Smith</Text>
-          <EditIcon style={styles.editIcon} />
+          <Text type="Body/Large">${purchaseAmount}</Text>
         </>
       ),
     },
@@ -32,18 +41,19 @@ const PurchaseReview: React.FC = () => {
       label: 'Transaction Fee',
       data: (
         <>
-          <Text type="Body/Large">584 382 483</Text>
-          <EditIcon style={styles.editIcon} />
+          <Text type="Body/Large">${calculatedValues.transactionFee}</Text>
         </>
       ),
     },
     {
       label: 'Purchase',
       data: (
-        <>
-          <Text type="Body/Large">835 483 495</Text>
-          <EditIcon style={styles.editIcon} />
-        </>
+        <View style={styles.rightAlign}>
+          <Text type="Body/Large">${calculatedValues.purchaseAmount}</Text>
+          <Text type="Title/Medium">
+            {calculatedValues.purchaseAmount} USDC
+          </Text>
+        </View>
       ),
     },
   ];
@@ -57,13 +67,11 @@ const PurchaseReview: React.FC = () => {
           goCloseScreen={() => {}}
         />
       </View>
-      <View>
-        <Text type="Body/Large">Please review the transaction.</Text>
+      <View style={styles.topText}>
+        <Text type="Body/Large">Please review the transaction:</Text>
       </View>
+      <InfoList list={list} />
       <View style={styles.contentContainer}>
-        <View>
-          <InfoList list={list} />
-        </View>
         <View>
           <Text style={styles.center} type="Body/Large">
             By clicking ‘purchase’, I agree to lorem ipsum dolor sit amet,

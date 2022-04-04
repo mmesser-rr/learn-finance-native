@@ -7,6 +7,7 @@ import * as themeReducer from './themeReducer';
 import * as bankingReducer from './bankingReducer';
 import * as onboardingReducer from './onboardingReducer';
 import * as userReducer from './userReducer';
+import * as wyreReducer from './wyreReducer';
 export default Object.assign(
   loginReducer,
   loadingReducer,
@@ -14,4 +15,5 @@ export default Object.assign(
   bankingReducer,
   onboardingReducer,
   userReducer,
+  wyreReducer,
 );
