@@ -15,23 +15,18 @@ import RewardsIcon from 'src/assets/icons/rewards.svg';
 import UninvestedIcon from 'src/assets/icons/uninvested.svg';
 import {twoDecimalFormatter} from 'src/utils/functions';
 import * as bankingActions from 'src/store/actions/bankingActions';
-import * as wyreActions from 'src/store/actions/wyreActions';
 import {RootState} from 'src/store/root-state';
 import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient} from 'src/utils/constants';
 import Button from 'src/components/common/Button';
 import {investmentsAccountBalanceSelector} from 'src/store/selectors/banking';
-import {
-  wyreAccountBalanceSelector,
-  wyreEligibleSelector,
-} from 'src/store/selectors/wyre';
+import {wyreEligibleSelector} from 'src/store/selectors/wyre';
 
-const InvestmentsPod: React.FC = () => {
+const Rewards: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(bankingActions.getTransactionHistory());
-    dispatch(wyreActions.getWyreAccount());
   }, []);
 
   const transactionHistory = useSelector((state: RootState) =>
@@ -40,28 +35,24 @@ const InvestmentsPod: React.FC = () => {
     ),
   );
   const balance = useSelector(investmentsAccountBalanceSelector);
-  const wyreBalance = useSelector(wyreAccountBalanceSelector);
-  const uninvested = twoDecimalFormatter.format(
-    Number(balance) - Number(wyreBalance),
-  );
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
   const hasRewardsAccount = useSelector(
     (state: RootState) => !!state.userReducer.user?.wyreAccountId,
   );
   const wyreEligible = useSelector(wyreEligibleSelector);
 
-  const goPreviousScreen = () => NavigationService.navigate('HomeStack');
+  const goPreviousScreen = () => NavigationService.goBack();
   const onLearnMore = () =>
     NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
   const onMaybeLater = () => {};
 
   const goToRewards = () =>
-    NavigationService.navigate('WyreStack', {screen: 'Rewards'});
+    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <TopNav title="Investments Pod" goPreviousScreen={goPreviousScreen} />
+        <TopNav title="Rewards" goPreviousScreen={goPreviousScreen} />
       </View>
       <View style={styles.summaryCardContainer}>
         <View style={styles.summaryCard}>
@@ -81,13 +72,11 @@ const InvestmentsPod: React.FC = () => {
             <View style={[styles.subAccountsContainer, styles.topBorder]}>
               <TouchableOpacity style={styles.subAccount} onPress={goToRewards}>
                 <View style={styles.cardLeft}>
-                  <View style={styles.subAccountIconWrapper}>
-                    <RewardsIcon />
-                  </View>
+                  <RewardsIcon style={styles.cardIcon} />
                   <Text type="Body/Large">Rewards</Text>
                 </View>
                 <View style={styles.cardLeft}>
-                  <Text type="Body/Large">${wyreBalance}</Text>
+                  <Text type="Body/Large">$</Text>
                   <View style={styles.caretContainer}>
                     <ForwardIcon />
                   </View>
@@ -95,13 +84,11 @@ const InvestmentsPod: React.FC = () => {
               </TouchableOpacity>
               <View style={[styles.subAccount, styles.topBorder]}>
                 <View style={styles.cardLeft}>
-                  <View style={styles.subAccountIconWrapper}>
-                    <UninvestedIcon />
-                  </View>
+                  <UninvestedIcon style={styles.cardIcon} />
                   <Text type="Body/Large">Uninvested</Text>
                 </View>
                 <View style={styles.cardLeft}>
-                  <Text type="Body/Large">${uninvested}</Text>
+                  <Text type="Body/Large">$</Text>
                   <View style={styles.caretContainer}></View>
                 </View>
               </View>
@@ -130,17 +117,10 @@ const InvestmentsPod: React.FC = () => {
         podContext="Investments"
         historyEntries={transactionHistory}
       />
-      {hasRewardsAccount && (
-        <View style={styles.usdcDisclaimerCard}>
-          <Text type="Title/Small">
-            The currency held in Rewards account is USDC. The USD amount on this
-            page is an approximate for display purpose only.
-          </Text>
-        </View>
-      )}
+      <View></View>
       {isLoading && <Loading />}
     </AppLayout>
   );
 };
 
-export default InvestmentsPod;
+export default Rewards;

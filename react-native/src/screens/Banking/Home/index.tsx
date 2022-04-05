@@ -33,10 +33,8 @@ import Loading from 'src/components/common/Loading';
 import InfoCard from 'src/components/common/InfoCard';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
-import {
-  hasMoneyInAccountSelector,
-  wyreEligibleSelector,
-} from 'src/store/selectors/banking';
+import {hasMoneyInAccountSelector} from 'src/store/selectors/banking';
+import {wyreEligibleSelector} from 'src/store/selectors/wyre';
 
 interface CardProps {
   style?: TextStyle;
