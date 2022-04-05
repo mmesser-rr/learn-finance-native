@@ -55,7 +55,11 @@ export const onCreateAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -120,7 +124,11 @@ export const onUpdateAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -185,7 +193,11 @@ export const onDeleteAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -240,7 +252,11 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         }
         plaidToken
         unitToken
-        plaidProcessorToken {
+        unitPlaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyrePlaidProcessorToken {
           plaidAccountId
           processorToken
         }
@@ -305,7 +321,11 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         }
         plaidToken
         unitToken
-        plaidProcessorToken {
+        unitPlaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyrePlaidProcessorToken {
           plaidAccountId
           processorToken
         }
@@ -370,7 +390,11 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         }
         plaidToken
         unitToken
-        plaidProcessorToken {
+        unitPlaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
+        wyrePlaidProcessorToken {
           plaidAccountId
           processorToken
         }
@@ -493,7 +517,7 @@ export const onCreateRecentTransaction = /* GraphQL */ `
     onCreateRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
-      type
+      transactionType
       status
       amount
       idempotencyKey
@@ -516,7 +540,7 @@ export const onUpdateRecentTransaction = /* GraphQL */ `
     onUpdateRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
-      type
+      transactionType
       status
       amount
       idempotencyKey
@@ -539,7 +563,7 @@ export const onDeleteRecentTransaction = /* GraphQL */ `
     onDeleteRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
-      type
+      transactionType
       status
       amount
       idempotencyKey
