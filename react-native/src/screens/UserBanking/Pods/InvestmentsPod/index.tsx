@@ -25,6 +25,7 @@ import {
   wyreAccountBalanceSelector,
   wyreEligibleSelector,
 } from 'src/store/selectors/wyre';
+import UsdcDisclaimerCard from 'src/components/wyre/UsdcDisclaimerCard';
 
 const InvestmentsPod: React.FC = () => {
   const dispatch = useDispatch();
@@ -130,14 +131,7 @@ const InvestmentsPod: React.FC = () => {
         podContext="Investments"
         historyEntries={transactionHistory}
       />
-      {hasRewardsAccount && (
-        <View style={styles.usdcDisclaimerCard}>
-          <Text type="Title/Small">
-            The currency held in Rewards account is USDC. The USD amount on this
-            page is an approximate for display purpose only.
-          </Text>
-        </View>
-      )}
+      {hasRewardsAccount && <UsdcDisclaimerCard />}
       {isLoading && <Loading />}
     </AppLayout>
   );

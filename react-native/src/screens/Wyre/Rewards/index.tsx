@@ -20,7 +20,13 @@ import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient} from 'src/utils/constants';
 import Button from 'src/components/common/Button';
 import {investmentsAccountBalanceSelector} from 'src/store/selectors/banking';
-import {wyreEligibleSelector} from 'src/store/selectors/wyre';
+import {
+  wyreAccountBalanceSelector,
+  wyreEligibleSelector,
+} from 'src/store/selectors/wyre';
+import UsdcDisclaimerCard from 'src/components/wyre/UsdcDisclaimerCard';
+import SubmitButton from 'src/components/common/SubmitButton';
+import SecondaryButton from 'src/components/common/SecondaryButton';
 
 const Rewards: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,24 +36,23 @@ const Rewards: React.FC = () => {
   }, []);
 
   const transactionHistory = useSelector((state: RootState) =>
-    state.bankingReducer.transactionHistory?.filter(entry =>
-      entry.attributes?.description?.includes('Investments'),
+    state.bankingReducer.transactionHistory?.filter(
+      entry =>
+        entry.attributes?.description?.includes('Rewards') &&
+        entry.attributes.direction === 'credit',
     ),
   );
-  const balance = useSelector(investmentsAccountBalanceSelector);
-  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
-  const hasRewardsAccount = useSelector(
-    (state: RootState) => !!state.userReducer.user?.wyreAccountId,
+  const balance = useSelector(wyreAccountBalanceSelector);
+  const usdcBalance = useSelector(
+    (state: RootState) => state.wyreReducer.wyreAccount?.balances?.USDC,
   );
-  const wyreEligible = useSelector(wyreEligibleSelector);
+
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
 
   const goPreviousScreen = () => NavigationService.goBack();
-  const onLearnMore = () =>
-    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
-  const onMaybeLater = () => {};
-
-  const goToRewards = () =>
-    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
+  const goToPurchase = () =>
+    NavigationService.navigate('WyreStack', {screen: 'PurchaseAmount'});
+  const goToWithdraw = () => {};
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
@@ -58,66 +63,59 @@ const Rewards: React.FC = () => {
         <View style={styles.summaryCard}>
           <View style={styles.summaryCardMain}>
             <View style={styles.cardLeft}>
-              <InvestmentsIcon style={styles.cardIcon} />
+              <RewardsIcon style={styles.cardIcon} />
               <Text type="Body/Large" style={styles.summaryCardLabel}>
-                Investments
+                Rewards
               </Text>
             </View>
             <View style={styles.summaryCardRight}>
-              <Text type="Title/Small">Balance</Text>
-              <Text type="Headline/Small">{'$' + balance}</Text>
+              <Text type="Body/Large">{balance} USD</Text>
+              <Text type="Title/Medium">{usdcBalance ?? '0.00'} USDC</Text>
             </View>
           </View>
-          {hasRewardsAccount && (
-            <View style={[styles.subAccountsContainer, styles.topBorder]}>
-              <TouchableOpacity style={styles.subAccount} onPress={goToRewards}>
-                <View style={styles.cardLeft}>
-                  <RewardsIcon style={styles.cardIcon} />
-                  <Text type="Body/Large">Rewards</Text>
-                </View>
-                <View style={styles.cardLeft}>
-                  <Text type="Body/Large">$</Text>
-                  <View style={styles.caretContainer}>
-                    <ForwardIcon />
-                  </View>
-                </View>
-              </TouchableOpacity>
-              <View style={[styles.subAccount, styles.topBorder]}>
-                <View style={styles.cardLeft}>
-                  <UninvestedIcon style={styles.cardIcon} />
-                  <Text type="Body/Large">Uninvested</Text>
-                </View>
-                <View style={styles.cardLeft}>
-                  <Text type="Body/Large">$</Text>
-                  <View style={styles.caretContainer}></View>
-                </View>
-              </View>
+
+          <View style={styles.summaryCardBelowLineContainer}>
+            <View style={styles.summaryCardBelowLine}>
+              <Text type="Body/Large">APY</Text>
+              <Text type="Body/Large">7.00%</Text>
             </View>
-          )}
+          </View>
         </View>
       </View>
-      {wyreEligible && (
-        <LinearGradient colors={PodsCardGradient} style={styles.wyrePromoCard}>
-          <Text type="Headline/Small" style={styles.wyrePromoHeadline}>
-            Earn up to 7% APY in Rewards
+
+      <View style={[styles.sectionWrapper, styles.halfCardsContainer]}>
+        <View style={styles.halfCard}>
+          <Text type="Body/Large" style={styles.halfCardTitle}>
+            Lifetime Rewards
           </Text>
-          <Text type="Body/Large">
-            Learn how crypto and Rewards Account works. Start investing today!
+          <Text type="Title/Small">33.24 USDC</Text>
+        </View>
+        <View style={styles.halfCard}>
+          <Text type="Body/Large" style={styles.halfCardTitle}>
+            Rewards earned in last 30 days
           </Text>
-          <Button onPress={onLearnMore} actionStyle={styles.learnMoreButton}>
-            <Text type="Body/Large">Learn More</Text>
-          </Button>
-          <Button actionStyle={styles.maybeLaterButton} onPress={onMaybeLater}>
-            <Text type="Body/Large">Maybe Later</Text>
-          </Button>
-        </LinearGradient>
-      )}
+          <Text type="Title/Small">5.38 USDC</Text>
+        </View>
+      </View>
+
+      <View style={styles.sectionWrapper}>
+        <SubmitButton
+          isValid={true}
+          actionLabel="Invest More"
+          onSubmit={goToPurchase}
+        />
+        <SecondaryButton
+          isValid={true}
+          actionLabel="Withdraw"
+          onPress={goToWithdraw}
+        />
+      </View>
 
       <TransactionHistoryCard
         podContext="Investments"
         historyEntries={transactionHistory}
       />
-      <View></View>
+      <UsdcDisclaimerCard />
       {isLoading && <Loading />}
     </AppLayout>
   );
