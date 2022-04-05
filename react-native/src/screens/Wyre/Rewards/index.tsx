@@ -24,7 +24,7 @@ import {
   wyreEligibleSelector,
 } from 'src/store/selectors/banking';
 
-const InvestmentsPod: React.FC = () => {
+const Rewards: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,18 +43,18 @@ const InvestmentsPod: React.FC = () => {
   );
   const wyreEligible = useSelector(wyreEligibleSelector);
 
-  const goPreviousScreen = () => NavigationService.navigate('HomeStack');
+  const goPreviousScreen = () => NavigationService.goBack();
   const onLearnMore = () =>
     NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
   const onMaybeLater = () => {};
 
   const goToRewards = () =>
-    NavigationService.navigate('WyreStack', {screen: 'Rewards'});
+    NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
-        <TopNav title="Investments Pod" goPreviousScreen={goPreviousScreen} />
+        <TopNav title="Rewards" goPreviousScreen={goPreviousScreen} />
       </View>
       <View style={styles.summaryCardContainer}>
         <View style={styles.summaryCard}>
@@ -125,4 +125,4 @@ const InvestmentsPod: React.FC = () => {
   );
 };
 
-export default InvestmentsPod;
+export default Rewards;
