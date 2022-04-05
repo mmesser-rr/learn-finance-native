@@ -1,5 +1,5 @@
-export const createWyreAccount = /* GraphQL */ `
-  mutation CreateWyreAccount($athleteId: ID!) {
+export const createWyreAccountCustom = /* GraphQL */ `
+  mutation CreateWyreAccountCustom($athleteId: ID!) {
     createWyreAccount(athleteId: $athleteId) {
       wyreAccountId
     }

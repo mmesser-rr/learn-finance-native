@@ -89,25 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  subAccountIconWrapper: {
-    width: 28,
-    height: 30,
-    marginHorizontal: 8,
-    alignItems: 'center',
-  },
   topBorder: {
     borderTopWidth: 1,
     borderTopColor: AppColors.coreBlack60,
   },
   caretContainer: {
     width: 24,
-  },
-  usdcDisclaimerCard: {
-    marginTop: 24,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: AppColors.coreBlack85,
-    borderRadius: 8,
   },
 });
 
