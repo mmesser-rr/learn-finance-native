@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {TextStyle, Dimensions} from 'react-native';
 import SafeArea from 'react-native-safe-area';
+import {WyreMinimumFee, WyreTransactionFeePercent} from 'src/config/data';
 
 import {scale} from 'src/config/dimentions';
 
@@ -55,9 +56,16 @@ export const twoDecimalFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 2,
 });
 
-export const decimalFormatter = (minimumFractionDigits: number, maximumFractionDigits: number) => {
+export const decimalFormatter = (
+  minimumFractionDigits: number,
+  maximumFractionDigits: number,
+) => {
   return new Intl.NumberFormat('en-US', {
     minimumFractionDigits,
     maximumFractionDigits,
   });
+};
+
+export const getWyreTransactionFee = (amount: number) => {
+  return Math.max(WyreMinimumFee, amount * WyreTransactionFeePercent);
 };

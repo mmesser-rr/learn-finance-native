@@ -96,6 +96,159 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
     }
   }
 `;
+export const getWyreAccount = /* GraphQL */ `
+  query GetWyreAccount($athleteId: ID!) {
+    getWyreAccount(athleteId: $athleteId) {
+      owner
+      status
+      balances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      createdAt
+      pusherChannel
+      srn
+      notes
+      depositAddresses {
+        ETH
+        BTC
+        AVAX
+        XLM
+      }
+      availableBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      name
+      id
+      type
+      pendingInterestBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+    }
+  }
+`;
+export const getWyreTransactionById = /* GraphQL */ `
+  query GetWyreTransactionById($wyreTransactionId: String!) {
+    getWyreTransactionById(wyreTransactionId: $wyreTransactionId) {
+      owner
+      status
+      balances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      createdAt
+      pusherChannel
+      srn
+      notes
+      depositAddresses {
+        ETH
+        BTC
+        AVAX
+        XLM
+      }
+      availableBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      name
+      id
+      type
+      pendingInterestBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+    }
+  }
+`;
+export const listAllWyreTransaction = /* GraphQL */ `
+  query ListAllWyreTransaction($athleteId: ID!) {
+    listAllWyreTransaction(athleteId: $athleteId) {
+      owner
+      status
+      balances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      createdAt
+      pusherChannel
+      srn
+      notes
+      depositAddresses {
+        ETH
+        BTC
+        AVAX
+        XLM
+      }
+      availableBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      name
+      id
+      type
+      pendingInterestBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+    }
+  }
+`;
 export const getUnitTransactionById = /* GraphQL */ `
   query GetUnitTransactionById(
     $unitAccountId: String!
@@ -665,6 +818,7 @@ export const getRecentTransaction = /* GraphQL */ `
     getRecentTransaction(id: $id) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey
@@ -696,6 +850,7 @@ export const listRecentTransactions = /* GraphQL */ `
       items {
         transactionId
         athleteId
+        type
         status
         amount
         idempotencyKey

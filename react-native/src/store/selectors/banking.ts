@@ -1,4 +1,5 @@
 import {NoWyreStates} from 'src/config/data';
+import {twoDecimalFormatter} from 'src/utils/functions';
 import {RootState} from '../root-state';
 
 export const wyreEligibleSelector = (state: RootState) =>
@@ -8,3 +9,8 @@ export const wyreEligibleSelector = (state: RootState) =>
 
 export const hasMoneyInAccountSelector = (state: RootState) =>
   (state.bankingReducer.totalBalance ?? 0) > 0;
+
+export const investmentsAccountBalanceSelector = (state: RootState) =>
+  twoDecimalFormatter.format(
+    (state.bankingReducer.investmentsAccount?.attributes?.balance ?? 0) / 100,
+  );
