@@ -8,6 +8,7 @@ import {GraphQLResult} from '@aws-amplify/api';
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
+import * as wyreActions from 'src/store/actions/wyreActions';
 import {
   Athlete,
   AthleteByPhoneQuery,
@@ -79,6 +80,7 @@ export function* loginRequest({phone, password}: ILoginRequest) {
       yield put(bankingActions.getConnectedAccounts(false));
       yield put(bankingActions.getAthleteAccounts());
       yield put(bankingActions.getBalanceHistory());
+      if (athlete.wyreAccountId) yield put(wyreActions.getWyreAccount());
     } catch (err) {
       console.log('Error attempting to fetch Athlete info:', err);
     }
