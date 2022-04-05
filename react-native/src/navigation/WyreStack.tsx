@@ -10,6 +10,7 @@ import PurchaseAmount from 'src/screens/Wyre/PurchaseAmount';
 import PurchaseReview from 'src/screens/Wyre/PurchaseReview';
 import PurchaseSubmitted from 'src/screens/Wyre/PurchaseSubmitted';
 import Rewards from 'src/screens/Wyre/Rewards';
+import TransactionHistory from 'src/screens/Wyre/TransactionHistory';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ const WyreStack: React.FC = () => {
       <Stack.Screen name="PurchaseReview" component={PurchaseReview} />
       <Stack.Screen name="PurchaseSubmitted" component={PurchaseSubmitted} />
       <Stack.Screen name="Rewards" component={Rewards} />
+      <Stack.Screen name="TransactionHistory" component={TransactionHistory} />
     </Stack.Navigator>
   );
 };

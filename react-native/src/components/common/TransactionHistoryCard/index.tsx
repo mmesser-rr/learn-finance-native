@@ -16,13 +16,20 @@ interface TransactionHistoryCardProps {
 }
 
 const TransactionHistoryCard: React.FC<TransactionHistoryCardProps> = ({
+  podContext,
   historyEntries = [],
   cardStyle,
 }) => {
   const goToTransactionHistory = () => {
-    NavigationService.navigate('UserBankingStack', {
-      screen: 'TransactionHistory',
-    });
+    if (podContext === 'Rewards') {
+      NavigationService.navigate('WyreStack', {
+        screen: 'TransactionHistory',
+      });
+    } else {
+      NavigationService.navigate('UserBankingStack', {
+        screen: 'TransactionHistory',
+      });
+    }
   };
 
   return (
