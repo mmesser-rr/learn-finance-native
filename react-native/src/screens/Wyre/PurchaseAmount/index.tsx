@@ -52,8 +52,7 @@ const PurchaseAmount: React.FC = () => {
     dispatch(wyrePurchaseAmountEntered(value));
     NavigationService.navigate('PurchaseReview');
   };
-  const goPreviousScreen = () =>
-    NavigationService.navigate('HomeStack', {screen: 'Home'});
+  const goPreviousScreen = () => NavigationService.goBack();
   const goCloseScreen = () =>
     NavigationService.navigate('HomeStack', {screen: 'Home'});
 
