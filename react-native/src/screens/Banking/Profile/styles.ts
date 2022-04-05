@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreWhite100
   },
   swiperView: {
-    marginTop: scale(36),
-    marginBottom: scale(24)
+    marginTop: scale(36)
   },
   swiperBody: {
     marginTop: scale(4),
