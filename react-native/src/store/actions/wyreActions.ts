@@ -1,5 +1,9 @@
 import {ITypeOnlyAction} from 'src/models/actions/common';
-import {IWyrePurchaseAmountEntered} from 'src/models/actions/wyre';
+import {
+  IWyreAccountLoaded,
+  IWyrePurchaseAmountEntered,
+} from 'src/models/actions/wyre';
+import {WyreAccount} from 'src/types/API';
 import * as types from './types';
 
 export function openRewardsAccount(): ITypeOnlyAction {
@@ -20,5 +24,18 @@ export function wyrePurchaseAmountEntered(
 export function wyrePurchaseRequest(): ITypeOnlyAction {
   return {
     type: types.WYRE_PURCHASE_REQUEST,
+  };
+}
+
+export function getWyreAccount(): ITypeOnlyAction {
+  return {
+    type: types.GET_WYRE_ACCOUNT,
+  };
+}
+
+export function wyreAccountLoaded(account: WyreAccount): IWyreAccountLoaded {
+  return {
+    type: types.WYRE_ACCOUNT_LOADED,
+    account,
   };
 }
