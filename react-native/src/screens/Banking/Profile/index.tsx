@@ -23,6 +23,7 @@ const ActiveDot = () => {
 
 const Profile: React.FC = () => {
   const [swiperIndex, setSwiperIndex] = useState(1);
+  const [swiperHeight, setSwiperHeight] = useState(200);
 
   const handleChangeSwiper = (index: number) => {
     setSwiperIndex(index);
@@ -42,13 +43,13 @@ const Profile: React.FC = () => {
           activeDot={<ActiveDot />}
           showsVerticalScrollIndicator={true}
           loop={false}
-          height={300}
+          height={swiperHeight + 56}
           onIndexChanged={handleChangeSwiper}
         >
           <View onLayout={(event) => {
-  var {x, y, width, height} = event.nativeEvent.layout;
-  console.log(222, height)
-}}>
+            const {height} = event.nativeEvent.layout;
+            setSwiperHeight(height);
+          }}>
             <LinearGradient colors={PodsCardGradient} style={styles.card}>
               <View>
                 <Text type="Headline/Small">
