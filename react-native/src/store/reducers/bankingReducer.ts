@@ -237,6 +237,18 @@ export const bankingReducer = createReducer(initialState, {
           direction: 'debit',
         },
       },
+      {
+        id: 'fyzz',
+        type: 'history entry',
+        attributes: {
+          amount: 99030,
+          date: '2021-12-12T22:18:34Z',
+          status: 'Posted',
+          summary: 'Purchase',
+          description: 'from Uninvested to Rewards',
+          direction: 'credit',
+        },
+      },
     ];
 
     return {...state, transactionHistory: entries};
