@@ -13,7 +13,7 @@ import {
 } from 'src/types/API';
 import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
-import {createWyreAccount} from 'src/graphql/mutations_custom';
+import {createWyreAccountCustom} from 'src/graphql/mutations_custom';
 import {athleteIdSelector} from '../selectors/user';
 
 export function* openRewardsAccount() {
@@ -31,7 +31,7 @@ export function* openRewardsAccount() {
 
     const response = (yield call(
       [API, 'graphql'],
-      graphqlOperation(createWyreAccount, queryFilter),
+      graphqlOperation(createWyreAccountCustom, queryFilter),
     )) as GraphQLResult<CreateWyreAccountMutation>;
 
     console.log('Create Wyre Account Response:');
