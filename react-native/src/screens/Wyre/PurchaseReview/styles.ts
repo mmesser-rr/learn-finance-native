@@ -44,14 +44,8 @@ const styles = StyleSheet.create({
   infoData: {
     flexDirection: 'row',
   },
-  editIcon: {
-    marginLeft: scale(8),
-  },
   topText: {
     marginBottom: scale(12),
-  },
-  rightAlign: {
-    alignItems: 'flex-end',
   },
 });
 
