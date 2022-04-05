@@ -493,6 +493,7 @@ export const onCreateRecentTransaction = /* GraphQL */ `
     onCreateRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey
@@ -515,6 +516,7 @@ export const onUpdateRecentTransaction = /* GraphQL */ `
     onUpdateRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey
@@ -537,6 +539,7 @@ export const onDeleteRecentTransaction = /* GraphQL */ `
     onDeleteRecentTransaction(athleteId: $athleteId) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey

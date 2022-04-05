@@ -1,69 +1,46 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View} from 'react-native';
-import dayjs from 'dayjs';
+import {useDispatch, useSelector} from 'react-redux';
 
+import styles from './styles';
 import SubmitButton from 'src/components/common/SubmitButton';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import TopNav from 'src/components/common/TopNav';
-import EditIcon from 'src/assets/icons/edit.svg';
 import NavigationService from 'src/navigation/NavigationService';
-import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
-import {twoDecimalFormatter} from 'src/utils/functions';
-
-import styles from './styles';
+import {getWyreTransactionFee, twoDecimalFormatter} from 'src/utils/functions';
+import {RootState} from 'src/store/root-state';
+import Loading from 'src/components/common/Loading';
+import {wyrePurchaseRequest} from 'src/store/actions/wyreActions';
+import WyrePurchaseSummary from 'src/components/wyre/WyrePurchaseSummary';
 
 const PurchaseReview: React.FC = () => {
+  const dispatch = useDispatch();
+  const {purchaseAmount} = useSelector((state: RootState) => state.wyreReducer);
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+
   const onPurchase = () => {
-    // TODO:
+    dispatch(wyrePurchaseRequest());
   };
 
-  const list: InfoItemInterface[] = [
-    {
-      label: 'Total',
-      data: (
-        <>
-          <Text type="Body/Large">John Smith</Text>
-          <EditIcon style={styles.editIcon} />
-        </>
-      ),
-    },
-    {
-      label: 'Transaction Fee',
-      data: (
-        <>
-          <Text type="Body/Large">584 382 483</Text>
-          <EditIcon style={styles.editIcon} />
-        </>
-      ),
-    },
-    {
-      label: 'Purchase',
-      data: (
-        <>
-          <Text type="Body/Large">835 483 495</Text>
-          <EditIcon style={styles.editIcon} />
-        </>
-      ),
-    },
-  ];
+  const goBack = () => NavigationService.goBack();
+  const closeScreen = () =>
+    NavigationService.navigate('HomeStack', {screen: 'Home'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
         <TopNav
           title="Purchase"
-          goPreviousScreen={() => {}}
-          goCloseScreen={() => {}}
+          goPreviousScreen={goBack}
+          goCloseScreen={closeScreen}
         />
       </View>
-      <View>
-        <Text type="Body/Large">Please review the transaction.</Text>
+      <View style={styles.topText}>
+        <Text type="Body/Large">Please review the transaction:</Text>
       </View>
+      <WyrePurchaseSummary purchaseAmount={purchaseAmount!} />
       <View style={styles.contentContainer}>
-        <View>
-          <InfoList list={list} />
-        </View>
         <View>
           <Text style={styles.center} type="Body/Large">
             By clicking ‘purchase’, I agree to lorem ipsum dolor sit amet,
@@ -83,6 +60,7 @@ const PurchaseReview: React.FC = () => {
           </Text>
         </View>
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };
