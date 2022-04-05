@@ -8,14 +8,14 @@ const getOrCreateProcessorToken = (athlete, plaidAccountId, amount, description,
     Promise.reject(`This account needs to be linked to plaid ${athleteId} or user doesn't have unit account`)
   }
   const unitAccountId = find(propEq('podName', 'SPENDING'))(athlete?.accounts.items).unitAccountId
-  if(athlete.plaidProcessorToken?.plaidAccountId !== null && athlete.plaidProcessorToken?.plaidAccountId === plaidAccountId){
-      return unit.plaidPayment(unitAccountId, athlete.plaidProcessorToken.processorToken, description, amount, idempotencyKey, athlete.unitToken)
-      .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transansactionType, athlete.podSettings, idempotencyKey))
+  if(athlete.unitPlaidProcessorToken?.plaidAccountId !== null && athlete.unitPlaidProcessorToken?.plaidAccountId === plaidAccountId){
+      return unit.plaidPayment(unitAccountId, athlete.unitPlaidProcessorToken.processorToken, description, amount, idempotencyKey, athlete.unitToken)
+      .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transactionType, athlete.podSettings, idempotencyKey))
   }else{
      return tpc.createProcessorToken(athlete.plaidToken, plaidAccountId)
      .then(res => tpc.updateAthleteAccount(axios, athlete.id, {plaidAccountId: plaidAccountId, processorToken: res}))
      .then(res => unit.plaidPayment(unitAccountId, res, description, amount, idempotencyKey))
-     .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transansactionType, athlete.podSettings, idempotencyKey))
+     .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transactionType, athlete.podSettings, idempotencyKey))
   }
 }
 

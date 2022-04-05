@@ -118,7 +118,11 @@ export const podSettings = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -254,7 +258,11 @@ export const createWyreAccount = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -263,6 +271,132 @@ export const createWyreAccount = /* GraphQL */ `
       id
       createdAt
       updatedAt
+    }
+  }
+`;
+export const debitWyreAccount = /* GraphQL */ `
+  mutation DebitWyreAccount(
+    $athleteId: ID!
+    $plaidAccountId: String!
+    $amount: Float!
+    $description: String
+    $idempotencyKey: String!
+  ) {
+    debitWyreAccount(
+      athleteId: $athleteId
+      plaidAccountId: $plaidAccountId
+      amount: $amount
+      description: $description
+      idempotencyKey: $idempotencyKey
+    ) {
+      owner
+      status
+      balances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      createdAt
+      pusherChannel
+      srn
+      notes
+      depositAddresses {
+        ETH
+        BTC
+        AVAX
+        XLM
+      }
+      availableBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      name
+      id
+      type
+      pendingInterestBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+    }
+  }
+`;
+export const creditWyreAccount = /* GraphQL */ `
+  mutation CreditWyreAccount(
+    $athleteId: ID!
+    $plaidAccountId: String!
+    $amount: Float!
+    $description: String
+    $idempotencyKey: String!
+  ) {
+    creditWyreAccount(
+      athleteId: $athleteId
+      plaidAccountId: $plaidAccountId
+      amount: $amount
+      description: $description
+      idempotencyKey: $idempotencyKey
+    ) {
+      owner
+      status
+      balances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      createdAt
+      pusherChannel
+      srn
+      notes
+      depositAddresses {
+        ETH
+        BTC
+        AVAX
+        XLM
+      }
+      availableBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
+      name
+      id
+      type
+      pendingInterestBalances {
+        DAI
+        AUD
+        USD
+        MXN
+        USDC
+        BTC
+        ETH
+        MUSDC
+      }
     }
   }
 `;
@@ -483,7 +617,11 @@ export const createAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -540,7 +678,11 @@ export const updateAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -597,7 +739,11 @@ export const deleteAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -755,32 +901,6 @@ export const deletePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
-export const updateRecentTransaction = /* GraphQL */ `
-  mutation UpdateRecentTransaction(
-    $input: UpdateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    updateRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      type
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
 export const deleteRecentTransaction = /* GraphQL */ `
   mutation DeleteRecentTransaction(
     $input: DeleteRecentTransactionInput!
@@ -789,7 +909,7 @@ export const deleteRecentTransaction = /* GraphQL */ `
     deleteRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
-      type
+      transactionType
       status
       amount
       idempotencyKey
@@ -897,7 +1017,33 @@ export const createRecentTransaction = /* GraphQL */ `
     createRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
-      type
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const updateRecentTransaction = /* GraphQL */ `
+  mutation UpdateRecentTransaction(
+    $input: UpdateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    updateRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      transactionType
       status
       amount
       idempotencyKey

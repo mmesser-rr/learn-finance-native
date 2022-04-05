@@ -1,43 +1,30 @@
-const { Unit } = require("@unit-finance/unit-node-sdk");
-const { JS } = require("aws-amplify");
-
 const IP = "127.0.0.1";
 const COUNTRY_CODE = "US";
 const APPLICATION_TYPE = "achPayment";
-const DIRECTION = "Credit";
 const TYPE = "depositAccount";
+const DIRECTION = "Credit";
 
-const parseApplicationParams = (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey) => ({
+
+const parseApplicationParams = (wyreAccountId, plaidProcessorToken, description, amount, idempotencyKey) => ({
   type: APPLICATION_TYPE,
-  attributes: {
-    amount: amount,
-    direction: DIRECTION,
-    description: description,
-    addenda: addenda,
-    idempotencyKey: idempotencyKey,
-    counterparty:{
-      name: receiverName,
-      routingNumber: receiverRoutingNumber,
-      accountNumber: receiverAccountNumber,
-      accountType: receiverAccountType
-    }
+  source: "paymentmethod:WA_LQHE7YNGF24:ach",
+  dest: {
+    country: "US",
+    plaidProcessorToken: plaidProcessorToken
   },
-  relationships:{
-    account:{
-        data:{
-          type: TYPE,
-          id: unitAccountId
-        }
-      }
-    }
+  sourceCurrency:"USD",
+  destCurrency:"USD",
+  sourceAmount: amount,
+  autoConfirm:true,
+  message: description,
+  customId: idempotencyKey
 });
 
-const creditAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey, token) => {
-  unit.payments.headers.Authorization = `Bearer ${token}`
-  const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey);
-  return unit.payments.create(unitParams)
-    .then(resultLens)
-    .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));
+const creditAccount = (wyre) => (wyreAccountId, plaidProcessorToken, description, amount, idempotencyKey, token) => {
+  wyre.payments.headers.Authorization = `Bearer ${token}`
+  const wyreParams = parseApplicationParams(wyreAccountId, plaidProcessorToken, description, amount, idempotencyKey);
+  return wyre.payments.create(wyreParams).then(resultLens)
+    .catch(err => Promise.reject(`Failed to submit payment to wyre API. Error: ${err}`));
 }
 
 const resultLens = (res) => ({

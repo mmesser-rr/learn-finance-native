@@ -45,9 +45,11 @@ const unitSecret = ""
 app.post('/webhook', function (request, response) {
   if(request?.header("x-unit-signature") != null){
     return unitWebhook(request, response)
+  }else if(request?.header("x-unit-signature") != null){
+    return wyreWebhook(request, response)
+  }else{
+    response.json({ received: true });
   }
-  // Return a response to acknowledge receipt of the event
-  response.json({ received: true });
 });
 
 app.listen(3000, function() {
@@ -63,10 +65,14 @@ const unitWebhook = (request, response) => {
       switch (request.body.type) {
         case 'transaction.updated':
           console.log('Payment update!')
-          updateTransactionList("unit", request.body.data.id, request.body.data.relationships.transaction.data.id)
+          updateUnitTransactionList("unit", request.body.data.id, request.body.data.relationships.transaction.data.id)
+          break;
+          case 'statements.created':
+          console.log('Monthly Statement is Ready!')
+          sendStament();
           break;
         default:
-          // Unexpected event type
+          // Unexpected event type   "type": "statements.created",
           return response.status(400).end();
       }
     }
@@ -79,23 +85,52 @@ const unitWebhook = (request, response) => {
   }
 }
 
-const updateTransactionList = (type, accountId, transactionId) => {
-  if(type === "unit"){
+
+const wyreWebhook = (request, response) => {
+  try {
+    var signature = request.header("x-unit-signature")
+    var hmac = crypto.createHmac('sha1', unitSecret)
+    hmac.update(JSON.stringify(request.body))
+    if(hmac.digest('base64') == signature) {
+      switch (request.body.type) {
+        case 'transaction.updated':
+          console.log('Payment update!')
+          updateWyreTransactionList("unit", request.body.data.id, request.body.data.relationships.transaction.data.id)
+          break;
+          case 'statements.created':
+          console.log('Monthly Statement is Ready!')
+          sendStament();
+          break;
+        default:
+          // Unexpected event type   "type": "statements.created",
+          return response.status(400).end();
+      }
+    }
+    else {
+        response.status(500).send("Signatures didn't match!")
+    }
+  }
+  catch (err) {
+    response.status(400).send(`Webhook Error: ${err.message}`);
+  }
+}
+
+const updateUnitTransactionList = (accountId, transactionId) => {
     return wrapper.getUnitTransactionById(accountId, transactionId)
     .then(res => console.log("<<<<<<<<<<<<<,",res))
     .then(res => tpc.updateTransaction(res))
     .catch(err => {
       throw new Error(`Failed to connect. Reason: ${JSON.stringify(err)}`);
     });
-  }else{
-    return wrapper.getWyreTransactionById(accountId, transactionId)
-    .then(res => console.log("<<<<<<<<<<<<<,",res))
-    .then(res => tpc.updateTransaction(res))
-    .catch(err => {
-      throw new Error(`Failed to connect. Reason: ${JSON.stringify(err)}`);
-    });
-  }
+}
 
+const updateWyreTransactionList = (accountId, transactionId) => {
+  return wrapper.getWyreTransactionById(accountId, transactionId)
+  .then(res => console.log("<<<<<<<<<<<<<,",res))
+  .then(res => tpc.updateTransaction(res)) 
+  .catch(err => {
+    throw new Error(`Failed to connect. Reason: ${JSON.stringify(err)}`);
+  });
 }
 
 // Export the app object. When executing the application local this does nothing. However,

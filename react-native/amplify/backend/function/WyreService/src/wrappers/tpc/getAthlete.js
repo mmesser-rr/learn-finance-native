@@ -11,10 +11,15 @@ const getAthleteStatement = gql`
       mobilePhone
       dateOfBirth
       wyreAccountId
+      plaidToken
       podSettings{
         SAVINGS
         INVESTMENTS
         SPENDING
+      }
+      wyrePlaidProcessorToken{
+        processorToken
+        plaidAccountId
       }
       address {
         apt

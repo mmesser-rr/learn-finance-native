@@ -1,5 +1,5 @@
 const tpc = require("../wrappers/tpc");
-const {getwyreTransactionById} = require("./getwyreTransactionById");
+const {getwyreTransactionById} = require("./getWyreTransactionById");
 const crypto = require('crypto');
 const webHookSecret = "133tgtu7924efvfh76y";
 
@@ -27,3 +27,5 @@ module.exports.wyreWebhook = async (event) => {
   return wyreWebhook(event.arguments)
 }
 //relationships.payment.data.id
+
+

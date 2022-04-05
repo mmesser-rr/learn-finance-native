@@ -1,7 +1,7 @@
 const paramsFromId = (accessToken, accountId) => ({
   access_token: accessToken,
   account_id: accountId,
-  processor: "unit"
+  processor: "wyre"
 });
 
 const createProcessorToken = (plaid) => (accessToken, accountId) => {

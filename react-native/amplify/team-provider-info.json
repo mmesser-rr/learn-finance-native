@@ -101,7 +101,7 @@
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/UnitService-384f744a4c334c704536-build.zip",
+          "s3Key": "amplify-builds/UnitService-79327632426362517257-build.zip",
           "unitApiUrl": "https://api.s.unit.sh/",
           "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMDRUMTY6NTc6NTguMDA1WiIsImp0aSI6IjEyMzUxNSIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfQXSRXfL2joVCb2ZLDMOKL9InJsOYz2YM7bayH8A-RBKAPS_Lm38I_ibTYKi0Wdh6GIPMmdoZmF5qPP2Yvb8bwM",
           "nodeEnv": "development",
@@ -110,7 +110,9 @@
         },
         "MailService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/MailService-326471426243304d7442-build.zip"
+          "s3Key": "amplify-builds/MailService-5434744f544d43325a57-build.zip",
+          "nodeEnv": "development",
+          "unitToken": "v2.public.eyJyb2xlIjoiYWRtaW4iLCJ1c2VySWQiOiIxOTU3Iiwic3ViIjoiZGVib0BrdW5haWNvLmNvbSIsImV4cCI6IjIwMjMtMDMtMjhUMDE6Mjk6MDQuODk2WiIsImp0aSI6IjEzMDUwNCIsIm9yZ0lkIjoiMTEwNSIsInNjb3BlIjoiYXBwbGljYXRpb25zIGFwcGxpY2F0aW9ucy13cml0ZSBjdXN0b21lcnMgY3VzdG9tZXJzLXdyaXRlIGN1c3RvbWVyLXRhZ3Mtd3JpdGUgY3VzdG9tZXItdG9rZW4td3JpdGUgYWNjb3VudHMgYWNjb3VudHMtd3JpdGUgY2FyZHMgY2FyZHMtd3JpdGUgY2FyZHMtc2Vuc2l0aXZlIGNhcmRzLXNlbnNpdGl2ZS13cml0ZSB0cmFuc2FjdGlvbnMgdHJhbnNhY3Rpb25zLXdyaXRlIGF1dGhvcml6YXRpb25zIHN0YXRlbWVudHMgcGF5bWVudHMgcGF5bWVudHMtd3JpdGUgcGF5bWVudHMtd3JpdGUtY291bnRlcnBhcnR5IHBheW1lbnRzLXdyaXRlLWFjaC1kZWJpdCBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSBiYXRjaC1yZWxlYXNlcyBiYXRjaC1yZWxlYXNlcy13cml0ZSB3ZWJob29rcyB3ZWJob29rcy13cml0ZSBldmVudHMgZXZlbnRzLXdyaXRlIGF1dGhvcml6YXRpb24tcmVxdWVzdHMgYXV0aG9yaXphdGlvbi1yZXF1ZXN0cy13cml0ZSBjaGVjay1kZXBvc2l0cyBjaGVjay1kZXBvc2l0cy13cml0ZSByZWNlaXZlZC1wYXltZW50cyByZWNlaXZlZC1wYXltZW50cy13cml0ZSBkaXNwdXRlcyIsIm9yZyI6Ikt1bmFpY28iLCJzb3VyY2VJcCI6IiIsInVzZXJUeXBlIjoib3JnIiwiaXNVbml0UGlsb3QiOmZhbHNlfT6aACj8e6fvFPSNu4zvQhwnj_kZkfml5n1QNlZLrSJXU0EYCIBRY76842c2OlJ5dZj7PpAi2dmpgeYFKY6OoAk"
         },
         "AirtableService": {
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k",
@@ -119,18 +121,18 @@
         },
         "WyreService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/WyreService-73325334473257625730-build.zip",
+          "s3Key": "amplify-builds/WyreService-706e766f373349475376-build.zip",
           "nodeEnv": "development",
           "apiKey": "AK-YGF6FVEM-QJL32NBD-9MJTC4MP-ETWHVXLC",
           "wyreToken": "SK-GNH8GWYF-G7ZBY8AE-BB7F76QA-TQ3HFUDM"
         },
         "WebhookService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/WebhookService-4c526762347259516261-build.zip"
+          "s3Key": "amplify-builds/WebhookService-5344383244376d456467-build.zip"
         },
         "theplayerscompany2db5774e2db5774ePostConfirmation": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-43544e4b2b7a466b6745-build.zip"
+          "s3Key": "amplify-builds/theplayerscompany2db5774e2db5774ePostConfirmation-6c414c6c6730736c7550-build.zip"
         }
       },
       "auth": {

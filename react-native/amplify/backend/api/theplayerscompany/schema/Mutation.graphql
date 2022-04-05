@@ -16,10 +16,9 @@ type Mutation {
   athleteUnitTokenVerification(athleteId: ID!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
 
   createWyreAccount(athleteId: ID!): Athlete @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-  #creditWyreAccount()
-  #getAthleteWyreAccount()
-  #getWryeTransactionById()
-  #listAllWryeTransaction()
+
+  debitWyreAccount(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): WyreAccount @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+  creditWyreAccount(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): WyreAccount @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
   
   createPlaidPayment(athleteId: ID!, plaidAccountId: String!, amount: Float!, description: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
   bookPayment(athleteId: ID!, unitAccountId: String!, amount: Float!, description: String, receiverUnitAccountId: String!, receiverAccountType: String, idempotencyKey: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])

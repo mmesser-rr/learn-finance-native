@@ -16,5 +16,15 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "nodeEnv",
+      "environmentVariableName": "NODE_ENV"
+    },
+    {
+      "cloudFormationParameterName": "unitToken",
+      "environmentVariableName": "UNIT_TOKEN"
+    }
+  ]
 }

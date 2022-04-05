@@ -1,8 +1,8 @@
-type RecentTransaction @model @auth(rules: [{ allow: public, operations: [read, create] },  {allow: owner, provider: userPools, ownerField: "athleteId" }])
+type RecentTransaction @model @auth(rules: [{ allow: public, operations: [read, create, update] },  {allow: owner, provider: userPools, ownerField: "athleteId" }])
 {
   transactionId: String! 
   athleteId: String!
-  type: String!
+  transactionType: String!
   status: String!
   amount: Float
   idempotencyKey: String

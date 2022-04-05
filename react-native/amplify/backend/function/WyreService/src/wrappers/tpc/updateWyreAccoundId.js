@@ -4,10 +4,11 @@ const gql = require('graphql-tag');
 const updateAthleteWyreStatement = gql`
   mutation updateAthleteWyreAccount($athleteId: ID!, $wyreAccountId: String!) {
     updateAthlete(input: {wyreAccountId: $wyreAccountId, id: $athleteId}) {
-      createdAt
-      id
-      isActive
+      firstName
+      lastName
       wyreAccountId
+      isActive
+      id
     }
   } 
 `
@@ -25,7 +26,7 @@ const updateWyreAccoundId = () => (
   authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete);
 
 module.exports = {
   updateWyreAccoundId

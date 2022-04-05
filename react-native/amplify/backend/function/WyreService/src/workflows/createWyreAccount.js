@@ -6,9 +6,9 @@ const createWyreAccount = (athlete) => {
   const custId = athlete?.unitLookup?.custId;
   const wyreId = athlete?.wyreAccountId;
 
-  if (custId === undefined || wyreId) {
-    throw new Error("Athlete does not have a unit customer id or already have a wyre account");
-  }
+  // if (custId === undefined || wyreId) {
+  //   throw new Error("Athlete does not have a unit customer id or already have a wyre account");
+  // }
   return wyre.createAccount(athlete)
     .then(res => tpc.updateWyreAccoundId(axios, athlete.id, res.id))
     .catch(err => {

@@ -2,7 +2,7 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateTransactionStatement = gql`
-  mutation persistRecentTransaction($transactionId: String!, $athleteId: String!, $amount: Float, $status: String!, $createdAt: String, $read: Boolean, $direction: String, $transactionType: transactionType, $podAllocation: PodSettingsInput, $idempotencyKey: String) {
+  mutation persistRecentTransaction($transactionId: String!, $athleteId: String!, $amount: Float, $status: String!, $createdAt: String, $read: Boolean, $direction: String, $transactionType: String!, $podAllocation: PodSettingsInput, $idempotencyKey: String) {
     createRecentTransaction(input: {amount: $amount, transactionId: $transactionId, athleteId: $athleteId, status: $status, createdAt: $createdAt, read: $read, direction: $direction, transactionType: $transactionType, podAllocation: $podAllocation, idempotencyKey: $idempotencyKey }) {
       transactionId
       createdAt

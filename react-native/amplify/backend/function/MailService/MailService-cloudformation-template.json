@@ -31,6 +31,12 @@
     "functionUnitServiceName": {
       "Type": "String",
       "Default": "functionUnitServiceName"
+    },
+    "nodeEnv": {
+      "Type": "String"
+    },
+    "unitToken": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -123,6 +129,12 @@
                   }
                 ]
               ]
+            },
+            "NODE_ENV": {
+              "Ref": "nodeEnv"
+            },
+            "UNIT_TOKEN": {
+              "Ref": "unitToken"
             }
           }
         },

@@ -12,7 +12,7 @@ const getAthleteStatement = gql`
       dateOfBirth
       plaidToken
       unitToken
-      plaidProcessorToken{
+      unitPlaidProcessorToken{
         plaidAccountId
         processorToken
       }

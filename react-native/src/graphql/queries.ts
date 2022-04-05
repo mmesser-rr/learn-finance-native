@@ -381,7 +381,11 @@ export const getAthlete = /* GraphQL */ `
       }
       plaidToken
       unitToken
-      plaidProcessorToken {
+      unitPlaidProcessorToken {
+        plaidAccountId
+        processorToken
+      }
+      wyrePlaidProcessorToken {
         plaidAccountId
         processorToken
       }
@@ -631,7 +635,7 @@ export const getRecentTransaction = /* GraphQL */ `
     getRecentTransaction(id: $id) {
       transactionId
       athleteId
-      type
+      transactionType
       status
       amount
       idempotencyKey
@@ -663,7 +667,7 @@ export const listRecentTransactions = /* GraphQL */ `
       items {
         transactionId
         athleteId
-        type
+        transactionType
         status
         amount
         idempotencyKey

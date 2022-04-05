@@ -55,7 +55,8 @@ type Athlete @model @auth(rules: [
   podSettings: PodSettings 
   plaidToken: String 
   unitToken: String 
-  plaidProcessorToken: ProcessorToken 
+  unitPlaidProcessorToken: ProcessorToken
+  wyrePlaidProcessorToken: ProcessorToken 
   wyreAccountId: String 
   isActive: Boolean! 
 }

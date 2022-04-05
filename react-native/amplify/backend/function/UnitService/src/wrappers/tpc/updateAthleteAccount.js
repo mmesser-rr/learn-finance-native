@@ -2,8 +2,8 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateAthleteStatement = gql`
-  mutation updateAthleteAccount($athleteId: ID!, $plaidProcessorToken: ProcessorTokenInput!) {
-    updateAthlete(input: {plaidProcessorToken: $plaidProcessorToken, id: $athleteId}) {
+  mutation updateAthleteAccount($athleteId: ID!, $unitPlaidProcessorToken: ProcessorTokenInput!) {
+    updateAthlete(input: {unitPlaidProcessorToken: $unitPlaidProcessorToken, id: $athleteId}) {
       email
       firstName
       createdAt
@@ -12,7 +12,7 @@ const updateAthleteStatement = gql`
       lastName
       level
       mobilePhone
-      plaidProcessorToken{
+      unitPlaidProcessorToken{
         processorToken
       }
     }
@@ -22,17 +22,17 @@ const updateAthleteStatement = gql`
 const updateAthlete = () => (
   axios,
   athleteId,
-  plaidProcessorToken
+  unitPlaidProcessorToken
 ) => axios.post("/", {
   query: print(updateAthleteStatement),
   variables: {
     athleteId,
-    plaidProcessorToken
+    unitPlaidProcessorToken
   },
   authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete.plaidProcessorToken.processorToken);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete.unitPlaidProcessorToken.processorToken);
 
 module.exports = {
   updateAthlete

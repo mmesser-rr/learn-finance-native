@@ -34,7 +34,8 @@ export type Athlete = {
   podSettings?: PodSettings | null,
   plaidToken?: string | null,
   unitToken?: string | null,
-  plaidProcessorToken?: ProcessorToken | null,
+  unitPlaidProcessorToken?: ProcessorToken | null,
+  wyrePlaidProcessorToken?: ProcessorToken | null,
   wyreAccountId?: string | null,
   isActive: boolean,
   id: string,
@@ -148,6 +149,43 @@ export type Tags = {
   athleteId?: string | null,
 };
 
+export type WyreAccount = {
+  __typename: "WyreAccount",
+  owner?: string | null,
+  status?: string | null,
+  balances?: WyreBalance | null,
+  createdAt?: string | null,
+  pusherChannel?: string | null,
+  srn?: string | null,
+  notes?: string | null,
+  depositAddresses?: DepositAddress | null,
+  availableBalances?: WyreBalance | null,
+  name?: string | null,
+  id?: string | null,
+  type?: string | null,
+  pendingInterestBalances?: WyreBalance | null,
+};
+
+export type WyreBalance = {
+  __typename: "WyreBalance",
+  DAI?: string | null,
+  AUD?: string | null,
+  USD?: string | null,
+  MXN?: string | null,
+  USDC?: string | null,
+  BTC?: string | null,
+  ETH?: string | null,
+  MUSDC?: string | null,
+};
+
+export type DepositAddress = {
+  __typename: "DepositAddress",
+  ETH?: string | null,
+  BTC?: string | null,
+  AVAX?: string | null,
+  XLM?: string | null,
+};
+
 export type CreateAthleteInput = {
   firstName?: string | null,
   lastName?: string | null,
@@ -164,7 +202,8 @@ export type CreateAthleteInput = {
   podSettings?: PodSettingsInput | null,
   plaidToken?: string | null,
   unitToken?: string | null,
-  plaidProcessorToken?: ProcessorTokenInput | null,
+  unitPlaidProcessorToken?: ProcessorTokenInput | null,
+  wyrePlaidProcessorToken?: ProcessorTokenInput | null,
   wyreAccountId?: string | null,
   isActive: boolean,
   id?: string | null,
@@ -292,7 +331,8 @@ export type UpdateAthleteInput = {
   podSettings?: PodSettingsInput | null,
   plaidToken?: string | null,
   unitToken?: string | null,
-  plaidProcessorToken?: ProcessorTokenInput | null,
+  unitPlaidProcessorToken?: ProcessorTokenInput | null,
+  wyrePlaidProcessorToken?: ProcessorTokenInput | null,
   wyreAccountId?: string | null,
   isActive?: boolean | null,
   id: string,
@@ -420,25 +460,14 @@ export type PhoneChallenge = {
   updatedAt: string,
 };
 
-export type UpdateRecentTransactionInput = {
-  transactionId?: string | null,
-  athleteId?: string | null,
-  type?: string | null,
-  status?: string | null,
-  amount?: number | null,
-  idempotencyKey?: string | null,
-  direction?: string | null,
-  createdAt?: string | null,
-  read?: boolean | null,
-  settled?: string | null,
-  podAllocation?: PodSettingsInput | null,
+export type DeleteRecentTransactionInput = {
   id: string,
 };
 
 export type ModelRecentTransactionConditionInput = {
   transactionId?: ModelStringInput | null,
   athleteId?: ModelStringInput | null,
-  type?: ModelStringInput | null,
+  transactionType?: ModelStringInput | null,
   status?: ModelStringInput | null,
   amount?: ModelFloatInput | null,
   idempotencyKey?: ModelStringInput | null,
@@ -467,7 +496,7 @@ export type RecentTransaction = {
   __typename: "RecentTransaction",
   transactionId: string,
   athleteId: string,
-  type: string,
+  transactionType: string,
   status: string,
   amount?: number | null,
   idempotencyKey?: string | null,
@@ -478,10 +507,6 @@ export type RecentTransaction = {
   podAllocation?: PodSettings | null,
   id: string,
   updatedAt: string,
-};
-
-export type DeleteRecentTransactionInput = {
-  id: string,
 };
 
 export type CreateEmailChallengeInput = {
@@ -521,7 +546,7 @@ export type UpdatePhoneChallengeInput = {
 export type CreateRecentTransactionInput = {
   transactionId: string,
   athleteId: string,
-  type: string,
+  transactionType: string,
   status: string,
   amount?: number | null,
   idempotencyKey?: string | null,
@@ -531,6 +556,21 @@ export type CreateRecentTransactionInput = {
   settled?: string | null,
   podAllocation?: PodSettingsInput | null,
   id?: string | null,
+};
+
+export type UpdateRecentTransactionInput = {
+  transactionId?: string | null,
+  athleteId?: string | null,
+  transactionType?: string | null,
+  status?: string | null,
+  amount?: number | null,
+  idempotencyKey?: string | null,
+  direction?: string | null,
+  createdAt?: string | null,
+  read?: boolean | null,
+  settled?: string | null,
+  podAllocation?: PodSettingsInput | null,
+  id: string,
 };
 
 export type PlaidAccountDetail = {
@@ -551,43 +591,6 @@ export type Balance = {
   iso_currency_code?: string | null,
   limit?: string | null,
   unofficial_currency_code?: string | null,
-};
-
-export type WyreAccount = {
-  __typename: "WyreAccount",
-  owner?: string | null,
-  status?: string | null,
-  balances?: WyreBalance | null,
-  createdAt?: string | null,
-  pusherChannel?: string | null,
-  srn?: string | null,
-  notes?: string | null,
-  depositAddresses?: DepositAddress | null,
-  availableBalances?: WyreBalance | null,
-  name?: string | null,
-  id?: string | null,
-  type?: string | null,
-  pendingInterestBalances?: WyreBalance | null,
-};
-
-export type WyreBalance = {
-  __typename: "WyreBalance",
-  DAI?: string | null,
-  AUD?: string | null,
-  USD?: string | null,
-  MXN?: string | null,
-  USDC?: string | null,
-  BTC?: string | null,
-  ETH?: string | null,
-  MUSDC?: string | null,
-};
-
-export type DepositAddress = {
-  __typename: "DepositAddress",
-  ETH?: string | null,
-  BTC?: string | null,
-  AVAX?: string | null,
-  XLM?: string | null,
 };
 
 export type ModelAthleteFilterInput = {
@@ -693,7 +696,7 @@ export type ModelPhoneChallengeConnection = {
 export type ModelRecentTransactionFilterInput = {
   transactionId?: ModelStringInput | null,
   athleteId?: ModelStringInput | null,
-  type?: ModelStringInput | null,
+  transactionType?: ModelStringInput | null,
   status?: ModelStringInput | null,
   amount?: ModelFloatInput | null,
   idempotencyKey?: ModelStringInput | null,
@@ -843,7 +846,12 @@ export type PodSettingsMutation = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -1003,7 +1011,12 @@ export type CreateWyreAccountMutation = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -1013,6 +1026,132 @@ export type CreateWyreAccountMutation = {
     id: string,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type DebitWyreAccountMutationVariables = {
+  athleteId: string,
+  plaidAccountId: string,
+  amount: number,
+  description?: string | null,
+  idempotencyKey: string,
+};
+
+export type DebitWyreAccountMutation = {
+  debitWyreAccount?:  {
+    __typename: "WyreAccount",
+    owner?: string | null,
+    status?: string | null,
+    balances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
+    createdAt?: string | null,
+    pusherChannel?: string | null,
+    srn?: string | null,
+    notes?: string | null,
+    depositAddresses?:  {
+      __typename: "DepositAddress",
+      ETH?: string | null,
+      BTC?: string | null,
+      AVAX?: string | null,
+      XLM?: string | null,
+    } | null,
+    availableBalances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
+    name?: string | null,
+    id?: string | null,
+    type?: string | null,
+    pendingInterestBalances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
+  } | null,
+};
+
+export type CreditWyreAccountMutationVariables = {
+  athleteId: string,
+  plaidAccountId: string,
+  amount: number,
+  description?: string | null,
+  idempotencyKey: string,
+};
+
+export type CreditWyreAccountMutation = {
+  creditWyreAccount?:  {
+    __typename: "WyreAccount",
+    owner?: string | null,
+    status?: string | null,
+    balances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
+    createdAt?: string | null,
+    pusherChannel?: string | null,
+    srn?: string | null,
+    notes?: string | null,
+    depositAddresses?:  {
+      __typename: "DepositAddress",
+      ETH?: string | null,
+      BTC?: string | null,
+      AVAX?: string | null,
+      XLM?: string | null,
+    } | null,
+    availableBalances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
+    name?: string | null,
+    id?: string | null,
+    type?: string | null,
+    pendingInterestBalances?:  {
+      __typename: "WyreBalance",
+      DAI?: string | null,
+      AUD?: string | null,
+      USD?: string | null,
+      MXN?: string | null,
+      USDC?: string | null,
+      BTC?: string | null,
+      ETH?: string | null,
+      MUSDC?: string | null,
+    } | null,
   } | null,
 };
 
@@ -1219,7 +1358,12 @@ export type CreateAthleteMutation = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -1285,7 +1429,12 @@ export type UpdateAthleteMutation = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -1351,7 +1500,12 @@ export type DeleteAthleteMutation = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -1525,35 +1679,6 @@ export type DeletePhoneChallengeMutation = {
   } | null,
 };
 
-export type UpdateRecentTransactionMutationVariables = {
-  input: UpdateRecentTransactionInput,
-  condition?: ModelRecentTransactionConditionInput | null,
-};
-
-export type UpdateRecentTransactionMutation = {
-  updateRecentTransaction?:  {
-    __typename: "RecentTransaction",
-    transactionId: string,
-    athleteId: string,
-    type: string,
-    status: string,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type DeleteRecentTransactionMutationVariables = {
   input: DeleteRecentTransactionInput,
   condition?: ModelRecentTransactionConditionInput | null,
@@ -1564,7 +1689,7 @@ export type DeleteRecentTransactionMutation = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,
@@ -1687,7 +1812,36 @@ export type CreateRecentTransactionMutation = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateRecentTransactionMutationVariables = {
+  input: UpdateRecentTransactionInput,
+  condition?: ModelRecentTransactionConditionInput | null,
+};
+
+export type UpdateRecentTransactionMutation = {
+  updateRecentTransaction?:  {
+    __typename: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,
@@ -2205,7 +2359,12 @@ export type GetAthleteQuery = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -2471,7 +2630,7 @@ export type GetRecentTransactionQuery = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,
@@ -2503,7 +2662,7 @@ export type ListRecentTransactionsQuery = {
       __typename: "RecentTransaction",
       transactionId: string,
       athleteId: string,
-      type: string,
+      transactionType: string,
       status: string,
       amount?: number | null,
       idempotencyKey?: string | null,
@@ -2579,7 +2738,12 @@ export type OnCreateAthleteSubscription = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -2644,7 +2808,12 @@ export type OnUpdateAthleteSubscription = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -2709,7 +2878,12 @@ export type OnDeleteAthleteSubscription = {
     } | null,
     plaidToken?: string | null,
     unitToken?: string | null,
-    plaidProcessorToken?:  {
+    unitPlaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyrePlaidProcessorToken?:  {
       __typename: "ProcessorToken",
       plaidAccountId: string,
       processorToken?: string | null,
@@ -2938,7 +3112,7 @@ export type OnCreateRecentTransactionSubscription = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,
@@ -2966,7 +3140,7 @@ export type OnUpdateRecentTransactionSubscription = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,
@@ -2994,7 +3168,7 @@ export type OnDeleteRecentTransactionSubscription = {
     __typename: "RecentTransaction",
     transactionId: string,
     athleteId: string,
-    type: string,
+    transactionType: string,
     status: string,
     amount?: number | null,
     idempotencyKey?: string | null,

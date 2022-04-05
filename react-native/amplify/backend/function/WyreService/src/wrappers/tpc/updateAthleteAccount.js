@@ -2,8 +2,8 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateAthleteStatement = gql`
-  mutation updateAthleteAccount($athleteId: ID!, $plaidProcessorToken: ProcessorTokenInput!) {
-    updateAthlete(input: {plaidProcessorToken: $plaidProcessorToken, id: $athleteId}) {
+  mutation updateAthleteAccount($athleteId: ID!, $wyrePlaidProcessorToken: ProcessorTokenInput!) {
+    updateAthlete(input: {wyrePlaidProcessorToken: $wyrePlaidProcessorToken, id: $athleteId}) {
       email
       firstName
       createdAt
@@ -12,7 +12,7 @@ const updateAthleteStatement = gql`
       lastName
       level
       mobilePhone
-      plaidProcessorToken{
+      wyrePlaidProcessorToken{
         processorToken
       }
     }
@@ -21,16 +21,16 @@ const updateAthleteStatement = gql`
 
 const updateAthlete = (axios) => (
   athleteId,
-  plaidProcessorToken
+  wyrePlaidProcessorToken
 ) => axios.post("/", {
   query: print(updateAthleteStatement),
   variables: {
     athleteId,
-    plaidProcessorToken
+    wyrePlaidProcessorToken
   }
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete.plaidProcessorToken.processorToken);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete.wyrePlaidProcessorToken.processorToken);
 
 module.exports = {
   updateAthlete

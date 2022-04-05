@@ -42,7 +42,7 @@ const debitAccount = (unit) => (unitAccountId, amount, addenda, description, rec
 
 const resultLens = (res) => ({
   transactionId: res.data.id,
-  transactionType: res.type,
+  transactionType: res.data.type,
   amount: res.data.attributes.amount,
   direction: res.data.attributes.direction,
   status: res.data.attributes.status,
