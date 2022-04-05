@@ -44,10 +44,31 @@ export function* openRewardsAccount() {
   } catch (error: any) {
     console.log('Failed to open rewards account:', error);
     NavigationService.navigate('UniversalError');
+    // NavigationService.navigate('RewardsAccountOpened');
+  }
+  yield put(loadingActions.disableLoader());
+}
+
+export function* wyrePurchaseRequest() {
+  yield put(loadingActions.enableLoader());
+  const athleteId = (yield select(athleteIdSelector)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('openRewardsAccount is for logged in users only');
+    }
+
+    // TODO: make API call
+
+    NavigationService.navigate('PurchaseSubmitted');
+  } catch (error: any) {
+    console.log('Failed to make Wyre purchase:', error);
+    NavigationService.navigate('UniversalError');
   }
   yield put(loadingActions.disableLoader());
 }
 
 export default function* wyreSaga() {
   yield takeLatest(types.OPEN_REWARDS_ACCOUNT, openRewardsAccount);
+  yield takeLatest(types.WYRE_PURCHASE_REQUEST, wyrePurchaseRequest);
 }

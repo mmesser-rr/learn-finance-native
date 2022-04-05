@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './styles';
 import SubmitButton from 'src/components/common/SubmitButton';
@@ -8,69 +8,38 @@ import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import TopNav from 'src/components/common/TopNav';
 import NavigationService from 'src/navigation/NavigationService';
-import InfoList, {InfoItemInterface} from 'src/components/common/InfoList';
 import {getWyreTransactionFee, twoDecimalFormatter} from 'src/utils/functions';
-
 import {RootState} from 'src/store/root-state';
+import Loading from 'src/components/common/Loading';
+import {wyrePurchaseRequest} from 'src/store/actions/wyreActions';
+import WyrePurchaseSummary from 'src/components/wyre/WyrePurchaseSummary';
 
 const PurchaseReview: React.FC = () => {
+  const dispatch = useDispatch();
   const {purchaseAmount} = useSelector((state: RootState) => state.wyreReducer);
-  const calculatedValues = useMemo(() => {
-    const numericValue = Number(purchaseAmount);
-    const transactionFee = getWyreTransactionFee(numericValue);
-    return {
-      transactionFee: twoDecimalFormatter.format(transactionFee),
-      purchaseAmount: twoDecimalFormatter.format(numericValue - transactionFee),
-    };
-  }, [purchaseAmount]);
+  const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
 
   const onPurchase = () => {
-    // TODO:
+    dispatch(wyrePurchaseRequest());
   };
 
-  const list: InfoItemInterface[] = [
-    {
-      label: 'Total',
-      data: (
-        <>
-          <Text type="Body/Large">${purchaseAmount}</Text>
-        </>
-      ),
-    },
-    {
-      label: 'Transaction Fee',
-      data: (
-        <>
-          <Text type="Body/Large">${calculatedValues.transactionFee}</Text>
-        </>
-      ),
-    },
-    {
-      label: 'Purchase',
-      data: (
-        <View style={styles.rightAlign}>
-          <Text type="Body/Large">${calculatedValues.purchaseAmount}</Text>
-          <Text type="Title/Medium">
-            {calculatedValues.purchaseAmount} USDC
-          </Text>
-        </View>
-      ),
-    },
-  ];
+  const goBack = () => NavigationService.goBack();
+  const closeScreen = () =>
+    NavigationService.navigate('HomeStack', {screen: 'Home'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
         <TopNav
           title="Purchase"
-          goPreviousScreen={() => {}}
-          goCloseScreen={() => {}}
+          goPreviousScreen={goBack}
+          goCloseScreen={closeScreen}
         />
       </View>
       <View style={styles.topText}>
         <Text type="Body/Large">Please review the transaction:</Text>
       </View>
-      <InfoList list={list} />
+      <WyrePurchaseSummary purchaseAmount={purchaseAmount!} />
       <View style={styles.contentContainer}>
         <View>
           <Text style={styles.center} type="Body/Large">
@@ -91,6 +60,7 @@ const PurchaseReview: React.FC = () => {
           </Text>
         </View>
       </View>
+      {isLoading && <Loading />}
     </AppLayout>
   );
 };

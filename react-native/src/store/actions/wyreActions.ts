@@ -16,3 +16,9 @@ export function wyrePurchaseAmountEntered(
     purchaseAmount: amount,
   };
 }
+
+export function wyrePurchaseRequest(): ITypeOnlyAction {
+  return {
+    type: types.WYRE_PURCHASE_REQUEST,
+  };
+}
