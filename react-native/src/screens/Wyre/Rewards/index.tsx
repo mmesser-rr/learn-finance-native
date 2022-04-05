@@ -19,10 +19,8 @@ import {RootState} from 'src/store/root-state';
 import {Text} from 'src/components/common/Texts';
 import {PodsCardGradient} from 'src/utils/constants';
 import Button from 'src/components/common/Button';
-import {
-  investmentsAccountBalanceSelector,
-  wyreEligibleSelector,
-} from 'src/store/selectors/banking';
+import {investmentsAccountBalanceSelector} from 'src/store/selectors/banking';
+import {wyreEligibleSelector} from 'src/store/selectors/wyre';
 
 const Rewards: React.FC = () => {
   const dispatch = useDispatch();

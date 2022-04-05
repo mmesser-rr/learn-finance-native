@@ -21,7 +21,7 @@ import {twoDecimalFormatter} from 'src/utils/functions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import {RootState} from 'src/store/root-state';
 import {RecentTransaction} from 'src/types/API';
-import {wyreEligibleSelector} from 'src/store/selectors/banking';
+import {wyreEligibleSelector} from 'src/store/selectors/wyre';
 
 const DepositResult: React.FC = () => {
   const dispatch = useDispatch();
