@@ -11,18 +11,19 @@ const styles = StyleSheet.create({
   },
   body: {
     textAlign: 'center',
-    marginBottom: scale(40),
+    marginBottom: scale(16),
   },
   headline: {
     textAlign: 'center',
-    marginBottom: scale(40),
+    marginBottom: scale(16),
   },
   iconWrapper: {
     alignItems: 'center',
-    marginBottom: scale(16),
+    marginBottom: scale(8),
   },
   actionWrapper: {
     width: '100%',
+    marginTop: scale(58),
   },
 });
 

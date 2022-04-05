@@ -1043,6 +1043,7 @@ export const updateRecentTransaction = /* GraphQL */ `
     updateRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey
@@ -1068,6 +1069,7 @@ export const deleteRecentTransaction = /* GraphQL */ `
     deleteRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey
@@ -1175,6 +1177,7 @@ export const createRecentTransaction = /* GraphQL */ `
     createRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
+      type
       status
       amount
       idempotencyKey

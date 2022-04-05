@@ -10,7 +10,7 @@ import SubmitButton from 'src/components/common/SubmitButton';
 
 const RewardsAccountOpened: React.FC = () => {
   const goToFirstPurchase = () => {
-    // TODO:
+    NavigationService.navigate('PurchaseAmount');
   };
 
   return (
