@@ -2,6 +2,102 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateAthleteAccount = /* GraphQL */ `
+  subscription OnCreateAthleteAccount($athleteId: String) {
+    onCreateAthleteAccount(athleteId: $athleteId) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        dateOfBirth
+        plaidToken
+        unitToken
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+      athleteId
+    }
+  }
+`;
+export const onUpdateAthleteAccount = /* GraphQL */ `
+  subscription OnUpdateAthleteAccount($athleteId: String) {
+    onUpdateAthleteAccount(athleteId: $athleteId) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        dateOfBirth
+        plaidToken
+        unitToken
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+      athleteId
+    }
+  }
+`;
+export const onDeleteAthleteAccount = /* GraphQL */ `
+  subscription OnDeleteAthleteAccount($athleteId: String) {
+    onDeleteAthleteAccount(athleteId: $athleteId) {
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        email
+        tag
+        level
+        dateOfBirth
+        plaidToken
+        unitToken
+        wyreAccountId
+        isActive
+        id
+        createdAt
+        updatedAt
+      }
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
+      id
+      createdAt
+      updatedAt
+      athleteAccountsId
+      athleteId
+    }
+  }
+`;
 export const onCreateAthlete = /* GraphQL */ `
   subscription OnCreateAthlete($id: String) {
     onCreateAthlete(id: $id) {
@@ -173,102 +269,6 @@ export const onDeleteAthlete = /* GraphQL */ `
       id
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateAthleteAccount = /* GraphQL */ `
-  subscription OnCreateAthleteAccount($athleteId: String) {
-    onCreateAthleteAccount(athleteId: $athleteId) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        dateOfBirth
-        plaidToken
-        unitToken
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
-    }
-  }
-`;
-export const onUpdateAthleteAccount = /* GraphQL */ `
-  subscription OnUpdateAthleteAccount($athleteId: String) {
-    onUpdateAthleteAccount(athleteId: $athleteId) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        dateOfBirth
-        plaidToken
-        unitToken
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
-    }
-  }
-`;
-export const onDeleteAthleteAccount = /* GraphQL */ `
-  subscription OnDeleteAthleteAccount($athleteId: String) {
-    onDeleteAthleteAccount(athleteId: $athleteId) {
-      athlete {
-        firstName
-        lastName
-        mobilePhone
-        athleteTag
-        email
-        tag
-        level
-        dateOfBirth
-        plaidToken
-        unitToken
-        wyreAccountId
-        isActive
-        id
-        createdAt
-        updatedAt
-      }
-      unitAccountId
-      routingCode
-      accountNumber
-      podName
-      id
-      createdAt
-      updatedAt
-      athleteAccountsId
-      athleteId
     }
   }
 `;

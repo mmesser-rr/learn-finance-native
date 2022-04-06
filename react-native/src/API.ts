@@ -460,8 +460,19 @@ export type PhoneChallenge = {
   updatedAt: string,
 };
 
-export type DeleteRecentTransactionInput = {
-  id: string,
+export type CreateRecentTransactionInput = {
+  transactionId: string,
+  athleteId: string,
+  transactionType: string,
+  status: string,
+  amount?: number | null,
+  idempotencyKey?: string | null,
+  direction?: string | null,
+  createdAt?: string | null,
+  read?: boolean | null,
+  settled?: string | null,
+  podAllocation?: PodSettingsInput | null,
+  id?: string | null,
 };
 
 export type ModelRecentTransactionConditionInput = {
@@ -509,6 +520,10 @@ export type RecentTransaction = {
   updatedAt: string,
 };
 
+export type DeleteRecentTransactionInput = {
+  id: string,
+};
+
 export type CreateEmailChallengeInput = {
   code: string,
   email: string,
@@ -541,21 +556,6 @@ export type UpdatePhoneChallengeInput = {
   code: string,
   phoneNumber: string,
   verified?: boolean | null,
-};
-
-export type CreateRecentTransactionInput = {
-  transactionId: string,
-  athleteId: string,
-  transactionType: string,
-  status: string,
-  amount?: number | null,
-  idempotencyKey?: string | null,
-  direction?: string | null,
-  createdAt?: string | null,
-  read?: boolean | null,
-  settled?: string | null,
-  podAllocation?: PodSettingsInput | null,
-  id?: string | null,
 };
 
 export type UpdateRecentTransactionInput = {
@@ -593,6 +593,17 @@ export type Balance = {
   unofficial_currency_code?: string | null,
 };
 
+export type ModelAthleteAccountFilterInput = {
+  unitAccountId?: ModelStringInput | null,
+  routingCode?: ModelStringInput | null,
+  accountNumber?: ModelStringInput | null,
+  podName?: ModelStringInput | null,
+  and?: Array< ModelAthleteAccountFilterInput | null > | null,
+  or?: Array< ModelAthleteAccountFilterInput | null > | null,
+  not?: ModelAthleteAccountFilterInput | null,
+  athleteAccountsId?: ModelIDInput | null,
+};
+
 export type ModelAthleteFilterInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
@@ -615,17 +626,6 @@ export type ModelAthleteConnection = {
   __typename: "ModelAthleteConnection",
   items:  Array<Athlete | null >,
   nextToken?: string | null,
-};
-
-export type ModelAthleteAccountFilterInput = {
-  unitAccountId?: ModelStringInput | null,
-  routingCode?: ModelStringInput | null,
-  accountNumber?: ModelStringInput | null,
-  podName?: ModelStringInput | null,
-  and?: Array< ModelAthleteAccountFilterInput | null > | null,
-  or?: Array< ModelAthleteAccountFilterInput | null > | null,
-  not?: ModelAthleteAccountFilterInput | null,
-  athleteAccountsId?: ModelIDInput | null,
 };
 
 export enum ModelSortDirection {
@@ -1679,6 +1679,35 @@ export type DeletePhoneChallengeMutation = {
   } | null,
 };
 
+export type CreateRecentTransactionMutationVariables = {
+  input: CreateRecentTransactionInput,
+  condition?: ModelRecentTransactionConditionInput | null,
+};
+
+export type CreateRecentTransactionMutation = {
+  createRecentTransaction?:  {
+    __typename: "RecentTransaction",
+    transactionId: string,
+    athleteId: string,
+    transactionType: string,
+    status: string,
+    amount?: number | null,
+    idempotencyKey?: string | null,
+    direction?: string | null,
+    createdAt?: string | null,
+    read?: boolean | null,
+    settled?: string | null,
+    podAllocation?:  {
+      __typename: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    id: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type DeleteRecentTransactionMutationVariables = {
   input: DeleteRecentTransactionInput,
   condition?: ModelRecentTransactionConditionInput | null,
@@ -1798,35 +1827,6 @@ export type UpdatePhoneChallengeMutation = {
     phoneNumber: string,
     verified: boolean,
     createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateRecentTransactionMutationVariables = {
-  input: CreateRecentTransactionInput,
-  condition?: ModelRecentTransactionConditionInput | null,
-};
-
-export type CreateRecentTransactionMutation = {
-  createRecentTransaction?:  {
-    __typename: "RecentTransaction",
-    transactionId: string,
-    athleteId: string,
-    transactionType: string,
-    status: string,
-    amount?: number | null,
-    idempotencyKey?: string | null,
-    direction?: string | null,
-    createdAt?: string | null,
-    read?: boolean | null,
-    settled?: string | null,
-    podAllocation?:  {
-      __typename: "PodSettings",
-      SAVINGS: number,
-      INVESTMENTS: number,
-      SPENDING: number,
-    } | null,
-    id: string,
     updatedAt: string,
   } | null,
 };
@@ -2307,6 +2307,68 @@ export type UnitAccountStatementQuery = {
   } | null > | null,
 };
 
+export type GetAthleteAccountQueryVariables = {
+  id: string,
+};
+
+export type GetAthleteAccountQuery = {
+  getAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      dateOfBirth?: string | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+    athleteId?: string | null,
+  } | null,
+};
+
+export type ListAthleteAccountsQueryVariables = {
+  filter?: ModelAthleteAccountFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAthleteAccountsQuery = {
+  listAthleteAccounts?:  {
+    __typename: "ModelAthleteAccountConnection",
+    items:  Array< {
+      __typename: "AthleteAccount",
+      unitAccountId: string,
+      routingCode: string,
+      accountNumber: string,
+      podName: string,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      athleteAccountsId?: string | null,
+      athleteId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetAthleteQueryVariables = {
   id: string,
 };
@@ -2403,68 +2465,6 @@ export type ListAthletesQuery = {
       id: string,
       createdAt: string,
       updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetAthleteAccountQueryVariables = {
-  id: string,
-};
-
-export type GetAthleteAccountQuery = {
-  getAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      dateOfBirth?: string | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type ListAthleteAccountsQueryVariables = {
-  filter?: ModelAthleteAccountFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAthleteAccountsQuery = {
-  listAthleteAccounts?:  {
-    __typename: "ModelAthleteAccountConnection",
-    items:  Array< {
-      __typename: "AthleteAccount",
-      unitAccountId: string,
-      routingCode: string,
-      accountNumber: string,
-      podName: string,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      athleteAccountsId?: string | null,
-      athleteId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2686,6 +2686,117 @@ export type GetAthleteSchoolQuery = {
   } | null > | null,
 };
 
+export type OnCreateAthleteAccountSubscriptionVariables = {
+  athleteId?: string | null,
+};
+
+export type OnCreateAthleteAccountSubscription = {
+  onCreateAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      dateOfBirth?: string | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+    athleteId?: string | null,
+  } | null,
+};
+
+export type OnUpdateAthleteAccountSubscriptionVariables = {
+  athleteId?: string | null,
+};
+
+export type OnUpdateAthleteAccountSubscription = {
+  onUpdateAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      dateOfBirth?: string | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+    athleteId?: string | null,
+  } | null,
+};
+
+export type OnDeleteAthleteAccountSubscriptionVariables = {
+  athleteId?: string | null,
+};
+
+export type OnDeleteAthleteAccountSubscription = {
+  onDeleteAthleteAccount?:  {
+    __typename: "AthleteAccount",
+    athlete:  {
+      __typename: "Athlete",
+      firstName?: string | null,
+      lastName?: string | null,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      email?: string | null,
+      tag?: string | null,
+      level?: AthleteLevel | null,
+      dateOfBirth?: string | null,
+      plaidToken?: string | null,
+      unitToken?: string | null,
+      wyreAccountId?: string | null,
+      isActive: boolean,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    unitAccountId: string,
+    routingCode: string,
+    accountNumber: string,
+    podName: string,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+    athleteAccountsId?: string | null,
+    athleteId?: string | null,
+  } | null,
+};
+
 export type OnCreateAthleteSubscriptionVariables = {
   id?: string | null,
 };
@@ -2893,117 +3004,6 @@ export type OnDeleteAthleteSubscription = {
     id: string,
     createdAt: string,
     updatedAt: string,
-  } | null,
-};
-
-export type OnCreateAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnCreateAthleteAccountSubscription = {
-  onCreateAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      dateOfBirth?: string | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type OnUpdateAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnUpdateAthleteAccountSubscription = {
-  onUpdateAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      dateOfBirth?: string | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
-  } | null,
-};
-
-export type OnDeleteAthleteAccountSubscriptionVariables = {
-  athleteId?: string | null,
-};
-
-export type OnDeleteAthleteAccountSubscription = {
-  onDeleteAthleteAccount?:  {
-    __typename: "AthleteAccount",
-    athlete:  {
-      __typename: "Athlete",
-      firstName?: string | null,
-      lastName?: string | null,
-      mobilePhone: string,
-      athleteTag?: string | null,
-      email?: string | null,
-      tag?: string | null,
-      level?: AthleteLevel | null,
-      dateOfBirth?: string | null,
-      plaidToken?: string | null,
-      unitToken?: string | null,
-      wyreAccountId?: string | null,
-      isActive: boolean,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    unitAccountId: string,
-    routingCode: string,
-    accountNumber: string,
-    podName: string,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    athleteAccountsId?: string | null,
-    athleteId?: string | null,
   } | null,
 };
 

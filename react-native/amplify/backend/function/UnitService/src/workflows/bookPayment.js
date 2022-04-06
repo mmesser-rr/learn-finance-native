@@ -8,12 +8,6 @@ const createBookRequest = (athlete, unitAccountId, amount, description, receiver
   Promise.reject(`Athlet doesn't have enough balance for this transaction ${athlete.id}`)
   );
 
-// const bookPayment = (athleteId, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey) => tpc.getAthlete(athleteId).then(athlete => 
-//   (athlete != null) ? 
-//      createBookRequest(athlete, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey) : 
-//     Promise.reject(`No athlete found with id ${athleteId}`)
-// );
-
 module.exports.bookPayment = async (event) => {
   axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
    const {athleteId, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey} = event.arguments;

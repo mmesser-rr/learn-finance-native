@@ -901,6 +901,32 @@ export const deletePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
+export const createRecentTransaction = /* GraphQL */ `
+  mutation CreateRecentTransaction(
+    $input: CreateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    createRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
 export const deleteRecentTransaction = /* GraphQL */ `
   mutation DeleteRecentTransaction(
     $input: DeleteRecentTransactionInput!
@@ -1005,32 +1031,6 @@ export const updatePhoneChallenge = /* GraphQL */ `
       phoneNumber
       verified
       createdAt
-      updatedAt
-    }
-  }
-`;
-export const createRecentTransaction = /* GraphQL */ `
-  mutation CreateRecentTransaction(
-    $input: CreateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
-  ) {
-    createRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
       updatedAt
     }
   }

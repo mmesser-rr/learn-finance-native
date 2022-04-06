@@ -8,7 +8,7 @@ const paramsFromCustId = () => ({
 
 const athleteTokenVerification = (unit) => (custId) => {
     const params = paramsFromCustId();
-    return unit.customerToken.createTokenVerification(custId, params).then(res => console.log("?>>>>>>>>>", res))
+    return unit.customerToken.createTokenVerification(custId, params)
     .then(res => res.data)
     .catch(err => Promise.reject(`Failed to reach Unit API. Error: ${JSON.stringify(err)}`));
   };
