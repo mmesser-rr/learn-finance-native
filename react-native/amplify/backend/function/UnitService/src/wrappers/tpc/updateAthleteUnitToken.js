@@ -25,7 +25,7 @@ const updateAthleteUnitToken = () => (
   authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthlete);
 
 module.exports = {
     updateAthleteUnitToken

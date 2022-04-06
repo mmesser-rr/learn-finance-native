@@ -13,7 +13,7 @@ const createAthleteUnitToken = (athlete, verificationCode, verificationToken) =>
   return unit.createAthleteUnitToken(custId, verificationCode, verificationToken)
   .then(res => response = res)
   .then(res => tpc.updateAthleteUnitToken(axios, athlete.id, res.token))
-  .then(res => res = {type: response.type, attributes: {expiresIn: response.expiresIn}} )
+  //.then(res => res = {type: response.type, attributes: {expiresIn: response.expiresIn}} )
     .catch(err => {
       throw new Error(`Failed to reach Unit. Reason: ${JSON.stringify(err)}`);
     });
