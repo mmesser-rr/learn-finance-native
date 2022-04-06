@@ -83,6 +83,14 @@ const Home: React.FC = () => {
   });
   const {user} = useSelector((state: RootState) => state.userReducer);
   const wyreEligible = useSelector(wyreEligibleSelector);
+  const investmentsTransactionPending = useSelector((state: RootState) =>
+    (state.bankingReducer.transactionHistory ?? []).some(
+      entry =>
+        entry.attributes?.description?.includes('vest') &&
+        entry.attributes?.status === 'Pending',
+    ),
+  );
+
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -347,7 +355,9 @@ const Home: React.FC = () => {
           <InfoCard
             IconSvg={InvestmentIcon}
             labelText="Investments"
-            rightTopText="Balance"
+            rightTopText={
+              investmentsTransactionPending ? 'Transaction Pending' : 'Balance'
+            }
             rightBottomText={'$' + amounts.investments}
             onPress={goToInvestmentsPod}
           />
