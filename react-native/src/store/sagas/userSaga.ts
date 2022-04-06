@@ -113,6 +113,24 @@ export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(loadingActions.disableLoader());
 }
 
+export function* logout() {
+  yield put(loadingActions.enableLoader());
+  try {
+    const logoutResponse = yield Auth.signOut();
+    console.log('Logout Response:');
+    console.log(logoutResponse);
+
+    yield put(userActions.clearUserState());
+    yield put(bankingActions.clearBankingState());
+    yield put(wyreActions.clearWyreState());
+    yield put(onboardingActions.clearOnboardingState());
+    NavigationService.navigate('UserLoginStack', {screen: 'UserLogin'});
+  } catch (error) {
+    console.log('Error attempting to log out:', error);
+  }
+  yield put(loadingActions.disableLoader());
+}
+
 export function* getUserByPhone({phone}: IGetUserByPhone) {
   const queryFilter: AthleteByPhoneQueryVariables = {
     mobilePhone: phone,
@@ -143,4 +161,5 @@ export default function* userSaga() {
   yield takeLatest(types.ONBOARDING_SILENT_SIGN_IN, onboardingSilentSignIn);
   yield takeLatest(types.LOGIN_REQUEST, loginRequest);
   yield takeLatest(types.GET_USER_BY_PHONE, getUserByPhone);
+  yield takeLatest(types.LOG_OUT, logout);
 }

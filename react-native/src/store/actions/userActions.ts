@@ -36,6 +36,12 @@ export function loginFailed(
   };
 }
 
+export function logout(): ITypeOnlyAction {
+  return {
+    type: types.LOG_OUT,
+  };
+}
+
 export function updateUser(update: Partial<Athlete>): IUserUpdate {
   return {
     type: types.USER_UPDATE,
