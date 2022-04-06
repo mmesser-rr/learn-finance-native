@@ -102,6 +102,16 @@ const styles = StyleSheet.create({
   caretContainer: {
     width: 24,
   },
+  pendingTransactionCard: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    backgroundColor: AppColors.coreBlack85,
+    borderRadius: 8,
+    marginBottom: 24,
+  },
+  link: {
+    color: AppColors.interactionBlue,
+  },
 });
 
 export default styles;

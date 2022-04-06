@@ -3,11 +3,12 @@ import createReducer from 'src/lib/createReducer';
 import {
   ATHLETE_ACCOUNTS_LOADED,
   BALANCE_HISTORY_LOADED,
+  CLEAR_BANKING_STATE,
   PLAID_ACCOUNTS_LOADED,
   PLAID_ACCOUNT_SELECTED,
   POD_SETTINGS_UPDATED,
   RECENT_TRANSACTIONS_LOADED,
-  SET_UNIT_TOKEN_EXPIRATION,
+  SET_UNIT_TOKEN,
   SET_UNIT_VERIFICATION_CODE_VALIDITY,
   TRANSACTION_HISTORY_LOADED,
   TRANSFER_AMOUNT_ENTERED,
@@ -21,7 +22,7 @@ import {
   IPlaidAccountsLoaded,
   IPodSettingsUpdated,
   IRecentTransactionsLoaded,
-  ISetUnitTokenExpiration,
+  ISetUnitToken,
   ISetUnitVerificationCodeValidity,
   ITransactionHistoryLoaded,
   ITransferAmountEntered,
@@ -266,10 +267,14 @@ export const bankingReducer = createReducer(initialState, {
   ) {
     return {...state, unitVerificationCodeValid: action.valid};
   },
-  [SET_UNIT_TOKEN_EXPIRATION](
-    state: IBankingState,
-    action: ISetUnitTokenExpiration,
-  ) {
-    return {...state, unitTokenExpiration: action.expiration};
+  [SET_UNIT_TOKEN](state: IBankingState, action: ISetUnitToken) {
+    return {
+      ...state,
+      unitToken: action.token,
+      unitTokenExpiration: action.expiration,
+    };
+  },
+  [CLEAR_BANKING_STATE]() {
+    return initialState;
   },
 });

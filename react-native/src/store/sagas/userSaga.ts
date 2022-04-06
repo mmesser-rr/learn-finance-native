@@ -8,6 +8,7 @@ import {GraphQLResult} from '@aws-amplify/api';
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
+import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as wyreActions from 'src/store/actions/wyreActions';
 import {
   Athlete,
@@ -52,6 +53,10 @@ export function* onboardingSilentSignIn() {
 
 export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(loadingActions.enableLoader());
+  yield put(userActions.clearUserState());
+  yield put(bankingActions.clearBankingState());
+  yield put(wyreActions.clearWyreState());
+  yield put(onboardingActions.clearOnboardingState());
   try {
     const loginResponse = yield Auth.signIn({username: phone, password});
     console.log('Sign In Response:');
@@ -73,10 +78,10 @@ export function* loginRequest({phone, password}: ILoginRequest) {
       if (!athlete) {
         throw new Error('No user found with id: ' + id);
       }
+
       yield put(userActions.updateUser(athlete));
 
       NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
-
       yield put(bankingActions.getConnectedAccounts(false));
       yield put(bankingActions.getAthleteAccounts());
       yield put(bankingActions.getBalanceHistory());
@@ -104,6 +109,24 @@ export function* loginRequest({phone, password}: ILoginRequest) {
         msg = error.message;
     }
     yield put(userActions.loginFailed(msg, userNotFound));
+  }
+  yield put(loadingActions.disableLoader());
+}
+
+export function* logout() {
+  yield put(loadingActions.enableLoader());
+  try {
+    const logoutResponse = yield Auth.signOut();
+    console.log('Logout Response:');
+    console.log(logoutResponse);
+
+    yield put(userActions.clearUserState());
+    yield put(bankingActions.clearBankingState());
+    yield put(wyreActions.clearWyreState());
+    yield put(onboardingActions.clearOnboardingState());
+    NavigationService.navigate('UserLoginStack', {screen: 'UserLogin'});
+  } catch (error) {
+    console.log('Error attempting to log out:', error);
   }
   yield put(loadingActions.disableLoader());
 }
@@ -138,4 +161,5 @@ export default function* userSaga() {
   yield takeLatest(types.ONBOARDING_SILENT_SIGN_IN, onboardingSilentSignIn);
   yield takeLatest(types.LOGIN_REQUEST, loginRequest);
   yield takeLatest(types.GET_USER_BY_PHONE, getUserByPhone);
+  yield takeLatest(types.LOG_OUT, logout);
 }

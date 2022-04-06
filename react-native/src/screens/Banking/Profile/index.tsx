@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch } from 'react-redux';
 
 import { Text } from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import { GradientButtonColors, PodsCardGradient } from 'src/utils/constants';
 import Button from 'src/components/common/Button';
 import ArrowRightIcon from 'src/assets/icons/arrow-right.svg';
+import { logout } from 'src/store/actions/userActions';
 
 import styles from './styles';
 import AppColors from 'src/config/colors';
@@ -25,6 +27,7 @@ const ActiveDot = () => {
 };
 
 const Profile: React.FC = () => {
+  const dispatch = useDispatch();
   const [swiperIndex, setSwiperIndex] = useState(1);
   const [swiperHeight, setSwiperHeight] = useState(200);
   const [isFaceId, setIsFaceId] = useState(true);
@@ -32,6 +35,8 @@ const Profile: React.FC = () => {
   const handleChangeSwiper = (index: number) => {
     setSwiperIndex(index);
   };
+
+  const signOut = () => dispatch(logout());
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
@@ -159,10 +164,10 @@ const Profile: React.FC = () => {
             <Text type="Body/Large">About</Text>
             <Text type="Title/Medium">Version 1.21.01</Text>
           </View>
-          <View style={styles.settingRow}>
+          <TouchableOpacity style={styles.settingRow} onPress={signOut}>
             <Text type="Body/Large">Sign out</Text>
             <ArrowRightIcon />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </AppLayout>

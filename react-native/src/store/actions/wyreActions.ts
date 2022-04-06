@@ -55,3 +55,9 @@ export function wyreAccountLoaded(account: WyreAccount): IWyreAccountLoaded {
     account,
   };
 }
+
+export function clearWyreState(): ITypeOnlyAction {
+  return {
+    type: types.CLEAR_WYRE_STATE,
+  };
+}
