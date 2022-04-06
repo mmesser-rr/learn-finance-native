@@ -2,6 +2,7 @@ import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
   IWyreAccountLoaded,
   IWyrePurchaseAmountEntered,
+  IWyreWithdrawAmountEntered,
 } from 'src/models/actions/wyre';
 import {WyreAccount} from 'src/types/API';
 import * as types from './types';
@@ -24,6 +25,21 @@ export function wyrePurchaseAmountEntered(
 export function wyrePurchaseRequest(): ITypeOnlyAction {
   return {
     type: types.WYRE_PURCHASE_REQUEST,
+  };
+}
+
+export function wyreWithdrawAmountEntered(
+  amount: string,
+): IWyreWithdrawAmountEntered {
+  return {
+    type: types.WYRE_WITHDRAW_AMOUNT_ENTERED,
+    withdrawAmount: amount,
+  };
+}
+
+export function wyreWithdrawRequest(): ITypeOnlyAction {
+  return {
+    type: types.WYRE_WITHDRAW_REQUEST,
   };
 }
 
