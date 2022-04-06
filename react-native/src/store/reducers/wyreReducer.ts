@@ -13,6 +13,12 @@ export const wyreReducer = createReducer(initialState, {
   ) {
     return {...state, purchaseAmount: action.purchaseAmount};
   },
+  [actions.WYRE_WITHDRAW_AMOUNT_ENTERED](
+    state: IWyreState,
+    action: actionModels.IWyreWithdrawAmountEntered,
+  ) {
+    return {...state, withdrawAmount: action.withdrawAmount};
+  },
   [actions.WYRE_ACCOUNT_LOADED](
     state: IWyreState,
     action: actionModels.IWyreAccountLoaded,

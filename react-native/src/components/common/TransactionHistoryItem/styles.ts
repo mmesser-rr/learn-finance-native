@@ -14,7 +14,10 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   itemLeft: {maxWidth: 210},
-  itemRight: {},
+  itemRight: {maxWidth: 120},
+  itemRightText: {
+    textAlign: 'right',
+  },
 });
 
 export default styles;

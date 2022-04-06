@@ -76,25 +76,33 @@ const styles = StyleSheet.create({
   summaryCardLabel: {
     marginHorizontal: 8,
   },
-  subAccountsContainer: {
-    paddingLeft: 36,
-  },
-  subAccount: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 18,
-  },
-  subAccountLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  topBorder: {
+  summaryCardBelowLineContainer: {
     borderTopWidth: 1,
     borderTopColor: AppColors.coreBlack60,
   },
-  caretContainer: {
-    width: 24,
+  summaryCardBelowLine: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 8,
+  },
+  sectionWrapper: {
+    marginBottom: 24,
+  },
+  halfCardsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  halfCard: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: AppColors.coreBlack85,
+    borderRadius: 8,
+    width: '47%',
+    alignItems: 'center',
+  },
+  halfCardTitle: {
+    textAlign: 'center',
   },
 });
 
