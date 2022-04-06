@@ -10,6 +10,9 @@ import Button from 'src/components/common/Button';
 import ArrowRightIcon from 'src/assets/icons/arrow-right.svg';
 
 import styles from './styles';
+import AppColors from 'src/config/colors';
+import Switch from 'src/components/common/Switch';
+import { scale } from 'src/config/dimentions';
 
 const Dot = () => <View style={styles.dot} />;
 
@@ -24,13 +27,14 @@ const ActiveDot = () => {
 const Profile: React.FC = () => {
   const [swiperIndex, setSwiperIndex] = useState(1);
   const [swiperHeight, setSwiperHeight] = useState(200);
+  const [isFaceId, setIsFaceId] = useState(true);
 
   const handleChangeSwiper = (index: number) => {
     setSwiperIndex(index);
   };
 
   return (
-    <AppLayout containerStyle={styles.container}>
+    <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
       <View style={styles.avatarContainer}>
         <View style={styles.avatar}></View>
         <View>
@@ -125,7 +129,23 @@ const Profile: React.FC = () => {
         <View>
           <View style={styles.settingRow}>
             <Text type="Body/Large">Face ID</Text>
-            <ArrowRightIcon />
+            <View>
+            <Switch
+              value={isFaceId}
+              onValueChange={(val) => setIsFaceId(val)}
+              circleSize={scale(27)}
+              barHeight={scale(31)}
+              width={scale(51)}
+              switchBorderRadius={scale(27)}
+              circleBorderWidth={0}
+              backgroundInactive={AppColors.gray120}
+              circleActiveColor={AppColors.coreWhite100}
+              circleInActiveColor={AppColors.coreWhite100}
+              changeValueImmediately={true}
+              innerCircleStyle={{ alignItems: "center", justifyContent: "center" }}
+              outerCircleStyle={{}}
+            />
+            </View>
           </View>
           <View style={styles.settingRow}>
             <Text type="Body/Large">Legal</Text>
