@@ -411,13 +411,7 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
     }
   } catch (error: any) {
     console.log('Error attempting to create Athlete Unit Token:', error);
-    if (
-      error?.errors[0]?.message?.includes(
-        'Error: 400 - Verification check failed',
-      )
-    ) {
-      yield put(bankingActions.setUnitVerificationCodeValidity(false));
-    }
+    yield put(bankingActions.setUnitVerificationCodeValidity(false));
     yield put(loadingActions.disableLoader());
   }
 }

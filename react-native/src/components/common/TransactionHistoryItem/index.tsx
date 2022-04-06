@@ -38,9 +38,15 @@ const TransactionHistoryItem: React.FC<TransactionHistoryCardProps> = ({
         <Text type={secondaryTextType}>{historyEntry.attributes?.status}</Text>
       </View>
       <View style={styles.itemRight}>
-        <Text type={mainTextType}>
-          {formatted.sign}${formatted.amount}
-        </Text>
+        {historyEntry.attributes?.currency !== 'USDC' ? (
+          <Text type={mainTextType} style={styles.itemRightText}>
+            {formatted.sign}${formatted.amount}
+          </Text>
+        ) : (
+          <Text type={secondaryTextType} style={styles.itemRightText}>
+            {formatted.sign} {formatted.amount} USDC
+          </Text>
+        )}
       </View>
     </View>
   );
