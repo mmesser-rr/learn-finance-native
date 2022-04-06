@@ -523,7 +523,7 @@ export const createPlaidPayment = /* GraphQL */ `
     $athleteId: ID!
     $plaidAccountId: String!
     $amount: Float!
-    $description: String
+    $description: String!
     $idempotencyKey: String!
     $unitToken: String!
   ) {
@@ -535,37 +535,23 @@ export const createPlaidPayment = /* GraphQL */ `
       idempotencyKey: $idempotencyKey
       unitToken: $unitToken
     ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
+      transactionId
+      athleteId
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
       }
+      id
+      updatedAt
     }
   }
 `;
@@ -574,7 +560,7 @@ export const bookPayment = /* GraphQL */ `
     $athleteId: ID!
     $unitAccountId: String!
     $amount: Float!
-    $description: String
+    $description: String!
     $receiverUnitAccountId: String!
     $receiverAccountType: String
     $idempotencyKey: String!
@@ -590,37 +576,23 @@ export const bookPayment = /* GraphQL */ `
       idempotencyKey: $idempotencyKey
       unitToken: $unitToken
     ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
+      transactionId
+      athleteId
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
       }
+      id
+      updatedAt
     }
   }
 `;
@@ -628,7 +600,7 @@ export const debitAccount = /* GraphQL */ `
   mutation DebitAccount(
     $athleteId: ID!
     $amount: Float!
-    $description: String
+    $description: String!
     $receiverName: String!
     $receiverRoutingNumber: String!
     $receiverAccountNumber: String!
@@ -649,37 +621,23 @@ export const debitAccount = /* GraphQL */ `
       idempotencyKey: $idempotencyKey
       unitToken: $unitToken
     ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
+      transactionId
+      athleteId
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
       }
+      id
+      updatedAt
     }
   }
 `;
@@ -687,7 +645,7 @@ export const creditAccount = /* GraphQL */ `
   mutation CreditAccount(
     $athleteId: ID!
     $amount: Float!
-    $description: String
+    $description: String!
     $receiverName: String!
     $receiverRoutingNumber: String!
     $receiverAccountNumber: String!
@@ -708,37 +666,23 @@ export const creditAccount = /* GraphQL */ `
       idempotencyKey: $idempotencyKey
       unitToken: $unitToken
     ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
+      transactionId
+      athleteId
+      transactionType
+      status
+      amount
+      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
       }
+      id
+      updatedAt
     }
   }
 `;
