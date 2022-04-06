@@ -41,7 +41,8 @@ const Rewards: React.FC = () => {
   const goPreviousScreen = () => NavigationService.goBack();
   const goToPurchase = () =>
     NavigationService.navigate('WyreStack', {screen: 'PurchaseAmount'});
-  const goToWithdraw = () => {};
+  const goToWithdraw = () =>
+    NavigationService.navigate('WyreStack', {screen: 'WithdrawAmount'});
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>

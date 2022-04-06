@@ -5,6 +5,11 @@ export interface IWyrePurchaseAmountEntered {
   purchaseAmount: string;
 }
 
+export interface IWyreWithdrawAmountEntered {
+  type: String;
+  withdrawAmount: string;
+}
+
 export interface IWyreAccountLoaded {
   type: String;
   account: WyreAccount;

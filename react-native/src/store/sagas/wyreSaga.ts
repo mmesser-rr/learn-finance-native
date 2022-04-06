@@ -60,7 +60,7 @@ export function* wyrePurchaseRequest() {
 
   try {
     if (!athleteId) {
-      throw new Error('openRewardsAccount is for logged in users only');
+      throw new Error('wyrePurchaseRequest is for logged in users only');
     }
 
     // TODO: make API call
@@ -73,12 +73,31 @@ export function* wyrePurchaseRequest() {
   yield put(loadingActions.disableLoader());
 }
 
+export function* wyreWithdrawRequest() {
+  yield put(loadingActions.enableLoader());
+  const athleteId = (yield select(athleteIdSelector)) as string | undefined;
+
+  try {
+    if (!athleteId) {
+      throw new Error('wyreWithdrawRequest is for logged in users only');
+    }
+
+    // TODO: make API call
+
+    NavigationService.navigate('WithdrawalSubmitted');
+  } catch (error: any) {
+    console.log('Failed to make Wyre withdrawal:', error);
+    NavigationService.navigate('UniversalError');
+  }
+  yield put(loadingActions.disableLoader());
+}
+
 export function* getWyreAccountDetails() {
   const athleteId = (yield select(athleteIdSelector)) as string | undefined;
 
   try {
     if (!athleteId) {
-      throw new Error('openRewardsAccount is for logged in users only');
+      throw new Error('getWyreAccountDetails is for logged in users only');
     }
 
     const queryFilter: GetWyreAccountQueryVariables = {
@@ -98,5 +117,6 @@ export function* getWyreAccountDetails() {
 export default function* wyreSaga() {
   yield takeLatest(types.OPEN_REWARDS_ACCOUNT, openRewardsAccount);
   yield takeLatest(types.WYRE_PURCHASE_REQUEST, wyrePurchaseRequest);
+  yield takeLatest(types.WYRE_WITHDRAW_REQUEST, wyreWithdrawRequest);
   yield takeLatest(types.GET_WYRE_ACCOUNT, getWyreAccountDetails);
 }
