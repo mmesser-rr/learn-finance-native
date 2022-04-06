@@ -40,10 +40,10 @@ export const loginReducer = createReducer(initialState, {
       isLoggedIn: false,
     };
   },
-  [types.LOG_OUT](state: ILoginState) {
-    return {
-      ...state,
-      isLoggedIn: false,
-    };
-  },
+  // [types.LOG_OUT](state: ILoginState) {
+  //   return {
+  //     ...state,
+  //     isLoggedIn: false,
+  //   };
+  // },
 });
