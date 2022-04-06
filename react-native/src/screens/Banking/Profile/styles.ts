@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100,
   },
+  viewStyle: {
+    marginBottom: 0
+  },
   avatarContainer: {
     flexDirection: 'column',
     justifyContent: 'center',

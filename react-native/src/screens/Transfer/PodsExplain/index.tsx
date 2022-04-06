@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View} from 'react-native';
+import {Dimensions, View} from 'react-native';
 import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
 import VideoPlayer from 'react-native-video-player';
@@ -17,7 +17,10 @@ import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 
+const unionRatio = 256 / 375;
+
 const PodsExplain: React.FC = () => {
+  const { width } = Dimensions.get('window');
   const [swiperIndex, setSwiperIndex] = useState(1);
   const onNext = () => NavigationService.navigate('TransferStack', {screen: 'SetupPods'});
 
@@ -58,7 +61,9 @@ const PodsExplain: React.FC = () => {
               </Text>
             </View>
             <View style={styles.diagram}>
-              <UnionIcon style={styles.union} />
+              <View style={{width, height: width * unionRatio}}>
+                <UnionIcon />
+              </View>
               <View style={styles.description}>
                 <View style={styles.leftDescription}>
                   <Text type="Body/Large">Deposit</Text>
