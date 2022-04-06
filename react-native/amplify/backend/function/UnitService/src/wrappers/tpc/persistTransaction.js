@@ -50,11 +50,12 @@ const persistTransaction = () => (
   authMode: 'AMAZON_COGNITO_USER_POOLS'
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve({ amount: res.data.data.createRecentTransaction.amount,
-  transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation, athleteId: res.data.data.createRecentTransaction.athleteId, transactionType: res.data.data.createRecentTransaction.transactionType,
-  idempotencyKey: res.data.data.createRecentTransaction.idempotencyKey
-});
+const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve(res.data.data.createRecentTransaction);
 
 module.exports = {
     persistTransaction
 }
+//{ amount: res.data.data.createRecentTransaction.amount,
+// transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation, athleteId: res.data.data.createRecentTransaction.athleteId, transactionType: res.data.data.createRecentTransaction.transactionType,
+// idempotencyKey: res.data.data.createRecentTransaction.idempotencyKey
+// }

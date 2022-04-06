@@ -10,7 +10,7 @@ const getOrCreateProcessorToken = (athlete, plaidAccountId, amount, description,
   const unitAccountId = find(propEq('podName', 'SPENDING'))(athlete?.accounts.items).unitAccountId
   if(athlete.unitPlaidProcessorToken?.plaidAccountId !== null && athlete.unitPlaidProcessorToken?.plaidAccountId === plaidAccountId){
       return unit.plaidPayment(unitAccountId, athlete.unitPlaidProcessorToken.processorToken, description, amount, idempotencyKey, unitToken)
-      .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transactionType, athlete.podSettings, idempotencyKey))
+      .then(res => tpc.persistTransaction(axios, res.relationships.transaction.data.id, athlete.id, res.attributes.amount, res.attributes.status, res.attributes.createdAt, false, res.attributes.direction, res.type, athlete.podSettings, idempotencyKey))
   }else{
      return tpc.createProcessorToken(athlete.plaidToken, plaidAccountId)
      .then(res => tpc.updateAthleteAccount(axios, athlete.id, {plaidAccountId: plaidAccountId, processorToken: res}))

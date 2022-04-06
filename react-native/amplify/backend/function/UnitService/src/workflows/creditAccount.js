@@ -6,7 +6,7 @@ const {axios} = require("../env");
 
 const createCreditRequest = (athlete, unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType,idempotencyKey, unitToken) => unit.getAthleteUnitAccountById(unitAccountId).then(res => (res.attributes.available >= amount) ? 
   unit.creditAccount(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey, unitToken)
-  .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transactionType, athlete.podSettings, idempotencyKey)): 
+  .then(res => tpc.persistTransaction(axios, res.relationships.transaction.data.id, athlete.id, res.attributes.amount, res.attributes.status, res.attributes.createdAt, false, res.attributes.direction, res.type, athlete.podSettings, idempotencyKey)): 
   Promise.reject(`Athlet doesn't have enough balance for this transaction ${athlete.id}`)
   );
 

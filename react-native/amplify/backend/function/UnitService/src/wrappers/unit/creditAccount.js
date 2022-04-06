@@ -36,7 +36,7 @@ const creditAccount = (unit) => (unitAccountId, amount, addenda, description, re
   unit.payments.headers.Authorization = `Bearer ${token}`
   const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey);
   return unit.payments.create(unitParams)
-    .then(resultLens)
+    .then(res => res.data)
     .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));
 }
 
