@@ -9,16 +9,15 @@ import AppLayout from 'src/components/layout/AppLayout';
 import AppColors from 'src/config/colors';
 import NavigationService from 'src/navigation/NavigationService';
 import TopNav from 'src/components/common/TopNav';
-import {investmentsAccountBalanceSelector} from 'src/store/selectors/banking';
-import {getWyreTransactionFee, twoDecimalFormatter} from 'src/utils/functions';
-import {wyrePurchaseAmountEntered} from 'src/store/actions/wyreActions';
+import {wyreWithdrawAmountEntered} from 'src/store/actions/wyreActions';
+import {wyreAccountBalanceSelector} from 'src/store/selectors/wyre';
 
-const PurchaseAmount: React.FC = () => {
+const WithdrawAmount: React.FC = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState('0.00');
   const [isValid, setIsValid] = useState(false);
 
-  const podBalance = useSelector(investmentsAccountBalanceSelector);
+  const balance = useSelector(wyreAccountBalanceSelector);
 
   const textChangeHandler = (txt: string) => {
     if (!txt) {
@@ -31,29 +30,15 @@ const PurchaseAmount: React.FC = () => {
         ? txt.slice(0, decimalIndex) + txt.slice(decimalIndex, decimalIndex + 3)
         : txt,
     );
-    setIsValid(Number(txt) > 0 && Number(txt) <= Number(podBalance));
+    setIsValid(Number(txt) > 0 && Number(txt) <= Number(balance));
   };
-
-  const calculatedValues = useMemo(() => {
-    const numericValue = Number(value);
-    const initialValue = numericValue - getWyreTransactionFee(numericValue);
-    const projectedValue = initialValue * (1 + 0.07);
-    const projectedRewards = projectedValue - initialValue;
-    return {
-      numericValue,
-      projectedRewards:
-        projectedRewards > 0
-          ? twoDecimalFormatter.format(projectedRewards)
-          : '0.00',
-    };
-  }, [value]);
 
   const onContinue = () => {
-    dispatch(wyrePurchaseAmountEntered(value));
-    NavigationService.navigate('PurchaseReview');
+    dispatch(wyreWithdrawAmountEntered(value));
+    NavigationService.navigate('WithdrawReview');
   };
   const goPreviousScreen = () => NavigationService.goBack();
-  const goCloseScreen = () =>
+  const closeScreen = () =>
     NavigationService.navigate('HomeStack', {screen: 'Home'});
 
   return (
@@ -61,14 +46,14 @@ const PurchaseAmount: React.FC = () => {
       <View>
         <View style={styles.nav}>
           <TopNav
-            title="Purchase"
+            title="Withdraw"
             goPreviousScreen={goPreviousScreen}
-            goCloseScreen={goCloseScreen}
+            goCloseScreen={closeScreen}
           />
         </View>
         <View>
           <Text type="Body/Large" style={styles.body}>
-            Choose how much you want to invest:
+            Choose how much you want to withdraw:
           </Text>
         </View>
         <View style={styles.inputContainer}>
@@ -86,23 +71,19 @@ const PurchaseAmount: React.FC = () => {
         </View>
         <View style={styles.available}>
           <Text type="Title/Medium" style={styles.availableText}>
-            available to invest ${podBalance}
+            available to withdraw
+          </Text>
+          <Text type="Title/Medium" style={styles.availableText}>
+            {balance} USDC · approx. {balance} USD
           </Text>
         </View>
         <View style={styles.error}>
-          {Number(value) > Number(podBalance) && (
+          {Number(value) > Number(balance) && (
             <Text type="Body/Medium" style={styles.errorText}>
               The Rewards account lacks sufficient funds.
             </Text>
           )}
         </View>
-      </View>
-      <View style={styles.projectionBox}>
-        <Text type="Body/Medium">Projected 1 year rewards with 7.00% APY</Text>
-        <Text type="Title/Small">
-          {calculatedValues.projectedRewards} USDC · approx.{' '}
-          {calculatedValues.projectedRewards} USD
-        </Text>
       </View>
       <View>
         <SubmitButton
@@ -115,4 +96,4 @@ const PurchaseAmount: React.FC = () => {
   );
 };
 
-export default PurchaseAmount;
+export default WithdrawAmount;
