@@ -37,8 +37,12 @@ const InvestmentsPod: React.FC = () => {
 
   const transactionHistory = useSelector((state: RootState) =>
     state.bankingReducer.transactionHistory?.filter(entry =>
-      entry.attributes?.description?.includes('Investments'),
+      entry.attributes?.description?.includes('vest'),
     ),
+  );
+
+  const transactionPending = (transactionHistory ?? []).some(
+    entry => entry.attributes?.status === 'Pending',
   );
   const balance = useSelector(investmentsAccountBalanceSelector);
   const wyreBalance = useSelector(wyreAccountBalanceSelector);
@@ -58,12 +62,18 @@ const InvestmentsPod: React.FC = () => {
 
   const goToRewards = () =>
     NavigationService.navigate('WyreStack', {screen: 'Rewards'});
+  const goToTransactionHistory = () => {
+    NavigationService.navigate('UserBankingStack', {
+      screen: 'TransactionHistory',
+    });
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
       <View style={styles.nav}>
         <TopNav title="Investments Pod" goPreviousScreen={goPreviousScreen} />
       </View>
+
       <View style={styles.summaryCardContainer}>
         <View style={styles.summaryCard}>
           <View style={styles.summaryCardMain}>
@@ -110,6 +120,7 @@ const InvestmentsPod: React.FC = () => {
           )}
         </View>
       </View>
+
       {wyreEligible && (
         <LinearGradient colors={PodsCardGradient} style={styles.wyrePromoCard}>
           <Text type="Headline/Small" style={styles.wyrePromoHeadline}>
@@ -127,11 +138,29 @@ const InvestmentsPod: React.FC = () => {
         </LinearGradient>
       )}
 
+      {transactionPending && (
+        <View style={styles.pendingTransactionCard}>
+          <Text type="Body/Large">
+            There is{' '}
+            <Text
+              type="Body/Large"
+              style={styles.link}
+              onPress={goToTransactionHistory}>
+              a pending transaction
+            </Text>
+            . You may see the funds temporarily unavailable from your
+            Investments Pod.
+          </Text>
+        </View>
+      )}
+
       <TransactionHistoryCard
         podContext="Investments"
         historyEntries={transactionHistory}
       />
+
       {hasRewardsAccount && <UsdcDisclaimerCard />}
+
       {isLoading && <Loading />}
     </AppLayout>
   );
