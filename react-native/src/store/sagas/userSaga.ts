@@ -8,6 +8,7 @@ import {GraphQLResult} from '@aws-amplify/api';
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
+import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as wyreActions from 'src/store/actions/wyreActions';
 import {
   Athlete,
@@ -52,6 +53,10 @@ export function* onboardingSilentSignIn() {
 
 export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(loadingActions.enableLoader());
+  yield put(userActions.clearUserState());
+  yield put(bankingActions.clearBankingState());
+  yield put(wyreActions.clearWyreState());
+  yield put(onboardingActions.clearOnboardingState());
   try {
     const loginResponse = yield Auth.signIn({username: phone, password});
     console.log('Sign In Response:');
@@ -73,10 +78,10 @@ export function* loginRequest({phone, password}: ILoginRequest) {
       if (!athlete) {
         throw new Error('No user found with id: ' + id);
       }
+
       yield put(userActions.updateUser(athlete));
 
       NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
-
       yield put(bankingActions.getConnectedAccounts(false));
       yield put(bankingActions.getAthleteAccounts());
       yield put(bankingActions.getBalanceHistory());

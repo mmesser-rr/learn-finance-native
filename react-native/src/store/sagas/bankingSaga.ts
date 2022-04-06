@@ -197,11 +197,14 @@ export function* createDeposit() {
   const accountId = (yield select(
     (state: RootState) => state.bankingReducer.selectedAccount?.account_id,
   )) as string | undefined;
+  const unitToken = (yield select(
+    (state: RootState) => state.bankingReducer.unitToken,
+  )) as string | undefined;
 
   try {
-    if (!athleteId || !transferAmount || !accountId) {
+    if (!athleteId || !transferAmount || !accountId || !unitToken) {
       throw new Error(
-        'Athlete ID, transfer amount, and account ID are required to create a deposit',
+        'Athlete ID, transfer amount, unit token, and account ID are required to create a deposit',
       );
     }
 
@@ -221,7 +224,10 @@ export function* createDeposit() {
       amount: amountInCents,
       description: 'One time deposit',
       idempotencyKey: idempotencyKey,
+      unitToken: unitToken,
     };
+
+    console.log('Create Deposit input:', mutationInput);
 
     const response = (yield call(
       [API, 'graphql'],
@@ -337,6 +343,7 @@ export function* getTransactionHistory() {
 
 export function* initiateUnitVerificationChallenge() {
   console.log('initiating Banking phone challenge');
+  yield put(bankingActions.setUnitVerificationCodeValidity(undefined));
   const athleteId = (yield select(getAthleteId)) as string | undefined;
 
   try {
@@ -358,9 +365,11 @@ export function* initiateUnitVerificationChallenge() {
       yield put(bankingActions.unitVerificationTokenLoaded(verificationToken!));
     } else {
       console.log('Unable to initialize token verification');
+      NavigationService.navigate('UniversalError');
     }
   } catch (error) {
     console.log('Error attempting to initiate phone challenge:', error);
+    NavigationService.navigate('UniversalError');
   }
 }
 
@@ -397,9 +406,10 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
       response.data?.createAthleteUnitToken,
     );
 
+    const token = response.data?.createAthleteUnitToken?.attributes?.token;
     const expiresIn =
       response.data?.createAthleteUnitToken?.attributes?.expiresIn;
-    const isValid = !!expiresIn && expiresIn > 0;
+    const isValid = !!token && !!expiresIn && expiresIn > 0;
     yield put(bankingActions.setUnitVerificationCodeValidity(isValid));
 
     yield put(loadingActions.disableLoader());
@@ -407,11 +417,22 @@ export function* verifyUnitChallengeCode({code}: IVerifyUnitChallengeCode) {
     if (isValid) {
       console.log('unit token will expire in ' + expiresIn / 1000 + 'seconds');
       const expirationDate = Date.now() + expiresIn;
-      yield put(bankingActions.setUnitTokenExpiration(expirationDate));
+      yield put(bankingActions.setUnitToken(token, expirationDate));
     }
   } catch (error: any) {
     console.log('Error attempting to create Athlete Unit Token:', error);
-    yield put(bankingActions.setUnitVerificationCodeValidity(false));
+    if (
+      error &&
+      error.errors &&
+      error.errors[0] &&
+      error.errors[0].message?.includes(
+        'Error: 400 - Verification check failed',
+      )
+    ) {
+      yield put(bankingActions.setUnitVerificationCodeValidity(false));
+    } else {
+      NavigationService.navigate('UniversalError');
+    }
     yield put(loadingActions.disableLoader());
   }
 }

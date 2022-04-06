@@ -1,3 +1,4 @@
+import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
   IGetUserByPhone,
   ILoginFailed,
@@ -46,5 +47,11 @@ export function getUserByPhone(phone: string): IGetUserByPhone {
   return {
     type: types.GET_USER_BY_PHONE,
     phone,
+  };
+}
+
+export function clearUserState(): ITypeOnlyAction {
+  return {
+    type: types.CLEAR_USER_STATE,
   };
 }
