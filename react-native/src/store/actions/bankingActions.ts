@@ -179,11 +179,19 @@ export function setUnitVerificationCodeValidity(
   };
 }
 
-export function setUnitTokenExpiration(
+export function setUnitToken(
+  token: string,
   expiration: number,
-): returnTypes.ISetUnitTokenExpiration {
+): returnTypes.ISetUnitToken {
   return {
-    type: types.SET_UNIT_TOKEN_EXPIRATION,
+    type: types.SET_UNIT_TOKEN,
+    token,
     expiration,
+  };
+}
+
+export function clearBankingState(): ITypeOnlyAction {
+  return {
+    type: types.CLEAR_BANKING_STATE,
   };
 }
