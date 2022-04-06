@@ -21,17 +21,14 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(27),
   },
   diagram: {
-    position: 'relative',
-  },
-  union: {
-    flex: 1
+    position: 'relative'
   },
   description: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   leftDescription: {
     justifyContent: 'center',

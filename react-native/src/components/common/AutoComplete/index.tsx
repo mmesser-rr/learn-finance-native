@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {TextStyle, TouchableOpacity, View} from 'react-native';
-import {Searchbar} from 'react-native-paper';
+// import {Searchbar} from 'react-native-paper';
 
 import AppColors from 'src/config/colors';
 import SearchIcon from 'src/assets/icons/search.svg';
@@ -86,7 +86,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
 
   return (
     <View>
-      <Searchbar
+      {/* <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
@@ -102,7 +102,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({suggestions, onChange}) => {
             primary: AppColors.gray20,
           },
         }}
-      />
+      /> */}
       <View>
         {filtered.map(s => {
           const isSelected = selectedValue === s.value;
