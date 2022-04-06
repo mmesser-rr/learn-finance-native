@@ -39,6 +39,7 @@ export const listAthleteUnitAccounts = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -68,6 +69,7 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -253,6 +255,7 @@ export const getUnitTransactionById = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -279,6 +282,7 @@ export const listAllUnitTransactions = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -305,6 +309,7 @@ export const listUnitBalanceHistory = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -331,6 +336,7 @@ export const unitAccountStatement = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold

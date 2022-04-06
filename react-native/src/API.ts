@@ -128,6 +128,7 @@ export type Attributes = {
   routingNumber?: string | null,
   accountNumber?: string | null,
   currency?: string | null,
+  token?: string | null,
   verificationToken?: string | null,
   expiresIn?: number | null,
   hold?: number | null,
@@ -920,6 +921,7 @@ export type CreateAthleteUnitTokenMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -951,6 +953,7 @@ export type AthleteUnitTokenVerificationMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1161,6 +1164,7 @@ export type CreatePlaidPaymentMutationVariables = {
   amount: number,
   description?: string | null,
   idempotencyKey: string,
+  unitToken: string,
 };
 
 export type CreatePlaidPaymentMutation = {
@@ -1182,6 +1186,7 @@ export type CreatePlaidPaymentMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1198,6 +1203,7 @@ export type BookPaymentMutationVariables = {
   receiverUnitAccountId: string,
   receiverAccountType?: string | null,
   idempotencyKey: string,
+  unitToken: string,
 };
 
 export type BookPaymentMutation = {
@@ -1219,6 +1225,7 @@ export type BookPaymentMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1237,6 +1244,7 @@ export type DebitAccountMutationVariables = {
   receiverAccountType?: string | null,
   addenda?: string | null,
   idempotencyKey: string,
+  unitToken: string,
 };
 
 export type DebitAccountMutation = {
@@ -1258,6 +1266,7 @@ export type DebitAccountMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1276,6 +1285,7 @@ export type CreditAccountMutationVariables = {
   receiverAccountType?: string | null,
   addenda?: string | null,
   idempotencyKey: string,
+  unitToken: string,
 };
 
 export type CreditAccountMutation = {
@@ -1297,6 +1307,7 @@ export type CreditAccountMutation = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1965,6 +1976,7 @@ export type ListAthleteUnitAccountsQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -1997,6 +2009,7 @@ export type GetAthleteUnitAccountByIdQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -2206,6 +2219,7 @@ export type GetUnitTransactionByIdQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -2237,6 +2251,7 @@ export type ListAllUnitTransactionsQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -2268,6 +2283,7 @@ export type ListUnitBalanceHistoryQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,
@@ -2299,6 +2315,7 @@ export type UnitAccountStatementQuery = {
       routingNumber?: string | null,
       accountNumber?: string | null,
       currency?: string | null,
+      token?: string | null,
       verificationToken?: string | null,
       expiresIn?: number | null,
       hold?: number | null,

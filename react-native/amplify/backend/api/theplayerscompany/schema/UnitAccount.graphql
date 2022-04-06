@@ -18,6 +18,7 @@ type Attributes{
    routingNumber: String
    accountNumber: String
    currency: String
+   token: String
    verificationToken: String
    expiresIn: Int
    hold: Float

@@ -9,7 +9,7 @@ const paramsFromCustId = (verificationCode, token) => ({
 
 const createAthleteUnitToken = (unit) => (custId, verificationCode, token) => {
     const params = paramsFromCustId(verificationCode, token);
-    return unit.customerToken.createToken(custId, params).then(resultLens)
+    return unit.customerToken.createToken(custId, params).then(res => res.data)
     .catch(err => Promise.reject(`Failed to reach Unit API. Error: ${err.message}`));
   };
 

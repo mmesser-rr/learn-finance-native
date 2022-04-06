@@ -182,6 +182,7 @@ export const createAthleteUnitToken = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -208,6 +209,7 @@ export const athleteUnitTokenVerification = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -407,6 +409,7 @@ export const createPlaidPayment = /* GraphQL */ `
     $amount: Float!
     $description: String
     $idempotencyKey: String!
+    $unitToken: String!
   ) {
     createPlaidPayment(
       athleteId: $athleteId
@@ -414,6 +417,7 @@ export const createPlaidPayment = /* GraphQL */ `
       amount: $amount
       description: $description
       idempotencyKey: $idempotencyKey
+      unitToken: $unitToken
     ) {
       type
       id
@@ -430,6 +434,7 @@ export const createPlaidPayment = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -447,6 +452,7 @@ export const bookPayment = /* GraphQL */ `
     $receiverUnitAccountId: String!
     $receiverAccountType: String
     $idempotencyKey: String!
+    $unitToken: String!
   ) {
     bookPayment(
       athleteId: $athleteId
@@ -456,6 +462,7 @@ export const bookPayment = /* GraphQL */ `
       receiverUnitAccountId: $receiverUnitAccountId
       receiverAccountType: $receiverAccountType
       idempotencyKey: $idempotencyKey
+      unitToken: $unitToken
     ) {
       type
       id
@@ -472,6 +479,7 @@ export const bookPayment = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -491,6 +499,7 @@ export const debitAccount = /* GraphQL */ `
     $receiverAccountType: String
     $addenda: String
     $idempotencyKey: String!
+    $unitToken: String!
   ) {
     debitAccount(
       athleteId: $athleteId
@@ -502,6 +511,7 @@ export const debitAccount = /* GraphQL */ `
       receiverAccountType: $receiverAccountType
       addenda: $addenda
       idempotencyKey: $idempotencyKey
+      unitToken: $unitToken
     ) {
       type
       id
@@ -518,6 +528,7 @@ export const debitAccount = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
@@ -537,6 +548,7 @@ export const creditAccount = /* GraphQL */ `
     $receiverAccountType: String
     $addenda: String
     $idempotencyKey: String!
+    $unitToken: String!
   ) {
     creditAccount(
       athleteId: $athleteId
@@ -548,6 +560,7 @@ export const creditAccount = /* GraphQL */ `
       receiverAccountType: $receiverAccountType
       addenda: $addenda
       idempotencyKey: $idempotencyKey
+      unitToken: $unitToken
     ) {
       type
       id
@@ -564,6 +577,7 @@ export const creditAccount = /* GraphQL */ `
         routingNumber
         accountNumber
         currency
+        token
         verificationToken
         expiresIn
         hold
