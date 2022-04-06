@@ -1,3 +1,4 @@
+import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
   ICreateAthleteAndAccount,
   IOnboardingUpdate,
@@ -18,5 +19,11 @@ export function createAthleteAndAccount(ssn: string): ICreateAthleteAndAccount {
   return {
     type: types.CREATE_ATHLETE_AND_ACCOUNT,
     ssn,
+  };
+}
+
+export function clearOnboardingState(): ITypeOnlyAction {
+  return {
+    type: types.CLEAR_ONBOARDING_STATE,
   };
 }

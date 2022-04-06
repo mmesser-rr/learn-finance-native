@@ -28,4 +28,7 @@ export const onboardingReducer = createReducer(initialState, {
       ...action.update,
     };
   },
+  [types.CLEAR_ONBOARDING_STATE]() {
+    return initialState;
+  },
 });
