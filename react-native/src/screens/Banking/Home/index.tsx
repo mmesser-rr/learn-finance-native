@@ -143,13 +143,6 @@ const Home: React.FC = () => {
   const onSetupDirectDeposit = () =>
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
 
-  const goToDeposit = () => {
-    if (hasPlaidConnection) {
-      goToDepositSelectAccount();
-    } else {
-    }
-  };
-
   const goToDepositSelectAccount = () =>
     NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
 
@@ -222,21 +215,49 @@ const Home: React.FC = () => {
         <Text type="Title/Medium">BankDAO</Text>
         {hasMoneyInAccount && (
           <View>
-            <LinearGradient
-              style={styles.buttonLinearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              locations={[0, 0, 0.2388, 1]}
-              colors={GradientButtonColors}>
-              <TouchableOpacity
-                onPress={goToDeposit}
-                style={styles.depositButton}>
-                <DepositIcon />
-                <Text type="Body/Medium" style={styles.depositButtonText}>
-                  Deposit
-                </Text>
-              </TouchableOpacity>
-            </LinearGradient>
+            {hasPlaidConnection ? (
+              <LinearGradient
+                style={styles.buttonLinearGradient}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                locations={[0, 0, 0.2388, 1]}
+                colors={GradientButtonColors}>
+                <TouchableOpacity
+                  onPress={goToDepositSelectAccount}
+                  style={styles.depositButton}>
+                  <DepositIcon />
+                  <Text type="Body/Medium" style={styles.depositButtonText}>
+                    Deposit
+                  </Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            ) : (
+              !!linkToken && (
+                <PlaidLink
+                  tokenConfig={{
+                    token: linkToken,
+                    noLoadingState: false,
+                  }}
+                  onSuccess={(success: LinkSuccess) =>
+                    onPlaidSuccessHandler(success)
+                  }
+                  onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}>
+                  <LinearGradient
+                    style={styles.buttonLinearGradient}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    locations={[0, 0, 0.2388, 1]}
+                    colors={GradientButtonColors}>
+                    <View style={styles.depositButton}>
+                      <DepositIcon />
+                      <Text type="Body/Medium" style={styles.depositButtonText}>
+                        Deposit
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </PlaidLink>
+              )
+            )}
           </View>
         )}
       </View>
