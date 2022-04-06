@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
+import {useFocusEffect} from '@react-navigation/native';
 
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
@@ -33,6 +34,7 @@ const UserLogin: React.FC = () => {
     handleSubmit,
     formState: {errors},
     formState: {isValid},
+    reset,
   } = useForm<FormData>({
     defaultValues: {
       phone: '',
@@ -40,6 +42,15 @@ const UserLogin: React.FC = () => {
     },
     mode: 'onChange',
   });
+
+  useFocusEffect(
+    React.useCallback(() => {
+      reset({
+        phone: '',
+        password: '',
+      });
+    }, []),
+  );
 
   const onSubmit = (data: FormData) => {
     const formattedPhone = '+1' + data.phone;
