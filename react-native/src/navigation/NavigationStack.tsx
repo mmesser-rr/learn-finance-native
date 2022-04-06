@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {NavigationContainer, Theme} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import {navigationRef} from './NavigationService';
@@ -32,17 +32,11 @@ import Agreement from 'src/screens/Terms/Agreement';
 import SelectPlayer from 'src/screens/SelectPlayer';
 import UniversalError from 'src/screens/UniversalError';
 
-interface IProps {
-  theme: Theme;
-}
-
 const RootStack = createStackNavigator<RootStackParamList>();
 
-const App: React.FC<IProps> = (props: IProps) => {
-  const {theme} = props;
-
+const App: React.FC= () => {
   return (
-    <NavigationContainer ref={navigationRef} theme={theme}>
+    <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator
         initialRouteName="Welcome"
         screenOptions={{

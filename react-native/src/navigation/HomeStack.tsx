@@ -31,10 +31,7 @@ const HomeStack = () => {
           paddingTop: scale(12),
         },
       }}
-      tabBarOptions={{
-        activeBackgroundColor: AppColors.coreBlack85,
-        inactiveBackgroundColor: AppColors.coreBlack85,
-      }}>
+    >
       <Tab.Screen
         name="Home"
         component={Home}
