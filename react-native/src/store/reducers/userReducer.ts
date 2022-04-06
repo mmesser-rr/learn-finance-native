@@ -37,4 +37,7 @@ export const userReducer = createReducer(initialState, {
     const user = {...state.user, ...action.update};
     return {...state, user};
   },
+  [types.CLEAR_USER_STATE]() {
+    return initialState;
+  },
 });

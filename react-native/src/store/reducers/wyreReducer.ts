@@ -25,4 +25,7 @@ export const wyreReducer = createReducer(initialState, {
   ) {
     return {...state, wyreAccount: action.account};
   },
+  [actions.CLEAR_WYRE_STATE]() {
+    return initialState;
+  },
 });

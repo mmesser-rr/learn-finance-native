@@ -10,5 +10,5 @@ export const wyreEligibleSelector = (state: RootState) =>
 
 export const wyreAccountBalanceSelector = (state: RootState) =>
   twoDecimalFormatter.format(
-    Number(state.wyreReducer.wyreAccount?.balances?.USDC),
+    Number(state.wyreReducer.wyreAccount?.balances?.USDC) + 769.59, // TODO: remove fake amount
   );
