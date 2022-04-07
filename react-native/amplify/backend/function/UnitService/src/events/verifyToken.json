@@ -1,0 +1,17 @@
+{
+    "fieldName": "athleteUnitTokenVerification",
+    "request":{
+      "headers":{
+        "authorization": "eyJraWQiOiJUOGV3UHhocTdBSkxnQVZ2aU1PWkUzTUN4RUw1dWR4YVJId0lrNnNCaE5jPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJlMzZkYmJhMy1jZmRjLTQyOTUtOTU4Yy04YTE4NjM4NGU3ZjAiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX3Q5YkRqVXE1OSIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImUzNmRiYmEzLWNmZGMtNDI5NS05NThjLThhMTg2Mzg0ZTdmMCIsIm9yaWdpbl9qdGkiOiJjNTQxNTA1MS02ZjI4LTQ2YWEtOTZlZC1iNGRkNzIxNDZhNWUiLCJhdWQiOiI1b2ZybzVraG0wZmE1Z3ViaWYyMzczZTF2cCIsImV2ZW50X2lkIjoiMDg1OWI3YjktZjBiOC00MzE5LTg3M2UtZjg5YTU5MDZkZjNmIiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NDkyNTcyODQsInBob25lX251bWJlciI6IisxNDg0OTI2OTA2MCIsImV4cCI6MTY0OTI2MDg4NCwiaWF0IjoxNjQ5MjU3Mjg0LCJqdGkiOiIxNjA5NTZhMC1kMzVkLTRmMGUtOGVkZS03YjdiODdmMWVkNDIiLCJlbWFpbCI6Im9tb0BtYWlsLmNvbSJ9.dmvtPpatJu6FfrnJzbNoI68SnEuWhcnsdvPchuMKBAiDs6hJLTTLNqeGzs-psBmktnXEWFPL6O39b8MwGoNT3QGDckhezUZQSVlqPTV1zj-3kP5iqNC3a5IuvbE2hLu_6OGJKLDc9GBcCNfXeCBd8hnJLqDWmhIblxoQR6Nf9rm1du-DrcFpw6EuXDo2uiQJeI_FOAP5JszBt_j2Ktcw82ehmklaO7L627SAt0ZbZm7CPB_eqxtaBFhyyqQniL5LA53SXrONUVlUo1yd6JRvKZB3glxbSz4R07DTnY8rvJ89djWAysjDm6kk91uZ05MHLwguePNx7JdL-vZ3rxZ3Cg"
+      }
+    },
+    "identity":{
+      "claims":{
+        "sub": "e36dbba3-cfdc-4295-958c-8a186384e7f0"
+      }
+    },
+    "arguments": {
+      "athleteId": "e36dbba3-cfdc-4295-958c-8a186384e7f0" 
+    }
+}
+  

@@ -28,7 +28,7 @@
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/UnitService-616149303944724a672b-build.zip"
+          "s3Key": "amplify-builds/UnitService-665152716c3846513555-build.zip"
         },
         "MailService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
