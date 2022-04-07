@@ -12,6 +12,17 @@ enum AthleteLevel {
   PROFESSIONAL
 }
 
+type PodSettings {
+  SAVINGS: Int!
+  INVESTMENTS: Int!
+  SPENDING: Int!
+}
+
+type ProcessorToken{
+  plaidAccountId: String!
+  processorToken: String
+}
+
 type AthleteSport {
   name: String!
   airTableId: String!
@@ -24,23 +35,41 @@ type AthleteTeam {
   isActive: Boolean
 }
 
-type Athlete @model {
-  firstName: String!
-  lastName: String!
-  mobilePhone: String!
-  email: String!
-  level: AthleteLevel!
-  sport: AthleteSport!
-  team: AthleteTeam!
-  address: Address!
-  dateOfBirth: String!
-  accounts: [AthleteAccount] @hasMany
-  unitLookup: AthleteUnitLookup
-  isActive: Boolean!
+type Athlete @model @auth(rules: [
+  {allow: owner, provider: userPools, ownerField: "id"}
+  {allow: public, operations: [read]}
+])#@auth(rules: [{ allow: owner, provider: userPools, ownerField: "id" } {allow: public, operations: [read, create, update]}])
+{
+  firstName: String 
+  lastName: String 
+  mobilePhone: String! @index(name: "byPhone", queryField: "athleteByPhone") 
+  athleteTag: String 
+  email: AWSEmail 
+  tag: String 
+  level: AthleteLevel 
+  sport: AthleteSport 
+  team: AthleteTeam 
+  address: Address 
+  dateOfBirth: String 
+  accounts: [AthleteAccount] @hasMany 
+  unitLookup: AthleteUnitLookup 
+  podSettings: PodSettings 
+  plaidToken: String 
+  unitToken: String 
+  unitPlaidProcessorToken: ProcessorToken
+  wyrePlaidProcessorToken: ProcessorToken 
+  wyreAccountId: String 
+  isActive: Boolean! 
 }
 
-type AthleteAccount @model {
-  athlete: Athlete! @belongsTo
-  routingCode: String!
-  accountNumber: String!
+type AthleteAccount @model 
+@auth(rules: [
+   {allow: owner, provider: userPools, ownerField: "athleteId"}
+])#@auth(rules: [{ allow: owner, provider: userPools, ownerField: "id" } {allow: public, operations: [read, create, update]}])
+{
+  athlete: Athlete! @belongsTo 
+  unitAccountId: String! 
+  routingCode: String! 
+  accountNumber: String! 
+  podName: String! 
 }

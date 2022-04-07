@@ -1,0 +1,33 @@
+type WyreAccount{
+  owner: String
+  status: String
+  balances: WyreBalance
+  createdAt: String
+  pusherChannel: String
+  srn: String
+  notes: String
+  depositAddresses: DepositAddress
+  availableBalances: WyreBalance
+  name: String
+  id: String
+  type: String
+  pendingInterestBalances: WyreBalance
+}
+
+type WyreBalance{
+    DAI: String
+    AUD: String
+    USD: String
+    MXN: String
+    USDC: String
+    BTC: String
+    ETH: String
+    MUSDC: String
+  }
+
+  type DepositAddress{
+    ETH: String
+    BTC: String
+    AVAX: String
+    XLM: String
+  }
