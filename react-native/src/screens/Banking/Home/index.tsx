@@ -83,6 +83,23 @@ const Home: React.FC = () => {
   });
   const {user} = useSelector((state: RootState) => state.userReducer);
   const wyreEligible = useSelector(wyreEligibleSelector);
+  const investmentsTransactionPending = useSelector((state: RootState) =>
+    (state.bankingReducer.transactionHistory ?? []).some(
+      entry =>
+        entry.attributes?.description?.includes('vest') &&
+        entry.attributes?.status === 'Pending',
+    ),
+  );
+  const rewardsPurchaseFailed = useSelector((state: RootState) =>
+    (state.bankingReducer.transactionHistory ?? []).some(
+      entry =>
+        entry.attributes?.description?.includes('Rewards') &&
+        entry.attributes?.direction === 'credit' &&
+        (entry.attributes?.status === 'Failed' ||
+          entry.attributes?.status === 'Cancelled'),
+    ),
+  );
+
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -135,13 +152,6 @@ const Home: React.FC = () => {
   const onSetupDirectDeposit = () =>
     NavigationService.navigate('TransferStack', {screen: 'DirectDeposit'});
 
-  const goToDeposit = () => {
-    if (hasPlaidConnection) {
-      goToDepositSelectAccount();
-    } else {
-    }
-  };
-
   const goToDepositSelectAccount = () =>
     NavigationService.navigate('TransferStack', {screen: 'PodSelectAccount'});
 
@@ -150,8 +160,16 @@ const Home: React.FC = () => {
 
   const goToSpendingPod = () =>
     NavigationService.navigate('UserBankingStack', {screen: 'SpendingPod'});
-  const goToInvestmentsPod = () =>
-    NavigationService.navigate('UserBankingStack', {screen: 'InvestmentsPod'});
+  const goToInvestmentsPod = () => {
+    if (rewardsPurchaseFailed) {
+      NavigationService.navigate('WyreStack', {screen: 'PurchaseFailed'});
+    } else {
+      NavigationService.navigate('UserBankingStack', {
+        screen: 'InvestmentsPod',
+      });
+    }
+  };
+
   const goToSavingsPod = () =>
     NavigationService.navigate('UserBankingStack', {screen: 'SavingsPod'});
 
@@ -182,6 +200,16 @@ const Home: React.FC = () => {
 
   const goToRewards = () =>
     NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
+
+  const getInvestmentsTopText = (): string => {
+    if (rewardsPurchaseFailed) {
+      return 'Transaction Failed';
+    } else if (investmentsTransactionPending) {
+      return 'Transaction Pending';
+    } else {
+      return 'Balance';
+    }
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
@@ -214,21 +242,49 @@ const Home: React.FC = () => {
         <Text type="Title/Medium">BankDAO</Text>
         {hasMoneyInAccount && (
           <View>
-            <LinearGradient
-              style={styles.buttonLinearGradient}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              locations={[0, 0, 0.2388, 1]}
-              colors={GradientButtonColors}>
-              <TouchableOpacity
-                onPress={goToDeposit}
-                style={styles.depositButton}>
-                <DepositIcon />
-                <Text type="Body/Medium" style={styles.depositButtonText}>
-                  Deposit
-                </Text>
-              </TouchableOpacity>
-            </LinearGradient>
+            {hasPlaidConnection ? (
+              <LinearGradient
+                style={styles.buttonLinearGradient}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                locations={[0, 0, 0.2388, 1]}
+                colors={GradientButtonColors}>
+                <TouchableOpacity
+                  onPress={goToDepositSelectAccount}
+                  style={styles.depositButton}>
+                  <DepositIcon />
+                  <Text type="Body/Medium" style={styles.depositButtonText}>
+                    Deposit
+                  </Text>
+                </TouchableOpacity>
+              </LinearGradient>
+            ) : (
+              !!linkToken && (
+                <PlaidLink
+                  tokenConfig={{
+                    token: linkToken,
+                    noLoadingState: false,
+                  }}
+                  onSuccess={(success: LinkSuccess) =>
+                    onPlaidSuccessHandler(success)
+                  }
+                  onExit={(exit: LinkExit) => onPlaidExitHandler(exit)}>
+                  <LinearGradient
+                    style={styles.buttonLinearGradient}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 0}}
+                    locations={[0, 0, 0.2388, 1]}
+                    colors={GradientButtonColors}>
+                    <View style={styles.depositButton}>
+                      <DepositIcon />
+                      <Text type="Body/Medium" style={styles.depositButtonText}>
+                        Deposit
+                      </Text>
+                    </View>
+                  </LinearGradient>
+                </PlaidLink>
+              )
+            )}
           </View>
         )}
       </View>
@@ -347,7 +403,7 @@ const Home: React.FC = () => {
           <InfoCard
             IconSvg={InvestmentIcon}
             labelText="Investments"
-            rightTopText="Balance"
+            rightTopText={getInvestmentsTopText()}
             rightBottomText={'$' + amounts.investments}
             onPress={goToInvestmentsPod}
           />
