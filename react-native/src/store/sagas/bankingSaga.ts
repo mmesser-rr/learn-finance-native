@@ -54,6 +54,7 @@ import {
   UpdateRecentTransactionMutationVariables,
 } from 'src/types/API';
 import NavigationService from 'src/navigation/NavigationService';
+import {createPlaidPaymentCustom} from 'src/graphql/mutations_custom';
 
 const getAthleteId = (state: RootState) => state.userReducer.user?.id;
 
@@ -231,7 +232,7 @@ export function* createDeposit() {
 
     const response = (yield call(
       [API, 'graphql'],
-      graphqlOperation(createPlaidPayment, mutationInput),
+      graphqlOperation(createPlaidPaymentCustom, mutationInput),
     )) as GraphQLResult<CreatePlaidPaymentMutation>;
 
     console.log('Create Deposit response:', response);
