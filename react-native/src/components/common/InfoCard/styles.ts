@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
   cardRight: {
     alignItems: 'flex-end',
   },
+  rightTopTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  exclamation: {marginLeft: 4},
   icon: {
     width: 30,
     height: 38,

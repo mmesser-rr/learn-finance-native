@@ -22,6 +22,7 @@ import * as bankingActions from 'src/store/actions/bankingActions';
 import {RootState} from 'src/store/root-state';
 import {RecentTransaction} from 'src/types/API';
 import {wyreEligibleSelector} from 'src/store/selectors/wyre';
+import {hasMoneyInAccountSelector} from 'src/store/selectors/banking';
 
 const DepositResult: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const DepositResult: React.FC = () => {
   const [index, setIndex] = useState(0);
 
   const {isLoading} = useSelector((state: RootState) => state.loadingReducer);
+  const hasMoneyInAccount = useSelector(hasMoneyInAccountSelector);
   const wyreEligible = useSelector(wyreEligibleSelector);
   const {recentTransactions} = useSelector(
     (state: RootState) => state.bankingReducer,
@@ -102,7 +104,7 @@ const DepositResult: React.FC = () => {
   };
 
   const goToHome = () => {
-    if (wyreEligible) {
+    if (wyreEligible && hasMoneyInAccount) {
       NavigationService.navigate('WyreFullScreenNotification');
     } else {
       NavigationService.navigate('HomeStack');
