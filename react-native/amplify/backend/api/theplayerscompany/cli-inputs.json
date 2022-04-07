@@ -3,10 +3,19 @@
   "serviceConfiguration": {
     "apiName": "theplayerscompany",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "C:\\Kunai\\ThePlayersCompany\\theplayerscompany-react-native\\amplify\\backend\\api\\theplayerscompany\\schema.graphql",
+    "gqlSchemaPath": "/Users/deboajagbe/Desktop/Projects/theplayerscompany-react-native/react-native/amplify/backend/api/theplayerscompany/schema.graphql",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "auththeplayerscompany2db5774e2db5774e"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 30,
+        "apiKeyExpirationDate": "2022-04-29T00:51:48.579Z",
+        "keyDescription": ""
+      }
+    ],
+    "conflictResolution": {}
   }
 }
