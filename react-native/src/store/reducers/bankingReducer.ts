@@ -251,6 +251,19 @@ export const bankingReducer = createReducer(initialState, {
           currency: 'USDC',
         },
       },
+      {
+        id: 'byzz',
+        type: 'history entry',
+        attributes: {
+          amount: 46830,
+          date: '2021-12-15T22:18:34Z',
+          status: 'Failed',
+          summary: 'Purchase',
+          description: 'from Uninvested to Rewards',
+          direction: 'credit',
+          currency: 'USDC',
+        },
+      },
     ];
 
     return {...state, transactionHistory: entries};

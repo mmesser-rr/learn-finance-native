@@ -24,15 +24,15 @@
         },
         "PlaidService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/PlaidService-38723243345544343953-build.zip"
+          "s3Key": "amplify-builds/PlaidService-76687a67413636756b51-build.zip"
         },
         "UnitService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/UnitService-786965513430762b4c72-build.zip"
+          "s3Key": "amplify-builds/UnitService-616149303944724a672b-build.zip"
         },
         "MailService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/MailService-326471426243304d7442-build.zip"
+          "s3Key": "amplify-builds/MailService-5434744f544d43325a57-build.zip"
         },
         "AirtableService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
@@ -41,12 +41,12 @@
         },
         "WyreService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/WyreService-77506a6f6f4153633971-build.zip",
+          "s3Key": "amplify-builds/WyreService-6647773169414671424d-build.zip",
           "secretsPathAmplifyAppId": "d3dzwrbiqysm7k"
         },
         "WebhookService": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
-          "s3Key": "amplify-builds/WebhookService-4c526762347259516261-build.zip"
+          "s3Key": "amplify-builds/WebhookService-5344383244376d456467-build.zip"
         },
         "theplayerscompany2db5774e2db5774ePostConfirmation": {
           "deploymentBucketName": "amplify-theplayerscompany-dev-104409-deployment",
