@@ -6,6 +6,7 @@ import styles from './styles';
 import {Text} from 'src/components/common/Texts';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {GradientButtonColors} from 'src/utils/constants';
+import ExclamationIcon from 'src/assets/icons/exclamation.svg';
 
 interface InfoCardProps {
   IconSvg: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
@@ -35,7 +36,12 @@ const InfoCard: React.FC<InfoCardProps> = ({
         </Text>
       </View>
       <View style={styles.cardRight}>
-        <Text type="Title/Small">{rightTopText}</Text>
+        <View style={styles.rightTopTextContainer}>
+          <Text type="Title/Small">{rightTopText}</Text>
+          {rightTopText && rightTopText?.includes('Failed') && (
+            <ExclamationIcon style={styles.exclamation} />
+          )}
+        </View>
         <Text type="Headline/Small" style={rightBottomStyle}>
           {rightBottomText}
         </Text>

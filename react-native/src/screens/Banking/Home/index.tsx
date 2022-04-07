@@ -90,6 +90,15 @@ const Home: React.FC = () => {
         entry.attributes?.status === 'Pending',
     ),
   );
+  const rewardsPurchaseFailed = useSelector((state: RootState) =>
+    (state.bankingReducer.transactionHistory ?? []).some(
+      entry =>
+        entry.attributes?.description?.includes('Rewards') &&
+        entry.attributes?.direction === 'credit' &&
+        (entry.attributes?.status === 'Failed' ||
+          entry.attributes?.status === 'Cancelled'),
+    ),
+  );
 
   const [linkToken, setLinkToken] = useState('');
   const [loading, setLoading] = useState(false);
@@ -151,8 +160,16 @@ const Home: React.FC = () => {
 
   const goToSpendingPod = () =>
     NavigationService.navigate('UserBankingStack', {screen: 'SpendingPod'});
-  const goToInvestmentsPod = () =>
-    NavigationService.navigate('UserBankingStack', {screen: 'InvestmentsPod'});
+  const goToInvestmentsPod = () => {
+    if (rewardsPurchaseFailed) {
+      NavigationService.navigate('WyreStack', {screen: 'PurchaseFailed'});
+    } else {
+      NavigationService.navigate('UserBankingStack', {
+        screen: 'InvestmentsPod',
+      });
+    }
+  };
+
   const goToSavingsPod = () =>
     NavigationService.navigate('UserBankingStack', {screen: 'SavingsPod'});
 
@@ -183,6 +200,16 @@ const Home: React.FC = () => {
 
   const goToRewards = () =>
     NavigationService.navigate('WyreStack', {screen: 'WyreIntro'});
+
+  const getInvestmentsTopText = (): string => {
+    if (rewardsPurchaseFailed) {
+      return 'Transaction Failed';
+    } else if (investmentsTransactionPending) {
+      return 'Transaction Pending';
+    } else {
+      return 'Balance';
+    }
+  };
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewStyle}>
@@ -376,9 +403,7 @@ const Home: React.FC = () => {
           <InfoCard
             IconSvg={InvestmentIcon}
             labelText="Investments"
-            rightTopText={
-              investmentsTransactionPending ? 'Transaction Pending' : 'Balance'
-            }
+            rightTopText={getInvestmentsTopText()}
             rightBottomText={'$' + amounts.investments}
             onPress={goToInvestmentsPod}
           />
