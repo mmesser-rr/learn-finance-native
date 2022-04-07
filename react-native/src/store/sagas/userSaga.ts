@@ -53,10 +53,12 @@ export function* onboardingSilentSignIn() {
 
 export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(loadingActions.enableLoader());
+
   yield put(userActions.clearUserState());
   yield put(bankingActions.clearBankingState());
   yield put(wyreActions.clearWyreState());
   yield put(onboardingActions.clearOnboardingState());
+
   try {
     const loginResponse = yield Auth.signIn({username: phone, password});
     console.log('Sign In Response:');
@@ -110,6 +112,7 @@ export function* loginRequest({phone, password}: ILoginRequest) {
     }
     yield put(userActions.loginFailed(msg, userNotFound));
   }
+
   yield put(loadingActions.disableLoader());
 }
 
