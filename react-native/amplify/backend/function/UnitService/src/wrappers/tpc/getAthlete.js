@@ -11,8 +11,7 @@ const getAthleteStatement = gql`
       mobilePhone
       dateOfBirth
       plaidToken
-      unitToken
-      unitPlaidProcessorToken{
+      plaidProcessorToken{
         plaidAccountId
         processorToken
       }
@@ -46,15 +45,13 @@ const getAthleteStatement = gql`
 
 const responseLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.getAthlete);
 
-const getAthlete = () => (
-  axios,
+const getAthlete = (axios) => (
   athleteId
 ) => axios.post("/", {
   query: print(getAthleteStatement),
   variables: {
     athleteId
-  },
-  authMode: 'AMAZON_COGNITO_USER_POOLS'
+  }
 }).then(responseLens);
 
 module.exports = {

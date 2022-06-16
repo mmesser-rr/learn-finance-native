@@ -1,6 +1,5 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const {axios} = require("../env");
 
 const getAthleteUnitAccountById = (athlete, unitAccountId) => {
   const accounts = athlete.accounts.items;
@@ -15,13 +14,14 @@ const getAthleteUnitAccountById = (athlete, unitAccountId) => {
     });
 }
 
-// const getAthleteUnitAccount = (athleteId, unitAccountId) => tpc.getAthlete(athleteId).then(athlete => 
-//   (athlete != null) ? 
-//   getAthleteUnitAccountById(athlete, unitAccountId) : 
-//     Promise.reject(`No athlete found with id ${athleteId}`)
-// )
+const getAthleteUnitAccount = (athleteId, unitAccountId) => tpc.getAthlete(athleteId).then(athlete => 
+  (athlete != null) ? 
+  getAthleteUnitAccountById(athlete, unitAccountId) : 
+    Promise.reject(`No athlete found with id ${athleteId}`)
+)
 
-module.exports.getAthleteUnitAccountById = async (event, athleteId, unitAccountId) => {
-  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
-return tpc.getAthlete(axios, athleteId).then(res => getAthleteUnitAccountById(res, unitAccountId))
+module.exports = {
+  getAthleteUnitAccountById: getAthleteUnitAccount
 }
+
+

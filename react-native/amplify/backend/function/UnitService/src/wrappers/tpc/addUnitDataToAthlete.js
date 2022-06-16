@@ -2,7 +2,7 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateAthleteUnitLookupStatement = gql`
-  mutation updateAthleteUnitLookup($athleteId: ID!, $unitLookup: AthleteUnitLookupInput!){
+  mutation updateAthleteUnitLookup($athleteId: ID!, $unitLookup: AthleteUnitLookupInput!) {
     updateAthlete(input: {unitLookup: $unitLookup, id: $athleteId}) {
       email
       firstName
@@ -16,8 +16,7 @@ const updateAthleteUnitLookupStatement = gql`
   } 
 `
 
-const addUnitDataToAthlete = () => (
-  axios,
+const addUnitDataToAthlete = (axios) => (
   athleteId,
   unitLookup
 ) => axios.post("/", {
@@ -25,11 +24,10 @@ const addUnitDataToAthlete = () => (
   variables: {
     athleteId,
     unitLookup
-  },
-  authMode: 'AMAZON_COGNITO_USER_POOLS'
+  }
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data.errors)) : Promise.resolve(res.data.data.updateAthleteUnitLookup);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthleteUnitLookup);
 
 module.exports = {
   addUnitDataToAthlete

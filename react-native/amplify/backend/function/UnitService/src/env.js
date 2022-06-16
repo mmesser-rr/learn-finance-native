@@ -4,6 +4,7 @@ const { Configuration, PlaidApi, PlaidEnvironments } = require('plaid');
 
 const { Unit } = require("@unit-finance/unit-node-sdk");
 const axios = require('axios');
+
 const jsonFile = compose(JSON.parse, fs.readFileSync)("./defaultEnv.json")
 
 const getEnv = (varName, required = true) => {
@@ -46,11 +47,10 @@ const devEnv = () => ({
   axios: axios.create({
     baseURL: getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-     // 'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
+      'x-api-key': getEnvOrJson("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 })
-
 
 const liveEnv = () => ({
   plaid: new PlaidApi(configuration),
@@ -58,7 +58,7 @@ const liveEnv = () => ({
   axios: axios.create({
     baseURL: getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIENDPOINTOUTPUT"),
     headers: {
-      //'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
+      'x-api-key': getEnv("API_THEPLAYERSCOMPANY_GRAPHQLAPIKEYOUTPUT")
     }
   })
 });

@@ -2,16 +2,15 @@ const { createAndPersistAccount } = require("./createAccount");
 const { repeat, map } = require("ramda");
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const {axios} = require("../env");
 
 /********************************************* /
 
 Note : The app creates 3 accounts on setup
 
 *********************************************/
-const availableName = ["SAVINGS", "SPENDING","INVESTMENTS"];
+const NO_OF_ACCOUNTS = 3;
 
-const createAppAndAccount = (athlete, ssn, event) => {
+const createAppAndAccount = (ssn, athlete) => {
   const custId = athlete?.unitLookup?.custId;
 
   if (custId) {
@@ -20,17 +19,28 @@ const createAppAndAccount = (athlete, ssn, event) => {
 
   return unit.createApplication(ssn, athlete)
     .catch(err => (err?.appId) ?
-      Promise.reject(tpc.addUnitDataToAthlete(axios, athlete.id, err))
-      : Promise.reject(JSON.stringify(err))
+      Promise.reject(tpc.addUnitDataToAthlete(athlete.id, err))
+      : Promise.reject(err)
     )
 
-    .then(res => tpc.addUnitDataToAthlete(axios, athlete.id, res))
+    .then(res => tpc.addUnitDataToAthlete(athlete.id, res))
     .then(res => Promise.all(
-      map(pod => createAndPersistAccount(event, athlete.id, pod), availableName)
+      map(
+        fn => fn(athlete.id), 
+        repeat(
+          createAndPersistAccount,
+          NO_OF_ACCOUNTS
+        )
+      )
     ));
 }
 
-module.exports.createAppAndAccount = async (event, ssn, athleteId) => {
-  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
-  return tpc.getAthlete(axios, athleteId).then(res => createAppAndAccount(res, ssn, event));
+const createAppAndAccountFromId = (ssn, athleteId) => tpc.getAthlete(athleteId).then(athlete => 
+  (athlete != null) ? 
+    createAppAndAccount(ssn, athlete) : 
+    Promise.reject(`No athlete found with id ${athleteId}`)
+);
+
+module.exports = {
+  createAppAndAccount: createAppAndAccountFromId
 }
