@@ -8,13 +8,12 @@ const TYPE = "depositAccount";
 const DIRECTION = "Credit";
 
 
-const parseApplicationParams = (unitAccountId, plaidProcessorToken, description, amount, idempotencyKey) => ({
+const parseApplicationParams = (unitAccountId, plaidProcessorToken, description, amount) => ({
   type: APPLICATION_TYPE,
   attributes: {
     amount: amount,
     direction: DIRECTION,
     description: description,
-    idempotencyKey: idempotencyKey,
     plaidProcessorToken: plaidProcessorToken
   },
   relationships:{
@@ -28,16 +27,14 @@ const parseApplicationParams = (unitAccountId, plaidProcessorToken, description,
 });
 
 
-const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description, amount, idempotencyKey, token) => {
-  unit.payments.headers.Authorization = `Bearer ${token}`
-  const unitParams = parseApplicationParams(unitAccountId, plaidProcessorToken, description, amount, idempotencyKey);
-  return unit.payments.create(unitParams).then(res => res.data)
+const plaidPayment = (unit) => (unitAccountId, plaidProcessorToken, description, amount) => {
+  const unitParams = parseApplicationParams(unitAccountId, plaidProcessorToken, description, amount);
+  return unit.payments.create(unitParams).then(resultLens)
     .catch(err => Promise.reject(`Failed to submit payment to Unit API. Error: ${err}`));
 }
 
 const resultLens = (res) => ({
-  transactionId: res.data.relationships.transaction.data.id,
-  transactionType: res.data.type,
+  transactionId: res.data.id,
   amount: res.data.attributes.amount,
   direction: res.data.attributes.direction,
   status: res.data.attributes.status,

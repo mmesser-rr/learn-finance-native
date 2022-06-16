@@ -1,23 +1,7 @@
 {
     "fieldName": "unitWebhookService",
     "arguments": {
-      "data": {
-        "header":"133tgtu7924efvfh76y",
-        "id": "350065", 
-        "type": "transaction.updated",
-        "attributes": {
-          "createdAt": "2020-07-30T09:17:21.593Z",
-          "interchange": 2.43
-        },
-        "relationships": {
-          "transaction": {
-            "data": {
-              "type": "purchase",
-              "id": "336696"
-            }
-          }
-        }
-      }
+      "data": "281b7b68-3f7b-4095-8f48-42e56f24fbc3",
     }
 }
   

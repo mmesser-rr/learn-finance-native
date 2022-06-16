@@ -2,16 +2,14 @@ const { print } = require('graphql');
 const gql = require('graphql-tag');
 
 const updateTransactionStatement = gql`
-  mutation persistRecentTransaction($transactionId: ID!, $athleteId: String!, $amount: Float, $status: String!, $createdAt: String, $read: Boolean, $direction: String, $transactionType: String!, $podAllocation: PodSettingsInput, $idempotencyKey: String) {
-    createRecentTransaction(input: {amount: $amount, transactionId: $transactionId, athleteId: $athleteId, status: $status, createdAt: $createdAt, read: $read, direction: $direction, transactionType: $transactionType, podAllocation: $podAllocation, idempotencyKey: $idempotencyKey }) {
+  mutation persistRecentTransaction($transactionId: String!, $athleteId: String!, $amount: Float, $status: String, $createdAt: String, $read: Boolean, $direction: String, $podAllocation: PodSettingsInput) {
+    createRecentTransaction(input: {amount: $amount, transactionId: $transactionId, athleteId: $athleteId, status: $status, createdAt: $createdAt, read: $read, direction: $direction, podAllocation: $podAllocation }) {
       transactionId
       createdAt
       athleteId
       amount
       status
       direction
-      transactionType
-      idempotencyKey
       podAllocation{
         SAVINGS
         INVESTMENTS
@@ -21,8 +19,7 @@ const updateTransactionStatement = gql`
   } 
 `
 
-const persistTransaction = () => (
-  axios,
+const persistTransaction = (axios) => (
  transactionId,
  athleteId, 
  amount, 
@@ -30,9 +27,7 @@ const persistTransaction = () => (
  createdAt,
  read, 
  direction,
- transactionType,
- podAllocation,
- idempotencyKey
+ podAllocation
 ) => axios.post("/", {
   query: print(updateTransactionStatement),
   variables: {
@@ -43,19 +38,13 @@ const persistTransaction = () => (
     createdAt,
     read, 
     direction,
-    transactionType,
-    podAllocation,
-    idempotencyKey
-  },
-  authMode: 'AMAZON_COGNITO_USER_POOLS'
+    podAllocation
+  }
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve(res.data.data.createRecentTransaction);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(JSON.stringify(res.data)) : Promise.resolve({ amount: res.data.data.createRecentTransaction.amount,
+  transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation });
 
 module.exports = {
     persistTransaction
 }
-//{ amount: res.data.data.createRecentTransaction.amount,
-// transactionId: res.data.data.createRecentTransaction.transactionId, status:res.data.data.createRecentTransaction.status, direction: res.data.data.createRecentTransaction.direction, podAllocation:res.data.data.createRecentTransaction.podAllocation, athleteId: res.data.data.createRecentTransaction.athleteId, transactionType: res.data.data.createRecentTransaction.transactionType,
-// idempotencyKey: res.data.data.createRecentTransaction.idempotencyKey
-// }

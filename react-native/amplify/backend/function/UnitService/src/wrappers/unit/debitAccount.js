@@ -7,34 +7,32 @@ const APPLICATION_TYPE = "achPayment";
 const DIRECTION = "Debit";
 const TYPE = "depositAccount";
 
-const parseApplicationParams = (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey) => ({
+const parseApplicationParams = (data) => ({
   type: APPLICATION_TYPE,
   attributes: {
-    amount: amount,
+    amount: data.amount,
     direction: DIRECTION,
-    description: description,
-    addenda: addenda,
-    idempotencyKey: idempotencyKey,
+    description: data.description,
+    addenda: data.addenda,
     counterparty:{
-      name: receiverName,
-      routingNumber: receiverRoutingNumber,
-      accountNumber: receiverAccountNumber,
-      accountType: receiverAccountType
+      name: data.receiverName,
+      routingNumber: data.receiverRoutingNumber,
+      accountNumber: data.receiverAccountNumber,
+      accountType: data.receiverAccountType
     }
   },
   relationships:{
     account:{
         data:{
           type: TYPE,
-          id: unitAccountId
+          id: data.unitAccountId
         }
       }
     }
 });
 
-const debitAccount = (unit) => (unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey, token) => {
-  unit.payments.headers.Authorization = `Bearer ${token}`
-  const unitParams = parseApplicationParams(unitAccountId, amount, addenda, description, receiverName, receiverRoutingNumber, receiverAccountNumber, receiverAccountType, idempotencyKey);
+const debitAccount = (unit) => (data) => {
+  const unitParams = parseApplicationParams(data);
   return unit.payments.create(unitParams)
     .then(resultLens)
     .catch(err => Promise.reject(`Failed to submit Payment to Unit API. Error: ${err.message}`));
@@ -42,7 +40,6 @@ const debitAccount = (unit) => (unitAccountId, amount, addenda, description, rec
 
 const resultLens = (res) => ({
   transactionId: res.data.id,
-  transactionType: res.data.type,
   amount: res.data.attributes.amount,
   direction: res.data.attributes.direction,
   status: res.data.attributes.status,

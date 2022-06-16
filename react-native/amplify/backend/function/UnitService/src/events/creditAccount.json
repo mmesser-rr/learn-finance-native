@@ -1,25 +1,16 @@
 {
   "fieldName": "creditAccount",
-  "request":{
-    "headers":{
-      "authorization": "eyJraWQiOiJUOGV3UHhocTdBSkxnQVZ2aU1PWkUzTUN4RUw1dWR4YVJId0lrNnNCaE5jPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJlMzZkYmJhMy1jZmRjLTQyOTUtOTU4Yy04YTE4NjM4NGU3ZjAiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX3Q5YkRqVXE1OSIsInBob25lX251bWJlcl92ZXJpZmllZCI6dHJ1ZSwiY29nbml0bzp1c2VybmFtZSI6ImUzNmRiYmEzLWNmZGMtNDI5NS05NThjLThhMTg2Mzg0ZTdmMCIsIm9yaWdpbl9qdGkiOiJkZDE4MzMyNy1hOGIwLTQzNTAtOTRhYS04ZWIyN2QyNzM0YmMiLCJhdWQiOiI1b2ZybzVraG0wZmE1Z3ViaWYyMzczZTF2cCIsImV2ZW50X2lkIjoiMDlhNWI3ZTUtZTEzMy00N2Q0LTkzZmQtMmJjOTk3NWE2NWQ5IiwidG9rZW5fdXNlIjoiaWQiLCJhdXRoX3RpbWUiOjE2NDkyNjIzMDgsInBob25lX251bWJlciI6IisxNDg0OTI2OTA2MCIsImV4cCI6MTY0OTI2NTkwOCwiaWF0IjoxNjQ5MjYyMzA4LCJqdGkiOiI1OGJhMjQ0MC04M2ZjLTRiODItYWRjOC1hMGZjZWZmM2U3ZWEiLCJlbWFpbCI6Im9tb0BtYWlsLmNvbSJ9.DAh6Q_EldrRlNqcgiAO6LBjklPhDeXe1AZIY7rrugqDT28qSzfLfymBDs2Gnz7zJmw02UUMSDCdMiwcbYRBOGDftqS5PDtSGLxUuGpsqeoDQ5cGYggwJeMlXcJI7pXp7HxSMZHGlFKiedAxwU-haYhzizSsFTCpd-7SpWNvoAMlaaOIeraUjfEFNYYwrKSRHiKICPSzHltwj-HaaTbMYkrSE5BVKl6ke3gcjCyg8q0xOZTqtZzLKrDgBeKy4E3CvyXCoEolevEGzpIxBhVZobGTNEVtxnBQZOr6m5KuQv21L3zkGnIDFXhKgxnVQ0iUrKvVQydHCA_1j5Xjc3kaZlQ"
-    }
-  },
-  "identity":{
-    "claims":{
-      "sub": "e36dbba3-cfdc-4295-958c-8a186384e7f0"
-    }
-  },
   "arguments": {
-      "athleteId": "e36dbba3-cfdc-4295-958c-8a186384e7f0",
-      "amount": 1500,
+    "athleteId": "281b7b68-3f7b-4095-8f48-42e56f24fbc3",
+    "data":{
+      "unitAccountId" : "350065",
+      "amount": 10,
       "addenda": "Some very long payment",
-      "idempotencyKey": "4095-8f48-42e56f24f-bc33333",
       "description": "Testing #5",
       "receiverName": "dee tres",
-      "unitToken": "v2.public.eyJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VySWQiOm51bGwsInN1YiI6ImN1c3RvbWVyLzI4MTkyNS9vbW9AbWFpbC5jb20iLCJleHAiOiIyMDIyLTA0LTA3VDE2OjM5OjQ5LjYyMloiLCJqdGkiOm51bGwsIm9yZ0lkIjpudWxsLCJzY29wZSI6ImN1c3RvbWVycyBhY2NvdW50cyBwYXltZW50cyBwYXltZW50cy13cml0ZSBjb3VudGVycGFydGllcyBjb3VudGVycGFydGllcy13cml0ZSIsImN1c3RvbWVySWQiOiIyODE5MjUiLCJ1c2VyVHlwZSI6ImN1c3RvbWVyIn2PqWwxH-TE0QkQCv3nd6CW2V_cDdDowTTR0GXtD9bj-pM6jRmSLQbpQDNvIt9ntB3PaEEh3sTRXvLE-X-L3OcL",
       "receiverRoutingNumber": "091311229",
-      "receiverAccountNumber": "1000376859",
+      "receiverAccountNumber": "864800000000",
       "receiverAccountType" : "Checking"
+    }
   }
 }
