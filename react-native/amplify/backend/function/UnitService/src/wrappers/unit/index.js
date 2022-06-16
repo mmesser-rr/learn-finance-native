@@ -6,28 +6,17 @@ const { creditAccount } = require("./creditAccount");
 const { plaidPayment } = require("./plaidPayment");
 const { getAthleteUnitAccountById } = require("./getAthleteUnitAccountById");
 const { getAllAthleteAccounts } = require("./getAllAthleteAccounts");
-const {getAllUnitTransaction} = require("./getAllUnitTransaction");
 const {getUnitTransactionById} = require("./getUnitTransactionById");
-const {listUnitBalanceHistory} = require("./listUnitBalanceHistory");
-const {createAthleteUnitToken} = require("./createAthleteUnitToken");
-const {getAccountStatement} = require("./getAccountStatement");
-const {athleteTokenVerification} = require("./athleteTokenVerification");
-
 const { unit } = require("../../env.js");
 
 module.exports = {
   createApplication: createApplication(unit),
   createAccount: createAccount(unit),
-  createAthleteUnitToken: createAthleteUnitToken(unit),
-  getAccountStatement: getAccountStatement(unit),
-  athleteTokenVerification: athleteTokenVerification(unit),
   debitAccount: debitAccount(unit),
   getAllAthleteAccounts: getAllAthleteAccounts(unit),
   getAthleteUnitAccountById: getAthleteUnitAccountById(unit),
   creditAccount: creditAccount(unit),
   plaidPayment: plaidPayment(unit),
-  listUnitBalanceHistory: listUnitBalanceHistory(unit),
   getUnitTransactionById: getUnitTransactionById(unit),
-  getAllUnitTransaction: getAllUnitTransaction(unit),
   bookPayment: bookPayment(unit)
 }
