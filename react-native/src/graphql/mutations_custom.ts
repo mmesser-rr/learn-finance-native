@@ -1,29 +1,59 @@
-export const createPlaidPaymentCustom = /* GraphQL */ `
-  mutation CreatePlaidPaymentCustom(
-    $athleteId: ID!
-    $plaidAccountId: String!
-    $amount: Float!
-    $description: String!
-    $idempotencyKey: String!
-    $unitToken: String!
-  ) {
-    createPlaidPayment(
-      athleteId: $athleteId
-      plaidAccountId: $plaidAccountId
-      amount: $amount
-      description: $description
-      idempotencyKey: $idempotencyKey
-      unitToken: $unitToken
-    ) {
-      status
-    }
-  }
-`;
+/* eslint-disable */
 
-export const createWyreAccountCustom = /* GraphQL */ `
-  mutation CreateWyreAccountCustom($athleteId: ID!) {
-    createWyreAccount(athleteId: $athleteId) {
-      wyreAccountId
+export const getOpportunityFormData = /* GraphQL */ `
+  query getOpportunity($id: ID!) {
+    getOpportunity(id: $id) {
+      id
+      categories
+      createdAt
+      creator {
+        id
+        handle
+      }
+      creatorId
+      details
+      detailsTldr
+      endDateTime
+      eventType
+      heroPhotoUri
+      isPrivate
+      locationDetail {
+        address
+        city
+        country
+        name
+        state
+        unit
+        zipCode
+      }
+      logoUri
+      onlineReserved
+      onlineTotal
+      organizations {
+        items {
+          id
+          displayName
+          relationshipType
+        }
+      }
+      orgs {
+        displayName
+        relationshipType
+      }
+      registrationUrl
+      reward
+      rewardDetails
+      seatsReserved
+      seatsTotal
+      startDateTime
+      subtitle
+      status
+      tags
+      timezone
+      title
+      updatedAt
+      websitePrompt
+      websiteUrl
     }
   }
 `;
