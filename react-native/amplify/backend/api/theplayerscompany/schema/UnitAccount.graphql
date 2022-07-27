@@ -14,16 +14,11 @@ type Attributes{
    counterparty: Counterparty   
    name: String
    status: String
-   date: String
    routingNumber: String
    accountNumber: String
    currency: String
-   token: String
-   verificationToken: String
-   expiresIn: Int
    hold: Float
-   available: Float   
-   tags: Tags  
+   available: Float     
 }
 
 type Counterparty{
@@ -31,9 +26,4 @@ type Counterparty{
    routingNumber: String
    accountNumber: String
    accountType: String
-}
-
-type Tags{
-   podName: String
-   athleteId: String
 }
