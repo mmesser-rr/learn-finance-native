@@ -1,0 +1,29 @@
+type Learn @model @searchable {
+  creatorId: ID!
+  creator: Athlete! @hasOne(fields: ["creatorId"])
+  bgImageUri: String
+  sponsor: String!
+  title: String!
+  level: LearnLevel!
+  reward: Int!
+  deposits: [Deposit]
+}
+
+type Deposit {
+  videoUri: String
+  title: String!
+  questions: [Quiz]
+}
+
+type Quiz {
+  questionText: String!
+  answers: [String]!
+  correctAnswer: String!
+}
+
+enum LearnLevel {
+  BEGINNER
+  MEDIUM
+  ADVANCED
+  EXPERT
+}

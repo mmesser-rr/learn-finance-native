@@ -44,8 +44,8 @@ const PhoneCodeVerify: React.FC<PhoneCodeVerifyProps> = ({
   const handleSubmit = async () => {
     updateLoading(true);
     try {
-      const response = await Auth.confirmSignUp(`+1${mobilePhone}`, code);
-      console.log('confirmSignUp response:', response);
+      // const response = await Auth.confirmSignUp(`+1${mobilePhone}`, code);
+      // console.log('confirmSignUp response:', response);
       dispatch(onboardingSilentSignIn());
       goToNextStep();
     } catch (error: any) {
