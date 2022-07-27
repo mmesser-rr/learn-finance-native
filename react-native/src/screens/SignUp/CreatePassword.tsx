@@ -115,6 +115,7 @@ const CreatePassword: React.FC<CreatePasswordProps> = ({
         password,
         attributes: {
           phone_number: phoneNumber,
+          email: ""
         },
       });
       console.log('signUp response', response);

@@ -1,16 +1,14 @@
 type Query{
-    listPlaidAccounts(athleteId: ID!): [PlaidAccountDetail] @function(name: "PlaidService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    listAthleteUnitAccounts(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")  @auth(rules: [{allow: private, provider: userPools}])
-    getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
+    listPlaidAccounts(athleteId: ID!): [PlaidAccountDetail] @function(name: "PlaidService-${env}")
+    listAthletUnitAccounts(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
+    getAthleteUnitAccountById(athleteId: ID!, unitAccountId: String!): UnitAccount @function(name: "UnitService-${env}")
 
-    getWyreAccount(athleteId: ID!): WyreAccount @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    getWyreTransactionById(wyreTransactionId: String!): WyreAccount @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    listAllWyreTransaction(athleteId: ID!): WyreAccount @function(name: "WyreService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-
-    getUnitTransactionById(unitAccountId: String!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    listAllUnitTransactions(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    listUnitBalanceHistory(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}") @auth(rules: [{allow: private, provider: userPools}])
-    unitAccountStatement(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")  @auth(rules: [{allow: private, provider: userPools}])
-    getAthleteSchool: [AthleteTeam] @function(name: "AirtableService-${env}") @auth(rules: [{ allow: public }])
+    getUnitTransactionById(athleteId: ID!, unitTransactionId: String!): UnitAccount @function(name: "UnitService-${env}")
+    listAllUnitTransactions(athleteId: ID!): [UnitAccount] @function(name: "UnitService-${env}")
+    nearbyOpportunities(
+        location: LocationInput!, 
+        distInMeters: Int, 
+        limit: Int, 
+        nextToken: String
+    ): ModelOpportunityConnection
 }
-

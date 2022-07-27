@@ -2,6 +2,64 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const initiatePhoneChallenge = /* GraphQL */ `
+  mutation InitiatePhoneChallenge($phoneNumber: String!) {
+    initiatePhoneChallenge(phoneNumber: $phoneNumber) {
+      code
+      phoneNumber
+      verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const returnUserChallenge = /* GraphQL */ `
+  mutation ReturnUserChallenge($phoneNumber: String!) {
+    returnUserChallenge(phoneNumber: $phoneNumber) {
+      code
+      phoneNumber
+      verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const validateReturnUser = /* GraphQL */ `
+  mutation ValidateReturnUser($phoneNumber: String!, $code: String!) {
+    validateReturnUser(phoneNumber: $phoneNumber, code: $code)
+  }
+`;
+export const tryPhoneChallenge = /* GraphQL */ `
+  mutation TryPhoneChallenge($phoneNumber: String!, $code: String!) {
+    tryPhoneChallenge(phoneNumber: $phoneNumber, code: $code)
+  }
+`;
+export const generateInvite = /* GraphQL */ `
+  mutation GenerateInvite {
+    generateInvite {
+      code
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const initiateEmailChallenge = /* GraphQL */ `
+  mutation InitiateEmailChallenge($email: String!) {
+    initiateEmailChallenge(email: $email) {
+      code
+      email
+      verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const tryEmailChallenge = /* GraphQL */ `
+  mutation TryEmailChallenge($email: String!, $code: String!) {
+    tryEmailChallenge(email: $email, code: $code)
+  }
+`;
 export const openAppAndAccount = /* GraphQL */ `
   mutation OpenAppAndAccount($ssn: String!, $athleteId: ID!) {
     openAppAndAccount(ssn: $ssn, athleteId: $athleteId) {
@@ -10,51 +68,16 @@ export const openAppAndAccount = /* GraphQL */ `
         lastName
         mobilePhone
         athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
         email
-        tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        unitToken
-        unitPlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyrePlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
+        wyreId
         isActive
+        handle
         id
         createdAt
         updatedAt
@@ -67,63 +90,27 @@ export const openAppAndAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
 export const openAccount = /* GraphQL */ `
-  mutation OpenAccount($athleteId: ID!, $podName: String!) {
-    openAccount(athleteId: $athleteId, podName: $podName) {
+  mutation OpenAccount($athleteId: ID!) {
+    openAccount(athleteId: $athleteId) {
       athlete {
         firstName
         lastName
         mobilePhone
         athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
         email
-        tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        unitToken
-        unitPlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyrePlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
+        wyreId
         isActive
+        handle
         id
         createdAt
         updatedAt
@@ -136,7 +123,29 @@ export const openAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
+    }
+  }
+`;
+export const unitWebhookService = /* GraphQL */ `
+  mutation UnitWebhookService($data: String) {
+    unitWebhookService(data: $data) {
+      type
+      id
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
@@ -153,69 +162,33 @@ export const podSettings = /* GraphQL */ `
       investments: $investments
       spending: $spending
     ) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
+      athlete {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
         isActive
+        handle
+        id
+        createdAt
+        updatedAt
       }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      unitPlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyrePlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
+      unitAccountId
+      routingCode
+      accountNumber
+      podName
       id
       createdAt
       updatedAt
+      athleteAccountsId
     }
   }
 `;
@@ -241,317 +214,36 @@ export const updatePlaidLink = /* GraphQL */ `
     }
   }
 `;
-export const createAthleteUnitToken = /* GraphQL */ `
-  mutation CreateAthleteUnitToken(
-    $athleteId: ID!
-    $verificationToken: String!
-    $verificationCode: String!
-  ) {
-    createAthleteUnitToken(
-      athleteId: $athleteId
-      verificationToken: $verificationToken
-      verificationCode: $verificationCode
-    ) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
-      }
-    }
-  }
-`;
-export const athleteUnitTokenVerification = /* GraphQL */ `
-  mutation AthleteUnitTokenVerification($athleteId: ID!) {
-    athleteUnitTokenVerification(athleteId: $athleteId) {
-      type
-      id
-      attributes {
-        createdAt
-        direction
-        amount
-        balance
-        summary
-        description
-        counterparty {
-          name
-          routingNumber
-          accountNumber
-          accountType
-        }
-        name
-        status
-        date
-        routingNumber
-        accountNumber
-        currency
-        token
-        verificationToken
-        expiresIn
-        hold
-        available
-        tags {
-          podName
-          athleteId
-        }
-      }
-    }
-  }
-`;
-export const createWyreAccount = /* GraphQL */ `
-  mutation CreateWyreAccount($athleteId: ID!) {
-    createWyreAccount(athleteId: $athleteId) {
-      firstName
-      lastName
-      mobilePhone
-      athleteTag
-      email
-      tag
-      level
-      sport {
-        name
-        airTableId
-        isActive
-      }
-      team {
-        name
-        airTableId
-        isActive
-      }
-      address {
-        streetAddress
-        apt
-        city
-        state
-        zipCode
-      }
-      dateOfBirth
-      accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
-        nextToken
-      }
-      unitLookup {
-        appId
-        custId
-      }
-      podSettings {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      plaidToken
-      unitToken
-      unitPlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyrePlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
-      isActive
-      id
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const debitWyreAccount = /* GraphQL */ `
-  mutation DebitWyreAccount(
-    $athleteId: ID!
-    $plaidAccountId: String!
-    $amount: Float!
-    $description: String
-    $idempotencyKey: String!
-  ) {
-    debitWyreAccount(
-      athleteId: $athleteId
-      plaidAccountId: $plaidAccountId
-      amount: $amount
-      description: $description
-      idempotencyKey: $idempotencyKey
-    ) {
-      owner
-      status
-      balances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-      createdAt
-      pusherChannel
-      srn
-      notes
-      depositAddresses {
-        ETH
-        BTC
-        AVAX
-        XLM
-      }
-      availableBalances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-      name
-      id
-      type
-      pendingInterestBalances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-    }
-  }
-`;
-export const creditWyreAccount = /* GraphQL */ `
-  mutation CreditWyreAccount(
-    $athleteId: ID!
-    $plaidAccountId: String!
-    $amount: Float!
-    $description: String
-    $idempotencyKey: String!
-  ) {
-    creditWyreAccount(
-      athleteId: $athleteId
-      plaidAccountId: $plaidAccountId
-      amount: $amount
-      description: $description
-      idempotencyKey: $idempotencyKey
-    ) {
-      owner
-      status
-      balances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-      createdAt
-      pusherChannel
-      srn
-      notes
-      depositAddresses {
-        ETH
-        BTC
-        AVAX
-        XLM
-      }
-      availableBalances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-      name
-      id
-      type
-      pendingInterestBalances {
-        DAI
-        AUD
-        USD
-        MXN
-        USDC
-        BTC
-        ETH
-        MUSDC
-      }
-    }
-  }
-`;
 export const createPlaidPayment = /* GraphQL */ `
   mutation CreatePlaidPayment(
     $athleteId: ID!
     $plaidAccountId: String!
     $amount: Float!
-    $description: String!
-    $idempotencyKey: String!
-    $unitToken: String!
+    $description: String
   ) {
     createPlaidPayment(
       athleteId: $athleteId
       plaidAccountId: $plaidAccountId
       amount: $amount
       description: $description
-      idempotencyKey: $idempotencyKey
-      unitToken: $unitToken
     ) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
+      type
       id
-      updatedAt
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
@@ -560,11 +252,9 @@ export const bookPayment = /* GraphQL */ `
     $athleteId: ID!
     $unitAccountId: String!
     $amount: Float!
-    $description: String!
+    $description: String
     $receiverUnitAccountId: String!
     $receiverAccountType: String
-    $idempotencyKey: String!
-    $unitToken: String!
   ) {
     bookPayment(
       athleteId: $athleteId
@@ -573,44 +263,42 @@ export const bookPayment = /* GraphQL */ `
       description: $description
       receiverUnitAccountId: $receiverUnitAccountId
       receiverAccountType: $receiverAccountType
-      idempotencyKey: $idempotencyKey
-      unitToken: $unitToken
     ) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
+      type
       id
-      updatedAt
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
 export const debitAccount = /* GraphQL */ `
   mutation DebitAccount(
     $athleteId: ID!
+    $unitAccountId: String!
     $amount: Float!
-    $description: String!
+    $description: String
     $receiverName: String!
     $receiverRoutingNumber: String!
     $receiverAccountNumber: String!
     $receiverAccountType: String
     $addenda: String
-    $idempotencyKey: String!
-    $unitToken: String!
   ) {
     debitAccount(
       athleteId: $athleteId
+      unitAccountId: $unitAccountId
       amount: $amount
       description: $description
       receiverName: $receiverName
@@ -618,44 +306,42 @@ export const debitAccount = /* GraphQL */ `
       receiverAccountNumber: $receiverAccountNumber
       receiverAccountType: $receiverAccountType
       addenda: $addenda
-      idempotencyKey: $idempotencyKey
-      unitToken: $unitToken
     ) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
+      type
       id
-      updatedAt
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
 export const creditAccount = /* GraphQL */ `
   mutation CreditAccount(
     $athleteId: ID!
+    $unitAccountId: String!
     $amount: Float!
-    $description: String!
+    $description: String
     $receiverName: String!
     $receiverRoutingNumber: String!
     $receiverAccountNumber: String!
     $receiverAccountType: String
     $addenda: String
-    $idempotencyKey: String!
-    $unitToken: String!
   ) {
     creditAccount(
       athleteId: $athleteId
+      unitAccountId: $unitAccountId
       amount: $amount
       description: $description
       receiverName: $receiverName
@@ -663,26 +349,24 @@ export const creditAccount = /* GraphQL */ `
       receiverAccountNumber: $receiverAccountNumber
       receiverAccountType: $receiverAccountType
       addenda: $addenda
-      idempotencyKey: $idempotencyKey
-      unitToken: $unitToken
     ) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
+      type
       id
-      updatedAt
+      attributes {
+        createdAt
+        direction
+        amount
+        balance
+        summary
+        description
+        name
+        status
+        routingNumber
+        accountNumber
+        currency
+        hold
+        available
+      }
     }
   }
 `;
@@ -696,8 +380,10 @@ export const createAthlete = /* GraphQL */ `
       lastName
       mobilePhone
       athleteTag
+      bio
+      profilePhotoUri
+      heroPhotoUri
       email
-      tag
       level
       sport {
         name
@@ -718,17 +404,6 @@ export const createAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
         nextToken
       }
       unitLookup {
@@ -741,17 +416,16 @@ export const createAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
-      unitToken
-      unitPlaidProcessorToken {
+      plaidProcessorToken {
         plaidAccountId
         processorToken
       }
-      wyrePlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
+      wyreId
       isActive
+      handle
+      socialHandles {
+        nextToken
+      }
       id
       createdAt
       updatedAt
@@ -768,8 +442,10 @@ export const updateAthlete = /* GraphQL */ `
       lastName
       mobilePhone
       athleteTag
+      bio
+      profilePhotoUri
+      heroPhotoUri
       email
-      tag
       level
       sport {
         name
@@ -790,17 +466,6 @@ export const updateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
         nextToken
       }
       unitLookup {
@@ -813,17 +478,16 @@ export const updateAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
-      unitToken
-      unitPlaidProcessorToken {
+      plaidProcessorToken {
         plaidAccountId
         processorToken
       }
-      wyrePlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
+      wyreId
       isActive
+      handle
+      socialHandles {
+        nextToken
+      }
       id
       createdAt
       updatedAt
@@ -840,8 +504,10 @@ export const deleteAthlete = /* GraphQL */ `
       lastName
       mobilePhone
       athleteTag
+      bio
+      profilePhotoUri
+      heroPhotoUri
       email
-      tag
       level
       sport {
         name
@@ -862,17 +528,6 @@ export const deleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-          athleteId
-        }
         nextToken
       }
       unitLookup {
@@ -885,17 +540,16 @@ export const deleteAthlete = /* GraphQL */ `
         SPENDING
       }
       plaidToken
-      unitToken
-      unitPlaidProcessorToken {
+      plaidProcessorToken {
         plaidAccountId
         processorToken
       }
-      wyrePlaidProcessorToken {
-        plaidAccountId
-        processorToken
-      }
-      wyreAccountId
+      wyreId
       isActive
+      handle
+      socialHandles {
+        nextToken
+      }
       id
       createdAt
       updatedAt
@@ -913,51 +567,16 @@ export const createAthleteAccount = /* GraphQL */ `
         lastName
         mobilePhone
         athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
         email
-        tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        unitToken
-        unitPlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyrePlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
+        wyreId
         isActive
+        handle
         id
         createdAt
         updatedAt
@@ -970,7 +589,6 @@ export const createAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -985,51 +603,16 @@ export const updateAthleteAccount = /* GraphQL */ `
         lastName
         mobilePhone
         athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
         email
-        tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        unitToken
-        unitPlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyrePlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
+        wyreId
         isActive
+        handle
         id
         createdAt
         updatedAt
@@ -1042,7 +625,6 @@ export const updateAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
     }
   }
 `;
@@ -1057,51 +639,16 @@ export const deleteAthleteAccount = /* GraphQL */ `
         lastName
         mobilePhone
         athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
         email
-        tag
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        unitToken
-        unitPlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyrePlaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
-        wyreAccountId
+        wyreId
         isActive
+        handle
         id
         createdAt
         updatedAt
@@ -1114,48 +661,6 @@ export const deleteAthleteAccount = /* GraphQL */ `
       createdAt
       updatedAt
       athleteAccountsId
-      athleteId
-    }
-  }
-`;
-export const deleteEmailChallenge = /* GraphQL */ `
-  mutation DeleteEmailChallenge(
-    $input: DeleteEmailChallengeInput!
-    $condition: ModelEmailChallengeConditionInput
-  ) {
-    deleteEmailChallenge(input: $input, condition: $condition) {
-      code
-      email
-      verified
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteInvite = /* GraphQL */ `
-  mutation DeleteInvite(
-    $input: DeleteInviteInput!
-    $condition: ModelInviteConditionInput
-  ) {
-    deleteInvite(input: $input, condition: $condition) {
-      code
-      status
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePhoneChallenge = /* GraphQL */ `
-  mutation DeletePhoneChallenge(
-    $input: DeletePhoneChallengeInput!
-    $condition: ModelPhoneChallengeConditionInput
-  ) {
-    deletePhoneChallenge(input: $input, condition: $condition) {
-      code
-      phoneNumber
-      verified
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -1167,10 +672,32 @@ export const createRecentTransaction = /* GraphQL */ `
     createRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
-      transactionType
       status
       amount
-      idempotencyKey
+      direction
+      createdAt
+      read
+      settled
+      podAllocation {
+        SAVINGS
+        INVESTMENTS
+        SPENDING
+      }
+      id
+      updatedAt
+    }
+  }
+`;
+export const updateRecentTransaction = /* GraphQL */ `
+  mutation UpdateRecentTransaction(
+    $input: UpdateRecentTransactionInput!
+    $condition: ModelRecentTransactionConditionInput
+  ) {
+    updateRecentTransaction(input: $input, condition: $condition) {
+      transactionId
+      athleteId
+      status
+      amount
       direction
       createdAt
       read
@@ -1193,10 +720,8 @@ export const deleteRecentTransaction = /* GraphQL */ `
     deleteRecentTransaction(input: $input, condition: $condition) {
       transactionId
       athleteId
-      transactionType
       status
       amount
-      idempotencyKey
       direction
       createdAt
       read
@@ -1208,6 +733,51 @@ export const deleteRecentTransaction = /* GraphQL */ `
       }
       id
       updatedAt
+    }
+  }
+`;
+export const createSocialHandle = /* GraphQL */ `
+  mutation CreateSocialHandle(
+    $input: CreateSocialHandleInput!
+    $condition: ModelSocialHandleConditionInput
+  ) {
+    createSocialHandle(input: $input, condition: $condition) {
+      platform
+      handle
+      id
+      createdAt
+      updatedAt
+      athleteSocialHandlesId
+    }
+  }
+`;
+export const updateSocialHandle = /* GraphQL */ `
+  mutation UpdateSocialHandle(
+    $input: UpdateSocialHandleInput!
+    $condition: ModelSocialHandleConditionInput
+  ) {
+    updateSocialHandle(input: $input, condition: $condition) {
+      platform
+      handle
+      id
+      createdAt
+      updatedAt
+      athleteSocialHandlesId
+    }
+  }
+`;
+export const deleteSocialHandle = /* GraphQL */ `
+  mutation DeleteSocialHandle(
+    $input: DeleteSocialHandleInput!
+    $condition: ModelSocialHandleConditionInput
+  ) {
+    deleteSocialHandle(input: $input, condition: $condition) {
+      platform
+      handle
+      id
+      createdAt
+      updatedAt
+      athleteSocialHandlesId
     }
   }
 `;
@@ -1239,6 +809,146 @@ export const updateEmailChallenge = /* GraphQL */ `
     }
   }
 `;
+export const deleteEmailChallenge = /* GraphQL */ `
+  mutation DeleteEmailChallenge(
+    $input: DeleteEmailChallengeInput!
+    $condition: ModelEmailChallengeConditionInput
+  ) {
+    deleteEmailChallenge(input: $input, condition: $condition) {
+      code
+      email
+      verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEvent = /* GraphQL */ `
+  mutation CreateEvent(
+    $input: CreateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    createEvent(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEvent = /* GraphQL */ `
+  mutation UpdateEvent(
+    $input: UpdateEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    updateEvent(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEvent = /* GraphQL */ `
+  mutation DeleteEvent(
+    $input: DeleteEventInput!
+    $condition: ModelEventConditionInput
+  ) {
+    deleteEvent(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createInvite = /* GraphQL */ `
   mutation CreateInvite(
     $input: CreateInviteInput!
@@ -1260,6 +970,412 @@ export const updateInvite = /* GraphQL */ `
     updateInvite(input: $input, condition: $condition) {
       code
       status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteInvite = /* GraphQL */ `
+  mutation DeleteInvite(
+    $input: DeleteInviteInput!
+    $condition: ModelInviteConditionInput
+  ) {
+    deleteInvite(input: $input, condition: $condition) {
+      code
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createLearn = /* GraphQL */ `
+  mutation CreateLearn(
+    $input: CreateLearnInput!
+    $condition: ModelLearnConditionInput
+  ) {
+    createLearn(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLearn = /* GraphQL */ `
+  mutation UpdateLearn(
+    $input: UpdateLearnInput!
+    $condition: ModelLearnConditionInput
+  ) {
+    updateLearn(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLearn = /* GraphQL */ `
+  mutation DeleteLearn(
+    $input: DeleteLearnInput!
+    $condition: ModelLearnConditionInput
+  ) {
+    deleteLearn(input: $input, condition: $condition) {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOpportunity = /* GraphQL */ `
+  mutation CreateOpportunity(
+    $input: CreateOpportunityInput!
+    $condition: ModelOpportunityConditionInput
+  ) {
+    createOpportunity(input: $input, condition: $condition) {
+      id
+      categories
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      details
+      detailsTldr
+      endDateTime
+      eventType
+      heroPhotoUri
+      isPrivate
+      location {
+        lat
+        lon
+      }
+      locationDetail {
+        address
+        unit
+        city
+        state
+        zipCode
+        country
+        name
+      }
+      logoUri
+      onlineReserved
+      onlineTotal
+      organizations {
+        nextToken
+      }
+      orgs {
+        displayName
+        relationshipType
+      }
+      registrationUrl
+      reward
+      rewardDetails
+      seatsReserved
+      seatsTotal
+      startDateTime
+      status
+      subtitle
+      tags
+      title
+      timezone
+      websitePrompt
+      websiteUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOpportunity = /* GraphQL */ `
+  mutation UpdateOpportunity(
+    $input: UpdateOpportunityInput!
+    $condition: ModelOpportunityConditionInput
+  ) {
+    updateOpportunity(input: $input, condition: $condition) {
+      id
+      categories
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      details
+      detailsTldr
+      endDateTime
+      eventType
+      heroPhotoUri
+      isPrivate
+      location {
+        lat
+        lon
+      }
+      locationDetail {
+        address
+        unit
+        city
+        state
+        zipCode
+        country
+        name
+      }
+      logoUri
+      onlineReserved
+      onlineTotal
+      organizations {
+        nextToken
+      }
+      orgs {
+        displayName
+        relationshipType
+      }
+      registrationUrl
+      reward
+      rewardDetails
+      seatsReserved
+      seatsTotal
+      startDateTime
+      status
+      subtitle
+      tags
+      title
+      timezone
+      websitePrompt
+      websiteUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOpportunity = /* GraphQL */ `
+  mutation DeleteOpportunity(
+    $input: DeleteOpportunityInput!
+    $condition: ModelOpportunityConditionInput
+  ) {
+    deleteOpportunity(input: $input, condition: $condition) {
+      id
+      categories
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      details
+      detailsTldr
+      endDateTime
+      eventType
+      heroPhotoUri
+      isPrivate
+      location {
+        lat
+        lon
+      }
+      locationDetail {
+        address
+        unit
+        city
+        state
+        zipCode
+        country
+        name
+      }
+      logoUri
+      onlineReserved
+      onlineTotal
+      organizations {
+        nextToken
+      }
+      orgs {
+        displayName
+        relationshipType
+      }
+      registrationUrl
+      reward
+      rewardDetails
+      seatsReserved
+      seatsTotal
+      startDateTime
+      status
+      subtitle
+      tags
+      title
+      timezone
+      websitePrompt
+      websiteUrl
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOrganization = /* GraphQL */ `
+  mutation CreateOrganization(
+    $input: CreateOrganizationInput!
+    $condition: ModelOrganizationConditionInput
+  ) {
+    createOrganization(input: $input, condition: $condition) {
+      id
+      displayName
+      relationshipType
+      opportunityId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOrganization = /* GraphQL */ `
+  mutation UpdateOrganization(
+    $input: UpdateOrganizationInput!
+    $condition: ModelOrganizationConditionInput
+  ) {
+    updateOrganization(input: $input, condition: $condition) {
+      id
+      displayName
+      relationshipType
+      opportunityId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOrganization = /* GraphQL */ `
+  mutation DeleteOrganization(
+    $input: DeleteOrganizationInput!
+    $condition: ModelOrganizationConditionInput
+  ) {
+    deleteOrganization(input: $input, condition: $condition) {
+      id
+      displayName
+      relationshipType
+      opportunityId
       createdAt
       updatedAt
     }
@@ -1293,35 +1409,12 @@ export const updatePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
-export const updateRecentTransaction = /* GraphQL */ `
-  mutation UpdateRecentTransaction(
-    $input: UpdateRecentTransactionInput!
-    $condition: ModelRecentTransactionConditionInput
+export const deletePhoneChallenge = /* GraphQL */ `
+  mutation DeletePhoneChallenge(
+    $input: DeletePhoneChallengeInput!
+    $condition: ModelPhoneChallengeConditionInput
   ) {
-    updateRecentTransaction(input: $input, condition: $condition) {
-      transactionId
-      athleteId
-      transactionType
-      status
-      amount
-      idempotencyKey
-      direction
-      createdAt
-      read
-      settled
-      podAllocation {
-        SAVINGS
-        INVESTMENTS
-        SPENDING
-      }
-      id
-      updatedAt
-    }
-  }
-`;
-export const initiatePhoneChallenge = /* GraphQL */ `
-  mutation InitiatePhoneChallenge($phoneNumber: String!) {
-    initiatePhoneChallenge(phoneNumber: $phoneNumber) {
+    deletePhoneChallenge(input: $input, condition: $condition) {
       code
       phoneNumber
       verified
@@ -1330,34 +1423,114 @@ export const initiatePhoneChallenge = /* GraphQL */ `
     }
   }
 `;
-export const tryPhoneChallenge = /* GraphQL */ `
-  mutation TryPhoneChallenge($phoneNumber: String!, $code: String!) {
-    tryPhoneChallenge(phoneNumber: $phoneNumber, code: $code)
-  }
-`;
-export const generateInvite = /* GraphQL */ `
-  mutation GenerateInvite {
-    generateInvite {
-      code
-      status
+export const createReward = /* GraphQL */ `
+  mutation CreateReward(
+    $input: CreateRewardInput!
+    $condition: ModelRewardConditionInput
+  ) {
+    createReward(input: $input, condition: $condition) {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
       createdAt
       updatedAt
     }
   }
 `;
-export const initiateEmailChallenge = /* GraphQL */ `
-  mutation InitiateEmailChallenge($email: String!) {
-    initiateEmailChallenge(email: $email) {
-      code
-      email
-      verified
+export const updateReward = /* GraphQL */ `
+  mutation UpdateReward(
+    $input: UpdateRewardInput!
+    $condition: ModelRewardConditionInput
+  ) {
+    updateReward(input: $input, condition: $condition) {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
       createdAt
       updatedAt
     }
   }
 `;
-export const tryEmailChallenge = /* GraphQL */ `
-  mutation TryEmailChallenge($email: String!, $code: String!) {
-    tryEmailChallenge(email: $email, code: $code)
+export const deleteReward = /* GraphQL */ `
+  mutation DeleteReward(
+    $input: DeleteRewardInput!
+    $condition: ModelRewardConditionInput
+  ) {
+    deleteReward(input: $input, condition: $condition) {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
+      createdAt
+      updatedAt
+    }
   }
 `;
