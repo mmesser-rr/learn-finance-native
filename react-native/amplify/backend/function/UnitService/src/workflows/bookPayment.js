@@ -1,15 +1,18 @@
 const unit = require("../wrappers/unit");
 const tpc = require("../wrappers/tpc");
-const {axios} = require("../env");
 
-const createBookRequest = (athlete, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, unitToken) => unit.getAthleteUnitAccountById(unitAccountId).then(res => (res.attributes.available >= amount) ? 
-  unit.bookPayment(unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, unitToken) 
-  .then(res => tpc.persistTransaction(axios, res.transactionId, athlete.id, res.amount, res.status, res.createdAt, false, res.direction, res.transactionType, athlete.podSettings, idempotencyKey)):  
-  Promise.reject(`Athlet doesn't have enough balance for this transaction ${athlete.id}`)
+const createBookRequest = (athleteId, data) => unit.getAthleteUnitAccountById(data.unitAccountId).then(res => (res.data.attributes.available < data.amount) ? 
+  unit.bookPayment(data) : 
+  Promise.reject(`Athlet doesn't have enough balance for this transaction ${athleteId}`)
   );
 
+const bookPayment = (athleteId, data) => tpc.getAthlete(athleteId).then(athlete => 
+  (athlete != null) ? 
+     createBookRequest(athlete, data) : 
+    Promise.reject(`No athlete found with id ${athleteId}`)
+);
+
 module.exports.bookPayment = async (event) => {
-  axios.defaults.headers["Authorization"] = event.request.headers.authorization; 
-   const {athleteId, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, unitToken} = event.arguments;
-   return tpc.getAthlete(axios, athleteId).then(res => createBookRequest(res, unitAccountId, amount, description, receiverAccountType, receiverUnitAccountId, idempotencyKey, unitToken));
+  const {athleteId, data} = event.arguments;
+   return bookPayment(athleteId, data)
 }

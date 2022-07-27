@@ -1,11 +1,10 @@
-const paramsFromCustId = (custId, athleteId, podName) => ({
+const paramsFromCustId = (custId, athleteId) => ({
   type: "depositAccount",
   attributes: {
     "depositProduct": "checking",
     "tags": {
       "purpose": "checking",
-      "athleteId": athleteId,
-      "podName": podName
+      "athleteId": athleteId
     }
   },
   relationships: {
@@ -18,10 +17,9 @@ const paramsFromCustId = (custId, athleteId, podName) => ({
   }
 });
 
-const createAccount = (unit) => (custId, athleteId, podName) => {
-  const params = paramsFromCustId(custId, athleteId, podName);
-  return unit.accounts.create(params)
-  .catch(err => Promise.reject(`Failed to reach Unit API. Error: ${err.message}`));
+const createAccount = (unit) => (custId, athleteId) => {
+  const params = paramsFromCustId(custId, athleteId);
+  return unit.accounts.create(params);
 };
 
 module.exports = {

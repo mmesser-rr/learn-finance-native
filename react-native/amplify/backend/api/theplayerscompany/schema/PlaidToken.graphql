@@ -1,4 +1,4 @@
-type PlaidToken {
+type PlaidToken{
   access_token: String
   item_id: String
   link_token: String

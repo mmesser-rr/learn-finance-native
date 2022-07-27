@@ -8,12 +8,13 @@ const updateAthletePlaidStatement = gql`
       id
       isActive
       lastName
+      level
+      mobilePhone 
     }
   } 
 `
 
-const addPlaidToken = () => (
-  axios,
+const addPlaidToken = (axios) => (
   athleteId,
   plaidToken
 ) => axios.post("/", {
@@ -21,11 +22,10 @@ const addPlaidToken = () => (
   variables: {
     athleteId,
     plaidToken
-  },
-  authMode: 'AMAZON_COGNITO_USER_POOLS'
+  }
 }).then(resultLens);
 
-const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data);
+const resultLens = (res) => res?.data?.errors ? Promise.reject(res.data.errors) : Promise.resolve(res.data.data.updateAthletePlaidLookup);
 
 module.exports = {
   addPlaidToken

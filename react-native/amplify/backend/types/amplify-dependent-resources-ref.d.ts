@@ -31,46 +31,41 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "MailService": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "CloudWatchEventRule": "string"
-        },
-        "AirtableService": {
+        "OpportunityService": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "WyreService": {
+        "S3Trigger2bbae92f": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
         },
-        "WebhookService": {
+        "S3Trigger8a6dfc74": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
-        },
-        "theplayerscompany2db5774e2db5774ePostConfirmation": {
-            "Name": "string",
-            "Arn": "string",
-            "LambdaExecutionRole": "string",
-            "Region": "string"
         }
     },
     "auth": {
-        "theplayerscompany2db5774e2db5774e": {
+        "theplayerscompany7e8846a2": {
+            "IdentityPoolId": "string",
+            "IdentityPoolName": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string",
             "CreatedSNSRole": "string"
+        }
+    },
+    "storage": {
+        "assets": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }
