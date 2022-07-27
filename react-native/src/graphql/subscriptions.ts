@@ -33,16 +33,6 @@ export const onCreateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -63,14 +53,6 @@ export const onCreateAthlete = /* GraphQL */ `
       isActive
       handle
       socialHandles {
-        items {
-          platform
-          handle
-          id
-          createdAt
-          updatedAt
-          athleteSocialHandlesId
-        }
         nextToken
       }
       id
@@ -110,16 +92,6 @@ export const onUpdateAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -140,14 +112,6 @@ export const onUpdateAthlete = /* GraphQL */ `
       isActive
       handle
       socialHandles {
-        items {
-          platform
-          handle
-          id
-          createdAt
-          updatedAt
-          athleteSocialHandlesId
-        }
         nextToken
       }
       id
@@ -187,16 +151,6 @@ export const onDeleteAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
-        items {
-          unitAccountId
-          routingCode
-          accountNumber
-          podName
-          id
-          createdAt
-          updatedAt
-          athleteAccountsId
-        }
         nextToken
       }
       unitLookup {
@@ -217,14 +171,6 @@ export const onDeleteAthlete = /* GraphQL */ `
       isActive
       handle
       socialHandles {
-        items {
-          platform
-          handle
-          id
-          createdAt
-          updatedAt
-          athleteSocialHandlesId
-        }
         nextToken
       }
       id
@@ -246,47 +192,11 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -315,47 +225,11 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -384,47 +258,11 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -572,6 +410,123 @@ export const onDeleteEmailChallenge = /* GraphQL */ `
     }
   }
 `;
+export const onCreateEvent = /* GraphQL */ `
+  subscription OnCreateEvent {
+    onCreateEvent {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEvent = /* GraphQL */ `
+  subscription OnUpdateEvent {
+    onUpdateEvent {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEvent = /* GraphQL */ `
+  subscription OnDeleteEvent {
+    onDeleteEvent {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      sponsor
+      title
+      category
+      heroPhotoUri
+      logoUri
+      tagline
+      description
+      dateTime
+      location
+      reward
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateInvite = /* GraphQL */ `
   subscription OnCreateInvite {
     onCreateInvite {
@@ -602,6 +557,120 @@ export const onDeleteInvite = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLearn = /* GraphQL */ `
+  subscription OnCreateLearn {
+    onCreateLearn {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLearn = /* GraphQL */ `
+  subscription OnUpdateLearn {
+    onUpdateLearn {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLearn = /* GraphQL */ `
+  subscription OnDeleteLearn {
+    onDeleteLearn {
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      bgImageUri
+      sponsor
+      title
+      level
+      reward
+      deposits {
+        videoUri
+        title
+      }
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateOpportunity = /* GraphQL */ `
   subscription OnCreateOpportunity {
     onCreateOpportunity {
@@ -618,47 +687,11 @@ export const onCreateOpportunity = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -686,14 +719,6 @@ export const onCreateOpportunity = /* GraphQL */ `
       onlineReserved
       onlineTotal
       organizations {
-        items {
-          id
-          displayName
-          relationshipType
-          opportunityId
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       orgs {
@@ -734,47 +759,11 @@ export const onUpdateOpportunity = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -802,14 +791,6 @@ export const onUpdateOpportunity = /* GraphQL */ `
       onlineReserved
       onlineTotal
       organizations {
-        items {
-          id
-          displayName
-          relationshipType
-          opportunityId
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       orgs {
@@ -850,47 +831,11 @@ export const onDeleteOpportunity = /* GraphQL */ `
         heroPhotoUri
         email
         level
-        sport {
-          name
-          airTableId
-          isActive
-        }
-        team {
-          name
-          airTableId
-          isActive
-        }
-        address {
-          streetAddress
-          apt
-          city
-          state
-          zipCode
-        }
         dateOfBirth
-        accounts {
-          nextToken
-        }
-        unitLookup {
-          appId
-          custId
-        }
-        podSettings {
-          SAVINGS
-          INVESTMENTS
-          SPENDING
-        }
         plaidToken
-        plaidProcessorToken {
-          plaidAccountId
-          processorToken
-        }
         wyreId
         isActive
         handle
-        socialHandles {
-          nextToken
-        }
         id
         createdAt
         updatedAt
@@ -918,14 +863,6 @@ export const onDeleteOpportunity = /* GraphQL */ `
       onlineReserved
       onlineTotal
       organizations {
-        items {
-          id
-          displayName
-          relationshipType
-          opportunityId
-          createdAt
-          updatedAt
-        }
         nextToken
       }
       orgs {
@@ -1014,6 +951,108 @@ export const onDeletePhoneChallenge = /* GraphQL */ `
       code
       phoneNumber
       verified
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateReward = /* GraphQL */ `
+  subscription OnCreateReward {
+    onCreateReward {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateReward = /* GraphQL */ `
+  subscription OnUpdateReward {
+    onUpdateReward {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteReward = /* GraphQL */ `
+  subscription OnDeleteReward {
+    onDeleteReward {
+      id
+      creatorId
+      creator {
+        firstName
+        lastName
+        mobilePhone
+        athleteTag
+        bio
+        profilePhotoUri
+        heroPhotoUri
+        email
+        level
+        dateOfBirth
+        plaidToken
+        wyreId
+        isActive
+        handle
+        id
+        createdAt
+        updatedAt
+      }
+      title
+      wealthAmount
+      logoUri
+      description
+      heroPhotoUri
       createdAt
       updatedAt
     }
