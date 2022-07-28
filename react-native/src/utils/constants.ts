@@ -5,6 +5,7 @@ export const SignUpSteps = [
   'verification_code',
   'name_capture',
   'email_capture',
+  'dob_capture'
 ];
 
 export const GradientButtonColors = [
@@ -19,4 +20,4 @@ export const PodsCardGradient = ['#FF5A5F', '#1735BC'];
 export const PODsSteps = ['account', 'pods', 'done'];
 export const BlackRedGradient = ['#000', '#682527', '#FF5A5F'];
 
-export const OnboardingStepNum = 11;
+export const OnboardingStepNum = 7;
