@@ -5,7 +5,7 @@ import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {API, graphqlOperation} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
 
-import {openAppAndAccount, updateAthlete} from 'src/graphql/mutations';
+import {createAthlete, openAppAndAccount, updateAthlete} from 'src/graphql/mutations';
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as userActions from 'src/store/actions/userActions';
@@ -13,6 +13,8 @@ import {
   Athlete,
   UpdateAthleteMutation,
   UpdateAthleteMutationVariables,
+  CreateAthleteMutation,
+  CreateAthleteMutationVariables
 } from 'src/types/API';
 import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
@@ -88,6 +90,50 @@ export function* addAthlete({ssn}: ICreateAthleteAndAccount) {
   yield put(loadingActions.disableLoader());
 }
 
+export function* addAthleteOnly() {
+  yield put(loadingActions.enableLoader());
+  const onboardingState = (yield select(
+    getOnboardingState,
+  )) as IOnboardingState;
+  const mutationInput: CreateAthleteMutationVariables = {
+    input: {
+      id: onboardingState.id!,
+      firstName: onboardingState.firstName,
+      lastName: onboardingState.lastName,
+      email: onboardingState.email,
+      mobilePhone: onboardingState.mobilePhone,
+      level: onboardingState.level,
+      sport: onboardingState.sport,
+      team: onboardingState.team,
+      address: onboardingState.address,
+      dateOfBirth: onboardingState.dateOfBirth,
+      isActive: true,
+      podSettings: {
+        SAVINGS: 0,
+        INVESTMENTS: 0,
+        SPENDING: 0,
+      },
+    },
+  };
+  console.log('athlete', mutationInput.input);
+  const token = (yield select(jwtSelector)) as string;
+  console.log('token:', token);
+
+  try {
+    yield API.graphql(
+      graphqlOperation(createAthlete, {
+        input: mutationInput.input
+      })
+    )
+    NavigationService.navigate('LastStepWelcome');
+  } catch (error) {
+    console.log('Error attempting to create new Athlete:', error);
+  }
+
+  yield put(loadingActions.disableLoader());
+}
+
 export default function* onboardingSaga() {
+  yield takeLatest(types.CREATE_ATHLETE, addAthleteOnly);
   yield takeLatest(types.CREATE_ATHLETE_AND_ACCOUNT, addAthlete);
 }

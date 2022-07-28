@@ -10,6 +10,7 @@ import NameCapture from './NameCapture';
 import Loading from 'src/components/common/Loading';
 import CreatePassword from './CreatePassword';
 import EmailCapture from './EmailCapture';
+import DOBCapture from './DOBCapture';
 
 import styles from './styles';
 import OnboardingSteps from 'src/components/common/OnboardingSteps';
@@ -31,10 +32,10 @@ const Verification: React.FC<SignUpProps> = ({
   }, [stepName]);
 
   const goToNextStep = () => {
-    if (stepCount < 5) {
+    if (stepCount < 7) {
       navigation.navigate('SignUp', {step: SignUpSteps[stepCount + 1]});
     } else {
-      navigation.navigate('BankAccountIntro');
+      navigation.navigate('LastStepWelcome');
     }
   };
 
@@ -71,6 +72,7 @@ const Verification: React.FC<SignUpProps> = ({
       {stepCount === 5 && (
         <EmailCapture password={password} goToNextStep={goToNextStep} updateLoading={setLoading} />
       )}
+      {stepCount === 6 && <DOBCapture />}
       {loading && <Loading />}
     </AppLayout>
   );
