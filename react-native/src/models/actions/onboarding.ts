@@ -9,3 +9,7 @@ export interface ICreateAthleteAndAccount {
   type: String;
   ssn: string;
 }
+
+export interface ICreateAthlete {
+  type: String;
+}
