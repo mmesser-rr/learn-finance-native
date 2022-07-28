@@ -1,5 +1,6 @@
 import {ITypeOnlyAction} from 'src/models/actions/common';
 import {
+  ICreateAthlete,
   ICreateAthleteAndAccount,
   IOnboardingUpdate,
 } from 'src/models/actions/onboarding';
@@ -19,6 +20,12 @@ export function createAthleteAndAccount(ssn: string): ICreateAthleteAndAccount {
   return {
     type: types.CREATE_ATHLETE_AND_ACCOUNT,
     ssn,
+  };
+}
+
+export function createAthlete(): ICreateAthlete {
+  return {
+    type: types.CREATE_ATHLETE
   };
 }
 

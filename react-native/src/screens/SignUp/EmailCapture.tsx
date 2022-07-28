@@ -4,7 +4,6 @@ import {View} from 'react-native';
 import {Text} from 'src/components/common/Texts';
 import SubmitButton from 'src/components/common/SubmitButton';
 import TextInput from 'src/components/common/TextInput';
-import NavigationService from 'src/navigation/NavigationService';
 
 import styles from './styles';
 import { Auth } from 'aws-amplify';
@@ -32,17 +31,9 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({password, goToNextStep, upda
     const reg = /\S+@\S+\.\S+/;
     setIsValid(!!value && reg.test(value));
     setEmail(value);
-  };
+  }
 
-  const onPrivacy = () => {
-    NavigationService.navigate('Privacy');
-  };
-
-  const onAgreement = () => {
-    NavigationService.navigate('Agreement');
-  };
-
-  const handleContinue = async () => {
+  const handleSubmit = async () => {
     updateLoading(true);
     try {
       await Auth.signIn(`+1${mobilePhone}`, password);
@@ -80,31 +71,10 @@ const EmailCapture: React.FC<EmailCaptureProps> = ({password, goToNextStep, upda
         </View>
       </View>
       <View>
-        <View style={styles.agreementWrapper}>
-          <Text type="Body/Large" style={styles.agreementText}>
-            By tapping 'sign up', you agree to our{' '}
-            <Text
-              type="Body/Large"
-              style={styles.agreementLink}
-              onPress={onAgreement}
-            >
-              Mobile Deposit Agreement
-            </Text>
-            {' '}and{' '}
-            <Text
-              type="Body/Large"
-              style={styles.agreementLink}
-              onPress={onPrivacy}
-            >
-              Players Co's Terms & Privacy Policy
-            </Text>
-            .
-          </Text>
-        </View>
         <SubmitButton
           isValid={isValid}
-          actionLabel="Sign Up"
-          onSubmit={handleContinue}
+          actionLabel="Continue"
+          onSubmit={handleSubmit}
         />
       </View>
     </View>
