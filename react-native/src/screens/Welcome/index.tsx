@@ -17,12 +17,7 @@ const Welcome: React.FC = () => {
       <>
         <View style={styles.title}>
           <Text type="Headline/Large">
-            Banking for the People
-          </Text>
-        </View>
-        <View>
-          <Text type="Title/Large">
-            Where equal access provides equal opportunity.
+            Get your money right education made simple.
           </Text>
         </View>
       </>

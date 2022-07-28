@@ -12,8 +12,8 @@ import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as wyreActions from 'src/store/actions/wyreActions';
 import {
   Athlete,
-  AthleteByPhoneQuery,
-  AthleteByPhoneQueryVariables,
+  // AthleteByPhoneQuery,
+  // AthleteByPhoneQueryVariables,
   GetAthleteQuery,
   GetAthleteQueryVariables,
 } from 'src/types/API';
@@ -21,8 +21,11 @@ import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
 import {RootState} from '../root-state';
 import {IGetUserByPhone, ILoginRequest} from 'src/models/actions/user';
-import {athleteByPhone, getAthlete} from 'src/graphql/queries';
-import {jwtSelector} from '../selectors/user';
+import {
+  // athleteByPhone, 
+  getAthlete
+} from 'src/graphql/queries';
+// import {jwtSelector} from '../selectors/user';
 import {IOnboardingState} from 'src/models/reducers/onboarding';
 
 const compareAthletesByCreationDate = (a: Athlete, b: Athlete) =>
@@ -71,8 +74,7 @@ export function* loginRequest({phone, password}: ILoginRequest) {
       const queryFilter: GetAthleteQueryVariables = {
         id,
       };
-      const response = (yield call(
-        [API, 'graphql'],
+      const response = (yield API.graphql(
         graphqlOperation(getAthlete, queryFilter),
       )) as GraphQLResult<GetAthleteQuery>;
 
@@ -83,13 +85,13 @@ export function* loginRequest({phone, password}: ILoginRequest) {
 
       yield put(userActions.updateUser(athlete));
 
-      NavigationService.navigate('UserLoginStack', {screen: 'UserFaceId'});
+      NavigationService.navigate('LastStepWelcome');
 
-      yield put(bankingActions.getConnectedAccounts(false));
-      yield put(bankingActions.getAthleteAccounts());
-      yield put(bankingActions.getBalanceHistory());
-      yield put(bankingActions.getTransactionHistory());
-      if (athlete.wyreAccountId) yield put(wyreActions.getWyreAccount());
+      // yield put(bankingActions.getConnectedAccounts(false));
+      // yield put(bankingActions.getAthleteAccounts());
+      // yield put(bankingActions.getBalanceHistory());
+      // yield put(bankingActions.getTransactionHistory());
+      // if (athlete.wyreAccountId) yield put(wyreActions.getWyreAccount());
     } catch (err) {
       console.log('Error attempting to fetch Athlete info:', err);
     }
@@ -136,35 +138,35 @@ export function* logout() {
   yield put(loadingActions.disableLoader());
 }
 
-export function* getUserByPhone({phone}: IGetUserByPhone) {
-  const queryFilter: AthleteByPhoneQueryVariables = {
-    mobilePhone: phone,
-  };
-  try {
-    const token = (yield select(jwtSelector)) as string;
-    console.log('token for getUserByPhone:', token);
-    const response = (yield call(
-      [API, 'graphql'],
-      graphqlOperation(athleteByPhone, queryFilter, token),
-    )) as GraphQLResult<AthleteByPhoneQuery>;
-    const athletes = (response.data?.athleteByPhone?.items ?? []) as Athlete[];
-    if (athletes.length === 0) {
-      throw new Error('No user found with the phone number: ' + phone);
-    }
-    if (athletes.length > 1) {
-      athletes.sort(compareAthletesByCreationDate);
-    }
+// export function* getUserByPhone({phone}: IGetUserByPhone) {
+//   const queryFilter: AthleteByPhoneQueryVariables = {
+//     mobilePhone: phone,
+//   };
+//   try {
+//     const token = (yield select(jwtSelector)) as string;
+//     console.log('token for getUserByPhone:', token);
+//     const response = (yield call(
+//       [API, 'graphql'],
+//       graphqlOperation(athleteByPhone, queryFilter, token),
+//     )) as GraphQLResult<AthleteByPhoneQuery>;
+//     const athletes = (response.data?.athleteByPhone?.items ?? []) as Athlete[];
+//     if (athletes.length === 0) {
+//       throw new Error('No user found with the phone number: ' + phone);
+//     }
+//     if (athletes.length > 1) {
+//       athletes.sort(compareAthletesByCreationDate);
+//     }
 
-    const athlete = athletes[0];
-    yield put(userActions.updateUser(athlete));
-  } catch (error) {
-    console.log('Error attempting to fetch Athlete info:', error);
-  }
-}
+//     const athlete = athletes[0];
+//     yield put(userActions.updateUser(athlete));
+//   } catch (error) {
+//     console.log('Error attempting to fetch Athlete info:', error);
+//   }
+// }
 
 export default function* userSaga() {
   yield takeLatest(types.ONBOARDING_SILENT_SIGN_IN, onboardingSilentSignIn);
   yield takeLatest(types.LOGIN_REQUEST, loginRequest);
-  yield takeLatest(types.GET_USER_BY_PHONE, getUserByPhone);
+  // yield takeLatest(types.GET_USER_BY_PHONE, getUserByPhone);
   yield takeLatest(types.LOG_OUT, logout);
 }
