@@ -28,69 +28,58 @@ export type RootStackParamList = {
   UniversalError: undefined;
   WyreStack: undefined;
   SelectPlayer: undefined;
+  Opportunities: undefined;
+  LearnVideo: undefined;
+  Exercise: {started: boolean};
 };
 
+type SignUpScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignUp'>;
 type SignUpScreenRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
-type SelectSportScreenRouteProp = RouteProp<RootStackParamList, 'SelectSport'>;
-type SelectTeamScreenRouteProp = RouteProp<RootStackParamList, 'SelectTeam'>;
-type PrivacyRouteProp = RouteProp<RootStackParamList, 'Privacy'>;
-type AgreementRouteProp = RouteProp<RootStackParamList, 'Agreement'>;
-type DisclosuresRouteProp = RouteProp<RootStackParamList, 'Disclosures'>;
-
-type SignUpScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'SignUp'
->;
-
 export type SignUpProps = {
   route: SignUpScreenRouteProp;
   navigation: SignUpScreenNavigationProp;
 };
 
 // Privacy
-type PrivacyScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Privacy'
->;
-
+type PrivacyRouteProp = RouteProp<RootStackParamList, 'Privacy'>;
+type PrivacyScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Privacy'>;
 export type PrivacyProps = {
   navigation: PrivacyScreenNavigationProp;
   route: PrivacyRouteProp;
 };
 
-type AgreementScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Agreement'
->;
-
+type AgreementRouteProp = RouteProp<RootStackParamList, 'Agreement'>;
+type AgreementScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Agreement'>;
 export type AgreementProps = {
   navigation: AgreementScreenNavigationProp;
   route: AgreementRouteProp;
 };
 
+type DisclosuresRouteProp = RouteProp<RootStackParamList, 'Disclosures'>;
 export type DisclosuresProps = {
   navigation: PrivacyScreenNavigationProp;
   route: DisclosuresRouteProp;
 };
 
 // SelectSport
-type SelectSportScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'SelectSport'
->;
-
+type SelectSportScreenRouteProp = RouteProp<RootStackParamList, 'SelectSport'>;
+type SelectSportScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SelectSport'>;
 export type SelectSportProps = {
   navigation: SelectSportScreenNavigationProp;
   route: SelectSportScreenRouteProp;
 };
 
 // SelectTeam
-type SelectTeamScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'SelectTeam'
->;
-
+type SelectTeamScreenRouteProp = RouteProp<RootStackParamList, 'SelectTeam'>;
+type SelectTeamScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SelectTeam'>;
 export type SelectTeamProps = {
   navigation: SelectTeamScreenNavigationProp;
   route: SelectTeamScreenRouteProp;
+};
+
+type ExerciseScreenRouteProp = RouteProp<RootStackParamList, 'Exercise'>;
+type ExerciseScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Exercise'>;
+export type ExerciseProps = {
+  route: ExerciseScreenRouteProp;
+  navigation: ExerciseScreenNavigationProp;
 };
