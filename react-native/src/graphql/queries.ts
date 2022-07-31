@@ -33,6 +33,12 @@ export const listAthletUnitAccounts = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -59,6 +65,12 @@ export const getAthleteUnitAccountById = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -85,6 +97,12 @@ export const getUnitTransactionById = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -108,6 +126,12 @@ export const listAllUnitTransactions = /* GraphQL */ `
         balance
         summary
         description
+        counterparty {
+          name
+          routingNumber
+          accountNumber
+          accountType
+        }
         name
         status
         routingNumber
@@ -136,15 +160,54 @@ export const nearbyOpportunities = /* GraphQL */ `
         id
         categories
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         details
         detailsTldr
         endDateTime
         eventType
         heroPhotoUri
         isPrivate
+        location {
+          lat
+          lon
+        }
+        locationDetail {
+          address
+          unit
+          city
+          state
+          zipCode
+          country
+          name
+        }
         logoUri
         onlineReserved
         onlineTotal
+        organizations {
+          nextToken
+        }
+        orgs {
+          displayName
+          relationshipType
+        }
         registrationUrl
         reward
         rewardDetails
@@ -185,6 +248,25 @@ export const searchEvents = /* GraphQL */ `
     ) {
       items {
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         sponsor
         title
         category
@@ -237,11 +319,34 @@ export const searchLearns = /* GraphQL */ `
     ) {
       items {
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         bgImageUri
         sponsor
         title
         level
         reward
+        deposits {
+          videoUri
+          title
+        }
         id
         createdAt
         updatedAt
@@ -286,15 +391,54 @@ export const searchOpportunities = /* GraphQL */ `
         id
         categories
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         details
         detailsTldr
         endDateTime
         eventType
         heroPhotoUri
         isPrivate
+        location {
+          lat
+          lon
+        }
+        locationDetail {
+          address
+          unit
+          city
+          state
+          zipCode
+          country
+          name
+        }
         logoUri
         onlineReserved
         onlineTotal
+        organizations {
+          nextToken
+        }
+        orgs {
+          displayName
+          relationshipType
+        }
         registrationUrl
         reward
         rewardDetails
@@ -350,6 +494,25 @@ export const searchRewards = /* GraphQL */ `
       items {
         id
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         title
         wealthAmount
         logoUri
@@ -408,6 +571,16 @@ export const getAthlete = /* GraphQL */ `
       }
       dateOfBirth
       accounts {
+        items {
+          unitAccountId
+          routingCode
+          accountNumber
+          podName
+          id
+          createdAt
+          updatedAt
+          athleteAccountsId
+        }
         nextToken
       }
       unitLookup {
@@ -428,6 +601,14 @@ export const getAthlete = /* GraphQL */ `
       isActive
       handle
       socialHandles {
+        items {
+          platform
+          handle
+          id
+          createdAt
+          updatedAt
+          athleteSocialHandlesId
+        }
         nextToken
       }
       id
@@ -453,11 +634,47 @@ export const listAthletes = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -479,11 +696,47 @@ export const getAthleteAccount = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -507,6 +760,25 @@ export const listAthleteAccounts = /* GraphQL */ `
   ) {
     listAthleteAccounts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        athlete {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         unitAccountId
         routingCode
         accountNumber
@@ -561,6 +833,11 @@ export const listRecentTransactions = /* GraphQL */ `
         createdAt
         read
         settled
+        podAllocation {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         id
         updatedAt
       }
@@ -652,11 +929,47 @@ export const getEvent = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -686,6 +999,25 @@ export const listEvents = /* GraphQL */ `
     listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         sponsor
         title
         category
@@ -755,11 +1087,47 @@ export const getLearn = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -772,6 +1140,11 @@ export const getLearn = /* GraphQL */ `
       deposits {
         videoUri
         title
+        questions {
+          questionText
+          answers
+          correctAnswer
+        }
       }
       id
       createdAt
@@ -788,11 +1161,34 @@ export const listLearns = /* GraphQL */ `
     listLearns(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         bgImageUri
         sponsor
         title
         level
         reward
+        deposits {
+          videoUri
+          title
+        }
         id
         createdAt
         updatedAt
@@ -817,11 +1213,47 @@ export const getOpportunity = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -849,6 +1281,14 @@ export const getOpportunity = /* GraphQL */ `
       onlineReserved
       onlineTotal
       organizations {
+        items {
+          id
+          displayName
+          relationshipType
+          opportunityId
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       orgs {
@@ -884,15 +1324,54 @@ export const listOpportunities = /* GraphQL */ `
         id
         categories
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         details
         detailsTldr
         endDateTime
         eventType
         heroPhotoUri
         isPrivate
+        location {
+          lat
+          lon
+        }
+        locationDetail {
+          address
+          unit
+          city
+          state
+          zipCode
+          country
+          name
+        }
         logoUri
         onlineReserved
         onlineTotal
+        organizations {
+          nextToken
+        }
+        orgs {
+          displayName
+          relationshipType
+        }
         registrationUrl
         reward
         rewardDetails
@@ -999,11 +1478,47 @@ export const getReward = /* GraphQL */ `
         heroPhotoUri
         email
         level
+        sport {
+          name
+          airTableId
+          isActive
+        }
+        team {
+          name
+          airTableId
+          isActive
+        }
+        address {
+          streetAddress
+          apt
+          city
+          state
+          zipCode
+        }
         dateOfBirth
+        accounts {
+          nextToken
+        }
+        unitLookup {
+          appId
+          custId
+        }
+        podSettings {
+          SAVINGS
+          INVESTMENTS
+          SPENDING
+        }
         plaidToken
+        plaidProcessorToken {
+          plaidAccountId
+          processorToken
+        }
         wyreId
         isActive
         handle
+        socialHandles {
+          nextToken
+        }
         id
         createdAt
         updatedAt
@@ -1028,6 +1543,25 @@ export const listRewards = /* GraphQL */ `
       items {
         id
         creatorId
+        creator {
+          firstName
+          lastName
+          mobilePhone
+          athleteTag
+          bio
+          profilePhotoUri
+          heroPhotoUri
+          email
+          level
+          dateOfBirth
+          plaidToken
+          wyreId
+          isActive
+          handle
+          id
+          createdAt
+          updatedAt
+        }
         title
         wealthAmount
         logoUri

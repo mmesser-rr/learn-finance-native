@@ -16,6 +16,8 @@ import {
   // AthleteByPhoneQueryVariables,
   GetAthleteQuery,
   GetAthleteQueryVariables,
+  GetAthlete_customQuery,
+  GetAthlete_customQueryVariables
 } from 'src/types/API';
 import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
@@ -27,6 +29,7 @@ import {
 } from 'src/graphql/queries';
 // import {jwtSelector} from '../selectors/user';
 import {IOnboardingState} from 'src/models/reducers/onboarding';
+import { getAthlete_custom } from 'src/graphql/queries_custom';
 
 const compareAthletesByCreationDate = (a: Athlete, b: Athlete) =>
   b.createdAt.localeCompare(a.createdAt);
@@ -71,12 +74,12 @@ export function* loginRequest({phone, password}: ILoginRequest) {
     yield put(userActions.loginSuccess(id, token));
 
     try {
-      const queryFilter: GetAthleteQueryVariables = {
+      const queryFilter: GetAthlete_customQueryVariables = {
         id,
       };
       const response = (yield API.graphql(
-        graphqlOperation(getAthlete, queryFilter),
-      )) as GraphQLResult<GetAthleteQuery>;
+        graphqlOperation(getAthlete_custom, queryFilter),
+      )) as GraphQLResult<GetAthlete_customQuery>;
 
       const athlete = response.data?.getAthlete as Athlete | undefined;
       if (!athlete) {

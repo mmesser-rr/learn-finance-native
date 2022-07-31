@@ -616,6 +616,88 @@ export type DeleteEmailChallengeInput = {
   email: string,
 };
 
+export type CreateEventInput = {
+  creatorId: string,
+  sponsor: string,
+  title: string,
+  category: string,
+  heroPhotoUri: string,
+  logoUri: string,
+  tagline: string,
+  description: string,
+  dateTime: number,
+  location: string,
+  reward: number,
+  id?: string | null,
+};
+
+export type ModelEventConditionInput = {
+  creatorId?: ModelIDInput | null,
+  sponsor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  category?: ModelStringInput | null,
+  heroPhotoUri?: ModelStringInput | null,
+  logoUri?: ModelStringInput | null,
+  tagline?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  dateTime?: ModelFloatInput | null,
+  location?: ModelStringInput | null,
+  reward?: ModelIntInput | null,
+  and?: Array< ModelEventConditionInput | null > | null,
+  or?: Array< ModelEventConditionInput | null > | null,
+  not?: ModelEventConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Event = {
+  __typename: "Event",
+  creatorId: string,
+  creator: Athlete,
+  sponsor: string,
+  title: string,
+  category: string,
+  heroPhotoUri: string,
+  logoUri: string,
+  tagline: string,
+  description: string,
+  dateTime: number,
+  location: string,
+  reward: number,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateEventInput = {
+  creatorId?: string | null,
+  sponsor?: string | null,
+  title?: string | null,
+  category?: string | null,
+  heroPhotoUri?: string | null,
+  logoUri?: string | null,
+  tagline?: string | null,
+  description?: string | null,
+  dateTime?: number | null,
+  location?: string | null,
+  reward?: number | null,
+  id: string,
+};
+
+export type DeleteEventInput = {
+  id: string,
+};
+
 export type CreateInviteInput = {
   code: string,
   status: Status,
@@ -635,6 +717,98 @@ export type UpdateInviteInput = {
 export type DeleteInviteInput = {
   code: string,
   status: Status,
+};
+
+export type CreateLearnInput = {
+  creatorId: string,
+  bgImageUri?: string | null,
+  sponsor: string,
+  title: string,
+  level: LearnLevel,
+  reward: number,
+  deposits?: Array< DepositInput | null > | null,
+  id?: string | null,
+};
+
+export enum LearnLevel {
+  BEGINNER = "BEGINNER",
+  MEDIUM = "MEDIUM",
+  ADVANCED = "ADVANCED",
+  EXPERT = "EXPERT",
+}
+
+
+export type DepositInput = {
+  videoUri?: string | null,
+  title: string,
+  questions?: Array< QuizInput | null > | null,
+};
+
+export type QuizInput = {
+  questionText: string,
+  answers: Array< string | null >,
+  correctAnswer: string,
+};
+
+export type ModelLearnConditionInput = {
+  creatorId?: ModelIDInput | null,
+  bgImageUri?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  level?: ModelLearnLevelInput | null,
+  reward?: ModelIntInput | null,
+  and?: Array< ModelLearnConditionInput | null > | null,
+  or?: Array< ModelLearnConditionInput | null > | null,
+  not?: ModelLearnConditionInput | null,
+};
+
+export type ModelLearnLevelInput = {
+  eq?: LearnLevel | null,
+  ne?: LearnLevel | null,
+};
+
+export type Learn = {
+  __typename: "Learn",
+  creatorId: string,
+  creator: Athlete,
+  bgImageUri?: string | null,
+  sponsor: string,
+  title: string,
+  level: LearnLevel,
+  reward: number,
+  deposits?:  Array<Deposit | null > | null,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type Deposit = {
+  __typename: "Deposit",
+  videoUri?: string | null,
+  title: string,
+  questions?:  Array<Quiz | null > | null,
+};
+
+export type Quiz = {
+  __typename: "Quiz",
+  questionText: string,
+  answers: Array< string | null >,
+  correctAnswer: string,
+};
+
+export type UpdateLearnInput = {
+  creatorId?: string | null,
+  bgImageUri?: string | null,
+  sponsor?: string | null,
+  title?: string | null,
+  level?: LearnLevel | null,
+  reward?: number | null,
+  deposits?: Array< DepositInput | null > | null,
+  id: string,
+};
+
+export type DeleteLearnInput = {
+  id: string,
 };
 
 export type CreateOpportunityInput = {
@@ -716,18 +890,6 @@ export type ModelOpportunityConditionInput = {
   and?: Array< ModelOpportunityConditionInput | null > | null,
   or?: Array< ModelOpportunityConditionInput | null > | null,
   not?: ModelOpportunityConditionInput | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type UpdateOpportunityInput = {
@@ -821,6 +983,74 @@ export type DeletePhoneChallengeInput = {
   phoneNumber: string,
 };
 
+export type CreateRewardInput = {
+  id?: string | null,
+  creatorId: string,
+  title: string,
+  wealthAmount: number,
+  logoUri?: string | null,
+  description?: string | null,
+  heroPhotoUri?: string | null,
+};
+
+export type ModelRewardConditionInput = {
+  creatorId?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  wealthAmount?: ModelIntInput | null,
+  logoUri?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  heroPhotoUri?: ModelStringInput | null,
+  and?: Array< ModelRewardConditionInput | null > | null,
+  or?: Array< ModelRewardConditionInput | null > | null,
+  not?: ModelRewardConditionInput | null,
+};
+
+export type Reward = {
+  __typename: "Reward",
+  id: string,
+  creatorId: string,
+  creator: Athlete,
+  title: string,
+  wealthAmount: number,
+  logoUri?: string | null,
+  description?: string | null,
+  heroPhotoUri?: string | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateRewardInput = {
+  id: string,
+  creatorId?: string | null,
+  title?: string | null,
+  wealthAmount?: number | null,
+  logoUri?: string | null,
+  description?: string | null,
+  heroPhotoUri?: string | null,
+};
+
+export type DeleteRewardInput = {
+  id: string,
+};
+
+export type ModelLearnFilterInput = {
+  creatorId?: ModelIDInput | null,
+  bgImageUri?: ModelStringInput | null,
+  sponsor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  level?: ModelLearnLevelInput | null,
+  reward?: ModelIntInput | null,
+  and?: Array< ModelLearnFilterInput | null > | null,
+  or?: Array< ModelLearnFilterInput | null > | null,
+  not?: ModelLearnFilterInput | null,
+};
+
+export type ModelLearnConnection = {
+  __typename: "ModelLearnConnection",
+  items:  Array<Learn | null >,
+  nextToken?: string | null,
+};
+
 export type PlaidAccountDetail = {
   __typename: "PlaidAccountDetail",
   account_id?: string | null,
@@ -848,37 +1078,24 @@ export type ModelOpportunityConnection = {
   nextToken?: string | null,
 };
 
-export type SearchableOpportunityFilterInput = {
-  id?: SearchableIDFilterInput | null,
-  categories?: SearchableStringFilterInput | null,
+export type SearchableEventFilterInput = {
   creatorId?: SearchableIDFilterInput | null,
-  details?: SearchableStringFilterInput | null,
-  detailsTldr?: SearchableStringFilterInput | null,
-  endDateTime?: SearchableFloatFilterInput | null,
-  eventType?: SearchableStringFilterInput | null,
-  heroPhotoUri?: SearchableStringFilterInput | null,
-  isPrivate?: SearchableBooleanFilterInput | null,
-  logoUri?: SearchableStringFilterInput | null,
-  onlineReserved?: SearchableIntFilterInput | null,
-  onlineTotal?: SearchableIntFilterInput | null,
-  registrationUrl?: SearchableStringFilterInput | null,
-  reward?: SearchableFloatFilterInput | null,
-  rewardDetails?: SearchableStringFilterInput | null,
-  seatsReserved?: SearchableIntFilterInput | null,
-  seatsTotal?: SearchableIntFilterInput | null,
-  startDateTime?: SearchableFloatFilterInput | null,
-  status?: SearchableStringFilterInput | null,
-  subtitle?: SearchableStringFilterInput | null,
-  tags?: SearchableStringFilterInput | null,
+  sponsor?: SearchableStringFilterInput | null,
   title?: SearchableStringFilterInput | null,
-  timezone?: SearchableStringFilterInput | null,
-  websitePrompt?: SearchableStringFilterInput | null,
-  websiteUrl?: SearchableStringFilterInput | null,
+  category?: SearchableStringFilterInput | null,
+  heroPhotoUri?: SearchableStringFilterInput | null,
+  logoUri?: SearchableStringFilterInput | null,
+  tagline?: SearchableStringFilterInput | null,
+  description?: SearchableStringFilterInput | null,
+  dateTime?: SearchableFloatFilterInput | null,
+  location?: SearchableStringFilterInput | null,
+  reward?: SearchableIntFilterInput | null,
+  id?: SearchableIDFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
-  and?: Array< SearchableOpportunityFilterInput | null > | null,
-  or?: Array< SearchableOpportunityFilterInput | null > | null,
-  not?: SearchableOpportunityFilterInput | null,
+  and?: Array< SearchableEventFilterInput | null > | null,
+  or?: Array< SearchableEventFilterInput | null > | null,
+  not?: SearchableEventFilterInput | null,
 };
 
 export type SearchableIDFilterInput = {
@@ -925,11 +1142,6 @@ export type SearchableFloatFilterInput = {
   range?: Array< number | null > | null,
 };
 
-export type SearchableBooleanFilterInput = {
-  eq?: boolean | null,
-  ne?: boolean | null,
-};
-
 export type SearchableIntFilterInput = {
   ne?: number | null,
   gt?: number | null,
@@ -938,6 +1150,198 @@ export type SearchableIntFilterInput = {
   lte?: number | null,
   eq?: number | null,
   range?: Array< number | null > | null,
+};
+
+export type SearchableEventSortInput = {
+  field?: SearchableEventSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableEventSortableFields {
+  creatorId = "creatorId",
+  sponsor = "sponsor",
+  title = "title",
+  category = "category",
+  heroPhotoUri = "heroPhotoUri",
+  logoUri = "logoUri",
+  tagline = "tagline",
+  description = "description",
+  dateTime = "dateTime",
+  location = "location",
+  reward = "reward",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchableEventAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableEventAggregateField,
+};
+
+export enum SearchableAggregateType {
+  terms = "terms",
+  avg = "avg",
+  min = "min",
+  max = "max",
+  sum = "sum",
+}
+
+
+export enum SearchableEventAggregateField {
+  creatorId = "creatorId",
+  sponsor = "sponsor",
+  title = "title",
+  category = "category",
+  heroPhotoUri = "heroPhotoUri",
+  logoUri = "logoUri",
+  tagline = "tagline",
+  description = "description",
+  dateTime = "dateTime",
+  location = "location",
+  reward = "reward",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableEventConnection = {
+  __typename: "SearchableEventConnection",
+  items:  Array<Event | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type SearchableAggregateResult = {
+  __typename: "SearchableAggregateResult",
+  name: string,
+  result?: SearchableAggregateGenericResult | null,
+};
+
+export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+
+export type SearchableAggregateScalarResult = {
+  __typename: "SearchableAggregateScalarResult",
+  value: number,
+};
+
+export type SearchableAggregateBucketResult = {
+  __typename: "SearchableAggregateBucketResult",
+  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
+};
+
+export type SearchableAggregateBucketResultItem = {
+  __typename: "SearchableAggregateBucketResultItem",
+  key: string,
+  doc_count: number,
+};
+
+export type SearchableLearnFilterInput = {
+  creatorId?: SearchableIDFilterInput | null,
+  bgImageUri?: SearchableStringFilterInput | null,
+  sponsor?: SearchableStringFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  reward?: SearchableIntFilterInput | null,
+  id?: SearchableIDFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  level?: SearchableStringFilterInput | null,
+  and?: Array< SearchableLearnFilterInput | null > | null,
+  or?: Array< SearchableLearnFilterInput | null > | null,
+  not?: SearchableLearnFilterInput | null,
+};
+
+export type SearchableLearnSortInput = {
+  field?: SearchableLearnSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableLearnSortableFields {
+  creatorId = "creatorId",
+  bgImageUri = "bgImageUri",
+  sponsor = "sponsor",
+  title = "title",
+  reward = "reward",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLearnAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableLearnAggregateField,
+};
+
+export enum SearchableLearnAggregateField {
+  creatorId = "creatorId",
+  bgImageUri = "bgImageUri",
+  sponsor = "sponsor",
+  title = "title",
+  level = "level",
+  reward = "reward",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLearnConnection = {
+  __typename: "SearchableLearnConnection",
+  items:  Array<Learn | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type SearchableOpportunityFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  categories?: SearchableStringFilterInput | null,
+  creatorId?: SearchableIDFilterInput | null,
+  details?: SearchableStringFilterInput | null,
+  detailsTldr?: SearchableStringFilterInput | null,
+  endDateTime?: SearchableFloatFilterInput | null,
+  eventType?: SearchableStringFilterInput | null,
+  heroPhotoUri?: SearchableStringFilterInput | null,
+  isPrivate?: SearchableBooleanFilterInput | null,
+  logoUri?: SearchableStringFilterInput | null,
+  onlineReserved?: SearchableIntFilterInput | null,
+  onlineTotal?: SearchableIntFilterInput | null,
+  registrationUrl?: SearchableStringFilterInput | null,
+  reward?: SearchableFloatFilterInput | null,
+  rewardDetails?: SearchableStringFilterInput | null,
+  seatsReserved?: SearchableIntFilterInput | null,
+  seatsTotal?: SearchableIntFilterInput | null,
+  startDateTime?: SearchableFloatFilterInput | null,
+  status?: SearchableStringFilterInput | null,
+  subtitle?: SearchableStringFilterInput | null,
+  tags?: SearchableStringFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  timezone?: SearchableStringFilterInput | null,
+  websitePrompt?: SearchableStringFilterInput | null,
+  websiteUrl?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableOpportunityFilterInput | null > | null,
+  or?: Array< SearchableOpportunityFilterInput | null > | null,
+  not?: SearchableOpportunityFilterInput | null,
+};
+
+export type SearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type SearchableOpportunitySortInput = {
@@ -976,26 +1380,11 @@ export enum SearchableOpportunitySortableFields {
 }
 
 
-export enum SearchableSortDirection {
-  asc = "asc",
-  desc = "desc",
-}
-
-
 export type SearchableOpportunityAggregationInput = {
   name: string,
   type: SearchableAggregateType,
   field: SearchableOpportunityAggregateField,
 };
-
-export enum SearchableAggregateType {
-  terms = "terms",
-  avg = "avg",
-  min = "min",
-  max = "max",
-  sum = "sum",
-}
-
 
 export enum SearchableOpportunityAggregateField {
   id = "id",
@@ -1036,29 +1425,64 @@ export type SearchableOpportunityConnection = {
   aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
-export type SearchableAggregateResult = {
-  __typename: "SearchableAggregateResult",
+export type SearchableRewardFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  creatorId?: SearchableIDFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  wealthAmount?: SearchableIntFilterInput | null,
+  logoUri?: SearchableStringFilterInput | null,
+  description?: SearchableStringFilterInput | null,
+  heroPhotoUri?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableRewardFilterInput | null > | null,
+  or?: Array< SearchableRewardFilterInput | null > | null,
+  not?: SearchableRewardFilterInput | null,
+};
+
+export type SearchableRewardSortInput = {
+  field?: SearchableRewardSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableRewardSortableFields {
+  id = "id",
+  creatorId = "creatorId",
+  title = "title",
+  wealthAmount = "wealthAmount",
+  logoUri = "logoUri",
+  description = "description",
+  heroPhotoUri = "heroPhotoUri",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableRewardAggregationInput = {
   name: string,
-  result?: SearchableAggregateGenericResult | null,
+  type: SearchableAggregateType,
+  field: SearchableRewardAggregateField,
 };
 
-export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+export enum SearchableRewardAggregateField {
+  id = "id",
+  creatorId = "creatorId",
+  title = "title",
+  wealthAmount = "wealthAmount",
+  logoUri = "logoUri",
+  description = "description",
+  heroPhotoUri = "heroPhotoUri",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
 
 
-export type SearchableAggregateScalarResult = {
-  __typename: "SearchableAggregateScalarResult",
-  value: number,
-};
-
-export type SearchableAggregateBucketResult = {
-  __typename: "SearchableAggregateBucketResult",
-  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
-};
-
-export type SearchableAggregateBucketResultItem = {
-  __typename: "SearchableAggregateBucketResultItem",
-  key: string,
-  doc_count: number,
+export type SearchableRewardConnection = {
+  __typename: "SearchableRewardConnection",
+  items:  Array<Reward | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
 export type ModelAthleteFilterInput = {
@@ -1158,6 +1582,29 @@ export type ModelEmailChallengeConnection = {
   nextToken?: string | null,
 };
 
+export type ModelEventFilterInput = {
+  creatorId?: ModelIDInput | null,
+  sponsor?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  category?: ModelStringInput | null,
+  heroPhotoUri?: ModelStringInput | null,
+  logoUri?: ModelStringInput | null,
+  tagline?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  dateTime?: ModelFloatInput | null,
+  location?: ModelStringInput | null,
+  reward?: ModelIntInput | null,
+  and?: Array< ModelEventFilterInput | null > | null,
+  or?: Array< ModelEventFilterInput | null > | null,
+  not?: ModelEventFilterInput | null,
+};
+
+export type ModelEventConnection = {
+  __typename: "ModelEventConnection",
+  items:  Array<Event | null >,
+  nextToken?: string | null,
+};
+
 export type ModelInviteFilterInput = {
   code?: ModelStringInput | null,
   status?: ModelStatusInput | null,
@@ -1230,6 +1677,25 @@ export type ModelPhoneChallengeFilterInput = {
 export type ModelPhoneChallengeConnection = {
   __typename: "ModelPhoneChallengeConnection",
   items:  Array<PhoneChallenge | null >,
+  nextToken?: string | null,
+};
+
+export type ModelRewardFilterInput = {
+  id?: ModelIDInput | null,
+  creatorId?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  wealthAmount?: ModelIntInput | null,
+  logoUri?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  heroPhotoUri?: ModelStringInput | null,
+  and?: Array< ModelRewardFilterInput | null > | null,
+  or?: Array< ModelRewardFilterInput | null > | null,
+  not?: ModelRewardFilterInput | null,
+};
+
+export type ModelRewardConnection = {
+  __typename: "ModelRewardConnection",
+  items:  Array<Reward | null >,
   nextToken?: string | null,
 };
 
@@ -2566,6 +3032,273 @@ export type DeleteEmailChallengeMutation = {
   } | null,
 };
 
+export type CreateEventMutationVariables = {
+  input: CreateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type CreateEventMutation = {
+  createEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateEventMutationVariables = {
+  input: UpdateEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type UpdateEventMutation = {
+  updateEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteEventMutationVariables = {
+  input: DeleteEventInput,
+  condition?: ModelEventConditionInput | null,
+};
+
+export type DeleteEventMutation = {
+  deleteEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateInviteMutationVariables = {
   input: CreateInviteInput,
   condition?: ModelInviteConditionInput | null,
@@ -2606,6 +3339,291 @@ export type DeleteInviteMutation = {
     __typename: "Invite",
     code: string,
     status: Status,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLearnMutationVariables = {
+  input: CreateLearnInput,
+  condition?: ModelLearnConditionInput | null,
+};
+
+export type CreateLearnMutation = {
+  createLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLearnMutationVariables = {
+  input: UpdateLearnInput,
+  condition?: ModelLearnConditionInput | null,
+};
+
+export type UpdateLearnMutation = {
+  updateLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLearnMutationVariables = {
+  input: DeleteLearnInput,
+  condition?: ModelLearnConditionInput | null,
+};
+
+export type DeleteLearnMutation = {
+  deleteLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -3115,6 +4133,377 @@ export type DeletePhoneChallengeMutation = {
   } | null,
 };
 
+export type CreateRewardMutationVariables = {
+  input: CreateRewardInput,
+  condition?: ModelRewardConditionInput | null,
+};
+
+export type CreateRewardMutation = {
+  createReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateRewardMutationVariables = {
+  input: UpdateRewardInput,
+  condition?: ModelRewardConditionInput | null,
+};
+
+export type UpdateRewardMutation = {
+  updateReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteRewardMutationVariables = {
+  input: DeleteRewardInput,
+  condition?: ModelRewardConditionInput | null,
+};
+
+export type DeleteRewardMutation = {
+  deleteReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLearns_customQueryVariables = {
+  filter?: ModelLearnFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLearns_customQuery = {
+  listLearns?:  {
+    __typename: "ModelLearnConnection",
+    items:  Array< {
+      __typename: "Learn",
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      bgImageUri?: string | null,
+      sponsor: string,
+      title: string,
+      level: LearnLevel,
+      reward: number,
+      deposits?:  Array< {
+        __typename: "Deposit",
+        videoUri?: string | null,
+        title: string,
+        questions?:  Array< {
+          __typename: "Quiz",
+          questionText: string,
+          correctAnswer: string,
+          answers: Array< string | null >,
+        } | null > | null,
+      } | null > | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetAthlete_customQueryVariables = {
+  id: string,
+};
+
+export type GetAthlete_customQuery = {
+  getAthlete?:  {
+    __typename: "Athlete",
+    firstName: string,
+    lastName: string,
+    mobilePhone: string,
+    athleteTag?: string | null,
+    bio?: string | null,
+    profilePhotoUri?: string | null,
+    heroPhotoUri?: string | null,
+    email: string,
+    level?: AthleteLevel | null,
+    sport?:  {
+      __typename: "AthleteSport",
+      name: string,
+      airTableId: string,
+      isActive?: boolean | null,
+    } | null,
+    team?:  {
+      __typename: "AthleteTeam",
+      name: string,
+      airTableId: string,
+      isActive?: boolean | null,
+    } | null,
+    address?:  {
+      __typename: "Address",
+      streetAddress: string,
+      apt?: string | null,
+      city: string,
+      state: string,
+      zipCode: string,
+    } | null,
+    dateOfBirth?: string | null,
+    unitLookup?:  {
+      __typename: "AthleteUnitLookup",
+      appId: string,
+      custId?: string | null,
+    } | null,
+    podSettings?:  {
+      __typename: "PodSettings",
+      SAVINGS: number,
+      INVESTMENTS: number,
+      SPENDING: number,
+    } | null,
+    plaidToken?: string | null,
+    plaidProcessorToken?:  {
+      __typename: "ProcessorToken",
+      plaidAccountId: string,
+      processorToken?: string | null,
+    } | null,
+    wyreId?: string | null,
+    isActive: boolean,
+    handle?: string | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type ListPlaidAccountsQueryVariables = {
   athleteId: string,
 };
@@ -3370,6 +4759,146 @@ export type NearbyOpportunitiesQuery = {
   } | null,
 };
 
+export type SearchEventsQueryVariables = {
+  filter?: SearchableEventFilterInput | null,
+  sort?: Array< SearchableEventSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableEventAggregationInput | null > | null,
+};
+
+export type SearchEventsQuery = {
+  searchEvents?:  {
+    __typename: "SearchableEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      sponsor: string,
+      title: string,
+      category: string,
+      heroPhotoUri: string,
+      logoUri: string,
+      tagline: string,
+      description: string,
+      dateTime: number,
+      location: string,
+      reward: number,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type SearchLearnsQueryVariables = {
+  filter?: SearchableLearnFilterInput | null,
+  sort?: Array< SearchableLearnSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableLearnAggregationInput | null > | null,
+};
+
+export type SearchLearnsQuery = {
+  searchLearns?:  {
+    __typename: "SearchableLearnConnection",
+    items:  Array< {
+      __typename: "Learn",
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      bgImageUri?: string | null,
+      sponsor: string,
+      title: string,
+      level: LearnLevel,
+      reward: number,
+      deposits?:  Array< {
+        __typename: "Deposit",
+        videoUri?: string | null,
+        title: string,
+      } | null > | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
 export type SearchOpportunitiesQueryVariables = {
   filter?: SearchableOpportunityFilterInput | null,
   sort?: Array< SearchableOpportunitySortInput | null > | null,
@@ -3453,6 +4982,71 @@ export type SearchOpportunitiesQuery = {
       timezone: string,
       websitePrompt: string,
       websiteUrl: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type SearchRewardsQueryVariables = {
+  filter?: SearchableRewardFilterInput | null,
+  sort?: Array< SearchableRewardSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableRewardAggregationInput | null > | null,
+};
+
+export type SearchRewardsQuery = {
+  searchRewards?:  {
+    __typename: "SearchableRewardConnection",
+    items:  Array< {
+      __typename: "Reward",
+      id: string,
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      title: string,
+      wealthAmount: number,
+      logoUri?: string | null,
+      description?: string | null,
+      heroPhotoUri?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3907,6 +5501,144 @@ export type ListEmailChallengesQuery = {
   } | null,
 };
 
+export type GetEventQueryVariables = {
+  id: string,
+};
+
+export type GetEventQuery = {
+  getEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListEventsQueryVariables = {
+  filter?: ModelEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEventsQuery = {
+  listEvents?:  {
+    __typename: "ModelEventConnection",
+    items:  Array< {
+      __typename: "Event",
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      sponsor: string,
+      title: string,
+      category: string,
+      heroPhotoUri: string,
+      logoUri: string,
+      tagline: string,
+      description: string,
+      dateTime: number,
+      location: string,
+      reward: number,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetInviteQueryVariables = {
   code: string,
   status: Status,
@@ -3938,6 +5670,150 @@ export type ListInvitesQuery = {
       __typename: "Invite",
       code: string,
       status: Status,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetLearnQueryVariables = {
+  id: string,
+};
+
+export type GetLearnQuery = {
+  getLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLearnsQueryVariables = {
+  filter?: ModelLearnFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLearnsQuery = {
+  listLearns?:  {
+    __typename: "ModelLearnConnection",
+    items:  Array< {
+      __typename: "Learn",
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      bgImageUri?: string | null,
+      sponsor: string,
+      title: string,
+      level: LearnLevel,
+      reward: number,
+      deposits?:  Array< {
+        __typename: "Deposit",
+        videoUri?: string | null,
+        title: string,
+      } | null > | null,
+      id: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -4238,6 +6114,134 @@ export type ListPhoneChallengesQuery = {
       code: string,
       phoneNumber: string,
       verified: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetRewardQueryVariables = {
+  id: string,
+};
+
+export type GetRewardQuery = {
+  getReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListRewardsQueryVariables = {
+  filter?: ModelRewardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListRewardsQuery = {
+  listRewards?:  {
+    __typename: "ModelRewardConnection",
+    items:  Array< {
+      __typename: "Reward",
+      id: string,
+      creatorId: string,
+      creator:  {
+        __typename: "Athlete",
+        firstName: string,
+        lastName: string,
+        mobilePhone: string,
+        athleteTag?: string | null,
+        bio?: string | null,
+        profilePhotoUri?: string | null,
+        heroPhotoUri?: string | null,
+        email: string,
+        level?: AthleteLevel | null,
+        dateOfBirth?: string | null,
+        plaidToken?: string | null,
+        wyreId?: string | null,
+        isActive: boolean,
+        handle?: string | null,
+        id: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      title: string,
+      wealthAmount: number,
+      logoUri?: string | null,
+      description?: string | null,
+      heroPhotoUri?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -4875,6 +6879,258 @@ export type OnDeleteEmailChallengeSubscription = {
   } | null,
 };
 
+export type OnCreateEventSubscription = {
+  onCreateEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateEventSubscription = {
+  onUpdateEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteEventSubscription = {
+  onDeleteEvent?:  {
+    __typename: "Event",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    sponsor: string,
+    title: string,
+    category: string,
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateInviteSubscription = {
   onCreateInvite?:  {
     __typename: "Invite",
@@ -4900,6 +7156,276 @@ export type OnDeleteInviteSubscription = {
     __typename: "Invite",
     code: string,
     status: Status,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLearnSubscription = {
+  onCreateLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLearnSubscription = {
+  onUpdateLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLearnSubscription = {
+  onDeleteLearn?:  {
+    __typename: "Learn",
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    bgImageUri?: string | null,
+    sponsor: string,
+    title: string,
+    level: LearnLevel,
+    reward: number,
+    deposits?:  Array< {
+      __typename: "Deposit",
+      videoUri?: string | null,
+      title: string,
+      questions?:  Array< {
+        __typename: "Quiz",
+        questionText: string,
+        answers: Array< string | null >,
+        correctAnswer: string,
+      } | null > | null,
+    } | null > | null,
+    id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -5359,6 +7885,243 @@ export type OnDeletePhoneChallengeSubscription = {
     code: string,
     phoneNumber: string,
     verified: boolean,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateRewardSubscription = {
+  onCreateReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateRewardSubscription = {
+  onUpdateReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteRewardSubscription = {
+  onDeleteReward?:  {
+    __typename: "Reward",
+    id: string,
+    creatorId: string,
+    creator:  {
+      __typename: "Athlete",
+      firstName: string,
+      lastName: string,
+      mobilePhone: string,
+      athleteTag?: string | null,
+      bio?: string | null,
+      profilePhotoUri?: string | null,
+      heroPhotoUri?: string | null,
+      email: string,
+      level?: AthleteLevel | null,
+      sport?:  {
+        __typename: "AthleteSport",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      team?:  {
+        __typename: "AthleteTeam",
+        name: string,
+        airTableId: string,
+        isActive?: boolean | null,
+      } | null,
+      address?:  {
+        __typename: "Address",
+        streetAddress: string,
+        apt?: string | null,
+        city: string,
+        state: string,
+        zipCode: string,
+      } | null,
+      dateOfBirth?: string | null,
+      accounts?:  {
+        __typename: "ModelAthleteAccountConnection",
+        nextToken?: string | null,
+      } | null,
+      unitLookup?:  {
+        __typename: "AthleteUnitLookup",
+        appId: string,
+        custId?: string | null,
+      } | null,
+      podSettings?:  {
+        __typename: "PodSettings",
+        SAVINGS: number,
+        INVESTMENTS: number,
+        SPENDING: number,
+      } | null,
+      plaidToken?: string | null,
+      plaidProcessorToken?:  {
+        __typename: "ProcessorToken",
+        plaidAccountId: string,
+        processorToken?: string | null,
+      } | null,
+      wyreId?: string | null,
+      isActive: boolean,
+      handle?: string | null,
+      socialHandles?:  {
+        __typename: "ModelSocialHandleConnection",
+        nextToken?: string | null,
+      } | null,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+    title: string,
+    wealthAmount: number,
+    logoUri?: string | null,
+    description?: string | null,
+    heroPhotoUri?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
