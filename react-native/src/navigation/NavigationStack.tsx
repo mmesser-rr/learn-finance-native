@@ -31,6 +31,9 @@ import WyreStack from './WyreStack';
 import Agreement from 'src/screens/Terms/Agreement';
 import SelectPlayer from 'src/screens/SelectPlayer';
 import UniversalError from 'src/screens/UniversalError';
+import Opportunities from 'src/screens/Opportunities';
+import LearnVideo from 'src/screens/Opportunities/Learn/LearnVideo';
+import Exercise from 'src/screens/Opportunities/Learn/Exercise';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -87,6 +90,16 @@ const App: React.FC= () => {
           component={UserBankingStack}
         />
         <RootStack.Screen name="WyreStack" component={WyreStack} />
+
+        {/* Main app */}
+        <RootStack.Screen name="Opportunities" component={Opportunities} />
+        <RootStack.Screen name="LearnVideo" component={LearnVideo} />
+        <RootStack.Screen 
+          name="Exercise" 
+          component={Exercise}
+          initialParams={{started: false}}  
+        />
+
       </RootStack.Navigator>
     </NavigationContainer>
   );

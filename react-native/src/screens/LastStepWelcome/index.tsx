@@ -17,8 +17,9 @@ const ProfileIntro: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(updateHomeStep(PODsSteps[0]));
-      NavigationService.navigate('HomeStack');
+      // dispatch(updateHomeStep(PODsSteps[0]));
+      // NavigationService.navigate('HomeStack');
+      NavigationService.navigate('Opportunities');
     }, 3000);
   }, []);
 
