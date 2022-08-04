@@ -1,28 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import {Image, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Image, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
+
+import LearnItem from 'src/screens/Opportunities/Learn';
+import EventItem from 'src/screens/Opportunities/Event';
+import RewardItem from 'src/screens/Opportunities/Reward';
 
 import AppLayout from 'src/components/layout/AppLayout';
-import {Text} from 'src/components/common/Texts';
-import WealthIcon from 'src/assets/icons/wealth.png';
-
-import styles from './styles';
-import {API, graphqlOperation} from 'aws-amplify';
-import {listLearns_custom} from 'src/graphql/queries_custom';
+import { Text } from 'src/components/common/Texts';
+import { listEvents, listLearnStatuses, listRewards } from 'src/graphql/queries';
+import { listLearns_custom } from 'src/graphql/queries_custom';
 import {
-  Event,
   Learn,
+  Event,
+  Reward,
   ListEventsQuery,
   ListLearns_customQuery,
   ListRewardsQuery,
-  Reward,
+  LearnStatus,
+  SearchLearnStatusesQuery,
+  SearchLearnStatusesQueryVariables,
+  Deposit,
+  GetLearnStatusQuery,
+  ListLearnStatusesQuery
 } from 'src/types/API';
-import {GraphQLResult} from '@aws-amplify/api';
-import {ScrollView, TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import LearnItem from './Learn';
-import {listEvents, listRewards} from 'src/graphql/queries';
-import EventItem from './Event';
-import RewardItem from './Reward';
+import * as learnStatusActions from 'src/store/actions/learnStatusActions'
+import { RootState } from 'src/store/root-state';
+import WealthIcon from 'src/assets/icons/wealth.png';
+
+import styles from './styles';
 
 const OPPORTUNITIES = {
   LEARN: 'Learn',
@@ -41,8 +50,8 @@ const WealthBalanceEle = () => {
   );
 };
 
-const OpportunityTab = ({label, activeOpportunity, setActiveOpportunity}) => {
-  function getBorderColorStyle(selectedOpportunity: string) {
+const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
+  const getBorderColorStyle = (selectedOpportunity: string) => {
     return {
       borderColor:
         activeOpportunity === selectedOpportunity
@@ -60,8 +69,12 @@ const OpportunityTab = ({label, activeOpportunity, setActiveOpportunity}) => {
   );
 };
 
-const Opportunities: React.FC = () => {
+const Opportunities = ({ navigation }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.userReducer);
+
+  const [athleteId, setAthleteId] = useState<string>(user?.id || "")
+
   const [activeOpportunity, setActiveOpportunity] = useState(
     OPPORTUNITIES.LEARN,
   );
@@ -69,11 +82,26 @@ const Opportunities: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [rewards, setRewards] = useState<Reward[]>([]);
 
+  const [learnStatuses, setLearnStatuses] = useState<LearnStatus[]>([])
+
   async function fetchLearns() {
     const response = (await API.graphql(
       graphqlOperation(listLearns_custom),
     )) as GraphQLResult<ListLearns_customQuery>;
     setLearns(response.data?.listLearns?.items as Learn[]);
+  }
+
+  async function fetchLearnStatuses() {
+    const response = (await API.graphql(
+      graphqlOperation(listLearnStatuses, {
+        filter: {
+          athleteId: {
+            eq: athleteId
+          }
+        }
+      }),
+    )) as GraphQLResult<ListLearnStatusesQuery>;
+    setLearnStatuses(response.data?.listLearnStatuses?.items as LearnStatus[]);
   }
 
   async function fetchEvents() {
@@ -93,21 +121,10 @@ const Opportunities: React.FC = () => {
   useEffect(() => {
     // fetch Learn, Events and Rewards data
     fetchLearns();
+    fetchLearnStatuses();
     fetchEvents();
     fetchRewards();
   }, []);
-
-  useEffect(() => {
-    console.log('learns', learns);
-  }, [learns]);
-
-  useEffect(() => {
-    console.log('events', events);
-  }, [events]);
-
-  useEffect(() => {
-    console.log('rewards', rewards);
-  }, [rewards]);
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper} scrollEnabled={false}>
@@ -116,41 +133,42 @@ const Opportunities: React.FC = () => {
         Opportunities
       </Text>
       <View style={styles.tabGroup}>
-        <OpportunityTab
-          {...{
-            label: OPPORTUNITIES.LEARN,
-            activeOpportunity,
-            setActiveOpportunity,
-          }}
-        />
-        <OpportunityTab
-          {...{
-            label: OPPORTUNITIES.EVENTS,
-            activeOpportunity,
-            setActiveOpportunity,
-          }}
-        />
-        <OpportunityTab
-          {...{
-            label: OPPORTUNITIES.REWARDS,
-            activeOpportunity,
-            setActiveOpportunity,
-          }}
-        />
+        {[OPPORTUNITIES.LEARN, OPPORTUNITIES.EVENTS, OPPORTUNITIES.REWARDS].map((label, index) => (
+          <OpportunityTab
+            {...{
+              key: index,
+              label: label,
+              activeOpportunity,
+              setActiveOpportunity,
+            }}
+          />
+        ))}
       </View>
       <ScrollView>
         {activeOpportunity === OPPORTUNITIES.LEARN &&
-          learns.map((learn, index) => (
-            <LearnItem
-              key={index}
-              backgroundImage="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
-              sponsor={learn.sponsor}
-              title={learn.title}
-              level={learn.level}
-              rewards={learn.reward}
-              depositsCount={learn.deposits?.length || 0}
-            />
-          ))}
+          learns.map((learn, index) => {
+            const result: LearnStatus | undefined = learnStatuses.filter(o => o.athleteId === athleteId && o.learnItemId === learn.id).pop()
+            const passedDepositIndex: number = result?.passedDepositIndex || 0
+            const depositData: Deposit | undefined | null = learn.deposits?.at(passedDepositIndex + 1)
+            const learnStatusId = result?.id || ""
+            const onPressLearnItem = async () => {
+              dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learn.id, passedDepositIndex))
+              navigation.navigate('LearnVideo', { depositData })
+            }
+            return (
+              <LearnItem
+                key={index}
+                backgroundImage="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
+                sponsor={learn.sponsor}
+                title={learn.title}
+                level={learn.level}
+                rewards={learn.reward}
+                depositsCount={learn.deposits?.length || 0}
+                passedDepositIndex={passedDepositIndex}
+                onPress={onPressLearnItem}
+              />
+            )
+          })}
 
         {activeOpportunity === OPPORTUNITIES.EVENTS &&
           events.map((event, index) => (
@@ -160,22 +178,29 @@ const Opportunities: React.FC = () => {
               sponsor={event.sponsor}
               title={event.title}
               dateTime={event.dateTime}
-              reward={event.reward} 
-              category={event.category} 
+              reward={event.reward}
+              category={event.category}
             />
           ))}
 
         {activeOpportunity === OPPORTUNITIES.REWARDS &&
-          rewards.map((reward, index) => (
-            <RewardItem
-              key={index}
-              heroPhotoUri="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
-              title={reward.title}
-              logoUri="https://reactjs.org/logo-og.png"
-              wealthAmount={reward.wealthAmount}
-              description={reward.description || ""}
-            />
-          ))}
+          rewards.map((reward, index) => {
+            const heroPhotoUri = "https://reactjs.org/logo-og.png" /* learn.bgImageUri */
+            const logoUri = "https://reactjs.org/logo-og.png"
+            const title = reward.title
+            const wealthAmount = reward.wealthAmount
+            const description = reward.description || ""
+            return (
+              <RewardItem
+                key={index}
+                {...{ heroPhotoUri, logoUri, title, wealthAmount, description }}
+                onPress={() => navigation.navigate('Redeem', {
+                  ...{ heroPhotoUri, logoUri, title, wealthAmount, description }
+                })}
+              />
+            )
+          }
+          )}
       </ScrollView>
     </AppLayout>
   );

@@ -28,9 +28,7 @@ export type RootStackParamList = {
   UniversalError: undefined;
   WyreStack: undefined;
   SelectPlayer: undefined;
-  Opportunities: undefined;
-  LearnVideo: undefined;
-  Exercise: {started: boolean};
+  OpportunitiesStack: undefined;
 };
 
 type SignUpScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignUp'>;
@@ -75,11 +73,4 @@ type SelectTeamScreenNavigationProp = StackNavigationProp<RootStackParamList, 'S
 export type SelectTeamProps = {
   navigation: SelectTeamScreenNavigationProp;
   route: SelectTeamScreenRouteProp;
-};
-
-type ExerciseScreenRouteProp = RouteProp<RootStackParamList, 'Exercise'>;
-type ExerciseScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Exercise'>;
-export type ExerciseProps = {
-  route: ExerciseScreenRouteProp;
-  navigation: ExerciseScreenNavigationProp;
 };

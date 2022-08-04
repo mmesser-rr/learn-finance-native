@@ -8,6 +8,8 @@ import * as bankingReducer from './bankingReducer';
 import * as onboardingReducer from './onboardingReducer';
 import * as userReducer from './userReducer';
 import * as wyreReducer from './wyreReducer';
+import * as learnStatusReducer from './learnStatusReducer';
+
 export default Object.assign(
   // loginReducer,
   loadingReducer,
@@ -16,4 +18,5 @@ export default Object.assign(
   onboardingReducer,
   userReducer,
   wyreReducer,
+  learnStatusReducer
 );
