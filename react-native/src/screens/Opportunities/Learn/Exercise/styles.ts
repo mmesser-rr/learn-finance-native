@@ -18,6 +18,24 @@ const styles = StyleSheet.create({
   },
   slideWrapper: {
     height: '88%'
+  },
+  answerButton: {
+    marginTop: scale(4),
+    backgroundColor: 'transparent',
+    borderWidth: scale(1),
+    borderColor: 'white'
+  },
+  correctAnswerButton: {
+    marginTop: scale(4),
+    backgroundColor: 'transparent',
+    borderWidth: scale(1),
+    borderColor: '#00FF00'
+  },
+  wrongAnswerButton: {
+    marginTop: scale(4),
+    backgroundColor: 'transparent',
+    borderWidth: scale(1),
+    borderColor: '#FFFF00'
   }
 });
 

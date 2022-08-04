@@ -1642,6 +1642,51 @@ export const deleteLearn = /* GraphQL */ `
     }
   }
 `;
+export const createLearnStatus = /* GraphQL */ `
+  mutation CreateLearnStatus(
+    $input: CreateLearnStatusInput!
+    $condition: ModelLearnStatusConditionInput
+  ) {
+    createLearnStatus(input: $input, condition: $condition) {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLearnStatus = /* GraphQL */ `
+  mutation UpdateLearnStatus(
+    $input: UpdateLearnStatusInput!
+    $condition: ModelLearnStatusConditionInput
+  ) {
+    updateLearnStatus(input: $input, condition: $condition) {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLearnStatus = /* GraphQL */ `
+  mutation DeleteLearnStatus(
+    $input: DeleteLearnStatusInput!
+    $condition: ModelLearnStatusConditionInput
+  ) {
+    deleteLearnStatus(input: $input, condition: $condition) {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createOpportunity = /* GraphQL */ `
   mutation CreateOpportunity(
     $input: CreateOpportunityInput!

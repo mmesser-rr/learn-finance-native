@@ -6,12 +6,6 @@ const styles = StyleSheet.create({
   slideContainer: { 
     flex: 1, 
     justifyContent: 'space-between' 
-  },
-  answerButton: {
-    marginTop: scale(4),
-    backgroundColor: 'transparent',
-    borderWidth: scale(1),
-    borderColor: 'white'
   }
 });
 

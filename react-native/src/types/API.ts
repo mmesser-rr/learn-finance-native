@@ -726,7 +726,7 @@ export type CreateLearnInput = {
   title: string,
   level: LearnLevel,
   reward: number,
-  deposits?: Array< DepositInput | null > | null,
+  deposits: Array< DepositInput >,
   id?: string | null,
 };
 
@@ -741,12 +741,12 @@ export enum LearnLevel {
 export type DepositInput = {
   videoUri?: string | null,
   title: string,
-  questions?: Array< QuizInput | null > | null,
+  questions: Array< QuizInput >,
 };
 
 export type QuizInput = {
   questionText: string,
-  answers: Array< string | null >,
+  answers: Array< string >,
   correctAnswer: string,
 };
 
@@ -776,7 +776,7 @@ export type Learn = {
   title: string,
   level: LearnLevel,
   reward: number,
-  deposits?:  Array<Deposit | null > | null,
+  deposits:  Array<Deposit >,
   id: string,
   createdAt: string,
   updatedAt: string,
@@ -786,13 +786,13 @@ export type Deposit = {
   __typename: "Deposit",
   videoUri?: string | null,
   title: string,
-  questions?:  Array<Quiz | null > | null,
+  questions:  Array<Quiz >,
 };
 
 export type Quiz = {
   __typename: "Quiz",
   questionText: string,
-  answers: Array< string | null >,
+  answers: Array< string >,
   correctAnswer: string,
 };
 
@@ -803,11 +803,48 @@ export type UpdateLearnInput = {
   title?: string | null,
   level?: LearnLevel | null,
   reward?: number | null,
-  deposits?: Array< DepositInput | null > | null,
+  deposits?: Array< DepositInput > | null,
   id: string,
 };
 
 export type DeleteLearnInput = {
+  id: string,
+};
+
+export type CreateLearnStatusInput = {
+  athleteId: string,
+  learnItemId: string,
+  passedDepositIndex: number,
+  id?: string | null,
+};
+
+export type ModelLearnStatusConditionInput = {
+  athleteId?: ModelIDInput | null,
+  learnItemId?: ModelIDInput | null,
+  passedDepositIndex?: ModelIntInput | null,
+  and?: Array< ModelLearnStatusConditionInput | null > | null,
+  or?: Array< ModelLearnStatusConditionInput | null > | null,
+  not?: ModelLearnStatusConditionInput | null,
+};
+
+export type LearnStatus = {
+  __typename: "LearnStatus",
+  athleteId: string,
+  learnItemId: string,
+  passedDepositIndex: number,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateLearnStatusInput = {
+  athleteId?: string | null,
+  learnItemId?: string | null,
+  passedDepositIndex?: number | null,
+  id: string,
+};
+
+export type DeleteLearnStatusInput = {
   id: string,
 };
 
@@ -1306,6 +1343,57 @@ export type SearchableLearnConnection = {
   aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
+export type SearchableLearnStatusFilterInput = {
+  athleteId?: SearchableIDFilterInput | null,
+  learnItemId?: SearchableIDFilterInput | null,
+  passedDepositIndex?: SearchableIntFilterInput | null,
+  id?: SearchableIDFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  and?: Array< SearchableLearnStatusFilterInput | null > | null,
+  or?: Array< SearchableLearnStatusFilterInput | null > | null,
+  not?: SearchableLearnStatusFilterInput | null,
+};
+
+export type SearchableLearnStatusSortInput = {
+  field?: SearchableLearnStatusSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableLearnStatusSortableFields {
+  athleteId = "athleteId",
+  learnItemId = "learnItemId",
+  passedDepositIndex = "passedDepositIndex",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLearnStatusAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableLearnStatusAggregateField,
+};
+
+export enum SearchableLearnStatusAggregateField {
+  athleteId = "athleteId",
+  learnItemId = "learnItemId",
+  passedDepositIndex = "passedDepositIndex",
+  id = "id",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableLearnStatusConnection = {
+  __typename: "SearchableLearnStatusConnection",
+  items:  Array<LearnStatus | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
 export type SearchableOpportunityFilterInput = {
   id?: SearchableIDFilterInput | null,
   categories?: SearchableStringFilterInput | null,
@@ -1621,6 +1709,21 @@ export type ModelStatusInput = {
 export type ModelInviteConnection = {
   __typename: "ModelInviteConnection",
   items:  Array<Invite | null >,
+  nextToken?: string | null,
+};
+
+export type ModelLearnStatusFilterInput = {
+  athleteId?: ModelIDInput | null,
+  learnItemId?: ModelIDInput | null,
+  passedDepositIndex?: ModelIntInput | null,
+  and?: Array< ModelLearnStatusFilterInput | null > | null,
+  or?: Array< ModelLearnStatusFilterInput | null > | null,
+  not?: ModelLearnStatusFilterInput | null,
+};
+
+export type ModelLearnStatusConnection = {
+  __typename: "ModelLearnStatusConnection",
+  items:  Array<LearnStatus | null >,
   nextToken?: string | null,
 };
 
@@ -3422,17 +3525,17 @@ export type CreateLearnMutation = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -3517,17 +3620,17 @@ export type UpdateLearnMutation = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -3612,17 +3715,68 @@ export type DeleteLearnMutation = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLearnStatusMutationVariables = {
+  input: CreateLearnStatusInput,
+  condition?: ModelLearnStatusConditionInput | null,
+};
+
+export type CreateLearnStatusMutation = {
+  createLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLearnStatusMutationVariables = {
+  input: UpdateLearnStatusInput,
+  condition?: ModelLearnStatusConditionInput | null,
+};
+
+export type UpdateLearnStatusMutation = {
+  updateLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLearnStatusMutationVariables = {
+  input: DeleteLearnStatusInput,
+  condition?: ModelLearnStatusConditionInput | null,
+};
+
+export type DeleteLearnStatusMutation = {
+  deleteLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -4422,17 +4576,17 @@ export type ListLearns_customQuery = {
       title: string,
       level: LearnLevel,
       reward: number,
-      deposits?:  Array< {
+      deposits:  Array< {
         __typename: "Deposit",
         videoUri?: string | null,
         title: string,
-        questions?:  Array< {
+        questions:  Array< {
           __typename: "Quiz",
           questionText: string,
           correctAnswer: string,
-          answers: Array< string | null >,
-        } | null > | null,
-      } | null > | null,
+          answers: Array< string >,
+        } >,
+      } >,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -4869,11 +5023,53 @@ export type SearchLearnsQuery = {
       title: string,
       level: LearnLevel,
       reward: number,
-      deposits?:  Array< {
+      deposits:  Array< {
         __typename: "Deposit",
         videoUri?: string | null,
         title: string,
-      } | null > | null,
+      } >,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
+  } | null,
+};
+
+export type SearchLearnStatusesQueryVariables = {
+  filter?: SearchableLearnStatusFilterInput | null,
+  sort?: Array< SearchableLearnStatusSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableLearnStatusAggregationInput | null > | null,
+};
+
+export type SearchLearnStatusesQuery = {
+  searchLearnStatuses?:  {
+    __typename: "SearchableLearnStatusConnection",
+    items:  Array< {
+      __typename: "LearnStatus",
+      athleteId: string,
+      learnItemId: string,
+      passedDepositIndex: number,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -5754,17 +5950,17 @@ export type GetLearnQuery = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -5808,11 +6004,49 @@ export type ListLearnsQuery = {
       title: string,
       level: LearnLevel,
       reward: number,
-      deposits?:  Array< {
+      deposits:  Array< {
         __typename: "Deposit",
         videoUri?: string | null,
         title: string,
-      } | null > | null,
+      } >,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetLearnStatusQueryVariables = {
+  id: string,
+};
+
+export type GetLearnStatusQuery = {
+  getLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLearnStatusesQueryVariables = {
+  filter?: ModelLearnStatusFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLearnStatusesQuery = {
+  listLearnStatuses?:  {
+    __typename: "ModelLearnStatusConnection",
+    items:  Array< {
+      __typename: "LearnStatus",
+      athleteId: string,
+      learnItemId: string,
+      passedDepositIndex: number,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -7234,17 +7468,17 @@ export type OnCreateLearnSubscription = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -7324,17 +7558,17 @@ export type OnUpdateLearnSubscription = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -7414,17 +7648,53 @@ export type OnDeleteLearnSubscription = {
     title: string,
     level: LearnLevel,
     reward: number,
-    deposits?:  Array< {
+    deposits:  Array< {
       __typename: "Deposit",
       videoUri?: string | null,
       title: string,
-      questions?:  Array< {
+      questions:  Array< {
         __typename: "Quiz",
         questionText: string,
-        answers: Array< string | null >,
+        answers: Array< string >,
         correctAnswer: string,
-      } | null > | null,
-    } | null > | null,
+      } >,
+    } >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLearnStatusSubscription = {
+  onCreateLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLearnStatusSubscription = {
+  onUpdateLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLearnStatusSubscription = {
+  onDeleteLearnStatus?:  {
+    __typename: "LearnStatus",
+    athleteId: string,
+    learnItemId: string,
+    passedDepositIndex: number,
     id: string,
     createdAt: string,
     updatedAt: string,

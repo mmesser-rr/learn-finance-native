@@ -3,11 +3,10 @@ import {Image, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch } from 'react-redux';
 
-import {PODsSteps, BlackRedGradient} from 'src/utils/constants';
+import {BlackRedGradient} from 'src/utils/constants';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
 import NavigationService from 'src/navigation/NavigationService';
-import { updateHomeStep } from 'src/store/actions/bankingActions';
 import LogoIcon from 'src/assets/icons/logo_white_transparent.png';
 
 import styles from './styles';
@@ -19,8 +18,8 @@ const ProfileIntro: React.FC = () => {
     setTimeout(() => {
       // dispatch(updateHomeStep(PODsSteps[0]));
       // NavigationService.navigate('HomeStack');
-      NavigationService.navigate('Opportunities');
-    }, 3000);
+      NavigationService.navigate('OpportunitiesStack');
+    }, 30);
   }, []);
 
   return (
