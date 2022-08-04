@@ -5,6 +5,7 @@ import * as themeActions from './themeActions';
 import * as bankingActions from './bankingActions';
 import * as userActions from './userActions';
 import * as wyreActions from './wyreActions';
+import * as learnStatusActions from './learnStatusActions';
 
 export const ActionCreators = Object.assign(
   {},
@@ -14,4 +15,5 @@ export const ActionCreators = Object.assign(
   bankingActions,
   userActions,
   wyreActions,
+  learnStatusActions
 );

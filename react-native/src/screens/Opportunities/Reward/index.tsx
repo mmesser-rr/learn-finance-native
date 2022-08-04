@@ -14,6 +14,7 @@ interface RewardItemProps {
   wealthAmount: number;
   logoUri: string;
   description: string;
+  onPress: () => void
 }
 
 const RewardItem: React.FC<RewardItemProps> = ({ 
@@ -21,10 +22,11 @@ const RewardItem: React.FC<RewardItemProps> = ({
   title,
   wealthAmount,
   logoUri,
-  description
-}) => {
+  description,
+  onPress
+}: RewardItemProps) => {
   return (
-    <ImageCard backgroundImage={heroPhotoUri} disabled={false}>
+    <ImageCard backgroundImage={heroPhotoUri} disabled={false} onPress={onPress}>
       <View style={styles.wealthAmount}>
         <Image source={WealthIcon} style={styles.wealthIcon} />
         <Text type="Body/Large">{wealthAmount}</Text>

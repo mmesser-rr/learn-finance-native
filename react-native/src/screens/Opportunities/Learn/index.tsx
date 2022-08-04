@@ -16,6 +16,8 @@ interface LearnItemProps {
   level: string;
   rewards: number;
   depositsCount: number;
+  passedDepositIndex: number;
+  onPress: () => void;
 }
 
 const LearnItem: React.FC<LearnItemProps> = ({ 
@@ -24,16 +26,17 @@ const LearnItem: React.FC<LearnItemProps> = ({
   title,
   level,
   rewards,
-  depositsCount
+  depositsCount,
+  passedDepositIndex,
+  onPress
 }) => {
   const formattedLevel = level.at(0) + level.substring(1).toLowerCase()
-
-  const onPress = () => {
-    NavigationService.navigate('LearnVideo')
-  }
+  const depositsPassStatusText = `${passedDepositIndex} of ${depositsCount}`
+  
   
   return (
     <ImageCard backgroundImage={backgroundImage} disabled={false} onPress={onPress}>
+      {passedDepositIndex > 0 && <Text type="Body/Large">{depositsPassStatusText}</Text>}
       <Text type="Body/Large" style={styles.sponsor}>
         Presented by {' '}
         <Text type="Body/Large" style={commonStyles.bold}>{sponsor}</Text>

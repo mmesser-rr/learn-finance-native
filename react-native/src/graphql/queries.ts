@@ -370,6 +370,50 @@ export const searchLearns = /* GraphQL */ `
     }
   }
 `;
+export const searchLearnStatuses = /* GraphQL */ `
+  query SearchLearnStatuses(
+    $filter: SearchableLearnStatusFilterInput
+    $sort: [SearchableLearnStatusSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableLearnStatusAggregationInput]
+  ) {
+    searchLearnStatuses(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        athleteId
+        learnItemId
+        passedDepositIndex
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const searchOpportunities = /* GraphQL */ `
   query SearchOpportunities(
     $filter: SearchableOpportunityFilterInput
@@ -1189,6 +1233,37 @@ export const listLearns = /* GraphQL */ `
           videoUri
           title
         }
+        id
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLearnStatus = /* GraphQL */ `
+  query GetLearnStatus($id: ID!) {
+    getLearnStatus(id: $id) {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLearnStatuses = /* GraphQL */ `
+  query ListLearnStatuses(
+    $filter: ModelLearnStatusFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLearnStatuses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        athleteId
+        learnItemId
+        passedDepositIndex
         id
         createdAt
         updatedAt

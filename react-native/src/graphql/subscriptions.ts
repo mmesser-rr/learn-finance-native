@@ -1064,6 +1064,42 @@ export const onDeleteLearn = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLearnStatus = /* GraphQL */ `
+  subscription OnCreateLearnStatus {
+    onCreateLearnStatus {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLearnStatus = /* GraphQL */ `
+  subscription OnUpdateLearnStatus {
+    onUpdateLearnStatus {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLearnStatus = /* GraphQL */ `
+  subscription OnDeleteLearnStatus {
+    onDeleteLearnStatus {
+      athleteId
+      learnItemId
+      passedDepositIndex
+      id
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateOpportunity = /* GraphQL */ `
   subscription OnCreateOpportunity {
     onCreateOpportunity {

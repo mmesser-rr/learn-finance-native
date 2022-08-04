@@ -4,6 +4,8 @@ import Video from 'react-native-video';
 import {Text} from 'src/components/common/Texts';
 import AppLayout from 'src/components/layout/AppLayout';
 import NavigationService from 'src/navigation/NavigationService';
+import { Quiz } from 'src/types/API';
+import { LearnVideoProps } from 'src/types/opportunitiesRouterTypes';
 
 var styles = StyleSheet.create({
   backgroundVideo: {
@@ -15,10 +17,20 @@ var styles = StyleSheet.create({
   },
 });
 
-const LearnVideo: React.FC = () => {
+const LearnVideo: React.FC<LearnVideoProps> = ({ 
+  navigation,
+  route 
+}: LearnVideoProps) => {
+  const depositData = route.params.depositData
+  const questions: Quiz[] = depositData.questions
+
   useEffect(() => {
-    NavigationService.navigate('Exercise')
+    setTimeout(() => {
+      navigation.navigate('Exercise', { started: false, questions })
+    }, 3000)
   }, [])
+
+  
   return (
     <AppLayout containerStyle={{backgroundColor: 'blue'}}>
       <View style={{flex: 1, backgroundColor: 'blue'}}>
@@ -27,7 +39,8 @@ const LearnVideo: React.FC = () => {
           style={styles.backgroundVideo}
           controls={true}
         /> */}
-        <Text type="Body/Large">Hello</Text>
+        <Text type="Body/Large">{`videoUri: ${depositData.videoUri}`}</Text>
+        <Text type="Body/Large">{`title: ${depositData.title}`}</Text>
       </View>
     </AppLayout>
   );

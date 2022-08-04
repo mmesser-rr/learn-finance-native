@@ -23,7 +23,8 @@ const ImageCard: React.FC<ImageCardProps> = ({
         source={{ uri: backgroundImage }} 
         resizeMode="cover" 
         imageStyle={{opacity: 0.4}}
-        style={styles.imageBackground}>
+        style={styles.imageBackground}
+      >
         <View style={styles.content}>{children}</View>
       </ImageBackground>
     </TouchableOpacity>

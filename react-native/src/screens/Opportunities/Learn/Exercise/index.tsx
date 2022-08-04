@@ -1,19 +1,25 @@
-import React, {useState} from 'react';
-import {Dimensions, View} from 'react-native';
-import {Text} from 'src/components/common/Texts';
-import PinkBox from 'src/components/common/PinkBox';
-import AppLayout from 'src/components/layout/AppLayout';
-import Button from 'src/components/common/Button';
-import {ExerciseProps} from 'src/types/routerTypes';
+import React, { useEffect, useState, useMemo } from 'react';
+import { Dimensions, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
-import {GradientButtonColors, PodsCardGradient} from 'src/utils/constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import Slide from 'src/components/common/Slide';
+import AppLayout from 'src/components/layout/AppLayout';
+import { GradientButtonColors } from 'src/utils/constants';
+import { RootState } from 'src/store/root-state';
 
 import styles from './styles';
-import Slide from '../Slide';
+import { Text } from 'src/components/common/Texts';
+import Button from 'src/components/common/Button';
+import NavigationService from 'src/navigation/NavigationService';
+import { ExerciseProps } from 'src/types/opportunitiesRouterTypes';
+import { useSelector } from 'react-redux';
+import { Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
+import AnswerButtonGroup from './answerButtonGroup';
 
-const {height} = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 const Dot = () => <View style={styles.dot} />;
 
@@ -25,45 +31,91 @@ const ActiveDot = () => {
   );
 };
 
-
 const Exercise: React.FC<ExerciseProps> = ({
   route,
-  navigation,
+  navigation
 }: ExerciseProps) => {
-  const [swiperIndex, setSwiperIndex] = useState(1);
-  const [swiperHeight, setSwiperHeight] = useState(200);
-  const started = route.params.started;
+  const started: boolean = route.params.started;
+  const questions: Quiz[] = route.params.questions;
+  const [answerResult, setAnswerResult] = useState({})
+  const [noWrongAnswers, setNoWrongAnswers] = useState(false);
+  const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
 
-  const handleChangeSwiper = (index: number) => {
-    setSwiperIndex(index);
-  };
-  console.log("rendered Exercise")
+  const ReadyText = () => (
+    <Text type="Headline/Small" style={{ textAlign: 'center' }}>
+      Ready to take the quiz?
+    </Text>
+  )
+
+  const StartAction = () => (
+    <Button
+      onPress={() =>
+        navigation.navigate('Exercise', { started: true, questions })
+      }>
+      <Text type="Body/Large">Start</Text>
+    </Button>
+  )
+
+  const QuestionText = ({ questionText }: { questionText: string }) => (
+    <Text type="Headline/Small"> {questionText} </Text>
+  )
+
+  const FinalText = () => (
+    <Text type="Headline/Small" style={{ textAlign: 'center' }}>
+      Congratulations! {/* Please find all the correct answers. */}
+    </Text>
+  )
+
+  const FinishAction = () => (
+    <Button
+      onPress={async () => {
+        const mutationInput: UpdateLearnStatusMutationVariables = {
+          input: {
+            id: learnStatusId,
+            athleteId,
+            learnItemId,
+            passedDepositIndex: passedDepositIndex + 1
+          }
+        };
+
+        await API.graphql(
+          graphqlOperation(learnStatusId.length ? updateLearnStatus : createLearnStatus, mutationInput),
+        )
+
+        NavigationService.navigate('OpportunitiesStack')
+      }
+      }>
+      <Text type="Body/Large">Finish</Text>
+    </Button>
+  )
+
+  useEffect(() => {
+    const initialAnswerResult = questions.reduce((prev, cur) => {
+      return {
+        ...prev,
+        [cur.correctAnswer]: false
+      }
+    }, {})
+    setAnswerResult(initialAnswerResult)
+  }, [])
+
+  useEffect(() => {
+    const correctAnswers = Object.keys(answerResult)
+    const questionsLength = questions.length;
+    for (let i = 0; i < questionsLength; i++) {
+      if (!answerResult[correctAnswers[i]]) {
+        setNoWrongAnswers(false)
+        return;
+      }
+    }
+    setNoWrongAnswers(true)
+  }, [answerResult])
 
   return (
     <AppLayout containerStyle={styles.container} scrollEnabled={false}>
-      <View style={{ marginTop: '20%', maxHeight: '90%'}}>
+      <View style={{ marginTop: '20%', maxHeight: '90%' }}>
         {!started && (
-          // <PinkBox>
-          //   <View style={{flex: 1, justifyContent: 'space-between'}}>
-          //     <View>
-          //       <View style={{marginBottom: '30%'}}>
-          //         <CloseIcon />
-          //       </View>
-          //       <Text type="Headline/Small" style={{textAlign: 'center'}}>
-          //         Ready to take the quiz?
-          //       </Text>
-          //     </View>
-          //     <View>
-          //       <Button
-          //         onPress={() =>
-          //           navigation.navigate('Exercise', {started: true})
-          //         }>
-          //         <Text type="Body/Large">Start</Text>
-          //       </Button>
-          //     </View>
-          //   </View>
-          // </PinkBox>
-          <Slide navigation={navigation} />
+          <Slide content={<ReadyText />} actions={<StartAction />} />
         )}
 
         {started && (
@@ -72,14 +124,27 @@ const Exercise: React.FC<ExerciseProps> = ({
             activeDot={<ActiveDot />}
             loop={false}
             height={height * 0.9}
-            onIndexChanged={handleChangeSwiper}
           >
-            <View style={styles.slideWrapper}>
-              <Slide navigation={navigation} />
-            </View>
-            <View style={styles.slideWrapper}>
-              <Slide navigation={navigation} />
-            </View>
+            {questions.map((quiz, index) => (
+              <View key={index} style={styles.slideWrapper}>
+                <Slide
+                  content={<QuestionText questionText={quiz.questionText} />}
+                  actions={
+                    <AnswerButtonGroup
+                      answers={quiz.answers}
+                      correctAnswer={quiz.correctAnswer}
+                      // answerResultProps={answerResult} 
+                      // setAnswerResultProps={setAnswerResult} 
+                    />
+                  }
+                />
+              </View>
+            )
+            )}
+
+            {noWrongAnswers && (
+              <Slide content={<FinalText />} actions={<FinishAction />} />
+            )}
           </Swiper>
         )}
       </View>
