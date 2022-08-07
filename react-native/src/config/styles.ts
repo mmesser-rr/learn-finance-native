@@ -1,3 +1,6 @@
+import AppColors from "./colors";
+import { Metrics, scale } from "./dimentions";
+
 /*
  * Provides universal color configs used in the app.
  * Provides universal fonts used in the app.
@@ -20,5 +23,22 @@ const AppStyles = {
     // FONT_REGULAR: 'Roboto-Regular',
     // FONT_MEDIUM: 'Roboto-Medium'
   },
+  container: {
+    backgroundColor: AppColors.coreBlack100,
+  },
+  viewWrapper: {
+    maxHeight: Metrics.screenHeight,
+    justifyContent: 'space-between'
+  },
+  avatarSize: scale(80),
+  redButton: {
+    backgroundColor: AppColors.accentRed100
+  },
+  transparentButton: {
+    backgroundColor: AppColors.transparent,
+    borderColor: AppColors.coreWhite100,
+    borderWidth: Metrics.pixels.size1
+  },
+  componentPadding: scale(14)
 };
 export default AppStyles;

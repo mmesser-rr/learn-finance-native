@@ -35,6 +35,7 @@ export const Metrics = {
   radius: {
     button: scale(6),
     input: scale(2),
+    card: scale(8)
   },
   padding: {
     horizontal: scale(20),
@@ -49,6 +50,10 @@ export const Metrics = {
     xlg: 22,
     title: 32,
     subTitle: 20,
+  },
+  pixels: {
+    size1: scale(1),
+    size2: scale(2)
   },
   icons: {
     tiny: scale(15),

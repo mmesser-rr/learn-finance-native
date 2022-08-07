@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useForm, Controller} from 'react-hook-form';
@@ -64,6 +64,10 @@ const UserLogin: React.FC = () => {
   const goToSignUp = () => {
     NavigationService.navigate('SignUp');
   };
+
+  useEffect(() => {
+    dispatch(userActions.loginRequest("+16095218692", "Ali1232313232!"));
+  }, [])
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper}>
