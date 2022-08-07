@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import AppColors from 'src/config/colors';
-import { scale } from 'src/config/dimentions';
+import { Metrics, scale } from 'src/config/dimentions';
+import AppStyles from 'src/config/styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,20 +22,20 @@ const styles = StyleSheet.create({
   },
   answerButton: {
     marginTop: scale(4),
-    backgroundColor: 'transparent',
-    borderWidth: scale(1),
-    borderColor: 'white'
+    backgroundColor: AppColors.transparent,
+    borderWidth: Metrics.pixels.size1,
+    borderColor: AppColors.coreWhite100
   },
   correctAnswerButton: {
     marginTop: scale(4),
-    backgroundColor: 'transparent',
-    borderWidth: scale(1),
+    backgroundColor: AppColors.transparent,
+    borderWidth: Metrics.pixels.size1,
     borderColor: '#00FF00'
   },
   wrongAnswerButton: {
     marginTop: scale(4),
-    backgroundColor: 'transparent',
-    borderWidth: scale(1),
+    backgroundColor: AppColors.transparent,
+    borderWidth: Metrics.pixels.size1,
     borderColor: '#FFFF00'
   }
 });

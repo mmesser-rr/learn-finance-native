@@ -12,6 +12,17 @@ export type OpportunitiesStackParamList = {
     logoUri: string,
     wealthAmount: number,
     description: string
+  };
+  AboutEvent: {
+    heroPhotoUri: string,
+    logoUri: string,
+    tagline: string,
+    sponsor: string,
+    title: string,
+    description: string,
+    dateTime: number,
+    location: string,
+    reward: number
   }
 };
 
@@ -37,4 +48,12 @@ type RedeemNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'Re
 export type RedeemProps = {
   navigation: RedeemNavigationProp;
   route: RedeemRouteProp;
+};
+
+// AboutEvent
+type AboutEventRouteProp = RouteProp<OpportunitiesStackParamList, 'AboutEvent'>;
+type AboutEventNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'AboutEvent'>;
+export type AboutEventProps = {
+  navigation: AboutEventNavigationProp;
+  route: AboutEventRouteProp;
 };

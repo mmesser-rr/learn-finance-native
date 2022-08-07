@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { Dimensions, View } from 'react-native';
 import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
@@ -40,6 +40,19 @@ const Exercise: React.FC<ExerciseProps> = ({
   const [answerResult, setAnswerResult] = useState({})
   const [noWrongAnswers, setNoWrongAnswers] = useState(false);
   const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
+  const [results, setResults] = useState({});
+  const [exerciseResult, setExerciseResult] = useState(false);
+
+  useEffect(() => {
+    const countQ = questions.length;
+    let result = true;
+
+    for (let idx = 0; idx < countQ; ++idx) {
+      result &&= (results[idx] === true);
+    }
+    console.log('setting exercise result: ', result);
+    setExerciseResult(result);
+  }, [results]);
 
   const ReadyText = () => (
     <Text type="Headline/Small" style={{ textAlign: 'center' }}>
@@ -89,6 +102,13 @@ const Exercise: React.FC<ExerciseProps> = ({
     </Button>
   )
 
+  const setFoundAnswer = useCallback((answer: string, correctAnswer: string) => {
+    setAnswerResult({
+      ...answerResult,
+      [correctAnswer]: (answer === correctAnswer)
+    })
+  }, [])
+
   useEffect(() => {
     const initialAnswerResult = questions.reduce((prev, cur) => {
       return {
@@ -100,6 +120,7 @@ const Exercise: React.FC<ExerciseProps> = ({
   }, [])
 
   useEffect(() => {
+    console.log('updated answerResult => ', answerResult)
     const correctAnswers = Object.keys(answerResult)
     const questionsLength = questions.length;
     for (let i = 0; i < questionsLength; i++) {
@@ -125,24 +146,38 @@ const Exercise: React.FC<ExerciseProps> = ({
             loop={false}
             height={height * 0.9}
           >
-            {questions.map((quiz, index) => (
-              <View key={index} style={styles.slideWrapper}>
-                <Slide
-                  content={<QuestionText questionText={quiz.questionText} />}
-                  actions={
-                    <AnswerButtonGroup
-                      answers={quiz.answers}
-                      correctAnswer={quiz.correctAnswer}
-                      // answerResultProps={answerResult} 
-                      // setAnswerResultProps={setAnswerResult} 
-                    />
-                  }
-                />
-              </View>
-            )
+            {questions.map((quiz, index) => {
+
+
+              return (
+                <View key={index} style={styles.slideWrapper}>
+                  <Slide
+                    content={<QuestionText questionText={quiz.questionText} />}
+                    actions={
+                      <AnswerButtonGroup
+                        answers={quiz.answers}
+                        correctAnswer={quiz.correctAnswer}
+                        correctIndex={1}
+                        setFoundAnswer={setFoundAnswer}
+                        setAnswer={
+                          (result: boolean) => {
+                            console.log(`reported answer for index: ${index}, answer = ${result}`);
+                            setResults({ ...results, [index]: result });
+                          }
+                        }
+                      />
+                    }
+                  />
+                </View>
+              )
+            }
             )}
 
-            {noWrongAnswers && (
+            {/* {noWrongAnswers && (
+              <Slide content={<FinalText />} actions={<FinishAction />} />
+            )} */}
+
+            {exerciseResult && (
               <Slide content={<FinalText />} actions={<FinishAction />} />
             )}
           </Swiper>

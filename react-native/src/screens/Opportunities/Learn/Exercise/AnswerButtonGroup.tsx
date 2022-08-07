@@ -1,23 +1,29 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Button from "src/components/common/Button"
 import { Text } from "src/components/common/Texts"
 
 import styles from './styles'
 
-const AnswerButtonGroup = React.memo(({ 
-  answers, 
+const AnswerButtonGroup = ({
+  answers,
   correctAnswer,
-  // answerResultProps,
-  // setAnswerResultProps
-}: { 
-  answers: string[], 
+  setFoundAnswer,
+  correctIndex,
+  setAnswer,
+}: {
+  answers: string[],
   correctAnswer: string,
-  // answerResultProps: {},
-  // setAnswerResultProps: React.Dispatch<React.SetStateAction<{}>>,
+  correctIndex: number,
+  setFoundAnswer: (answer: string, correctAnswer: string) => void,
+  setAnswer: (boolean) => void,
 }) => {
-  const [selectedButtonIndex, setSelectedButtonIndex] = useState(-1)
+  // const [buttonStyles, setButtonStyles] = useState({})
+  console.log("rendering AnswerButtonGroup")
 
-  const AnswerButton = ({text, style, onPress}) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
+
+  const AnswerButton = ({ text, result, onPress }) => {
+    const style = result === true ? styles.correctAnswerButton : result === false ? styles.wrongAnswerButton : styles.answerButton
     return (
       <Button actionStyle={style} onPress={onPress}>
         <Text type="Body/Large">{text}</Text>
@@ -25,47 +31,60 @@ const AnswerButtonGroup = React.memo(({
     )
   }
 
-  const getStyle = (index: number, answer: string) => {
-    console.log("answer, correctAnswer", answer, correctAnswer)
-    // console.log('answerResultProps', answerResultProps)
+  useEffect(() => console.log('current index: ', currentIndex), [currentIndex]);
 
-    if (selectedButtonIndex === index) {
-      if (answer === correctAnswer) {
-        // if (!answerResultProps[correctAnswer]) {
-        //   setAnswerResultProps({
-        //     ...answerResultProps,
-        //     [correctAnswer]: true
-        //   })
-        // }
-        
-        return styles.correctAnswerButton 
-      }
-      else {
-        return styles.wrongAnswerButton
-      }
-    }
-    else {
-      return styles.answerButton
-    }
-  }
+  // const onPress = (selectedIndex: number) => {
+  //   console.log('=> answerButtonGroup => onPress => selectedIndex => ', selectedIndex)
+  //   let newButtonStyles = buttonStyles
+  //   answers.map((answer, index) => {
+  //     if (selectedIndex === index) {
+  //       // setFoundAnswer(answer, correctAnswer)
+  //       newButtonStyles[answer] = (answer === correctAnswer ? styles.correctAnswerButton : styles.wrongAnswerButton)
+  //     }
+  //     else {
+  //       newButtonStyles[answer] = styles.answerButton
+  //     }
+  //   })
+  //   // console.log('newButtonStyles', newButtonStyles)
+  //   setButtonStyles(newButtonStyles)
+  //   console.log("set new button style");
+  // }
 
-  const onPress = (index: number) => {
-    // console.log('answerResultProps', answerResultProps)
-    // setSelectedButtonIndex(index)
-  }
+  // useEffect(() => {
+  //   const initialButtonStyles = answers.reduce((prev, cur) => {
+  //     return {
+  //       ...prev,
+  //       [cur]: styles.answerButton
+  //     }
+  //   }, {})
+
+  //   setButtonStyles(initialButtonStyles)
+  //   console.log('resetting button styles...');
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log("=> answerButtonGroup => buttonStyles => ", buttonStyles)
+  // }, [buttonStyles])
 
   return (
     <>
       {answers.map((answer, index) => (
-        <AnswerButton 
-          key={index} 
-          text={answer} 
-          style={() => getStyle(index, answer)}
-          onPress={() => onPress(index)}
+        <AnswerButton
+          key={index}
+          text={answer}
+          result={index !== currentIndex ? undefined: currentIndex === correctIndex ? true: false}
+          onPress={() => {setCurrentIndex(index); setAnswer(index === correctIndex);}}
         />
       ))}
     </>
   )
-})
-
-export default AnswerButtonGroup
+}
+const Memoized =  React.memo(AnswerButtonGroup, (prev, next) => {
+  console.log('============================');
+  // console.log(prev);
+  // console.log(next);
+  const result =  prev.correctIndex === next.correctIndex;
+  console.log('useMemo return ', result);
+  return result;
+});
+export default Memoized;

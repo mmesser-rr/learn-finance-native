@@ -17,6 +17,7 @@ interface EventItemProps {
   category: string;
   dateTime: number;
   reward: number;
+  onPress: () => void;
 }
 
 const EventItem: React.FC<EventItemProps> = ({ 
@@ -25,9 +26,11 @@ const EventItem: React.FC<EventItemProps> = ({
   title,
   category,
   dateTime,
-  reward
-}) => {
+  reward,
+  onPress
+}: EventItemProps) => {
   const formattedDateTime = format(new Date(dateTime), "MMMM do 'at' h:maaa zzz")
+
   return (
     <ImageCard backgroundImage={heroPhotoUri}>
       <Text type="Body/Large" style={styles.sponsor}>
@@ -42,11 +45,11 @@ const EventItem: React.FC<EventItemProps> = ({
       </View>
       <Text type="Body/Large">{formattedDateTime}</Text>
       <View style={styles.buttonGroup}>
-        <Button actionStyle={styles.notify}>
+        <Button variant='transparent' actionStyle={styles.notify}>
           <Text type="Body/Large">Notify Me</Text>
         </Button>
         <View style={styles.buttonGap}></View>
-        <Button actionStyle={styles.rsvp}>
+        <Button variant='red' actionStyle={styles.rsvp} onPress={onPress}>
           <Text type="Body/Large">RSVP</Text>  
         </Button>
       </View>

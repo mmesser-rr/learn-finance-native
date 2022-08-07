@@ -23,14 +23,10 @@ const styles = StyleSheet.create({
     height: 1
   },
   notify: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    borderColor: 'white',
-    borderWidth: scale(1)
+    flex: 1
   },
   rsvp: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 90, 95, 1)'
+    flex: 1
   }
 });
 

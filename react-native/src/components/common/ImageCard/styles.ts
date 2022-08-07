@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {scale} from 'src/config/dimentions';
+import AppColors from 'src/config/colors';
+import {Metrics, scale} from 'src/config/dimentions';
 
 const styles = StyleSheet.create({
   card: {
-    borderColor: 'white',
-    borderWidth: scale(1.5),
-    borderRadius: scale(8),
+    borderColor: AppColors.coreWhite100,
+    borderWidth: Metrics.pixels.size2,
+    borderRadius: Metrics.radius.card,
     minHeight: scale(160),
     marginTop: scale(16)
   },
