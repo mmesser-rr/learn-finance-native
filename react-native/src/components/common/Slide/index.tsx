@@ -5,7 +5,7 @@ import PinkBox from "src/components/common/PinkBox"
 import { Text } from "src/components/common/Texts";
 import Button from "src/components/common/Button";
 import NavigationService from "src/navigation/NavigationService";
-import CloseIcon from 'src/assets/icons/close(white).svg';
+import CloseIcon from 'src/assets/icons/close-white.svg';
 
 import styles from "./styles"
 

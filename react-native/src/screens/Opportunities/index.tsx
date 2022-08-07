@@ -149,10 +149,14 @@ const Opportunities = ({ navigation }) => {
           learns.map((learn, index) => {
             const result: LearnStatus | undefined = learnStatuses.filter(o => o.athleteId === athleteId && o.learnItemId === learn.id).pop()
             const passedDepositIndex: number = result?.passedDepositIndex || 0
-            const depositData: Deposit | undefined | null = learn.deposits?.at(passedDepositIndex + 1)
+            const depositData: Deposit | undefined = learn.deposits?.at(passedDepositIndex + 1)
             const learnStatusId = result?.id || ""
             const onPressLearnItem = async () => {
               dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learn.id, passedDepositIndex))
+              if (!depositData) {
+                console.log(`Deposit data at index of ${index} doesn't exist.`)
+                return;
+              }
               navigation.navigate('LearnVideo', { depositData })
             }
             return (
@@ -171,17 +175,34 @@ const Opportunities = ({ navigation }) => {
           })}
 
         {activeOpportunity === OPPORTUNITIES.EVENTS &&
-          events.map((event, index) => (
-            <EventItem
-              key={index}
-              heroPhotoUri="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
-              sponsor={event.sponsor}
-              title={event.title}
-              dateTime={event.dateTime}
-              reward={event.reward}
-              category={event.category}
-            />
-          ))}
+          events.map((event, index) => {
+            const heroPhotoUri = event.heroPhotoUri;
+            const logoUri = event.logoUri;
+            const sponsor = event.sponsor;
+            const title = event.title;
+            const dateTime = event.dateTime;
+            const reward = event.reward;
+            const category = event.category;
+
+            const onPressEventItem = () => {
+              navigation.navigate('AboutEvent', {
+                ...{ heroPhotoUri, logoUri, sponsor, title, dateTime, reward, category }
+              })
+            }
+
+            return (
+              <EventItem
+                key={index}
+                heroPhotoUri="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
+                sponsor={event.sponsor}
+                title={event.title}
+                dateTime={event.dateTime}
+                reward={event.reward}
+                category={event.category}
+                onPress={onPressEventItem}
+              />
+            )
+          })}
 
         {activeOpportunity === OPPORTUNITIES.REWARDS &&
           rewards.map((reward, index) => {
@@ -190,13 +211,18 @@ const Opportunities = ({ navigation }) => {
             const title = reward.title
             const wealthAmount = reward.wealthAmount
             const description = reward.description || ""
+
+            const onPressRewardItem = () => {
+              navigation.navigate('Redeem', {
+                ...{ heroPhotoUri, logoUri, title, wealthAmount, description }
+              })
+            }
+
             return (
               <RewardItem
                 key={index}
                 {...{ heroPhotoUri, logoUri, title, wealthAmount, description }}
-                onPress={() => navigation.navigate('Redeem', {
-                  ...{ heroPhotoUri, logoUri, title, wealthAmount, description }
-                })}
+                onPress={() => onPressRewardItem()}
               />
             )
           }
