@@ -14,7 +14,7 @@ import Button from 'src/components/common/Button';
 import NavigationService from 'src/navigation/NavigationService';
 import { ExerciseProps } from 'src/types/opportunitiesRouterTypes';
 import { useSelector } from 'react-redux';
-import { Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
+import { CreateLearnStatusMutationVariables, Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
 import AnswerButtonGroup from './answerButtonGroup';
@@ -37,22 +37,11 @@ const Exercise: React.FC<ExerciseProps> = ({
 }: ExerciseProps) => {
   const started: boolean = route.params.started;
   const questions: Quiz[] = route.params.questions;
-  const [answerResult, setAnswerResult] = useState({})
-  const [noWrongAnswers, setNoWrongAnswers] = useState(false);
+
   const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
-  const [results, setResults] = useState({});
-  const [exerciseResult, setExerciseResult] = useState(false);
-
-  useEffect(() => {
-    const countQ = questions.length;
-    let result = true;
-
-    for (let idx = 0; idx < countQ; ++idx) {
-      result &&= (results[idx] === true);
-    }
-    console.log('setting exercise result: ', result);
-    setExerciseResult(result);
-  }, [results]);
+  const [answerButtonsStatus, setAnswerButtonsStatus] = useState<Object>({})
+  const [flag, setFlag] = useState(false) // used for re-rendering component when answerButtonsStatus is updated.
+  const [foundAllAnswers, setFoundAllAnswers] = useState(false)
 
   const ReadyText = () => (
     <Text type="Headline/Small" style={{ textAlign: 'center' }}>
@@ -75,62 +64,81 @@ const Exercise: React.FC<ExerciseProps> = ({
 
   const FinalText = () => (
     <Text type="Headline/Small" style={{ textAlign: 'center' }}>
-      Congratulations! {/* Please find all the correct answers. */}
+      {foundAllAnswers ? `Congratulations!` : `Please find all the correct answers.`}
     </Text>
   )
 
-  const FinishAction = () => (
-    <Button
-      onPress={async () => {
-        const mutationInput: UpdateLearnStatusMutationVariables = {
-          input: {
-            id: learnStatusId,
-            athleteId,
-            learnItemId,
-            passedDepositIndex: passedDepositIndex + 1
-          }
-        };
-
-        await API.graphql(
-          graphqlOperation(learnStatusId.length ? updateLearnStatus : createLearnStatus, mutationInput),
-        )
-
-        NavigationService.navigate('OpportunitiesStack')
-      }
-      }>
-      <Text type="Body/Large">Finish</Text>
-    </Button>
-  )
-
-  const setFoundAnswer = useCallback((answer: string, correctAnswer: string) => {
-    setAnswerResult({
-      ...answerResult,
-      [correctAnswer]: (answer === correctAnswer)
-    })
-  }, [])
-
-  useEffect(() => {
-    const initialAnswerResult = questions.reduce((prev, cur) => {
-      return {
-        ...prev,
-        [cur.correctAnswer]: false
-      }
-    }, {})
-    setAnswerResult(initialAnswerResult)
-  }, [])
-
-  useEffect(() => {
-    console.log('updated answerResult => ', answerResult)
-    const correctAnswers = Object.keys(answerResult)
-    const questionsLength = questions.length;
-    for (let i = 0; i < questionsLength; i++) {
-      if (!answerResult[correctAnswers[i]]) {
-        setNoWrongAnswers(false)
-        return;
-      }
+  const onFinish = async () => {
+    const mainPayload = {
+      athleteId,
+      learnItemId,
+      passedDepositIndex: passedDepositIndex + 1
     }
-    setNoWrongAnswers(true)
-  }, [answerResult])
+    if (learnStatusId.length > 0) {
+      const updateMutationInput: UpdateLearnStatusMutationVariables = {
+        input: {
+          id: learnStatusId,
+          ...mainPayload
+        }
+      };
+      await API.graphql(
+        graphqlOperation(updateLearnStatus, updateMutationInput)
+      )
+    }
+    else {
+      const creaetMutationInput: CreateLearnStatusMutationVariables = {
+        input: mainPayload
+      };
+
+      await API.graphql(
+        graphqlOperation(createLearnStatus, creaetMutationInput)
+      )
+    }
+
+    NavigationService.navigate('Opportunities')
+  }
+
+  const FinishAction = () => {
+    return (
+      <>{foundAllAnswers ? (
+        <Button onPress={onFinish}>
+          <Text type="Body/Large">Finish</Text>
+        </Button >
+      ) : (<></>)
+      }</>)
+  }
+
+  const checkFoundAllAnswers = (newStatus) => {
+    let index = 0;
+    questions.reduce((prev, next) => {
+      return prev && newStatus[index]
+    }, true)
+
+    let result = true;
+    Object.keys(newStatus).forEach((qKey, questionIndex) => {
+      // if sumOfStates is equal to -1 (-1 + -1 + 1 = -1), this means correctAnswer is found.
+      const sumOfStates = Object.keys(newStatus[qKey]).reduce((prev, next) => {
+        return prev + newStatus[qKey][next]
+      }, 0)
+
+      result = result && (sumOfStates === -1)
+    })
+    return result;
+  }
+
+  useEffect(() => {
+    let newSt = {};
+    const nQuestions = questions.length;
+    for (let i = 0; i < nQuestions; ++i) {
+      let newSubSt = {};
+      const nAnswers = questions[i].answers.length
+      for (let j = 0; j < nAnswers; ++j) {
+        newSubSt[j] = -1
+      }
+      newSt[i] = newSubSt
+    }
+    setAnswerButtonsStatus(newSt)
+  }, [])
 
   return (
     <AppLayout containerStyle={styles.container} scrollEnabled={false}>
@@ -144,42 +152,41 @@ const Exercise: React.FC<ExerciseProps> = ({
             dot={<Dot />}
             activeDot={<ActiveDot />}
             loop={false}
-            height={height * 0.9}
+            height={height * 0.8}
           >
-            {questions.map((quiz, index) => {
-
+            {[...questions.map((quiz, quizIndex) => {
+              const setSelectedAnswerIndex = (selectedAnswerIndex: number) => {
+                const newSt = answerButtonsStatus
+                quiz.answers.map((answer, answerIndex) => {
+                  newSt[quizIndex][answerIndex] = answerIndex === selectedAnswerIndex ? Number(quiz.correctAnswer === answer) : -1
+                })
+                setAnswerButtonsStatus(newSt)
+                setFoundAllAnswers(checkFoundAllAnswers(newSt))
+                setFlag(!flag)
+              }
 
               return (
-                <View key={index} style={styles.slideWrapper}>
+                <View key={quizIndex} style={styles.slideWrapper}>
                   <Slide
                     content={<QuestionText questionText={quiz.questionText} />}
                     actions={
                       <AnswerButtonGroup
                         answers={quiz.answers}
                         correctAnswer={quiz.correctAnswer}
-                        correctIndex={1}
-                        setFoundAnswer={setFoundAnswer}
-                        setAnswer={
-                          (result: boolean) => {
-                            console.log(`reported answer for index: ${index}, answer = ${result}`);
-                            setResults({ ...results, [index]: result });
-                          }
-                        }
+                        answerButtonsStatus={answerButtonsStatus[quizIndex]}
+                        setSelectedAnswerIndex={setSelectedAnswerIndex}
                       />
                     }
                   />
                 </View>
               )
             }
-            )}
+            ), (
+              <View style={styles.slideWrapper} key="asdf">
+                <Slide content={<FinalText />} actions={<FinishAction />} />
+              </View>
+            )]}
 
-            {/* {noWrongAnswers && (
-              <Slide content={<FinalText />} actions={<FinishAction />} />
-            )} */}
-
-            {exerciseResult && (
-              <Slide content={<FinalText />} actions={<FinishAction />} />
-            )}
           </Swiper>
         )}
       </View>

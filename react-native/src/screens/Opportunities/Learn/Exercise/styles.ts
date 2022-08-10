@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreWhite100
   },
   slideWrapper: {
-    height: '88%'
+    height: '92%'
   },
   answerButton: {
     marginTop: scale(4),
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginTop: scale(4),
     backgroundColor: AppColors.transparent,
     borderWidth: Metrics.pixels.size1,
-    borderColor: '#FFFF00'
+    borderColor: '#FF0000'
   }
 });
 
