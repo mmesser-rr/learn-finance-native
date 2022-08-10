@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
-import {Text} from 'src/components/common/Texts';
+import { Text } from 'src/components/common/Texts';
 
 import commonStyles from '../styles'
 import styles from './styles';
 import ImageCard from 'src/components/common/ImageCard';
 import { Oval } from 'src/components/common/Oval';
 import NavigationService from 'src/navigation/NavigationService';
+import { Storage } from 'aws-amplify';
 
 interface LearnItemProps {
   backgroundImage: string;
@@ -20,7 +21,7 @@ interface LearnItemProps {
   onPress: () => void;
 }
 
-const LearnItem: React.FC<LearnItemProps> = ({ 
+const LearnItem: React.FC<LearnItemProps> = ({
   backgroundImage,
   sponsor,
   title,
@@ -30,13 +31,26 @@ const LearnItem: React.FC<LearnItemProps> = ({
   passedDepositIndex,
   onPress
 }) => {
+  const [imgSrc, setImgSrc] = useState("https://reactjs.org/logo-og.png")
+
   const formattedLevel = level.at(0) + level.substring(1).toLowerCase()
-  const depositsPassStatusText = `${passedDepositIndex} of ${depositsCount}`
-  
-  
+  const depositsPassStatusText = `${passedDepositIndex + 1} of ${depositsCount}`
+
+  useEffect(() => {
+    const setBackgroundImage = async () => {
+      console.log('backgroundImage', backgroundImage)
+      if (backgroundImage.length) {
+        const bgImage = await Storage.get(backgroundImage, { download: false })
+        setImgSrc(bgImage)
+      }
+    }
+
+    setBackgroundImage()
+  }, [])
+
   return (
-    <ImageCard backgroundImage={backgroundImage} disabled={false} onPress={onPress}>
-      {passedDepositIndex > 0 && <Text type="Body/Large">{depositsPassStatusText}</Text>}
+    <ImageCard backgroundImage={imgSrc} disabled={false} onPress={onPress}>
+      {/* passedDepositIndex > 0 && */ <Text type="Body/Large">{depositsPassStatusText}</Text>}
       <Text type="Body/Large" style={styles.sponsor}>
         Presented by {' '}
         <Text type="Body/Large" style={commonStyles.bold}>{sponsor}</Text>

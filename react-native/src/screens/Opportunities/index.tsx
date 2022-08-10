@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useFocusEffect } from '@react-navigation/native';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
 
@@ -118,13 +119,15 @@ const Opportunities = ({ navigation }) => {
     setRewards(response.data?.listRewards?.items as Reward[]);
   }
 
-  useEffect(() => {
-    // fetch Learn, Events and Rewards data
-    fetchLearns();
-    fetchLearnStatuses();
-    fetchEvents();
-    fetchRewards();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      // fetch Learn, Events and Rewards data
+      fetchLearns();
+      fetchLearnStatuses();
+      fetchEvents();
+      fetchRewards();
+    }, [navigation])
+  )
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper} scrollEnabled={false}>
@@ -148,10 +151,12 @@ const Opportunities = ({ navigation }) => {
         {activeOpportunity === OPPORTUNITIES.LEARN &&
           learns.map((learn, index) => {
             const result: LearnStatus | undefined = learnStatuses.filter(o => o.athleteId === athleteId && o.learnItemId === learn.id).pop()
-            const passedDepositIndex: number = result?.passedDepositIndex || 0
+            const passedDepositIndex: number = (typeof result?.passedDepositIndex === 'undefined') ? -1 : result?.passedDepositIndex;
             const depositData: Deposit | undefined = learn.deposits?.at(passedDepositIndex + 1)
             const learnStatusId = result?.id || ""
+
             const onPressLearnItem = async () => {
+              if (passedDepositIndex === learn.deposits.length - 1) return;
               dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learn.id, passedDepositIndex))
               if (!depositData) {
                 console.log(`Deposit data at index of ${index} doesn't exist.`)
@@ -159,10 +164,11 @@ const Opportunities = ({ navigation }) => {
               }
               navigation.navigate('LearnVideo', { depositData })
             }
+
             return (
               <LearnItem
                 key={index}
-                backgroundImage="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
+                backgroundImage={learn.bgImageUri || ""}
                 sponsor={learn.sponsor}
                 title={learn.title}
                 level={learn.level}
