@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
   logo: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: scale(12),
     flex: 1
   },
   content: {
+    paddingLeft: scale(16),
     flex: 3
   }
 });

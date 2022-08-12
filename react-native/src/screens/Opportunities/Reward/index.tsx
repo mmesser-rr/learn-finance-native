@@ -49,13 +49,13 @@ const RewardItem: React.FC<RewardItemProps> = ({
     <ImageCard backgroundImage={heroPhotoSrc} disabled={false} onPress={onPress}>
       <View style={styles.wealthAmount}>
         <Image source={WealthIcon} style={styles.wealthIcon} />
-        <Text type="Body/Large" variant='white'>{wealthAmount}</Text>
+        <Text type="Body/Medium" variant='white'>{wealthAmount}</Text>
       </View>
       <View style={styles.body}>
         <Image source={{ uri: logoSrc }} style={styles.logo} />
         <View style={styles.content}>
-          <Text type="Headline/Large" variant='white'>{title}</Text>
-          <Text type="Body/Large" variant='white'>{description}</Text>
+          <Text type="Headline/Medium" variant='white'>{title}</Text>
+          <Text type="Body/Medium" variant='white'>{description}</Text>
         </View>
       </View>
     </ImageCard>

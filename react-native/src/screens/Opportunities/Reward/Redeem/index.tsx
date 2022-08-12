@@ -10,6 +10,7 @@ import CloseIcon from 'src/assets/icons/close-gray.png';
 import { Image, TouchableOpacity, View } from "react-native"
 import Button from "src/components/common/Button"
 import AppStyles from "src/config/styles"
+import BackwardIcon from 'src/assets/icons/backward.png';
 
 const Redeem: React.FC<RedeemProps> = ({
   navigation,
@@ -46,8 +47,11 @@ const Redeem: React.FC<RedeemProps> = ({
     <BottomSheetModalProvider>
       <AppLayout containerStyle={AppStyles.container} viewStyle={AppStyles.viewWrapper} scrollEnabled={false}>
         <View>
-          <Text type="Headline/Large" variant='white'>How to Claim</Text>
-          <Text type="Body/Large" variant='white'>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
+          <TouchableOpacity style={styles.backward} onPress={() => navigation.goBack()}>
+            <Image source={BackwardIcon} />
+          </TouchableOpacity>
+          <Text type="Headline/Medium" variant='white'>How to Claim</Text>
+          <Text type="Body/Medium" variant='white'>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
           <RewardItem {...{ heroPhotoUri, title, wealthAmount, logoUri, description, onPress: () => null }} />
         </View>
 
@@ -63,27 +67,27 @@ const Redeem: React.FC<RedeemProps> = ({
             <TouchableOpacity onPress={handleDismissModal}>
               <Image source={CloseIcon} />
             </TouchableOpacity>
-            <Text type="Headline/Large" variant='white'>Redeem Offer</Text>
-            <Text type="Body/Large" variant='white'>You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
+            <Text type="Headline/Medium" variant='white'>Redeem Offer</Text>
+            <Text type="Body/Medium" variant='white'>You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
             <Button actionStyle={AppStyles.redButton} onPress={handleRedeem}>
-              <Text type="Body/Large" variant='white'>Redeem</Text>
+              <Text type="Body/Medium" variant='white'>Redeem</Text>
             </Button>
             <Button actionStyle={AppStyles.transparentButton} onPress={handleDismissModal}>
-              <Text type="Body/Large" variant='white'>Cancel</Text>
+              <Text type="Body/Medium" variant='white'>Cancel</Text>
             </Button>
           </View>
         </BottomSheetModal>
 
         {!redeemed && (
           <Button variant="red" onPress={handlePresentModal}>
-            <Text type="Body/Large" variant='white'>Redeem Offer</Text>
+            <Text type="Body/Medium" variant='white'>Redeem Offer</Text>
           </Button>
         )}
 
         {redeemed && (
           <View>
             <Button variant="red" actionStyle={styles.redeemedButton} disabled={true}>
-              <Text type="Body/Large" variant='white'>Offer Redeemed</Text>
+              <Text type="Body/Medium" variant='white'>Offer Redeemed</Text>
             </Button>
           </View>
         )}
