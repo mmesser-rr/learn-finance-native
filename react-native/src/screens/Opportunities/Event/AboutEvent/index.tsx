@@ -81,35 +81,35 @@ const AboutEvent: React.FC<AboutEventProps> = ({
 
           {/* Event Details */}
           <View style={styles.eventDetails}>
-            <Text type="Body/Large">{tagline}</Text>
-            <Text type="Headline/Large">About</Text>
-            <Text type="Body/Large">{description}</Text>
+            <Text type="Body/Large" variant='white'>{tagline}</Text>
+            <Text type="Headline/Large" variant='white'>About</Text>
+            <Text type="Body/Large" variant='white'>{description}</Text>
             <View style={styles.infoBox}>
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small">Date</Text>
-                <Text type="Headline/Small">{date}</Text>
+                <Text type="Headline/Small" variant='white'>Date</Text>
+                <Text type="Headline/Small" variant='white'>{date}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small">Time</Text>
-                <Text type="Headline/Small">{time}</Text>
+                <Text type="Headline/Small" variant='white'>Time</Text>
+                <Text type="Headline/Small" variant='white'>{time}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small">Location</Text>
-                <Text type="Headline/Small">{location}</Text>
+                <Text type="Headline/Small" variant='white'>Location</Text>
+                <Text type="Headline/Small" variant='white'>{location}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small">Reward</Text>
-                <Text type="Headline/Small">{reward}</Text>
+                <Text type="Headline/Small" variant='white'>Reward</Text>
+                <Text type="Headline/Small" variant='white'>{reward}</Text>
               </View>
             </View>
           </View>
@@ -126,13 +126,13 @@ const AboutEvent: React.FC<AboutEventProps> = ({
               <TouchableOpacity onPress={handleDismissModal}>
                 <Image source={CloseIcon} />
               </TouchableOpacity>
-              <Text type="Headline/Large">Confirm Registration?</Text>
-              <Text type="Body/Large">Event details will be sent via email, you can change/cancel your registration in your profile.</Text>
+              <Text type="Headline/Large" variant='white'>Confirm Registration?</Text>
+              <Text type="Body/Large" variant='white'>Event details will be sent via email, you can change/cancel your registration in your profile.</Text>
               <Button variant="red" onPress={handleConfirm}>
-                <Text type="Body/Large">Confirm</Text>
+                <Text type="Body/Large" variant='white'>Confirm</Text>
               </Button>
               <Button variant="transparent" onPress={handleDismissModal}>
-                <Text type="Body/Large">Cancel</Text>
+                <Text type="Body/Large" variant='white'>Cancel</Text>
               </Button>
             </View>
           </BottomSheetModal>
@@ -140,17 +140,17 @@ const AboutEvent: React.FC<AboutEventProps> = ({
 
         {!confirmed && (
           <Button variant="red" actionStyle={styles.rsvpButton} onPress={handlePresentModal}>
-            <Text type="Body/Large">RSVP</Text>
+            <Text type="Body/Large" variant='white'>RSVP</Text>
           </Button>
         )}
 
         {confirmed && (
           <View>
             <Button variant="red" actionStyle={styles.RegConfirmedButton} disabled={true}>
-              <Text type="Body/Large">Registration Confirmed</Text>
+              <Text type="Body/Large" variant='white'>Registration Confirmed</Text>
             </Button>
             <Button variant="transparent" actionStyle={styles.cancelRegButton} onPress={handleCancelConfirm}>
-              <Text type="Body/Large">Cancel Registration</Text>
+              <Text type="Body/Large" variant='white'>Cancel Registration</Text>
             </Button>
           </View>
         )}

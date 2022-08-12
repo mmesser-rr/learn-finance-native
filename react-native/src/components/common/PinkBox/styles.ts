@@ -5,8 +5,8 @@ const {height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    // marginVertical: scale(60),
-    padding: scale(20)
+    padding: scale(20),
+    borderRadius: scale(8)
   }
 });
 

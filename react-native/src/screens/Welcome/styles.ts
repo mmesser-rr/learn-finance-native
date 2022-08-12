@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     marginBottom: scale(44),
   },
   joinAction: {
-    marginBottom: scale(16),
     backgroundColor: AppColors.gray20,
   },
   loginAction: {

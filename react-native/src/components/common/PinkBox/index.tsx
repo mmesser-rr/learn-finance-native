@@ -11,7 +11,7 @@ interface PinkBoxProps {
 const PinkBox: React.FC<PinkBoxProps> = ({children}) => {
   const backgroundColors = [
     '#FD7072', 
-    '#979797',
+    '#7f3d3f',
     // '#7F3D3F'
   ];
 

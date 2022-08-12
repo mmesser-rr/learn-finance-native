@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   sponsor: {
-    marginTop: scale(52)
+    marginTop: scale(40)
   },
   flexRow: {
     flexDirection: 'row',
