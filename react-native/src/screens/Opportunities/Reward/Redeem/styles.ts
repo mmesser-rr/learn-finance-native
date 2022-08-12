@@ -6,6 +6,10 @@ import AppStyles from 'src/config/styles';
 const {height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
+  backward: {
+    marginVertical: scale(12), 
+    alignSelf: 'flex-start'
+  },
   redeemedButton: {
     opacity: 0.7
   },

@@ -47,24 +47,24 @@ const EventItem: React.FC<EventItemProps> = ({
 
   return (
     <ImageCard backgroundImage={imgSrc}>
-      <Text type="Body/Large" variant='white' style={styles.sponsor}>
+      <Text type="Body/Medium" variant='white' style={styles.sponsor}>
         Presented by {' '}
-        <Text type="Body/Large" variant='white' style={commonStyles.bold}>{sponsor}</Text>
+        <Text type="Body/Medium" variant='white' style={commonStyles.bold}>{sponsor}</Text>
       </Text>
-      <Text type="Headline/Small" variant='white'>{title}</Text>
+      <Text type="Headline/Medium" variant='white'>{title}</Text>
       <View style={commonStyles.flexRow}>
-        <Text type="Body/Large" variant='white'>{category}</Text>
+        <Text type="Body/Medium" variant='white'>{category}</Text>
         <Oval />
-        <Text type="Body/Large" variant='white'>{`${reward} $WEALTH`}</Text>
+        <Text type="Body/Medium" variant='white'>{`${reward} $WEALTH`}</Text>
       </View>
-      <Text type="Body/Large" variant='white'>{formattedDateTime}</Text>
+      <Text type="Body/Medium" variant='white'>{formattedDateTime}</Text>
       <View style={styles.buttonGroup}>
         <Button variant='transparent' actionStyle={styles.notify}>
-          <Text type="Body/Large" variant='white'>Notify Me</Text>
+          <Text type="Body/Medium" variant='white'>Notify Me</Text>
         </Button>
         <View style={styles.buttonGap}></View>
         <Button variant='red' actionStyle={styles.rsvp} onPress={onPress}>
-          <Text type="Body/Large" variant='white'>RSVP</Text>  
+          <Text type="Body/Medium" variant='white'>RSVP</Text>  
         </Button>
       </View>
     </ImageCard>

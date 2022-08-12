@@ -12,6 +12,7 @@ import { Image, ImageBackground, TouchableOpacity, View } from "react-native"
 import Button from "src/components/common/Button"
 import { Storage } from "aws-amplify"
 import CloseIcon from 'src/assets/icons/close-gray.png';
+import BackwardIcon from 'src/assets/icons/backward.png';
 
 const Divider = () => (
   <View style={styles.divider} />
@@ -75,41 +76,44 @@ const AboutEvent: React.FC<AboutEventProps> = ({
           {/* Profile */}
           {!!heroPhotoSrc.length && !!avatarSrc.length && (
             <ImageBackground source={{ uri: heroPhotoSrc }} resizeMode="cover" style={styles.heroPhoto}>
+              <TouchableOpacity style={styles.backward} onPress={() => navigation.goBack()}>
+                <Image source={BackwardIcon} />
+              </TouchableOpacity>
               <Image source={{ uri: avatarSrc }} style={styles.avatar} />
             </ImageBackground>
           )}
 
           {/* Event Details */}
           <View style={styles.eventDetails}>
-            <Text type="Body/Large" variant='white'>{tagline}</Text>
-            <Text type="Headline/Large" variant='white'>About</Text>
-            <Text type="Body/Large" variant='white'>{description}</Text>
+            <Text type="Body/Medium" variant='white' style={styles.tagline}>{tagline}</Text>
+            <Text type="Headline/Medium" variant='white'>About</Text>
+            <Text type="Body/Medium" variant='white'>{description}</Text>
             <View style={styles.infoBox}>
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small" variant='white'>Date</Text>
-                <Text type="Headline/Small" variant='white'>{date}</Text>
+                <Text type="Body/Large" variant='white'>Date</Text>
+                <Text type="Body/Large" variant='white'>{date}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small" variant='white'>Time</Text>
-                <Text type="Headline/Small" variant='white'>{time}</Text>
+                <Text type="Body/Large" variant='white'>Time</Text>
+                <Text type="Body/Large" variant='white'>{time}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small" variant='white'>Location</Text>
-                <Text type="Headline/Small" variant='white'>{location}</Text>
+                <Text type="Body/Large" variant='white'>Location</Text>
+                <Text type="Body/Large" variant='white'>{location}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
-                <Text type="Headline/Small" variant='white'>Reward</Text>
-                <Text type="Headline/Small" variant='white'>{reward}</Text>
+                <Text type="Body/Large" variant='white'>Reward</Text>
+                <Text type="Body/Large" variant='white'>{reward}</Text>
               </View>
             </View>
           </View>

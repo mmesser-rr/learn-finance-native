@@ -5,7 +5,7 @@ import {Metrics, scale} from 'src/config/dimentions';
 const styles = StyleSheet.create({
   card: {
     borderColor: AppColors.coreWhite100,
-    borderWidth: Metrics.pixels.size2,
+    borderWidth: Metrics.pixels.size1,
     borderRadius: Metrics.radius.card,
     minHeight: scale(160),
     marginTop: scale(16)
