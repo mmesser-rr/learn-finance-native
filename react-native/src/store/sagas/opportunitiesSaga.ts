@@ -75,7 +75,6 @@ export function* loadLearnStatuses() {
       graphqlOperation(listLearnStatuses),
     )) as GraphQLResult<ListLearnStatusesQuery>;
 
-    const _learns: Learn[] = 
     yield put(learnStatusesActions.updateLearnStatuses(response.data?.listLearnStatuses?.items as LearnStatus[]))
   } catch (error) {
     console.log('Error attempting to load learnStatuses:', error);

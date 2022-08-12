@@ -25,6 +25,11 @@ const LearnVideo: React.FC<LearnVideoProps> = ({
   route,
   navigation
 }: LearnVideoProps) => {
+  const [myKey, setMyKey] = useState(0)
+  const { learns } = useSelector((state: RootState) => state.learnsReducer)
+  const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
+  console.log("LearnVideo -> passedDepositIndex -> ", passedDepositIndex);
+  
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log("LearnVideo -> focus")
@@ -34,24 +39,18 @@ const LearnVideo: React.FC<LearnVideoProps> = ({
     return unsubscribe;
   }, [navigation]);
 
-  const { learns } = useSelector((state: RootState) => state.learnsReducer)
-  const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
-  console.log("LearnVideo -> passedDepositIndex -> ", passedDepositIndex);
-  const [myKey, setMyKey] = useState(0)
-  
-  const learnData: Learn = learns.filter(o => o.id === learnItemId)[0]  
-  if (passedDepositIndex >= learnData.deposits.length - 1) {
-    NavigationService.navigate('Opportunities')
-    return <></>
+  const learnData: Learn = learns.filter(o => o.id === learnItemId)[0] 
+  const bug: boolean =  passedDepositIndex >= learnData.deposits.length - 1
+  if (bug) {
+    navigation.navigate('Opportunities')
   }
 
-  const depositData: Deposit = learnData.deposits[passedDepositIndex + 1]
+  const depositData: Deposit = learnData.deposits[passedDepositIndex + Number(!bug)]
   const questions: Quiz[] = depositData?.questions  
-  
   console.log("LearnVideo -> questions -> ", questions)
 
   const onPress = () => {
-    NavigationService.navigate('Exercise', { started: false, questions })
+    navigation.navigate('Exercise', { started: false, questions })
   }
 
   return (

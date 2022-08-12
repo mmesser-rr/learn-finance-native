@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Image, View } from 'react-native';
-import { useSelector } from 'react-redux';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
@@ -11,18 +11,24 @@ import RewardItem from 'src/screens/Opportunities/Reward';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import { Text } from 'src/components/common/Texts';
+import Button from 'src/components/common/Button';
+
 import {
   DeleteLearnStatusMutation,
   DeleteLearnStatusMutationVariables
 } from 'src/types/API';
+import { OpportunitiesProps } from 'src/types/opportunitiesRouterTypes';
+
 import WealthIcon from 'src/assets/icons/wealth.png';
 
-import styles from './styles';
 import AppColors from 'src/config/colors';
+
 import { RootState } from 'src/store/root-state';
+import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
+
 import { deleteLearnStatus } from 'src/graphql/mutations';
-import { OpportunitiesProps } from 'src/types/opportunitiesRouterTypes';
-import Button from 'src/components/common/Button';
+
+import styles from './styles';
 
 const OPPORTUNITIES = {
   LEARN: 'Learn',
@@ -63,6 +69,8 @@ const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
 const Opportunities: React.FC<OpportunitiesProps> = ({ 
   navigation 
 }: OpportunitiesProps) => {
+  console.log("Rendering Opportunities --->")
+  const dispatch = useDispatch()
   const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { events } = useSelector((state: RootState) => state.eventsReducer)
@@ -73,19 +81,29 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
     OPPORTUNITIES.LEARN,
   );
 
-  const clearLearnStatus = () => {
-    learnStatuses.map((o, i) => {
-      const mutationInput: DeleteLearnStatusMutationVariables = {
-        input: {
-          id: o.id
+  const clearLearnStatus = async () => {
+    console.log("Opportunities -> clearLearnStatus -> learnStatuses -> ", learnStatuses)
+    for await (const o of learnStatuses) {
+      try {
+        const mutationInput: DeleteLearnStatusMutationVariables = {
+          input: {
+            id: o.id
+          }
         }
+        const response = await API.graphql(
+          graphqlOperation(deleteLearnStatus, mutationInput),
+        ) as GraphQLResult<DeleteLearnStatusMutation>;
+
+        console.log(response.data?.deleteLearnStatus)
       }
-      API.graphql(
-        graphqlOperation(deleteLearnStatus, mutationInput),
-      ) as GraphQLResult<DeleteLearnStatusMutation>;
-    })
+      catch (e) {
+        console.log("Opportunities -> clearLearnStatus -> error -> ", e)
+      }
+    }
+
+    dispatch(learnStatusesActions.loadLearnStatuses())
     console.log("Opportunities - cleared learnStatuses")
-    setTimeout(() => setMyKey(Math.random()), 2000)
+    setMyKey(Math.random())
   }
 
   useEffect(() => {
@@ -104,7 +122,7 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
         Opportunities
       </Text>
       <Button variant="transparent" onPress={clearLearnStatus}>
-        <Text type="Body/Small">Clear LearnStatus</Text>
+        <Text type="Body/Large">Clear LearnStatus</Text>
       </Button>
       <View style={styles.tabGroup}>
         {[OPPORTUNITIES.LEARN, OPPORTUNITIES.EVENTS, OPPORTUNITIES.REWARDS].map((label, index) => (
