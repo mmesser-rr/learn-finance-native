@@ -19,7 +19,7 @@ const Slide: React.FC<SlideProps> = ({content, actions}: SlideProps) => {
     <PinkBox>
       <View style={styles.slideContainer}>
         <View>
-          <TouchableOpacity style={{marginBottom: '30%'}} onPress={() => NavigationService.goBack()}>
+          <TouchableOpacity style={{marginBottom: '30%', alignSelf: 'flex-start'}} onPress={() => NavigationService.goBack()}>
             <CloseIcon />
           </TouchableOpacity>
           {content}

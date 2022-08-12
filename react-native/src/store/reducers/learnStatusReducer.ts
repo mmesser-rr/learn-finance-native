@@ -13,7 +13,7 @@ const initialState: ILearnStatusState = {
   learnStatusId: "",
   athleteId: "",
   learnItemId: "",
-  passedDepositIndex: 0
+  passedDepositIndex: -1
 };
 
 export const learnStatusReducer = createReducer(initialState, {

@@ -1,15 +1,19 @@
 /* Redux saga class
  * initial account creation
  */
-import {call, put, select, takeLatest} from 'redux-saga/effects';
-import {API, Auth, graphqlOperation} from 'aws-amplify';
-import {GraphQLResult} from '@aws-amplify/api';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
 
 import * as loadingActions from 'src/store/actions/loadingActions';
 import * as userActions from 'src/store/actions/userActions';
 import * as bankingActions from 'src/store/actions/bankingActions';
 import * as onboardingActions from 'src/store/actions/onboardingActions';
 import * as wyreActions from 'src/store/actions/wyreActions';
+import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
+import * as learnsActions from 'src/store/actions/learnsActions';
+import * as eventsActions from 'src/store/actions/eventsActions';
+import * as rewardsActions from 'src/store/actions/rewardsActions';
 import {
   Athlete,
   // AthleteByPhoneQuery,
@@ -17,26 +21,34 @@ import {
   GetAthleteQuery,
   GetAthleteQueryVariables,
   GetAthlete_customQuery,
-  GetAthlete_customQueryVariables
+  GetAthlete_customQueryVariables,
+  Learn,
+  Event,
+  Reward,
+  LearnStatus,
+  ListEventsQuery,
+  ListLearnStatusesQuery,
+  ListLearns_customQuery,
+  ListRewardsQuery
 } from 'src/types/API';
 import * as types from '../actions/types';
 import NavigationService from 'src/navigation/NavigationService';
-import {RootState} from '../root-state';
-import {IGetUserByPhone, ILoginRequest} from 'src/models/actions/user';
+import { RootState } from '../root-state';
+import { IGetUserByPhone, ILoginRequest } from 'src/models/actions/user';
 import {
   // athleteByPhone, 
-  getAthlete
+  getAthlete, listEvents, listLearnStatuses, listRewards
 } from 'src/graphql/queries';
 // import {jwtSelector} from '../selectors/user';
-import {IOnboardingState} from 'src/models/reducers/onboarding';
-import { getAthlete_custom } from 'src/graphql/queries_custom';
+import { IOnboardingState } from 'src/models/reducers/onboarding';
+import { getAthlete_custom, listLearns_custom } from 'src/graphql/queries_custom';
 
 const compareAthletesByCreationDate = (a: Athlete, b: Athlete) =>
   b.createdAt.localeCompare(a.createdAt);
 
 export function* onboardingSilentSignIn() {
   try {
-    const {mobilePhone, password} = (yield select(
+    const { mobilePhone, password } = (yield select(
       (state: RootState) => state.onboardingReducer,
     )) as IOnboardingState;
     if (!mobilePhone || !password) {
@@ -57,7 +69,7 @@ export function* onboardingSilentSignIn() {
   }
 }
 
-export function* loginRequest({phone, password}: ILoginRequest) {
+export function* loginRequest({ phone, password }: ILoginRequest) {
   yield put(loadingActions.enableLoader());
 
   yield put(userActions.clearUserState());
@@ -66,7 +78,7 @@ export function* loginRequest({phone, password}: ILoginRequest) {
   yield put(onboardingActions.clearOnboardingState());
 
   try {
-    const loginResponse = yield Auth.signIn({username: phone, password});
+    const loginResponse = yield Auth.signIn({ username: phone, password });
     console.log('Sign In Response:');
     console.log(loginResponse);
     const token = loginResponse.signInUserSession.accessToken.jwtToken;
@@ -134,7 +146,7 @@ export function* logout() {
     yield put(bankingActions.clearBankingState());
     yield put(wyreActions.clearWyreState());
     yield put(onboardingActions.clearOnboardingState());
-    NavigationService.navigate('UserLoginStack', {screen: 'UserLogin'});
+    NavigationService.navigate('UserLoginStack', { screen: 'UserLogin' });
   } catch (error) {
     console.log('Error attempting to log out:', error);
   }

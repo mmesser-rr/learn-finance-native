@@ -3,6 +3,10 @@ import {Image, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch } from 'react-redux';
 
+import * as learnsActions from 'src/store/actions/learnsActions'
+import * as learnStatusesActions from 'src/store/actions/learnStatusesActions'
+import * as eventsActions from 'src/store/actions/eventsActions'
+import * as rewardsActions from 'src/store/actions/rewardsActions'
 import {BlackRedGradient} from 'src/utils/constants';
 import AppLayout from 'src/components/layout/AppLayout';
 import {Text} from 'src/components/common/Texts';
@@ -16,6 +20,10 @@ const ProfileIntro: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      dispatch(learnsActions.loadLearns())
+      dispatch(learnStatusesActions.loadLearnStatuses())
+      dispatch(eventsActions.loadEvents())
+      dispatch(rewardsActions.loadRewards())
       // dispatch(updateHomeStep(PODsSteps[0]));
       // NavigationService.navigate('HomeStack');
       NavigationService.navigate('OpportunitiesStack');

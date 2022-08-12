@@ -15,24 +15,15 @@ import { Text } from 'src/components/common/Texts';
 import { listEvents, listLearnStatuses, listRewards } from 'src/graphql/queries';
 import { listLearns_custom } from 'src/graphql/queries_custom';
 import {
-  Learn,
-  Event,
-  Reward,
-  ListEventsQuery,
-  ListLearns_customQuery,
-  ListRewardsQuery,
-  LearnStatus,
-  SearchLearnStatusesQuery,
-  SearchLearnStatusesQueryVariables,
-  Deposit,
-  GetLearnStatusQuery,
-  ListLearnStatusesQuery
+  DeleteLearnStatusMutation,
+  DeleteLearnStatusMutationVariables
 } from 'src/types/API';
-import * as learnStatusActions from 'src/store/actions/learnStatusActions'
-import { RootState } from 'src/store/root-state';
 import WealthIcon from 'src/assets/icons/wealth.png';
 
 import styles from './styles';
+import AppColors from 'src/config/colors';
+import { RootState } from 'src/store/root-state';
+import { deleteLearnStatus } from 'src/graphql/mutations';
 
 const OPPORTUNITIES = {
   LEARN: 'Learn',
@@ -40,13 +31,13 @@ const OPPORTUNITIES = {
   EVENTS: 'Events',
 };
 
-const WealthBalanceEle = () => {
+export const WealthBalanceEle = () => {
   const [wealthBalance, setWealthBalance] = useState(1000);
 
   return (
     <View style={styles.wealthBalance}>
       <Image source={WealthIcon} style={styles.wealthIcon} />
-      <Text type="Body/Large">{wealthBalance}</Text>
+      <Text type="Body/Large" variant='white'>{wealthBalance}</Text>
     </View>
   );
 };
@@ -56,8 +47,8 @@ const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
     return {
       borderColor:
         activeOpportunity === selectedOpportunity
-          ? 'rgba(255, 90, 95, 1)'
-          : 'white',
+          ? AppColors.accentRed100
+          : AppColors.coreWhite100,
     };
   }
 
@@ -71,68 +62,32 @@ const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
 };
 
 const Opportunities = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.userReducer);
-
-  const [athleteId, setAthleteId] = useState<string>(user?.id || "")
+  const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer)
+  const { learns } = useSelector((state: RootState) => state.learnsReducer)
+  const { events } = useSelector((state: RootState) => state.eventsReducer)
+  const { rewards } = useSelector((state: RootState) => state.rewardsReducer)  
 
   const [activeOpportunity, setActiveOpportunity] = useState(
     OPPORTUNITIES.LEARN,
   );
-  const [learns, setLearns] = useState<Learn[]>([]);
-  const [events, setEvents] = useState<Event[]>([]);
-  const [rewards, setRewards] = useState<Reward[]>([]);
 
-  const [learnStatuses, setLearnStatuses] = useState<LearnStatus[]>([])
-
-  async function fetchLearns() {
-    const response = (await API.graphql(
-      graphqlOperation(listLearns_custom),
-    )) as GraphQLResult<ListLearns_customQuery>;
-    setLearns(response.data?.listLearns?.items as Learn[]);
-  }
-
-  async function fetchLearnStatuses() {
-    const response = (await API.graphql(
-      graphqlOperation(listLearnStatuses, {
-        filter: {
-          athleteId: {
-            eq: athleteId
-          }
+  useEffect(() => {
+    learnStatuses.map((o, i) => {
+      const mutationInput: DeleteLearnStatusMutationVariables = {
+        input: {
+          id: o.id
         }
-      }),
-    )) as GraphQLResult<ListLearnStatusesQuery>;
-    setLearnStatuses(response.data?.listLearnStatuses?.items as LearnStatus[]);
-  }
-
-  async function fetchEvents() {
-    const response = (await API.graphql(
-      graphqlOperation(listEvents),
-    )) as GraphQLResult<ListEventsQuery>;
-    setEvents(response.data?.listEvents?.items as Event[]);
-  }
-
-  async function fetchRewards() {
-    const response = (await API.graphql(
-      graphqlOperation(listRewards),
-    )) as GraphQLResult<ListRewardsQuery>;
-    setRewards(response.data?.listRewards?.items as Reward[]);
-  }
-
-  useFocusEffect(
-    React.useCallback(() => {
-      // fetch Learn, Events and Rewards data
-      fetchLearns();
-      fetchLearnStatuses();
-      fetchEvents();
-      fetchRewards();
-    }, [navigation])
-  )
+      }
+      API.graphql(
+        graphqlOperation(deleteLearnStatus, mutationInput),
+      ) as GraphQLResult<DeleteLearnStatusMutation>;
+    })
+  }, [])
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper} scrollEnabled={false}>
       <WealthBalanceEle />
-      <Text type="Headline/Large" style={styles.headline}>
+      <Text type="Headline/Large" variant='white' style={styles.headline}>
         Opportunities
       </Text>
       <View style={styles.tabGroup}>
@@ -149,36 +104,12 @@ const Opportunities = ({ navigation }) => {
       </View>
       <ScrollView>
         {activeOpportunity === OPPORTUNITIES.LEARN &&
-          learns.map((learn, index) => {
-            const result: LearnStatus | undefined = learnStatuses.filter(o => o.athleteId === athleteId && o.learnItemId === learn.id).pop()
-            const passedDepositIndex: number = (typeof result?.passedDepositIndex === 'undefined') ? -1 : result?.passedDepositIndex;
-            const depositData: Deposit | undefined = learn.deposits?.at(passedDepositIndex + 1)
-            const learnStatusId = result?.id || ""
-
-            const onPressLearnItem = async () => {
-              if (passedDepositIndex === learn.deposits.length - 1) return;
-              dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learn.id, passedDepositIndex))
-              if (!depositData) {
-                console.log(`Deposit data at index of ${index} doesn't exist.`)
-                return;
-              }
-              navigation.navigate('LearnVideo', { depositData })
-            }
-
-            return (
-              <LearnItem
-                key={index}
-                backgroundImage={learn.bgImageUri || ""}
-                sponsor={learn.sponsor}
-                title={learn.title}
-                level={learn.level}
-                rewards={learn.reward}
-                depositsCount={learn.deposits?.length || 0}
-                passedDepositIndex={passedDepositIndex}
-                onPress={onPressLearnItem}
-              />
-            )
-          })}
+          learns.map((learn, index) => (
+            <LearnItem
+              key={index}
+              data={learn}
+            />
+          ))}
 
         {activeOpportunity === OPPORTUNITIES.EVENTS &&
           events.map((event, index) => {
@@ -199,12 +130,7 @@ const Opportunities = ({ navigation }) => {
             return (
               <EventItem
                 key={index}
-                heroPhotoUri="https://reactjs.org/logo-og.png" /* learn.bgImageUri */
-                sponsor={event.sponsor}
-                title={event.title}
-                dateTime={event.dateTime}
-                reward={event.reward}
-                category={event.category}
+                {...{ heroPhotoUri, sponsor, title, dateTime, reward, category }}
                 onPress={onPressEventItem}
               />
             )
@@ -212,8 +138,8 @@ const Opportunities = ({ navigation }) => {
 
         {activeOpportunity === OPPORTUNITIES.REWARDS &&
           rewards.map((reward, index) => {
-            const heroPhotoUri = "https://reactjs.org/logo-og.png" /* learn.bgImageUri */
-            const logoUri = "https://reactjs.org/logo-og.png"
+            const heroPhotoUri = reward.heroPhotoUri || ""
+            const logoUri = reward.logoUri || ""
             const title = reward.title
             const wealthAmount = reward.wealthAmount
             const description = reward.description || ""

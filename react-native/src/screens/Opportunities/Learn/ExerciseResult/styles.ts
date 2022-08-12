@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     padding: scale(6),
-    borderColor: AppColors.coreWhite100,
+    borderColor: 'white',
     borderWidth: scale(2),
     borderRadius: scale(6)
   },
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: scale(84),
     padding: scale(1),
-    borderColor: AppColors.coreWhite100,
+    borderColor: 'white',
     borderWidth: scale(1),
     borderRadius: scale(6),
     marginRight: scale(12)

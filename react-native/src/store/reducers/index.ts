@@ -9,6 +9,10 @@ import * as onboardingReducer from './onboardingReducer';
 import * as userReducer from './userReducer';
 import * as wyreReducer from './wyreReducer';
 import * as learnStatusReducer from './learnStatusReducer';
+import * as learnStatusesReducer from './learnStatusesReducer';
+import * as learnsReducer from './learnsReducer';
+import * as eventsReducer from './eventsReducer';
+import * as rewardsReducer from './rewardsReducer';
 
 export default Object.assign(
   // loginReducer,
@@ -18,5 +22,9 @@ export default Object.assign(
   onboardingReducer,
   userReducer,
   wyreReducer,
-  learnStatusReducer
+  learnStatusReducer,
+  learnStatusesReducer,
+  learnsReducer,
+  eventsReducer,
+  rewardsReducer
 );
