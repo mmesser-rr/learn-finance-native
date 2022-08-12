@@ -9,7 +9,14 @@ const styles = StyleSheet.create({
     height: Metrics.screenHeight,
     justifyContent: 'space-between'
   },
+  backward: {
+    marginLeft: scale(18), 
+    marginTop: scale(36), 
+    alignSelf: 'flex-start',
+
+  },
   infoBox: {
+    marginTop: scale(16),
     marginVertical: scale(10),
     borderColor: AppColors.coreWhite100,
     borderWidth: Metrics.pixels.size2,
@@ -17,7 +24,7 @@ const styles = StyleSheet.create({
     padding: AppStyles.componentPadding
   },
   divider: {
-    marginHorizontal: scale(4),
+    marginHorizontal: scale(1),
     marginVertical: scale(8),
     borderWidth: Metrics.pixels.size1,
     borderColor: AppColors.coreWhite100
@@ -25,10 +32,10 @@ const styles = StyleSheet.create({
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   heroPhoto: {
-    height: Metrics.screenWidth * 0.5,
+    height: Metrics.screenWidth * 0.45,
     position: 'relative'
   },
   avatar: {
@@ -40,8 +47,11 @@ const styles = StyleSheet.create({
     left: scale(16)
   },
   eventDetails: {
-    paddingTop: AppStyles.avatarSize,
     paddingHorizontal: scale(16)
+  },
+  tagline: {
+    paddingTop: AppStyles.avatarSize / 4 * 3,
+    paddingBottom: AppStyles.avatarSize / 3
   },
   sheetContainer: {
     marginHorizontal: 24,
