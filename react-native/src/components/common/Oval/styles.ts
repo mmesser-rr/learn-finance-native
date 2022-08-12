@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     height: scale(8),
     backgroundColor: 'white',
     borderRadius: 100,
-    marginHorizontal: scale(3)
+    marginHorizontal: scale(5)
   }
 });
 

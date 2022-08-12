@@ -4,8 +4,9 @@ import { Deposit, Learn, Quiz } from './API';
 
 export type OpportunitiesStackParamList = {
   Opportunities: undefined;
-  LearnVideo: {depositData: Deposit};
+  LearnVideo: undefined;
   Exercise: {started: boolean, questions: Quiz[]}
+  ExerciseResult: undefined;
   Redeem: {
     heroPhotoUri: string,
     title: string,
@@ -24,14 +25,6 @@ export type OpportunitiesStackParamList = {
     location: string,
     reward: number
   }
-};
-
-// LearnVideo
-type LearnVideoRouteProp = RouteProp<OpportunitiesStackParamList, 'LearnVideo'>;
-type LearnVideoNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'LearnVideo'>;
-export type LearnVideoProps = {
-  navigation: LearnVideoNavigationProp;
-  route: LearnVideoRouteProp;
 };
 
 // Exercise

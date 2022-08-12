@@ -1,139 +1,90 @@
 /* Redux saga class
- * initial account creation
+ * opportunities - learns, events, rewards
  */
 import {call, put, select, takeLatest} from 'redux-saga/effects';
 import {API, graphqlOperation} from 'aws-amplify';
 import {GraphQLResult} from '@aws-amplify/api';
 
-import {createAthlete, openAppAndAccount, updateAthlete} from 'src/graphql/mutations';
-import * as loadingActions from 'src/store/actions/loadingActions';
-import * as onboardingActions from 'src/store/actions/onboardingActions';
-import * as userActions from 'src/store/actions/userActions';
+import * as learnsActions from 'src/store/actions/learnsActions';
+import * as eventsActions from 'src/store/actions/eventsActions';
+import * as rewardsActions from 'src/store/actions/rewardsActions';
+import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
 import {
-  Athlete,
-  UpdateAthleteMutation,
-  UpdateAthleteMutationVariables,
-  CreateAthleteMutation,
-  CreateAthleteMutationVariables
+  ListLearns_customQuery,
+  Learn,
+  Event,
+  ListEventsQuery,
+  ListRewardsQuery,
+  Reward,
+  ListLearnStatusesQuery,
+  LearnStatus
 } from 'src/types/API';
 import * as types from '../actions/types';
-import NavigationService from 'src/navigation/NavigationService';
-import {IOnboardingState} from 'src/models/reducers/onboarding';
-import {RootState} from '../root-state';
-import {ICreateAthleteAndAccount} from 'src/models/actions/onboarding';
-import {jwtSelector} from '../selectors/user';
+import { listLearns_custom } from 'src/graphql/queries_custom';
+import { listEvents, listLearnStatuses, listRewards } from 'src/graphql/queries';
 
-const getOnboardingState = (state: RootState) => state.onboardingReducer;
+// const getLearnsState = (state: RootState) => state.learnsReducer;
+// const getEventsState = (state: RootState) => state.eventsReducer;
+// const getRewardsState = (state: RootState) => state.rewardsReducer;
+// const getLearnStatusState = (state: RootState) => state.learnStatusReducer;
+// const getLearnStatusesState = (state: RootState) => state.learnStatusesReducer;
 
-export function* addAthlete({ssn}: ICreateAthleteAndAccount) {
-  yield put(loadingActions.enableLoader());
-  const onboardingState = (yield select(
-    getOnboardingState,
-  )) as IOnboardingState;
-  const mutationInput: UpdateAthleteMutationVariables = {
-    input: {
-      id: onboardingState.id!,
-      firstName: onboardingState.firstName,
-      lastName: onboardingState.lastName,
-      email: onboardingState.email,
-      level: onboardingState.level,
-      sport: onboardingState.sport,
-      team: onboardingState.team,
-      address: onboardingState.address,
-      dateOfBirth: onboardingState.dateOfBirth,
-      isActive: true,
-      podSettings: {
-        SAVINGS: 0,
-        INVESTMENTS: 0,
-        SPENDING: 0,
-      },
-    },
-  };
-  console.log('athlete', mutationInput.input);
-  const token = (yield select(jwtSelector)) as string;
-  console.log('token:', token);
-
+export function* loadLearns() {
   try {
-    const response = (yield API.graphql({
-      query: updateAthlete,
-      variables: mutationInput,
-      authMode: 'AMAZON_COGNITO_USER_POOLS',
-    })) as GraphQLResult<UpdateAthleteMutation>;
+    const response = (yield API.graphql(
+      graphqlOperation(listLearns_custom),
+    )) as GraphQLResult<ListLearns_customQuery>;
 
-    const newlyCreatedAthlete = response.data?.updateAthlete as Athlete;
-
-    console.log('New Athlete ID:', newlyCreatedAthlete.id);
-    try {
-      yield API.graphql({
-        query: openAppAndAccount,
-        variables: {
-          athleteId: newlyCreatedAthlete.id,
-          ssn: ssn,
-        },
-        authMode: 'AMAZON_COGNITO_USER_POOLS',
-      });
-
-      yield put(userActions.updateUser(newlyCreatedAthlete));
-
-      NavigationService.navigate('AccountCreateSuccess');
-    } catch (error: any) {
-      console.log('Error attempting to openAppAndAccount:', error);
-      console.log(error.errors);
-      console.log(error.errors[0].message);
-      NavigationService.navigate('AccountCreateFailure');
-    }
+    yield put(learnsActions.updateLearns(response.data?.listLearns?.items as Learn[]))
   } catch (error) {
-    console.log('Error attempting to update new Athlete:', error);
-    NavigationService.navigate('AccountCreateFailure');
+    console.log('Error attempting to load learns:', error);
   }
-
-  yield put(loadingActions.disableLoader());
 }
 
-export function* addAthleteOnly() {
-  yield put(loadingActions.enableLoader());
-  const onboardingState = (yield select(
-    getOnboardingState,
-  )) as IOnboardingState;
-  const mutationInput: CreateAthleteMutationVariables = {
-    input: {
-      id: onboardingState.id!,
-      firstName: onboardingState.firstName,
-      lastName: onboardingState.lastName,
-      email: onboardingState.email,
-      mobilePhone: onboardingState.mobilePhone,
-      level: onboardingState.level,
-      sport: onboardingState.sport,
-      team: onboardingState.team,
-      address: onboardingState.address,
-      dateOfBirth: onboardingState.dateOfBirth,
-      isActive: true,
-      podSettings: {
-        SAVINGS: 0,
-        INVESTMENTS: 0,
-        SPENDING: 0,
-      },
-    },
-  };
-  console.log('athlete', mutationInput.input);
-  const token = (yield select(jwtSelector)) as string;
-  console.log('token:', token);
-
+export function* loadEvents() {
+  // const eventsState = (yield select(getEventsState)) as IEvents;
+  
   try {
-    yield API.graphql(
-      graphqlOperation(createAthlete, {
-        input: mutationInput.input
-      })
-    )
-    NavigationService.navigate('LastStepWelcome');
-  } catch (error) {
-    console.log('Error attempting to create new Athlete:', error);
-  }
+    const response = (yield API.graphql(
+      graphqlOperation(listEvents),
+    )) as GraphQLResult<ListEventsQuery>;
 
-  yield put(loadingActions.disableLoader());
+    yield put(eventsActions.updateEvents(response.data?.listEvents?.items as Event[]))
+  } catch (error) {
+    console.log('Error attempting to load events:', error);
+  }
 }
 
-export default function* onboardingSaga() {
-  yield takeLatest(types.CREATE_ATHLETE, addAthleteOnly);
-  yield takeLatest(types.CREATE_ATHLETE_AND_ACCOUNT, addAthlete);
+export function* loadRewards() {
+  
+  try {
+    const response = (yield API.graphql(
+      graphqlOperation(listRewards),
+    )) as GraphQLResult<ListRewardsQuery>;
+    
+    yield put(rewardsActions.updateRewards(response.data?.listRewards?.items as Reward[]))
+  } catch (error) {
+    console.log('Error attempting to load rewards:', error);
+  }
+}
+
+export function* loadLearnStatuses() {
+  
+  try {
+    const response = (yield API.graphql(
+      graphqlOperation(listLearnStatuses),
+    )) as GraphQLResult<ListLearnStatusesQuery>;
+
+    const _learns: Learn[] = 
+    yield put(learnStatusesActions.updateLearnStatuses(response.data?.listLearnStatuses?.items as LearnStatus[]))
+  } catch (error) {
+    console.log('Error attempting to load learnStatuses:', error);
+  }
+}
+
+export default function* opportunitiesSaga() {
+  yield takeLatest(types.LOAD_LEARNS, loadLearns);
+  yield takeLatest(types.LOAD_EVENTS, loadEvents);
+  yield takeLatest(types.LOAD_REWARDS, loadRewards);
+  yield takeLatest(types.LOAD_LEARN_STATUSES, loadLearnStatuses);
 }

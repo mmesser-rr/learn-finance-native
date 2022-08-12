@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { Dimensions, View } from 'react-native';
 import Swiper from 'react-native-swiper';
-import LinearGradient from 'react-native-linear-gradient';
 
 import Slide from 'src/components/common/Slide';
 import AppLayout from 'src/components/layout/AppLayout';
-import { GradientButtonColors } from 'src/utils/constants';
 import { RootState } from 'src/store/root-state';
 
 import styles from './styles';
@@ -13,28 +11,26 @@ import { Text } from 'src/components/common/Texts';
 import Button from 'src/components/common/Button';
 import NavigationService from 'src/navigation/NavigationService';
 import { ExerciseProps } from 'src/types/opportunitiesRouterTypes';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CreateLearnStatusMutationVariables, Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
+import { updateLearnStatus as updateLearnStatusAction } from 'src/store/actions/learnStatusActions';
 import AnswerButtonGroup from './answerButtonGroup';
+import AppColors from 'src/config/colors';
+import { useFocusEffect } from '@react-navigation/native';
 
 const { height } = Dimensions.get('window');
 
 const Dot = () => <View style={styles.dot} />;
 
-const ActiveDot = () => {
-  return (
-    <LinearGradient colors={GradientButtonColors} style={styles.dot}>
-      <View />
-    </LinearGradient>
-  );
-};
+const ActiveDot = () => <View style={{ ...styles.dot, backgroundColor: AppColors.accentRed100 }} />;
 
 const Exercise: React.FC<ExerciseProps> = ({
   route,
   navigation
 }: ExerciseProps) => {
+  const dispatch = useDispatch()
   const started: boolean = route.params.started;
   const questions: Quiz[] = route.params.questions;
 
@@ -43,8 +39,10 @@ const Exercise: React.FC<ExerciseProps> = ({
   const [flag, setFlag] = useState(false) // used for re-rendering component when answerButtonsStatus is updated.
   const [foundAllAnswers, setFoundAllAnswers] = useState(false)
 
+  const swiperRef = useRef<Swiper>(null)
+
   const ReadyText = () => (
-    <Text type="Headline/Small" style={{ textAlign: 'center' }}>
+    <Text type="Headline/Medium" variant='white' style={{ textAlign: 'center' }}>
       Ready to take the quiz?
     </Text>
   )
@@ -59,11 +57,11 @@ const Exercise: React.FC<ExerciseProps> = ({
   )
 
   const QuestionText = ({ questionText }: { questionText: string }) => (
-    <Text type="Headline/Small"> {questionText} </Text>
+    <Text type="Headline/Medium" variant='white'> {questionText} </Text>
   )
 
   const FinalText = () => (
-    <Text type="Headline/Small" style={{ textAlign: 'center' }}>
+    <Text type="Headline/Medium" variant='white' style={{ textAlign: 'center' }}>
       {foundAllAnswers ? `Congratulations!` : `Please find all the correct answers.`}
     </Text>
   )
@@ -86,23 +84,24 @@ const Exercise: React.FC<ExerciseProps> = ({
       )
     }
     else {
-      const creaetMutationInput: CreateLearnStatusMutationVariables = {
+      const createMutationInput: CreateLearnStatusMutationVariables = {
         input: mainPayload
       };
 
       await API.graphql(
-        graphqlOperation(createLearnStatus, creaetMutationInput)
+        graphqlOperation(createLearnStatus, createMutationInput)
       )
     }
 
-    NavigationService.navigate('Opportunities')
+    dispatch(updateLearnStatusAction(learnStatusId, athleteId, learnItemId, passedDepositIndex + 1))
+    NavigationService.navigate('ExerciseResult')
   }
 
   const FinishAction = () => {
     return (
       <>{foundAllAnswers ? (
         <Button onPress={onFinish}>
-          <Text type="Body/Large">Finish</Text>
+          <Text type="Body/Large" variant='white'>Finish</Text>
         </Button >
       ) : (<></>)
       }</>)
@@ -126,33 +125,37 @@ const Exercise: React.FC<ExerciseProps> = ({
     return result;
   }
 
-  useEffect(() => {
-    let newSt = {};
-    const nQuestions = questions.length;
-    for (let i = 0; i < nQuestions; ++i) {
-      let newSubSt = {};
-      const nAnswers = questions[i].answers.length
-      for (let j = 0; j < nAnswers; ++j) {
-        newSubSt[j] = -1
+  useFocusEffect(
+    React.useCallback(() => {
+      let newSt = {};
+      const nQuestions = questions.length;
+      for (let i = 0; i < nQuestions; ++i) {
+        let newSubSt = {};
+        const nAnswers = questions[i].answers.length
+        for (let j = 0; j < nAnswers; ++j) {
+          newSubSt[j] = -1
+        }
+        newSt[i] = newSubSt
       }
-      newSt[i] = newSubSt
-    }
-    setAnswerButtonsStatus(newSt)
-  }, [])
+      setAnswerButtonsStatus(newSt)
+    }, [])
+  )
 
   return (
     <AppLayout containerStyle={styles.container} scrollEnabled={false}>
-      <View style={{ marginTop: '20%', maxHeight: '90%' }}>
+      <View style={{ marginTop: '20%', maxHeight: '83%' }}>
         {!started && (
           <Slide content={<ReadyText />} actions={<StartAction />} />
         )}
 
         {started && (
           <Swiper
+            ref={swiperRef}
             dot={<Dot />}
             activeDot={<ActiveDot />}
             loop={false}
-            height={height * 0.8}
+            height={height * 0.75}
+            scrollEnabled={false}
           >
             {[...questions.map((quiz, quizIndex) => {
               const setSelectedAnswerIndex = (selectedAnswerIndex: number) => {
@@ -163,6 +166,11 @@ const Exercise: React.FC<ExerciseProps> = ({
                 setAnswerButtonsStatus(newSt)
                 setFoundAllAnswers(checkFoundAllAnswers(newSt))
                 setFlag(!flag)
+                if (Object.values(newSt[quizIndex]).includes(1)) {
+                  setTimeout(() => {
+                    swiperRef?.current?.scrollBy(quizIndex + 1)
+                  }, 1000)
+                }
               }
 
               return (

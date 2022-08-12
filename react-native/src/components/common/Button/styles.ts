@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.coreBlack100,
     borderRadius: 100,
     width: '100%',
+    marginVertical: scale(8)
   },
   label: {
     paddingHorizontal: scale(10),

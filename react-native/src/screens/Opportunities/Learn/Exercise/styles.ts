@@ -21,19 +21,19 @@ const styles = StyleSheet.create({
     height: '92%'
   },
   answerButton: {
-    marginTop: scale(4),
+    marginTop: scale(8),
     backgroundColor: AppColors.transparent,
     borderWidth: Metrics.pixels.size1,
     borderColor: AppColors.coreWhite100
   },
   correctAnswerButton: {
-    marginTop: scale(4),
+    marginTop: scale(8),
     backgroundColor: AppColors.transparent,
     borderWidth: Metrics.pixels.size1,
     borderColor: '#00FF00'
   },
   wrongAnswerButton: {
-    marginTop: scale(4),
+    marginTop: scale(8),
     backgroundColor: AppColors.transparent,
     borderWidth: Metrics.pixels.size1,
     borderColor: '#FF0000'

@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   },
   mediumHeadline: {
     fontFamily: 'Lato-Bold',
-    fontSize: scale(28),
-    lineHeight: scale(36),
+    fontSize: scale(24),
+    lineHeight: scale(32),
     color: AppColors.gray20,
   },
   smallHeadline: {

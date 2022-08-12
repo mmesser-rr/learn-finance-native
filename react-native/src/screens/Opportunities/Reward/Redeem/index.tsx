@@ -46,8 +46,8 @@ const Redeem: React.FC<RedeemProps> = ({
     <BottomSheetModalProvider>
       <AppLayout containerStyle={AppStyles.container} viewStyle={AppStyles.viewWrapper} scrollEnabled={false}>
         <View>
-          <Text type="Headline/Large">How to Claim</Text>
-          <Text type="Body/Large">Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
+          <Text type="Headline/Large" variant='white'>How to Claim</Text>
+          <Text type="Body/Large" variant='white'>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
           <RewardItem {...{ heroPhotoUri, title, wealthAmount, logoUri, description, onPress: () => null }} />
         </View>
 
@@ -63,27 +63,27 @@ const Redeem: React.FC<RedeemProps> = ({
             <TouchableOpacity onPress={handleDismissModal}>
               <Image source={CloseIcon} />
             </TouchableOpacity>
-            <Text type="Headline/Large">Redeem Offer</Text>
-            <Text type="Body/Large">You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
+            <Text type="Headline/Large" variant='white'>Redeem Offer</Text>
+            <Text type="Body/Large" variant='white'>You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
             <Button actionStyle={AppStyles.redButton} onPress={handleRedeem}>
-              <Text type="Body/Large">Redeem</Text>
+              <Text type="Body/Large" variant='white'>Redeem</Text>
             </Button>
             <Button actionStyle={AppStyles.transparentButton} onPress={handleDismissModal}>
-              <Text type="Body/Large">Cancel</Text>
+              <Text type="Body/Large" variant='white'>Cancel</Text>
             </Button>
           </View>
         </BottomSheetModal>
 
         {!redeemed && (
           <Button variant="red" onPress={handlePresentModal}>
-            <Text type="Body/Large">Redeem Offer</Text>
+            <Text type="Body/Large" variant='white'>Redeem Offer</Text>
           </Button>
         )}
 
         {redeemed && (
           <View>
             <Button variant="red" actionStyle={styles.redeemedButton} disabled={true}>
-              <Text type="Body/Large">Offer Redeemed</Text>
+              <Text type="Body/Large" variant='white'>Offer Redeemed</Text>
             </Button>
           </View>
         )}

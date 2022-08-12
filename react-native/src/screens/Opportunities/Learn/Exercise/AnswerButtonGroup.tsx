@@ -22,7 +22,7 @@ const AnswerButtonGroup = ({
         : styles.answerButton
     return (
       <Button actionStyle={style} onPress={onPress}>
-        <Text type="Body/Large">{text}</Text>
+        <Text type="Body/Large" variant='white'>{text}</Text>
       </Button>
     )
   }
