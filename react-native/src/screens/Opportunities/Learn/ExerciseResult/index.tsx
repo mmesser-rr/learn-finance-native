@@ -14,18 +14,18 @@ import { RootState } from 'src/store/root-state';
 import { Learn } from 'src/types/API';
 import NavigationService from 'src/navigation/NavigationService';
 
-const ExerciseResult = () => {
-  const { learns }= useSelector((state: RootState) => state.learnsReducer)
+const ExerciseResult: React.FC = () => {
+  const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
   const data: Learn = learns.filter(o => o.id === learnItemId)[0]
   const nDeposits = data.deposits.length
 
   const onPressNextDeposit = () => {
-    // NavigationService.navigate('LearnVideo')
+    NavigationService.navigate('OpportunitiesStack', {screen: 'LearnVideo'})
   }
 
   const onPressBacktoDashboard = () => {
-    // NavigationService.navigate('OpportunitiesStack')
+    NavigationService.navigate('OpportunitiesStack', {screen: 'Opportunities'})
   }
 
   return (
@@ -39,9 +39,11 @@ const ExerciseResult = () => {
         <LearnItem data={data} />
       </View>
       <View>
-        <Button variant="red" onPress={onPressNextDeposit}>
-          <Text type="Body/Large" variant="white">Begin Next Deposit</Text>
-        </Button>
+        {passedDepositIndex < nDeposits - 1 && (
+          <Button variant="red" onPress={onPressNextDeposit}>
+            <Text type="Body/Large" variant="white">Begin Next Deposit</Text>
+          </Button>
+        )}
         <Button variant="transparent" onPress={onPressBacktoDashboard}>
           <Text type="Body/Large" variant="white">Back to Dashboard</Text>
         </Button>
