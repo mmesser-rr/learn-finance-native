@@ -27,6 +27,22 @@ export type OpportunitiesStackParamList = {
   }
 };
 
+// Opportunities
+type OpportunitiesRouteProp = RouteProp<OpportunitiesStackParamList, 'Opportunities'>;
+type OpportunitiesNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'Opportunities'>;
+export type OpportunitiesProps = {
+  navigation: OpportunitiesNavigationProp;
+  route: OpportunitiesRouteProp;
+};
+
+// LearnVideo
+type LearnVideoRouteProp = RouteProp<OpportunitiesStackParamList, 'LearnVideo'>;
+type LearnVideoNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'LearnVideo'>;
+export type LearnVideoProps = {
+  navigation: LearnVideoNavigationProp;
+  route: LearnVideoRouteProp;
+};
+
 // Exercise
 type ExerciseRouteProp = RouteProp<OpportunitiesStackParamList, 'Exercise'>;
 type ExerciseNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'Exercise'>;

@@ -11,7 +11,7 @@ const initialState: ILearnStatuses = {
   learnStatuses: []
 };
 
-export const learnsReducer = createReducer(initialState, {
+export const learnStatusesReducer = createReducer(initialState, {
   [types.UPDATE_LEARN_STATUSES](state: ILearnStatuses, action: IUpdateLearnStatusesRequestState) {
     return {
       ...state,

@@ -19,15 +19,16 @@ const ProfileIntro: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(learnsActions.loadLearns())
+    dispatch(learnStatusesActions.loadLearnStatuses())
+    dispatch(eventsActions.loadEvents())
+    dispatch(rewardsActions.loadRewards())
+    
     setTimeout(() => {
-      dispatch(learnsActions.loadLearns())
-      dispatch(learnStatusesActions.loadLearnStatuses())
-      dispatch(eventsActions.loadEvents())
-      dispatch(rewardsActions.loadRewards())
       // dispatch(updateHomeStep(PODsSteps[0]));
       // NavigationService.navigate('HomeStack');
       NavigationService.navigate('OpportunitiesStack');
-    }, 30);
+    }, 3000);
   }, []);
 
   return (

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { useFocusEffect } from '@react-navigation/native';
 import { API, graphqlOperation } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api';
 
@@ -12,8 +11,6 @@ import RewardItem from 'src/screens/Opportunities/Reward';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import { Text } from 'src/components/common/Texts';
-import { listEvents, listLearnStatuses, listRewards } from 'src/graphql/queries';
-import { listLearns_custom } from 'src/graphql/queries_custom';
 import {
   DeleteLearnStatusMutation,
   DeleteLearnStatusMutationVariables
@@ -24,6 +21,8 @@ import styles from './styles';
 import AppColors from 'src/config/colors';
 import { RootState } from 'src/store/root-state';
 import { deleteLearnStatus } from 'src/graphql/mutations';
+import { OpportunitiesProps } from 'src/types/opportunitiesRouterTypes';
+import Button from 'src/components/common/Button';
 
 const OPPORTUNITIES = {
   LEARN: 'Learn',
@@ -61,17 +60,20 @@ const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
   );
 };
 
-const Opportunities = ({ navigation }) => {
+const Opportunities: React.FC<OpportunitiesProps> = ({ 
+  navigation 
+}: OpportunitiesProps) => {
   const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { events } = useSelector((state: RootState) => state.eventsReducer)
-  const { rewards } = useSelector((state: RootState) => state.rewardsReducer)  
+  const { rewards } = useSelector((state: RootState) => state.rewardsReducer)
+  const [myKey, setMyKey] = useState(0)
 
   const [activeOpportunity, setActiveOpportunity] = useState(
     OPPORTUNITIES.LEARN,
   );
 
-  useEffect(() => {
+  const clearLearnStatus = () => {
     learnStatuses.map((o, i) => {
       const mutationInput: DeleteLearnStatusMutationVariables = {
         input: {
@@ -82,7 +84,18 @@ const Opportunities = ({ navigation }) => {
         graphqlOperation(deleteLearnStatus, mutationInput),
       ) as GraphQLResult<DeleteLearnStatusMutation>;
     })
-  }, [])
+    console.log("Opportunities - cleared learnStatuses")
+    setTimeout(() => setMyKey(Math.random()), 2000)
+  }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      console.log("Opportunities -> focus")
+      setMyKey(Math.random())
+    });
+
+    return unsubscribe;
+  }, [navigation])
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper} scrollEnabled={false}>
@@ -90,6 +103,9 @@ const Opportunities = ({ navigation }) => {
       <Text type="Headline/Large" variant='white' style={styles.headline}>
         Opportunities
       </Text>
+      <Button variant="transparent" onPress={clearLearnStatus}>
+        <Text type="Body/Small">Clear LearnStatus</Text>
+      </Button>
       <View style={styles.tabGroup}>
         {[OPPORTUNITIES.LEARN, OPPORTUNITIES.EVENTS, OPPORTUNITIES.REWARDS].map((label, index) => (
           <OpportunityTab
@@ -115,15 +131,26 @@ const Opportunities = ({ navigation }) => {
           events.map((event, index) => {
             const heroPhotoUri = event.heroPhotoUri;
             const logoUri = event.logoUri;
+            const tagline = event.tagline;
             const sponsor = event.sponsor;
             const title = event.title;
+            const description = event.description;
             const dateTime = event.dateTime;
+            const location = event.location;
             const reward = event.reward;
             const category = event.category;
 
             const onPressEventItem = () => {
               navigation.navigate('AboutEvent', {
-                ...{ heroPhotoUri, logoUri, sponsor, title, dateTime, reward, category }
+                heroPhotoUri,
+                logoUri,
+                tagline,
+                sponsor,
+                title,
+                description,
+                dateTime,
+                location,
+                reward 
               })
             }
 

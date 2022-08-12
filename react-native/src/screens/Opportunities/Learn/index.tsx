@@ -42,11 +42,6 @@ const LearnItem: React.FC<LearnItemProps> = ({
   const onPressLearnItem = async () => {
     if (passedDepositIndex === depositsCount - 1) return;
     dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, data.id, passedDepositIndex))
-    
-    const depositData: Deposit | undefined = data.deposits?.at(passedDepositIndex + 1)
-    if (!depositData) {
-      return;
-    }
     NavigationService.navigate('LearnVideo')
   }
 
