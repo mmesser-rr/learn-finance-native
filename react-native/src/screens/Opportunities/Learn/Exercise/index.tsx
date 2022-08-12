@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CreateLearnStatusMutationVariables, Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
-import { updateLearnStatus as updateLearnStatusAction } from 'src/store/actions/learnStatusActions';
+import * as learnStatusActions from 'src/store/actions/learnStatusActions';
 import AnswerButtonGroup from './answerButtonGroup';
 import AppColors from 'src/config/colors';
 import { useFocusEffect } from '@react-navigation/native';
@@ -37,7 +37,6 @@ const Exercise: React.FC<ExerciseProps> = ({
   const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
   const [answerButtonsStatus, setAnswerButtonsStatus] = useState<Object>({})
   const [flag, setFlag] = useState(false) // used for re-rendering component when answerButtonsStatus is updated.
-  const [foundAllAnswers, setFoundAllAnswers] = useState(false)
 
   const swiperRef = useRef<Swiper>(null)
 
@@ -62,68 +61,70 @@ const Exercise: React.FC<ExerciseProps> = ({
 
   const FinalText = () => (
     <Text type="Headline/Medium" variant='white' style={{ textAlign: 'center' }}>
-      {foundAllAnswers ? `Congratulations!` : `Please find all the correct answers.`}
+      Congratulations!
     </Text>
   )
 
   const onFinish = async () => {
-    const mainPayload = {
-      athleteId,
-      learnItemId,
-      passedDepositIndex: passedDepositIndex + 1
-    }
-    if (learnStatusId.length > 0) {
-      const updateMutationInput: UpdateLearnStatusMutationVariables = {
-        input: {
-          id: learnStatusId,
-          ...mainPayload
-        }
-      };
-      await API.graphql(
-        graphqlOperation(updateLearnStatus, updateMutationInput)
-      )
-    }
-    else {
-      const createMutationInput: CreateLearnStatusMutationVariables = {
-        input: mainPayload
-      };
+    try {
+      const mainPayload = {
+        athleteId,
+        learnItemId,
+        passedDepositIndex: passedDepositIndex + 1
+      }
+      if (learnStatusId.length > 0) {
+        const updateMutationInput: UpdateLearnStatusMutationVariables = {
+          input: {
+            ...mainPayload,
+            id: learnStatusId
+          }
+        };
+        console.log("updateMutationInput", updateMutationInput)
+        await API.graphql(
+          graphqlOperation(updateLearnStatus, updateMutationInput)
+        )
+      }
+      else {
+        const createMutationInput: CreateLearnStatusMutationVariables = {
+          input: mainPayload
+        };
 
-      await API.graphql(
-        graphqlOperation(createLearnStatus, createMutationInput)
-      )
+        await API.graphql(
+          graphqlOperation(createLearnStatus, createMutationInput)
+        )
+      }
+      dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learnItemId, passedDepositIndex + 1))
+      NavigationService.navigate('ExerciseResult')
+    }
+    catch (e) {
+      console.log("Exercise - onFinish - error: ", e)
     }
 
-    dispatch(updateLearnStatusAction(learnStatusId, athleteId, learnItemId, passedDepositIndex + 1))
-    NavigationService.navigate('ExerciseResult')
   }
 
-  const FinishAction = () => {
-    return (
-      <>{foundAllAnswers ? (
-        <Button onPress={onFinish}>
-          <Text type="Body/Large" variant='white'>Finish</Text>
-        </Button >
-      ) : (<></>)
-      }</>)
-  }
+  const FinishAction = () => (
+    <Button onPress={onFinish}>
+      <Text type="Body/Large" variant='white'>Finish</Text>
+    </Button >
+  )
 
-  const checkFoundAllAnswers = (newStatus) => {
-    let index = 0;
-    questions.reduce((prev, next) => {
-      return prev && newStatus[index]
-    }, true)
+  // const checkFoundAllAnswers = (newStatus) => {
+  //   let index = 0;
+  //   questions.reduce((prev, next) => {
+  //     return prev && newStatus[index]
+  //   }, true)
 
-    let result = true;
-    Object.keys(newStatus).forEach((qKey, questionIndex) => {
-      // if sumOfStates is equal to -1 (-1 + -1 + 1 = -1), this means correctAnswer is found.
-      const sumOfStates = Object.keys(newStatus[qKey]).reduce((prev, next) => {
-        return prev + newStatus[qKey][next]
-      }, 0)
+  //   let result = true;
+  //   Object.keys(newStatus).forEach((qKey, questionIndex) => {
+  //     // if sumOfStates is equal to -1 (-1 + -1 + 1 = -1), this means correctAnswer is found.
+  //     const sumOfStates = Object.keys(newStatus[qKey]).reduce((prev, next) => {
+  //       return prev + newStatus[qKey][next]
+  //     }, 0)
 
-      result = result && (sumOfStates === -1)
-    })
-    return result;
-  }
+  //     result = result && (sumOfStates === -1)
+  //   })
+  //   return result;
+  // }
 
   useFocusEffect(
     React.useCallback(() => {
@@ -164,8 +165,8 @@ const Exercise: React.FC<ExerciseProps> = ({
                   newSt[quizIndex][answerIndex] = answerIndex === selectedAnswerIndex ? Number(quiz.correctAnswer === answer) : -1
                 })
                 setAnswerButtonsStatus(newSt)
-                setFoundAllAnswers(checkFoundAllAnswers(newSt))
-                setFlag(!flag)
+                // setFoundAllAnswers(checkFoundAllAnswers(newSt))
+                // setFlag(!flag)
                 if (Object.values(newSt[quizIndex]).includes(1)) {
                   setTimeout(() => {
                     swiperRef?.current?.scrollBy(quizIndex + 1)
@@ -183,8 +184,7 @@ const Exercise: React.FC<ExerciseProps> = ({
                         correctAnswer={quiz.correctAnswer}
                         answerButtonsStatus={answerButtonsStatus[quizIndex]}
                         setSelectedAnswerIndex={setSelectedAnswerIndex}
-                      />
-                    }
+                      />}
                   />
                 </View>
               )
