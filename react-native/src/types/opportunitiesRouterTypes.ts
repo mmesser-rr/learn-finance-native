@@ -1,6 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import { Deposit, Learn, Quiz } from './API';
+import { Deposit, Event, Learn, Quiz } from './API';
 
 export type OpportunitiesStackParamList = {
   Opportunities: undefined;
@@ -15,15 +15,7 @@ export type OpportunitiesStackParamList = {
     description: string
   };
   AboutEvent: {
-    heroPhotoUri: string,
-    logoUri: string,
-    tagline: string,
-    sponsor: string,
-    title: string,
-    description: string,
-    dateTime: number,
-    location: string,
-    reward: number
+    data: Event
   }
 };
 
@@ -49,6 +41,14 @@ type ExerciseNavigationProp = StackNavigationProp<OpportunitiesStackParamList, '
 export type ExerciseProps = {
   navigation: ExerciseNavigationProp;
   route: ExerciseRouteProp;
+};
+
+// ExerciseResult
+type ExerciseResultRouteProp = RouteProp<OpportunitiesStackParamList, 'ExerciseResult'>;
+type ExerciseResultNavigationProp = StackNavigationProp<OpportunitiesStackParamList, 'ExerciseResult'>;
+export type ExerciseResultProps = {
+  navigation: ExerciseResultNavigationProp;
+  route: ExerciseResultRouteProp;
 };
 
 // Redeem

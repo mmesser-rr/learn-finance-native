@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
   slideContainer: { 
     flex: 1, 
     justifyContent: 'space-between' 
+  },
+  closeIcon: {
+    marginBottom: '30%', 
+    alignSelf: 'flex-start'
   }
 });
 

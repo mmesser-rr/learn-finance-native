@@ -3,7 +3,7 @@ import RewardItem from '../index'
 import { Text } from "src/components/common/Texts"
 import { RedeemProps } from "src/types/opportunitiesRouterTypes"
 import AppLayout from "src/components/layout/AppLayout"
-import BottomSheet, { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 import styles from './styles'
 import CloseIcon from 'src/assets/icons/close-gray.png';
@@ -43,6 +43,17 @@ const Redeem: React.FC<RedeemProps> = ({
     setRedeemed(false)
   }
 
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
+
   return (
     <BottomSheetModalProvider>
       <AppLayout containerStyle={AppStyles.container} viewStyle={AppStyles.viewWrapper} scrollEnabled={false}>
@@ -51,30 +62,33 @@ const Redeem: React.FC<RedeemProps> = ({
             <Image source={BackwardIcon} />
           </TouchableOpacity>
           <Text type="Headline/Medium" variant='white'>How to Claim</Text>
-          <Text type="Body/Medium" variant='white'>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
+          <Text type="Paragraph/Medium" variant='white' style={styles.description}>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
           <RewardItem {...{ heroPhotoUri, title, wealthAmount, logoUri, description, onPress: () => null }} />
         </View>
 
         <BottomSheetModal
           ref={bottomSheetModalRef}
-          snapPoints={['40%']}
+          snapPoints={[320]}
           backgroundStyle={styles.modalBackground}
           handleStyle={styles.handleStyle}
+          backdropComponent={renderBackdrop}
           onChange={console.log}
           index={0}
         >
           <View style={styles.modalContent}>
-            <TouchableOpacity onPress={handleDismissModal}>
+            <TouchableOpacity style={styles.closeIcon} onPress={handleDismissModal}>
               <Image source={CloseIcon} />
             </TouchableOpacity>
-            <Text type="Headline/Medium" variant='white'>Redeem Offer</Text>
-            <Text type="Body/Medium" variant='white'>You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
-            <Button actionStyle={AppStyles.redButton} onPress={handleRedeem}>
-              <Text type="Body/Medium" variant='white'>Redeem</Text>
-            </Button>
-            <Button actionStyle={AppStyles.transparentButton} onPress={handleDismissModal}>
-              <Text type="Body/Medium" variant='white'>Cancel</Text>
-            </Button>
+            <View style={styles.modalBody}>
+              <Text type="Headline/Medium" variant='white' style={styles.modalTitle}>Redeem Offer</Text>
+              <Text type="Body/Medium" variant='white' style={styles.modalDescription}>You will receive a code in your email with detailed instructions of how to activate your offer.</Text>
+              <Button actionStyle={AppStyles.redButton} onPress={handleRedeem}>
+                <Text type="Body/Large" variant='white'>Redeem</Text>
+              </Button>
+              <Button actionStyle={AppStyles.transparentButton} onPress={handleDismissModal}>
+                <Text type="Body/Large" variant='white'>Cancel</Text>
+              </Button>
+            </View>
           </View>
         </BottomSheetModal>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AppLayout from 'src/components/layout/AppLayout';
 import { Text } from 'src/components/common/Texts';
@@ -13,8 +13,15 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/root-state';
 import { Learn } from 'src/types/API';
 import NavigationService from 'src/navigation/NavigationService';
+import { log } from 'src/utils/functions';
+import { ExerciseResultProps } from 'src/types/opportunitiesRouterTypes';
 
-const ExerciseResult: React.FC = () => {
+const ExerciseResult: React.FC<ExerciseResultProps> = ({
+  navigation,
+  route
+}) => {
+  log("title", "ExerciseResult")
+  const [myKey, setMyKey] = useState(0)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
   const data: Learn = learns.filter(o => o.id === learnItemId)[0]
@@ -28,6 +35,15 @@ const ExerciseResult: React.FC = () => {
     NavigationService.navigate('OpportunitiesStack', {screen: 'Opportunities'})
   }
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      log("content", "ExerciseResult -> focus")
+      setMyKey(Math.random())
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <AppLayout containerStyle={AppStyles.container} viewStyle={AppStyles.viewWrapper} scrollEnabled={false}>
       <View>
@@ -36,7 +52,7 @@ const ExerciseResult: React.FC = () => {
           Congratulations!
         </Text>
         <Text type="Body/Medium" variant="white">{passedDepositIndex === nDeposits - 1 ? `You have earned ${data.reward} $WEALTH!` : ""}</Text>
-        <LearnItem data={data} />
+        <LearnItem data={data} myKey={myKey} />
       </View>
       <View>
         {passedDepositIndex < nDeposits - 1 && (

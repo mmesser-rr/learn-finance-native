@@ -7,18 +7,23 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: AppColors.coreBlack100
   },
+  viewWrapper: {
+    paddingTop: '35%', 
+    paddingBottom: '30%',
+    flex: 1,
+    backgroundColor: AppColors.coreBlack100
+  },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
     marginLeft: 3,
     marginRight: 3,
-    marginTop: 3,
-    marginBottom: 3,
+    top: 50,
     backgroundColor: AppColors.coreWhite100
   },
   slideWrapper: {
-    height: '92%'
+    paddingHorizontal: scale(9)
   },
   answerButton: {
     marginTop: scale(8),

@@ -69,3 +69,16 @@ export const decimalFormatter = (
 export const getWyreTransactionFee = (amount: number) => {
   return Math.max(WyreMinimumFee, amount * WyreTransactionFeePercent);
 };
+
+export const log = (type: 'title' | 'content' | 'error', text: any) => {
+  switch(type) {
+    case 'title':
+      console.log(`\n\n---------- Rendering ${text}`); break;
+    case 'content':
+      console.log(`\n\n====> ${text}`); break;
+    case 'error':
+      console.log(`\n\n##### ${text}`); break;
+    default:
+      console.log(text)
+  }
+}

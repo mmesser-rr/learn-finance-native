@@ -10,6 +10,7 @@ import NavigationService from 'src/navigation/NavigationService';
 import { RootState } from 'src/store/root-state';
 import { Deposit, Learn, Quiz } from 'src/types/API';
 import { LearnVideoProps } from 'src/types/opportunitiesRouterTypes';
+import { log } from 'src/utils/functions';
 
 var styles = StyleSheet.create({
   backgroundVideo: {
@@ -25,14 +26,15 @@ const LearnVideo: React.FC<LearnVideoProps> = ({
   route,
   navigation
 }: LearnVideoProps) => {
+  log("title", "LearnVideo")
   const [myKey, setMyKey] = useState(0)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
-  console.log("LearnVideo -> passedDepositIndex -> ", passedDepositIndex);
+  log("content", `LearnVideo -> passedDepositIndex -> ${passedDepositIndex}`);
   
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log("LearnVideo -> focus")
+      log("content", "LearnVideo -> focus")
       setMyKey(Math.random())
     });
 
@@ -42,12 +44,11 @@ const LearnVideo: React.FC<LearnVideoProps> = ({
   const learnData: Learn = learns.filter(o => o.id === learnItemId)[0] 
   const bug: boolean =  passedDepositIndex >= learnData.deposits.length - 1
   if (bug) {
-    navigation.navigate('Opportunities')
+    return <></>
   }
 
   const depositData: Deposit = learnData.deposits[passedDepositIndex + Number(!bug)]
-  const questions: Quiz[] = depositData?.questions  
-  console.log("LearnVideo -> questions -> ", questions)
+  const questions: Quiz[] = depositData?.questions
 
   const onPress = () => {
     navigation.navigate('Exercise', { started: false, questions })
@@ -56,11 +57,11 @@ const LearnVideo: React.FC<LearnVideoProps> = ({
   return (
     <AppLayout containerStyle={{ backgroundColor: 'blue' }}>
       <View style={{ flex: 1, backgroundColor: 'blue' }}>
-        {/* <Video 
+        <Video 
           source={{ uri: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }} 
           style={styles.backgroundVideo}
-          controls={true}
-        /> */}
+          rate={1} volume={1} muted={true} resizeMode="cover" repeat={true}
+        />
         <Text type="Body/Large">{`videoUri: ${depositData.videoUri}`}</Text>
         <Text type="Body/Large">{`title: ${depositData.title}`}</Text>
         <Button variant="transparent" onPress={onPress}>

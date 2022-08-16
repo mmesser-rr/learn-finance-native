@@ -83,7 +83,8 @@
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-dotenv": "^3.3.1",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "@fawazahmed/react-native-read-more": "^2.3.7"
   },
   "resolutions": {
     "@types/react": "^17"
