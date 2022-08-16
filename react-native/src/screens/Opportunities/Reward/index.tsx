@@ -55,7 +55,7 @@ const RewardItem: React.FC<RewardItemProps> = ({
         <Image source={{ uri: logoSrc }} style={styles.logo} />
         <View style={styles.content}>
           <Text type="Headline/Medium" variant='white'>{title}</Text>
-          <Text type="Body/Medium" variant='white'>{description}</Text>
+          <Text type="Paragraph/Medium" variant='white'>{description}</Text>
         </View>
       </View>
     </ImageCard>

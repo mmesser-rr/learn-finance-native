@@ -16,11 +16,12 @@ import { CreateLearnStatusMutationVariables, Quiz, UpdateLearnStatusMutationVari
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
 import * as learnStatusActions from 'src/store/actions/learnStatusActions';
+import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
 import AnswerButtonGroup from './answerButtonGroup';
 import AppColors from 'src/config/colors';
 import { useFocusEffect } from '@react-navigation/native';
-
-const { height } = Dimensions.get('window');
+import {Metrics, scale} from 'src/config/dimentions';
+import { log } from 'src/utils/functions';
 
 const Dot = () => <View style={styles.dot} />;
 
@@ -36,7 +37,6 @@ const Exercise: React.FC<ExerciseProps> = ({
 
   const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
   const [answerButtonsStatus, setAnswerButtonsStatus] = useState<Object>({})
-  const [flag, setFlag] = useState(false) // used for re-rendering component when answerButtonsStatus is updated.
 
   const swiperRef = useRef<Swiper>(null)
 
@@ -79,7 +79,7 @@ const Exercise: React.FC<ExerciseProps> = ({
             id: learnStatusId
           }
         };
-        console.log("updateMutationInput", updateMutationInput)
+        log("content", `updateMutationInput: ${updateMutationInput}`)
         await API.graphql(
           graphqlOperation(updateLearnStatus, updateMutationInput)
         )
@@ -93,11 +93,14 @@ const Exercise: React.FC<ExerciseProps> = ({
           graphqlOperation(createLearnStatus, createMutationInput)
         )
       }
+      log("content", "dispatching 'learnStatusActions.updateLearnStatus'")
       dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learnItemId, passedDepositIndex + 1))
-      NavigationService.navigate('ExerciseResult')
+      dispatch(learnStatusesActions.loadLearnStatuses())
+      log("content", "dispatched 'learnStatusActions.updateLearnStatus'")
+      navigation.navigate('ExerciseResult')
     }
     catch (e) {
-      console.log("Exercise - onFinish - error: ", e)
+      log("error", `Exercise - onFinish - error: ${e}`)
     }
 
   }
@@ -107,24 +110,6 @@ const Exercise: React.FC<ExerciseProps> = ({
       <Text type="Body/Large" variant='white'>Finish</Text>
     </Button >
   )
-
-  // const checkFoundAllAnswers = (newStatus) => {
-  //   let index = 0;
-  //   questions.reduce((prev, next) => {
-  //     return prev && newStatus[index]
-  //   }, true)
-
-  //   let result = true;
-  //   Object.keys(newStatus).forEach((qKey, questionIndex) => {
-  //     // if sumOfStates is equal to -1 (-1 + -1 + 1 = -1), this means correctAnswer is found.
-  //     const sumOfStates = Object.keys(newStatus[qKey]).reduce((prev, next) => {
-  //       return prev + newStatus[qKey][next]
-  //     }, 0)
-
-  //     result = result && (sumOfStates === -1)
-  //   })
-  //   return result;
-  // }
 
   useFocusEffect(
     React.useCallback(() => {
@@ -143,62 +128,62 @@ const Exercise: React.FC<ExerciseProps> = ({
   )
 
   return (
-    <AppLayout containerStyle={styles.container} scrollEnabled={false}>
-      <View style={{ marginTop: '20%', maxHeight: '83%' }}>
+    <View style={styles.viewWrapper}>
+      <View style={styles.slideWrapper}>
         {!started && (
           <Slide content={<ReadyText />} actions={<StartAction />} />
         )}
-
-        {started && (
-          <Swiper
-            ref={swiperRef}
-            dot={<Dot />}
-            activeDot={<ActiveDot />}
-            loop={false}
-            height={height * 0.75}
-            scrollEnabled={false}
-          >
-            {[...questions.map((quiz, quizIndex) => {
-              const setSelectedAnswerIndex = (selectedAnswerIndex: number) => {
-                const newSt = answerButtonsStatus
-                quiz.answers.map((answer, answerIndex) => {
-                  newSt[quizIndex][answerIndex] = answerIndex === selectedAnswerIndex ? Number(quiz.correctAnswer === answer) : -1
-                })
-                setAnswerButtonsStatus(newSt)
-                // setFoundAllAnswers(checkFoundAllAnswers(newSt))
-                // setFlag(!flag)
-                if (Object.values(newSt[quizIndex]).includes(1)) {
-                  setTimeout(() => {
-                    swiperRef?.current?.scrollBy(quizIndex + 1)
-                  }, 1000)
-                }
-              }
-
-              return (
-                <View key={quizIndex} style={styles.slideWrapper}>
-                  <Slide
-                    content={<QuestionText questionText={quiz.questionText} />}
-                    actions={
-                      <AnswerButtonGroup
-                        answers={quiz.answers}
-                        correctAnswer={quiz.correctAnswer}
-                        answerButtonsStatus={answerButtonsStatus[quizIndex]}
-                        setSelectedAnswerIndex={setSelectedAnswerIndex}
-                      />}
-                  />
-                </View>
-              )
-            }
-            ), (
-              <View style={styles.slideWrapper} key="asdf">
-                <Slide content={<FinalText />} actions={<FinishAction />} />
-              </View>
-            )]}
-
-          </Swiper>
-        )}
       </View>
-    </AppLayout>
+
+      {started && (
+        <Swiper
+          ref={swiperRef}
+          dot={<Dot />}
+          activeDot={<ActiveDot />}
+          loop={false}
+          width={Metrics.screenWidth}
+          scrollEnabled={false}
+        >
+          {[...questions.map((quiz, quizIndex) => {
+            const setSelectedAnswerIndex = (selectedAnswerIndex: number) => {
+              const newSt = Object.assign({}, answerButtonsStatus)
+              quiz.answers.map((answer, answerIndex) => {
+                newSt[quizIndex][answerIndex] = answerIndex === selectedAnswerIndex ? Number(quiz.correctAnswer === answer) : -1
+              })
+              setAnswerButtonsStatus(newSt)
+              if (Object.values(newSt[quizIndex]).includes(1)) {
+                setTimeout(() => {
+                  quizIndex === questions.length - 1 
+                    ? onFinish()
+                    : swiperRef?.current?.scrollBy(quizIndex + 1)
+                }, 1000)
+              }
+            }
+
+            return (
+              <View key={quizIndex} style={styles.slideWrapper}>
+                <Slide
+                  content={<QuestionText questionText={quiz.questionText} />}
+                  actions={
+                    <AnswerButtonGroup
+                      answers={quiz.answers}
+                      correctAnswer={quiz.correctAnswer}
+                      answerButtonsStatus={answerButtonsStatus[quizIndex]}
+                      setSelectedAnswerIndex={setSelectedAnswerIndex}
+                    />}
+                />
+              </View>
+            )
+          }
+          )/* , (
+            <View style={styles.slideWrapper} key="asdf">
+              <Slide content={<FinalText />} actions={<FinishAction />} />
+            </View>
+          ) */]}
+
+        </Swiper>
+      )}
+    </View>
   );
 };
 

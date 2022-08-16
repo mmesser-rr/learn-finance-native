@@ -10,34 +10,30 @@ import { Oval } from 'src/components/common/Oval';
 import commonStyles from '../styles'
 import styles from './styles';
 import { Storage } from 'aws-amplify';
+import { Event } from 'src/types/API';
+import NavigationService from 'src/navigation/NavigationService';
+import { log } from 'src/utils/functions';
 
 interface EventItemProps {
-  heroPhotoUri: string;
-  sponsor: string;
-  title: string;
-  category: string;
-  dateTime: number;
-  reward: number;
-  onPress: () => void;
+  data: Event
 }
 
 const EventItem: React.FC<EventItemProps> = ({ 
-  heroPhotoUri,
-  sponsor,
-  title,
-  category,
-  dateTime,
-  reward,
-  onPress
+  data
 }: EventItemProps) => {
+  log("title", "EventItem")
   const [imgSrc, setImgSrc] = useState("https://reactjs.org/logo-og.png")
-  
-  const formattedDateTime = format(new Date(dateTime), "MMMM do 'at' h:maaa zzz")
+  const formattedDateTime = format(new Date(data.dateTime), "MMMM do 'at' h:maaa zzz")
+
+  const onPressRSVP = () => {
+    log("content", "Navigating to 'AboutEvent'")
+    NavigationService.navigate('AboutEvent', { data })
+  }
 
   useEffect(() => {
     const setBackgroundImage = async () => {
-      if (heroPhotoUri.length) {
-        const bgImage = await Storage.get(heroPhotoUri, { download: false })
+      if (data.heroPhotoUri.length) {
+        const bgImage = await Storage.get(data.heroPhotoUri, { download: false })
         setImgSrc(bgImage)
       }
     }
@@ -49,13 +45,13 @@ const EventItem: React.FC<EventItemProps> = ({
     <ImageCard backgroundImage={imgSrc}>
       <Text type="Body/Medium" variant='white' style={styles.sponsor}>
         Presented by {' '}
-        <Text type="Body/Medium" variant='white' style={commonStyles.bold}>{sponsor}</Text>
+        <Text type="Body/Medium" variant='white' style={commonStyles.bold}>{data.sponsor}</Text>
       </Text>
-      <Text type="Headline/Medium" variant='white'>{title}</Text>
+      <Text type="Headline/Medium" variant='white'>{data.title}</Text>
       <View style={commonStyles.flexRow}>
-        <Text type="Body/Medium" variant='white'>{category}</Text>
+        <Text type="Body/Medium" variant='white'>{data.category}</Text>
         <Oval />
-        <Text type="Body/Medium" variant='white'>{`${reward} $WEALTH`}</Text>
+        <Text type="Body/Medium" variant='white'>{`${data.reward} $WEALTH`}</Text>
       </View>
       <Text type="Body/Medium" variant='white'>{formattedDateTime}</Text>
       <View style={styles.buttonGroup}>
@@ -63,7 +59,7 @@ const EventItem: React.FC<EventItemProps> = ({
           <Text type="Body/Medium" variant='white'>Notify Me</Text>
         </Button>
         <View style={styles.buttonGap}></View>
-        <Button variant='red' actionStyle={styles.rsvp} onPress={onPress}>
+        <Button variant='red' actionStyle={styles.rsvp} onPress={onPressRSVP}>
           <Text type="Body/Medium" variant='white'>RSVP</Text>  
         </Button>
       </View>

@@ -12,11 +12,18 @@ const styles = StyleSheet.create({
   backward: {
     marginLeft: scale(18), 
     marginTop: scale(36), 
-    alignSelf: 'flex-start',
-
+    alignSelf: 'flex-start'
+  },
+  description: {
+    marginTop: scale(4),
+    color: AppColors.coreWhite100,
+    fontFamily: 'Lato-Medium',
+    fontSize: scale(14),
+    lineHeight: scale(16),
+    letterSpacing: scale(0.25),
   },
   infoBox: {
-    marginTop: scale(16),
+    marginTop: scale(20),
     marginVertical: scale(10),
     borderColor: AppColors.coreWhite100,
     borderWidth: Metrics.pixels.size2,
@@ -25,7 +32,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginHorizontal: scale(1),
-    marginVertical: scale(8),
+    marginVertical: scale(10),
     borderWidth: Metrics.pixels.size1,
     borderColor: AppColors.coreWhite100
   },
@@ -46,12 +53,21 @@ const styles = StyleSheet.create({
     bottom: -AppStyles.avatarSize / 2,
     left: scale(16)
   },
-  eventDetails: {
+  paddingHorizontal16: {
     paddingHorizontal: scale(16)
   },
   tagline: {
     paddingTop: AppStyles.avatarSize / 4 * 3,
     paddingBottom: AppStyles.avatarSize / 3
+  },
+  wealthIcon: {
+    width: scale(16),
+    height: scale(16),
+    marginRight: scale(4)
+  },
+  wealthAmount: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   sheetContainer: {
     marginHorizontal: 24,
@@ -65,16 +81,36 @@ const styles = StyleSheet.create({
   cancelRegButton: {
     marginVertical: scale(20)
   },
-  modalContent: {
+  modalContainer: {
     padding: AppStyles.componentPadding,
     height: '100%',
     justifyContent: 'space-around'
   },
+  modalBody: {
+    paddingHorizontal: scale(6)
+  },
+  modalTitle: {
+    marginVertical: scale(12)
+  },
+  modalDescription: {
+    marginBottom: scale(12)
+  },
   modalBackground: {
     backgroundColor: AppColors.coreBlack85,
+    borderRadius: 0
   },
   handleStyle: {
     display: 'none'
+  },
+  closeIcon: {
+    marginVertical: scale(16), 
+    alignSelf: 'flex-start'
+  },
+  seeMore: {
+    color: AppColors.coreBlue75
+  },
+  seeLess: {
+    color: AppColors.coreBlue75
   }
 });
 

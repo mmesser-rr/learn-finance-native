@@ -7,11 +7,9 @@ const styles = StyleSheet.create({
     borderColor: AppColors.coreWhite100,
     borderWidth: Metrics.pixels.size1,
     borderRadius: Metrics.radius.card,
-    minHeight: scale(160),
     marginTop: scale(16)
   },
   imageBackground: {
-    flex: 1,
     overflow: 'hidden'
   },
   content: {
