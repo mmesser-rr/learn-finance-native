@@ -29,6 +29,7 @@ import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
 import { deleteLearnStatus } from 'src/graphql/mutations';
 
 import styles from './styles';
+import { log } from 'src/utils/functions';
 
 const OPPORTUNITIES = {
   LEARN: 'Learn',
@@ -69,7 +70,7 @@ const OpportunityTab = ({ label, activeOpportunity, setActiveOpportunity }) => {
 const Opportunities: React.FC<OpportunitiesProps> = ({ 
   navigation 
 }: OpportunitiesProps) => {
-  console.log("Rendering Opportunities --->")
+  log("title", "Opportunities")
   const dispatch = useDispatch()
   const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
@@ -82,7 +83,7 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
   );
 
   const clearLearnStatus = async () => {
-    console.log("Opportunities -> clearLearnStatus -> learnStatuses -> ", learnStatuses)
+    log("content", `Opportunities -> clearLearnStatus -> learnStatuses -> ${learnStatuses}`)
     for await (const o of learnStatuses) {
       try {
         const mutationInput: DeleteLearnStatusMutationVariables = {
@@ -93,22 +94,20 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
         const response = await API.graphql(
           graphqlOperation(deleteLearnStatus, mutationInput),
         ) as GraphQLResult<DeleteLearnStatusMutation>;
-
-        console.log(response.data?.deleteLearnStatus)
       }
       catch (e) {
-        console.log("Opportunities -> clearLearnStatus -> error -> ", e)
+        log("error", `Opportunities -> clearLearnStatus -> error -> ${e}`)
       }
     }
 
     dispatch(learnStatusesActions.loadLearnStatuses())
-    console.log("Opportunities - cleared learnStatuses")
+    log("content", "Opportunities - cleared learnStatuses")
     setMyKey(Math.random())
   }
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log("Opportunities -> focus")
+      log("content", "Opportunities -> focus")
       setMyKey(Math.random())
     });
 
@@ -142,41 +141,16 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
             <LearnItem
               key={index}
               data={learn}
+              myKey={myKey}
             />
           ))}
 
         {activeOpportunity === OPPORTUNITIES.EVENTS &&
           events.map((event, index) => {
-            const heroPhotoUri = event.heroPhotoUri;
-            const logoUri = event.logoUri;
-            const tagline = event.tagline;
-            const sponsor = event.sponsor;
-            const title = event.title;
-            const description = event.description;
-            const dateTime = event.dateTime;
-            const location = event.location;
-            const reward = event.reward;
-            const category = event.category;
-
-            const onPressEventItem = () => {
-              navigation.navigate('AboutEvent', {
-                heroPhotoUri,
-                logoUri,
-                tagline,
-                sponsor,
-                title,
-                description,
-                dateTime,
-                location,
-                reward 
-              })
-            }
-
             return (
               <EventItem
                 key={index}
-                {...{ heroPhotoUri, sponsor, title, dateTime, reward, category }}
-                onPress={onPressEventItem}
+                data={event}
               />
             )
           })}

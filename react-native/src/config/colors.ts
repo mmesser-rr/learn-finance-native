@@ -8,6 +8,7 @@ const AppColors = {
   coreBlack80: '#333',
   coreBlack60: '#666',
   coreBlack40: '#999',
+  coreBlue75: '#40b9ff',
   searchPlaceholderColor: '#F7F7F738',
   accentRed100: '#FF5A5F',
   coreWhite100: '#FFF',

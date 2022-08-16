@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { Text } from "src/components/common/Texts"
 import { AboutEventProps } from "src/types/opportunitiesRouterTypes"
 import {
+  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetModalProvider
 } from '@gorhom/bottom-sheet';
 import { format } from 'date-fns-tz'
+import ReadMore from '@fawazahmed/react-native-read-more';
 
 import styles from './styles'
 import { Image, ImageBackground, TouchableOpacity, View } from "react-native"
@@ -13,6 +15,8 @@ import Button from "src/components/common/Button"
 import { Storage } from "aws-amplify"
 import CloseIcon from 'src/assets/icons/close-gray.png';
 import BackwardIcon from 'src/assets/icons/backward.png';
+import WealthIcon from 'src/assets/icons/wealth.png';
+import { Event } from "src/types/API";
 
 const Divider = () => (
   <View style={styles.divider} />
@@ -25,18 +29,10 @@ const AboutEvent: React.FC<AboutEventProps> = ({
   const [avatarSrc, setAvatarSrc] = useState("")
   const [confirmed, setConfirmed] = useState(false)
 
-  const heroPhotoUri = route.params.heroPhotoUri;
-  const logoUri = route.params.logoUri;
-  const tagline = route.params.tagline;
-  const sponsor = route.params.sponsor;
-  const title = route.params.title;
-  const description = route.params.description;
-  const dateTime = route.params.dateTime;
-  const location = route.params.location;
-  const reward = route.params.reward;
+  const data: Event = route.params.data
 
-  const date = format(new Date(dateTime), "MMMM do")
-  const time = format(new Date(dateTime), "h:maaa zzz")
+  const date = format(new Date(data.dateTime), "MMMM do")
+  const time = format(new Date(data.dateTime), "h:maaa zzz")
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -56,11 +52,22 @@ const AboutEvent: React.FC<AboutEventProps> = ({
   const handleCancelConfirm = () => {
     setConfirmed(false)
   }
-  
+
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
+
   useEffect(() => {
     const setImages = async () => {
-      const _heroPhotoSrc = await Storage.get(heroPhotoUri, { download: false })
-      const _avatarSrc = await Storage.get(logoUri, { download: false })
+      const _heroPhotoSrc = await Storage.get(data.heroPhotoUri, { download: false })
+      const _avatarSrc = await Storage.get(data.logoUri, { download: false })
 
       setHeroPhotoSrc(_heroPhotoSrc)
       setAvatarSrc(_avatarSrc)
@@ -84,10 +91,20 @@ const AboutEvent: React.FC<AboutEventProps> = ({
           )}
 
           {/* Event Details */}
-          <View style={styles.eventDetails}>
-            <Text type="Body/Medium" variant='white' style={styles.tagline}>{tagline}</Text>
+          <View style={styles.paddingHorizontal16}>
+            <Text type="Body/Medium" variant='white' style={styles.tagline}>{data.tagline}</Text>
             <Text type="Headline/Medium" variant='white'>About</Text>
-            <Text type="Body/Medium" variant='white'>{description}</Text>
+            <ReadMore 
+              numberOfLines={4}
+              style={styles.description}
+              seeMoreText="read more"
+              seeMoreStyle={styles.seeMore}
+              seeLessText="read less"
+              seeLessStyle={styles.seeLess}
+              ellipsis=".."
+            >
+              {data.description}
+            </ReadMore>
             <View style={styles.infoBox}>
 
               <View style={styles.infoRow}>
@@ -106,58 +123,67 @@ const AboutEvent: React.FC<AboutEventProps> = ({
 
               <View style={styles.infoRow}>
                 <Text type="Body/Large" variant='white'>Location</Text>
-                <Text type="Body/Large" variant='white'>{location}</Text>
+                <Text type="Body/Large" variant='white'>{data.location}</Text>
               </View>
 
               <Divider />
 
               <View style={styles.infoRow}>
                 <Text type="Body/Large" variant='white'>Reward</Text>
-                <Text type="Body/Large" variant='white'>{reward}</Text>
+                <View style={styles.wealthAmount}>
+                  <Image source={WealthIcon} style={styles.wealthIcon} />
+                  <Text type="Body/Large" variant='white'>{data.reward}</Text>
+                </View>
+
               </View>
             </View>
           </View>
 
           <BottomSheetModal
             ref={bottomSheetModalRef}
-            snapPoints={['40%']}
+            snapPoints={[300]}
             backgroundStyle={styles.modalBackground}
             handleStyle={styles.handleStyle}
+            backdropComponent={renderBackdrop}
             onChange={console.log}
             index={0}
           >
-            <View style={styles.modalContent}>
-              <TouchableOpacity onPress={handleDismissModal}>
+            <View style={styles.modalContainer}>
+              <TouchableOpacity style={styles.closeIcon} onPress={handleDismissModal}>
                 <Image source={CloseIcon} />
               </TouchableOpacity>
-              <Text type="Headline/Large" variant='white'>Confirm Registration?</Text>
-              <Text type="Body/Large" variant='white'>Event details will be sent via email, you can change/cancel your registration in your profile.</Text>
-              <Button variant="red" onPress={handleConfirm}>
-                <Text type="Body/Large" variant='white'>Confirm</Text>
-              </Button>
-              <Button variant="transparent" onPress={handleDismissModal}>
-                <Text type="Body/Large" variant='white'>Cancel</Text>
-              </Button>
+              <View style={styles.modalBody}>
+                <Text type="Headline/Medium" variant='white' style={styles.modalTitle}>Confirm Registration?</Text>
+                <Text type="Body/Medium" variant='white' style={styles.modalDescription}>Event details will be sent via email, you can change/cancel your registration in your profile.</Text>
+                <Button variant="red" onPress={handleConfirm}>
+                  <Text type="Body/Medium" variant='white'>Confirm</Text>
+                </Button>
+                <Button variant="transparent" onPress={handleDismissModal}>
+                  <Text type="Body/Medium" variant='white'>Cancel</Text>
+                </Button>
+              </View>
             </View>
           </BottomSheetModal>
         </View>
 
-        {!confirmed && (
-          <Button variant="red" actionStyle={styles.rsvpButton} onPress={handlePresentModal}>
-            <Text type="Body/Large" variant='white'>RSVP</Text>
-          </Button>
-        )}
+        <View style={styles.paddingHorizontal16}>
+          {!confirmed && (
+            <Button variant="red" actionStyle={styles.rsvpButton} onPress={handlePresentModal}>
+              <Text type="Body/Large" variant='white'>RSVP</Text>
+            </Button>
+          )}
 
-        {confirmed && (
-          <View>
-            <Button variant="red" actionStyle={styles.RegConfirmedButton} disabled={true}>
-              <Text type="Body/Large" variant='white'>Registration Confirmed</Text>
-            </Button>
-            <Button variant="transparent" actionStyle={styles.cancelRegButton} onPress={handleCancelConfirm}>
-              <Text type="Body/Large" variant='white'>Cancel Registration</Text>
-            </Button>
-          </View>
-        )}
+          {confirmed && (
+            <View>
+              <Button variant="red" actionStyle={styles.RegConfirmedButton} disabled={true}>
+                <Text type="Body/Large" variant='white'>Registration Confirmed</Text>
+              </Button>
+              <Button variant="transparent" actionStyle={styles.cancelRegButton} onPress={handleCancelConfirm}>
+                <Text type="Body/Large" variant='white'>Cancel Registration</Text>
+              </Button>
+            </View>
+          )}
+        </View>
       </View>
     </BottomSheetModalProvider>
   )

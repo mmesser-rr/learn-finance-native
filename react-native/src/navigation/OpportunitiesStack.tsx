@@ -17,7 +17,7 @@ const OpportunitiesStack: React.FC = () => {
       <Stack.Screen name="Opportunities" component={Opportunities} options={{ headerShown: false }} />
       <Stack.Screen name="LearnVideo" component={LearnVideo} options={{ headerShown: false }} />
       <Stack.Screen name="Exercise" component={Exercise} initialParams={{started: false}} options={{ headerShown: false }} />
-      <Stack.Screen name="ExerciseResult" component={ExerciseResult} options={{ headerShown: false }} />
+      <Stack.Screen name="ExerciseResult" component={ExerciseResult} options={{ headerShown: false, gestureEnabled: false }}/>
       <Stack.Screen name="Redeem" component={Redeem} options={{ headerShown: false }} />
       <Stack.Screen name="AboutEvent" component={AboutEvent} options={{ headerShown: false }} />
 
