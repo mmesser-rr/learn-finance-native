@@ -4,4 +4,5 @@ export interface IUpdateLearnStatusRequestState {
   athleteId: string;
   learnItemId: string;
   passedDepositIndex: number;
+  wealthBalance: number;
 }

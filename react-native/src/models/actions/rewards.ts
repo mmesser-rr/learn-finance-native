@@ -8,3 +8,8 @@ export interface IUpdateRewardsRequestState {
   type: string;
   rewards: Reward[];
 }
+
+export interface IUpdateRewardRequestState {
+  id: string;
+  redeemed: boolean;
+}

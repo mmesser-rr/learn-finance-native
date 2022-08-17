@@ -175,6 +175,7 @@ export const nearbyOpportunities = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -263,6 +264,7 @@ export const searchEvents = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -277,6 +279,7 @@ export const searchEvents = /* GraphQL */ `
         dateTime
         location
         reward
+        registered
         id
         createdAt
         updatedAt
@@ -334,6 +337,7 @@ export const searchLearns = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -450,6 +454,7 @@ export const searchOpportunities = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -553,6 +558,7 @@ export const searchRewards = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -562,6 +568,7 @@ export const searchRewards = /* GraphQL */ `
         logoUri
         description
         heroPhotoUri
+        redeemed
         createdAt
         updatedAt
       }
@@ -644,6 +651,7 @@ export const getAthlete = /* GraphQL */ `
       wyreId
       isActive
       handle
+      wealthBalance
       socialHandles {
         items {
           platform
@@ -716,6 +724,7 @@ export const listAthletes = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -778,6 +787,7 @@ export const getAthleteAccount = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -819,6 +829,7 @@ export const listAthleteAccounts = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -1011,6 +1022,7 @@ export const getEvent = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1028,6 +1040,7 @@ export const getEvent = /* GraphQL */ `
       dateTime
       location
       reward
+      registered
       id
       createdAt
       updatedAt
@@ -1058,6 +1071,7 @@ export const listEvents = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -1072,6 +1086,7 @@ export const listEvents = /* GraphQL */ `
         dateTime
         location
         reward
+        registered
         id
         createdAt
         updatedAt
@@ -1169,6 +1184,7 @@ export const getLearn = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1220,6 +1236,7 @@ export const listLearns = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -1326,6 +1343,7 @@ export const getOpportunity = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1414,6 +1432,7 @@ export const listOpportunities = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -1591,6 +1610,7 @@ export const getReward = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1603,6 +1623,7 @@ export const getReward = /* GraphQL */ `
       logoUri
       description
       heroPhotoUri
+      redeemed
       createdAt
       updatedAt
     }
@@ -1633,6 +1654,7 @@ export const listRewards = /* GraphQL */ `
           wyreId
           isActive
           handle
+          wealthBalance
           id
           createdAt
           updatedAt
@@ -1642,6 +1664,7 @@ export const listRewards = /* GraphQL */ `
         logoUri
         description
         heroPhotoUri
+        redeemed
         createdAt
         updatedAt
       }

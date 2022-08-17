@@ -8,3 +8,8 @@ export interface IUpdateEventsRequestState {
   type: string;
   events: Event[];
 }
+
+export interface IUpdateEventRequestState {
+  id: string;
+  registered: boolean;
+}

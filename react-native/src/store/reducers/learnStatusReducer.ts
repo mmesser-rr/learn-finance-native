@@ -13,7 +13,8 @@ const initialState: ILearnStatusState = {
   learnStatusId: "",
   athleteId: "",
   learnItemId: "",
-  passedDepositIndex: -1
+  passedDepositIndex: -1,
+  wealthBalance: 0
 };
 
 export const learnStatusReducer = createReducer(initialState, {
@@ -23,7 +24,8 @@ export const learnStatusReducer = createReducer(initialState, {
       learnStatusId: action.learnStatusId,
       athleteId: action.athleteId,
       learnItemId: action.learnItemId,
-      passedDepositIndex: action.passedDepositIndex
+      passedDepositIndex: action.passedDepositIndex,
+      wealthBalance: action.wealthBalance
     };
   }
 });
