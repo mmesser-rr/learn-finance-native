@@ -12,7 +12,7 @@ import Button from 'src/components/common/Button';
 import NavigationService from 'src/navigation/NavigationService';
 import { ExerciseProps } from 'src/types/opportunitiesRouterTypes';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateLearnStatusMutationVariables, Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
+import { CreateLearnStatusMutationVariables, Learn, Quiz, UpdateLearnStatusMutationVariables } from 'src/types/API';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
 import * as learnStatusActions from 'src/store/actions/learnStatusActions';
@@ -35,8 +35,14 @@ const Exercise: React.FC<ExerciseProps> = ({
   const started: boolean = route.params.started;
   const questions: Quiz[] = route.params.questions;
 
-  const { learnStatusId, learnItemId, athleteId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
+
+  const { learnStatusId, learnItemId, athleteId, passedDepositIndex, wealthBalance } = useSelector((state: RootState) => state.learnStatusReducer)
+  const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const [answerButtonsStatus, setAnswerButtonsStatus] = useState<Object>({})
+
+  const learnData: Learn = learns.filter(o => o.id === learnItemId)[0]
+  const depositsCount = learnData.deposits.length
+  const rewards = learnData.reward
 
   const swiperRef = useRef<Swiper>(null)
 
@@ -66,11 +72,12 @@ const Exercise: React.FC<ExerciseProps> = ({
   )
 
   const onFinish = async () => {
+    const newPassedDepositIndex = passedDepositIndex + 1
     try {
       const mainPayload = {
         athleteId,
         learnItemId,
-        passedDepositIndex: passedDepositIndex + 1
+        passedDepositIndex: newPassedDepositIndex
       }
       if (learnStatusId.length > 0) {
         const updateMutationInput: UpdateLearnStatusMutationVariables = {
@@ -94,7 +101,14 @@ const Exercise: React.FC<ExerciseProps> = ({
         )
       }
       log("content", "dispatching 'learnStatusActions.updateLearnStatus'")
-      dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, learnItemId, passedDepositIndex + 1))
+      const newWealthBalance = newPassedDepositIndex === depositsCount - 1 ? wealthBalance + rewards : wealthBalance;
+      dispatch(learnStatusActions.updateLearnStatus(
+        learnStatusId, 
+        athleteId, 
+        learnItemId, 
+        newPassedDepositIndex,
+        newWealthBalance
+      ))
       dispatch(learnStatusesActions.loadLearnStatuses())
       log("content", "dispatched 'learnStatusActions.updateLearnStatus'")
       navigation.navigate('ExerciseResult')

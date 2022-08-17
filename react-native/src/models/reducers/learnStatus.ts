@@ -3,4 +3,5 @@ export interface ILearnStatusState {
   athleteId: string;
   learnItemId: string;
   passedDepositIndex: number;
+  wealthBalance: number;
 }

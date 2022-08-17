@@ -23,7 +23,7 @@ const ExerciseResult: React.FC<ExerciseResultProps> = ({
   log("title", "ExerciseResult")
   const [myKey, setMyKey] = useState(0)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
-  const { learnItemId, passedDepositIndex } = useSelector((state: RootState) => state.learnStatusReducer)
+  const { learnItemId, passedDepositIndex, wealthBalance } = useSelector((state: RootState) => state.learnStatusReducer)
   const data: Learn = learns.filter(o => o.id === learnItemId)[0]
   const nDeposits = data.deposits.length
 
@@ -47,7 +47,7 @@ const ExerciseResult: React.FC<ExerciseResultProps> = ({
   return (
     <AppLayout containerStyle={AppStyles.container} viewStyle={AppStyles.viewWrapper} scrollEnabled={false}>
       <View>
-        <WealthBalanceEle />
+        <WealthBalanceEle balance={wealthBalance} />
         <Text type="Headline/Large" variant='white' style={styles.headline}>
           Congratulations!
         </Text>

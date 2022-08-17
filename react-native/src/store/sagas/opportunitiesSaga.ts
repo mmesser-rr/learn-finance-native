@@ -17,11 +17,17 @@ import {
   ListRewardsQuery,
   Reward,
   ListLearnStatusesQuery,
-  LearnStatus
+  LearnStatus,
+  UpdateEventMutation,
+  UpdateRewardMutation
 } from 'src/types/API';
 import * as types from '../actions/types';
 import { listLearns_custom } from 'src/graphql/queries_custom';
 import { listEvents, listLearnStatuses, listRewards } from 'src/graphql/queries';
+import * as mutations from 'src/graphql/mutations';
+import { IUpdateEventRequestState } from 'src/models/actions/events';
+import { IUpdateRewardRequestState } from 'src/models/actions/rewards';
+import { log } from 'src/utils/functions';
 
 // const getLearnsState = (state: RootState) => state.learnsReducer;
 // const getEventsState = (state: RootState) => state.eventsReducer;
@@ -81,9 +87,46 @@ export function* loadLearnStatuses() {
   }
 }
 
+export function* updateEvent({ id, registered }: IUpdateEventRequestState) {
+  log("content", `opportunitiesSaga.ts -> updateEvent -> id, registered: ${id}, ${registered}`)
+  try {
+    const response = (yield API.graphql(
+      graphqlOperation(mutations.updateEvent, { 
+        input: {
+          id, 
+          registered
+        } 
+      }),
+    )) as GraphQLResult<UpdateEventMutation>;
+
+    yield put(eventsActions.loadEvents())
+  } catch (error) {
+    console.log('Error attempting to update event:', error);
+  }
+}
+
+export function* updateReward({ id, redeemed }: IUpdateRewardRequestState) {
+  try {
+    const response = (yield API.graphql(
+      graphqlOperation(mutations.updateReward, { 
+        input: {
+          id, 
+          redeemed 
+        }
+      }),
+    )) as GraphQLResult<UpdateRewardMutation>;
+
+    yield put(rewardsActions.loadRewards())
+  } catch (error) {
+    console.log('Error attempting to update reward:', error);
+  }
+}
+
 export default function* opportunitiesSaga() {
   yield takeLatest(types.LOAD_LEARNS, loadLearns);
   yield takeLatest(types.LOAD_EVENTS, loadEvents);
   yield takeLatest(types.LOAD_REWARDS, loadRewards);
   yield takeLatest(types.LOAD_LEARN_STATUSES, loadLearnStatuses);
+  yield takeLatest(types.UPDATE_EVENT, updateEvent);
+  yield takeLatest(types.UPDATE_REWARD, updateReward);
 }
