@@ -8,54 +8,50 @@ import WealthIcon from 'src/assets/icons/wealth.png';
 import commonStyles from '../styles'
 import styles from './styles';
 import { Storage } from 'aws-amplify';
+import { Reward } from 'src/types/API';
+import NavigationService from 'src/navigation/NavigationService';
 
 interface RewardItemProps {
-  heroPhotoUri: string;
-  title: string;
-  wealthAmount: number;
-  logoUri: string;
-  description: string;
-  onPress: () => void
+  data: Reward;
 }
 
 const RewardItem: React.FC<RewardItemProps> = ({ 
-  heroPhotoUri,
-  title,
-  wealthAmount,
-  logoUri,
-  description,
-  onPress
+  data
 }: RewardItemProps) => {
   const [heroPhotoSrc, setHeroPhotoSrc] = useState("https://reactjs.org/logo-og.png")
   const [logoSrc, setLogoSrc] = useState("https://reactjs.org/logo-og.png")
 
+  const onPressRewardItem = () => {
+    NavigationService.navigate('Redeem', { data })
+  }
+
   useEffect(() => {
     const setBackgroundImage = async () => {
-      if (heroPhotoUri.length) {
-        const img = await Storage.get(heroPhotoUri, { download: false })
+      if (data.heroPhotoUri?.length) {
+        const img = await Storage.get(data.heroPhotoUri, { download: false })
         setHeroPhotoSrc(img)
       }
 
-      if (logoUri.length) {
-        const img = await Storage.get(logoUri, { download: false })
+      if (data.logoUri?.length) {
+        const img = await Storage.get(data.logoUri, { download: false })
         setLogoSrc(img)
       }
     }
 
     setBackgroundImage()
-  }, [])
+  }, [data])
 
   return (
-    <ImageCard backgroundImage={heroPhotoSrc} disabled={false} onPress={onPress}>
+    <ImageCard backgroundImage={heroPhotoSrc} disabled={false} onPress={onPressRewardItem}>
       <View style={styles.wealthAmount}>
         <Image source={WealthIcon} style={styles.wealthIcon} />
-        <Text type="Body/Medium" variant='white'>{wealthAmount}</Text>
+        <Text type="Body/Medium" variant='white'>{data.wealthAmount}</Text>
       </View>
       <View style={styles.body}>
         <Image source={{ uri: logoSrc }} style={styles.logo} />
         <View style={styles.content}>
-          <Text type="Headline/Medium" variant='white'>{title}</Text>
-          <Text type="Paragraph/Medium" variant='white'>{description}</Text>
+          <Text type="Headline/Medium" variant='white'>{data.title}</Text>
+          <Text type="Paragraph/Medium" variant='white'>{data.description}</Text>
         </View>
       </View>
     </ImageCard>

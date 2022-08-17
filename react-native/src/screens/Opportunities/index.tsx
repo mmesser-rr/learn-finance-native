@@ -15,7 +15,11 @@ import Button from 'src/components/common/Button';
 
 import {
   DeleteLearnStatusMutation,
-  DeleteLearnStatusMutationVariables
+  DeleteLearnStatusMutationVariables,
+  UpdateEventMutation,
+  UpdateEventMutationVariables,
+  UpdateRewardMutation,
+  UpdateRewardMutationVariables
 } from 'src/types/API';
 import { OpportunitiesProps } from 'src/types/opportunitiesRouterTypes';
 
@@ -24,9 +28,12 @@ import WealthIcon from 'src/assets/icons/wealth.png';
 import AppColors from 'src/config/colors';
 
 import { RootState } from 'src/store/root-state';
+import * as learnStatusActions from 'src/store/actions/learnStatusActions';
 import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
+import * as eventsActions from 'src/store/actions/eventsActions';
+import * as rewardsActions from 'src/store/actions/rewardsActions';
 
-import { deleteLearnStatus } from 'src/graphql/mutations';
+import { deleteLearnStatus, updateEvent, updateReward } from 'src/graphql/mutations';
 
 import styles from './styles';
 import { log } from 'src/utils/functions';
@@ -37,13 +44,14 @@ const OPPORTUNITIES = {
   EVENTS: 'Events',
 };
 
-export const WealthBalanceEle = () => {
-  const [wealthBalance, setWealthBalance] = useState(1000);
-
+interface WealthBalanceEleProps {
+  balance: number;
+}
+export const WealthBalanceEle: React.FC<WealthBalanceEleProps> = ({ balance }: WealthBalanceEleProps) => {
   return (
     <View style={styles.wealthBalance}>
       <Image source={WealthIcon} style={styles.wealthIcon} />
-      <Text type="Body/Large" variant='white'>{wealthBalance}</Text>
+      <Text type="Body/Large" variant='white'>{balance}</Text>
     </View>
   );
 };
@@ -73,6 +81,7 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
   log("title", "Opportunities")
   const dispatch = useDispatch()
   const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer)
+  const { athleteId, learnItemId, learnStatusId, passedDepositIndex, wealthBalance } = useSelector((state: RootState) => state.learnStatusReducer)
   const { learns } = useSelector((state: RootState) => state.learnsReducer)
   const { events } = useSelector((state: RootState) => state.eventsReducer)
   const { rewards } = useSelector((state: RootState) => state.rewardsReducer)
@@ -82,8 +91,8 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
     OPPORTUNITIES.LEARN,
   );
 
-  const clearLearnStatus = async () => {
-    log("content", `Opportunities -> clearLearnStatus -> learnStatuses -> ${learnStatuses}`)
+  const clearData = async () => {
+    log("content", `Opportunities -> clearData -> learnStatuses -> ${learnStatuses}`)
     for await (const o of learnStatuses) {
       try {
         const mutationInput: DeleteLearnStatusMutationVariables = {
@@ -96,12 +105,50 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
         ) as GraphQLResult<DeleteLearnStatusMutation>;
       }
       catch (e) {
-        log("error", `Opportunities -> clearLearnStatus -> error -> ${e}`)
+        log("error", `Opportunities -> clearData -> learnStatuses -> error -> ${e}`)
       }
     }
 
+    for await (const o of events) {
+      try {
+        const mutationInput: UpdateEventMutationVariables = {
+          input: {
+            id: o.id,
+            registered: false
+          }
+        }
+        const response = await API.graphql(
+          graphqlOperation(updateEvent, mutationInput),
+        ) as GraphQLResult<UpdateEventMutation>;
+      }
+      catch (e) {
+        log("error", `Opportunities -> clearData -> events -> error -> ${e}`)
+      }
+
+      for await (const o of rewards) {
+        try {
+          const mutationInput: UpdateRewardMutationVariables = {
+            input: {
+              id: o.id,
+              redeemed: false
+            }
+          }
+          const response = await API.graphql(
+            graphqlOperation(updateReward, mutationInput),
+          ) as GraphQLResult<UpdateRewardMutation>;
+        }
+        catch (e) {
+          log("error", `Opportunities -> clearData -> rewards -> error -> ${e}`)
+        }
+      }
+
+      dispatch(learnStatusActions.updateLearnStatus(athleteId, learnItemId, learnStatusId, passedDepositIndex, 0))
+    }
+
     dispatch(learnStatusesActions.loadLearnStatuses())
-    log("content", "Opportunities - cleared learnStatuses")
+    dispatch(eventsActions.loadEvents())
+    dispatch(rewardsActions.loadRewards())
+    log("content", "Opportunities - cleared data")
     setMyKey(Math.random())
   }
 
@@ -116,11 +163,11 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
 
   return (
     <AppLayout containerStyle={styles.container} viewStyle={styles.viewWrapper} scrollEnabled={false}>
-      <WealthBalanceEle />
+      <WealthBalanceEle balance={wealthBalance} />
       <Text type="Headline/Large" variant='white' style={styles.headline}>
         Opportunities
       </Text>
-      <Button variant="transparent" onPress={clearLearnStatus}>
+      <Button variant="transparent" onPress={clearData}>
         <Text type="Body/Large">Clear LearnStatus</Text>
       </Button>
       <View style={styles.tabGroup}>
@@ -157,23 +204,10 @@ const Opportunities: React.FC<OpportunitiesProps> = ({
 
         {activeOpportunity === OPPORTUNITIES.REWARDS &&
           rewards.map((reward, index) => {
-            const heroPhotoUri = reward.heroPhotoUri || ""
-            const logoUri = reward.logoUri || ""
-            const title = reward.title
-            const wealthAmount = reward.wealthAmount
-            const description = reward.description || ""
-
-            const onPressRewardItem = () => {
-              navigation.navigate('Redeem', {
-                ...{ heroPhotoUri, logoUri, title, wealthAmount, description }
-              })
-            }
-
             return (
               <RewardItem
                 key={index}
-                {...{ heroPhotoUri, logoUri, title, wealthAmount, description }}
-                onPress={() => onPressRewardItem()}
+                data={reward}
               />
             )
           }

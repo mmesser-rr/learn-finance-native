@@ -1,6 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import { Deposit, Event, Learn, Quiz } from './API';
+import { Deposit, Event, Learn, Quiz, Reward } from './API';
 
 export type OpportunitiesStackParamList = {
   Opportunities: undefined;
@@ -8,11 +8,7 @@ export type OpportunitiesStackParamList = {
   Exercise: {started: boolean, questions: Quiz[]}
   ExerciseResult: undefined;
   Redeem: {
-    heroPhotoUri: string,
-    title: string,
-    logoUri: string,
-    wealthAmount: number,
-    description: string
+    data: Reward
   };
   AboutEvent: {
     data: Event

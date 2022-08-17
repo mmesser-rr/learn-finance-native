@@ -40,6 +40,7 @@ const LearnItem: React.FC<LearnItemProps> = ({
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.userReducer);
   const { learnStatuses } = useSelector((state: RootState) => state.learnStatusesReducer);
+  const { wealthBalance } = useSelector((state: RootState) => state.learnStatusReducer);
 
   const [imgSrc, setImgSrc] = useState("https://reactjs.org/logo-og.png")
   const [athleteId, setAthleteId] = useState<string>(user?.id || "")
@@ -52,7 +53,7 @@ const LearnItem: React.FC<LearnItemProps> = ({
 
   const goToLearnVideo = () => {
     log("content", "dispatching 'learnStatusActions.updateLearnStatus'")
-    dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, data.id, passedDepositIndex))
+    dispatch(learnStatusActions.updateLearnStatus(learnStatusId, athleteId, data.id, passedDepositIndex, wealthBalance))
     log("content", "dispatched 'learnStatusActions.updateLearnStatus'")
     NavigationService.navigate('LearnVideo')
   }
@@ -134,6 +135,7 @@ const LearnItem: React.FC<LearnItemProps> = ({
 
   useEffect(() => {
     const setBackgroundImage = async () => {
+      log("content", `data.bgImageUri: ${data.bgImageUri}`)
       if (data.bgImageUri?.length) {
         const bgImage = await Storage.get(data.bgImageUri, { download: false })
         setImgSrc(bgImage)
@@ -141,7 +143,7 @@ const LearnItem: React.FC<LearnItemProps> = ({
     }
 
     setBackgroundImage()
-  }, [])
+  }, [data])
 
   return (
     <ImageCard backgroundImage={imgSrc} disabled={false} onPress={onPressLearnItem}>

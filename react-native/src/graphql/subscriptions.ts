@@ -62,6 +62,7 @@ export const onCreateAthlete = /* GraphQL */ `
       wyreId
       isActive
       handle
+      wealthBalance
       socialHandles {
         items {
           platform
@@ -139,6 +140,7 @@ export const onUpdateAthlete = /* GraphQL */ `
       wyreId
       isActive
       handle
+      wealthBalance
       socialHandles {
         items {
           platform
@@ -216,6 +218,7 @@ export const onDeleteAthlete = /* GraphQL */ `
       wyreId
       isActive
       handle
+      wealthBalance
       socialHandles {
         items {
           platform
@@ -284,6 +287,7 @@ export const onCreateAthleteAccount = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -353,6 +357,7 @@ export const onUpdateAthleteAccount = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -422,6 +427,7 @@ export const onDeleteAthleteAccount = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -624,6 +630,7 @@ export const onCreateEvent = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -641,6 +648,7 @@ export const onCreateEvent = /* GraphQL */ `
       dateTime
       location
       reward
+      registered
       id
       createdAt
       updatedAt
@@ -699,6 +707,7 @@ export const onUpdateEvent = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -716,6 +725,7 @@ export const onUpdateEvent = /* GraphQL */ `
       dateTime
       location
       reward
+      registered
       id
       createdAt
       updatedAt
@@ -774,6 +784,7 @@ export const onDeleteEvent = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -791,6 +802,7 @@ export const onDeleteEvent = /* GraphQL */ `
       dateTime
       location
       reward
+      registered
       id
       createdAt
       updatedAt
@@ -879,6 +891,7 @@ export const onCreateLearn = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -958,6 +971,7 @@ export const onUpdateLearn = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1037,6 +1051,7 @@ export const onDeleteLearn = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1154,6 +1169,7 @@ export const onCreateOpportunity = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1270,6 +1286,7 @@ export const onUpdateOpportunity = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1386,6 +1403,7 @@ export const onDeleteOpportunity = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1570,6 +1588,7 @@ export const onCreateReward = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1582,6 +1601,7 @@ export const onCreateReward = /* GraphQL */ `
       logoUri
       description
       heroPhotoUri
+      redeemed
       createdAt
       updatedAt
     }
@@ -1640,6 +1660,7 @@ export const onUpdateReward = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1652,6 +1673,7 @@ export const onUpdateReward = /* GraphQL */ `
       logoUri
       description
       heroPhotoUri
+      redeemed
       createdAt
       updatedAt
     }
@@ -1710,6 +1732,7 @@ export const onDeleteReward = /* GraphQL */ `
         wyreId
         isActive
         handle
+        wealthBalance
         socialHandles {
           nextToken
         }
@@ -1722,6 +1745,7 @@ export const onDeleteReward = /* GraphQL */ `
       logoUri
       description
       heroPhotoUri
+      redeemed
       createdAt
       updatedAt
     }

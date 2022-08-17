@@ -61,6 +61,7 @@ export type Athlete = {
   wyreId?: string | null,
   isActive: boolean,
   handle?: string | null,
+  wealthBalance: number,
   socialHandles?: ModelSocialHandleConnection | null,
   id: string,
   createdAt: string,
@@ -301,6 +302,7 @@ export type CreateAthleteInput = {
   wyreId?: string | null,
   isActive: boolean,
   handle?: string | null,
+  wealthBalance: number,
   id?: string | null,
 };
 
@@ -355,6 +357,7 @@ export type ModelAthleteConditionInput = {
   wyreId?: ModelStringInput | null,
   isActive?: ModelBooleanInput | null,
   handle?: ModelStringInput | null,
+  wealthBalance?: ModelIntInput | null,
   and?: Array< ModelAthleteConditionInput | null > | null,
   or?: Array< ModelAthleteConditionInput | null > | null,
   not?: ModelAthleteConditionInput | null,
@@ -412,6 +415,18 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type UpdateAthleteInput = {
   firstName?: string | null,
   lastName?: string | null,
@@ -433,6 +448,7 @@ export type UpdateAthleteInput = {
   wyreId?: string | null,
   isActive?: boolean | null,
   handle?: string | null,
+  wealthBalance?: number | null,
   id: string,
 };
 
@@ -628,6 +644,7 @@ export type CreateEventInput = {
   dateTime: number,
   location: string,
   reward: number,
+  registered: boolean,
   id?: string | null,
 };
 
@@ -643,21 +660,10 @@ export type ModelEventConditionInput = {
   dateTime?: ModelFloatInput | null,
   location?: ModelStringInput | null,
   reward?: ModelIntInput | null,
+  registered?: ModelBooleanInput | null,
   and?: Array< ModelEventConditionInput | null > | null,
   or?: Array< ModelEventConditionInput | null > | null,
   not?: ModelEventConditionInput | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type Event = {
@@ -674,6 +680,7 @@ export type Event = {
   dateTime: number,
   location: string,
   reward: number,
+  registered: boolean,
   id: string,
   createdAt: string,
   updatedAt: string,
@@ -691,6 +698,7 @@ export type UpdateEventInput = {
   dateTime?: number | null,
   location?: string | null,
   reward?: number | null,
+  registered?: boolean | null,
   id: string,
 };
 
@@ -1028,6 +1036,7 @@ export type CreateRewardInput = {
   logoUri?: string | null,
   description?: string | null,
   heroPhotoUri?: string | null,
+  redeemed: boolean,
 };
 
 export type ModelRewardConditionInput = {
@@ -1037,6 +1046,7 @@ export type ModelRewardConditionInput = {
   logoUri?: ModelStringInput | null,
   description?: ModelStringInput | null,
   heroPhotoUri?: ModelStringInput | null,
+  redeemed?: ModelBooleanInput | null,
   and?: Array< ModelRewardConditionInput | null > | null,
   or?: Array< ModelRewardConditionInput | null > | null,
   not?: ModelRewardConditionInput | null,
@@ -1052,6 +1062,7 @@ export type Reward = {
   logoUri?: string | null,
   description?: string | null,
   heroPhotoUri?: string | null,
+  redeemed: boolean,
   createdAt: string,
   updatedAt: string,
 };
@@ -1064,6 +1075,7 @@ export type UpdateRewardInput = {
   logoUri?: string | null,
   description?: string | null,
   heroPhotoUri?: string | null,
+  redeemed?: boolean | null,
 };
 
 export type DeleteRewardInput = {
@@ -1127,6 +1139,7 @@ export type SearchableEventFilterInput = {
   dateTime?: SearchableFloatFilterInput | null,
   location?: SearchableStringFilterInput | null,
   reward?: SearchableIntFilterInput | null,
+  registered?: SearchableBooleanFilterInput | null,
   id?: SearchableIDFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
@@ -1189,6 +1202,11 @@ export type SearchableIntFilterInput = {
   range?: Array< number | null > | null,
 };
 
+export type SearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
+};
+
 export type SearchableEventSortInput = {
   field?: SearchableEventSortableFields | null,
   direction?: SearchableSortDirection | null,
@@ -1206,6 +1224,7 @@ export enum SearchableEventSortableFields {
   dateTime = "dateTime",
   location = "location",
   reward = "reward",
+  registered = "registered",
   id = "id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
@@ -1245,6 +1264,7 @@ export enum SearchableEventAggregateField {
   dateTime = "dateTime",
   location = "location",
   reward = "reward",
+  registered = "registered",
   id = "id",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
@@ -1427,11 +1447,6 @@ export type SearchableOpportunityFilterInput = {
   not?: SearchableOpportunityFilterInput | null,
 };
 
-export type SearchableBooleanFilterInput = {
-  eq?: boolean | null,
-  ne?: boolean | null,
-};
-
 export type SearchableOpportunitySortInput = {
   field?: SearchableOpportunitySortableFields | null,
   direction?: SearchableSortDirection | null,
@@ -1521,6 +1536,7 @@ export type SearchableRewardFilterInput = {
   logoUri?: SearchableStringFilterInput | null,
   description?: SearchableStringFilterInput | null,
   heroPhotoUri?: SearchableStringFilterInput | null,
+  redeemed?: SearchableBooleanFilterInput | null,
   createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
   and?: Array< SearchableRewardFilterInput | null > | null,
@@ -1541,6 +1557,7 @@ export enum SearchableRewardSortableFields {
   logoUri = "logoUri",
   description = "description",
   heroPhotoUri = "heroPhotoUri",
+  redeemed = "redeemed",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
@@ -1560,6 +1577,7 @@ export enum SearchableRewardAggregateField {
   logoUri = "logoUri",
   description = "description",
   heroPhotoUri = "heroPhotoUri",
+  redeemed = "redeemed",
   createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
@@ -1588,6 +1606,7 @@ export type ModelAthleteFilterInput = {
   wyreId?: ModelStringInput | null,
   isActive?: ModelBooleanInput | null,
   handle?: ModelStringInput | null,
+  wealthBalance?: ModelIntInput | null,
   and?: Array< ModelAthleteFilterInput | null > | null,
   or?: Array< ModelAthleteFilterInput | null > | null,
   not?: ModelAthleteFilterInput | null,
@@ -1682,6 +1701,7 @@ export type ModelEventFilterInput = {
   dateTime?: ModelFloatInput | null,
   location?: ModelStringInput | null,
   reward?: ModelIntInput | null,
+  registered?: ModelBooleanInput | null,
   and?: Array< ModelEventFilterInput | null > | null,
   or?: Array< ModelEventFilterInput | null > | null,
   not?: ModelEventFilterInput | null,
@@ -1791,6 +1811,7 @@ export type ModelRewardFilterInput = {
   logoUri?: ModelStringInput | null,
   description?: ModelStringInput | null,
   heroPhotoUri?: ModelStringInput | null,
+  redeemed?: ModelBooleanInput | null,
   and?: Array< ModelRewardFilterInput | null > | null,
   or?: Array< ModelRewardFilterInput | null > | null,
   not?: ModelRewardFilterInput | null,
@@ -2014,6 +2035,7 @@ export type OpenAppAndAccountMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -2096,6 +2118,7 @@ export type OpenAccountMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -2216,6 +2239,7 @@ export type PodSettingsMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -2503,6 +2527,7 @@ export type CreateAthleteMutation = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -2595,6 +2620,7 @@ export type UpdateAthleteMutation = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -2687,6 +2713,7 @@ export type DeleteAthleteMutation = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -2770,6 +2797,7 @@ export type CreateAthleteAccountMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -2853,6 +2881,7 @@ export type UpdateAthleteAccountMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -2936,6 +2965,7 @@ export type DeleteAthleteAccountMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3200,6 +3230,7 @@ export type CreateEventMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3218,6 +3249,7 @@ export type CreateEventMutation = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -3289,6 +3321,7 @@ export type UpdateEventMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3307,6 +3340,7 @@ export type UpdateEventMutation = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -3378,6 +3412,7 @@ export type DeleteEventMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3396,6 +3431,7 @@ export type DeleteEventMutation = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -3512,6 +3548,7 @@ export type CreateLearnMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3607,6 +3644,7 @@ export type UpdateLearnMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3702,6 +3740,7 @@ export type DeleteLearnMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3850,6 +3889,7 @@ export type CreateOpportunityMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -3985,6 +4025,7 @@ export type UpdateOpportunityMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -4120,6 +4161,7 @@ export type DeleteOpportunityMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -4353,6 +4395,7 @@ export type CreateRewardMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -4366,6 +4409,7 @@ export type CreateRewardMutation = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4437,6 +4481,7 @@ export type UpdateRewardMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -4450,6 +4495,7 @@ export type UpdateRewardMutation = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4521,6 +4567,7 @@ export type DeleteRewardMutation = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -4534,6 +4581,7 @@ export type DeleteRewardMutation = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -4855,6 +4903,7 @@ export type NearbyOpportunitiesQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -4944,6 +4993,7 @@ export type SearchEventsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -4958,6 +5008,7 @@ export type SearchEventsQuery = {
       dateTime: number,
       location: string,
       reward: number,
+      registered: boolean,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -5014,6 +5065,7 @@ export type SearchLearnsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -5128,6 +5180,7 @@ export type SearchOpportunitiesQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -5234,6 +5287,7 @@ export type SearchRewardsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -5243,6 +5297,7 @@ export type SearchRewardsQuery = {
       logoUri?: string | null,
       description?: string | null,
       heroPhotoUri?: string | null,
+      redeemed: boolean,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -5339,6 +5394,7 @@ export type GetAthleteQuery = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -5423,6 +5479,7 @@ export type ListAthletesQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -5498,6 +5555,7 @@ export type GetAthleteAccountQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -5544,6 +5602,7 @@ export type ListAthleteAccountsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -5761,6 +5820,7 @@ export type GetEventQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -5779,6 +5839,7 @@ export type GetEventQuery = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -5813,6 +5874,7 @@ export type ListEventsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -5827,6 +5889,7 @@ export type ListEventsQuery = {
       dateTime: number,
       location: string,
       reward: number,
+      registered: boolean,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -5937,6 +6000,7 @@ export type GetLearnQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -5995,6 +6059,7 @@ export type ListLearnsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -6121,6 +6186,7 @@ export type GetOpportunityQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -6219,6 +6285,7 @@ export type ListOpportunitiesQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -6420,6 +6487,7 @@ export type GetRewardQuery = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -6433,6 +6501,7 @@ export type GetRewardQuery = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -6467,6 +6536,7 @@ export type ListRewardsQuery = {
         wyreId?: string | null,
         isActive: boolean,
         handle?: string | null,
+        wealthBalance: number,
         id: string,
         createdAt: string,
         updatedAt: string,
@@ -6476,6 +6546,7 @@ export type ListRewardsQuery = {
       logoUri?: string | null,
       description?: string | null,
       heroPhotoUri?: string | null,
+      redeemed: boolean,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -6551,6 +6622,7 @@ export type OnCreateAthleteSubscription = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -6638,6 +6710,7 @@ export type OnUpdateAthleteSubscription = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -6725,6 +6798,7 @@ export type OnDeleteAthleteSubscription = {
     wyreId?: string | null,
     isActive: boolean,
     handle?: string | null,
+    wealthBalance: number,
     socialHandles?:  {
       __typename: "ModelSocialHandleConnection",
       items:  Array< {
@@ -6803,6 +6877,7 @@ export type OnCreateAthleteAccountSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -6881,6 +6956,7 @@ export type OnUpdateAthleteAccountSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -6959,6 +7035,7 @@ export type OnDeleteAthleteAccountSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7173,6 +7250,7 @@ export type OnCreateEventSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7191,6 +7269,7 @@ export type OnCreateEventSubscription = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -7257,6 +7336,7 @@ export type OnUpdateEventSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7275,6 +7355,7 @@ export type OnUpdateEventSubscription = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -7341,6 +7422,7 @@ export type OnDeleteEventSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7359,6 +7441,7 @@ export type OnDeleteEventSubscription = {
     dateTime: number,
     location: string,
     reward: number,
+    registered: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -7455,6 +7538,7 @@ export type OnCreateLearnSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7545,6 +7629,7 @@ export type OnUpdateLearnSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7635,6 +7720,7 @@ export type OnDeleteLearnSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7763,6 +7849,7 @@ export type OnCreateOpportunitySubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -7893,6 +7980,7 @@ export type OnUpdateOpportunitySubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -8023,6 +8111,7 @@ export type OnDeleteOpportunitySubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -8221,6 +8310,7 @@ export type OnCreateRewardSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -8234,6 +8324,7 @@ export type OnCreateRewardSubscription = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -8300,6 +8391,7 @@ export type OnUpdateRewardSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -8313,6 +8405,7 @@ export type OnUpdateRewardSubscription = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -8379,6 +8472,7 @@ export type OnDeleteRewardSubscription = {
       wyreId?: string | null,
       isActive: boolean,
       handle?: string | null,
+      wealthBalance: number,
       socialHandles?:  {
         __typename: "ModelSocialHandleConnection",
         nextToken?: string | null,
@@ -8392,6 +8486,7 @@ export type OnDeleteRewardSubscription = {
     logoUri?: string | null,
     description?: string | null,
     heroPhotoUri?: string | null,
+    redeemed: boolean,
     createdAt: string,
     updatedAt: string,
   } | null,

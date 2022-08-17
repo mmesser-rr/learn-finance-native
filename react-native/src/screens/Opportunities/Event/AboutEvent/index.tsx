@@ -17,6 +17,10 @@ import CloseIcon from 'src/assets/icons/close-gray.png';
 import BackwardIcon from 'src/assets/icons/backward.png';
 import WealthIcon from 'src/assets/icons/wealth.png';
 import { Event } from "src/types/API";
+import { useDispatch, useSelector } from "react-redux";
+import * as eventsActions from 'src/store/actions/eventsActions'
+import * as learnStatusActions from 'src/store/actions/learnStatusActions'
+import { RootState } from "src/store/root-state";
 
 const Divider = () => (
   <View style={styles.divider} />
@@ -25,11 +29,12 @@ const AboutEvent: React.FC<AboutEventProps> = ({
   navigation,
   route
 }) => {
+  const dispatch = useDispatch()
   const [heroPhotoSrc, setHeroPhotoSrc] = useState("")
   const [avatarSrc, setAvatarSrc] = useState("")
-  const [confirmed, setConfirmed] = useState(false)
 
   const data: Event = route.params.data
+  const [confirmed, setConfirmed] = useState(data.registered)
 
   const date = format(new Date(data.dateTime), "MMMM do")
   const time = format(new Date(data.dateTime), "h:maaa zzz")
@@ -45,11 +50,13 @@ const AboutEvent: React.FC<AboutEventProps> = ({
   }, []);
 
   const handleConfirm = () => {
+    dispatch(eventsActions.updateEvent({ id: data.id, registered: true }))
     setConfirmed(true)
     handleDismissModal()
   }
 
   const handleCancelConfirm = () => {
+    dispatch(eventsActions.updateEvent({ id: data.id, registered: false }))
     setConfirmed(false)
   }
 

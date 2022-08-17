@@ -4,6 +4,8 @@ import { Text } from "src/components/common/Texts"
 import { RedeemProps } from "src/types/opportunitiesRouterTypes"
 import AppLayout from "src/components/layout/AppLayout"
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import * as learnStatusActions from 'src/store/actions/learnStatusActions'
+import * as rewardsActions from 'src/store/actions/rewardsActions'
 
 import styles from './styles'
 import CloseIcon from 'src/assets/icons/close-gray.png';
@@ -11,18 +13,18 @@ import { Image, TouchableOpacity, View } from "react-native"
 import Button from "src/components/common/Button"
 import AppStyles from "src/config/styles"
 import BackwardIcon from 'src/assets/icons/backward.png';
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "src/store/root-state"
 
 const Redeem: React.FC<RedeemProps> = ({
   navigation,
   route
 }) => {
-  const [redeemed, setRedeemed] = useState(false)
-
-  const heroPhotoUri = route.params.heroPhotoUri;
-  const title = route.params.title;
-  const wealthAmount = route.params.wealthAmount;
-  const logoUri = route.params.logoUri;
-  const description = route.params.description;
+  const dispatch = useDispatch()
+  const data = route.params.data;
+  const { athleteId, learnItemId, learnStatusId, passedDepositIndex, wealthBalance } = useSelector((state: RootState) => state.learnStatusReducer)
+  
+  const [redeemed, setRedeemed] = useState(data.redeemed)
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -35,6 +37,9 @@ const Redeem: React.FC<RedeemProps> = ({
   }, []);
 
   const handleRedeem = () => {
+    const newWealthBalance = wealthBalance - data.wealthAmount;
+    dispatch(learnStatusActions.updateLearnStatus(athleteId, learnItemId, learnStatusId, passedDepositIndex, newWealthBalance))
+    dispatch(rewardsActions.updateReward({ id: data.id, redeemed: true }))
     setRedeemed(true)
     handleDismissModal()
   }
@@ -63,7 +68,7 @@ const Redeem: React.FC<RedeemProps> = ({
           </TouchableOpacity>
           <Text type="Headline/Medium" variant='white'>How to Claim</Text>
           <Text type="Paragraph/Medium" variant='white' style={styles.description}>Redeem your offer and you’ll receive an email with your discount code and instructions how to use it at your selected retailer.</Text>
-          <RewardItem {...{ heroPhotoUri, title, wealthAmount, logoUri, description, onPress: () => null }} />
+          <RewardItem data={data} />
         </View>
 
         <BottomSheetModal
