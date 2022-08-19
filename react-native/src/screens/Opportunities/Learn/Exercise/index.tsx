@@ -17,7 +17,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { createLearnStatus, updateLearnStatus } from 'src/graphql/mutations';
 import * as learnStatusActions from 'src/store/actions/learnStatusActions';
 import * as learnStatusesActions from 'src/store/actions/learnStatusesActions';
-import AnswerButtonGroup from './answerButtonGroup';
+import AnswerButtonGroup from './AnswerButtonGroup';
 import AppColors from 'src/config/colors';
 import { useFocusEffect } from '@react-navigation/native';
 import {Metrics, scale} from 'src/config/dimentions';

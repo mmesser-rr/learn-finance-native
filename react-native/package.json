@@ -96,12 +96,12 @@
       "/amplify/",
       "/node_modules/"
     ],
+    "modulePathIgnorePatterns": ["<rootDir>/build"],
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js",
       "jsx",
-      "json",
       "node"
     ]
   }
